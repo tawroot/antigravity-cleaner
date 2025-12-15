@@ -88,12 +88,12 @@ for x, y in sparkle_positions:
 
 # Save as PNG
 img.save('icon.png', 'PNG')
-print("✓ Created icon.png (512x512)")
+print("Created icon.png (512x512)")
 
 # Create ICO file (multiple sizes)
 icon_sizes = [(256, 256), (128, 128), (64, 64), (48, 48), (32, 32), (16, 16)]
 img.save('icon.ico', format='ICO', sizes=icon_sizes)
-print("✓ Created icon.ico (multi-size)")
+print("Created icon.ico (multi-size)")
 
 # Create ICNS for macOS (if on macOS)
 import platform
@@ -115,11 +115,11 @@ if platform.system() == 'Darwin':
         
         # Convert to ICNS
         subprocess.run(['iconutil', '-c', 'icns', 'icon.iconset'])
-        print("✓ Created icon.icns (macOS)")
+        print("Created icon.icns (macOS)")
     except Exception as e:
-        print(f"⚠ Could not create ICNS: {e}")
+        print(f"Could not create ICNS: {e}")
 
-print("\n✓ Icon generation complete!")
+print("\nIcon generation complete!")
 print("Files created:")
 print("  - icon.png (512x512)")
 print("  - icon.ico (Windows)")
