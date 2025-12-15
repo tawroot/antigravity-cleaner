@@ -1,0 +1,12 @@
+[2025-12-15 19:20:09] [INFO] === Antigravity Cleaner Started ===
+[2025-12-15 19:20:09] [INFO] BrowserHelper initialized (OS: windows, Dry-run: False)
+[2025-12-15 19:20:09] [INFO] NetworkOptimizer initialized (OS: windows, Dry-run: False)
+[2025-12-15 19:20:09] [DEBUG] Created new master key
+[2025-12-15 19:20:09] [INFO] SessionManager initialized (Storage: C:\Users\lol\.antigravity-cleaner\sessions, Dry-run: False)
+[2025-12-15 19:20:09] [INFO] Browser helper modules initialized successfully
+[2025-12-15 19:29:26] [INFO] === Antigravity Cleaner Started ===
+[2025-12-15 19:29:26] [INFO] BrowserHelper initialized (OS: windows, Dry-run: False)
+[2025-12-15 19:29:26] [INFO] NetworkOptimizer initialized (OS: windows, Dry-run: False)
+[2025-12-15 19:29:26] [DEBUG] Loaded existing master key
+[2025-12-15 19:29:26] [INFO] SessionManager initialized (Storage: C:\Users\lol\.antigravity-cleaner\sessions, Dry-run: False)
+[2025-12-15 19:29:26] [INFO] Browser helper modules initialized successfully

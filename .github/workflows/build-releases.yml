@@ -1,0 +1,105 @@
+name: Build Releases
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+      
+      - name: Build Windows EXE
+        run: |
+          python -m PyInstaller --onefile --windowed --name "AntigravityCleaner" --icon=icon.ico src/gui_cleaner.py
+      
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: AntigravityCleaner-Windows
+          path: dist/AntigravityCleaner.exe
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install pyinstaller
+      
+      - name: Build macOS APP
+        run: |
+          python3 -m PyInstaller --onefile --windowed --name "AntigravityCleaner" src/gui_cleaner.py
+      
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: AntigravityCleaner-macOS
+          path: dist/AntigravityCleaner.app
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-tk
+          python3 -m pip install --upgrade pip
+          pip3 install pyinstaller
+      
+      - name: Build Linux Binary
+        run: |
+          python3 -m PyInstaller --onefile --windowed --name "AntigravityCleaner" src/gui_cleaner.py
+      
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: AntigravityCleaner-Linux
+          path: dist/AntigravityCleaner
+
+  create-release:
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            AntigravityCleaner-Windows/AntigravityCleaner.exe
+            AntigravityCleaner-macOS/AntigravityCleaner.app
+            AntigravityCleaner-Linux/AntigravityCleaner
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,3 +4,18 @@ __pycache__/
 *.log
 !.agent/logs/*.log
 .DS_Store
+
+# Build files
+build/
+dist/
+*.spec
+*.exe
+*.app
+
+
+# Build files
+build/
+dist/
+*.spec
+*.exe
+*.app

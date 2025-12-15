@@ -1,185 +1,624 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antigravity Cleaner | Fix Installation & Network Errors</title>
+    <title>Antigravity Cleaner | Professional IDE Cleaning Tool</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="The ultimate cross-platform tool to fix Antigravity IDE installation errors, network issues, and region locks. Runs on Windows, macOS, and Linux.">
+        content="Professional tool to fix Antigravity IDE installation errors, network issues, and region locks. One-click cleaning for Windows, macOS, and Linux.">
     <meta name="keywords"
-        content="Antigravity Cleaner, Antigravity IDE Fix, Google Login Fix, Region Lock Bypass, Python Cleaner Script, آنتی‌گرویتی کلینر, رفع تحریم گوگل, حل مشکل آنتی گرویتی">
+        content="Antigravity Cleaner, IDE Fix, Google Login Fix, Region Lock Bypass, Python Cleaner, Network Reset">
     <meta name="author" content="Tawroot">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <!-- Open Graph -->
     <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/">
-    <meta property="og:title" content="Antigravity Cleaner">
+    <meta property="og:title" content="Antigravity Cleaner - Professional IDE Cleaning Tool">
     <meta property="og:description"
-        content="Fix Antigravity IDE errors instantly with one command. Cross-platform, open-source, and free.">
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/assets/og-image.png">
+        content="Fix Antigravity IDE errors instantly. Cross-platform, open-source, and free.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/icon.png">
 
     <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Vazirmatn:wght@300;400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff006e;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #888888;
+            --success: #00c853;
+            --warning: #ff9100;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #0099cc);
+            color: var(--dark);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+        }
+
+        /* Download Section */
+        .download-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+
+        .download-card i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .download-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Command Section */
+        .command-section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .command-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .command-box h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .code-block {
+            background: #000;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: #00ff41;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--light);
+        }
+
+        /* Features */
+        .features {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Support Banner */
+        .support-banner {
+            max-width: 1000px;
+            margin: 6rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(0, 212, 255, 0.1));
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .support-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-banner p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .star-btn {
+            background: linear-gradient(135deg, var(--secondary), #cc0058);
+            color: var(--light);
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .star-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        footer p {
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="bg-animation"></div>
 
-    <div class="background-globes">
-        <div class="globe globe-1"></div>
-        <div class="globe globe-2"></div>
-        <div class="globe globe-3"></div>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="glass-nav">
-        <div class="logo">
-            <i class="fa-solid fa-rocket"></i> Antigravity Cleaner
-        </div>
-        <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#install">Install</a>
-            <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="github-btn">
-                <i class="fa-brands fa-github"></i> Star on GitHub
-            </a>
-        </div>
-    </nav>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Antigravity Cleaner</div>
+            <ul class="nav-links">
+                <li><a href="#download">Download</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="https://github.com/tawroot/antigravity-cleaner">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <span class="badge">v2.0.0 Now Available</span>
-            <h1>Fix Antigravity <span class="gradient-text">Instantly.</span></h1>
-            <p class="subtitle">
-                The most powerful tool to remove leftover files, fix network errors, and bypass region locks for
-                Antigravity IDE.
-                <br>
-                <span class="persian-text">ابزار قدرتمند برای رفع خطاهای نصب و شبکه آنتی‌گرویتی</span>
-            </p>
+    <section class="hero">
+        <h1>Fix Antigravity IDE<br>Instantly</h1>
+        <p>Professional cleaning tool for installation errors, network issues, and region locks</p>
+        <div class="btn-group">
+            <a href="#download" class="btn btn-primary">
+                <i class="fas fa-download"></i> Download Now
+            </a>
+            <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </div>
+    </section>
 
-            <div class="cta-group">
-                <a href="#install" class="btn btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary">
-                    <i class="fa-regular fa-star"></i> Star Project
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <h2 class="section-title">Download for Your Platform</h2>
+        <div class="download-grid">
+            <div class="download-card">
+                <i class="fab fa-windows"></i>
+                <h3>Windows</h3>
+                <p>Portable EXE with GUI<br>Windows 7, 8, 10, 11</p>
+                <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/AntigravityCleaner.exe"
+                    class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download EXE
+                </a>
+            </div>
+
+            <div class="download-card">
+                <i class="fab fa-apple"></i>
+                <h3>macOS</h3>
+                <p>Native Application<br>macOS 10.14+</p>
+                <a href="https://github.com/tawroot/antigravity-cleaner/releases" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download APP
+                </a>
+            </div>
+
+            <div class="download-card">
+                <i class="fab fa-linux"></i>
+                <h3>Linux</h3>
+                <p>Portable Binary<br>Ubuntu, Fedora, Arch</p>
+                <a href="https://github.com/tawroot/antigravity-cleaner/releases" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Binary
                 </a>
             </div>
         </div>
-    </header>
-
-    <!-- Installation Section -->
-    <section id="install" class="install-section">
-        <div class="container">
-            <h2 class="section-title">One-Line Installation</h2>
-
-            <div class="terminal-window glass-panel">
-                <div class="terminal-header">
-                    <div class="dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                    </div>
-                    <div class="tabs">
-                        <button class="tab-btn active" onclick="switchTab('win')"><i class="fa-brands fa-windows"></i>
-                            Windows</button>
-                        <button class="tab-btn" onclick="switchTab('unix')"><i class="fa-brands fa-apple"></i> Mac /
-                            Linux</button>
-                    </div>
-                </div>
-
-                <div class="terminal-body" id="cmd-win">
-                    <div class="code-line">
-                        <span class="prompt">PS C:\></span>
-                        <span class="cmd-text" id="text-win">iwr -useb
-                            https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1
-                            | iex</span>
-                    </div>
-                    <button class="copy-btn" onclick="copyCmd('text-win')"><i class="fa-regular fa-copy"></i>
-                        Copy</button>
-                </div>
-
-                <div class="terminal-body hidden" id="cmd-unix">
-                    <div class="code-line">
-                        <span class="prompt">$</span>
-                        <span class="cmd-text" id="text-unix">curl -sL
-                            https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh
-                            | bash</span>
-                    </div>
-                    <button class="copy-btn" onclick="copyCmd('text-unix')"><i class="fa-regular fa-copy"></i>
-                        Copy</button>
-                </div>
-            </div>
-
-            <p class="note">Requires Internet Connection. Runs safely in memory.</p>
-        </div>
     </section>
 
-    <!-- Features Grid -->
-    <section id="features" class="features-section">
-        <div class="container">
-            <h2 class="section-title">Why Use This Cleaner?</h2>
-            <div class="grid">
-                <div class="card glass-panel">
-                    <div class="icon-box"><i class="fa-solid fa-broom"></i></div>
-                    <h3>Deep Clean</h3>
-                    <p>Scans registry, AppData, and temp folders to remove 100% of leftover traces. (حذف کامل فایل‌های
-                        اضافی)</p>
-                </div>
-                <div class="card glass-panel">
-                    <div class="icon-box"><i class="fa-solid fa-wifi"></i></div>
-                    <h3>Network Fix</h3>
-                    <p>Resets DNS and Winsock to resolve "Network Error" and login issues. (رفع خطای شبکه و اتصال)</p>
-                </div>
-                <div class="card glass-panel">
-                    <div class="icon-box"><i class="fa-brands fa-python"></i></div>
-                    <h3>Runs Everywhere</h3>
-                    <p>Built with Python. Works flawlessly on Windows 10/11, macOS, and Linux.</p>
-                </div>
+    <!-- Command Section -->
+    <section class="command-section">
+        <h2 class="section-title">Or Use Command Line</h2>
+
+        <div class="command-box">
+            <h4><i class="fab fa-windows"></i> Windows (PowerShell)</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('win-cmd')">Copy</button>
+                <code
+                    id="win-cmd">iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code>
+            </div>
+        </div>
+
+        <div class="command-box">
+            <h4><i class="fab fa-apple"></i> <i class="fab fa-linux"></i> macOS / Linux (Terminal)</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('unix-cmd')">Copy</button>
+                <code
+                    id="unix-cmd">curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code>
             </div>
         </div>
     </section>
 
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Antigravity Cleaner?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Lightning Fast</h3>
+                <p>Clean and fix Antigravity IDE errors in seconds with our optimized cleaning engine</p>
+            </div>
 
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>100% Safe</h3>
+                <p>Dry-run mode lets you preview changes before applying. No data loss guaranteed</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Cross-Platform</h3>
+                <p>Works seamlessly on Windows, macOS, and Linux with native support</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Beautiful GUI</h3>
+                <p>Modern, intuitive interface with English and Persian language support</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Deep Cleaning</h3>
+                <p>Removes leftover files, registry entries, and network configurations</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Detailed Logs</h3>
+                <p>Real-time operation logs show exactly what's being cleaned and why</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Banner -->
+    <section class="support-banner" id="support">
+        <h2>🌟 Support the Project</h2>
+        <p>If you find this tool helpful, please give us a star on GitHub!<br>
+            Your support helps us develop <strong>v3.0</strong> with <strong>one-click Antigravity login</strong>
+            feature!</p>
+        <a href="https://github.com/tawroot/antigravity-cleaner" class="star-btn">
+            <i class="fas fa-star"></i> Star on GitHub
+        </a>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Tawroot. Open Source under MIT License.</p>
-        </div>
+        <p>&copy; 2025 Tawroot | Open Source under MIT License</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://github.com/tawroot" style="color: var(--primary); text-decoration: none;">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </p>
     </footer>
 
-    <!-- JSON-LD Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Antigravity Cleaner",
-      "operatingSystem": "Windows, macOS, Linux",
-      "applicationCategory": "UtilitiesApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Tawroot",
-        "url": "https://github.com/tawroot"
-      },
-      "description": "A cross-platform tool to fix Antigravity IDE installation errors, network issues, and region locks.",
-      "softwareVersion": "2.0.0"
-    }
-    </script>
+    <script>
+        function copyCode(id) {
+            const code = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#00c853';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
 
-    <script src="script.js"></script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
