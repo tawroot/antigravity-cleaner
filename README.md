@@ -6,7 +6,11 @@
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 
+## 🌐 Available Languages | زبان‌های موجود
 
+| 🇬🇧 **English** | 🇮🇷 [فارسی](README.fa.md) | 🇨🇳 [中文](README.zh.md) | 🇷🇺 [Русский](README.ru.md) |
+|:---:|:---:|:---:|:---:|
+| 🇹🇷 [Türkçe](README.tr.md) | 🇪🇸 [Español](README.es.md) | 🇦🇪 [العربية](README.ar.md) | 🇵🇰 [اردو](README.ur.md) |
 
 ---
 
