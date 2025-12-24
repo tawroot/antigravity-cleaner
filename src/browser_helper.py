@@ -65,6 +65,15 @@ class BrowserHelper:
                 'linux': os.path.join(os.path.expanduser('~'), '.config', 'BraveSoftware', 'Brave-Browser')
             }
         },
+        'chromium': {
+            'name': 'Chromium',
+            'process_names': ['chromium-browser', 'chromium'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('LOCALAPPDATA', ''), 'Chromium', 'User Data'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'Chromium'),
+                'linux': os.path.join(os.path.expanduser('~'), '.config', 'chromium')
+            }
+        },
         'firefox': {
             'name': 'Mozilla Firefox',
             'process_names': ['firefox.exe', 'firefox'],
@@ -73,8 +82,81 @@ class BrowserHelper:
                 'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'Firefox', 'Profiles'),
                 'linux': os.path.join(os.path.expanduser('~'), '.mozilla', 'firefox')
             }
-        }
+        },
+        'opera': {
+            'name': 'Opera',
+            'process_names': ['opera.exe', 'opera'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('APPDATA', ''), 'Opera Software', 'Opera Stable'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'com.operasoftware.Opera'),
+                'linux': os.path.join(os.path.expanduser('~'), '.config', 'opera')
+            }
+        },
+        'opera_gx': {
+            'name': 'Opera GX',
+            'process_names': ['opera.exe', 'opera'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('APPDATA', ''), 'Opera Software', 'Opera GX Stable'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'com.operasoftware.OperaGX'),
+                'linux': os.path.join(os.path.expanduser('~'), '.config', 'opera-gx')
+            }
+        },
+        'vivaldi': {
+            'name': 'Vivaldi',
+            'process_names': ['vivaldi.exe', 'vivaldi'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('LOCALAPPDATA', ''), 'Vivaldi', 'User Data'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'Vivaldi'),
+                'linux': os.path.join(os.path.expanduser('~'), '.config', 'vivaldi')
+            }
+        },
+        'arc': {
+            'name': 'Arc Browser',
+            'process_names': ['Arc', 'arc'],
+            'data_paths': {
+                'windows': '',  # Arc is Mac-only currently
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'Arc', 'User Data'),
+                'linux': ''
+            }
+        },
+        'safari': {
+            'name': 'Safari',
+            'process_names': ['Safari'],
+            'data_paths': {
+                'windows': '',  # Safari is Mac-only
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Safari'),
+                'linux': ''
+            }
+        },
+        'waterfox': {
+            'name': 'Waterfox',
+            'process_names': ['waterfox.exe', 'waterfox'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('APPDATA', ''), 'Waterfox', 'Profiles'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'Waterfox', 'Profiles'),
+                'linux': os.path.join(os.path.expanduser('~'), '.waterfox')
+            }
+        },
+        'floorp': {
+            'name': 'Floorp',
+            'process_names': ['floorp.exe', 'floorp'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('APPDATA', ''), 'Floorp', 'Profiles'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'Floorp', 'Profiles'),
+                'linux': os.path.join(os.path.expanduser('~'), '.floorp')
+            }
+        },
+        'zen': {
+            'name': 'Zen Browser',
+            'process_names': ['zen.exe', 'zen'],
+            'data_paths': {
+                'windows': os.path.join(os.environ.get('APPDATA', ''), 'zen', 'Profiles'),
+                'darwin': os.path.join(os.path.expanduser('~'), 'Library', 'Application Support', 'zen', 'Profiles'),
+                'linux': os.path.join(os.path.expanduser('~'), '.zen')
+            }
+        },
     }
+
     
     # Keywords to identify Antigravity-related data
     ANTIGRAVITY_KEYWORDS = [
@@ -221,19 +303,27 @@ class BrowserHelper:
             
             # Path 2: google.services
             google_services = prefs.get('google', {}).get('services', {})
-            if 'last_username' in google_services:
-                return google_services['last_username']
+            if google_services:
+                # Direct last_username
+                if 'last_username' in google_services:
+                    return google_services['last_username']
+                
+                # Nested in signin
+                signin_info = google_services.get('signin', {})
+                if signin_info and 'last_username' in signin_info:
+                    return signin_info['last_username']
+
+            # Path 3: sync metadata
+            sync = prefs.get('sync', {})
+            if sync and 'authenticated_email' in sync:
+                return sync['authenticated_email']
             
-            # Path 3: signin info
+            # Path 4: signin info (root level)
             signin = prefs.get('signin', {})
-            if 'allowed' in signin:
-                # Try to find email from sync
-                sync_info = prefs.get('sync', {})
-                if sync_info:
-                    # Sometimes email is in sync preferences
-                    pass
+            if signin and 'last_username' in signin:
+                return signin['last_username']
             
-            # Path 4: Profile name (sometimes contains email)
+            # Path 5: Profile name (sometimes contains email)
             profile = prefs.get('profile', {})
             name = profile.get('name', '')
             if '@' in name:
@@ -241,8 +331,28 @@ class BrowserHelper:
             
         except Exception as e:
             self.logger.debug(f"Could not read profile preferences: {e}")
+
+        # Fallback: Check Local State (contains info for ALL profiles)
+        try:
+            profile_dir_name = os.path.basename(profile_path)
+            user_data_root = os.path.dirname(profile_path)
+            local_state_file = os.path.join(user_data_root, 'Local State')
+            
+            if os.path.exists(local_state_file):
+                with open(local_state_file, 'r', encoding='utf-8') as f:
+                    local_state = json.load(f)
+                
+                # Path: profile.info_cache.[ProfileDir].user_name
+                info_cache = local_state.get('profile', {}).get('info_cache', {})
+                profile_info = info_cache.get(profile_dir_name, {})
+                
+                if 'user_name' in profile_info and '@' in profile_info['user_name']:
+                    return profile_info['user_name']
+        except Exception as e:
+            self.logger.debug(f"Could not read Local State for email fallback: {e}")
         
         return None
+
     
     def get_browser_profiles_with_email(self, browser: str) -> List[Dict]:
         """

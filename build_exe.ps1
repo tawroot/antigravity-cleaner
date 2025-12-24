@@ -57,12 +57,15 @@ if (!(Test-Path "dist")) {
 # Build command - check if icon exists
 if (Test-Path "icon.ico") {
     Write-Host "Building with custom icon..." -ForegroundColor Cyan
-    pyinstaller --onefile --windowed --name "AntigravityCleaner" --icon=icon.ico --add-data "src;src" src/gui_cleaner.py
+    pyinstaller --onefile --windowed --name "AntigravityCleaner" --icon=icon.ico --add-data "src;src" --hidden-import=customtkinter src/gui_apple.py
 }
 else {
     Write-Host "Building without icon..." -ForegroundColor Cyan
-    pyinstaller --onefile --windowed --name "AntigravityCleaner" --add-data "src;src" src/gui_cleaner.py
+    pyinstaller --onefile --windowed --name "AntigravityCleaner" --add-data "src;src" --hidden-import=customtkinter src/gui_apple.py
 }
+
+
+
 
 # Check if build was successful
 if ($LASTEXITCODE -eq 0) {

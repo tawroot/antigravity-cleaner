@@ -529,10 +529,13 @@ def session_manager_menu(session_manager, browser_helper, logger):
                 else:
                     session_name = None
             
-            if session_manager.backup_session(browser, selected_profile['path'], session_name):
-                console.print("[green]✓ Session backed up successfully![/green]")
+            backup_result = session_manager.backup_session(browser, selected_profile['path'], session_name)
+            if backup_result:
+                console.print(f"[green]✓ Session backed up successfully![/green]")
+                console.print(f"[dim]Path: {backup_result}[/dim]")
             else:
                 console.print("[red]✗ Session backup failed.[/red]")
+
         
         elif choice == "2":
             # Restore session
@@ -694,10 +697,13 @@ def session_manager_menu(session_manager, browser_helper, logger):
                         if browser_helper.is_browser_running(target_browser):
                             browser_helper.kill_browser_processes(target_browser)
 
-                if session_manager.backup_session(selected_profile['browser'], selected_profile['path'], session_name):
+                backup_result = session_manager.backup_session(selected_profile['browser'], selected_profile['path'], session_name)
+                if backup_result:
                     console.print("[green]✓ Session backed up successfully![/green]")
+                    console.print(f"[dim]Path: {backup_result}[/dim]")
                 else:
                     console.print("[red]✗ Session backup failed.[/red]")
+
         
         if choice != "0":
             if not Confirm.ask("\nContinue in Session Manager?"):

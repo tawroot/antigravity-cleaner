@@ -303,7 +303,8 @@ class SessionManager:
                 os.chmod(session_file, 0o600)
             
             self.logger.info(f"[OK] Backed up {len(cookies_list)} cookies to '{session_name}'")
-            return True
+            return session_file
+
             
         except Exception as e:
             self.logger.error(f"Session backup failed: {e}")

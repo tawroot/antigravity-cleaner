@@ -1,0 +1,36 @@
+# Antigravity Cleaner - Version Info
+# This file is used by PyInstaller to embed version info in the EXE
+
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(3, 1, 0, 0),
+    prodvers=(3, 1, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo(
+      [
+        StringTable(
+          u'040904B0',
+          [
+            StringStruct(u'CompanyName', u'Tawana Network'),
+            StringStruct(u'FileDescription', u'Antigravity Cleaner - System Optimization Tool'),
+            StringStruct(u'FileVersion', u'3.1.0.0'),
+            StringStruct(u'InternalName', u'AntigravityCleaner'),
+            StringStruct(u'LegalCopyright', u'© 2024-2025 Tawana Mohammadi / Tawana Network. All Rights Reserved.'),
+            StringStruct(u'OriginalFilename', u'AntigravityCleaner.exe'),
+            StringStruct(u'ProductName', u'Antigravity Cleaner'),
+            StringStruct(u'ProductVersion', u'3.1.0.0'),
+            StringStruct(u'LegalTrademarks', u'Antigravity Cleaner is a trademark of Tawana Network'),
+          ]
+        )
+      ]
+    ),
+    VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+  ]
+)

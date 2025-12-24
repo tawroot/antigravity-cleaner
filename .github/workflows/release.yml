@@ -1,0 +1,109 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            artifact_name: AntigravityCleaner-Windows.exe
+            asset_name: AntigravityCleaner-Windows
+          - os: macos-latest
+            artifact_name: AntigravityCleaner-macOS
+            asset_name: AntigravityCleaner-macOS
+          - os: ubuntu-latest
+            artifact_name: AntigravityCleaner-Linux
+            asset_name: AntigravityCleaner-Linux
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install customtkinter psutil pycryptodome rich pillow pyinstaller
+
+      - name: Build with PyInstaller (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          pyinstaller --onefile --windowed --name "AntigravityCleaner" --add-data "src;src" --hidden-import=customtkinter --hidden-import=PIL --hidden-import=PIL._tkinter_finder src/gui_apple.py
+          mv dist/AntigravityCleaner.exe dist/${{ matrix.artifact_name }}
+
+      - name: Build with PyInstaller (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          pyinstaller --onefile --windowed --name "AntigravityCleaner" --add-data "src:src" --hidden-import=customtkinter --hidden-import=PIL --hidden-import=PIL._tkinter_finder src/gui_apple.py
+          mv dist/AntigravityCleaner dist/${{ matrix.artifact_name }}
+
+      - name: Build with PyInstaller (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          pyinstaller --onefile --name "AntigravityCleaner" --add-data "src:src" --hidden-import=customtkinter --hidden-import=PIL --hidden-import=PIL._tkinter_finder src/gui_apple.py
+          mv dist/AntigravityCleaner dist/${{ matrix.artifact_name }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}
+          path: dist/${{ matrix.artifact_name }}
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            AntigravityCleaner-Windows/AntigravityCleaner-Windows.exe
+            AntigravityCleaner-macOS/AntigravityCleaner-macOS
+            AntigravityCleaner-Linux/AntigravityCleaner-Linux
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+          body: |
+            ## 🚀 Antigravity Cleaner Pro - Release ${{ github.ref_name }}
+            
+            Professional system optimization and browser session management tool.
+            
+            ### 📦 Artifacts
+            - **Windows**: Portable EXE
+            - **macOS**: Universal Binary
+            - **Linux**: Standard Binary
+            
+            ### ✨ Features
+            - Dashboard with System Health Score
+            - Multi-Browser Support (8+ Browsers)
+            - Secure Session Backup/Restore
+            - Google Services Connectivity Test
+            - Network Optimizer & Diagnostics
+            
+            ---
+            **Powered by TAWANA NETWORK**
+            (c) 2024-2025 Tawana Mohammadi. All Rights Reserved.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
