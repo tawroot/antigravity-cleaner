@@ -55,15 +55,24 @@ except ImportError as e:
 class AppleColors:
     """Apple Design System Colors"""
     
-    # Primary
+    # Glassmorphism & Translucency
+    BG_GLASS = "#F5F5F7" if platform.system() == "Darwin" else "#F0F0F2"
+    BG_GLASS_DARK = "#1C1C1E"
+    
+    # Modern Semantic Colors
     BLUE = "#007AFF"
     GREEN = "#34C759"
     RED = "#FF3B30"
     ORANGE = "#FF9500"
-    YELLOW = "#FFCC00"
-    PURPLE = "#AF52DE"
-    PINK = "#FF2D55"
-    TEAL = "#5AC8FA"
+    
+    # Text
+    LABEL = "#1D1D1F"
+    SECONDARY_LABEL = "#86868B"
+    
+    # Borders
+    SEPARATOR = "#D2D2D7"
+    BORDER = "rgba(0,0,0,0.1)"
+
     
     # Grays (Light mode)
     LABEL = "#000000"

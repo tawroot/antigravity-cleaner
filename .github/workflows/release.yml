@@ -93,7 +93,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Use the environment variable provided by GitHub Actions
           TAG_NAME="${{ github.ref_name }}"
+          
+          # First check if the release already exists, if so delete it to retry cleanly
+          gh release delete "$TAG_NAME" --yes || true
+          
+          # Create new release
           gh release create "$TAG_NAME" \
             --title "Antigravity Cleaner Pro $TAG_NAME" \
             --notes "## 💎 Official Portable Release\n\n- Cross-platform ZIP packages\n- Premium Apple-Style UI\n- Multi-browser Support\n- Powered by Tawana Network" \
