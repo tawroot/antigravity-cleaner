@@ -1,33 +1,55 @@
-# 🌎 Antigravity Cleaner Pro - Multi-language Wiki
+# Antigravity Cleaner Wiki
 
-Welcome to the Global Support Center of Antigravity Cleaner Pro.
-Select your language below:
+Welcome to the official Antigravity Cleaner Wiki! 🚀
 
----
+## Quick Links
 
-## 🌐 Language Hub
-
-| Language | Welcome Page |
-| :--- | :--- |
-| 🇬🇧 **English** | [[Welcome-English]] |
-| 🇮🇷 **فارسی (Persian)** | [[Welcome-Persian]] |
-| 🇹🇷 **Türkçe (Turkish)** | [[Welcome-Turkish]] |
-| 🇦🇪 **العربية (Arabic)** | [[Welcome-Arabic]] |
-| 🇷🇺 **Русский (Russian)** | [[Welcome-Russian]] |
-| 🇨🇳 **中文 (Chinese)** | [[Welcome-Chinese]] |
-| 🇪🇸 **Español (Spanish)** | [[Welcome-Spanish]] |
-| 🇵🇰 **اردو (Urdu)** | [[Welcome-Urdu]] |
+| Page | Description |
+|------|-------------|
+| [Installation](Installation) | How to install on Windows, macOS, Linux |
+| [Features](Features) | Complete feature list |
+| [FAQ](FAQ) | Frequently asked questions |
+| [Troubleshooting](Troubleshooting) | Fix common problems |
 
 ---
 
-## 🛠 Project Standards
-- **Powered by:** Tawana Network
-- **Architect:** Tawana Mohammadi
-- **Support:** GitHub Issues Only
-- **License:** Proprietary (All Rights Reserved)
+## What is Antigravity Cleaner?
 
-## 📖 Key Sections
-1. **[Installation Guide](Installation-Guide)**
-2. **[Security Protocols](Security-Protocols)**
-3. **[Browser Troubleshooting](Browser-Troubleshooting)**
-4. **[Development & API](Development)**
+**Antigravity Cleaner Pro** is a professional utility for:
+- 🧹 Cleaning Antigravity IDE traces and system junk
+- 💾 Managing browser sessions with encrypted backup
+- 🌐 Testing Google connectivity (perfect for restricted regions)
+- 🔧 Optimizing network settings
+
+---
+
+## Supported Platforms
+
+| Platform | Version |
+|----------|---------|
+| Windows | 10/11 (x64) |
+| macOS | Catalina 10.15+ |
+| Linux | Ubuntu, Fedora, Arch |
+
+---
+
+## Quick Start
+
+**Windows:** Download [AntigravityCleaner.exe](https://github.com/tawroot/antigravity-cleaner/releases/latest)
+
+**macOS/Linux:**
+```bash
+curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
+```
+
+---
+
+## Support
+
+- ⭐ [Star on GitHub](https://github.com/tawroot/antigravity-cleaner)
+- 📢 [Join Telegram](https://t.me/panbehnet)
+- 🐛 [Report Issues](https://github.com/tawroot/antigravity-cleaner/issues)
+
+---
+
+**Copyright © 2024-2025 Tawana Network**

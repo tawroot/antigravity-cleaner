@@ -1,0 +1,466 @@
+name: 🚀 Build & Release v4.0
+
+on:
+  push:
+    tags:
+      - 'v4.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v4.0.1)'
+        required: true
+        default: 'v4.0.1'
+
+permissions:
+  contents: write
+
+jobs:
+  # Security: Only allow repository owner to create releases
+  check-permission:
+    name: 🔒 Check Permission
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify repository owner
+        run: |
+          if [ "${{ github.actor }}" != "${{ github.repository_owner }}" ]; then
+            echo "❌ Error: Only repository owner can create releases"
+            echo "Actor: ${{ github.actor }}"
+            echo "Owner: ${{ github.repository_owner }}"
+            exit 1
+          fi
+          echo "✅ Permission verified: ${{ github.actor }}"
+
+  build:
+    needs: check-permission
+    name: Build ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            platform: Windows
+            ext: .exe
+            archive: zip
+            artifact: AntigravityCleaner-v4.0-Windows-Portable.zip
+          - os: macos-latest
+            platform: macOS
+            ext: ''
+            archive: zip
+            artifact: AntigravityCleaner-v4.0-macOS-Portable.zip
+          - os: ubuntu-latest
+            platform: Linux
+            ext: ''
+            archive: tar.gz
+            artifact: AntigravityCleaner-v4.0-Linux-Portable.tar.gz
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install system dependencies (Linux)
+        if: matrix.platform == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-tk python3-dev
+
+      - name: 📦 Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install customtkinter psutil pycryptodome rich pillow pyinstaller
+
+      - name: 🔨 Build executable (Windows)
+        if: matrix.platform == 'Windows'
+        shell: pwsh
+        run: |
+          Write-Host "Building for Windows..." -ForegroundColor Cyan
+          
+          python -m PyInstaller `
+            --onefile `
+            --windowed `
+            --name "AntigravityCleaner" `
+            --clean `
+            --noupx `
+            --version-file=version_info.txt `
+            --manifest=app.manifest `
+            --icon=icon.ico `
+            --add-data "src;src" `
+            --add-data "LICENSE;." `
+            --hidden-import=customtkinter `
+            --hidden-import=tkinter `
+            --hidden-import=tkinter.ttk `
+            --hidden-import=tkinter.messagebox `
+            --hidden-import=PIL `
+            --hidden-import=PIL._tkinter_finder `
+            src/gui_apple.py
+          
+          Write-Host "Build completed!" -ForegroundColor Green
+
+      - name: 🔨 Build executable (macOS)
+        if: matrix.platform == 'macOS'
+        run: |
+          echo "Building for macOS..."
+          
+          python -m PyInstaller \
+            --onefile \
+            --windowed \
+            --name "AntigravityCleaner" \
+            --clean \
+            --noupx \
+            --icon=icon.png \
+            --add-data "src:src" \
+            --add-data "LICENSE:." \
+            --hidden-import=customtkinter \
+            --hidden-import=tkinter \
+            --hidden-import=tkinter.ttk \
+            --hidden-import=tkinter.messagebox \
+            --hidden-import=PIL \
+            --hidden-import=PIL._tkinter_finder \
+            src/gui_apple.py
+          
+          echo "Build completed!"
+
+      - name: 🔨 Build executable (Linux)
+        if: matrix.platform == 'Linux'
+        run: |
+          echo "Building for Linux..."
+          
+          python -m PyInstaller \
+            --onefile \
+            --name "AntigravityCleaner" \
+            --clean \
+            --noupx \
+            --add-data "src:src" \
+            --add-data "LICENSE:." \
+            --hidden-import=customtkinter \
+            --hidden-import=tkinter \
+            --hidden-import=tkinter.ttk \
+            --hidden-import=tkinter.messagebox \
+            --hidden-import=PIL \
+            --hidden-import=PIL._tkinter_finder \
+            src/gui_apple.py
+          
+          echo "Build completed!"
+
+      - name: 📦 Create Portable Package (Windows)
+        if: matrix.platform == 'Windows'
+        shell: pwsh
+        run: |
+          Write-Host "Creating portable package..." -ForegroundColor Cyan
+          
+          $portableDir = "AntigravityCleaner-Portable"
+          New-Item -ItemType Directory -Path $portableDir -Force | Out-Null
+          
+          # Copy executable
+          Copy-Item "dist/AntigravityCleaner.exe" "$portableDir/" -Force
+          
+          # Copy documentation
+          Copy-Item "README.md" "$portableDir/" -Force
+          Copy-Item "LICENSE" "$portableDir/" -Force
+          
+          # Create portable marker
+          @"
+Antigravity Cleaner - Portable Edition
+======================================
+
+Version: 4.0.0
+Platform: Windows
+Build Date: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss UTC')
+
+Copyright © 2024-2025 Tawana Mohammadi / Tawana Network
+All Rights Reserved
+
+This is the portable version. No installation required.
+Just run AntigravityCleaner.exe
+
+Features:
+- Premium Apple-Style UI
+- Multi-browser Session Management
+- Google Services Diagnostics
+- Network Optimization Tools
+- Encrypted Session Backups (AES-256-GCM)
+
+Support: https://github.com/tawroot/antigravity-cleaner/issues
+Website: https://tawroot.github.io/antigravity-cleaner/
+Telegram: https://t.me/panbehnet
+"@ | Out-File -FilePath "$portableDir/PORTABLE.txt" -Encoding UTF8
+          
+          # Create data folder
+          New-Item -ItemType Directory -Path "$portableDir/data" -Force | Out-Null
+          
+          # Create ZIP archive
+          Compress-Archive -Path "$portableDir/*" -DestinationPath "${{ matrix.artifact }}" -Force
+          
+          Write-Host "Package created: ${{ matrix.artifact }}" -ForegroundColor Green
+
+      - name: 📦 Create Portable Package (macOS)
+        if: matrix.platform == 'macOS'
+        run: |
+          echo "Creating portable package..."
+          
+          portableDir="AntigravityCleaner-Portable"
+          mkdir -p "$portableDir"
+          
+          # Copy executable
+          cp "dist/AntigravityCleaner" "$portableDir/"
+          chmod +x "$portableDir/AntigravityCleaner"
+          
+          # Copy documentation
+          cp "README.md" "$portableDir/"
+          cp "LICENSE" "$portableDir/"
+          
+          # Create portable marker
+          cat > "$portableDir/PORTABLE.txt" << 'EOF'
+Antigravity Cleaner - Portable Edition
+======================================
+
+Version: 4.0.0
+Platform: macOS
+Build Date: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+
+Copyright © 2024-2025 Tawana Mohammadi / Tawana Network
+All Rights Reserved
+
+This is the portable version. No installation required.
+Just run ./AntigravityCleaner
+
+Features:
+- Premium Apple-Style UI
+- Multi-browser Session Management
+- Google Services Diagnostics
+- Network Optimization Tools
+- Encrypted Session Backups (AES-256-GCM)
+
+Support: https://github.com/tawroot/antigravity-cleaner/issues
+Website: https://tawroot.github.io/antigravity-cleaner/
+Telegram: https://t.me/panbehnet
+EOF
+          
+          # Create data folder
+          mkdir -p "$portableDir/data"
+          
+          # Create ZIP archive
+          cd "$portableDir" && zip -r "../${{ matrix.artifact }}" . && cd ..
+          
+          echo "Package created: ${{ matrix.artifact }}"
+
+      - name: 📦 Create Portable Package (Linux)
+        if: matrix.platform == 'Linux'
+        run: |
+          echo "Creating portable package..."
+          
+          portableDir="AntigravityCleaner-Portable"
+          mkdir -p "$portableDir"
+          
+          # Copy executable
+          cp "dist/AntigravityCleaner" "$portableDir/"
+          chmod +x "$portableDir/AntigravityCleaner"
+          
+          # Copy documentation
+          cp "README.md" "$portableDir/"
+          cp "LICENSE" "$portableDir/"
+          
+          # Create portable marker
+          cat > "$portableDir/PORTABLE.txt" << 'EOF'
+Antigravity Cleaner - Portable Edition
+======================================
+
+Version: 4.0.0
+Platform: Linux
+Build Date: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+
+Copyright © 2024-2025 Tawana Mohammadi / Tawana Network
+All Rights Reserved
+
+This is the portable version. No installation required.
+Just run ./AntigravityCleaner
+
+Features:
+- Premium Apple-Style UI
+- Multi-browser Session Management
+- Google Services Diagnostics
+- Network Optimization Tools
+- Encrypted Session Backups (AES-256-GCM)
+
+Support: https://github.com/tawroot/antigravity-cleaner/issues
+Website: https://tawroot.github.io/antigravity-cleaner/
+Telegram: https://t.me/panbehnet
+EOF
+          
+          # Create data folder
+          mkdir -p "$portableDir/data"
+          
+          # Create TAR.GZ archive
+          tar -czf "${{ matrix.artifact }}" -C "$portableDir" .
+          
+          echo "Package created: ${{ matrix.artifact }}"
+
+      - name: 📤 Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-build
+          path: ${{ matrix.artifact }}
+          retention-days: 7
+          compression-level: 0  # Already compressed
+
+  release:
+    name: 🎉 Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📥 Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: 📋 Display structure
+        run: |
+          echo "Release assets:"
+          ls -lh release-assets/
+
+      - name: 🏷️ Get version tag
+        id: get_version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Create Release with GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG_NAME="${{ steps.get_version.outputs.version }}"
+          
+          echo "Creating release for $TAG_NAME..."
+          
+          # Delete release if exists (for retry scenarios)
+          gh release delete "$TAG_NAME" --yes 2>/dev/null || true
+          
+          # Create new release
+          gh release create "$TAG_NAME" \
+            --title "🚀 Antigravity Cleaner Pro $TAG_NAME" \
+            --notes "## 💎 Official Portable Release - Multi-Platform
+
+### ✨ What's New in v4.0.0
+
+#### 🎨 **Premium User Interface**
+- **Apple-Style Design** with Glassmorphism effects and smooth animations
+- **Dark/Light Mode** support with beautiful transitions
+- **Responsive Layout** that adapts to any window size
+- **Bilingual Interface** - Full English & Persian (فارسی) support with RTL
+
+#### 🚀 **Core Features**
+- **🧹 System Cleaning** - Deep clean Antigravity IDE traces, temp files, and caches
+- **💾 Session Manager** - Encrypted backup & restore for 8+ browsers
+  - Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc, Safari
+  - AES-256-GCM encryption for maximum security
+- **🌐 Google Connectivity Test** - Real-time diagnostics for:
+  - Google Account access
+  - Gemini AI services
+  - Google Cloud Platform
+  - AI Studio connectivity
+- **🔧 Network Optimizer** - DNS flush, network reset, and diagnostics
+
+#### 📦 **Package Details**
+
+Each portable package contains:
+- ✅ \`AntigravityCleaner\` executable (platform-specific)
+- ✅ \`README.md\` - Complete documentation
+- ✅ \`LICENSE\` - License terms
+- ✅ \`PORTABLE.txt\` - Quick start guide
+- ✅ \`data/\` - Auto-created folder for settings and backups
+
+#### 🚀 **Quick Start**
+
+**Windows:**
+\`\`\`powershell
+# Extract ZIP and run
+.\AntigravityCleaner.exe
+\`\`\`
+
+**macOS:**
+\`\`\`bash
+# Extract ZIP and run
+chmod +x AntigravityCleaner
+./AntigravityCleaner
+\`\`\`
+
+**Linux:**
+\`\`\`bash
+# Extract TAR.GZ and run
+tar -xzf AntigravityCleaner-v4.0-Linux-Portable.tar.gz
+chmod +x AntigravityCleaner
+./AntigravityCleaner
+\`\`\`
+
+#### 🛡️ **Security Notes**
+
+- ✅ **No Installation Required** - Fully portable, runs from any location
+- ✅ **Data Privacy** - All data stored locally in \`data/\` folder
+- ✅ **Encrypted Backups** - Session backups use AES-256-GCM encryption
+- ✅ **Open Source** - Full source code available for review
+- ⚠️ **Windows SmartScreen** - First run may show warning (normal for unsigned apps)
+  - Click \"More info\" → \"Run anyway\"
+
+#### 🌍 **Multi-Language Support**
+
+Full documentation available in:
+- 🇺🇸 English - [README.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.md)
+- 🇮🇷 فارسی - [README.fa.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.fa.md)
+- 🇨🇳 中文 - [README.zh.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.zh.md)
+- 🇷🇺 Русский - [README.ru.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.ru.md)
+- 🇹🇷 Türkçe - [README.tr.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.tr.md)
+- 🇸🇦 العربية - [README.ar.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.ar.md)
+- 🇪🇸 Español - [README.es.md](https://github.com/tawroot/antigravity-cleaner/blob/main/README.es.md)
+
+#### 📊 **System Requirements**
+
+| Platform | Requirements |
+|----------|-------------|
+| **Windows** | Windows 10/11 (x64) |
+| **macOS** | macOS 10.15 Catalina or later |
+| **Linux** | Any modern distro with Python 3.10+ |
+
+#### 🤝 **Support & Community**
+
+- 📢 **Telegram Channel**: [t.me/panbehnet](https://t.me/panbehnet)
+- 🐛 **Report Issues**: [GitHub Issues](https://github.com/tawroot/antigravity-cleaner/issues)
+- 🌐 **Website**: [tawroot.github.io/antigravity-cleaner](https://tawroot.github.io/antigravity-cleaner/)
+- 💬 **Contact**: [@RAHBARUSD](https://t.me/RAHBARUSD)
+
+#### 🙏 **Credits**
+
+Developed with ❤️ by **Tawana Network**
+
+**Copyright © 2024-2025 Tawana Mohammadi / Tawana Network**  
+All Rights Reserved.
+
+---
+
+### 📥 Download the version for your platform below ⬇️" \
+            release-assets/*
+
+          echo "✅ Release created successfully!"
+
+      - name: 🎊 Success notification
+        run: |
+          echo "================================================"
+          echo "🎉 Release ${{ steps.get_version.outputs.version }} created successfully!"
+          echo "================================================"
+          echo ""
+          echo "📦 Artifacts uploaded:"
+          ls -lh release-assets/
+          echo ""
+          echo "🔗 View release: https://github.com/${{ github.repository }}/releases/tag/${{ steps.get_version.outputs.version }}"

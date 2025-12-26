@@ -17,6 +17,7 @@ import os
 import platform
 import threading
 import webbrowser
+import ctypes
 from datetime import datetime
 
 try:
@@ -55,54 +56,46 @@ except ImportError as e:
 class AppleColors:
     """Apple Design System Colors"""
     
-    # Glassmorphism & Translucency
-    BG_GLASS = "#F5F5F7" if platform.system() == "Darwin" else "#F0F0F2"
-    BG_GLASS_DARK = "#1C1C1E"
+    # Minimal "Air" Palette
+    BG_PRIMARY = "#FFFFFF"       # Pure White
+    BG_SECONDARY = "#F5F5F7"     # Light Gray (Apple style)
+    BG_TERTIARY = "#E8E8ED"      # Hover states
     
-    # Modern Semantic Colors
-    BLUE = "#007AFF"
-    GREEN = "#34C759"
-    RED = "#FF3B30"
+    # Text
+    TEXT_PRIMARY = "#000000"     # Primary Text
+    TEXT_SECONDARY = "#86868B"   # Subtitles
+    TEXT_TERTIARY = "#D2D2D7"    # Disabled/Placeholder
+    
+    # BORDERS
+    BORDER = "#E5E5EA"
+
+    # Accents
+    ACCENT_PRIMARY = "#007AFF"   # Apple Blue
+    ACCENT_HOVER = "#0062CC"
+    ACCENT_DANGER = "#FF3B30"    # Apple Red
+    ACCENT_SUCCESS = "#34C759"   # Apple Green
+    
+    # Mappings
+    BLUE = ACCENT_PRIMARY
+    RED = ACCENT_DANGER
+    GREEN = ACCENT_SUCCESS
     ORANGE = "#FF9500"
-    YELLOW = "#FFCC00"
     PURPLE = "#AF52DE"
     PINK = "#FF2D55"
     TEAL = "#5AC8FA"
+    YELLOW = "#FFCC00"
     
-    # Text
-    LABEL = "#1D1D1F"
-    SECONDARY_LABEL = "#86868B"
-    TERTIARY_LABEL = "#3C3C4399"
-    
-    # Backgrounds
-    BG_PRIMARY = "#FFFFFF"
-    BG_SECONDARY = "#F2F2F7"
-    BG_TERTIARY = "#E5E5EA"
-    
-    # Sidebar
-    SIDEBAR_BG = "#F5F5F7"
-    SIDEBAR_ACTIVE = "#007AFF"
-    SIDEBAR_HOVER = "#E8E8ED"
-    
-    # Borders & Separators
-    SEPARATOR = "#C6C6C8"
-    BORDER = "rgba(0,0,0,0.1)"
-    
-    # Dark mode
-    DARK_BG = "#1C1C1E"
-    DARK_SECONDARY = "#2C2C2E"
-    DARK_TERTIARY = "#3A3A3C"
-    DARK_LABEL = "#FFFFFF"
-
-
-# ==================== Translations ====================
+    LABEL = TEXT_PRIMARY
+    SECONDARY_LABEL = TEXT_SECONDARY
+    SEPARATOR = BORDER
+    SIDEBAR_HOVER = BG_TERTIARY
 
 TRANSLATIONS = {
     'en': {
         'title': 'Antigravity Cleaner',
         'cleaner': 'Cleaner',
         'sessions': 'Sessions',
-        'browser': 'Browser',
+        'browser': 'Browser Helper',
         'network': 'Network',
         'quick_clean': 'Quick Clean',
         'deep_clean': 'Deep Clean',
@@ -118,12 +111,15 @@ TRANSLATIONS = {
         'dark_mode': 'Dark Mode',
         'ready': 'Ready',
         'test_google': 'Test Google',
+        'google': 'Google Test',
+        'dashboard': 'Dashboard',
+        'scan': 'Scan System',
     },
     'fa': {
         'title': 'آنتی‌گرویتی کلینر',
         'cleaner': 'پاکسازی',
         'sessions': 'نشست‌ها',
-        'browser': 'مرورگر',
+        'browser': 'مدیریت مرورگر',
         'network': 'شبکه',
         'quick_clean': 'پاکسازی سریع',
         'deep_clean': 'پاکسازی عمیق',
@@ -139,6 +135,9 @@ TRANSLATIONS = {
         'dark_mode': 'حالت تاریک',
         'ready': 'آماده',
         'test_google': 'تست گوگل',
+        'google': 'تست گوگل',
+        'dashboard': 'داشبورد',
+        'scan': 'اسکن سیستم',
     }
 }
 
@@ -219,17 +218,24 @@ class AntigravityApp(ctk.CTk):
         # Window setup - COMPACT SIZE
         self.title(f"Antigravity Cleaner v{self.VERSION}")
         
+        # Enable DPI awareness for Windows to fix 'out of frame' issues
+        if platform.system() == "Windows":
+            try:
+                ctypes.windll.shcore.SetProcessDpiAwareness(1)
+            except:
+                pass
+        
         # Calculate center position
+        window_w = 980
+        window_h = 680
         screen_w = self.winfo_screenwidth()
         screen_h = self.winfo_screenheight()
-        window_w = 950
-        window_h = 600
         x = (screen_w - window_w) // 2
         y = (screen_h - window_h) // 2
         
         self.geometry(f"{window_w}x{window_h}+{x}+{y}")
-        self.minsize(800, 500)
-        self.maxsize(1200, 800)
+        self.minsize(900, 600)
+        # Removed maxsize to allow full resizing
         
         # Appearance
         ctk.set_appearance_mode("light")
@@ -318,110 +324,94 @@ class AntigravityApp(ctk.CTk):
         )
         self.app_title.pack(side="right", padx=20)
 
-        # Sidebar setup (now in row 1)
+        # Sidebar setup (Floating look)
         self.sidebar = ctk.CTkFrame(
             self,
-            width=220,
+            width=200,
             corner_radius=0,
-            fg_color=AppleColors.SIDEBAR_BG
+            fg_color=AppleColors.BG_PRIMARY # White sidebar
         )
         self.sidebar.grid(row=1, column=0, sticky="nsew")
         self.sidebar.grid_propagate(False)
         
-        # Logo
+        # Logo Area
         logo_frame = ctk.CTkFrame(self.sidebar, fg_color="transparent")
-        logo_frame.pack(pady=(30, 10), padx=20, fill="x")
+        logo_frame.pack(pady=(40, 30), padx=20, fill="x")
         
         logo = ctk.CTkLabel(
             logo_frame,
             text="🚀",
-            font=ctk.CTkFont(size=40)
+            font=ctk.CTkFont(size=32)
         )
         logo.pack(side="left")
         
-        title_frame = ctk.CTkFrame(logo_frame, fg_color="transparent")
-        title_frame.pack(side="left", padx=12)
-        
-        title = ctk.CTkLabel(
-            title_frame,
+        title_label = ctk.CTkLabel(
+            logo_frame,
             text="Antigravity",
             font=ctk.CTkFont(family="SF Pro Display", size=18, weight="bold"),
-            text_color=AppleColors.LABEL
+            text_color=AppleColors.TEXT_PRIMARY
         )
-        title.pack(anchor="w")
-        
-        subtitle = ctk.CTkLabel(
-            title_frame,
-            text="Cleaner Pro",
-            font=ctk.CTkFont(family="SF Pro Display", size=14),
-            text_color=AppleColors.SECONDARY_LABEL
-        )
-        subtitle.pack(anchor="w")
+        title_label.pack(side="left", padx=10)
 
-        
-        # Separator
-        sep = ctk.CTkFrame(self.sidebar, height=1, fg_color=AppleColors.SEPARATOR)
-        sep.pack(fill="x", padx=15, pady=15)
-        
         # Navigation
         self.nav_btns = {}
         nav_items = [
             ("dashboard", "📊", "Dashboard"),
+            ("google", "🔍", "Google Test"),
             ("cleaner", "🧹", self.t('cleaner')),
             ("sessions", "💾", self.t('sessions')),
             ("browser", "🌐", self.t('browser')),
             ("network", "🔧", self.t('network')),
         ]
 
-        
         for key, icon, text in nav_items:
             btn = ctk.CTkButton(
                 self.sidebar,
                 text=f"  {icon}  {text}",
                 font=ctk.CTkFont(size=14),
-                height=40,
-                corner_radius=10,
+                height=45,
+                corner_radius=8,
                 fg_color="transparent",
-                text_color=AppleColors.LABEL,
-                hover_color=AppleColors.SIDEBAR_HOVER,
+                text_color=AppleColors.TEXT_SECONDARY,
+                hover_color=AppleColors.BG_SECONDARY,
                 anchor="w",
                 command=lambda k=key: self.show_page(k)
             )
-            btn.pack(fill="x", padx=10, pady=2)
+            btn.pack(fill="x", padx=15, pady=4)
             self.nav_btns[key] = btn
         
         # Spacer
         spacer = ctk.CTkFrame(self.sidebar, fg_color="transparent")
         spacer.pack(fill="both", expand=True)
         
-        # Bottom branding
+        # Bottom Branding and Version
         branding_frame = ctk.CTkFrame(self.sidebar, fg_color="transparent")
-        branding_frame.pack(side="bottom", fill="x", pady=20, padx=15)
-        
-        credit = ctk.CTkLabel(
-            branding_frame,
-            text="Powered by",
-            font=ctk.CTkFont(size=10),
-            text_color=AppleColors.SECONDARY_LABEL
-        )
-        credit.pack()
+        branding_frame.pack(side="bottom", fill="x", pady=(0, 20), padx=15)
         
         tawana = ctk.CTkLabel(
             branding_frame,
             text="TAWANA NETWORK",
-            font=ctk.CTkFont(size=12, weight="bold"),
-            text_color=AppleColors.BLUE
+            font=ctk.CTkFont(size=10, weight="bold"),
+            text_color=AppleColors.ACCENT_PRIMARY
         )
         tawana.pack()
         
+        ver = ctk.CTkLabel(
+            branding_frame,
+            text=f"v{self.VERSION}",
+            font=ctk.CTkFont(size=10),
+            text_color=AppleColors.TEXT_TERTIARY
+        )
+        ver.pack()
+
         license_btn = ctk.CTkLabel(
             branding_frame,
-            text="Proprietary License",
-            font=ctk.CTkFont(size=10, underline=True),
-            text_color=AppleColors.SECONDARY_LABEL,
+            text="License",
+            font=ctk.CTkFont(size=9),
+            text_color=AppleColors.TEXT_TERTIARY,
             cursor="hand2"
         )
-        license_btn.pack(pady=(5, 0))
+        license_btn.pack(pady=(2, 0))
         license_btn.bind("<Button-1>", lambda e: self.show_license())
         
         # Bottom controls (Theme/Lang)
@@ -491,6 +481,7 @@ class AntigravityApp(ctk.CTk):
             "sessions": self.page_sessions,
             "browser": self.page_browser,
             "network": self.page_network,
+            "google": self.page_google,
         }
         pages[page].grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
 
@@ -539,6 +530,7 @@ Violation of these terms will result in legal action.
         self.create_sessions_page()
         self.create_browser_page()
         self.create_network_page()
+        self.create_google_page()
 
     
     def create_card(self, parent, **kwargs):
@@ -588,168 +580,107 @@ Violation of these terms will result in legal action.
     
     # ==================== Dashboard Page ====================
     
+    # ==================== Dashboard Page ====================
+    
     def create_dashboard_page(self):
-        """Dashboard with health score and system status"""
+        """Minimal Dashboard Hub"""
         self.page_dashboard = ctk.CTkFrame(self.content, fg_color="transparent")
-        self.page_dashboard.grid_columnconfigure((0, 1), weight=1)
-        self.page_dashboard.grid_rowconfigure(2, weight=1) # Allow bottom content to expand
-
+        self.page_dashboard.grid_columnconfigure(0, weight=1)
+        self.page_dashboard.grid_rowconfigure(0, weight=1)
         
-        # Header
-        header = ctk.CTkLabel(
-            self.page_dashboard,
-            text="📊 Dashboard",
-            font=ctk.CTkFont(size=24, weight="bold"),
-            text_color=AppleColors.LABEL
-        )
-        header.grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 20))
+        # Center Hub
+        hub_frame = ctk.CTkFrame(self.page_dashboard, fg_color="transparent")
+        hub_frame.grid(row=0, column=0, sticky="nsew", padx=40, pady=40)
         
-        # Health Score Card (Left)
-        health_card = self.create_card(self.page_dashboard)
-        health_card.grid(row=1, column=0, sticky="nsew", padx=(0, 10), pady=(0, 10))
-        
-        health_title = ctk.CTkLabel(
-            health_card,
-            text="🏥 System Health",
-            font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=AppleColors.LABEL
-        )
-        health_title.pack(pady=(15, 5), padx=20, anchor="w")
-        
-        # Health score display
+        # 1. Health Display (Big & Clean)
         self.health_score_label = ctk.CTkLabel(
-            health_card,
+            hub_frame,
             text="--",
-            font=ctk.CTkFont(size=48, weight="bold"),
-            text_color=AppleColors.BLUE
+            font=ctk.CTkFont(family="SF Pro Display", size=96, weight="bold"),
+            text_color=AppleColors.TEXT_PRIMARY
         )
-        self.health_score_label.pack(pady=10)
+        self.health_score_label.pack(pady=(20, 0))
         
         self.health_status_label = ctk.CTkLabel(
-            health_card,
-            text="Scanning...",
-            font=ctk.CTkFont(size=14),
-            text_color=AppleColors.SECONDARY_LABEL
+            hub_frame,
+            text="System Scanning...",
+            font=ctk.CTkFont(size=18),
+            text_color=AppleColors.TEXT_SECONDARY
         )
-        self.health_status_label.pack(pady=(0, 10))
+        self.health_status_label.pack(pady=(5, 30))
         
-        # Scan button
-        scan_btn = self.create_button(
-            health_card, "🔍 Scan Now", "blue",
+        # 2. Primary Actions (Horizontal, Large)
+        action_frame = ctk.CTkFrame(hub_frame, fg_color="transparent")
+        action_frame.pack(pady=20)
+        
+        # Scan Report Button (Safe)
+        scan_btn = ctk.CTkButton(
+            action_frame,
+            text="Analyze Now",
+            font=ctk.CTkFont(size=16, weight="bold"),
+            height=50,
+            width=200,
+            corner_radius=25,
+            fg_color=AppleColors.ACCENT_PRIMARY,
+            hover_color=AppleColors.ACCENT_HOVER,
             command=self.run_scan
         )
-        scan_btn.pack(pady=20, padx=20, fill="x")
-        
-        # Status Card (Right)
-        status_card = self.create_card(self.page_dashboard)
-        status_card.grid(row=1, column=1, sticky="nsew", padx=(10, 0), pady=(0, 10))
-        
-        status_title = ctk.CTkLabel(
-            status_card,
-            text="📋 Status",
+        scan_btn.pack(side="left", padx=10)
+
+        # Google Test Button
+        google_btn = ctk.CTkButton(
+            action_frame,
+            text="Test Connectivity",
             font=ctk.CTkFont(size=16, weight="bold"),
-            text_color=AppleColors.LABEL
+            height=50,
+            width=200,
+            corner_radius=25,
+            fg_color="transparent",
+            border_width=2,
+            border_color=AppleColors.ACCENT_PRIMARY,
+            text_color=AppleColors.ACCENT_PRIMARY,
+            hover_color=AppleColors.BG_TERTIARY,
+            command=lambda: self.show_page('google')
         )
-        status_title.pack(pady=(20, 15), padx=20, anchor="w")
+        google_btn.pack(side="left", padx=10)
         
-        # Status items frame
-        self.status_frame = ctk.CTkFrame(status_card, fg_color="transparent")
-        self.status_frame.pack(fill="both", expand=True, padx=20, pady=10)
-        
-        # Status items (placeholders)
-        status_items = [
-            ("installed", "🔧 Antigravity Installed", "Checking..."),
-            ("running", "▶️ Antigravity Running", "Checking..."),
-            ("leftovers", "📁 Leftover Files", "Checking..."),
-            ("browsers", "🌐 Browsers Detected", "Checking..."),
-            ("sessions", "💾 Saved Sessions", "Checking..."),
-        ]
+        # 3. Quick Stats (Minimal Text)
+        stats_frame = ctk.CTkFrame(hub_frame, fg_color="transparent")
+        stats_frame.pack(pady=(40, 0), fill="x")
         
         self.status_labels = {}
-        for key, title, value in status_items:
-            row = ctk.CTkFrame(self.status_frame, fg_color="transparent")
-            row.pack(fill="x", pady=5)
+        
+        # Define stats to track
+        stats_keys = ['browsers', 'sessions', 'leftovers']
+        
+        # Create 3 columns for stats
+        stats_frame.grid_columnconfigure((0, 1, 2), weight=1)
+        
+        for i, key in enumerate(stats_keys):
+            frame = ctk.CTkFrame(stats_frame, fg_color=AppleColors.BG_PRIMARY, corner_radius=12)
+            frame.grid(row=0, column=i, padx=10, sticky="ew")
             
-            title_label = ctk.CTkLabel(
-                row,
-                text=title,
-                font=ctk.CTkFont(size=13),
-                text_color=AppleColors.LABEL
+            val = ctk.CTkLabel(
+                frame, 
+                text="...", 
+                font=ctk.CTkFont(size=24, weight="bold"),
+                text_color=AppleColors.TEXT_PRIMARY
             )
-            title_label.pack(side="left")
+            val.pack(pady=(15, 5))
+            self.status_labels[key] = val
             
-            value_label = ctk.CTkLabel(
-                row,
-                text=value,
-                font=ctk.CTkFont(size=13, weight="bold"),
-                text_color=AppleColors.SECONDARY_LABEL
+            lbl = ctk.CTkLabel(
+                frame,
+                text=key.capitalize(),
+                font=ctk.CTkFont(size=12),
+                text_color=AppleColors.TEXT_SECONDARY
             )
-            value_label.pack(side="right")
-            self.status_labels[key] = value_label
-        
-        # Google Services Card (row 2, left)
-        google_card = self.create_card(self.page_dashboard)
-        google_card.grid(row=2, column=0, sticky="nsew", padx=(0, 10), pady=(10, 0))
-        
-        google_title = ctk.CTkLabel(
-            google_card,
-            text="🌐 Google Services",
-            font=ctk.CTkFont(size=14, weight="bold"),
-            text_color=AppleColors.LABEL
-        )
-        google_title.pack(pady=(15, 10), padx=20, anchor="w")
-        
-        # Google services status
-        self.google_status_frame = ctk.CTkScrollableFrame(
-            google_card,
-            height=100,
-            fg_color=AppleColors.BG_SECONDARY,
-            corner_radius=8
-        )
-        self.google_status_frame.pack(fill="both", expand=True, padx=15, pady=(0, 10))
-        
-        # Placeholder
-        self.google_status_placeholder = ctk.CTkLabel(
-            self.google_status_frame,
-            text="Click 'Test Google' to check",
-            font=ctk.CTkFont(size=12),
-            text_color=AppleColors.SECONDARY_LABEL
-        )
-        self.google_status_placeholder.pack(pady=20)
-        
-        # Test button
-        test_google_btn = self.create_button(
-            google_card, "🔍 Test Google", "blue",
-            command=self.test_google_services
-        )
-        test_google_btn.pack(pady=(0, 15), padx=20, fill="x")
-        
-        # Quick Actions Card (row 2, right)
-        actions_card = self.create_card(self.page_dashboard)
-        actions_card.grid(row=2, column=1, sticky="nsew", padx=(10, 0), pady=(10, 0))
-        
-        actions_title = ctk.CTkLabel(
-            actions_card,
-            text="⚡ Quick Actions",
-            font=ctk.CTkFont(size=14, weight="bold"),
-            text_color=AppleColors.LABEL
-        )
-        actions_title.pack(pady=(15, 10), padx=20, anchor="w")
-        
-        btn_frame = ctk.CTkFrame(actions_card, fg_color="transparent")
-        btn_frame.pack(fill="both", expand=True, padx=20, pady=(0, 15))
-        
-        quick_btns = [
-            ("🧹 Quick Clean", "green", lambda: self.run_clean('quick')),
-            ("💾 Backup All", "blue", self.backup_all_sessions),
-            ("🔧 Full Repair", "red", lambda: self.run_clean('full')),
-            ("🔄 Refresh", "gray", self.run_scan),
-        ]
-        
-        for text, color, cmd in quick_btns:
-            btn = self.create_button(btn_frame, text, color, command=cmd)
-            btn.pack(pady=3, fill="x")
-        
+            lbl.pack(pady=(0, 15))
+
+        # Add dummy labels for missing keys to prevent errors
+        self.status_labels['installed'] = ctk.CTkLabel(self, text="")
+        self.status_labels['running'] = ctk.CTkLabel(self, text="")
+
         # Auto-scan on load
         self.after(500, self.run_scan)
     
@@ -778,31 +709,24 @@ Violation of these terms will result in legal action.
                 
                 # Determine color based on score
                 if score >= 90:
-                    color = AppleColors.GREEN
+                    color = AppleColors.ACCENT_SUCCESS
                 elif score >= 70:
                     color = AppleColors.ORANGE
                 else:
-                    color = AppleColors.RED
+                    color = AppleColors.ACCENT_DANGER
                 
                 self.after(0, lambda: self.health_score_label.configure(text=str(score), text_color=color))
                 self.after(0, lambda: self.health_status_label.configure(text=status))
                 
-                # Update status items
-                installed = "Yes" if results['is_installed'] else "No"
-                running = "Yes" if results['is_running'] else "No"
-                leftovers = f"{len(results['leftover_paths'])} files ({results['leftover_size_human']})"
+                # Update status items (Minimal)
+                leftovers_txt = f"{len(results['leftover_paths'])} Files"
+                if results['leftover_size'] > 0:
+                     leftovers_txt += f"\n({results['leftover_size_human']})"
                 
-                self.after(0, lambda: self.status_labels['installed'].configure(
-                    text=installed, 
-                    text_color=AppleColors.RED if results['is_installed'] else AppleColors.GREEN
-                ))
-                self.after(0, lambda: self.status_labels['running'].configure(
-                    text=running,
-                    text_color=AppleColors.RED if results['is_running'] else AppleColors.GREEN
-                ))
-                self.after(0, lambda: self.status_labels['leftovers'].configure(text=leftovers))
+                self.after(0, lambda: self.status_labels['leftovers'].configure(text=leftovers_txt))
+
             else:
-                self.after(0, lambda: self.health_score_label.configure(text="100", text_color=AppleColors.GREEN))
+                self.after(0, lambda: self.health_score_label.configure(text="100", text_color=AppleColors.ACCENT_SUCCESS))
                 self.after(0, lambda: self.health_status_label.configure(text="✅ Clean"))
             
             # Update browser count
@@ -1170,7 +1094,83 @@ Violation of these terms will result in legal action.
         )
         self.network_text.pack(fill="both", expand=True, padx=15, pady=15)
     
+    # ==================== Google Page ====================
+    
+    def create_google_page(self):
+        """Dedicated Google Services Test page"""
+        self.page_google = ctk.CTkFrame(self.content, fg_color="transparent")
+        self.page_google.grid_columnconfigure(0, weight=1)
+        self.page_google.grid_rowconfigure(1, weight=1)
+        
+        # Header
+        header = ctk.CTkLabel(
+            self.page_google,
+            text="🔍 Google Services Diagnostics",
+            font=ctk.CTkFont(size=24, weight="bold"),
+            text_color=AppleColors.LABEL
+        )
+        header.grid(row=0, column=0, sticky="w", pady=(0, 20))
+        
+        # Main card
+        main_card = self.create_card(self.page_google)
+        main_card.grid(row=1, column=0, sticky="nsew")
+        main_card.grid_columnconfigure(0, weight=1)
+        main_card.grid_rowconfigure(2, weight=1)
+        
+        # Description
+        desc = ctk.CTkLabel(
+            main_card,
+            text="Test connectivity to Google Account, Gemini AI, Cloud Services, and AI Studio.\nUseful for diagnosing access issues in restricted networks.",
+            font=ctk.CTkFont(size=13),
+            text_color=AppleColors.SECONDARY_LABEL,
+            justify="left"
+        )
+        desc.pack(pady=(20, 15), padx=25, anchor="w")
+        
+        # Large Test Button
+        test_btn = ctk.CTkButton(
+            main_card,
+            text="🚀 Run Google Services Test",
+            command=self.test_google_services,
+            height=60,
+            font=ctk.CTkFont(size=18, weight="bold"),
+            fg_color=AppleColors.BLUE,
+            hover_color=self._lighten(AppleColors.BLUE),
+            corner_radius=12
+        )
+        test_btn.pack(pady=(0, 20), padx=25, fill="x")
+        
+        # Results area
+        results_label = ctk.CTkLabel(
+            main_card,
+            text="📋 Test Results",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            text_color=AppleColors.LABEL
+        )
+        results_label.pack(pady=(10, 5), padx=25, anchor="w")
+        
+        self.google_results_text = ctk.CTkTextbox(
+            main_card,
+            font=ctk.CTkFont(family="SF Mono", size=11),
+            fg_color=AppleColors.BG_SECONDARY,
+            text_color=AppleColors.LABEL,
+            corner_radius=8,
+            state="disabled"
+        )
+        self.google_results_text.pack(fill="both", expand=True, padx=25, pady=(0, 25))
+        
+        # Initial message
+        self.google_results_text.configure(state="normal")
+        self.google_results_text.insert("end", "Click 'Run Google Services Test' to start diagnostics...\n\n")
+        self.google_results_text.insert("end", "Services to be tested:\n")
+        self.google_results_text.insert("end", "  • Google Account (accounts.google.com)\n")
+        self.google_results_text.insert("end", "  • Gemini AI (gemini.google.com)\n")
+        self.google_results_text.insert("end", "  • Google Cloud (cloud.google.com)\n")
+        self.google_results_text.insert("end", "  • AI Studio (aistudio.google.com)\n")
+        self.google_results_text.configure(state="disabled")
+    
     # ==================== Actions ====================
+
     
     def log(self, msg):
         """Add to log"""

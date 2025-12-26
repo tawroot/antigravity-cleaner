@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Antigravity Cleaner</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-theme="dark">
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" data-lang-key="home">Home</a></li>
+                    <li><a href="features.html" data-lang-key="features">Features</a></li>
+                    <li><a href="download.html" data-lang-key="download">Download</a></li>
+                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
+                    <li><a href="blog.html" class="active" data-lang-key="blog">Blog</a></li>
+                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switcher">
+                        <select id="langSelect"
+                            style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
+                            <option value="en">EN</option>
+                            <option value="fa">FA</option>
+                            <option value="ru">RU</option>
+                            <option value="zh">ZH</option>
+                        </select>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 150px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="blog">Latest News</h2>
+                <p class="section-subtitle">Updates, tutorials, and security insights.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="glass-card feature-item" style="text-align: left;">
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">December 25, 2025</div>
+                    <h3 data-lang-key="blog_1_title">Fixing SSL Handshake Errors</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;" data-lang-key="blog_1_desc">A
+                        comprehensive guide to understanding and fixing SSL/TLS errors in restricted network
+                        environments.</p>
+                    <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 5px 15px;"
+                        data-lang-key="read_more">Read More</a>
+                </div>
+
+                <div class="glass-card feature-item" style="text-align: left;">
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">December 20, 2025</div>
+                    <h3 data-lang-key="blog_2_title">Version 4.0 Release Notes</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;" data-lang-key="blog_2_desc">Celebrating
+                        the release of our biggest update yet, featuring new UI and faster cleaning engines.</p>
+                    <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 5px 15px;"
+                        data-lang-key="read_more">Read More</a>
+                </div>
+
+                <div class="glass-card feature-item" style="text-align: left;">
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">November 15, 2025</div>
+                    <h3 data-lang-key="blog_3_title">Understanding Region Locks</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;" data-lang-key="blog_3_desc">How software
+                        limits access based on geography and what you can do about it legally.</p>
+                    <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 5px 15px;"
+                        data-lang-key="read_more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

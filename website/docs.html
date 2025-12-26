@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Antigravity Cleaner - User Guide</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Complete documentation and user guide for Antigravity Cleaner. Learn how to install, configure, and use all features.">
+    <meta name="keywords"
+        content="Antigravity Cleaner documentation, user guide, how to install antigravity, tutorial, آموزش آنتی گرویتی">
+    <meta name="author" content="Tawroot">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Search Console -->
+    <meta name="google-site-verification" content="_zKMwaybu8btLgnyo58WAiQn4DdQ9nKMevHHZk2m3LY" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Antigravity Cleaner Documentation">
+    <meta property="og:description" content="Complete user guide and documentation.">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Antigravity Cleaner</a>
+            <ul class="nav-links">
+                <li><a href="index.html#download">Download</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="docs.html" class="active">Docs</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                <li><a href="https://github.com/tawroot/antigravity-cleaner/wiki" target="_blank">Wiki</a></li>
+                <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank">GitHub</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+        <h1>Documentation</h1>
+        <p>Everything you need to know about Antigravity Cleaner</p>
+    </section>
+
+    <!-- Quick Start -->
+    <section>
+        <h2 class="section-title">Quick Start Guide</h2>
+
+        <div class="command-section">
+            <h3 style="margin-bottom: 24px;">📥 Installation</h3>
+
+            <div class="command-box">
+                <h4><i class="fab fa-windows"></i> Windows</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;">Download the portable EXE - no
+                    installation required!</p>
+                <div class="code-block">
+                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" class="btn btn-primary"
+                        style="font-size: 14px;">
+                        <i class="fas fa-download"></i> Download for Windows
+                    </a>
+                </div>
+            </div>
+
+            <div class="command-box">
+                <h4><i class="fab fa-apple"></i> <i class="fab fa-linux"></i> macOS / Linux</h4>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('install-cmd')">Copy</button>
+                    <code
+                        id="install-cmd">curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code>
+                </div>
+            </div>
+
+            <div class="command-box">
+                <h4><i class="fab fa-windows"></i> Windows PowerShell</h4>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('ps-cmd')">Copy</button>
+                    <code
+                        id="ps-cmd">iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Guide -->
+    <section>
+        <h2 class="section-title">How to Use</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">1️⃣</div>
+                <h3>Launch Application</h3>
+                <p>Run the downloaded executable. On first launch, you'll see the Dashboard with your system health
+                    score.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">2️⃣</div>
+                <h3>Analyze System</h3>
+                <p>Click "Analyze Now" to scan for Antigravity traces, leftover files, and browser sessions. This is
+                    100% safe - read-only scan.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">3️⃣</div>
+                <h3>Backup Sessions</h3>
+                <p>Go to Sessions tab, select browser profiles, and click Backup. Your sessions are encrypted and stored
+                    locally.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">4️⃣</div>
+                <h3>Test Google Connectivity</h3>
+                <p>Use the "Google Test" page to diagnose access to Google Account, Gemini AI, and Cloud services.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">5️⃣</div>
+                <h3>Clean System</h3>
+                <p>Go to Cleaner tab. Choose Quick Clean or Deep Clean. Review changes before confirming.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">6️⃣</div>
+                <h3>Network Tools</h3>
+                <p>Use Network tab to flush DNS, reset network stack, or run diagnostics to fix connection issues.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wiki Link -->
+    <section class="support-banner">
+        <h2>📚 Full Documentation</h2>
+        <p>For detailed guides, visit our GitHub Wiki.</p>
+        <a href="https://github.com/tawroot/antigravity-cleaner/wiki" class="star-btn" target="_blank">
+            <i class="fas fa-book"></i> Open Wiki
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Tawroot | All Rights Reserved</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://github.com/tawroot"><i class="fab fa-github"></i> GitHub</a> |
+            <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i> Telegram</a>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

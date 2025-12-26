@@ -4,333 +4,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antigravity Cleaner | Professional IDE Cleaning Tool</title>
+    <title>Antigravity Cleaner | Pro Maintenance Tool</title>
 
-    <!-- SEO Meta Tags -->
+    <!-- Meta Tags -->
     <meta name="description"
-        content="Professional tool to fix Antigravity IDE installation errors, network issues, and region locks. One-click cleaning for Windows, macOS, and Linux.">
+        content="Fix Antigravity IDE errors, region locks, and network interference instantly. Professional cleaning tool for Windows, macOS, and Linux.">
     <meta name="keywords"
-        content="Antigravity Cleaner, IDE Fix, Google Login Fix, Region Lock Bypass, Python Cleaner, Network Reset, Tawana Mohammadi, Towana Mohammadi, تعمیر Antigravity, پاکسازی IDE">
-    <meta name="author" content="Tawroot">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English, Persian">
-    <meta name="revisit-after" content="7 days">
-    <meta name="distribution" content="global">
-    <meta name="rating" content="general">
+        content="antigravity cleaner, fix antigravity error, bypass region lock, panbeh vpn, session backup">
 
-    <!-- Hidden Keywords for SEO (not visible to users) -->
-    <meta name="DC.creator" content="Tawana Mohammadi">
-    <meta name="DC.contributor" content="Towana Mohammadi">
-    <meta name="citation_author" content="Tawana Mohammadi">
-
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="_zKMwaybu8btLgnyo58WAiQn4DdQ9nKMevHHZk2m3LY" />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/">
-    <meta property="og:title" content="Antigravity Cleaner - Professional IDE Cleaning Tool">
-    <meta property="og:description"
-        content="Fix Antigravity IDE errors instantly. Cross-platform, open-source, and free.">
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Antigravity Cleaner">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:locale:alternate" content="fa_IR">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@tawroot">
-    <meta name="twitter:creator" content="@tawroot">
-    <meta name="twitter:title" content="Antigravity Cleaner - Professional IDE Cleaning Tool">
-    <meta name="twitter:description"
-        content="Fix Antigravity IDE errors instantly. Cross-platform, open-source, and free.">
-    <meta name="twitter:image"
-        content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
-
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Antigravity Cleaner",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": ["Windows", "macOS", "Linux"],
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "127"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "Tawroot",
-        "url": "https://github.com/tawroot"
-      },
-      "description": "Professional tool to fix Antigravity IDE installation errors, network issues, and region locks. One-click cleaning for Windows, macOS, and Linux.",
-      "downloadUrl": "https://github.com/tawroot/antigravity-cleaner/releases",
-      "softwareVersion": "2.1.0",
-      "releaseNotes": "Added professional GUI with bilingual support",
-      "screenshot": "https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png",
-      "license": "Proprietary"
-    }
-    </script>
-
-    <!-- Fonts & Icons -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <div class="bg-animation"></div>
-
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-        <button onclick="switchLang('en')" id="lang-en" class="active">EN</button>
-        <button onclick="switchLang('fa')" id="lang-fa">فا</button>
-    </div>
+<body data-theme="dark">
 
     <!-- Header -->
     <header>
-        <nav>
-            <div class="logo">Antigravity Cleaner</div>
-            <ul class="nav-links">
-                <li><a href="#download" data-en="Download" data-fa="دانلود">Download</a></li>
-                <li><a href="#tutorial" data-en="Tutorial" data-fa="آموزش">Tutorial</a></li>
-                <li><a href="#features" data-en="Features" data-fa="ویژگی‌ها">Features</a></li>
-                <li><a href="#support" data-en="Support" data-fa="حمایت">Support</a></li>
-                <li><a href="https://github.com/tawroot/antigravity-cleaner">GitHub</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    Antigravity <span>Cleaner</span>
+                </a>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="active" data-lang-key="home">Home</a></li>
+                    <li><a href="features.html" data-lang-key="features">Features</a></li>
+                    <li><a href="download.html" data-lang-key="download">Download</a></li>
+                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                </ul>
+
+                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
+                    <div class="lang-switcher">
+                        <select id="langSelect"
+                            style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
+                            <option value="en">EN</option>
+                            <option value="fa">FA</option>
+                            <option value="ru">RU</option>
+                            <option value="zh">ZH</option>
+                            <option value="ar">AR</option>
+                            <option value="es">ES</option>
+                            <option value="tr">TR</option>
+                        </select>
+                    </div>
+
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <a href="download.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
+                        <span data-lang-key="get_app">Get App</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1 data-en="Fix Antigravity IDE<br>Instantly" data-fa="رفع مشکلات Antigravity<br>در یک لحظه">Fix Antigravity
-            IDE<br>Instantly</h1>
-        <p data-en="Professional cleaning tool for installation errors, network issues, and region locks"
-            data-fa="ابزار حرفه‌ای برای رفع خطاهای نصب، مشکلات شبکه و محدودیت منطقه‌ای">Professional cleaning tool for
-            installation errors, network issues, and region locks</p>
-        <div class="btn-group">
-            <a href="#download" class="btn btn-primary">
-                <i class="fas fa-download"></i> <span data-en="Download Now" data-fa="دانلود فوری">Download Now</span>
-            </a>
-            <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary">
-                <i class="fab fa-github"></i> <span data-en="View on GitHub" data-fa="مشاهده در گیت‌هاب">View on
-                    GitHub</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section class="download-section" id="download">
-        <h2 class="section-title" data-en="Download for Your Platform" data-fa="دانلود برای پلتفرم شما">Download for
-            Your Platform</h2>
-        <div class="download-grid">
-            <div class="download-card">
-                <i class="fab fa-windows"></i>
-                <h3>Windows</h3>
-                <p data-en="Portable EXE with GUI<br>Windows 7, 8, 10, 11"
-                    data-fa="فایل اجرایی با رابط گرافیکی<br>ویندوز 7، 8، 10، 11">Portable EXE with GUI<br>Windows 7, 8,
-                    10, 11</p>
-                <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/AntigravityCleaner.exe"
-                    class="btn btn-primary">
-                    <i class="fas fa-download"></i> <span data-en="Download EXE" data-fa="دانلود EXE">Download
-                        EXE</span>
+        <div class="container hero-content">
+            <h1 class="gradient-text fade-in" style="animation-delay: 0.1s;" data-lang-key="hero_title">Fix Antigravity
+                IDE Instantly</h1>
+            <p class="fade-in" style="animation-delay: 0.2s;" data-lang-key="hero_subtitle">
+                The most powerful maintenance tool for installation errors, network interference, and region
+                restrictions.
+            </p>
+            <div class="hero-btns fade-in" style="animation-delay: 0.3s;">
+                <a href="download.html" class="btn btn-primary">
+                    <i class="fas fa-arrow-down"></i> <span data-lang-key="get_started">Get Started</span>
+                </a>
+                <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-github"></i> <span data-lang-key="view_source">View Source</span>
                 </a>
             </div>
 
-            <div class="download-card">
-                <i class="fab fa-apple"></i>
-                <h3>macOS</h3>
-                <p data-en="Native Application<br>macOS 10.14+" data-fa="برنامه بومی<br>macOS 10.14+">Native
-                    Application<br>macOS 10.14+</p>
-                <a href="https://github.com/tawroot/antigravity-cleaner/releases" class="btn btn-primary">
-                    <i class="fas fa-download"></i> <span data-en="Download APP" data-fa="دانلود APP">Download
-                        APP</span>
+            <!-- Bento Stats -->
+            <div class="stats fade-in" style="animation-delay: 0.5s;">
+                <div class="stat-card">
+                    <span class="stat-value" id="star-count">...</span>
+                    <span class="stat-label" data-lang-key="stars">GitHub Stars</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="fork-count">...</span>
+                    <span class="stat-label" data-lang-key="forks">Forks</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="download-count">10k+</span>
+                    <span class="stat-label" data-lang-key="downloads">Downloads</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">v4.0</span>
+                    <span class="stat-label" data-lang-key="version">Version</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Block -->
+    <section class="container">
+        <div class="terminal-block fade-in" style="animation-delay: 0.6s;">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="quick_install">Quick Install</h2>
+                <p class="section-subtitle" data-lang-key="quick_install_desc">Install instantly via terminal without
+                    leaving your keyboard.</p>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="t-red"></span>
+                        <span class="t-yellow"></span>
+                        <span class="t-green"></span>
+                    </div>
+                    <div class="terminal-tabs">
+                        <button class="t-tab active" id="tabWin" onclick="toggleTerminal('win')">Windows</button>
+                        <button class="t-tab" id="tabUnix" onclick="toggleTerminal('unix')">Unix/Mac</button>
+                    </div>
+                </div>
+                <div class="terminal-content" id="terminal">
+                    <div id="cmdWin">
+                        <span class="t-prompt">PS C:\></span>
+                        <span class="t-cmd" id="winTxt">iwr -useb
+                            https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</span>
+                    </div>
+                    <div id="cmdUnix" style="display:none;">
+                        <span class="t-prompt">$</span>
+                        <span class="t-cmd" id="unixTxt">curl -sL
+                            https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</span>
+                    </div>
+                    <button class="t-copy-btn" onclick="copyTerminal()">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community & Support Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="community_title">Join Our Community</h2>
+                <p class="section-subtitle" data-lang-key="community_subtitle">Get help, share ideas, and stay updated
+                    with the latest news.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- GitHub Star -->
+                <div class="glass-card feature-item" style="text-align: center;">
+                    <div class="feature-icon">⭐</div>
+                    <h3 data-lang-key="star_title">Star on GitHub</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;" data-lang-key="star_desc">Show your
+                        support by starring our repository. It helps us grow!</p>
+                    <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-primary"
+                        style="width: 100%;">
+                        <i class="fab fa-github"></i> <span data-lang-key="star_btn">Star Repository</span>
+                    </a>
+                </div>
+
+                <!-- Telegram Channel -->
+                <div class="glass-card feature-item" style="text-align: center;">
+                    <div class="feature-icon">📢</div>
+                    <h3 data-lang-key="telegram_title">Telegram Channel</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;" data-lang-key="telegram_desc">Join our
+                        Telegram channel for updates, tips, and community support.</p>
+                    <a href="https://t.me/panbehnet" target="_blank" class="btn btn-primary" style="width: 100%;">
+                        <i class="fab fa-telegram"></i> <span data-lang-key="telegram_btn">Join Channel</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funding Campaign Section -->
+    <section class="section"
+        style="background: linear-gradient(135deg, rgba(250, 35, 59, 0.05) 0%, rgba(0, 0, 0, 0) 100%);">
+        <div class="container">
+            <div class="glass-card" style="padding: 48px; max-width: 900px; margin: 0 auto; text-align: center;">
+                <!-- Campaign Header -->
+                <div style="margin-bottom: 32px;">
+                    <div
+                        style="display: inline-block; background: rgba(250, 35, 59, 0.1); padding: 8px 16px; border-radius: 20px; margin-bottom: 16px;">
+                        <span style="color: var(--primary); font-weight: 600; font-size: 0.875rem;"
+                            data-lang-key="campaign_badge">🚀 FUNDING CAMPAIGN</span>
+                    </div>
+                    <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 16px; font-weight: 800;"
+                        data-lang-key="campaign_title">Fund Antigravity Cleaner v5.0</h2>
+                    <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto;"
+                        data-lang-key="campaign_desc">Help us build the next generation with AI-powered cleaning,
+                        advanced automation, and enterprise features.</p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div style="margin-bottom: 32px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 2rem; font-weight: 800; color: var(--primary);"
+                                id="campaign-raised">$0</span>
+                            <span style="color: var(--text-secondary); font-size: 1rem;"
+                                data-lang-key="campaign_raised">raised</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--text-secondary); font-size: 1rem;"
+                                data-lang-key="campaign_goal">Goal:</span>
+                            <span style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);"
+                                id="campaign-goal">$500</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div
+                        style="background: rgba(255, 255, 255, 0.05); height: 24px; border-radius: 12px; overflow: hidden; position: relative;">
+                        <div id="campaign-progress"
+                            style="background: linear-gradient(90deg, var(--primary) 0%, var(--primary-hover) 100%); height: 100%; width: 0%; transition: width 1s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;">
+                            <span style="color: white; font-weight: 700; font-size: 0.875rem;"
+                                id="campaign-percentage">0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; margin-top: 24px;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);"
+                                id="campaign-backers">0</div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                data-lang-key="campaign_backers">Backers</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="campaign-days">
+                                30</div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                data-lang-key="campaign_days">Days Left</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">v5.0</div>
+                            <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                data-lang-key="campaign_version">Target Version</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features List -->
+                <div
+                    style="text-align: left; margin-bottom: 32px; background: rgba(255, 255, 255, 0.02); padding: 24px; border-radius: 12px;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 16px; text-align: center;"
+                        data-lang-key="campaign_features_title">What's Coming in v5.0?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">🤖</span>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_ai">AI-Powered
+                                    Cleaning</div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                    data-lang-key="feature_ai_desc">Smart detection and removal</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">⚡</span>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_auto">
+                                    Auto-Scheduler</div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                    data-lang-key="feature_auto_desc">Automated maintenance tasks</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">🏢</span>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_enterprise">
+                                    Enterprise Tools</div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                    data-lang-key="feature_enterprise_desc">Fleet management & reporting</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">🎨</span>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_ui">Modern GUI
+                                </div>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
+                                    data-lang-key="feature_ui_desc">Beautiful desktop interface</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://nowpayments.io/donation/tawroot" target="_blank" class="btn btn-primary"
+                        style="font-size: 1.125rem; padding: 16px 32px;">
+                        <i class="fas fa-rocket"></i> <span data-lang-key="campaign_support">Support v5.0</span>
+                    </a>
+                    <a href="https://github.com/tawroot/antigravity-cleaner/discussions" target="_blank"
+                        class="btn btn-secondary" style="font-size: 1.125rem; padding: 16px 32px;">
+                        <i class="fas fa-comments"></i> <span data-lang-key="campaign_discuss">Join Discussion</span>
+                    </a>
+                </div>
+
+                <!-- Backer Perks -->
+                <div
+                    style="margin-top: 32px; padding: 24px; background: rgba(250, 35, 59, 0.05); border: 1px solid rgba(250, 35, 59, 0.2); border-radius: 12px;">
+                    <h4 style="font-size: 1.125rem; margin-bottom: 16px; color: var(--primary);"
+                        data-lang-key="backer_perks_title">🎁 Backer Benefits</h4>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; text-align: left;">
+                        <div style="display: flex; gap: 8px; align-items: start;">
+                            <span style="color: var(--primary);">✅</span>
+                            <span style="font-size: 0.9375rem;" data-lang-key="perk_support">Priority Support</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: start;">
+                            <span style="color: var(--primary);">✅</span>
+                            <span style="font-size: 0.9375rem;" data-lang-key="perk_feature">Feature Requests</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: start;">
+                            <span style="color: var(--primary);">✅</span>
+                            <span style="font-size: 0.9375rem;" data-lang-key="perk_early">Early Access to v5.0</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: start;">
+                            <span style="color: var(--primary);">✅</span>
+                            <span style="font-size: 0.9375rem;" data-lang-key="perk_credit">Credits in Release
+                                Notes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Small Note -->
+                <p style="margin-top: 24px; color: var(--text-tertiary); font-size: 0.875rem;"
+                    data-lang-key="campaign_note">
+                    💡 All donations go directly to development. We accept BTC, ETH, USDT, and more.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview Section -->
+    <section class="section" style="background: var(--bg-secondary); padding: 80px 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="why_choose">Why Choose Antigravity Cleaner?</h2>
+                <p class="section-subtitle" data-lang-key="why_choose_desc">Powerful features designed for developers
+                    and power users.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="glass-card feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <h3 data-lang-key="feat_clean_title">One-Click Clean</h3>
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_clean_desc">Remove corrupted
+                        installation files, cache, and registry keys instantly.</p>
+                </div>
+
+                <div class="glass-card feature-item">
+                    <div class="feature-icon">🌍</div>
+                    <h3 data-lang-key="feat_region_title">Region Bypass</h3>
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_region_desc">Automatically fix
+                        region-locked errors for constrained networks.</p>
+                </div>
+
+                <div class="glass-card feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 data-lang-key="feat_session_title">Session Preservation</h3>
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_session_desc">Clean the system without
+                        losing your browser cookies or login sessions.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 48px;">
+                <a href="features.html" class="btn btn-primary">
+                    <span data-lang-key="view_all_features">View All Features</span> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
+        </div>
+    </section>
 
-            <div class="download-card">
-                <i class="fab fa-linux"></i>
-                <h3>Linux</h3>
-                <p data-en="Portable Binary<br>Ubuntu, Fedora, Arch" data-fa="فایل اجرایی<br>اوبونتو، فدورا، آرچ">
-                    Portable Binary<br>Ubuntu, Fedora, Arch</p>
-                <a href="https://github.com/tawroot/antigravity-cleaner/releases" class="btn btn-primary">
-                    <i class="fas fa-download"></i> <span data-en="Download Binary" data-fa="دانلود Binary">Download
-                        Binary</span>
+    <!-- CTA Section -->
+    <section class="section"
+        style="background: linear-gradient(135deg, rgba(250, 35, 59, 0.1) 0%, rgba(0, 0, 0, 0) 100%); padding: 100px 0;">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; font-weight: 800;"
+                data-lang-key="cta_title">Ready to Fix Your IDE?</h2>
+            <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px;"
+                data-lang-key="cta_desc">Download now and solve installation errors in seconds.</p>
+
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="download.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 16px 32px;">
+                    <i class="fas fa-download"></i> <span data-lang-key="download_now">Download Now</span>
+                </a>
+                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary"
+                    style="font-size: 1.125rem; padding: 16px 32px;">
+                    <i class="fab fa-github"></i> <span data-lang-key="view_on_github">View on GitHub</span>
                 </a>
             </div>
         </div>
-    </section>
-
-    <!-- Command Section -->
-    <section class="command-section">
-        <h2 class="section-title" data-en="Or Use Command Line" data-fa="یا از خط فرمان استفاده کنید">Or Use Command
-            Line</h2>
-
-        <div class="command-box">
-            <h4><i class="fab fa-windows"></i> Windows (PowerShell)</h4>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copyCode('win-cmd')">Copy</button>
-                <code
-                    id="win-cmd">iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code>
-            </div>
-        </div>
-
-        <div class="command-box">
-            <h4><i class="fab fa-apple"></i> <i class="fab fa-linux"></i> macOS / Linux (Terminal)</h4>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copyCode('unix-cmd')">Copy</button>
-                <code
-                    id="unix-cmd">curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tutorial Section -->
-    <section class="tutorial-section" id="tutorial">
-        <h2 class="section-title" data-en="How to Use" data-fa="نحوه استفاده">How to Use</h2>
-
-        <div class="tutorial-grid">
-            <div class="tutorial-step">
-                <div class="step-number">1</div>
-                <h3 data-en="Download & Run" data-fa="دانلود و اجرا">Download & Run</h3>
-                <p data-en="Download the app for your platform and run it. No installation needed!"
-                    data-fa="برنامه را برای پلتفرم خود دانلود و اجرا کنید. نیازی به نصب نیست!">Download the app for your
-                    platform and run it. No installation needed!</p>
-                <img src="https://via.placeholder.com/400x250/1a1a1a/00d4ff?text=Step+1:+Download" alt="Step 1"
-                    class="tutorial-img">
-            </div>
-
-            <div class="tutorial-step">
-                <div class="step-number">2</div>
-                <h3 data-en="Choose Cleaning Mode" data-fa="انتخاب حالت پاکسازی">Choose Cleaning Mode</h3>
-                <p data-en="Select Quick Clean for basic cleanup, or Deep Clean for thorough removal"
-                    data-fa="پاکسازی سریع برای حذف پایه، یا پاکسازی عمیق برای حذف کامل">Select Quick Clean for basic
-                    cleanup, or Deep Clean for thorough removal</p>
-                <img src="https://via.placeholder.com/400x250/1a1a1a/ff006e?text=Step+2:+Choose+Mode" alt="Step 2"
-                    class="tutorial-img">
-            </div>
-
-            <div class="tutorial-step">
-                <div class="step-number">3</div>
-                <h3 data-en="Review & Confirm" data-fa="بررسی و تأیید">Review & Confirm</h3>
-                <p data-en="Check the operation log to see what will be cleaned, then confirm"
-                    data-fa="گزارش عملیات را بررسی کنید تا ببینید چه چیزی پاک می‌شود، سپس تأیید کنید">Check the
-                    operation log to see what will be cleaned, then confirm</p>
-                <img src="https://via.placeholder.com/400x250/1a1a1a/00c853?text=Step+3:+Confirm" alt="Step 3"
-                    class="tutorial-img">
-            </div>
-
-            <div class="tutorial-step">
-                <div class="step-number">4</div>
-                <h3 data-en="Done! Reinstall" data-fa="تمام! نصب مجدد">Done! Reinstall</h3>
-                <p data-en="Cleaning complete! Now you can reinstall Antigravity IDE fresh"
-                    data-fa="پاکسازی تمام شد! حالا می‌توانید Antigravity IDE را دوباره نصب کنید">Cleaning complete! Now
-                    you can reinstall Antigravity IDE fresh</p>
-                <img src="https://via.placeholder.com/400x250/1a1a1a/ffc107?text=Step+4:+Reinstall" alt="Step 4"
-                    class="tutorial-img">
-            </div>
-        </div>
-
-        <!-- Video Tutorial -->
-        <div class="video-section">
-            <h3 data-en="📹 Video Tutorial (Coming Soon)" data-fa="📹 آموزش ویدیویی (به زودی)">📹 Video Tutorial (Coming
-                Soon)</h3>
-            <p data-en="A detailed video guide will be available soon!"
-                data-fa="راهنمای ویدیویی دقیق به زودی در دسترس خواهد بود!">A detailed video guide will be available
-                soon!</p>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section class="features" id="features">
-        <h2 class="section-title" data-en="Why Antigravity Cleaner?" data-fa="چرا Antigravity Cleaner؟">Why Antigravity
-            Cleaner?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🔐</div>
-                <h3 data-en="Google Login Fix" data-fa="حل مشکل لاگین گوگل">Google Login Fix</h3>
-                <p data-en="Fix 403 Forbidden and region-lock errors for Google services instantly."
-                    data-fa="رفع ارورهای ۴۰۳ و محدودیت‌های منطقه‌ای گوگل در کمترین زمان ممکن">Fix 403 Forbidden and region-lock errors for Google services instantly.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🌐</div>
-                <h3 data-en="Network Optimizer" data-fa="بهینه‌سازی شبکه">Network Optimizer</h3>
-                <p data-en="Full network stack reset and DNS flushing to bypass interference."
-                    data-fa="ریست کامل استک شبکه و پاکسازی DNS برای عبور از تداخلات شبکه">Full network stack reset and DNS flushing to bypass interference.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">💾</div>
-                <h3 data-en="Secure Session Box" data-fa="مدیریت نشست محلی">Secure Session Box</h3>
-                <p data-en="Encrypted local session storage with Zero-Cloud privacy. No data leaves your PC."
-                    data-fa="ذخیره رمزنگاری شده نشست‌ها به صورت کاملاً محلی بدون ارسال به سرور">Encrypted local session storage with Zero-Cloud privacy. No data leaves your PC.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3 data-en="100% Safe" data-fa="۱۰۰٪ ایمن">100% Safe</h3>
-                <p data-en="Dry-run mode lets you preview changes. Full backups before any cleanup."
-                    data-fa="حالت تست برای پیش‌نمایش تغییرات و بک‌آپ خودکار قبل از هر عملیات">Dry-run mode lets you preview changes. Full backups before any cleanup.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3 data-en="Global Access" data-fa="دسترسی جهانی">Global Access</h3>
-                <p data-en="Built for restricted networks. Works on Windows, macOS, and Linux."
-                    data-fa="ساخته شده برای محیط‌های محدود. سازگار با ویندوز، مک و لینوکس">Built for restricted networks. Works on Windows, macOS, and Linux.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔧</div>
-                <h3 data-en="Deep Cleaning" data-fa="پاکسازی عمیق">Deep Cleaning</h3>
-                <p data-en="Removes leftover files, registry entries, and stuck browser traces."
-                    data-fa="حذف کامل فایل‌های باقی‌مانده، ورودی‌های رجیستری و ردهای مرورگر">Removes leftover files, registry entries, and stuck browser traces.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Support Banner -->
-    <section class="support-banner" id="support">
-        <h2 data-en="🌟 Support the Project" data-fa="🌟 حمایت از پروژه">🌟 Support the Project</h2>
-        <p data-en="If you find this tool helpful, please give us a star on GitHub!<br>Your support helps us develop <strong>v3.0</strong> with <strong>one-click Antigravity login</strong> feature!"
-            data-fa="اگر این ابزار را مفید می‌دانید، لطفاً در گیت‌هاب ستاره بدهید!<br>حمایت شما به ما کمک می‌کند <strong>نسخه 3.0</strong> را با قابلیت <strong>ورود یک‌کلیکه به Antigravity</strong> توسعه دهیم!">
-            If you find this tool helpful, please give us a star on GitHub!<br>Your support helps us develop
-            <strong>v3.0</strong> with <strong>one-click Antigravity login</strong> feature!
-        </p>
-        <a href="https://github.com/tawroot/antigravity-cleaner" class="star-btn">
-            <i class="fas fa-star"></i> <span data-en="Star on GitHub" data-fa="ستاره در گیت‌هاب">Star on GitHub</span>
-        </a>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p data-en="© 2025 Tawroot | All Rights Reserved - Proprietary License"
-            data-fa="© ۱۴۰۴ تاوروت | تمامی حقوق محفوظ است">©
-            2025 Tawroot | All Rights Reserved - Proprietary License</p>
-        <p style="margin-top: 1rem;">
-            <a href="https://github.com/tawroot" style="color: var(--primary); text-decoration: none;">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-        </p>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Antigravity <span>Cleaner</span></h2>
+                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-lang-key="product">Product</h4>
+                        <ul>
+                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="features.html" data-lang-key="features">Features</a></li>
+                            <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-lang-key="support">Support</h4>
+                        <ul>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="social-links">
+                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Initialize stats
+        fetchStats();
+    </script>
 </body>
 
 </html>

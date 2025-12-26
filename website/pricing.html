@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Antigravity Cleaner</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-theme="dark">
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" data-lang-key="home">Home</a></li>
+                    <li><a href="features.html" data-lang-key="features">Features</a></li>
+                    <li><a href="download.html" data-lang-key="download">Download</a></li>
+                    <li><a href="pricing.html" class="active" data-lang-key="pricing">Pricing</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switcher">
+                        <select id="langSelect"
+                            style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
+                            <option value="en">EN</option>
+                            <option value="fa">FA</option>
+                            <option value="ru">RU</option>
+                            <option value="zh">ZH</option>
+                        </select>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 150px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="pricing">Premium Solutions</h2>
+                <p class="section-subtitle">Dedicated support and high-performance networks.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Free -->
+                <div class="glass-card feature-item" style="text-align: center; border-color: var(--text-muted);">
+                    <h3 style="margin-bottom: 10px;" data-lang-key="price_free_title">Community</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">$0</div>
+                    <ul style="list-style: none; text-align: left; margin-bottom: 30px; color: var(--text-muted);">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--success); margin-right: 10px;"></i> <span
+                                data-lang-key="price_free_1">Open Source Core</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--success); margin-right: 10px;"></i> <span
+                                data-lang-key="price_free_2">GitHub Issues Support</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--success); margin-right: 10px;"></i> <span
+                                data-lang-key="price_free_3">All Basic Features</span></li>
+                    </ul>
+                    <a href="download.html" class="btn btn-secondary" style="width: 100%;"
+                        data-lang-key="download_free">Download Free</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="glass-card feature-item"
+                    style="text-align: center; border-color: var(--primary); box-shadow: 0 0 20px rgba(109, 40, 217, 0.2);">
+                    <div style="position: absolute; top: 0; right: 0; background: var(--primary); padding: 5px 15px; border-bottom-left-radius: 10px; font-size: 0.8rem; font-weight: bold;"
+                        data-lang-key="price_popular">POPULAR</div>
+                    <h3 style="margin-bottom: 10px;" data-lang-key="price_pro_title">Pro Network</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">$5<span
+                            style="font-size: 1rem; color: var(--text-muted);">/mo</span></div>
+                    <ul style="list-style: none; text-align: left; margin-bottom: 30px; color: var(--text-muted);">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--primary); margin-right: 10px;"></i> <span
+                                data-lang-key="price_pro_1">Private V2Ray Servers</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--primary); margin-right: 10px;"></i> <span
+                                data-lang-key="price_pro_2">Low Latency Routing</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--primary); margin-right: 10px;"></i> <span
+                                data-lang-key="price_pro_3">Priority Support</span></li>
+                    </ul>
+                    <a href="https://t.me/panbehnet" class="btn btn-primary" style="width: 100%;"
+                        data-lang-key="get_started">Get Started</a>
+                </div>
+
+                <!-- Business -->
+                <div class="glass-card feature-item" style="text-align: center; border-color: var(--accent);">
+                    <h3 style="margin-bottom: 10px;" data-lang-key="price_ent_title">Enterprise</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;" data-lang-key="price_custom">
+                        Custom</div>
+                    <ul style="list-style: none; text-align: left; margin-bottom: 30px; color: var(--text-muted);">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--accent); margin-right: 10px;"></i> <span
+                                data-lang-key="price_ent_1">Dedicated IPs</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--accent); margin-right: 10px;"></i> <span
+                                data-lang-key="price_ent_2">Fleet Management</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                                style="color: var(--accent); margin-right: 10px;"></i> <span
+                                data-lang-key="price_ent_3">24/7 SLA Support</span></li>
+                    </ul>
+                    <a href="https://t.me/RAHBARUSD" class="btn btn-secondary" style="width: 100%;"
+                        data-lang-key="contact_sales">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

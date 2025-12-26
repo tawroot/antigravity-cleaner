@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Antigravity Cleaner</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-theme="dark">
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" data-lang-key="home">Home</a></li>
+                    <li><a href="features.html" data-lang-key="features">Features</a></li>
+                    <li><a href="download.html" data-lang-key="download">Download</a></li>
+                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="faq.html" class="active" data-lang-key="faq">FAQ</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <div class="lang-switcher">
+                        <select id="langSelect"
+                            style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
+                            <option value="en">EN</option>
+                            <option value="fa">FA</option>
+                            <option value="ru">RU</option>
+                            <option value="zh">ZH</option>
+                        </select>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 150px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="faq">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Find answers to common issues.</p>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+                <div class="glass-card" style="padding: 20px;">
+                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_safe_q">Is it safe
+                        to use?</h3>
+                    <p style="color: var(--text-muted);" data-lang-key="faq_safe_a">Yes. Antigravity Cleaner
+                        specifically targets temporary files, caches, and invalid registry keys associated with known
+                        IDE errors. It does not touch your personal documents or project source codes.</p>
+                </div>
+
+                <div class="glass-card" style="padding: 20px;">
+                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_pass_q">Will I lose
+                        my browser passwords?</h3>
+                    <p style="color: var(--text-muted);" data-lang-key="faq_pass_a">No. Our "Session Preservation"
+                        technology ensures that critical files like Cookies and Login Data are backed up or excluded
+                        from the cleaning process, so you don't have to log in again.</p>
+                </div>
+
+                <div class="glass-card" style="padding: 20px;">
+                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_net_q">How do I fix
+                        "Network Error"?</h3>
+                    <p style="color: var(--text-muted);" data-lang-key="faq_net_a">Use the "Network Reset" feature in
+                        the Tools menu. This will flush your DNS cache and reset the Winsock catalog, which often
+                        resolves connection issues caused by VPNs using the Tun/Tap adapter.</p>
+                </div>
+
+                <div class="glass-card" style="padding: 20px;">
+                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_mac_q">Do you
+                        support Mac M1/M2?</h3>
+                    <p style="color: var(--text-muted);" data-lang-key="faq_mac_a">Yes, we have native builds for Apple
+                        Silicon (ARM64) as well as Intel Macs. Check the Download page for the correct version.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
