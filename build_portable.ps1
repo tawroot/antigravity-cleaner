@@ -60,7 +60,6 @@ $buildArgs = @(
     "--hidden-import=tkinter.messagebox",
     "--hidden-import=PIL",
     "--hidden-import=PIL._tkinter_finder",
-    "--hidden-import=pkg_resources.extern",
     "src/gui_apple.py"
 )
 
