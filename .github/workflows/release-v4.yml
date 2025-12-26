@@ -87,30 +87,8 @@ jobs:
         if: matrix.platform == 'Windows'
         shell: pwsh
         run: |
-          Write-Host "Building for Windows..." -ForegroundColor Cyan
-          
-          python -m PyInstaller `
-            --onefile `
-            --windowed `
-            --name "AntigravityCleaner" `
-            --clean `
-            --noupx `
-            --version-file=version_info.txt `
-            --manifest=app.manifest `
-            --icon=icon.ico `
-            --collect-all customtkinter `
-            --add-data "src;src" `
-            --add-data "LICENSE;." `
-            --hidden-import=customtkinter `
-            --hidden-import=tkinter `
-            --hidden-import=tkinter.ttk `
-            --hidden-import=tkinter.messagebox `
-            --hidden-import=PIL `
-            --hidden-import=PIL._tkinter_finder `
-            --hidden-import=pkg_resources.extern `
-            src/gui_apple.py
-          
-          Write-Host "Build completed!" -ForegroundColor Green
+          # Execute the unified build script
+          ./build_portable.ps1
 
       - name: 🔨 Build executable (macOS)
         if: matrix.platform == 'macOS'
@@ -162,53 +140,15 @@ jobs:
         if: matrix.platform == 'Windows'
         shell: pwsh
         run: |
-          Write-Host "Creating portable package..." -ForegroundColor Cyan
-          
-          $portableDir = "AntigravityCleaner-Portable"
-          New-Item -ItemType Directory -Path $portableDir -Force | Out-Null
-          
-          # Copy executable
-          Copy-Item "dist/AntigravityCleaner.exe" "$portableDir/" -Force
-          
-          # Copy documentation
-          Copy-Item "README.md" "$portableDir/" -Force
-          Copy-Item "LICENSE" "$portableDir/" -Force
-          
-          # Create portable marker
-          $portableContent = @"
-          Antigravity Cleaner - Portable Edition
-          ======================================
-
-          Version: 4.0.0
-          Platform: Windows
-          Build Date: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss UTC')
-
-          Copyright © 2024-2025 Tawana Mohammadi / Tawana Network
-          All Rights Reserved
-
-          This is the portable version. No installation required.
-          Just run AntigravityCleaner.exe
-
-          Features:
-          - Premium Apple-Style UI
-          - Multi-browser Session Management
-          - Google Services Diagnostics
-          - Network Optimization Tools
-          - Encrypted Session Backups (AES-256-GCM)
-
-          Support: https://github.com/tawroot/antigravity-cleaner/issues
-          Website: https://tawroot.github.io/antigravity-cleaner/
-          Telegram: https://t.me/panbehnet
-          "@
-          $portableContent | Out-File -FilePath "$portableDir/PORTABLE.txt" -Encoding UTF8
-          
-          # Create data folder
-          New-Item -ItemType Directory -Path "$portableDir/data" -Force | Out-Null
-          
-          # Create ZIP archive
-          Compress-Archive -Path "$portableDir/*" -DestinationPath "${{ matrix.artifact }}" -Force
-          
-          Write-Host "Package created: ${{ matrix.artifact }}" -ForegroundColor Green
+          Write-Host "Verifying portable package..." -ForegroundColor Cyan
+          if (Test-Path "AntigravityCleaner-Windows-Portable.zip") {
+              # Rename to match expected artifact name
+              Move-Item "AntigravityCleaner-Windows-Portable.zip" "${{ matrix.artifact }}" -Force
+              Write-Host "Package ready: ${{ matrix.artifact }}" -ForegroundColor Green
+          } else {
+              Write-Host "Error: ZIP file not found!" -ForegroundColor Red
+              exit 1
+          }
 
       - name: 📦 Create Portable Package (macOS)
         if: matrix.platform == 'macOS'
