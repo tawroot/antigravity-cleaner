@@ -87,19 +87,29 @@ jobs:
         if: matrix.platform == 'Windows'
         shell: pwsh
         run: |
-          Write-Host "Building for Windows using build_portable.ps1..." -ForegroundColor Cyan
+          Write-Host "Building for Windows..." -ForegroundColor Cyan
           
-          # Run the proven working build script
-          .\build_portable.ps1
+          python -m PyInstaller `
+            --onefile `
+            --windowed `
+            --name "AntigravityCleaner" `
+            --clean `
+            --noupx `
+            --version-file=version_info.txt `
+            --manifest=app.manifest `
+            --icon=icon.ico `
+            --collect-all customtkinter `
+            --add-data "src;src" `
+            --add-data "LICENSE;." `
+            --hidden-import=customtkinter `
+            --hidden-import=tkinter `
+            --hidden-import=tkinter.ttk `
+            --hidden-import=tkinter.messagebox `
+            --hidden-import=PIL `
+            --hidden-import=PIL._tkinter_finder `
+            src/gui_apple.py
           
-          # Verify the script created the ZIP
-          if (-not (Test-Path "AntigravityCleaner-Windows-Portable.zip")) {
-            Write-Host "Error: Build script did not create ZIP file!" -ForegroundColor Red
-            Get-ChildItem -Recurse | Where-Object { $_.Name -like "*.zip" -or $_.Name -like "*.exe" }
-            exit 1
-          }
-          
-          Write-Host "Build completed successfully!" -ForegroundColor Green
+          Write-Host "Build completed!" -ForegroundColor Green
 
       - name: 🔨 Build executable (macOS)
         if: matrix.platform == 'macOS'
@@ -146,7 +156,6 @@ jobs:
             --hidden-import=tkinter.messagebox \
             --hidden-import=PIL \
             --hidden-import=PIL._tkinter_finder \
-            --hidden-import=pkg_resources.extern \
             src/gui_apple.py
           
           echo "Build completed!"
@@ -155,13 +164,25 @@ jobs:
         if: matrix.platform == 'Windows'
         shell: pwsh
         run: |
-          Write-Host "Renaming portable package..." -ForegroundColor Cyan
+          Write-Host "Creating portable package..." -ForegroundColor Cyan
           
-          # The build script creates AntigravityCleaner-Windows-Portable.zip
-          # Rename it to match the artifact name
-          Move-Item "AntigravityCleaner-Windows-Portable.zip" "${{ matrix.artifact }}" -Force
+          $portableDir = "AntigravityCleaner-Portable"
+          New-Item -ItemType Directory -Path $portableDir -Force | Out-Null
           
-          Write-Host "Package ready: ${{ matrix.artifact }}" -ForegroundColor Green
+          Copy-Item "dist/AntigravityCleaner.exe" "$portableDir/" -Force
+          Copy-Item "README.md" "$portableDir/" -Force
+          Copy-Item "LICENSE" "$portableDir/" -Force
+          
+          @"
+          Antigravity Cleaner - Portable Edition v4.1.0
+          Platform: Windows
+          Build Date: $(Get-Date -Format 'yyyy-MM-dd')
+          "@ | Out-File -FilePath "$portableDir/PORTABLE.txt" -Encoding UTF8
+          
+          New-Item -ItemType Directory -Path "$portableDir/data" -Force | Out-Null
+          Compress-Archive -Path "$portableDir/*" -DestinationPath "${{ matrix.artifact }}" -Force
+          
+          Write-Host "Package created: ${{ matrix.artifact }}" -ForegroundColor Green
 
       - name: 📦 Create Portable Package (macOS)
         if: matrix.platform == 'macOS'
