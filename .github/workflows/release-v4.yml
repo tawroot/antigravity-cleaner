@@ -87,8 +87,26 @@ jobs:
         if: matrix.platform == 'Windows'
         shell: pwsh
         run: |
-          # Execute the unified build script
-          ./build_portable.ps1
+          Write-Host "Executing unified build script..." -ForegroundColor Cyan
+          
+          # Set execution policy for this session
+          Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+          
+          # Execute the build script
+          & "$PWD\build_portable.ps1"
+          
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Build script failed!" -ForegroundColor Red
+            exit 1
+          }
+          
+          # Verify output exists
+          if (-not (Test-Path "AntigravityCleaner-Windows-Portable.zip")) {
+            Write-Host "Error: Build output not found!" -ForegroundColor Red
+            exit 1
+          }
+          
+          Write-Host "Build script completed successfully!" -ForegroundColor Green
 
       - name: 🔨 Build executable (macOS)
         if: matrix.platform == 'macOS'
@@ -102,6 +120,7 @@ jobs:
             --clean \
             --noupx \
             --icon=icon.png \
+            --collect-all customtkinter \
             --add-data "src:src" \
             --add-data "LICENSE:." \
             --hidden-import=customtkinter \
@@ -110,6 +129,7 @@ jobs:
             --hidden-import=tkinter.messagebox \
             --hidden-import=PIL \
             --hidden-import=PIL._tkinter_finder \
+            --hidden-import=pkg_resources.extern \
             src/gui_apple.py
           
           echo "Build completed!"
@@ -124,6 +144,7 @@ jobs:
             --name "AntigravityCleaner" \
             --clean \
             --noupx \
+            --collect-all customtkinter \
             --add-data "src:src" \
             --add-data "LICENSE:." \
             --hidden-import=customtkinter \
@@ -132,6 +153,7 @@ jobs:
             --hidden-import=tkinter.messagebox \
             --hidden-import=PIL \
             --hidden-import=PIL._tkinter_finder \
+            --hidden-import=pkg_resources.extern \
             src/gui_apple.py
           
           echo "Build completed!"
