@@ -6,18 +6,43 @@
 .AUTHOR
     Tawana Network
 .VERSION
-    4.0.0 (Shell Edition)
+    4.1.0 (Shell Edition)
 #>
 
-$host.UI.RawUI.WindowTitle = "Antigravity Cleaner Shell v4.0.0"
+$host.UI.RawUI.WindowTitle = "Antigravity Cleaner Shell v4.1.0"
 $ErrorActionPreference = "SilentlyContinue"
 
-# --- Configuration ---
+# --- Configuration & Platform Detection ---
 $AppTitle = "ANTIGRAVITY CLEANER"
-$Version = "4.0.0"
+$Version = "4.1.0"
+
+# Detect OS safely (avoiding conflict with built-in readonly variables in PS 6+)
+$Global:OS_Win = if ($null -ne $IsWindows) { $IsWindows } else { $true }
+$Global:OS_Mac = if ($null -ne $IsMacOS) { $IsMacOS } else { $false }
+$Global:OS_Lin = if ($null -ne $IsLinux) { $IsLinux } else { $false }
+
+# Fallback for PowerShell 5.1
+if ($null -eq $IsWindows) {
+    $Global:OS_Win = $env:OS -like "*Windows*"
+    $Global:OS_Mac = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::OSX) -eq $true
+    $Global:OS_Lin = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Linux) -eq $true
+}
+
+$HomePath = if ($OS_Win) { $env:USERPROFILE } else { $env:HOME }
+
 $DataPath = Join-Path $PSScriptRoot "Data"
 $SessionDataPath = Join-Path $DataPath "Sessions"
-$LogsPath = Join-Path $DataPath "Logs"
+
+# --- OS Specific Paths ---
+$Paths = @{
+    Temp     = if ($OS_Win) { $env:TEMP } else { "/tmp" }
+    WinTemp  = if ($OS_Win) { "$env:windir\Temp" } else { $null }
+    Prefetch = if ($OS_Win) { "$env:windir\Prefetch" } else { $null }
+    
+    # AppData equivalents
+    Local    = if ($OS_Win) { $env:LOCALAPPDATA } elseif ($OS_Mac) { "$HomePath/Library/Application Support" } else { "$HomePath/.config" }
+    Roaming  = if ($OS_Win) { $env:APPDATA } elseif ($OS_Mac) { "$HomePath/Library/Application Support" } else { "$HomePath/.config" }
+}
 
 # --- UI Helpers ---
 
@@ -86,21 +111,29 @@ function Invoke-Cleaner {
     Show-Info "Starting System Clean..."
     
     # System Paths
-    Clear-Junk -Path $env:TEMP -Description "User Temp" -DryRun:$DryRun
-    Clear-Junk -Path $env:windir\Temp -Description "Windows Temp" -DryRun:$DryRun
-    Clear-Junk -Path $env:windir\Prefetch -Description "Prefetch Cache" -DryRun:$DryRun
+    Clear-Junk -Path $Paths.Temp -Description "Temp Files" -DryRun:$DryRun
+    if ($Paths.WinTemp) { Clear-Junk -Path $Paths.WinTemp -Description "OS Temp" -DryRun:$DryRun }
+    if ($Paths.Prefetch) { Clear-Junk -Path $Paths.Prefetch -Description "Prefetch" -DryRun:$DryRun }
     
     # Application Paths (Antigravity/IDE Traces)
-    $AppData = $env:LOCALAPPDATA
-    $Roaming = $env:APPDATA
+    $TargetPaths = @()
     
-    $TargetPaths = @(
-        "$AppData\Antigravity",
-        "$Roaming\Antigravity",
-        "$AppData\JetBrains",
-        "$AppData\VSCode\Cache",
-        "$AppData\Google\Chrome\User Data\Default\Cache"
-    )
+    if ($OS_Win) {
+        $TargetPaths += "$($Paths.Local)\Antigravity"
+        $TargetPaths += "$($Paths.Roaming)\Antigravity"
+        $TargetPaths += "$($Paths.Local)\JetBrains"
+        $TargetPaths += "$($Paths.Local)\VSCode\Cache"
+    }
+    elseif ($OS_Mac) {
+        $TargetPaths += "$HomePath/Library/Preferences/Antigravity"
+        $TargetPaths += "$HomePath/Library/Caches/JetBrains"
+        $TargetPaths += "$HomePath/Library/Application Support/Code/User/workspaceStorage"
+    }
+    else {
+        # Linux
+        $TargetPaths += "$HomePath/.config/Antigravity"
+        $TargetPaths += "$HomePath/.cache/JetBrains"
+    }
     
     foreach ($path in $TargetPaths) {
         Clear-Junk -Path $path -Description "App Trace" -DryRun:$DryRun
@@ -111,7 +144,7 @@ function Invoke-Cleaner {
 }
 
 # --- Module Wrappers for Menu ---
-function Menu-Cleaner {
+function Invoke-CleanerMenu {
     Show-Header
     Show-Info "System Cleaning Module"
     Write-Host "  [1] Quick Clean (Standard)"
@@ -127,12 +160,29 @@ function Menu-Cleaner {
 }
 
 function Get-Browsers {
-    $AppData = $env:LOCALAPPDATA
-    @{
-        "Google Chrome"  = "$AppData\Google\Chrome\User Data"
-        "Microsoft Edge" = "$AppData\Microsoft\Edge\User Data"
-        "Brave Browser"  = "$AppData\BraveSoftware\Brave-Browser\User Data"
-        "Opera"          = "$env:APPDATA\Opera Software\Opera Stable"
+    if ($OS_Win) {
+        return @{
+            "Google Chrome"  = "$($Paths.Local)\Google\Chrome\User Data"
+            "Microsoft Edge" = "$($Paths.Local)\Microsoft\Edge\User Data"
+            "Brave Browser"  = "$($Paths.Local)\BraveSoftware\Brave-Browser\User Data"
+            "Opera"          = "$($Paths.Roaming)\Opera Software\Opera Stable"
+        }
+    }
+    elseif ($OS_Mac) {
+        return @{
+            "Google Chrome"  = "$HomePath/Library/Application Support/Google/Chrome"
+            "Microsoft Edge" = "$HomePath/Library/Application Support/Microsoft Edge"
+            "Brave Browser"  = "$HomePath/Library/Application Support/BraveSoftware/Brave-Browser"
+            "Opera"          = "$HomePath/Library/Application Support/com.operasoftware.Opera"
+        }
+    }
+    else {
+        # Linux
+        return @{
+            "Google Chrome"  = "$HomePath/.config/google-chrome"
+            "Brave Browser"  = "$HomePath/.config/BraveSoftware/Brave-Browser"
+            "Microsoft Edge" = "$HomePath/.config/microsoft-edge"
+        }
     }
 }
 
@@ -225,18 +275,35 @@ function Invoke-RegionInspector {
         
         # Launch URL with specific profile
         $url = "https://policies.google.com/country-association-form"
-        $cmd = ""
-        $args = ""
+        $LaunchCmd = ""
+        $LaunchArgs = @()
         
-        switch -Wildcard ($target.Browser) {
-            "*Chrome*" { $cmd = "chrome"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
-            "*Edge*" { $cmd = "msedge"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
-            "*Brave*" { $cmd = "brave"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
-            "*Opera*" { $cmd = "launcher"; $args = "`"$url`"" } # Opera handles profiles differently
+        if ($OS_Win) {
+            switch -Wildcard ($target.Browser) {
+                "*Chrome*" { $LaunchCmd = "chrome"; $LaunchArgs = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+                "*Edge*" { $LaunchCmd = "msedge"; $LaunchArgs = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+                "*Brave*" { $LaunchCmd = "brave"; $LaunchArgs = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+                "*Opera*" { $LaunchCmd = "launcher"; $LaunchArgs = "`"$url`"" }
+            }
+        }
+        elseif ($OS_Mac) {
+            switch -Wildcard ($target.Browser) {
+                "*Chrome*" { $LaunchCmd = "open"; $LaunchArgs = @("-a", "Google Chrome", "--args", "--profile-directory=`"$($target.Name)`"", "$url") }
+                "*Edge*" { $LaunchCmd = "open"; $LaunchArgs = @("-a", "Microsoft Edge", "--args", "--profile-directory=`"$($target.Name)`"", "$url") }
+                "*Brave*" { $LaunchCmd = "open"; $LaunchArgs = @("-a", "Brave Browser", "--args", "--profile-directory=`"$($target.Name)`"", "$url") }
+            }
+        }
+        else {
+            # Linux
+            switch -Wildcard ($target.Browser) {
+                "*Chrome*" { $LaunchCmd = "google-chrome"; $LaunchArgs = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+                "*Edge*" { $LaunchCmd = "microsoft-edge"; $LaunchArgs = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+                "*Brave*" { $LaunchCmd = "brave-browser"; $LaunchArgs = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+            }
         }
         
         try {
-            Start-Process $cmd -ArgumentList $args
+            Start-Process $LaunchCmd -ArgumentList $LaunchArgs
             Show-Success "Browser opened. Check the page for 'Country Association'."
         }
         catch {
@@ -345,9 +412,10 @@ function Invoke-BackupAntigravityApp {
     Show-Header
     Show-Info "Backup Antigravity Desktop App"
     
-    $roamingPath = "$env:APPDATA\Antigravity"
-    if (!(Test-Path $roamingPath)) {
-        Show-Warning "Antigravity Desktop App data not found in Roaming."
+    $agPath = if ($OS_Win) { "$env:APPDATA\Antigravity" } elseif ($OS_Mac) { "$HomePath/Library/Application Support/Antigravity" } else { "$HomePath/.config/Antigravity" }
+    
+    if (!(Test-Path $agPath)) {
+        Show-Warning "Antigravity Desktop App data not found."
         Wait-Key
         return
     }
@@ -358,7 +426,7 @@ function Invoke-BackupAntigravityApp {
     Show-Info "Backing up Antigravity App Data..."
     try {
         if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force > $null }
-        Copy-Item -Path "$roamingPath\*" -Destination $dest -Recurse -Force -ErrorAction Stop
+        Copy-Item -Path "$agPath\*" -Destination $dest -Recurse -Force -ErrorAction Stop
         
         $meta = @{
             Browser     = "Antigravity Desktop"
@@ -419,7 +487,7 @@ function Invoke-RestoreSession {
         $destPath = ""
         
         if ($target.Header.Browser -eq "Antigravity Desktop") {
-            $destPath = "$env:APPDATA\Antigravity"
+            $destPath = if ($OS_Win) { "$env:APPDATA\Antigravity" } elseif ($OS_Mac) { "$HomePath/Library/Application Support/Antigravity" } else { "$HomePath/.config/Antigravity" }
             Show-Info "Restoring Antigravity Desktop App..."
         }
         else {
@@ -436,7 +504,16 @@ function Invoke-RestoreSession {
                 if ($target.Header.Browser -ne "Antigravity Desktop") {
                     # Stop browser
                     $procName = switch -Wildcard ($target.Header.Browser) { "*Chrome*" { "chrome" } "*Edge*" { "msedge" } "*Brave*" { "brave" } "*Opera*" { "opera" } }
-                    Stop-Process -Name $procName -Force -ErrorAction SilentlyContinue
+                    if ($OS_Mac) {
+                        $procName = switch -Wildcard ($target.Header.Browser) { "*Chrome*" { "Google Chrome" } "*Edge*" { "Microsoft Edge" } "*Brave*" { "Brave Browser" } "*Opera*" { "Opera" } }
+                        Start-Process "pkill" -ArgumentList "-x", "$procName" -NoNewWindow -Wait
+                    }
+                    elseif ($OS_Lin) {
+                        Start-Process "pkill" -ArgumentList "$procName" -NoNewWindow -Wait
+                    }
+                    else {
+                        Stop-Process -Name $procName -Force -ErrorAction SilentlyContinue
+                    }
                 }
                 
                 # Restore
@@ -528,17 +605,33 @@ function Invoke-NetworkReset {
     $confirm = Read-Host "  > Continue? (Y/N)"
     if ($confirm -ne "Y") { return }
     
-    Show-Info "Flushing DNS..."
-    cmd /c "ipconfig /flushdns" | Out-Null
-    
-    Show-Info "Resetting Winsock Catalog..."
-    Start-Process "netsh" -ArgumentList "winsock reset catalog" -Wait -NoNewWindow
-    
-    Show-Info "Resetting TCP/IP..."
-    Start-Process "netsh" -ArgumentList "int ip reset" -Wait -NoNewWindow
+    if ($OS_Win) {
+        Show-Info "Flushing DNS..."
+        cmd /c "ipconfig /flushdns" | Out-Null
+        
+        Show-Info "Resetting Winsock Catalog..."
+        Start-Process "netsh" -ArgumentList "winsock reset catalog" -Wait -NoNewWindow
+        
+        Show-Info "Resetting TCP/IP..."
+        Start-Process "netsh" -ArgumentList "int ip reset" -Wait -NoNewWindow
+    }
+    elseif ($OS_Mac) {
+        Show-Info "Flushing DNS (macOS)..."
+        Start-Process "sudo" -ArgumentList "killall", "-HUP", "mDNSResponder" -Wait -NoNewWindow
+    }
+    elseif ($OS_Lin) {
+        # Linux
+        Show-Info "Flushing DNS (Linux)..."
+        if (Get-Command "resolvectl" -ErrorAction SilentlyContinue) {
+            Start-Process "sudo" -ArgumentList "resolvectl", "flush-caches" -Wait -NoNewWindow
+        }
+        else {
+            Start-Process "sudo" -ArgumentList "systemd-resolve", "--flush-caches" -Wait -NoNewWindow
+        }
+    }
     
     Show-Success "Network Reset Complete!"
-    Show-Info "PLEASE RESTART YOUR COMPUTER for changes to take effect."
+    Show-Info "If problems persist, please RESTART YOUR COMPUTER."
     Wait-Key
 }
 
@@ -580,7 +673,7 @@ function Main {
         $selection = Read-Host "  > Enter Choice"
         
         switch ($selection) {
-            "1" { Menu-Cleaner }
+            "1" { Invoke-CleanerMenu }
             "2" { Invoke-SessionManager }
             "3" { Invoke-NetworkTools }
             "4" { Test-SystemAnalysis }

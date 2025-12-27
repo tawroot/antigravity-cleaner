@@ -1,15 +1,14 @@
-# Antigravity Cleaner Shell (v3.0.0)
+# Antigravity Cleaner Shell (v4.1.0)
 
 <div align="center">
   <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
   <br>
   
+  [![Version](https://img.shields.io/badge/Version-4.1.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![License](https://img.shields.io/badge/License-TACL-red.svg?style=for-the-badge)](docs/LICENSE.md)
-  [![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg?style=for-the-badge&logo=windows)](https://microsoft.com/windows)
+  [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue.svg?style=for-the-badge&logo=platform.sh)](https://github.com/tawroot/antigravity-cleaner)
   [![Language](https://img.shields.io/badge/Language-PowerShell-yellow.svg?style=for-the-badge&logo=powershell)]()
   [![Security](https://img.shields.io/badge/Security-Zero%20Telemetry-green.svg?style=for-the-badge&logo=shields)](docs/SECURITY.md)
-  [![Maintenance](https://img.shields.io/badge/Maintenance-Active-success.svg?style=for-the-badge)]()
-  [![Made With Love](https://img.shields.io/badge/Made%20With-Love-ff69b4.svg?style=for-the-badge)]()
 </div>
 
 > *Dedicated to the people of Iran, Cuba, Syria, and all those navigating the complexities of digital sanctions. We believe access to technology is a fundamental right.*
@@ -139,7 +138,8 @@ We are growing fast! Thank you for your support.
 
 ## 💖 Support the Mission (Campaign)
 **We are in a race against time.**
-Sanctions and restrictions are constantly evolving. To keep Antigravity Cleaner ahead of the curve (and to finally port it to **macOS & Linux**), we need to dedicate hundreds of dev-hours.
+**We are in a race against time.**
+Sanctions and restrictions are constantly evolving. Antigravity Cleaner v4.1.0 is now **cross-platform**, but maintaining it for Windows, macOS, and Linux requires dedicated effort.
 
 **Your support is the fuel for this engine.**
 If this tool saved you hours of debugging or fixed your region-locked account, please consider donating. It helps us stay awake, code faster, and fight for a free internet.

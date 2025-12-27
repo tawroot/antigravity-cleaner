@@ -1,15 +1,14 @@
-# Antigravity Cleaner Shell (v3.0.0)
+# Antigravity Cleaner Shell (v4.1.0)
 
 <div align="center">
   <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
   <br>
 
+  [![Version](https://img.shields.io/badge/Version-4.1.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![License](https://img.shields.io/badge/License-TACL-red.svg?style=for-the-badge)](docs/LICENSE.md)
-  [![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg?style=for-the-badge&logo=windows)](https://microsoft.com/windows)
+  [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue.svg?style=for-the-badge&logo=platform.sh)](https://github.com/tawroot/antigravity-cleaner)
   [![Language](https://img.shields.io/badge/Language-PowerShell-yellow.svg?style=for-the-badge&logo=powershell)]()
   [![Security](https://img.shields.io/badge/Security-Zero%20Telemetry-green.svg?style=for-the-badge&logo=shields)](docs/SECURITY.md)
-  [![Maintenance](https://img.shields.io/badge/Maintenance-Active-success.svg?style=for-the-badge)]()
-  [![Made With Love](https://img.shields.io/badge/Made%20With-Love-ff69b4.svg?style=for-the-badge)]()
 </div>
 
 > **İran halkına ve dijital yaptırımlar ile internet kısıtlamaları altında sıkışıp kalan herkese ithaf edilmiştir.**
@@ -60,7 +59,7 @@ Bu aracın çözdüğü yaygın hatalar:
 ## Proje Hakkında
 **Antigravity Cleaner Shell**, geliştiricilere, freelancerlara ve ileri düzey kullanıcılara yardımcı olmak amacıyla tasarlanmış, **PowerShell** tabanlı, açık kaynaklı (Open Source) ve güçlü bir araçtır. Bu aracın temel amacı, tarayıcı oturumlarını akıllıca yönetmek, Google yaptırımlarını (Google Sanctions) aşmak ve yazılım geliştirme süreçleri için sistemi optimize etmektir.
 
-Bu sürüm (v3.0.0), Python veya ağır kütüphanelere ihtiyaç duymadan, tamamen Windows üzerinde yerel (Native) olarak çalışacak şekilde yeniden yazılmıştır.
+Bu sürüm (**v4.1.0**), tamamen Windows, macOS ve Linux üzerinde yerel (Multi-Platform) olarak çalışacak şekilde yeniden yazılmıştır.
 
 ---
 
@@ -140,9 +139,10 @@ Güvenliğinizi ciddiye alıyoruz.
 
 ## Yol Haritası (Roadmap)
 Sürekli yeni özellikler ekliyoruz. Gelecek planlarımız:
-- [ ] **v3.1:** Firefox desteği.
-- [ ] **v3.2:** Otomatik DNS değiştirme aracı (Shecan, 403, Cloudflare).
-- [ ] **v3.5:** Terminal kullanmak istemeyenler için modern Grafik Arayüz (GUI).
+- [x] **v4.1:** Linux ve macOS desteği (Cross-Platform).
+- [ ] **v4.2:** Firefox desteği.
+- [ ] **v4.3:** Otomatik DNS değiştirme aracı (Shecan, 403, Cloudflare).
+- [ ] **v4.5:** Modern Grafik Arayüz (GUI).
 
 ---
 
@@ -170,7 +170,7 @@ Büyüyoruz! Desteğiniz için teşekkürler.
 
 ## 💖 Dijital Özgürlük Kampanyası (Destek)
 **Zamana karşı bir yarış içindeyiz.**
-Yaptırımlar ve kısıtlamalar sürekli değişiyor. Antigravity Cleaner'ı her zaman güncel tutmak (ve sonunda **macOS & Linux** sürümlerini çıkarmak) için yüzlerce saatlik geliştirme çalışmasına ihtiyacımız var.
+Yaptırımlar ve kısıtlamalar sürekli değişiyor. Antigravity Cleaner v4.1.0 artık **çapraz platform** (cross-platform) destekliyor, ancak Windows, macOS ve Linux için güncel tutmak büyük bir çaba gerektiriyor.
 
 **Desteğiniz bu motorun yakıtıdır.**
 Eğer bu araç sizi saatlerce hata ayıklamaktan kurtardıysa veya Google hesabınızı kurtardıysa, lütfen bağış yapmayı düşünün. Bu, uyanık kalmamıza, daha hızlı kod yazmamıza ve özgür internet için savaşmamıza yardımcı olur.
