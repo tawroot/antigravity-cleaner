@@ -132,6 +132,43 @@ function Get-Browsers {
     }
 }
 
+function Get-BrowserAccounts {
+    param($UserDataPath)
+    $accounts = @()
+    
+    if (!(Test-Path $UserDataPath)) { return $accounts }
+
+    $profileDirs = Get-ChildItem -Path $UserDataPath -Directory | Where-Object { $_.Name -eq "Default" -or $_.Name -like "Profile *" }
+    
+    foreach ($dir in $profileDirs) {
+        $prefPath = Join-Path $dir.FullName "Preferences"
+        if (Test-Path $prefPath) {
+            try {
+                # Read JSON with error suppression for locked files
+                $content = Get-Content -Path $prefPath -Raw -ErrorAction SilentlyContinue
+                if ($content) {
+                    $json = $content | ConvertFrom-Json
+                    
+                    $email = $null
+                    # Try detection method 1 (Modern Chrome/Edge)
+                    if ($json.account_info -and $json.account_info.Count -gt 0) {
+                        $email = $json.account_info[0].email
+                    }
+                    # Method 2 (Legacy)
+                    if ([string]::IsNullOrWhiteSpace($email) -and $json.google -and $json.google.services) {
+                        $email = $json.google.services.username
+                    }
+
+                    if (-not [string]::IsNullOrWhiteSpace($email)) {
+                        $accounts += $email
+                    }
+                }
+            } catch {}
+        }
+    }
+    return $accounts | Select-Object -Unique
+}
+
 function Invoke-BackupSession {
     Show-Header
     Show-Info "Backup Browser Sessions"
@@ -142,7 +179,12 @@ function Invoke-BackupSession {
     
     foreach ($key in $browsers.Keys) {
         if (Test-Path $browsers[$key]) {
-            Write-Host "  [$i] $key"
+            $emails = Get-BrowserAccounts -UserDataPath $browsers[$key]
+            $emailStr = if ($emails) { " [Accounts: $($emails -join ', ')]" } else { "" }
+            
+            Write-Host "  [$i] $key" -NoNewline
+            if ($emailStr) { Write-Host $emailStr -ForegroundColor DarkGray } else { Write-Host "" }
+            
             $available += $key
             $i++
         }
@@ -222,7 +264,12 @@ function Invoke-RestoreSession {
         $j = 1
         Show-Info "Available Backups for $($browserName):"
         foreach ($ts in $timestamps) {
-            Write-Host "    [$j] $($ts.Name)"
+            # Scan backup for emails
+            $emails = Get-BrowserAccounts -UserDataPath $ts.FullName
+            $emailStr = if ($emails) { " [Accounts: $($emails -join ', ')]" } else { " [No Login Detected]" }
+
+            Write-Host "    [$j] $($ts.Name)" -NoNewline
+            Write-Host $emailStr -ForegroundColor DarkGray
             $j++
         }
         
