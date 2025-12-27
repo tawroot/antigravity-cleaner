@@ -1,339 +1,115 @@
-# Antigravity Cleaner v2.1.1 🌍
-### Çapraz Platform Temizleme ve Onarım Aracı | Kurulum ve Ağ Sorunlarını Düzeltin
+# Antigravity Cleaner Shell (v3.0.0)
 
-[![Python](https://img.shields.io/badge/Made%20with-Python-blue?style=for-the-badge&logo=python)](https://python.org)
-[![OS](https://img.shields.io/badge/Platform-Win%20|%20Mac%20|%20Linux-lightgrey?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner)
-[![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-Windows-blue)](https://microsoft.com/windows)
+[![Version](https://img.shields.io/badge/Version-3.0.0-green)]()
 
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=00BFFF&height=300&section=header&text=Antigravity%20Cleaner&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Fix%20Install%20Errors%20%26%20Network%20Issues&descAlignY=51&descAlign=62" alt="Antigravity Header" />
-</div>
+> **İran halkına ve dijital yaptırımlar ile internet kısıtlamaları altında sıkışıp kalan herkese ithaf edilmiştir.**
+> Bilgiye, teknolojiye ve geliştirme araçlarına özgür erişimin her insanın en temel hakkı olduğuna inanıyoruz. Bu araç, dijital özgürlüğün sesidir; hem içeriden hem de dışarıdan etrafımıza örülen duvarları aşmak için tasarlandı.
 
 ---
 
-## 🌐 Mevcut Diller | Available Languages
-
-| 🇬🇧 [English](README.md) | 🇮🇷 [فارسی](README.fa.md) | 🇨🇳 [中文](README.zh.md) | 🇷🇺 [Русский](README.ru.md) |
-|:---:|:---:|:---:|:---:|
-| 🇹🇷 **Türkçe** | 🇪🇸 [Español](README.es.md) | 🇦🇪 [العربية](README.ar.md) | 🇵🇰 [اردو](README.ur.md) |
-
----
-
-## 🌍 Çözdüğümüz Küresel Sorun
-
-**Antigravity Cleaner** başlangıçta İranlı kullanıcılar için geliştirildi, ancak çözdüğü sorunlar **dünya çapında evrenseldir**.
-
-### 🎯 Hangi Sorunları Çözüyoruz:
-
-- **🚫 Bölgesel Kısıtlamalar**: Yaptırımlar nedeniyle bazı ülkelerde Google hizmetleri kullanılamıyor (İran, Küba, Suriye, Kuzey Kore, Kırım)
-- **🌐 Ağ Müdahalesi**: DNS manipülasyonu, proxy çakışmaları, güvenlik duvarı kısıtlamaları
-- **🔒 Bölge Kilidi Hataları**: Giriş sırasında "Bölgenizde kullanılamıyor" mesajı
-- **📡 Bağlantı Sorunları**: Ağ hataları, zaman aşımları, SSL sertifika hataları
-- **🔄 Kurulum Hataları**: Bozuk indirmeler, takılan işlemler, kalan dosyalar
-- **🔐 Oturum Sona Ermesi**: Tekrarlanan giriş istekleri, çerez bozulması
-
-### 👥 Bu Aracı Kimler Kullanıyor:
-
-- **🚨 Ağır Kısıtlamalı Ağlar**: Kapsamlı internet filtrelemesi olan ülkeler (Çin, Türkmenistan, Kuzey Kore, İran)
-- **⚖️ Yaptırım Uygulanan Bölgeler**: Google hizmetlerinin resmi olarak engellendiği bölgeler (İran, Küba, Suriye, Kırım)
-- **🌐 Kısmen Filtrelenen Ağlar**: Seçici hizmet kısıtlamaları olan bölgeler (Rusya, Türkiye, Mısır, Pakistan)
-- **🏢 Ağ Kısıtlamalı Ortamlar**: Kurumsal ağlar, eğitim kurumları, halka açık WiFi
-- **✈️ Gezginler ve Gurbetçiler**: Seyahat ederken bölge kilidiyle karşılaşan kullanıcılar
-- **🔧 Geliştiriciler ve BT Profesyonelleri**: Kurulum ve ağ sorunlarını çözen sistem yöneticileri
+## İçindekiler
+1. [Proje Hakkında](#proje-hakkında)
+2. [Kolay Kurulum (Tek Satır)](#kolay-kurulum-tek-satır)
+3. [Temel Özellikler](#temel-özellikler)
+4. [Güvenlik ve Gizlilik](#güvenlik-ve-gizlilik)
+5. [Modül Kılavuzu](#modül-kılavuzu)
+6. [Yol Haritası (Roadmap)](#yol-haritası-roadmap)
+7. [Lisans](#lisans)
+8. [Yazar Hakkında](#yazar-hakkında)
 
 ---
 
-## 🖥️ Terminal Ekran Görüntüsü
+## Proje Hakkında
+**Antigravity Cleaner Shell**, geliştiricilere, freelancerlara ve ileri düzey kullanıcılara yardımcı olmak amacıyla tasarlanmış, **PowerShell** tabanlı, açık kaynaklı (Open Source) ve güçlü bir araçtır. Bu aracın temel amacı, tarayıcı oturumlarını akıllıca yönetmek, Google yaptırımlarını (Google Sanctions) aşmak ve yazılım geliştirme süreçleri için sistemi optimize etmektir.
 
-```console
-+-------------------------------------------------------------+
-|               ANTIGRAVITY CLEANER v2.1.1                    |
-|        Running on Windows 10 | Python 3.12.0                |
-+-------------------------------------------------------------+
-| Seçenekler:                                                 |
-|  [1] Hızlı Temizlik  (Standart Yollar)                      |
-|  [2] Derin Temizlik  (Kayıt Defteri + Temp + Cache + Ext)   |
-|  [3] Ağ Sıfırlama  (DNS Flush + Winsock Reset)              |
-|  [4] Tam Onarım  (Derin Temizlik + Ağ Sıfırlama)            |
-|  [5] Test Modu  (Dry Run)                                   |
-|  [6] Tarayıcı Giriş Yardımcısı  ⭐ YENİ                     |
-|  [7] Oturum Yöneticisi  (Yedekleme/Geri Yükleme) ⭐ YENİ    |
-|  [0] Çıkış                                                  |
-+-------------------------------------------------------------+
-```
+Bu sürüm (v3.0.0), Python veya ağır kütüphanelere ihtiyaç duymadan, tamamen Windows üzerinde yerel (Native) olarak çalışacak şekilde yeniden yazılmıştır.
 
 ---
 
-## 🚀 Tek Komutla Kurulum ve Çalıştırma
+## Kolay Kurulum (Tek Satır)
 
-### 🪟 Windows (PowerShell)
+Kurulum ve çalıştırma için PowerShell'i açın ve sadece aşağıdaki satırı kopyalayıp Enter tuşuna basın.
+(Bu komut programı otomatik olarak indirir ve masaüstünüzde bir kısayol oluşturur)
+
 ```powershell
-iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
+iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/antigravity-cleaner/install.ps1 -useb | iex
 ```
 
-### 🍎 macOS / 🐧 Linux (Terminal)
-```bash
-curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
-```
+*Hata alırsanız, terminali Yönetici (Administrator) olarak çalıştırın.*
 
 ---
 
-## ✨ Temel Özellikler
+## Temel Özellikler
 
-### 🧹 Derin Temizlik
-- AppData, Temp, Kayıt Defteri ve **Chrome Uzantılarından** izleri kaldırma
-- Kalan dosyaların tam temizliği
-- Silmeden önce otomatik yedekleme
+### 1. Gelişmiş Oturum Yöneticisi (Session Manager)
+Antigravity'nin kalbi olan bu modül, tarayıcı profillerinizi yönetmenizi ve taşımanızı sağlar.
+*   **Akıllı Algılama:** Chrome, Edge, Brave ve Opera tarayıcı profillerini ve bağlı e-posta adreslerini otomatik olarak algılar.
+*   **Çift Modlu Yedekleme (Dual Mode Backup):**
+    *   **Light Mod:** Sadece çerezleri, giriş bilgilerini ve temel ayarları yedekler (~20MB). Hızlı taşıma ve şifre girmeden oturum açmak için idealdir.
+    *   **Full Mod:** Tüm uzantılar, geçmiş ve önbellek dahil olmak üzere tam profil yedeği alır (~500MB+).
+*   **Antigravity Desktop Desteği:** Antigravity IDE (VS Code tabanlı) masaüstü sürümü için özel yedekleme.
 
-### 🌐 Ağ Sıfırlama
-- `netsh` ve `flushdns` otomatik çalıştırma
-- "Ağ Hatası" veya "Bölge Kilidi" sorunlarını düzeltme
-- DNS sorunlarını tespit etme ve düzeltme
+### 2. Bölge Denetçisi (Region Inspector)
+Google hesaplarının yaptırıma uğramasından endişe edenler için hayati bir araç.
+*   **Durum Kontrolü:** Doğru profille doğrudan Google'ın gizli `Country Association` sayfasına yönlendirir.
+*   **Sızıntı Önleme Kontrolü (Pre-Check):** Bölge değişikliği talebinde bulunmadan önce IP Sızıntısı, DNS Sızıntısı ve WebRTC testleri yaparak talebinizin Google tarafından kabul edilme şansını 10 kat artırır.
 
-### 🔧 İşlem Yönetimi
-- Takılan işlemleri otomatik sonlandırma
-- Çalışan hizmetleri tespit etme
-- Veri kaybı olmadan güvenli temizlik
+### 3. Ağ Analizörü (Systems Analysis)
+*   **Bağlantı Testi:** Google servislerine (Google Developer Services, Gemini AI, Cloud Platform) bağlantı durumunu anlık olarak kontrol eder.
+*   **Bağımlılık Testi:** Geliştiriciler için kritik depolara (GitHub API, VS Code Marketplace) erişimi kontrol eder.
 
-### 🌐 Tarayıcı Giriş Yardımcısı (v2.1+)
+### 4. Sistem Optimizasyonu (System Cleaner)
+*   Önceki konumunuza dair izler taşıyabilecek geçici dosyaları (Temp) ve sistem önbelleklerini temizler.
+*   Diskte yer açmak ve IDE hızını artırmak için geliştirme araçlarının (JetBrains, VSCode) büyük önbelleklerini temizler.
 
-Antigravity'ye giriş sorunu mu yaşıyorsunuz? Bu özellik yardımcı olur:
-
-**Güvenli Tarayıcı Temizliği:**
-- Yalnızca Antigravity ile ilgili veriler temizlenir
-- Diğer tarayıcı verileriniz dokunulmadan kalır
-- Silmeden önce otomatik yedekleme
-- Chrome, Edge, Brave ve Firefox desteği
-
-**Oturum Yönetimi:**
-- Başarılı girişten sonra oturum yedekleme
-- Tekrarlanan girişleri önlemek için oturum geri yükleme
-- Şifreli depolama (AES-256)
-- 30 günlük geçerlilik
-
-**Ağ Optimizasyonu:**
-- Google hizmetlerine bağlantı testi
-- DNS ve proxy sorunlarını teşhis
-- SSL sertifika sorunlarını düzeltme
-- Ayrıntılı teşhis raporları
+### 5. Ağ Onarım Aracı (Network Reset)
+*   Tek tıkla DNS önbelleğini temizler, Winsock ve TCP/IP ayarlarını sıfırlayarak bağlantı sorunlarını çözer.
 
 ---
 
-## 📋 Tam Özellik Kılavuzu
-
-### 1️⃣ Hızlı Temizlik (Standart Yollar)
-**Ne Yapar:**
-- Standart Antigravity kurulum klasörlerini tarar
-- AppData ve Roaming'deki kalan dosyaları kaldırır
-- Temel yapılandırma dosyalarını temizler
-
-**Ne Zaman Kullanılır:**
-- Normal Antigravity kaldırmasından sonra
-- Rutin temizlik için
-- Hızlı ve güvenli temizlik istediğinizde
-
-**Güvenlik:** ✅ Çok güvenli - yalnızca Antigravity dosyaları
+## Güvenlik ve Gizlilik
+Güvenliğinizi ciddiye alıyoruz.
+*   **%100 Çevrimdışı:** Bu betik, "veri göndermek" için internete erişmez. Tüm işlemler kendi sisteminizde gerçekleştirilir.
+*   **Telemetri Yok:** Verilerinizi toplamakla ilgilenmiyoruz.
+*   **Şifreleme:** Oturum yedek dosyaları, Windows DPAPI standardı ile şifrelenmiş hassas bilgiler içerir ve (Tam Profil Yedeği hariç) sadece sizin sisteminizde kullanılabilir.
 
 ---
 
-### 2️⃣ Derin Temizlik (Agresif Tarama)
-**Ne Yapar:**
-- Hızlı Temizlikteki her şey, artı:
-- Windows Kayıt Defterini Antigravity girişleri için tarama
-- Geçici kurulum dosyalarını kaldırma
-- Antigravity ile ilgili tarayıcı uzantılarını temizleme
-- Gizli önbellek dosyalarını arama
+## Modül Kılavuzu
 
-**Ne Zaman Kullanılır:**
-- Hızlı Temizlik sorunu çözmediğinde
-- Temiz yeniden kurulumdan önce
-- İnatçı kurulum hatalarınız olduğunda
+### Profil Yedekleme
+1. Ana menüde `2` (Session Manager) seçeneğini seçin.
+2. `1` (Backup Browser Profile) seçeneğine tıklayın.
+3. Listeden (e-postaları gösteren) istediğiniz profili seçin.
+4. Hızlı yedekleme (sadece girişler) için **Light Mod**, tam taşıma için **Full Mod** seçin.
 
-**Güvenlik:** ✅ Güvenli - silmeden önce yedek oluşturur
+### Geri Yükleme (Restore)
+1. Session Manager'da `3` seçeneğine tıklayın.
+2. Yedekleme listesini göreceksiniz (Tarih ve Light/Full türü ile).
+3. Bir yedek seçtiğinizde, program tarayıcıyı otomatik olarak kapatır ve dosyaları değiştirir. **Uyarı:** O profilin mevcut verileri silinecektir.
 
----
-
-### 3️⃣ Ağ Sıfırlama
-**Ne Yapar:**
-- DNS önbelleğini temizleme
-- Windows ağ yığınını sıfırlama
-- TCP/IP ayarlarını sıfırlama
-
-**Ne Zaman Kullanılır:**
-- Girişte "Ağ Hatası"
-- Bağlantı zaman aşımı sorunları
-- VPN/proxy değişikliklerinden sonra
-
-**Güvenlik:** ⚠️ Yeniden başlatma gerektirir - ancak tamamen güvenli
+### Google Bölge Değişikliği
+1. Ana menüde `5` (Region Inspector) seçeneğine tıklayın.
+2. VPN'inizin düzgün çalıştığından emin olmak için önce `Pre-Check` yapmanız önerilir.
+3. Tarayıcının açılıp kayıtlı ülkeyi göstermesi için bir profil seçin.
 
 ---
 
-### 4️⃣ Tam Onarım
-**Ne Yapar:**
-- Derin Temizliği çalıştırır (seçenek 2)
-- Ardından Ağ Sıfırlamayı çalıştırır (seçenek 3)
-- Tam sistem temizliği ve ağ düzeltmesi
-
-**Ne Zaman Kullanılır:**
-- Maksimum temizlik gerektiğinde
-- Birden fazla başarısız kurulum denemesi
-- Hem dosya hem ağ sorunları
-
-**Güvenlik:** ✅ Güvenli - iki güvenli işlemin kombinasyonu
+## Yol Haritası (Roadmap)
+Sürekli yeni özellikler ekliyoruz. Gelecek planlarımız:
+- [ ] **v3.1:** Firefox desteği.
+- [ ] **v3.2:** Otomatik DNS değiştirme aracı (Shecan, 403, Cloudflare).
+- [ ] **v3.5:** Terminal kullanmak istemeyenler için modern Grafik Arayüz (GUI).
 
 ---
 
-### 5️⃣ Test Modu (Dry Run)
-**Ne Yapar:**
-- "Test modunu" etkinleştirir
-- Gerçekte silmeden neyin silineceğini gösterir
-- Tüm işlemleri önizlemenize olanak tanır
-
-**Ne Zaman Kullanılır:**
-- Aracı ilk kez kullanırken
-- Neyin temizleneceğini görmek istediğinizde
-- Gerçek temizlikten önce test
-
-**Güvenlik:** ✅ Tamamen güvenli - gerçek değişiklik yok
+## Lisans
+Bu proje **Tawana Anti-Copy License (TACL)** altında yayınlanmıştır. Kopyalanması ve ticari kullanımı yasaktır. Detaylar için `docs/LICENSE.md` dosyasına bakınız.
 
 ---
 
-### 6️⃣ Tarayıcı Giriş Yardımcısı ⭐ YENİ
-
-**Seçenek 1: Tarayıcıdaki Antigravity İzlerini Temizle (Güvenli)**
-- Chrome, Edge, Brave ve Firefox'u tarar
-- Yalnızca Antigravity ile ilgili çerez/önbellek bulur
-- Takılan giriş verilerini kaldırır
-- Silmeden önce otomatik yedekleme
-
-**Seçenek 2: Giriş için Ağı Optimize Et**
-- DNS önbelleğini temizler
-- Google hizmetlerine bağlantı testi
-- Proxy çakışmalarını düzeltir
-
-**Seçenek 3: Ağ Teşhis Raporu**
-- Google sunucularına bağlantı testi
-- DNS çözünürlüğü kontrolü
-- Proxy/VPN sorunlarını tespit
-- SSL sertifikalarını doğrulama
-
-**Seçenek 4: Tam Giriş Onarımı**
-- Seçenek 1, 2 ve 3'ü birleştirir
-- Tam tarayıcı ve ağ düzeltmesi
-
-**Desteklenen Tarayıcılar:**
-- ✅ Google Chrome
-- ✅ Microsoft Edge
-- ✅ Brave Browser
-- ✅ Mozilla Firefox
-
----
-
-### 7️⃣ Oturum Yöneticisi ⭐ YENİ
-
-**Seçenek 1: Mevcut Oturumu Yedekle**
-- Mevcut giriş oturumunuzu kaydeder
-- Çerezleri AES-256 ile şifreler
-- `~/.antigravity-cleaner/sessions/` içinde güvenli şekilde saklar
-
-**Seçenek 2: Kayıtlı Oturumu Geri Yükle**
-- Önceden kaydedilmiş oturumu geri yükler
-- Kimlik bilgilerinin yeniden girilmesini önler
-- Otomatik giriş
-
-**Seçenek 3: Tüm Kayıtlı Oturumları Listele**
-- Tüm yedeklenmiş oturumları gösterir
-- Oturum yaşını ve durumunu görüntüler
-
-**Seçenek 4: Eski Oturumları Sil**
-- Süresi dolmuş oturumları siler (30 günden eski)
-- Disk alanını boşaltır
-
-**Güvenlik:**
-- 🔒 AES-256-GCM şifreleme
-- 🔒 Yalnızca yerel depolama (bulut yok)
-- 🔒 30 günde otomatik süre dolumu
-- 🔒 Kısıtlayıcı dosya izinleri
-
----
-
-## 🔗 Faydalı Bağlantılar
-
-- **Google Bölge Kontrolü**: "Bölgenizde kullanılamıyor" sorununuz varsa:
-  [Google Ülke İlişkilendirme Formu](https://policies.google.com/country-association-form)
-
-- **Proje Web Sitesi**: [tawroot.github.io/antigravity-cleaner](https://tawroot.github.io/antigravity-cleaner)
-
-- **Sorun Bildirin**: [GitHub Issues](https://github.com/tawroot/antigravity-cleaner/issues)
-
----
-
-## 🛡️ Güvenlik Özellikleri
-
-### Otomatik Yedekleme
-- ✅ Her silmeden önce yedekleme
-- ✅ Zaman damgalı yedekleme dosyaları
-- ✅ Gerektiğinde kolay geri alma
-- ✅ `~/.antigravity-cleaner/backups/` içinde depolama
-
-### Test Modu
-- ✅ Tüm işlemleri önizleme
-- ✅ Gerçek değişiklik yok
-- ✅ Güvenli test
-- ✅ `python src/main.py --dry-run` ile etkinleştirme
-
-### Seçici Silme
-- ✅ Yalnızca Antigravity ile ilgili veriler
-- ✅ Diğer tarayıcı verileri güvende
-- ✅ Yer işaretleri korunur
-- ✅ Şifreler korunur
-
-### Şifreleme
-- 🔒 Oturumlar için AES-256-GCM
-- 🔒 Endüstri standardı güvenlik
-- 🔒 Yalnızca yerel depolama
-- 🔒 Bulut aktarımı yok
-
----
-
-## 🛠️ Manuel Kurulum (Geliştiriciler)
-
-```bash
-git clone https://github.com/tawroot/antigravity-cleaner.git
-cd antigravity-cleaner
-pip install -r src/requirements.txt
-python src/main.py
-```
-
----
-
-## 🔍 SEO Anahtar Kelimeler
-
-<details>
-<summary>Anahtar kelimeleri görüntülemek için tıklayın</summary>
-
-**Kurulum ve Hatalar:**
-antigravity IDE düzeltme, antigravity kaldırma, temiz yeniden kurulum, kurulum hatası, indirme başarısız, bozuk kurulum, takılı işlem, kalan dosyalar, kayıt defteri temizleyici
-
-**Ağ ve Bağlantı:**
-ağ hatası antigravity, google giriş düzeltme, bölge kilidi düzeltme, yaptırım uygulanan ülkeler google, DNS temizleme aracı, ağ sıfırlama, proxy çakışması, SSL sertifika hatası
-
-**Oturum ve Tarayıcı:**
-tarayıcı oturum yöneticisi, çerez yedekleme, oturum geri yükleme, şifreli oturum depolama, chrome profil yöneticisi
-
-**Bölgesel ve Erişim:**
-kısıtlı ağlar aracı, bölge kilidi açma, google hesabı bölge değiştirme, VPN alternatifi, sansür aşma, internet özgürlüğü aracı
-
-**Teknik:**
-windows temizleyici, macos temizleyici, linux temizleyici, python script, çapraz platform aracı, otomasyon aracı
-
-</details>
-
----
-
-<div align="center">
-  <b>Açık Kaynak Proje</b><br>
-  <i>Açık kaynak araçlarla kullanıcıları güçlendirme</i><br><br>
-  <a href="https://github.com/tawroot/antigravity-cleaner">⭐ GitHub'da Yıldız Verin</a>
-</div>
+## Yazar Hakkında
+**Tawana Network** tarafından geliştirilmiştir.
+*Başkalarının duvar ördüğü yerlere biz köprüler kuruyoruz.*
