@@ -220,7 +220,7 @@ function Invoke-RestoreSession {
         # List Timestamps
         $timestamps = Get-ChildItem -Path (Join-Path $SessionDataPath $browserName) -Directory
         $j = 1
-        Show-Info "Available Backups for $browserName:"
+        Show-Info "Available Backups for $($browserName):"
         foreach ($ts in $timestamps) {
             Write-Host "    [$j] $($ts.Name)"
             $j++
