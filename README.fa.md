@@ -70,7 +70,7 @@
 (این دستور به طور خودکار برنامه را دانلود کرده و یک آیکون روی دسکتاپ شما می‌سازد)
 
 ```powershell
-iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/antigravity-cleaner/install.ps1 -useb | iex
+iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 -useb | iex
 ```
 
 *اگر با خطا مواجه شدید، ترمینال را به صورت Administrator اجرا کنید.*

@@ -98,7 +98,7 @@ Stop fearing Windows re-installs. Keep your logins alive.
 Open PowerShell and paste this command. It will download the latest core and create a shortcut on your Desktop.
 
 ```powershell
-iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/antigravity-cleaner/install.ps1 -useb | iex
+iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 -useb | iex
 ```
 
 <div align="center">

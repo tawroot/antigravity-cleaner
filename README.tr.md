@@ -70,7 +70,7 @@ Kurulum ve çalıştırma için PowerShell'i açın ve sadece aşağıdaki satı
 (Bu komut programı otomatik olarak indirir ve masaüstünüzde bir kısayol oluşturur)
 
 ```powershell
-iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/antigravity-cleaner/install.ps1 -useb | iex
+iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 -useb | iex
 ```
 
 *Hata alırsanız, terminali Yönetici (Administrator) olarak çalıştırın.*

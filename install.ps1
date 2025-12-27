@@ -12,7 +12,7 @@ if (!(Test-Path $InstallDir)) {
 # 2. Download Main Script
 Write-Host "Downloading Antigravity Shell..." -ForegroundColor Yellow
 try {
-    Invoke-WebRequest -Uri "$GithubBaseUrl/antigravity-cleaner/Antigravity.ps1" -OutFile $TargetFile -UseBasicParsing
+    Invoke-WebRequest -Uri "$GithubBaseUrl/Antigravity.ps1" -OutFile $TargetFile -UseBasicParsing
     Write-Host "Download Complete." -ForegroundColor Green
 }
 catch {
