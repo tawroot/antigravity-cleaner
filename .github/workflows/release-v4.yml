@@ -69,7 +69,7 @@ jobs:
       - name: 🐍 Set up Python 3.14
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14.0'
+          python-version: '3.12.0'
           cache: 'pip'
 
       - name: 📦 Install system dependencies (Linux)
@@ -107,6 +107,12 @@ jobs:
             --hidden-import=tkinter.messagebox `
             --hidden-import=PIL `
             --hidden-import=PIL._tkinter_finder `
+            --hidden-import=browser_helper `
+            --hidden-import=network_optimizer `
+            --hidden-import=session_manager `
+            --hidden-import=antigravity_detector `
+            --hidden-import=google_checker `
+            --hidden-import=google_test_window `
             src/gui_apple.py
           
           Write-Host "Build completed!" -ForegroundColor Green
@@ -133,6 +139,12 @@ jobs:
             --hidden-import=PIL \
             --hidden-import=PIL._tkinter_finder \
             --hidden-import=pkg_resources.extern \
+            --hidden-import=browser_helper \
+            --hidden-import=network_optimizer \
+            --hidden-import=session_manager \
+            --hidden-import=antigravity_detector \
+            --hidden-import=google_checker \
+            --hidden-import=google_test_window \
             src/gui_apple.py
           
           echo "Build completed!"
@@ -156,6 +168,12 @@ jobs:
             --hidden-import=tkinter.messagebox \
             --hidden-import=PIL \
             --hidden-import=PIL._tkinter_finder \
+            --hidden-import=browser_helper \
+            --hidden-import=network_optimizer \
+            --hidden-import=session_manager \
+            --hidden-import=antigravity_detector \
+            --hidden-import=google_checker \
+            --hidden-import=google_test_window \
             src/gui_apple.py
           
           echo "Build completed!"

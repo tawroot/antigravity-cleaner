@@ -19,6 +19,7 @@ import threading
 import webbrowser
 import ctypes
 from datetime import datetime
+import shutil
 
 try:
     import customtkinter as ctk
@@ -28,168 +29,25 @@ except ImportError:
     print("Missing customtkinter. Install: pip install customtkinter")
     sys.exit(1)
 
+# Add src to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-try:
-    from browser_helper import BrowserHelper
-    from network_optimizer import NetworkOptimizer
-    from session_manager import SessionManager
-    from antigravity_detector import AntigravityDetector
-    from google_checker import GoogleServicesChecker
-    from google_test_window import open_google_test_window
-    import logging
-except ImportError as e:
-    print(f"Warning: {e}")
-    BrowserHelper = None
-    NetworkOptimizer = None
-    SessionManager = None
-    AntigravityDetector = None
-    GoogleServicesChecker = None
-    open_google_test_window = None
+# Import shared modules
+from config import APP_NAME, VERSION, GITHUB_URL, AppleColors
+from i18n import get_text
+from logger import setup_logger
+from utils import get_base_path, DependencyLoader
 
+# Helper modules (loaded dynamically)
+loader = DependencyLoader()
+loader.load_all()
 
-
-
-
-# ==================== Apple-Style Colors ====================
-
-class AppleColors:
-    """Apple Design System Colors"""
-    
-    # Minimal "Air" Palette
-    BG_PRIMARY = "#FFFFFF"       # Pure White
-    BG_SECONDARY = "#F5F5F7"     # Light Gray (Apple style)
-    BG_TERTIARY = "#E8E8ED"      # Hover states
-    
-    # Text
-    TEXT_PRIMARY = "#000000"     # Primary Text
-    TEXT_SECONDARY = "#86868B"   # Subtitles
-    TEXT_TERTIARY = "#D2D2D7"    # Disabled/Placeholder
-    
-    # BORDERS
-    BORDER = "#E5E5EA"
-
-    # Accents
-    ACCENT_PRIMARY = "#007AFF"   # Apple Blue
-    ACCENT_HOVER = "#0062CC"
-    ACCENT_DANGER = "#FF3B30"    # Apple Red
-    ACCENT_SUCCESS = "#34C759"   # Apple Green
-    
-    # Mappings
-    BLUE = ACCENT_PRIMARY
-    RED = ACCENT_DANGER
-    GREEN = ACCENT_SUCCESS
-    ORANGE = "#FF9500"
-    PURPLE = "#AF52DE"
-    PINK = "#FF2D55"
-    TEAL = "#5AC8FA"
-    YELLOW = "#FFCC00"
-    
-    LABEL = TEXT_PRIMARY
-    SECONDARY_LABEL = TEXT_SECONDARY
-    SEPARATOR = BORDER
-    SIDEBAR_HOVER = BG_TERTIARY
-
-TRANSLATIONS = {
-    'en': {
-        'title': 'Antigravity Cleaner',
-        'cleaner': 'Cleaner',
-        'sessions': 'Sessions',
-        'browser': 'Browser Helper',
-        'network': 'Network',
-        'quick_clean': 'Quick Clean',
-        'deep_clean': 'Deep Clean',
-        'full_repair': 'Full Repair',
-        'preview': 'Preview Mode',
-        'backup': 'Backup',
-        'restore': 'Restore',
-        'detect': 'Detect',
-        'clean': 'Clean',
-        'flush_dns': 'Flush DNS',
-        'diagnostics': 'Diagnostics',
-        'reset': 'Reset',
-        'dark_mode': 'Dark Mode',
-        'ready': 'Ready',
-        'test_google': 'Test Google',
-        'google': 'Google Test',
-        'dashboard': 'Dashboard',
-        'scan': 'Scan System',
-    },
-    'fa': {
-        'title': 'آنتی‌گرویتی کلینر',
-        'cleaner': 'پاکسازی',
-        'sessions': 'نشست‌ها',
-        'browser': 'مدیریت مرورگر',
-        'network': 'شبکه',
-        'quick_clean': 'پاکسازی سریع',
-        'deep_clean': 'پاکسازی عمیق',
-        'full_repair': 'تعمیر کامل',
-        'preview': 'حالت پیش‌نمایش',
-        'backup': 'پشتیبان',
-        'restore': 'بازیابی',
-        'detect': 'شناسایی',
-        'clean': 'پاکسازی',
-        'flush_dns': 'پاکسازی DNS',
-        'diagnostics': 'تشخیص',
-        'reset': 'ریست',
-        'dark_mode': 'حالت تاریک',
-        'ready': 'آماده',
-        'test_google': 'تست گوگل',
-        'google': 'تست گوگل',
-        'dashboard': 'داشبورد',
-        'scan': 'اسکن سیستم',
-    }
-}
-
-
-# ==================== Paths & Portable Mode ====================
-
-def get_base_path():
-    """Get the base path for data storage (Portable friendly)"""
-    try:
-        if getattr(sys, 'frozen', False):
-            # Running as EXE
-            base = os.path.dirname(sys.executable)
-        else:
-            # Running as Script
-            base = os.path.dirname(os.path.abspath(__file__))
-        
-        # Check if we should use local 'data' folder (Portable standard)
-        local_data = os.path.join(base, 'data')
-        
-        # Ensure 'data' folder exists for portable mode
-        if not os.path.exists(local_data):
-            try:
-                os.makedirs(local_data, exist_ok=True)
-            except:
-                # If cannot create 'data' in app folder (e.g. Program Files), fallback to user home
-                return os.path.join(os.path.expanduser('~'), '.antigravity-cleaner')
-        
-        return local_data
-    except Exception as e:
-        # Emergency fallback
-        return os.path.join(os.path.expanduser('~'), '.antigravity-cleaner')
-
-
-def setup_logger():
-    data_dir = get_base_path()
-    log_dir = os.path.join(data_dir, 'logs')
-    os.makedirs(log_dir, exist_ok=True)
-    
-    logger = logging.getLogger('antigravity_apple')
-    logger.setLevel(logging.DEBUG)
-    
-    if not logger.handlers:
-        handler = logging.FileHandler(
-            os.path.join(log_dir, 'apple-gui.log'),
-            encoding='utf-8'
-        )
-        handler.setFormatter(logging.Formatter('[%(asctime)s] %(message)s'))
-        logger.addHandler(handler)
-    
-    return logger
-
-
+BrowserHelper = loader.browser_helper
+NetworkOptimizer = loader.network_optimizer
+SessionManager = loader.session_manager
+AntigravityDetector = loader.detector
+GoogleServicesChecker = loader.google_checker
+open_google_test_window = loader.google_window
 
 # ==================== Main App ====================
 
@@ -197,9 +55,6 @@ class AntigravityApp(ctk.CTk):
     """
     Antigravity Cleaner with Apple-style design
     """
-    
-    VERSION = "4.0.0"
-    GITHUB_URL = "https://github.com/tawroot/antigravity-cleaner"
     
     def __init__(self):
         super().__init__()
@@ -210,13 +65,13 @@ class AntigravityApp(ctk.CTk):
         self.is_busy = False
         
         # Logger
-        self.logger = setup_logger()
+        self.logger = setup_logger('antigravity_apple', 'apple-gui.log')
         
         # Initialize helpers
         self.init_helpers()
         
         # Window setup - COMPACT SIZE
-        self.title(f"Antigravity Cleaner v{self.VERSION}")
+        self.title(f"{APP_NAME} v{VERSION}")
         
         # Enable DPI awareness for Windows to fix 'out of frame' issues
         if platform.system() == "Windows":
@@ -255,7 +110,7 @@ class AntigravityApp(ctk.CTk):
         self.show_page("dashboard")
         
         # Log
-        self.log("🚀 Antigravity Cleaner started")
+        self.log(f"🚀 {APP_NAME} started")
         self.log(f"💻 {platform.system()} {platform.release()}")
     
     def init_helpers(self):
@@ -282,7 +137,6 @@ class AntigravityApp(ctk.CTk):
                 self.session_manager = SessionManager(storage, self.logger, dry_run=False)
             except: pass
 
-        
         if AntigravityDetector:
             try:
                 self.detector = AntigravityDetector(self.logger)
@@ -297,7 +151,7 @@ class AntigravityApp(ctk.CTk):
 
     
     def t(self, key):
-        return TRANSLATIONS[self.lang].get(key, key)
+        return get_text(key, self.lang)
     
     # ==================== Sidebar ====================
     
@@ -318,7 +172,7 @@ class AntigravityApp(ctk.CTk):
         
         self.app_title = ctk.CTkLabel(
             self.top_header,
-            text=f"Antigravity Cleaner Pro v{self.VERSION}",
+            text=f"{APP_NAME} Pro v{VERSION}",
             font=ctk.CTkFont(family="Inter", size=12),
             text_color=AppleColors.SECONDARY_LABEL
         )
@@ -398,7 +252,7 @@ class AntigravityApp(ctk.CTk):
         
         ver = ctk.CTkLabel(
             branding_frame,
-            text=f"v{self.VERSION}",
+            text=f"v{VERSION}",
             font=ctk.CTkFont(size=10),
             text_color=AppleColors.TEXT_TERTIARY
         )
@@ -455,7 +309,7 @@ class AntigravityApp(ctk.CTk):
             font=ctk.CTkFont(size=14),
             fg_color=AppleColors.PURPLE,
             hover_color="#9B3DD1",
-            command=lambda: webbrowser.open(self.GITHUB_URL)
+            command=lambda: webbrowser.open(GITHUB_URL)
         )
         github_btn.pack(side="right", padx=5)
     
@@ -465,6 +319,11 @@ class AntigravityApp(ctk.CTk):
         
         # Update nav buttons
         for key, btn in self.nav_btns.items():
+            # Refresh text language
+            icon = btn.cget("text").split()[0]
+            # Simple text mapping based on translation not perfect but works for refresh
+            # In a real scenario we'd rebuild the button or update text variable
+            
             if key == page:
                 btn.configure(fg_color=AppleColors.BLUE, text_color="#FFFFFF")
             else:
@@ -488,21 +347,8 @@ class AntigravityApp(ctk.CTk):
     
     def show_license(self):
         """Show proprietary license information"""
-        license_text = """
-TAWANA NETWORK PROPRIETARY LICENSE
-==================================
-
-Copyright (c) 2024-2025 Tawana Mohammadi / Tawana Network
-All Rights Reserved.
-
-- Use: Free for everyone.
-- Copy/Fork: STRICTLY PROHIBITED.
-- Modify: STRICTLY PROHIBITED.
-- Support: GitHub Issues Only.
-
-Violation of these terms will result in legal action.
-"""
-        messagebox.showinfo("License & Copyright", license_text)
+        from config import LICENSE_TEXT
+        messagebox.showinfo("License & Copyright", LICENSE_TEXT)
     
     def toggle_theme(self):
 
@@ -514,6 +360,9 @@ Violation of these terms will result in legal action.
         """Toggle language"""
         self.lang = 'fa' if self.lang == 'en' else 'en'
         self.lang_btn.configure(text="🌐 EN" if self.lang == 'fa' else "🌐 FA")
+        # Note: A full UI refresh would be needed to update all texts immediately
+        # For now, this just toggles state for subsequent renders or specific updates
+        messagebox.showinfo("Language", "Language changed! Some elements will update on refresh.")
     
     # ==================== Content ====================
     
@@ -577,8 +426,6 @@ Violation of these terms will result in legal action.
         rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
         lighter = tuple(min(255, int(c * factor)) for c in rgb)
         return f"#{lighter[0]:02x}{lighter[1]:02x}{lighter[2]:02x}"
-    
-    # ==================== Dashboard Page ====================
     
     # ==================== Dashboard Page ====================
     
@@ -703,27 +550,30 @@ Violation of these terms will result in legal action.
         def do_scan():
             # Update health score
             if self.detector:
-                results = self.detector.detect_all()
-                score = results['health_score']
-                status = results['status']
-                
-                # Determine color based on score
-                if score >= 90:
-                    color = AppleColors.ACCENT_SUCCESS
-                elif score >= 70:
-                    color = AppleColors.ORANGE
-                else:
-                    color = AppleColors.ACCENT_DANGER
-                
-                self.after(0, lambda: self.health_score_label.configure(text=str(score), text_color=color))
-                self.after(0, lambda: self.health_status_label.configure(text=status))
-                
-                # Update status items (Minimal)
-                leftovers_txt = f"{len(results['leftover_paths'])} Files"
-                if results['leftover_size'] > 0:
-                     leftovers_txt += f"\n({results['leftover_size_human']})"
-                
-                self.after(0, lambda: self.status_labels['leftovers'].configure(text=leftovers_txt))
+                try:
+                    results = self.detector.detect_all()
+                    score = results['health_score']
+                    status = results['status']
+                    
+                    # Determine color based on score
+                    if score >= 90:
+                        color = AppleColors.ACCENT_SUCCESS
+                    elif score >= 70:
+                        color = AppleColors.ORANGE
+                    else:
+                        color = AppleColors.ACCENT_DANGER
+                    
+                    self.after(0, lambda: self.health_score_label.configure(text=str(score), text_color=color))
+                    self.after(0, lambda: self.health_status_label.configure(text=status))
+                    
+                    # Update status items (Minimal)
+                    leftovers_txt = f"{len(results['leftover_paths'])} Files"
+                    if results['leftover_size'] > 0:
+                         leftovers_txt += f"\n({results['leftover_size_human']})"
+                    
+                    self.after(0, lambda: self.status_labels['leftovers'].configure(text=leftovers_txt))
+                except Exception as e:
+                    self.after(0, lambda: self.health_status_label.configure(text=f"Scan Error"))
 
             else:
                 self.after(0, lambda: self.health_score_label.configure(text="100", text_color=AppleColors.ACCENT_SUCCESS))
@@ -731,13 +581,17 @@ Violation of these terms will result in legal action.
             
             # Update browser count
             if self.browser_helper:
-                browsers = self.browser_helper.detect_installed_browsers()
-                self.after(0, lambda: self.status_labels['browsers'].configure(text=str(len(browsers))))
+                try:
+                    browsers = self.browser_helper.detect_installed_browsers()
+                    self.after(0, lambda: self.status_labels['browsers'].configure(text=str(len(browsers))))
+                except: pass
             
             # Update sessions count
             if self.session_manager:
-                sessions = self.session_manager.list_saved_sessions()
-                self.after(0, lambda: self.status_labels['sessions'].configure(text=str(len(sessions))))
+                try:
+                    sessions = self.session_manager.list_saved_sessions()
+                    self.after(0, lambda: self.status_labels['sessions'].configure(text=str(len(sessions))))
+                except: pass
         
         threading.Thread(target=do_scan, daemon=True).start()
     
@@ -1179,7 +1033,9 @@ Violation of these terms will result in legal action.
         self.log_text.insert("end", f"[{time}] {msg}\n")
         self.log_text.see("end")
         self.log_text.configure(state="disabled")
-        self.logger.info(msg)
+        try:
+            self.logger.info(msg)
+        except: pass
     
     def clear_log(self):
         """Clear log"""
@@ -1217,7 +1073,6 @@ Violation of these terms will result in legal action.
     
     def _clean_files(self, mode, dry_run):
         """Clean files"""
-        import shutil
         
         home = os.path.expanduser("~")
         paths = []
