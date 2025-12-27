@@ -58,18 +58,22 @@ function Clear-Junk {
             $msg = "$Description ($Path) - Found $count items ({0:N2} MB)" -f $size
             if ($DryRun) {
                 Show-Info "[DRY RUN] $msg"
-            } else {
+            }
+            else {
                 Try {
                     Remove-Item -Path "$Path\*" -Recurse -Force -ErrorAction Stop
                     Show-Success "Cleaned: $msg"
-                } Catch {
+                }
+                Catch {
                     Show-Warning "Partial Clean: $Description (Locked files skipped)"
                 }
             }
-        } else {
+        }
+        else {
             Show-Info "Empty: $Description"
         }
-    } else {
+    }
+    else {
         Show-Info "Skip: $Description (Not Found)"
     }
 }
@@ -125,10 +129,10 @@ function Menu-Cleaner {
 function Get-Browsers {
     $AppData = $env:LOCALAPPDATA
     @{
-        "Google Chrome" = "$AppData\Google\Chrome\User Data"
+        "Google Chrome"  = "$AppData\Google\Chrome\User Data"
         "Microsoft Edge" = "$AppData\Microsoft\Edge\User Data"
-        "Brave Browser" = "$AppData\BraveSoftware\Brave-Browser\User Data"
-        "Opera"         = "$env:APPDATA\Opera Software\Opera Stable"
+        "Brave Browser"  = "$AppData\BraveSoftware\Brave-Browser\User Data"
+        "Opera"          = "$env:APPDATA\Opera Software\Opera Stable"
     }
 }
 
@@ -153,11 +157,13 @@ function Get-BrowserProfiles {
                     $json = $content | ConvertFrom-Json
                     if ($json.account_info -and $json.account_info.Count -gt 0) {
                         $email = $json.account_info[0].email
-                    } elseif ($json.google -and $json.google.services -and $json.google.services.username) {
+                    }
+                    elseif ($json.google -and $json.google.services -and $json.google.services.username) {
                         $email = $json.google.services.username
                     }
                 }
-            } catch {}
+            }
+            catch {}
         }
         
         $profiles += [PSCustomObject]@{
@@ -215,15 +221,16 @@ function Invoke-RegionInspector {
         
         switch -Wildcard ($target.Browser) {
             "*Chrome*" { $cmd = "chrome"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
-            "*Edge*"   { $cmd = "msedge"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
-            "*Brave*"  { $cmd = "brave";  $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
-            "*Opera*"  { $cmd = "launcher"; $args = "`"$url`"" } # Opera handles profiles differently
+            "*Edge*" { $cmd = "msedge"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+            "*Brave*" { $cmd = "brave"; $args = "--profile-directory=`"$($target.Name)`" `"$url`"" }
+            "*Opera*" { $cmd = "launcher"; $args = "`"$url`"" } # Opera handles profiles differently
         }
         
         try {
             Start-Process $cmd -ArgumentList $args
             Show-Success "Browser opened. Check the page for 'Country Association'."
-        } catch {
+        }
+        catch {
             Show-Error "Could not launch browser automatically. Please open manually:"
             Write-Host "  $url" -ForegroundColor White
         }
@@ -231,6 +238,7 @@ function Invoke-RegionInspector {
     Wait-Key
 }
 
+# --- Enhanced Session Manager ---
 # --- Enhanced Session Manager ---
 function Invoke-BackupSession {
     Show-Header
@@ -263,30 +271,99 @@ function Invoke-BackupSession {
     if ($sel -match "^\d+$" -and [int]$sel -le $allProfiles.Count -and [int]$sel -gt 0) {
         $p = $allProfiles[[int]$sel - 1]
         
+        Write-Host ""
+        Show-Info "Select Backup Mode:"
+        Write-Host "  [1] Light (Login & Sessions Only) - ~20MB - Quick"
+        Write-Host "  [2] Full (Entire Profile) - ~500MB+ - Complete"
+        $mode = Read-Host "  > Select Mode"
+        
         $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-        # Sanitize email for folder name
         $safeEmail = $p.Email -replace "[^a-zA-Z0-9@-]", "_"
-        $dest = Join-Path $SessionDataPath "$($p.Browser)\$safeEmail\_$timestamp"
+        $tag = if ($mode -eq "1") { "Light" } else { "Full" }
+        $dest = Join-Path $SessionDataPath "$($p.Browser)\$safeEmail\_$tag`_$timestamp"
         
         Show-Info "Backing up $($p.Browser) ($($p.Email))..."
         try {
             if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force > $null }
-            Copy-Item -Path "$($p.Path)\*" -Destination $dest -Recurse -Force -ErrorAction Stop
+            
+            if ($mode -eq "1") {
+                # Light Mode: Specific files only
+                $essentialFiles = @(
+                    "Cookies", "Login Data", "Web Data", "Preferences", "Secure Preferences", "Extension Cookies", "Local State"
+                )
+                $essentialFolders = @("Local Extension Settings", "Sync Data", "Local Storage", "Databases")
+                
+                foreach ($file in $essentialFiles) {
+                    $fPath = Join-Path $p.Path $file
+                    if (Test-Path $fPath) { Copy-Item -Path $fPath -Destination $dest -Force -ErrorAction SilentlyContinue }
+                }
+                foreach ($folder in $essentialFolders) {
+                    $dPath = Join-Path $p.Path $folder
+                    if (Test-Path $dPath) { 
+                        $targetDir = Join-Path $dest $folder
+                        New-Item -ItemType Directory -Path $targetDir -Force > $null
+                        Copy-Item -Path "$dPath\*" -Destination $targetDir -Recurse -Force -ErrorAction SilentlyContinue 
+                    }
+                }
+                
+            }
+            else {
+                # Full Mode
+                Copy-Item -Path "$($p.Path)\*" -Destination $dest -Recurse -Force -ErrorAction Stop
+            }
             
             # Save metadata
             $meta = @{
-                Browser = $p.Browser
+                Browser     = $p.Browser
                 ProfileName = $p.Name
-                Email = $p.Email
-                Date = $timestamp
+                Email       = $p.Email
+                Date        = $timestamp
+                Mode        = $tag
             } | ConvertTo-Json
             $meta | Out-File (Join-Path $dest "meta.json")
             
-            Show-Success "Backup Saved to:"
+            Show-Success "Backup ($tag) Saved to:"
             Write-Host "  $dest" -ForegroundColor White
-        } catch {
+        }
+        catch {
             Show-Error "Backup Failed: $_"
         }
+    }
+    Wait-Key
+}
+
+function Invoke-BackupAntigravityApp {
+    Show-Header
+    Show-Info "Backup Antigravity Desktop App"
+    
+    $roamingPath = "$env:APPDATA\Antigravity"
+    if (!(Test-Path $roamingPath)) {
+        Show-Warning "Antigravity Desktop App data not found in Roaming."
+        Wait-Key
+        return
+    }
+    
+    $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+    $dest = Join-Path $SessionDataPath "Antigravity_Desktop\_$timestamp"
+    
+    Show-Info "Backing up Antigravity App Data..."
+    try {
+        if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force > $null }
+        Copy-Item -Path "$roamingPath\*" -Destination $dest -Recurse -Force -ErrorAction Stop
+        
+        $meta = @{
+            Browser     = "Antigravity Desktop"
+            ProfileName = "Roaming"
+            Email       = "Desktop App"
+            Date        = $timestamp
+            Mode        = "Full"
+        } | ConvertTo-Json
+        $meta | Out-File (Join-Path $dest "meta.json")
+        
+        Show-Success "App Backup Complete!"
+    }
+    catch {
+        Show-Error "Backup Failed: $_"
     }
     Wait-Key
 }
@@ -310,14 +387,15 @@ function Invoke-RestoreSession {
     foreach ($metaFile in $backups) {
         $json = Get-Content $metaFile.FullName | ConvertFrom-Json
         $folder = $metaFile.Directory.FullName
+        $modeStr = if ($json.Mode) { "[$($json.Mode)]" } else { "[Full]" }
         
-        Write-Host "  [$i] $($json.Browser)" -NoNewline
+        Write-Host "  [$i] $modeStr $($json.Browser)" -NoNewline
         Write-Host " - $($json.Email)" -ForegroundColor Cyan -NoNewline
         Write-Host " ($($json.Date))" -ForegroundColor DarkGray
         
         $restoreList += [PSCustomObject]@{
             Header = $json
-            Path = $folder
+            Path   = $folder
         }
         $i++
     }
@@ -329,26 +407,34 @@ function Invoke-RestoreSession {
     if ($sel -match "^\d+$" -and [int]$sel -le $restoreList.Count -and [int]$sel -gt 0) {
         $target = $restoreList[[int]$sel - 1]
         
-        # Determine current path
-        $browsers = Get-Browsers
-        $browserRoot = $browsers[$target.Header.Browser]
-        $destPath = Join-Path $browserRoot $target.Header.ProfileName
+        $destPath = ""
         
-        Show-Warning "Restoring will OVERWRITE the current: $($target.Header.Browser) > $($target.Header.ProfileName)"
-        Show-Info "This will allow you to login to Antigravity without a password!"
+        if ($target.Header.Browser -eq "Antigravity Desktop") {
+            $destPath = "$env:APPDATA\Antigravity"
+            Show-Info "Restoring Antigravity Desktop App..."
+        }
+        else {
+            # Determine browser path
+            $browsers = Get-Browsers
+            $browserRoot = $browsers[$target.Header.Browser]
+            $destPath = Join-Path $browserRoot $target.Header.ProfileName
+        }
         
+        Show-Warning "Restoring will OVERWRITE data in: $destPath"
         $confirm = Read-Host "  > Are you sure? (Y/N)"
         if ($confirm -eq "Y") {
             try {
-                # Stop browser
-                $procName = switch -Wildcard ($target.Header.Browser) { "*Chrome*" {"chrome"} "*Edge*" {"msedge"} "*Brave*" {"brave"} "*Opera*" {"opera"} }
-                Stop-Process -Name $procName -Force -ErrorAction SilentlyContinue
+                if ($target.Header.Browser -ne "Antigravity Desktop") {
+                    # Stop browser
+                    $procName = switch -Wildcard ($target.Header.Browser) { "*Chrome*" { "chrome" } "*Edge*" { "msedge" } "*Brave*" { "brave" } "*Opera*" { "opera" } }
+                    Stop-Process -Name $procName -Force -ErrorAction SilentlyContinue
+                }
                 
                 # Restore
                 Copy-Item -Path "$($target.Path)\*" -Destination $destPath -Recurse -Force -ErrorAction Stop
                 Show-Success "Restore Successful!"
-                Show-Info "You can now open Antigravity/Browser."
-            } catch {
+            }
+            catch {
                 Show-Error "Restore Failed: $_"
             }
         }
@@ -359,14 +445,16 @@ function Invoke-RestoreSession {
 function Invoke-SessionManager {
     Show-Header
     Show-Info "Session Manager Module"
-    Write-Host "  [1] Backup Individual Profile"
-    Write-Host "  [2] Restore Profile (Login Bypass)"
+    Write-Host "  [1] Backup Browser Profile"
+    Write-Host "  [2] Backup Antigravity App"
+    Write-Host "  [3] Restore Profile/App"
     Write-Host "  [0] Back"
     
     $choice = Read-Host "  > Select"
     switch ($choice) {
         "1" { Invoke-BackupSession }
-        "2" { Invoke-RestoreSession }
+        "2" { Invoke-BackupAntigravityApp }
+        "3" { Invoke-RestoreSession }
         "0" { return }
     }
 }
@@ -379,12 +467,12 @@ function Test-SystemAnalysis {
     # 1. Google Services
     Write-Host "  [Google Services]" -ForegroundColor Cyan
     $googleEndpoints = @{
-        "Google Search"      = "https://www.google.com"
-        "Google Identity"    = "https://accounts.google.com"
-        "Gemini AI API"      = "https://generativelanguage.googleapis.com"
-        "Google AI Studio"   = "https://ai.google.dev"
+        "Google Search"         = "https://www.google.com"
+        "Google Identity"       = "https://accounts.google.com"
+        "Gemini AI API"         = "https://generativelanguage.googleapis.com"
+        "Google AI Studio"      = "https://ai.google.dev"
         "Google Cloud Platform" = "https://cloud.google.com"
-        "Colab"              = "https://colab.research.google.com"
+        "Colab"                 = "https://colab.research.google.com"
     }
 
     foreach ($name in $googleEndpoints.Keys) {
@@ -393,7 +481,8 @@ function Test-SystemAnalysis {
             $req = Invoke-WebRequest -Uri $googleEndpoints[$name] -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
             if ($req.StatusCode -eq 200) { Write-Host "OK" -ForegroundColor Green }
             else { Write-Host "WARN ($($req.StatusCode))" -ForegroundColor Yellow }
-        } catch {
+        }
+        catch {
             Write-Host "FAIL" -ForegroundColor Red
         }
     }
@@ -413,7 +502,8 @@ function Test-SystemAnalysis {
             $req = Invoke-WebRequest -Uri $agEndpoints[$name] -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
             if ($req.StatusCode -eq 200) { Write-Host "OK" -ForegroundColor Green }
             else { Write-Host "WARN ($($req.StatusCode))" -ForegroundColor Yellow }
-        } catch {
+        }
+        catch {
             Write-Host "FAIL" -ForegroundColor Red
         }
     }
@@ -495,7 +585,8 @@ function Main {
 # Start
 try {
     Main
-} catch {
+}
+catch {
     Show-Error "Critical Engine Failure: $_"
     Wait-Key
 }
