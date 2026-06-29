@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-base_url="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main"
+base_url="https://raw.githubusercontent.com/atakhadiviom/antigravity-cleaner/fix-macos-linux-support"
 install_dir="${HOME}/.antigravity"
 target_file="${install_dir}/Antigravity.sh"
 
