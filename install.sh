@@ -16,4 +16,9 @@ else
 fi
 
 chmod +x "$target_file"
-exec "$target_file"
+if [ -t 0 ]; then
+  exec "$target_file"
+else
+  # Piped install (curl ... | sh): menu must read from the real terminal
+  exec "$target_file" 0</dev/tty
+fi

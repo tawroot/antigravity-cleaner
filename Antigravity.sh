@@ -369,6 +369,10 @@ region_inspector() {
 
 main() {
   if [ "$PLATFORM" = "unsupported" ]; then err "Unsupported OS: $OS_NAME"; exit 1; fi
+  # curl | sh leaves stdin as a closed pipe — attach keyboard input from the terminal
+  if [ ! -t 0 ] && [ -e /dev/tty ]; then
+    exec 0</dev/tty
+  fi
   while true; do
     show_header
     printf '  MAIN MENU\n\n'
