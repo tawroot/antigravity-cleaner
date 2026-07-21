@@ -33,6 +33,8 @@ $HomePath = if ($OS_Win) { $env:USERPROFILE } else { $env:HOME }
 $DataPath = Join-Path $PSScriptRoot "Data"
 $SessionDataPath = Join-Path $DataPath "Sessions"
 
+function Join-ChildGlob { param([string]$Path) Join-Path -Path $Path -ChildPath "*" }
+
 # --- OS Specific Paths ---
 $Paths = @{
     Temp     = if ($OS_Win) { $env:TEMP } else { "/tmp" }
@@ -86,7 +88,7 @@ function Clear-Junk {
             }
             else {
                 Try {
-                    Remove-Item -Path "$Path\*" -Recurse -Force -ErrorAction Stop
+                    Remove-Item -Path (Join-ChildGlob $Path) -Recurse -Force -ErrorAction Stop
                     Show-Success "Cleaned: $msg"
                 }
                 Catch {
@@ -356,7 +358,7 @@ function Invoke-BackupSession {
         $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
         $safeEmail = $p.Email -replace "[^a-zA-Z0-9@-]", "_"
         $tag = if ($mode -eq "1") { "Light" } else { "Full" }
-        $dest = Join-Path $SessionDataPath "$($p.Browser)\$safeEmail\_$tag`_$timestamp"
+        $dest = Join-Path (Join-Path (Join-Path $SessionDataPath $p.Browser) $safeEmail) "_$tag`_$timestamp"
         
         Show-Info "Backing up $($p.Browser) ($($p.Email))..."
         try {
@@ -378,14 +380,14 @@ function Invoke-BackupSession {
                     if (Test-Path $dPath) { 
                         $targetDir = Join-Path $dest $folder
                         New-Item -ItemType Directory -Path $targetDir -Force > $null
-                        Copy-Item -Path "$dPath\*" -Destination $targetDir -Recurse -Force -ErrorAction SilentlyContinue 
+                        Copy-Item -Path (Join-ChildGlob $dPath) -Destination $targetDir -Recurse -Force -ErrorAction SilentlyContinue 
                     }
                 }
                 
             }
             else {
                 # Full Mode
-                Copy-Item -Path "$($p.Path)\*" -Destination $dest -Recurse -Force -ErrorAction Stop
+                Copy-Item -Path (Join-ChildGlob $p.Path) -Destination $dest -Recurse -Force -ErrorAction Stop
             }
             
             # Save metadata
@@ -426,7 +428,7 @@ function Invoke-BackupAntigravityApp {
     Show-Info "Backing up Antigravity App Data..."
     try {
         if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force > $null }
-        Copy-Item -Path "$agPath\*" -Destination $dest -Recurse -Force -ErrorAction Stop
+        Copy-Item -Path (Join-ChildGlob $agPath) -Destination $dest -Recurse -Force -ErrorAction Stop
         
         $meta = @{
             Browser     = "Antigravity Desktop"
@@ -517,7 +519,8 @@ function Invoke-RestoreSession {
                 }
                 
                 # Restore
-                Copy-Item -Path "$($target.Path)\*" -Destination $destPath -Recurse -Force -ErrorAction Stop
+                if (!(Test-Path $destPath)) { New-Item -ItemType Directory -Path $destPath -Force > $null }
+                Copy-Item -Path (Join-ChildGlob $target.Path) -Destination $destPath -Recurse -Force -ErrorAction Stop
                 Show-Success "Restore Successful!"
             }
             catch {

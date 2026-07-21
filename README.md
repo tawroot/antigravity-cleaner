@@ -93,11 +93,18 @@ Stop fearing Windows re-installs. Keep your logins alive.
 
 ## 💾 Installation
 
-### Option 1: One-Line Installer (Recommended)
+### Windows: One-Line Installer
 Open PowerShell and paste this command. It will download the latest core and create a shortcut on your Desktop.
 
 ```powershell
 iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 -useb | iex
+```
+
+### macOS / Linux: Native Shell Installer
+Open Terminal and run this command. It uses the native `Antigravity.sh` shell edition and does **not** require PowerShell.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | sh
 ```
 
 <div align="center">
@@ -106,10 +113,15 @@ iwr https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 </div>
 
 ### Option 2: Manual (Git)
-```powershell
+```bash
 git clone https://github.com/tawroot/antigravity-cleaner.git
 cd antigravity-cleaner
-.\Antigravity.ps1
+
+# Windows
+./Antigravity.ps1
+
+# macOS / Linux
+./Antigravity.sh
 ```
 
 ---

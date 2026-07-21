@@ -53,4 +53,5 @@ else {
 
 # 4. Launch
 Write-Host "Launching Antigravity..." -ForegroundColor Cyan
-Start-Process $PSExe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$TargetFile`""
+$LaunchArgs = if ($IsWin) { "-NoProfile -ExecutionPolicy Bypass -File `"$TargetFile`"" } else { "-NoProfile -File `"$TargetFile`"" }
+Start-Process $PSExe -ArgumentList $LaunchArgs
