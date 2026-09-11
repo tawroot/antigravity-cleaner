@@ -1,35 +1,60 @@
-name: 🐛 Bug Report
-description: Create a report to help us improve Antigravity Cleaner Pro
-labels: ["bug"]
+name: "🐛 گزارش باگ / Bug Report"
+description: "ثبت گزارش باگ یا خطا در اجرای Antigravity Cleaner"
+title: "[Bug]: "
+labels: ["bug", "triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        ### ⚡ سپاس از گزارش و همراهی شما / Thank you for reporting!
+        پیش از ثبت ایشو، لطفاً بررسی کنید که آیا با اجرای دستور زیر مشکل شما تشخیص داده یا حل می‌شود:
+        ```bash
+        ag-cleaner doctor
+        ```
   - type: textarea
-    id: what-happened
+    id: description
     attributes:
-      label: What happened?
-      description: Also tell us what you expected to happen.
-      placeholder: Tell us what you did and what went wrong...
+      label: "شرح مشکل / Problem Description"
+      description: "توضیح دهید چه کاری انجام دادید و چه خطایی رخ داد / Describe what happened and what you expected."
+      placeholder: "مثال: پس از اجرای پچ، لاگین هنوز با خطا مواجه می‌شود..."
     validations:
       required: true
   - type: dropdown
     id: os
     attributes:
-      label: Operating System
+      label: "سیستم‌عامل / Operating System"
       options:
-        - Windows 11
-        - Windows 10
-        - macOS (Intel)
-        - macOS (Apple Silicon)
-        - Linux (Ubuntu/Debian)
-        - Linux (Other)
+        - "Linux (Ubuntu / Debian / Arch / Fedora)"
+        - "Windows 11"
+        - "Windows 10"
+        - "macOS (Apple Silicon M1/M2/M3/M4)"
+        - "macOS (Intel x86_64)"
+        - "Other"
     validations:
       required: true
-  - type: textarea
-    id: logs
+  - type: input
+    id: version
     attributes:
-      label: Logs
-      description: Please paste the content of your .antigravity-cleaner/logs/apple-gui.log here.
+      label: "نسخه Antigravity Cleaner / Version"
+      description: "نسخه ابزار (خروجی دستور `ag-cleaner --version`)"
+      placeholder: "v5.1.0"
+    validations:
+      required: false
+  - type: textarea
+    id: doctor_output
+    attributes:
+      label: "خروجی دیاگنوستیک داکتر / Doctor Diagnostics Output"
+      description: "خروجی دستور `ag-cleaner doctor` را در این بخش پیست کنید:"
+      placeholder: "Paste 'ag-cleaner doctor' output here..."
       render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "تأییدیه‌ها / Checklist"
+      options:
+        - label: "من از آخرین نسخه پایدار (v5.1.0 به بالا) استفاده می‌کنم / Using latest release."
+          required: true
+        - label: "فایل راهنما (README.md) و چنج‌لاگ را بررسی کرده‌ام / Checked README & CHANGELOG."
+          required: false

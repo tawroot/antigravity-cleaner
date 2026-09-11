@@ -1,0 +1,33 @@
+name: "💡 پیشنهاد قابلیت جدید / Feature Request"
+description: "پیشنهاد ایده، ابزار، یا قابلیت جدید برای Antigravity Cleaner"
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 🚀 پیشنهاد قابلیت جدید / Feature Proposal
+        ایده‌ها و پیشنهادات شما به پیشرفت و کاربردی‌تر شدن این ابزار کمک شایانی می‌کند!
+  - type: textarea
+    id: problem
+    attributes:
+      label: "نیاز یا مشکل مرتبط / Is your feature request related to a problem?"
+      description: "آیا این قابلیت برای حل مشکلی خاص مطرح شده است؟ / A clear description of what the problem is."
+      placeholder: "مثال: من همیشه با تنظیم خودکار DNS در فلان محیط مشکل دارم..."
+    validations:
+      required: false
+  - type: textarea
+    id: solution
+    attributes:
+      label: "قابلیت یا راهکار پیشنهادی / Describe the solution you'd like"
+      description: "قابلیت درخواستی را به طور واضح توضیح دهید / A clear description of what you want to happen."
+      placeholder: "اضافه شدن فلگ جدید، پشتیبانی از کلاینت جدید و..."
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "جایگزین‌ها یا راهکارهای موجود / Additional context & alternatives"
+      description: "هرگونه نکته، اسکرین‌شات یا راهکار دیگری که مد نظر دارید."
+    validations:
+      required: false
