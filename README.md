@@ -1,7 +1,7 @@
 # ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.1.1)
 
 <div align="center">
-  <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
+  <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="85%">
   <br>
   
   [![Version](https://img.shields.io/badge/Version-5.1.1-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
@@ -116,8 +116,21 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 ---
 
 ## 💻 2026 Visual Dashboard (TUI)
+ 
+Run `ag-cleaner` in your terminal for an interactive, beautifully styled terminal menu:
 
-Run `ag-cleaner doctor` in your terminal for a non-intimidating, high-aesthetic health card:
+<div align="center">
+  <img src="docs/images/terminal.png" alt="Antigravity Cleaner TUI" width="75%">
+</div>
+
+### 🎬 Live Demo Walkthrough
+See Antigravity Cleaner v5.1 in action — automated detection, zero-TUN proxy injection, and one-click unlocking:
+
+https://github.com/user-attachments/assets/demo.webm
+
+> *Video demo: [`docs/images/demo.webm`](docs/images/demo.webm)*
+
+Run `ag-cleaner doctor` for a non-intimidating, high-aesthetic health card:
 
 ```text
 ╭────────────────────────────────────────────────────────────────────────────╮
