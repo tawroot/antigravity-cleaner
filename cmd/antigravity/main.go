@@ -124,6 +124,8 @@ func handleSubcommand(cmd string, args []string) {
 		_ = proxy.LaunchAntigravityWithProxy("", proxyURL, fs.Args())
 	case "clean":
 		runSurgicalClean()
+	case "kill":
+		runKillProcesses()
 	case "create-launcher":
 		runCreateLauncher()
 	case "about":
@@ -131,7 +133,7 @@ func handleSubcommand(cmd string, args []string) {
 	case "version", "-v", "--version":
 		fmt.Printf("Antigravity Cleaner Toolkit v%s (@dalroot)\n", Version)
 	default:
-		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [doctor|patch|launch|clean|create-launcher|about|version]\n", cmd)
+		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [doctor|patch|launch|clean|kill|create-launcher|about|version]\n", cmd)
 		os.Exit(1)
 	}
 }
@@ -170,27 +172,38 @@ func ensureRunningSafety(force bool) bool {
 		return true
 	}
 
-	warnStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF5555"))
+	warnStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFB800"))
 	fmt.Println()
-	fmt.Println(warnStyle.Render("  ⚠️ WARNING: Antigravity IDE or language_server is currently RUNNING!"))
+	fmt.Println(warnStyle.Render("  ⚠️ NOTICE: Active Antigravity or language_server processes detected."))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render(
-		"  Modifying or patching files while Antigravity is open will DESTROY active AI sessions and cause immediate DISCONNECT."))
+		"  Closing running processes prevents zombie socket locks and ensures clean patches."))
 	fmt.Println()
 
 	if force {
-		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  [--force specified] Terminating running Antigravity processes safely..."))
-		_ = patcher.KillAntigravityProcesses()
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  [--force specified] Terminating running processes cleanly..."))
+		_, _ = patcher.KillAntigravityProcesses()
 		return true
 	}
 
-	confirm := ui.ReadInput("Do you want to close Antigravity processes now before proceeding? (y/N)")
-	if confirm != "y" && confirm != "Y" {
-		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  Operation cancelled to prevent disconnecting your running Antigravity session."))
+	confirm := ui.ReadInput("Do you want to automatically close active processes before proceeding? (Y/n)")
+	if confirm == "n" || confirm == "N" {
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  Operation cancelled to preserve running Antigravity session."))
 		return false
 	}
 
-	_ = patcher.KillAntigravityProcesses()
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Closed active processes cleanly."))
+	_, _ = patcher.KillAntigravityProcesses()
 	return true
+}
+
+func runKillProcesses() {
+	ui.PrintSection("🧹 Killing Active Antigravity Processes")
+	if !patcher.IsAntigravityRunning() {
+		ui.PrintStatus("OK", "Processes", "No active Antigravity or language_server processes found.")
+		return
+	}
+	_, _ = patcher.KillAntigravityProcesses()
+	ui.PrintStatus("OK", "Processes Terminated", "All Antigravity and language_server processes were killed.")
 }
 
 func runQuickAutoFix() {

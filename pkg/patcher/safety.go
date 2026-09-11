@@ -30,7 +30,7 @@ func IsAntigravityRunning() bool {
 	if err == nil {
 		lines := strings.Split(strings.TrimSpace(string(out)), "\n")
 		for _, l := range lines {
-			l = strings.TrimSpace(l);
+			l = strings.TrimSpace(l)
 			if l != "" && l != selfPID {
 				return true
 			}
@@ -41,7 +41,7 @@ func IsAntigravityRunning() bool {
 	if err2 == nil {
 		lines := strings.Split(strings.TrimSpace(string(out2)), "\n")
 		for _, l := range lines {
-			l = strings.TrimSpace(l);
+			l = strings.TrimSpace(l)
 			if l != "" && l != selfPID {
 				return true
 			}
@@ -52,16 +52,22 @@ func IsAntigravityRunning() bool {
 }
 
 // KillAntigravityProcesses terminates active Antigravity and language_server instances
-func KillAntigravityProcesses() error {
+func KillAntigravityProcesses() (int, error) {
+	killedCount := 0
+
 	if runtime.GOOS == "windows" {
 		_ = exec.Command("taskkill", "/F", "/IM", "language_server.exe").Run()
 		_ = exec.Command("taskkill", "/F", "/IM", "Antigravity.exe").Run()
+		_ = exec.Command("taskkill", "/F", "/IM", "antigravity.exe").Run()
 		time.Sleep(1 * time.Second)
-		return nil
+		return 1, nil
 	}
 
+	// Linux / macOS: kill language_server and antigravity
 	_ = exec.Command("pkill", "-9", "-f", "language_server").Run()
 	_ = exec.Command("pkill", "-9", "-f", "antigravity").Run()
+	_ = exec.Command("pkill", "-9", "-f", "chrome-sandbox").Run()
 	time.Sleep(1 * time.Second)
-	return nil
+
+	return killedCount, nil
 }
