@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.1] - 2026-09-11
+
+### 🛡️ Safety Guard: Session Disconnect Prevention
+
+- **Active Process Detection:** Added real-time process monitoring (`IsAntigravityRunning()`) before executing `patch` or `clean` operations.
+- **Session Protection Warning:** Prompts user with a prominent warning if Antigravity IDE or `language_server` is running, preventing accidental disconnection of active AI sessions.
+- **Graceful Termination / Cancellation:** Allows users to safely cancel patching/cleaning to preserve their ongoing chat session, or close processes safely first if intended.
+
 ---
 
 ## [5.1.0] - 2026-09-11

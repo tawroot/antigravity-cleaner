@@ -13,7 +13,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/ui"
 )
 
-const Version = "5.1.0"
+const Version = "5.1.1"
 
 func main() {
 	if len(os.Args) > 1 {
@@ -165,7 +165,38 @@ func runDoctor(verbose bool) {
 	ui.PrintDashboard(rows, verbose)
 }
 
+func ensureRunningSafety(force bool) bool {
+	if !patcher.IsAntigravityRunning() {
+		return true
+	}
+
+	warnStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF5555"))
+	fmt.Println()
+	fmt.Println(warnStyle.Render("  ⚠️ WARNING: Antigravity IDE or language_server is currently RUNNING!"))
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render(
+		"  Modifying or patching files while Antigravity is open will DESTROY active AI sessions and cause immediate DISCONNECT."))
+	fmt.Println()
+
+	if force {
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  [--force specified] Terminating running Antigravity processes safely..."))
+		_ = patcher.KillAntigravityProcesses()
+		return true
+	}
+
+	confirm := ui.ReadInput("Do you want to close Antigravity processes now before proceeding? (y/N)")
+	if confirm != "y" && confirm != "Y" {
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  Operation cancelled to prevent disconnecting your running Antigravity session."))
+		return false
+	}
+
+	_ = patcher.KillAntigravityProcesses()
+	return true
+}
+
 func runQuickAutoFix() {
+	if !ensureRunningSafety(false) {
+		return
+	}
 	ui.PrintSection("⚡ Smart 1-Click Auto-Fix")
 
 	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("  Step 1: Core Engine MultiGate Bytecode Unlock..."))
@@ -216,6 +247,9 @@ func runQuickAutoFix() {
 }
 
 func runPatchCore() {
+	if !ensureRunningSafety(false) {
+		return
+	}
 	ui.PrintSection("Patch Core Binaries")
 	if res, err := patcher.PatchLanguageServer(""); err != nil {
 		ui.PrintStatus("FAIL", "Language Server", err.Error())
@@ -231,6 +265,9 @@ func runPatchCore() {
 }
 
 func runPatchIde() {
+	if !ensureRunningSafety(false) {
+		return
+	}
 	ui.PrintSection("Patch IDE & VS Code Extensions")
 	if res, err := patcher.PatchIdeMainJs(""); err != nil {
 		ui.PrintStatus("WARN", "IDE main.js", err.Error())
@@ -275,6 +312,9 @@ func runCreateLauncher() {
 }
 
 func runSurgicalClean() {
+	if !ensureRunningSafety(false) {
+		return
+	}
 	ui.PrintSection("Surgical 429 Quota & Session Reset")
 	fmt.Println("  This will clear corrupted token cache, DIPS, and cookies to resolve HTTP 429.")
 	fmt.Printf("  %s\n\n", lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("All project chats, workspaces, settings and keybindings are strictly PRESERVED."))

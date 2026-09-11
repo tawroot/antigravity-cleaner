@@ -1,5 +1,5 @@
 $ErrorActionPreference = "SilentlyContinue"
-$GithubBaseUrl = "https://github.com/tawroot/antigravity-cleaner/releases/download/v5.1.0"
+$GithubBaseUrl = "https://github.com/tawroot/antigravity-cleaner/releases/download/v5.1.1"
 $ExeName = "antigravity-cleaner-windows-amd64.exe"
 
 $HomePath = if ($IsWindows -or $env:OS -like "*Windows*") { $env:USERPROFILE } else { $env:HOME }
@@ -7,7 +7,7 @@ $InstallDir = Join-Path $HomePath ".antigravity\bin"
 $TargetFile = Join-Path $InstallDir "antigravity-cleaner.exe"
 
 Write-Host "====================================================" -ForegroundColor Cyan
-Write-Host "  ⚡ Antigravity Cleaner Toolkit Installer (v5.1.0)" -ForegroundColor Yellow
+Write-Host "  ⚡ Antigravity Cleaner Toolkit Installer (v5.1.1)" -ForegroundColor Yellow
 Write-Host "  ✨ Universal Support: Auto-detects ALL Antigravity Versions (1.x, 2.x, IDE & CLI)" -ForegroundColor Cyan
 Write-Host "====================================================" -ForegroundColor Cyan
 
