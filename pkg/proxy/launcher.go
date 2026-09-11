@@ -146,13 +146,8 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 
 		iconPath := filepath.Join(filepath.Dir(appPath), "icon.png")
 		if fi, err := os.Stat(iconPath); err != nil || fi.Size() < 100 {
-			// Try ~/.local/share/icons/antigravity.png
 			userIcon := filepath.Join(home, ".local", "share", "icons", "antigravity.png")
-			if fi2, err2 := os.Stat(userIcon); err2 == nil && fi2.Size() > 100 {
-				iconPath = userIcon
-			} else {
-				iconPath = "antigravity"
-			}
+			iconPath = EnsureDefaultIcon(userIcon)
 		}
 
 		content := fmt.Sprintf(`[Desktop Entry]
