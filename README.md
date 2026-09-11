@@ -1,10 +1,10 @@
-# ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.1.0)
+# ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.1.1)
 
 <div align="center">
   <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
   <br>
   
-  [![Version](https://img.shields.io/badge/Version-5.1.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Version](https://img.shields.io/badge/Version-5.1.1-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go Report](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
   [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
   [![Benchmark](https://img.shields.io/badge/Bytecode_Scan-1.9_GB%2Fs-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
@@ -159,6 +159,9 @@ ag-cleaner launch
 
 # Reset HTTP 429 Quota without losing conversation history
 ag-cleaner clean
+
+# Terminate all running Antigravity & language_server zombie processes
+ag-cleaner kill
 
 # Generate desktop shortcut with pre-configured proxy
 ag-cleaner create-launcher
