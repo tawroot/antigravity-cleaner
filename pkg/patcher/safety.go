@@ -26,24 +26,28 @@ func IsAntigravityRunning() bool {
 	}
 
 	// Linux / macOS
-	out, err := exec.Command("pgrep", "-f", "language_server").Output()
+	out, err := exec.Command("pgrep", "-a", "-f", "language_server").Output()
 	if err == nil {
 		lines := strings.Split(strings.TrimSpace(string(out)), "\n")
 		for _, l := range lines {
-			l = strings.TrimSpace(l)
-			if l != "" && l != selfPID {
+			parts := strings.Fields(l)
+			if len(parts) > 0 && parts[0] != selfPID {
 				return true
 			}
 		}
 	}
 
-	out2, err2 := exec.Command("pgrep", "-f", "antigravity").Output()
+	out2, err2 := exec.Command("pgrep", "-a", "-f", "antigravity").Output()
 	if err2 == nil {
 		lines := strings.Split(strings.TrimSpace(string(out2)), "\n")
 		for _, l := range lines {
-			l = strings.TrimSpace(l)
-			if l != "" && l != selfPID {
-				return true
+			parts := strings.Fields(l)
+			if len(parts) > 1 {
+				pid := parts[0]
+				cmd := strings.Join(parts[1:], " ")
+				if pid != selfPID && !strings.Contains(cmd, "antigravity-cleaner") && !strings.Contains(cmd, "ag-cleaner") {
+					return true
+				}
 			}
 		}
 	}

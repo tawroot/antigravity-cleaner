@@ -50,6 +50,8 @@ func FindLanguageServer() string {
 	home, _ := os.UserHomeDir()
 
 	candidates := []string{
+		filepath.Join(home, "Applications", "Antigravity", "resources", "bin", "language_server"),
+		filepath.Join(home, "Applications", "Antigravity-x64", "resources", "bin", "language_server"),
 		filepath.Join(home, "antigravity", "resources", "bin", "language_server"),
 		filepath.Join(home, "antigravity", "resources", "bin", "language_server.exe"),
 		"/usr/share/antigravity-ide/resources/bin/language_server",

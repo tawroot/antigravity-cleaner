@@ -14,6 +14,8 @@ func FindAntigravityExecutable() string {
 	home, _ := os.UserHomeDir()
 
 	candidates := []string{
+		filepath.Join(home, "Applications", "Antigravity", "antigravity"),
+		filepath.Join(home, "Applications", "Antigravity-x64", "antigravity"),
 		filepath.Join(home, "antigravity", "antigravity"),
 		filepath.Join(home, "antigravity", "antigravity.exe"),
 		"/usr/share/antigravity-ide/antigravity",

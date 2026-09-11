@@ -17,6 +17,9 @@ func FindIdeMainJs() string {
 	home, _ := os.UserHomeDir()
 
 	candidates := []string{
+		filepath.Join(home, "Applications", "Antigravity", "resources", "app", "out", "main.js"),
+		filepath.Join(home, "Applications", "Antigravity", "resources", "app", "main.js"),
+		filepath.Join(home, "Applications", "Antigravity-x64", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "antigravity", "resources", "app", "main.js"),
 		"/usr/share/antigravity-ide/resources/app/out/main.js",
