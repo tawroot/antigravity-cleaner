@@ -1,8 +1,19 @@
+# Binaries and build outputs
+bin/
+dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
 
 # User Data & Backups
 Data/
 *.log
+!docs/test-reports/*.log
 *.tmp
+*.agybak
+*.old
 
 # Editor
 .vscode/
@@ -11,3 +22,4 @@ Data/
 # OS
 Thumbs.db
 Desktop.ini
+.DS_Store

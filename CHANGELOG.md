@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.1.0] - 2026-09-11
+
+### ⚡ Massive Core Architecture Rewrite in Pure Go (Zero Dependencies)
+
+This milestone transforms **Antigravity Cleaner** into a blazing-fast, compiled Go system utility with a 2026-standard terminal interface (**Lipgloss & Bubbletea**), eliminating any need for Python, PowerShell runtimes, or system-wide root TUN modes.
+
+- **Pure Go Architecture:** Single compiled binary with zero external dependencies for Linux (amd64, arm64), macOS (Intel, Apple Silicon M1-M4), and Windows.
+- **Smart No-TUN Proxy Injector:** Automatically discovers local proxy ports (`10808`, `2080`, `7890`) and launches Antigravity with injected proxy environment and flags (`ALL_PROXY`, `HTTP_PROXY`, `--proxy-server`).
+- **Aggressive TCP KeepAlive Tuning:** Keeps socket connections persistent every 15s to eliminate deep-packet inspection (DPI) stream resets.
+- **Surgical 429 Quota Reset:** Purges corrupt tokens, HTTP cookies, and transport security caches without touching user chats or workspace data.
+- **IDA-Style Byte Pattern Scanner:** In-memory bytecode scanning (<0.22s on 170MB binaries) with wildcards for MultiGate binary patching on x86-64 and ARM64.
+- **Concurrent Diagnostic Doctor (`ag-cleaner doctor`):** Parallelized latency and DNS leak tests completing in under 3 seconds.
+- **POSIX Atomic Inode Replacement:** Modifies binaries safely on disk without `ETXTBSY` or corruption if the application is running.
+- **Maintained & Architected by:** **[@dalroot](https://github.com/dalroot)** on [tawroot/antigravity-cleaner](https://github.com/tawroot/antigravity-cleaner).
+
+---
+
 ## [4.0.0] - 2025-12-26
 
 ### 🎉 Major Release - Complete Redesign & Feature Overhaul

@@ -1,0 +1,74 @@
+=== Antigravity Cleaner v5.1.0 Live System Execution Log ===
+Host OS: Linux x86_64
+Execution Timestamp: 2026-09-11T03:53:00Z
+Privacy & Security Check: Local usernames & sensitive paths SANITIZED.
+
+[STAGE 1: Pre-Audit Diagnostics]
+$ ag-cleaner doctor
+╭────────────────────────────────────────────────────────────────────────────╮
+│  🩺 Antigravity Cleaner — Health & Connectivity Audit                      │
+│ ────────────────────────────────────────────────────────────────────────   │
+│                                                                            │
+│  Antigravity IDE         READY   Installed & Detected                      │
+│  Core Engine             CHECK   Official (Unpatched)                      │
+│  Proxy Connection        READY   Active on 127.0.0.1:10808 (v2ray / Xray)  │
+│  Google DNS              READY   Healthy (16 IPs resolved)                 │
+│  Cloud Code Service      READY   Connected (1311ms, Fast)                  │
+│  Gemini AI API           READY   Connected (2387ms, Moderate)              │
+│  Google Accounts         CHECK   Slow / Timed Out                          │
+│                                                                            │
+╰────────────────────────────────────────────────────────────────────────────╯
+   ACTION  Run with --verbose for detailed trace or run Option 1 to Auto-Fix.
+
+[STAGE 2: Surgical 429 Quota & Session Reset]
+$ ag-cleaner clean
+─── Surgical 429 Quota & Session Reset ───────────────────────────────────────────────────
+  This will clear corrupted token cache, DIPS, and cookies to resolve HTTP 429.
+  All project chats, workspaces, settings and keybindings are strictly PRESERVED.
+
+  Do you want to proceed? (y/N): y
+    OK   Reset Completed         → Cleaned 16 cache & session artifacts
+    - Cookies
+    - Cookies-journal
+    - DIPS
+    - DIPS-wal
+    - TransportSecurity
+    - Trust Tokens
+    - Trust Tokens-journal
+    - SharedStorage
+    - SharedStorage-wal
+    - Network Persistent State
+    - app_storage.json
+    - blob_storage/
+    - DawnGraphiteCache/
+    - DawnWebGPUCache/
+    - GPUCache/
+    - Session Storage/
+
+[STAGE 3: Core MultiGate Binary Patch (POSIX Atomic Replacement)]
+$ ag-cleaner patch all
+─── Quick Auto-Fix ───────────────────────────────────────────────────
+    OK   Language Server         → Successfully patched language_server (language_server hasValidAuth=true (x64)) at offset 0x68d626a
+    OK   Desktop Launcher        → Created at $HOME/.local/share/applications/antigravity-notun.desktop
+
+[STAGE 4: Post-Patch Verification]
+$ ag-cleaner doctor
+╭────────────────────────────────────────────────────────────────────────────╮
+│  🩺 Antigravity Cleaner — Health & Connectivity Audit                      │
+│ ────────────────────────────────────────────────────────────────────────   │
+│                                                                            │
+│  Antigravity IDE         READY   Installed & Detected                      │
+│  Core Engine             READY   Unlocked (Patched)                        │
+│  Proxy Connection        READY   Active on 127.0.0.1:10808 (v2ray / Xray)  │
+│  Google DNS              READY   Healthy (16 IPs resolved)                 │
+│  Cloud Code Service      READY   Connected (1290ms, Fast)                  │
+│  Gemini AI API           READY   Connected (2110ms, Moderate)              │
+│  Google Accounts         READY   Connected (1820ms, Fast)                  │
+│                                                                            │
+╰────────────────────────────────────────────────────────────────────────────╯
+   ONLINE  System is optimized. You can launch Antigravity with Smart Proxy!
+
+[SUMMARY]
+- Core unlocked successfully without process crash or disconnect.
+- 16 corrupt token/cache artifacts purged; user chats 100% preserved.
+- Smart proxy routed directly without TUN overhead.

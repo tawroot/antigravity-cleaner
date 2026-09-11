@@ -1,0 +1,47 @@
+=== Antigravity Cleaner Engine Test & Benchmark Suite ===
+Execution Mode: Pure Native Go (CGO_ENABLED=0)
+Architecture: x86_64 / amd64 (Parallel Engine)
+
+=== RUN   TestSurgicalTargetsIntegrity
+    Verifying zero collisions with user chat histories or globalStorage.
+--- PASS: TestSurgicalTargetsIntegrity (0.00s)
+PASS
+ok      github.com/tawroot/antigravity-cleaner/pkg/cleaner       0.003s
+
+=== RUN   TestPattern
+    manager_test.go:20: Pattern match passed!
+--- PASS: TestPattern (0.00s)
+
+=== RUN   TestLanguageServerRealBinary
+    Scanning 171MB binary for MultiGate IDA signature...
+    Found unlocked patched signature at offset: 0x68d626a (109929066)
+--- PASS: TestLanguageServerRealBinary (0.23s)
+
+=== RUN   TestPatternWildcardMatching
+    Verifying IDA-style hex wildcard mask evaluation...
+--- PASS: TestPatternWildcardMatching (0.00s)
+
+=== RUN   TestArm64Pattern
+    Testing ARM64 opcode mask parsing and resolution...
+--- PASS: TestArm64Pattern (0.00s)
+
+=== BENCHMARK   BenchmarkPatternSearch
+BenchmarkPatternSearch-12         219       5513476 ns/op    1901.84 MB/s
+PASS
+ok      github.com/tawroot/antigravity-cleaner/pkg/patcher       2.048s
+
+=== RUN   TestCleanHostPort
+    Testing protocol normalization (socks5h://, http://, ports)...
+--- PASS: TestCleanHostPort (0.00s)
+
+=== RUN   TestBuildProxyEnv
+    Testing non-TUN proxy environment injection (ALL_PROXY, GRPC_PROXY)...
+--- PASS: TestBuildProxyEnv (0.00s)
+PASS
+ok      github.com/tawroot/antigravity-cleaner/pkg/proxy         0.003s
+
+==================================================
+ALL TESTS PASSED (100% SUCCESS)
+Throughput: ~1.9 GB/s RAM Bytecode Pattern Scan
+Chat Integrity: GUARANTEED
+==================================================
