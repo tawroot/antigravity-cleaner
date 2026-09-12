@@ -23,7 +23,7 @@
   [![Security](https://img.shields.io/badge/Privacy-100%25_Offline_%7C_Zero--Tracking-success?style=for-the-badge)]()
 </div>
 
-> *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇷🇺 Russia, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
+> *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
 > — **@dalroot**
 
 ---
