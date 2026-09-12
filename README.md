@@ -36,7 +36,7 @@ Unlike conventional scripts that force users to route their entire operating sys
 Prefer a simple graphical interface? Download the standalone executable for your operating system from [Releases](https://github.com/tawroot/antigravity-cleaner/releases) and simply **double-click** to run. No terminal commands, no Python runtime, and zero external dependencies!
 
 <div align="center">
-  <img src="assets/shot.jpg" alt="Antigravity Retro KeyGen GUI (Win95 Style)" width="520">
+  <img src="assets/shot.jpg" alt="Antigravity Retro KeyGen GUI (Win95 Style)" width="440">
   <br>
   <sub><em>Authentic Windows 95/98 style Patcher with live demoscene starfield, Web Audio 8-bit sound effects & 1-click Auto-Fix.</em></sub>
 </div>
