@@ -1,3 +1,14 @@
+<p align="center">
+  <a href="README.md">🇺🇸 English</a> •
+  <a href="README.fa.md">🇮🇷 فارسی</a> •
+  <a href="README.ar.md">🇸🇦 العربية</a> •
+  <a href="README.ru.md">🇷🇺 Русский</a> •
+  <a href="README.es.md">🇪🇸 Español</a> •
+  <a href="README.tr.md">🇹🇷 Türkçe</a> •
+  <a href="README.zh.md">🇨🇳 简体中文</a> •
+  <a href="README.ur.md">🇵🇰 اردو</a>
+</p>
+
 # ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.2.0)
 
 <div align="center">
@@ -9,16 +20,17 @@
   [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
   [![Benchmark](https://img.shields.io/badge/Bytecode_Scan-1.9_GB%2Fs-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
   [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-brightgreen.svg?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner)
-  [![Security](https://img.shields.io/badge/Telemetry-Zero%20(100%25%20Offline)-success?style=for-the-badge)]()
+  [![Security](https://img.shields.io/badge/Privacy-100%25_Offline_%7C_Zero--Tracking-success?style=for-the-badge)]()
 </div>
 
-> *Dedicated to developers in Iran, Cuba, Syria, and restricted regions navigating digital sanctions and censorship. Access to AI and development tools is a fundamental human right.*
+> *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇷🇺 Russia, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
+> — **@dalroot**
 
 ---
 
 ## ⚡ What is Antigravity Cleaner?
 
-**Antigravity Cleaner** is an enterprise-grade, high-performance systems utility engineered in **pure Go** with a 2026-standard terminal interface (**Lipgloss & Bubbletea**). It completely solves region blocking, account eligibility barriers, 429 quota exhaustion, and streaming connection drops for:
+**Antigravity Cleaner** is an enterprise-grade, high-performance systems utility engineered in **pure Go** with both an authentic **1-Click Retro KeyGen GUI** and a 2026-standard terminal dashboard (**Lipgloss & Bubbletea**). It completely solves region blocking, account eligibility barriers, 429 quota exhaustion, and streaming connection drops for:
 - **Google Antigravity 2.x**
 - **Antigravity IDE**
 - **Antigravity CLI (`agy`)**
@@ -50,6 +62,20 @@ Prefer a simple graphical interface? Download the standalone executable for your
 | 🍎 **macOS** (Intel) | [**`antigravity-cleaner-darwin-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `./antigravity-cleaner-darwin-amd64` |
 | 🐧 **Linux** (x86_64) | [**`antigravity-cleaner-linux-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `ag-cleaner gui` |
 | 🐧 **Linux** (ARM64) | [**`antigravity-cleaner-linux-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `ag-cleaner gui` |
+
+<br>
+
+### 📑 Quick Navigation
+- [💾 1-Click Graphical Patcher](#-1-click-retro-keygen-gui-zero-terminal-required)
+- [🚀 Quick CLI Install (One-Liner)](#-quick-install-one-liner)
+- [💻 2026 Visual Dashboard (TUI)](#-2026-visual-dashboard-tui)
+- [🛠️ CLI Subcommands & Diagnostics](#️-cli-subcommands)
+- [🏛️ System Architecture](#️-system-architecture)
+- [🛡️ Security, Privacy & Integrity Guarantee](#️-security-privacy--integrity-guarantee)
+- [📊 Benchmarks & Verified Test Reports](#-benchmarks--verified-test-reports)
+- [🥊 Comparison Matrix](#-comparison-matrix)
+- [🔧 Troubleshooting Matrix](#-troubleshooting-matrix)
+- [👥 Credits & Attribution](#-credits--attribution)
 
 ---
 
@@ -254,6 +280,6 @@ make release
 ## 👥 Credits & Attribution
 
 - **Lead Architect & Maintainer:** **[@dalroot](https://github.com/dalroot)**
-- **Co-Pilot & Pair Programming:** **Antigravity AI (Google DeepMind)**
+- **Co-Pilot & Pair Programming:** **Antigravity AI (Google DeepMind)** — *Crafted in creative pair-programming using Google's own AI agent to liberate Google's developer tools for restricted coders worldwide!* 🤖
 - **License:** GNU General Public License v3.0 (GPL-3.0)
-- Dedicated to uncensored technology and open-source accessibility worldwide.
+- Dedicated to uncensored technology, open-source accessibility, and developer freedom everywhere.
