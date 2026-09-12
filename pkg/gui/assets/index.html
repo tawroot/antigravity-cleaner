@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Antigravity Patcher v5.1 - by dalroot</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+      font-size: 11px;
+    }
+
+    body {
+      background-color: #c0c0c0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+      padding: 3px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Classic Windows 95 Dialog Window */
+    .win95-window {
+      width: 100%;
+      height: 100%;
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #ffffff #808080 #808080 #ffffff;
+      padding: 3px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Windows 95 Title Bar */
+    .title-bar {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      padding: 3px 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .title-bar-text {
+      color: #ffffff;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .title-bar-controls {
+      display: flex;
+      gap: 2px;
+    }
+
+    .close-btn {
+      width: 16px;
+      height: 14px;
+      background: #c0c0c0;
+      border: 1px solid;
+      border-color: #ffffff #000000 #000000 #ffffff;
+      color: #000;
+      font-size: 9px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .close-btn:active {
+      border-color: #000000 #ffffff #ffffff #000000;
+      padding: 1px 0 0 1px;
+    }
+
+    /* Window Content Body */
+    .window-body {
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Top Retro Demoscene Box */
+    .graphic-box {
+      width: 100%;
+      height: 110px;
+      background: #000000;
+      border: 2px solid;
+      border-color: #808080 #ffffff #ffffff #808080;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #retroCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-overlay {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .dalroot-logo {
+      font-size: 28px;
+      font-weight: 900;
+      font-family: Impact, "Arial Black", sans-serif;
+      letter-spacing: 3px;
+      color: #ffff00;
+      text-shadow: 2px 2px #ff0000, 4px 4px #000080;
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      font-size: 10px;
+      color: #00ffea;
+      font-family: monospace;
+      font-weight: bold;
+      letter-spacing: 1px;
+      background: rgba(0,0,0,0.6);
+      padding: 1px 6px;
+      margin-top: 3px;
+    }
+
+    /* Form Fields Section */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .field-label {
+      color: #000;
+      font-size: 11px;
+    }
+
+    .field-input {
+      width: 100%;
+      height: 23px;
+      background: #ffffff;
+      border: 2px solid;
+      border-color: #808080 #ffffff #ffffff #808080;
+      padding: 2px 6px;
+      color: #000000;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      font-weight: bold;
+      outline: none;
+    }
+
+    .field-input.status-box {
+      background: #000000;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      letter-spacing: 0.5px;
+      font-size: 10.5px;
+    }
+
+    /* Classic Beveled Buttons */
+    .buttons-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 5px;
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px solid #808080;
+      box-shadow: 0 -1px 0 #ffffff;
+    }
+
+    .win95-btn {
+      flex: 1;
+      height: 26px;
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #ffffff #000000 #000000 #ffffff;
+      color: #000000;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      outline: 1px dotted transparent;
+      outline-offset: -4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .win95-btn:active {
+      border-color: #000000 #ffffff #ffffff #000000;
+      padding: 2px 0 0 2px;
+    }
+
+    .win95-btn:focus {
+      outline: 1px dotted #000;
+    }
+
+    .win95-btn:disabled {
+      color: #808080;
+      cursor: not-allowed;
+    }
+
+    /* Bottom Scroller / Credits */
+    .statusbar {
+      margin-top: 4px;
+      height: 20px;
+      border: 1px solid;
+      border-color: #808080 #ffffff #ffffff #808080;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      font-size: 10px;
+      color: #000;
+      background: #c0c0c0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-text {
+      animation: marquee 14s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Windows 95 KeyGen Window -->
+  <div class="win95-window">
+    
+    <!-- Titlebar -->
+    <div class="title-bar">
+      <div class="title-bar-text">
+        <span>💾</span> Antigravity PATCH v5.1 - [dalroot]
+      </div>
+      <div class="title-bar-controls">
+        <div class="close-btn" onclick="soundBeep(400)">_</div>
+        <div class="close-btn" onclick="actionExit()">✕</div>
+      </div>
+    </div>
+
+    <div class="window-body">
+
+      <!-- Top Demoscene Graphic Box -->
+      <div class="graphic-box">
+        <canvas id="retroCanvas"></canvas>
+        <div class="logo-overlay">
+          <div class="dalroot-logo">DALROOT</div>
+          <div class="logo-sub">&bull; ANTIGRAVITY FREEDOM TOOLKIT &bull;</div>
+        </div>
+      </div>
+
+      <!-- Auto-Detected Installation Section -->
+      <div class="field-group">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <label class="field-label">Target Application:</label>
+          <span id="detectedBadge" style="color:#008000; font-weight:bold; font-size:10px;">✔ [ AUTO-DETECTED ]</span>
+        </div>
+        <input type="text" class="field-input" id="targetApp" value="Detecting Antigravity..." readonly style="background:#f0f0f0; color:#000080;">
+      </div>
+
+      <!-- Installation Path Box (Auto-Detected) -->
+      <div class="field-group">
+        <label class="field-label">Target File Path:</label>
+        <input type="text" class="field-input" id="pathInput" value="Searching system..." readonly style="background:#f0f0f0; color:#333;">
+      </div>
+
+      <!-- Step-by-Step Guidance / Status Output Box -->
+      <div class="field-group">
+        <label class="field-label">Status & Next Step:</label>
+        <input type="text" class="field-input status-box" id="statusOutput" value="READY: Click [ Auto-Fix ] to unlock 4 targets & proxy" readonly>
+      </div>
+
+      <!-- Privacy & Trust Indicator -->
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:#005500; font-weight:bold; padding:1px 2px;">
+        <span>🔒 100% Offline & Zero-Track</span>
+        <span style="color:#000080;">🛡️ GPL-3.0 Auditable</span>
+      </div>
+
+      <!-- Classic Buttons Row with Restore Button -->
+      <div class="buttons-row">
+        <button class="win95-btn" id="btnPatch" onclick="actionPatch()" title="Full Auto-Fix: Core, CLI, IDE & VS Code + Smart Proxy">Auto-Fix</button>
+        <button class="win95-btn" id="btnLaunch" onclick="actionLaunch()" title="Start Antigravity with injected proxy">Launch</button>
+        <button class="win95-btn" id="btnReset" onclick="actionReset()" title="Flush 429 tokens without chat loss">Reset 429</button>
+        <button class="win95-btn" id="btnRestore" onclick="actionRestore()" title="Revert to original .agybak backup">Restore</button>
+        <button class="win95-btn" id="btnDoctor" onclick="actionDoctor()" title="Audit connection & proxy health">Doctor</button>
+        <button class="win95-btn" id="btnExit" onclick="actionExit()" title="Close application">Exit</button>
+      </div>
+
+      <!-- Classic Statusbar -->
+      <div class="statusbar">
+        <span class="marquee-text">&bull;&bull;&bull; 🔒 100% OFFLINE & ZERO-TRACK &bull;&bull;&bull; NO TELEMETRY &bull;&bull;&bull; ANTIGRAVITY PATCHER 5.2 BY DALROOT &bull;&bull;&bull; ZERO-TUN PROXY INJECTION &bull;&bull;&bull; OPEN-SOURCE & SAFE &bull;&bull;&bull;</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // --- Web Audio 8-bit Beep on Click ---
+    let audioCtx = null;
+    function soundBeep(freq = 600, duration = 0.08) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // --- Retro Classic Copper / Raster Starfield Canvas ---
+    const canvas = document.getElementById('retroCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function initCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      stars = [];
+      for (let i = 0; i < 60; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          speed: 1 + Math.random() * 3,
+          color: ['#fff', '#00ffea', '#ff007f', '#ffff00'][Math.floor(Math.random() * 4)]
+        });
+      }
+    }
+    initCanvas();
+    window.addEventListener('resize', initCanvas);
+
+    function drawRetroCanvas() {
+      ctx.fillStyle = '#050510';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let s of stars) {
+        s.x -= s.speed;
+        if (s.x < 0) s.x = canvas.width;
+        ctx.fillStyle = s.color;
+        ctx.fillRect(s.x, s.y, 2, 2);
+      }
+
+      requestAnimationFrame(drawRetroCanvas);
+    }
+    drawRetroCanvas();
+
+    // --- DOM Elements ---
+    const statusBox = document.getElementById('statusOutput');
+    const pathInput = document.getElementById('pathInput');
+    const targetApp = document.getElementById('targetApp');
+    const detectedBadge = document.getElementById('detectedBadge');
+
+    function setStatus(text, color = '#00ff00') {
+      statusBox.value = text;
+      statusBox.style.color = color;
+    }
+
+    // Auto-Detect on Load
+    async function loadDetection() {
+      try {
+        const res = await fetch('/api/detect');
+        const data = await res.json();
+        targetApp.value = data.app || 'Google Antigravity 2.x';
+        pathInput.value = data.path || 'Not detected (custom location)';
+        if (data.detected) {
+          detectedBadge.innerText = '✔ [ AUTO-DETECTED ]';
+          detectedBadge.style.color = '#008000';
+          setStatus('READY: Click [ Auto-Fix ] to unlock 4 targets & proxy', '#00ff00');
+        } else {
+          detectedBadge.innerText = '⚠️ [ NOT FOUND ]';
+          detectedBadge.style.color = '#c00000';
+          setStatus('NOTICE: Antigravity path not found automatically', '#ffff00');
+        }
+      } catch (err) {
+        targetApp.value = 'Google Antigravity 2.x (IDE & Language Server)';
+        pathInput.value = '~/Applications/Antigravity/resources/bin/language_server';
+        setStatus('READY: Click [ Auto-Fix ] to unlock 4 targets & proxy', '#00ff00');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', loadDetection);
+
+    // Patch Action with step guidance
+    async function actionPatch() {
+      soundBeep(880, 0.12);
+      setStatus('STEP 1/3: Patching 4 Targets (Core, CLI, IDE, VS Code)...', '#ffff00');
+      try {
+        const res = await fetch('/api/patch', { method: 'POST' });
+        const data = await res.json();
+        soundBeep(1174, 0.18);
+        if (data.success) {
+          setStatus('✔ STEP 2/3: 4 Targets Patched & Proxy Ready! Click [ Launch ]', '#00ff00');
+        } else {
+          setStatus('ERROR: ' + (data.message || 'Patch failed'), '#ff0055');
+        }
+      } catch (err) {
+        setStatus('ERROR: Communication failure', '#ff0055');
+      }
+    }
+
+    // Launch Action
+    async function actionLaunch() {
+      soundBeep(659, 0.1);
+      setStatus('🚀 LAUNCHING: Spawning Antigravity with smart proxy...', '#00ffea');
+      try {
+        const res = await fetch('/api/launch', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          setStatus('🚀 RUNNING: Antigravity is active with injected proxy.', '#00ffea');
+        } else {
+          setStatus('ERROR: ' + (data.message || 'Launch failed'), '#ff0055');
+        }
+      } catch (err) {
+        setStatus('ERROR: Communication failure', '#ff0055');
+      }
+    }
+
+    // Reset 429 Action
+    async function actionReset() {
+      soundBeep(523, 0.1);
+      setStatus('🧹 CLEANING: Clearing corrupted quota & token cache...', '#ffff00');
+      try {
+        const res = await fetch('/api/reset', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          setStatus('🧹 FLUSHED: 429 quota tokens reset. Chats preserved.', '#00ff00');
+        } else {
+          setStatus('ERROR: ' + (data.message || 'Reset failed'), '#ff0055');
+        }
+      } catch (err) {
+        setStatus('ERROR: Communication failure', '#ff0055');
+      }
+    }
+
+    // Restore Action
+    async function actionRestore() {
+      soundBeep(440, 0.15);
+      setStatus('↺ RESTORING: Restoring clean original backups...', '#ffff00');
+      try {
+        const res = await fetch('/api/restore', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          setStatus('↺ RESTORED: Reverted to original clean backup (.agybak).', '#00ff00');
+        } else {
+          setStatus('ERROR: ' + (data.message || 'Restore failed'), '#ff0055');
+        }
+      } catch (err) {
+        setStatus('ERROR: Communication failure', '#ff0055');
+      }
+    }
+
+    // Doctor Action
+    async function actionDoctor() {
+      soundBeep(784, 0.1);
+      setStatus('🩺 AUDITING: Running system & proxy diagnostics...', '#ffff00');
+      try {
+        const res = await fetch('/api/doctor', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          setStatus('🩺 HEALTHY: Cloud Code, DNS & Gemini APIs connected.', '#00ff00');
+        } else {
+          setStatus('WARN: Issues found. Review system logs.', '#ffff00');
+        }
+      } catch (err) {
+        setStatus('ERROR: Diagnostics error', '#ff0055');
+      }
+    }
+
+    // Exit Action
+    async function actionExit() {
+      soundBeep(330, 0.2);
+      setStatus('CLOSED: Terminating application...', '#ffffff');
+      try {
+        fetch('/api/exit', { method: 'POST' });
+      } catch (e) {}
+      setTimeout(() => {
+        window.close();
+      }, 300);
+    }
+  </script>
+</body>
+</html>

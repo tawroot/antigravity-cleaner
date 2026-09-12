@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.0] - 2026-09-13
+
+### 💾 Retro KeyGen Desktop GUI & GitHub Actions Release Pipeline
+
+- **Cross-Platform Retro KeyGen Desktop GUI:** Authentic Windows 95/98 warez-style graphical patcher with beveled 3D controls, raster demoscene starfield, Web Audio 8-bit sound effects, and 1-click execution.
+- **Zero-Terminal Standalone Mode:** Automatically launches the GUI when double-clicked from file managers (Explorer / Finder / Desktop) without requiring any terminal interaction.
+- **Full 4-Target Auto-Fix:** One-click unlocking covers Core `language_server` MultiGate bytecode, `agy` CLI binary, IDE `main.js`, and VS Code Extension guard, combined with Zero-TUN smart proxy injection.
+- **Process Termination Shield:** Rewrote process termination logic to strictly exclude the cleaner process, GUI window, and helper processes, preventing self-termination during Auto-Fix.
+- **Automated GitHub Actions Releases (`release.yml`):** Fully automated CI/CD pipeline compiling standalone binaries for Linux (amd64/arm64), macOS (Intel/Apple Silicon), and Windows with automated SHA-256 checksums.
+
+---
+
 ## [5.1.1] - 2026-09-11
 
 ### 🛡️ Safety Guard: Session Disconnect Prevention

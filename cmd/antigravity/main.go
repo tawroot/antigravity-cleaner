@@ -6,19 +6,28 @@ import (
 	"os"
 
 	"github.com/charmbracelet/lipgloss"
+	"github.com/mattn/go-isatty"
 	"github.com/tawroot/antigravity-cleaner/pkg/cleaner"
 	"github.com/tawroot/antigravity-cleaner/pkg/doctor"
+	"github.com/tawroot/antigravity-cleaner/pkg/gui"
 	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
 	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
 	"github.com/tawroot/antigravity-cleaner/pkg/ui"
 )
 
-const Version = "5.1.1"
+const Version = "5.2.0"
 
 func main() {
 	if len(os.Args) > 1 {
 		handleSubcommand(os.Args[1], os.Args[2:])
 		return
+	}
+
+	// Auto-launch GUI if executed without a terminal (e.g. desktop icon / file manager double click)
+	if !isatty.IsTerminal(os.Stdin.Fd()) && !isatty.IsCygwinTerminal(os.Stdin.Fd()) {
+		if err := gui.Run(); err == nil {
+			return
+		}
 	}
 
 	keyStyle := lipgloss.NewStyle().
@@ -45,6 +54,7 @@ func main() {
 			{"6", "🧹 Surgical 429 Quota Reset (Preserves Chats & Settings)"},
 			{"7", "🩺 Run Antigravity Doctor (System & Connection Health)"},
 			{"8", "🔄 Restore Backups (.agybak)"},
+			{"9", "🖥️ Launch Retro GUI (Classic Win95 Patcher)"},
 			{"0", "🚪 Exit"},
 		}
 
@@ -79,11 +89,13 @@ func main() {
 		case "8":
 			runRestore()
 			ui.PromptKey()
+		case "9", "gui":
+			runGui()
 		case "0", "exit", "q":
 			fmt.Printf("\n  %s\n\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🦅 Farewell! Happy Coding with Antigravity."))
 			return
 		default:
-			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Invalid option. Please choose between 0-8."))
+			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Invalid option. Please choose between 0-9."))
 			ui.PromptKey()
 		}
 	}
@@ -122,6 +134,8 @@ func handleSubcommand(cmd string, args []string) {
 		fs.StringVar(&proxyURL, "proxy", "", "Custom proxy URL (e.g. socks5h://127.0.0.1:10808)")
 		_ = fs.Parse(args)
 		_ = proxy.LaunchAntigravityWithProxy("", proxyURL, fs.Args())
+	case "gui":
+		runGui()
 	case "clean":
 		runSurgicalClean()
 	case "kill":
@@ -133,7 +147,7 @@ func handleSubcommand(cmd string, args []string) {
 	case "version", "-v", "--version":
 		fmt.Printf("Antigravity Cleaner Toolkit v%s (@dalroot)\n", Version)
 	default:
-		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [doctor|patch|launch|clean|kill|create-launcher|about|version]\n", cmd)
+		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [gui|doctor|patch|launch|clean|kill|create-launcher|about|version]\n", cmd)
 		os.Exit(1)
 	}
 }
@@ -371,3 +385,12 @@ func runRestore() {
 		}
 	}
 }
+
+func runGui() {
+	ui.PrintSection("🖥️ Launching Retro Win95 KeyGen GUI")
+	fmt.Println("  Starting local GUI server and opening desktop window...")
+	if err := gui.Run(); err != nil {
+		ui.PrintStatus("FAIL", "GUI Error", err.Error())
+	}
+}
+

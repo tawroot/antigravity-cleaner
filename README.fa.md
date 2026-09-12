@@ -1,10 +1,10 @@
-# ⚡ آنتی‌گراویتی کلینر (Antigravity Cleaner) — جعبه‌ابزار آزادی هوش مصنوعی (نسخه ۵.۱.۰)
+# ⚡ آنتی‌گراویتی کلینر (Antigravity Cleaner) — جعبه‌ابزار آزادی هوش مصنوعی (نسخه ۵.۲.۰)
 
 <div align="center">
   <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
   <br>
   
-  [![Version](https://img.shields.io/badge/نسخه-5.1.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Version](https://img.shields.io/badge/نسخه-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
   [![پشتیبانی نسخه‌ها](https://img.shields.io/badge/پشتیبانی-تمام_نسخه‌های_انتی‌گراویتی-purple?style=for-the-badge)]()
   [![تست‌ها](https://img.shields.io/badge/تست‌ها-۱۰۰٪_موفق-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
@@ -18,11 +18,36 @@
 
 ## ⚡ آنتی‌گراویتی کلینر چیست؟
 
-**Antigravity Cleaner** یک ابزار سیستمی مدرن و فوق‌العاده سریع با زبان **Go** و رابط کاربری جذاب ترمینال سال ۲۰۲۶ (**Lipgloss & Bubbletea**) است که **به صورت کاملاً خودکار و هوشمند تمام نسخه‌های گوگل آنتی‌گراویتی (Antigravity 1.x / 2.x / محیط IDE / خط فرمان `agy` / اکستنشن VS Code)** را بدون نیاز به کانفیگ دستی شناسایی و قفل‌گشایی می‌کند:
+**Antigravity Cleaner** یک ابزار سیستمی مدرن و فوق‌العاده سریع با زبان **Go** است که هم دارای **رابط کاربری گرافیکی کلاسیک (Retro KeyGen GUI)** و هم رابط ترمینال سال ۲۰۲۶ (**Lipgloss**) می‌باشد. این ابزار **به صورت کاملاً خودکار و هوشمند تمام نسخه‌های گوگل آنتی‌گراویتی (Antigravity 1.x / 2.x / محیط IDE / خط فرمان `agy` / اکستنشن VS Code)** را بدون نیاز به تنظیم دستی شناسایی و قفل‌گشایی می‌کند:
 - **حل قطعی ارورهای ریجن و تحریم (Region Not Supported)**
 - **حل محدودیت کوتا و خطای ۴۲۹ (HTTP 429 Quota Exhausted)**
 - **جلوگیری از قطعی استریم چت در حین کار با تنظیم سوکت KeepAlive**
 - **تزریق مستقیم پروکسی لوکال بدون نیاز به VPN یا روت کل سیستم (No-TUN)**
+
+> 🔒 **تضمین امنیت، عدم رهگیری و ۱۰۰٪ آفلاین (Zero-Track Guarantee):**
+> آنتی‌گراویتی کلینر **کاملاً آفلاین روی لوکال‌هاست (`127.0.0.1`)** اجرا می‌شود. این ابزار **فاقد هرگونه تله‌متری، جمع‌آوری داده، لاگ از راه دور یا اتصال به سرور خارجی** است. کدهای پروژه، پرامپت‌ها و چت‌های شما هرگز خوانده یا ارسال نمی‌شوند. سورس‌کد پروژه کاملاً باز، شفاف و تحت لایسنس بین‌المللی GPL-3.0 قابل بررسی است.
+
+---
+
+## 💾 اجرای گرافیکی با یک دابل‌کلیک (بدون نیاز به ترمینال)
+
+اگر ترجیح می‌دهید بدون درگیر شدن با خط فرمان و دستورات ترمینال کار کنید، کافیست فایل نسخه سیستم‌عامل خود را از بخش [Releases گیت‌هاب](https://github.com/tawroot/antigravity-cleaner/releases) دانلود کرده و روی آن **دابل‌کلیک** کنید تا پنجره گرافیکی و خاطره‌انگیز پچر باز شود:
+
+<div align="center">
+  <img src="assets/shot.jpg" alt="پنجره گرافیکی رترو آنتی‌گراویتی پچر" width="520">
+  <br>
+  <sub><em>پچر گرافیکی کلاسیک طرح ویندوز ۹۵ با انیمیشن ستاره‌ای، افکت‌های صوتی نوستالژیک ۸-بیتی و پچ ۱-کلیکه تمام ۴ هدف.</em></sub>
+</div>
+
+<br>
+
+| سیستم‌عامل | لینک دانلود فایل مستقل (بدون نیاز به نصب) | نحوه اجرا |
+| :--- | :--- | :--- |
+| 🪟 **ویندوز** (۶۴ بیتی) | [**`antigravity-cleaner-windows-amd64.exe`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک روی فایل `.exe` (اجرای خودکار GUI) |
+| 🍎 **مک** (اپل سیلیکون M1 تا M4) | [**`antigravity-cleaner-darwin-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک یا اجرای مستقیم فایل |
+| 🍎 **مک** (اینتل) | [**`antigravity-cleaner-darwin-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک یا اجرای مستقیم فایل |
+| 🐧 **لینوکس** (x86_64) | [**`antigravity-cleaner-linux-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک یا دستور `ag-cleaner gui` |
+| 🐧 **لینوکس** (ARM64) | [**`antigravity-cleaner-linux-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک یا دستور `ag-cleaner gui` |
 
 ---
 

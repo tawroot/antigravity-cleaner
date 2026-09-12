@@ -55,23 +55,54 @@ func IsAntigravityRunning() bool {
 	return false
 }
 
-// KillAntigravityProcesses terminates active Antigravity and language_server instances
+// KillAntigravityProcesses terminates active Antigravity and language_server instances safely
 func KillAntigravityProcesses() (int, error) {
 	killedCount := 0
+	selfPID := os.Getpid()
 
 	if runtime.GOOS == "windows" {
 		_ = exec.Command("taskkill", "/F", "/IM", "language_server.exe").Run()
 		_ = exec.Command("taskkill", "/F", "/IM", "Antigravity.exe").Run()
-		_ = exec.Command("taskkill", "/F", "/IM", "antigravity.exe").Run()
-		time.Sleep(1 * time.Second)
+		time.Sleep(500 * time.Millisecond)
 		return 1, nil
 	}
 
-	// Linux / macOS: kill language_server and antigravity
-	_ = exec.Command("pkill", "-9", "-f", "language_server").Run()
-	_ = exec.Command("pkill", "-9", "-f", "antigravity").Run()
-	_ = exec.Command("pkill", "-9", "-f", "chrome-sandbox").Run()
-	time.Sleep(1 * time.Second)
+	// 1. Terminate language_server processes
+	outLS, _ := exec.Command("pgrep", "-f", "language_server").Output()
+	for _, pStr := range strings.Fields(string(outLS)) {
+		var pid int
+		if _, err := fmt.Sscanf(pStr, "%d", &pid); err == nil && pid != selfPID {
+			if p, err := os.FindProcess(pid); err == nil {
+				_ = p.Kill()
+				killedCount++
+			}
+		}
+	}
 
+	// 2. Terminate Antigravity IDE processes, strictly EXCLUDING our own cleaner toolkit and GUI browser
+	outAnti, _ := exec.Command("pgrep", "-a", "-f", "antigravity").Output()
+	lines := strings.Split(strings.TrimSpace(string(outAnti)), "\n")
+	for _, line := range lines {
+		parts := strings.Fields(line)
+		if len(parts) > 1 {
+			var pid int
+			if _, err := fmt.Sscanf(parts[0], "%d", &pid); err == nil && pid != selfPID {
+				cmd := strings.Join(parts[1:], " ")
+				// Strictly ignore our own cleaner process and the patcher GUI window
+				if strings.Contains(cmd, "antigravity-cleaner") ||
+					strings.Contains(cmd, "ag-cleaner") ||
+					strings.Contains(cmd, "antigravity-patcher") ||
+					strings.Contains(cmd, "antigravity-gui") {
+					continue
+				}
+				if p, err := os.FindProcess(pid); err == nil {
+					_ = p.Kill()
+					killedCount++
+				}
+			}
+		}
+	}
+
+	time.Sleep(500 * time.Millisecond)
 	return killedCount, nil
 }

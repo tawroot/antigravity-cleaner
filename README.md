@@ -1,10 +1,10 @@
-# ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.1.1)
+# ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.2.0)
 
 <div align="center">
   <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="85%">
   <br>
   
-  [![Version](https://img.shields.io/badge/Version-5.1.1-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Version](https://img.shields.io/badge/Version-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go Report](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
   [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
   [![Benchmark](https://img.shields.io/badge/Bytecode_Scan-1.9_GB%2Fs-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
@@ -25,6 +25,31 @@
 - **Official VS Code Extension (`google.google-antigravity`)**
 
 Unlike conventional scripts that force users to route their entire operating system through a heavy, root-permission **TUN Mode (VPN)**, Antigravity Cleaner introduces an automated **No-TUN Smart Proxy Injector** that routes Antigravity traffic directly to local proxies (Xray, Clash, NekoBox, Hiddify) with zero system overhead.
+
+> 🔒 **100% Offline & Zero-Track Guarantee:**
+> Antigravity Cleaner operates **100% locally on `127.0.0.1`**. It contains **ZERO telemetry, ZERO analytics, and ZERO remote network requests**. Your source code, API keys, and chats are never uploaded or tracked. Fully open-source and auditable under GPL-3.0.
+
+---
+
+## 💾 1-Click Retro KeyGen GUI (Zero Terminal Required)
+
+Prefer a simple graphical interface? Download the standalone executable for your operating system from [Releases](https://github.com/tawroot/antigravity-cleaner/releases) and simply **double-click** to run. No terminal commands, no Python runtime, and zero external dependencies!
+
+<div align="center">
+  <img src="assets/shot.jpg" alt="Antigravity Retro KeyGen GUI (Win95 Style)" width="520">
+  <br>
+  <sub><em>Authentic Windows 95/98 style Patcher with live demoscene starfield, Web Audio 8-bit sound effects & 1-click Auto-Fix.</em></sub>
+</div>
+
+<br>
+
+| Operating System | Standalone Binary (Direct Download) | Mode |
+| :--- | :--- | :--- |
+| 🪟 **Windows** (64-bit) | [**`antigravity-cleaner-windows-amd64.exe`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click `.exe` (opens GUI automatically) |
+| 🍎 **macOS** (Apple Silicon M1–M4) | [**`antigravity-cleaner-darwin-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `./antigravity-cleaner-darwin-arm64` |
+| 🍎 **macOS** (Intel) | [**`antigravity-cleaner-darwin-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `./antigravity-cleaner-darwin-amd64` |
+| 🐧 **Linux** (x86_64) | [**`antigravity-cleaner-linux-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `ag-cleaner gui` |
+| 🐧 **Linux** (ARM64) | [**`antigravity-cleaner-linux-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `ag-cleaner gui` |
 
 ---
 
@@ -157,6 +182,9 @@ Run `ag-cleaner doctor` for a non-intimidating, high-aesthetic health card:
 ```bash
 # Launch interactive menu
 ag-cleaner
+
+# Launch Retro KeyGen GUI (Classic Win95 Desktop Window)
+ag-cleaner gui
 
 # Health & latency diagnostics (clean card)
 ag-cleaner doctor

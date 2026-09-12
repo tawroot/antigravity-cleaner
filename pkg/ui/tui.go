@@ -84,6 +84,7 @@ func PrintBanner(version string) {
 		version,
 		lipgloss.NewStyle().Foreground(ColorMuted).Render(" | @dalroot"))
 	fmt.Printf("  %s\n", lipgloss.NewStyle().Bold(true).Foreground(ColorSuccess).Render("✔ Universal Auto-Detection: Supports ALL Antigravity Versions (1.x, 2.x, IDE & CLI)"))
+	fmt.Printf("  %s\n", lipgloss.NewStyle().Foreground(ColorPrimary).Render("🔒 100% Offline & Zero-Track: Zero telemetry, zero analytics, completely local & safe"))
 	fmt.Printf("  %s\n\n", StyleAuthor.Render("Crafted in creative pair-programming with Antigravity AI (Google DeepMind)"))
 }
 
