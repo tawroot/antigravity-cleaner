@@ -759,3 +759,172 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================
+   Freedom Banner & Country Badges
+   ======================================== */
+.freedom-banner {
+  margin: 60px auto 40px;
+  padding: 40px;
+  max-width: 1080px;
+  background: linear-gradient(135deg, rgba(250, 35, 59, 0.08) 0%, rgba(20, 20, 25, 0.8) 100%);
+  border: 1px solid rgba(250, 35, 59, 0.25);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.freedom-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.freedom-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(250, 35, 59, 0.15);
+  border: 1px solid rgba(250, 35, 59, 0.35);
+  color: var(--primary-hover);
+  padding: 6px 14px;
+  border-radius: 980px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.freedom-header h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.freedom-header p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-bottom: 28px;
+}
+
+.country-flags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.country-badge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.country-badge:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(250, 35, 59, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(250, 35, 59, 0.15);
+}
+
+.country-badge .c-flag {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.country-badge .c-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.badge-status {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #00ff9f;
+  background: rgba(0, 255, 159, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 159, 0.25);
+  letter-spacing: 0.02em;
+}
+
+.freedom-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.freedom-quote {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-style: italic;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.freedom-quote strong {
+  color: var(--text-primary);
+  font-style: normal;
+}
+
+.freedom-cta-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   GUI Showcase Card
+   ======================================== */
+.gui-showcase-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+  padding: 40px;
+  margin: 60px auto;
+  max-width: 1100px;
+}
+
+@media (max-width: 900px) {
+  .gui-showcase-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+
+.gui-preview-img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 20px rgba(250, 35, 59, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.gui-preview-img:hover {
+  transform: scale(1.02);
+}

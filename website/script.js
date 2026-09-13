@@ -37,19 +37,19 @@ const translations = {
         cta_title: "Ready to Fix Your IDE?", cta_desc: "Download now and solve installation errors in seconds.",
         download_now: "Download Now", view_on_github: "View on GitHub",
 
-        // Campaign
-        campaign_badge: "🚀 FUNDING CAMPAIGN", campaign_title: "Fund Antigravity Cleaner v5.0",
-        campaign_desc: "Help us build the next generation with AI-powered cleaning, advanced automation, and enterprise features.",
-        campaign_raised: "raised", campaign_goal: "Goal:", campaign_backers: "Backers", campaign_days: "Days Left", campaign_version: "Target Version",
-        campaign_features_title: "What's Coming in v5.0?",
-        feature_ai: "AI-Powered Cleaning", feature_ai_desc: "Smart detection and removal",
-        feature_auto: "Auto-Scheduler", feature_auto_desc: "Automated maintenance tasks",
-        feature_enterprise: "Enterprise Tools", feature_enterprise_desc: "Fleet management & reporting",
-        feature_ui: "Modern GUI", feature_ui_desc: "Beautiful desktop interface",
-        campaign_support: "Support v5.0", campaign_discuss: "Join Discussion",
-        campaign_note: "💡 All donations go directly to development. We accept BTC, ETH, USDT, and more.",
-        backer_perks_title: "🎁 Backer Benefits",
-        perk_support: "Priority Support", perk_feature: "Feature Requests", perk_early: "Early Access to v5.0", perk_credit: "Credits in Release Notes"
+        // Freedom & Region Bypass
+        freedom_badge: "🌍 UNIVERSAL AI FREEDOM & REGION BYPASS",
+        freedom_title: "Are you locked out of Antigravity IDE & AI Tools?",
+        freedom_desc: "Geographical 403 blocks and unfair digital sanctions shouldn't hold back passionate developers. Antigravity Cleaner cleans regional lock tokens, bypasses network restrictions, and restores your sovereign right to code.",
+        status_bypassed: "Bypassed",
+        freedom_quote: "Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders.",
+        gui_badge: "🎨 RETRO KEYGEN DESKTOP INTERFACE",
+        gui_title: "Powerful Diagnostics, Timeless Retro Aesthetic",
+        gui_desc: "A fully offline standalone GUI built for developers who appreciate classic keygen design, chiptune audio, and one-click diagnostics.",
+        gui_f1: "1-Click Automatic Repair & Bypass",
+        gui_f2: "100% Offline & Telemetry-Free",
+        gui_f3: "Built-in 8-Bit Chiptune Synthesizer",
+        gui_f4: "Session & Credential Preservation"
     },
     fa: {
         home: "خانه", features: "ویژگی‌ها", download: "دانلود", pricing: "تعرفه‌ها", blog: "وبلاگ", faq: "سوالات", get_app: "دانلود برنامه",
@@ -88,19 +88,19 @@ const translations = {
         cta_title: "آماده رفع مشکلات IDE خود هستید؟", cta_desc: "همین حالا دانلود کنید و خطاهای نصب را در چند ثانیه حل کنید.",
         download_now: "دانلود فوری", view_on_github: "مشاهده در گیت‌هاب",
 
-        // Campaign
-        campaign_badge: "🚀 کمپین تامین مالی", campaign_title: "حمایت از نسخه ۵.۰ آنتی‌گرویتی",
-        campaign_desc: "به ما کمک کنید نسل بعدی را با پاکسازی هوشمند AI، اتوماسیون پیشرفته و امکانات سازمانی بسازیم.",
-        campaign_raised: "جمع‌آوری شده", campaign_goal: "هدف:", campaign_backers: "حامیان", campaign_days: "روز باقی‌مانده", campaign_version: "نسخه هدف",
-        campaign_features_title: "چه چیزی در نسخه ۵.۰ می‌آید؟",
-        feature_ai: "پاکسازی هوشمند AI", feature_ai_desc: "تشخیص و حذف هوشمند",
-        feature_auto: "زمان‌بند خودکار", feature_auto_desc: "وظایف نگهداری خودکار",
-        feature_enterprise: "ابزارهای سازمانی", feature_enterprise_desc: "مدیریت ناوگان و گزارش‌دهی",
-        feature_ui: "رابط گرافیکی مدرن", feature_ui_desc: "رابط کاربری زیبا",
-        campaign_support: "حمایت از نسخه ۵.۰", campaign_discuss: "پیوستن به بحث",
-        campaign_note: "💡 تمام کمک‌ها مستقیماً صرف توسعه می‌شود. ما BTC، ETH، USDT و سایر ارزها را قبول می‌کنیم.",
-        backer_perks_title: "🎁 مزایای حامیان",
-        perk_support: "پشتیبانی اولویت‌دار", perk_feature: "درخواست ویژگی", perk_early: "دسترسی زودهنگام به نسخه ۵.۰", perk_credit: "نام در یادداشت‌های انتشار"
+        // Freedom & Region Bypass
+        freedom_badge: "🌍 آزادی جهانی هوش مصنوعی و رفع تحریم‌های منطقه‌ای",
+        freedom_title: "آیا دسترسی شما به آنتی‌گرویتی و ابزارهای هوش مصنوعی تحریم شده است؟",
+        freedom_desc: "خطاهای ۴۰۳ جغرافیایی و تحریم‌های ناعادلانه نباید مانع پیشرفت برنامه‌نویسان شود. آنتی‌گرویتی کلینر توکن‌های قفل منطقه‌ای را پاکسازی کرده، تداخل شبکه را رفع می‌کند و دسترسی کامل را به شما بازمی‌گرداند.",
+        status_bypassed: "رفع تحریم",
+        freedom_quote: "تقدیم به تمام برنامه‌نویسانی که از داخل فیلتر و از بیرون تحریم شده‌اند. دانش و کد مرز نمی‌شناسد.",
+        gui_badge: "🎨 رابط گرافیکی نوستالژیک رترو (KeyGen Style)",
+        gui_title: "عیب‌یابی قدرتمند در کنار حس ناب و نوستالژیک",
+        gui_desc: "یک نرم‌افزار گرافیکی سبک و کاملاً آفلاین با الهام از کی‌جن‌های کلاسیک، همراه با موزیک چیپ‌تیون ۸-بیتی و امکان پاکسازی تک‌کلیک.",
+        gui_f1: "پاکسازی خودکار و رفع قفل با یک کلیک",
+        gui_f2: "۱۰۰٪ آفلاین و بدون هیچ ارسال داده یا ردگیری",
+        gui_f3: "پخش‌کننده داخلی موزیک خاطره‌انگیز ۸-بیتی",
+        gui_f4: "حفظ کامل سشن‌ها، کوکی‌ها و پروژه‌های شما"
     },
     ru: {
         home: "Главная", features: "Функции", download: "Скачать", pricing: "Цены", blog: "Блог", faq: "FAQ",
@@ -224,6 +224,9 @@ window.fetchStats = async function () {
         if (starCount && data.stargazers_count) {
             starCount.innerText = data.stargazers_count.toLocaleString();
         }
+        document.querySelectorAll('.github-stars-val').forEach(el => {
+            if (data.stargazers_count) el.innerText = data.stargazers_count.toLocaleString();
+        });
         if (forkCount && data.forks_count) {
             forkCount.innerText = data.forks_count.toLocaleString();
         }
