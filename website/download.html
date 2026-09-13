@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Antigravity Cleaner</title>
+    <title>Download Antigravity Cleaner | Windows, Linux, macOS</title>
+
+    <!-- Meta Tags -->
+    <meta name="description"
+        content="Download Antigravity Cleaner v5.2.0 for Windows 10/11, Linux (x86_64, ARM64), and macOS (Apple Silicon, Intel). 100% offline, zero-track, open source maintenance toolkit.">
+    <meta name="keywords"
+        content="download antigravity cleaner, antigravity cleaner exe, antigravity cleaner linux, antigravity cleaner mac, offline patcher, region bypass">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
         rel="stylesheet">
@@ -22,11 +31,11 @@
                     <li><a href="index.html" data-lang-key="home">Home</a></li>
                     <li><a href="features.html" data-lang-key="features">Features</a></li>
                     <li><a href="download.html" class="active" data-lang-key="download">Download</a></li>
-                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
-                <div class="nav-controls">
+                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
                     <div class="lang-switcher">
                         <select id="langSelect"
                             style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
@@ -34,58 +43,178 @@
                             <option value="fa">FA</option>
                             <option value="ru">RU</option>
                             <option value="zh">ZH</option>
+                            <option value="ar">AR</option>
+                            <option value="es">ES</option>
+                            <option value="tr">TR</option>
                         </select>
                     </div>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="padding-top: 150px;">
+    <!-- Download Hero / Cards -->
+    <section class="section" style="padding-top: 140px; padding-bottom: 40px;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-lang-key="download">Download</h2>
-                <p class="section-subtitle">Get the latest version for your operating system.</p>
+                <div style="display: inline-block; background: rgba(250, 35, 59, 0.1); padding: 6px 14px; border-radius: 20px; margin-bottom: 12px;">
+                    <span style="color: var(--primary); font-weight: 600; font-size: 0.85rem;">⚡ LATEST RELEASE v5.2.0</span>
+                </div>
+                <h1 class="section-title" data-lang-key="download">Download Antigravity Cleaner</h1>
+                <p class="section-subtitle">Zero telemetry. Fully offline. Native standalone binaries with built-in retro desktop GUI.</p>
             </div>
 
             <div class="grid-3">
                 <!-- Windows -->
-                <div class="glass-card feature-item" style="text-align: center;">
-                    <div class="feature-icon"><i class="fab fa-windows"></i></div>
-                    <h3>Windows</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;">Windows 10, 11 (64-bit) • 1-Click GUI</p>
-                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe"
-                        class="btn btn-primary" style="width: 100%; margin-bottom: 8px;">Download .exe</a>
-                    <small style="color: #00ff9f; font-size: 0.8rem;">🔒 100% Offline • Zero-Track</small>
+                <div class="glass-card feature-item" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(0, 164, 239, 0.3);">
+                    <div>
+                        <div class="feature-icon" style="color: #00a4ef;"><i class="fab fa-windows"></i></div>
+                        <h3 style="margin-bottom: 8px;">Windows 64-bit</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Windows 10, 11 (x64) • Portable Desktop GUI &amp; CLI</p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe"
+                            class="btn btn-primary" style="width: 100%; margin-bottom: 12px; font-size: 0.95rem;">
+                            <i class="fas fa-download"></i> Download .exe (v5.2.0)
+                        </a>
+                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 500;">
+                            <i class="fas fa-shield-alt"></i> 100% Offline • Zero-Track
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Linux -->
-                <div class="glass-card feature-item" style="text-align: center;">
-                    <div class="feature-icon"><i class="fab fa-linux"></i></div>
-                    <h3>Linux</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;">Ubuntu, Debian, Arch, Fedora</p>
-                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64" class="btn btn-primary"
-                        style="width: 100%; margin-bottom: 8px;">Download (x86_64)</a>
-                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64" style="color: var(--accent); font-size: 0.85rem;">ARM64 Binary</a>
+                <div class="glass-card feature-item" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(252, 198, 36, 0.3);">
+                    <div>
+                        <div class="feature-icon" style="color: #fcc624;"><i class="fab fa-linux"></i></div>
+                        <h3 style="margin-bottom: 8px;">Linux</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Ubuntu, Debian, Arch, Fedora, openSUSE</p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64"
+                            class="btn btn-primary" style="width: 100%; margin-bottom: 10px; font-size: 0.95rem;">
+                            <i class="fas fa-download"></i> Linux x86_64
+                        </a>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64"
+                            class="btn btn-secondary" style="width: 100%; margin-bottom: 12px; font-size: 0.85rem; padding: 8px 16px;">
+                            <i class="fas fa-microchip"></i> Linux ARM64 Binary
+                        </a>
+                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 500;">
+                            <i class="fas fa-bolt"></i> Standalone Binary • No Runtime
+                        </div>
+                    </div>
                 </div>
 
                 <!-- macOS -->
-                <div class="glass-card feature-item" style="text-align: center;">
-                    <div class="feature-icon"><i class="fab fa-apple"></i></div>
-                    <h3>macOS</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;">Apple Silicon (M1-M4) & Intel</p>
-                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64" class="btn btn-primary"
-                        style="width: 100%; margin-bottom: 8px;">Apple Silicon (ARM64)</a>
-                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64" style="color: var(--accent); font-size: 0.85rem;">Intel Mac Binary</a>
+                <div class="glass-card feature-item" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(255, 255, 255, 0.3);">
+                    <div>
+                        <div class="feature-icon" style="color: #ffffff;"><i class="fab fa-apple"></i></div>
+                        <h3 style="margin-bottom: 8px;">macOS</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Native Apple Silicon (M1-M4) &amp; Intel Macs</p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64"
+                            class="btn btn-primary" style="width: 100%; margin-bottom: 10px; font-size: 0.95rem;">
+                            <i class="fas fa-download"></i> Apple Silicon (ARM64)
+                        </a>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64"
+                            class="btn btn-secondary" style="width: 100%; margin-bottom: 12px; font-size: 0.85rem; padding: 8px 16px;">
+                            <i class="fas fa-laptop"></i> Intel Mac (x86_64)
+                        </a>
+                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 500;">
+                            <i class="fas fa-check-circle"></i> Universal Support • Zero Telemetry
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Bar -->
+            <div class="glass-card" style="margin-top: 32px; padding: 20px; text-align: center; background: rgba(255, 255, 255, 0.02);">
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 16px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <div><i class="fas fa-lock" style="color: #00ff9f; margin-right: 6px;"></i> 100% Offline &amp; Private</div>
+                    <div><i class="fas fa-certificate" style="color: var(--primary); margin-right: 6px;"></i> GNU GPL-3.0 Open Source</div>
+                    <div><i class="fas fa-ban" style="color: #ffbd2e; margin-right: 6px;"></i> Zero Tracking or Telemetry</div>
+                    <div><i class="fas fa-desktop" style="color: #00a4ef; margin-right: 6px;"></i> Retro Desktop GUI Included</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Terminal Block -->
+    <section class="container" style="padding-bottom: 60px;">
+        <div class="terminal-block">
+            <div class="section-header">
+                <h2 class="section-title" data-lang-key="quick_install">Quick Install via Terminal</h2>
+                <p class="section-subtitle" data-lang-key="quick_install_desc">One-line automated installation for command-line power users.</p>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="t-red"></span>
+                        <span class="t-yellow"></span>
+                        <span class="t-green"></span>
+                    </div>
+                    <div class="terminal-tabs">
+                        <button class="t-tab active" id="tabWin" onclick="toggleTerminal('win')">Windows PowerShell</button>
+                        <button class="t-tab" id="tabUnix" onclick="toggleTerminal('unix')">Linux / macOS</button>
+                    </div>
+                </div>
+                <div class="terminal-content" id="terminal">
+                    <div id="cmdWin">
+                        <span class="t-prompt">PS C:\&gt;</span>
+                        <span class="t-cmd" id="winTxt">iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</span>
+                    </div>
+                    <div id="cmdUnix" style="display:none;">
+                        <span class="t-prompt">$</span>
+                        <span class="t-cmd" id="unixTxt">curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</span>
+                    </div>
+                    <button class="t-copy-btn" onclick="copyTerminal()" aria-label="Copy Command">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Antigravity <span>Cleaner</span></h2>
+                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-lang-key="product">Product</h4>
+                        <ul>
+                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="features.html" data-lang-key="features">Features</a></li>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-lang-key="support">Support</h4>
+                        <ul>
+                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
+                <div class="social-links">
+                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
         </div>
     </footer>

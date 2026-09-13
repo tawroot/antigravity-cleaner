@@ -22,11 +22,11 @@
                     <li><a href="index.html" data-lang-key="home">Home</a></li>
                     <li><a href="features.html" data-lang-key="features">Features</a></li>
                     <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
-                    <li><a href="blog.html" class="active" data-lang-key="blog">Blog</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="blog.html" class="active" data-lang-key="blog">Blog</a></li>
                 </ul>
-                <div class="nav-controls">
+                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
                     <div class="lang-switcher">
                         <select id="langSelect"
                             style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
@@ -34,56 +34,93 @@
                             <option value="fa">FA</option>
                             <option value="ru">RU</option>
                             <option value="zh">ZH</option>
+                            <option value="ar">AR</option>
+                            <option value="es">ES</option>
+                            <option value="tr">TR</option>
                         </select>
                     </div>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="padding-top: 150px;">
+    <section class="section" style="padding-top: 150px; padding-bottom: 80px;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-lang-key="blog">Latest News</h2>
-                <p class="section-subtitle">Updates, tutorials, and security insights.</p>
+                <h1 class="section-title" data-lang-key="blog">Latest News &amp; Updates</h1>
+                <p class="section-subtitle">Engineering updates, tutorials, and release announcements.</p>
             </div>
 
             <div class="grid-3">
                 <div class="glass-card feature-item" style="text-align: left;">
-                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">December 25, 2025</div>
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; font-weight: 600;">September 2026</div>
+                    <h3>Antigravity Cleaner v5.2.0 Released</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Introducing the Retro KeyGen desktop GUI with chiptune audio, universal Apple Silicon/Intel support, and safe process termination.</p>
+                    <a href="download.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 16px;">
+                        Read Release &amp; Download
+                    </a>
+                </div>
+
+                <div class="glass-card feature-item" style="text-align: left;">
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; font-weight: 600;">December 2025</div>
                     <h3 data-lang-key="blog_1_title">Fixing SSL Handshake Errors</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;" data-lang-key="blog_1_desc">A
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;" data-lang-key="blog_1_desc">A
                         comprehensive guide to understanding and fixing SSL/TLS errors in restricted network
                         environments.</p>
-                    <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 5px 15px;"
-                        data-lang-key="read_more">Read More</a>
+                    <a href="troubleshooting.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 16px;"
+                        data-lang-key="read_more">Read Guide</a>
                 </div>
 
                 <div class="glass-card feature-item" style="text-align: left;">
-                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">December 20, 2025</div>
-                    <h3 data-lang-key="blog_2_title">Version 4.0 Release Notes</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;" data-lang-key="blog_2_desc">Celebrating
-                        the release of our biggest update yet, featuring new UI and faster cleaning engines.</p>
-                    <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 5px 15px;"
-                        data-lang-key="read_more">Read More</a>
-                </div>
-
-                <div class="glass-card feature-item" style="text-align: left;">
-                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;">November 15, 2025</div>
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; font-weight: 600;">November 2025</div>
                     <h3 data-lang-key="blog_3_title">Understanding Region Locks</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;" data-lang-key="blog_3_desc">How software
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;" data-lang-key="blog_3_desc">How software
                         limits access based on geography and what you can do about it legally.</p>
-                    <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 5px 15px;"
-                        data-lang-key="read_more">Read More</a>
+                    <a href="docs.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 16px;"
+                        data-lang-key="read_more">Read Docs</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Antigravity <span>Cleaner</span></h2>
+                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-lang-key="product">Product</h4>
+                        <ul>
+                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="features.html" data-lang-key="features">Features</a></li>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-lang-key="support">Support</h4>
+                        <ul>
+                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
+                <div class="social-links">
+                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
         </div>
     </footer>

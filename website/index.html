@@ -39,10 +39,10 @@
                 <ul class="nav-links" id="navLinks">
                     <li><a href="index.html" class="active" data-lang-key="home">Home</a></li>
                     <li><a href="features.html" data-lang-key="features">Features</a></li>
-                    <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="#download" data-lang-key="download">Download</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
 
                 <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
@@ -65,7 +65,7 @@
                         <span></span>
                     </button>
 
-                    <a href="download.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
+                    <a href="#download" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
                         <span data-lang-key="get_app">Get App</span>
                     </a>
                 </div>
@@ -83,7 +83,7 @@
                 restrictions.
             </p>
             <div class="hero-btns fade-in" style="animation-delay: 0.3s;">
-                <a href="download.html" class="btn btn-primary">
+                <a href="#download" class="btn btn-primary">
                     <i class="fas fa-arrow-down"></i> <span data-lang-key="get_started">Get Started</span>
                 </a>
                 <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary" target="_blank">
@@ -108,6 +108,93 @@
                 <div class="stat-card">
                     <span class="stat-value">v5.2.0</span>
                     <span class="stat-label" data-lang-key="version">Version</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Platform Download Section -->
+    <section id="download" class="section" style="padding-top: 40px; padding-bottom: 20px;">
+        <div class="container">
+            <div class="section-header">
+                <div style="display: inline-block; background: rgba(250, 35, 59, 0.1); padding: 6px 14px; border-radius: 20px; margin-bottom: 12px;">
+                    <span style="color: var(--primary); font-weight: 600; font-size: 0.85rem;">⚡ v5.2.0 RELEASE</span>
+                </div>
+                <h2 class="section-title" data-lang-key="download">Download Antigravity Cleaner</h2>
+                <p class="section-subtitle">Zero telemetry. Fully offline. Native standalone binaries for all operating systems.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Windows -->
+                <div class="glass-card feature-item" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(0, 164, 239, 0.3);">
+                    <div>
+                        <div class="feature-icon" style="color: #00a4ef;"><i class="fab fa-windows"></i></div>
+                        <h3 style="margin-bottom: 8px;">Windows 64-bit</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Windows 10, 11 (x64) • Portable Desktop GUI &amp; CLI</p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe"
+                            class="btn btn-primary" style="width: 100%; margin-bottom: 12px; font-size: 0.95rem;">
+                            <i class="fas fa-download"></i> Download .exe (v5.2.0)
+                        </a>
+                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 500;">
+                            <i class="fas fa-shield-alt"></i> 100% Offline • Zero-Track
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linux -->
+                <div class="glass-card feature-item" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(252, 198, 36, 0.3);">
+                    <div>
+                        <div class="feature-icon" style="color: #fcc624;"><i class="fab fa-linux"></i></div>
+                        <h3 style="margin-bottom: 8px;">Linux</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Ubuntu, Debian, Arch, Fedora, openSUSE</p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64"
+                            class="btn btn-primary" style="width: 100%; margin-bottom: 10px; font-size: 0.95rem;">
+                            <i class="fas fa-download"></i> Linux x86_64
+                        </a>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64"
+                            class="btn btn-secondary" style="width: 100%; margin-bottom: 12px; font-size: 0.85rem; padding: 8px 16px;">
+                            <i class="fas fa-microchip"></i> Linux ARM64 Binary
+                        </a>
+                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 500;">
+                            <i class="fas fa-bolt"></i> Standalone Binary • No Runtime
+                        </div>
+                    </div>
+                </div>
+
+                <!-- macOS -->
+                <div class="glass-card feature-item" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(255, 255, 255, 0.3);">
+                    <div>
+                        <div class="feature-icon" style="color: #ffffff;"><i class="fab fa-apple"></i></div>
+                        <h3 style="margin-bottom: 8px;">macOS</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Native Apple Silicon (M1-M4) &amp; Intel Macs</p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64"
+                            class="btn btn-primary" style="width: 100%; margin-bottom: 10px; font-size: 0.95rem;">
+                            <i class="fas fa-download"></i> Apple Silicon (ARM64)
+                        </a>
+                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64"
+                            class="btn btn-secondary" style="width: 100%; margin-bottom: 12px; font-size: 0.85rem; padding: 8px 16px;">
+                            <i class="fas fa-laptop"></i> Intel Mac (x86_64)
+                        </a>
+                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 500;">
+                            <i class="fas fa-check-circle"></i> Universal Support • Zero Telemetry
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Bar -->
+            <div class="glass-card" style="margin-top: 32px; padding: 20px; text-align: center; background: rgba(255, 255, 255, 0.02);">
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 16px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <div><i class="fas fa-lock" style="color: #00ff9f; margin-right: 6px;"></i> 100% Offline &amp; Private</div>
+                    <div><i class="fas fa-certificate" style="color: var(--primary); margin-right: 6px;"></i> GNU GPL-3.0 Open Source</div>
+                    <div><i class="fas fa-ban" style="color: #ffbd2e; margin-right: 6px;"></i> No Telemetry or Tracking</div>
+                    <div><i class="fas fa-desktop" style="color: #00a4ef; margin-right: 6px;"></i> Built-in Retro Desktop GUI</div>
                 </div>
             </div>
         </div>
@@ -189,169 +276,6 @@
         </div>
     </section>
 
-    <!-- Funding Campaign Section -->
-    <section class="section"
-        style="background: linear-gradient(135deg, rgba(250, 35, 59, 0.05) 0%, rgba(0, 0, 0, 0) 100%);">
-        <div class="container">
-            <div class="glass-card" style="padding: 48px; max-width: 900px; margin: 0 auto; text-align: center;">
-                <!-- Campaign Header -->
-                <div style="margin-bottom: 32px;">
-                    <div
-                        style="display: inline-block; background: rgba(250, 35, 59, 0.1); padding: 8px 16px; border-radius: 20px; margin-bottom: 16px;">
-                        <span style="color: var(--primary); font-weight: 600; font-size: 0.875rem;"
-                            data-lang-key="campaign_badge">🚀 FUNDING CAMPAIGN</span>
-                    </div>
-                    <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 16px; font-weight: 800;"
-                        data-lang-key="campaign_title">Fund Antigravity Cleaner v5.0</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto;"
-                        data-lang-key="campaign_desc">Help us build the next generation with AI-powered cleaning,
-                        advanced automation, and enterprise features.</p>
-                </div>
-
-                <!-- Progress Bar -->
-                <div style="margin-bottom: 32px;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
-                        <div>
-                            <span style="font-size: 2rem; font-weight: 800; color: var(--primary);"
-                                id="campaign-raised">$0</span>
-                            <span style="color: var(--text-secondary); font-size: 1rem;"
-                                data-lang-key="campaign_raised">raised</span>
-                        </div>
-                        <div>
-                            <span style="color: var(--text-secondary); font-size: 1rem;"
-                                data-lang-key="campaign_goal">Goal:</span>
-                            <span style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);"
-                                id="campaign-goal">$500</span>
-                        </div>
-                    </div>
-
-                    <!-- Progress Bar -->
-                    <div
-                        style="background: rgba(255, 255, 255, 0.05); height: 24px; border-radius: 12px; overflow: hidden; position: relative;">
-                        <div id="campaign-progress"
-                            style="background: linear-gradient(90deg, var(--primary) 0%, var(--primary-hover) 100%); height: 100%; width: 0%; transition: width 1s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;">
-                            <span style="color: white; font-weight: 700; font-size: 0.875rem;"
-                                id="campaign-percentage">0%</span>
-                        </div>
-                    </div>
-
-                    <!-- Stats -->
-                    <div
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; margin-top: 24px;">
-                        <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);"
-                                id="campaign-backers">0</div>
-                            <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                data-lang-key="campaign_backers">Backers</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="campaign-days">
-                                30</div>
-                            <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                data-lang-key="campaign_days">Days Left</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">v5.0</div>
-                            <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                data-lang-key="campaign_version">Target Version</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Features List -->
-                <div
-                    style="text-align: left; margin-bottom: 32px; background: rgba(255, 255, 255, 0.02); padding: 24px; border-radius: 12px;">
-                    <h3 style="font-size: 1.25rem; margin-bottom: 16px; text-align: center;"
-                        data-lang-key="campaign_features_title">What's Coming in v5.0?</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <span style="color: var(--primary); font-size: 1.25rem;">🤖</span>
-                            <div>
-                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_ai">AI-Powered
-                                    Cleaning</div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                    data-lang-key="feature_ai_desc">Smart detection and removal</div>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <span style="color: var(--primary); font-size: 1.25rem;">⚡</span>
-                            <div>
-                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_auto">
-                                    Auto-Scheduler</div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                    data-lang-key="feature_auto_desc">Automated maintenance tasks</div>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <span style="color: var(--primary); font-size: 1.25rem;">🏢</span>
-                            <div>
-                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_enterprise">
-                                    Enterprise Tools</div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                    data-lang-key="feature_enterprise_desc">Fleet management & reporting</div>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 12px; align-items: start;">
-                            <span style="color: var(--primary); font-size: 1.25rem;">🎨</span>
-                            <div>
-                                <div style="font-weight: 600; margin-bottom: 4px;" data-lang-key="feature_ui">Modern GUI
-                                </div>
-                                <div style="color: var(--text-secondary); font-size: 0.875rem;"
-                                    data-lang-key="feature_ui_desc">Beautiful desktop interface</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Buttons -->
-                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://nowpayments.io/donation/tawroot" target="_blank" class="btn btn-primary"
-                        style="font-size: 1.125rem; padding: 16px 32px;">
-                        <i class="fas fa-rocket"></i> <span data-lang-key="campaign_support">Support v5.0</span>
-                    </a>
-                    <a href="https://github.com/tawroot/antigravity-cleaner/discussions" target="_blank"
-                        class="btn btn-secondary" style="font-size: 1.125rem; padding: 16px 32px;">
-                        <i class="fas fa-comments"></i> <span data-lang-key="campaign_discuss">Join Discussion</span>
-                    </a>
-                </div>
-
-                <!-- Backer Perks -->
-                <div
-                    style="margin-top: 32px; padding: 24px; background: rgba(250, 35, 59, 0.05); border: 1px solid rgba(250, 35, 59, 0.2); border-radius: 12px;">
-                    <h4 style="font-size: 1.125rem; margin-bottom: 16px; color: var(--primary);"
-                        data-lang-key="backer_perks_title">🎁 Backer Benefits</h4>
-                    <div
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; text-align: left;">
-                        <div style="display: flex; gap: 8px; align-items: start;">
-                            <span style="color: var(--primary);">✅</span>
-                            <span style="font-size: 0.9375rem;" data-lang-key="perk_support">Priority Support</span>
-                        </div>
-                        <div style="display: flex; gap: 8px; align-items: start;">
-                            <span style="color: var(--primary);">✅</span>
-                            <span style="font-size: 0.9375rem;" data-lang-key="perk_feature">Feature Requests</span>
-                        </div>
-                        <div style="display: flex; gap: 8px; align-items: start;">
-                            <span style="color: var(--primary);">✅</span>
-                            <span style="font-size: 0.9375rem;" data-lang-key="perk_early">Early Access to v5.0</span>
-                        </div>
-                        <div style="display: flex; gap: 8px; align-items: start;">
-                            <span style="color: var(--primary);">✅</span>
-                            <span style="font-size: 0.9375rem;" data-lang-key="perk_credit">Credits in Release
-                                Notes</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Small Note -->
-                <p style="margin-top: 24px; color: var(--text-tertiary); font-size: 0.875rem;"
-                    data-lang-key="campaign_note">
-                    💡 All donations go directly to development. We accept BTC, ETH, USDT, and more.
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- Features Preview Section -->
     <section class="section" style="background: var(--bg-secondary); padding: 80px 0;">
         <div class="container">
@@ -402,7 +326,7 @@
                 data-lang-key="cta_desc">Download now and solve installation errors in seconds.</p>
 
             <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="download.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 16px 32px;">
+                <a href="#download" class="btn btn-primary" style="font-size: 1.125rem; padding: 16px 32px;">
                     <i class="fas fa-download"></i> <span data-lang-key="download_now">Download Now</span>
                 </a>
                 <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary"
@@ -425,23 +349,23 @@
                     <div class="link-group">
                         <h4 data-lang-key="product">Product</h4>
                         <ul>
-                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="#download" data-lang-key="download">Download</a></li>
                             <li><a href="features.html" data-lang-key="features">Features</a></li>
-                            <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
                         </ul>
                     </div>
                     <div class="link-group">
                         <h4 data-lang-key="support">Support</h4>
                         <ul>
-                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
                             <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
                             <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
                 <div class="social-links">
                     <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
                     <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>

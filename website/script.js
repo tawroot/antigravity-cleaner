@@ -232,53 +232,8 @@ window.fetchStats = async function () {
     }
 };
 
-// ========================================
-// CAMPAIGN PROGRESS UPDATER
-// ========================================
-
-// Manual update function - call this when you receive donations
-window.updateCampaignProgress = function (raised, backers, daysLeft) {
-    const goal = 500; // $500 goal
-    const percentage = Math.min(Math.round((raised / goal) * 100), 100);
-
-    // Update raised amount
-    const raisedEl = document.getElementById('campaign-raised');
-    if (raisedEl) raisedEl.innerText = `$${raised.toLocaleString()}`;
-
-    // Update progress bar
-    const progressEl = document.getElementById('campaign-progress');
-    const percentageEl = document.getElementById('campaign-percentage');
-    if (progressEl) progressEl.style.width = `${percentage}%`;
-    if (percentageEl) percentageEl.innerText = `${percentage}%`;
-
-    // Update backers
-    const backersEl = document.getElementById('campaign-backers');
-    if (backersEl) backersEl.innerText = backers;
-
-    // Update days left
-    const daysEl = document.getElementById('campaign-days');
-    if (daysEl) daysEl.innerText = daysLeft;
-
-    // Save to localStorage
-    localStorage.setItem('campaign_data', JSON.stringify({ raised, backers, daysLeft, updated: Date.now() }));
-};
-
-// Load saved campaign data on page load
-function loadCampaignData() {
-    const saved = localStorage.getItem('campaign_data');
-    if (saved) {
-        try {
-            const data = JSON.parse(saved);
-            updateCampaignProgress(data.raised || 0, data.backers || 0, data.daysLeft || 30);
-        } catch (e) {
-            console.error('Failed to load campaign data:', e);
-        }
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('star-count')) fetchStats();
-    loadCampaignData(); // Load campaign progress
     initHybridNavigation();
 });
 

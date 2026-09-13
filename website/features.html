@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Features - Antigravity Cleaner</title>
+
+    <!-- Meta Tags -->
+    <meta name="description"
+        content="Explore the powerful features of Antigravity Cleaner: One-Click Cleaning, Region Bypass, Session Preservation, Network Reset, Dry Run mode, and Retro Desktop GUI.">
+    <meta name="keywords"
+        content="antigravity features, ide cleaner, region lock bypass, session preservation, network reset, dry run mode">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
         rel="stylesheet">
@@ -22,11 +31,11 @@
                     <li><a href="index.html" data-lang-key="home">Home</a></li>
                     <li><a href="features.html" class="active" data-lang-key="features">Features</a></li>
                     <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
-                <div class="nav-controls">
+                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
                     <div class="lang-switcher">
                         <select id="langSelect"
                             style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
@@ -34,65 +43,107 @@
                             <option value="fa">FA</option>
                             <option value="ru">RU</option>
                             <option value="zh">ZH</option>
+                            <option value="ar">AR</option>
+                            <option value="es">ES</option>
+                            <option value="tr">TR</option>
                         </select>
                     </div>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="padding-top: 150px;">
+    <section class="section" style="padding-top: 150px; padding-bottom: 80px;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-lang-key="features">Features</h2>
-                <p class="section-subtitle">Why thousands of developers trust Antigravity.</p>
+                <h1 class="section-title" data-lang-key="features">Features &amp; Capabilities</h1>
+                <p class="section-subtitle">Engineered specifically for developers and constrained network environments.</p>
             </div>
 
             <div class="grid-3">
                 <div class="glass-card feature-item">
                     <div class="feature-icon">🚀</div>
                     <h3 data-lang-key="feat_clean_title">One-Click Clean</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="feat_clean_desc">Remove corrupted installation
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_clean_desc">Remove corrupted installation
                         files, cache, and registry keys instantly.</p>
                 </div>
                 <div class="glass-card feature-item">
                     <div class="feature-icon">🌍</div>
                     <h3 data-lang-key="feat_region_title">Region Bypass</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="feat_region_desc">Automatically fix
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_region_desc">Automatically fix
                         region-locked errors for constrained networks.</p>
                 </div>
                 <div class="glass-card feature-item">
                     <div class="feature-icon">🛡️</div>
                     <h3 data-lang-key="feat_session_title">Session Preservation</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="feat_session_desc">Clean the system without
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_session_desc">Clean the system without
                         losing your browser cookies or login sessions.</p>
                 </div>
                 <div class="glass-card feature-item">
                     <div class="feature-icon">🔧</div>
                     <h3 data-lang-key="feat_network_title">Network Reset</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="feat_network_desc">Flush DNS and reset network
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_network_desc">Flush DNS and reset network
                         adapters to solve connection timeouts.</p>
                 </div>
                 <div class="glass-card feature-item">
                     <div class="feature-icon">👁️</div>
                     <h3 data-lang-key="feat_dryrun_title">Dry Run Mode</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="feat_dryrun_desc">Preview exact changes before
+                    <p style="color: var(--text-secondary);" data-lang-key="feat_dryrun_desc">Preview exact changes before
                         applying them to your system.</p>
                 </div>
                 <div class="glass-card feature-item">
                     <div class="feature-icon">💻</div>
-                    <h3 data-lang-key="feat_portable_title">Portable</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="feat_portable_desc">No installation required.
-                        Run directly from USB or any folder.</p>
+                    <h3 data-lang-key="feat_portable_title">Portable &amp; Retro GUI</h3>
+                    <p style="color: var(--text-secondary);">No external runtime needed. Built-in retro keygen-style desktop GUI with 8-bit chiptune audio.</p>
                 </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="download.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 14px 32px;">
+                    <i class="fas fa-download"></i> <span data-lang-key="download_now">Download Now</span>
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Antigravity <span>Cleaner</span></h2>
+                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-lang-key="product">Product</h4>
+                        <ul>
+                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="features.html" data-lang-key="features">Features</a></li>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-lang-key="support">Support</h4>
+                        <ul>
+                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
+                <div class="social-links">
+                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
         </div>
     </footer>

@@ -22,11 +22,11 @@
                     <li><a href="index.html" data-lang-key="home">Home</a></li>
                     <li><a href="features.html" data-lang-key="features">Features</a></li>
                     <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="pricing.html" data-lang-key="pricing">Pricing</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" class="active" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
-                <div class="nav-controls">
+                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
                     <div class="lang-switcher">
                         <select id="langSelect"
                             style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
@@ -34,59 +34,96 @@
                             <option value="fa">FA</option>
                             <option value="ru">RU</option>
                             <option value="zh">ZH</option>
+                            <option value="ar">AR</option>
+                            <option value="es">ES</option>
+                            <option value="tr">TR</option>
                         </select>
                     </div>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="padding-top: 150px;">
+    <section class="section" style="padding-top: 150px; padding-bottom: 80px;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-lang-key="faq">Frequently Asked Questions</h2>
-                <p class="section-subtitle">Find answers to common issues.</p>
+                <h1 class="section-title" data-lang-key="faq">Frequently Asked Questions</h1>
+                <p class="section-subtitle">Find answers to common issues and safety questions.</p>
             </div>
 
             <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
-                <div class="glass-card" style="padding: 20px;">
-                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_safe_q">Is it safe
+                <div class="glass-card" style="padding: 24px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;" data-lang-key="faq_safe_q">Is it safe
                         to use?</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="faq_safe_a">Yes. Antigravity Cleaner
+                    <p style="color: var(--text-secondary);" data-lang-key="faq_safe_a">Yes. Antigravity Cleaner
                         specifically targets temporary files, caches, and invalid registry keys associated with known
                         IDE errors. It does not touch your personal documents or project source codes.</p>
                 </div>
 
-                <div class="glass-card" style="padding: 20px;">
-                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_pass_q">Will I lose
+                <div class="glass-card" style="padding: 24px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;" data-lang-key="faq_pass_q">Will I lose
                         my browser passwords?</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="faq_pass_a">No. Our "Session Preservation"
+                    <p style="color: var(--text-secondary);" data-lang-key="faq_pass_a">No. Our "Session Preservation"
                         technology ensures that critical files like Cookies and Login Data are backed up or excluded
                         from the cleaning process, so you don't have to log in again.</p>
                 </div>
 
-                <div class="glass-card" style="padding: 20px;">
-                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_net_q">How do I fix
+                <div class="glass-card" style="padding: 24px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;" data-lang-key="faq_net_q">How do I fix
                         "Network Error"?</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="faq_net_a">Use the "Network Reset" feature in
+                    <p style="color: var(--text-secondary);" data-lang-key="faq_net_a">Use the "Network Reset" feature in
                         the Tools menu. This will flush your DNS cache and reset the Winsock catalog, which often
                         resolves connection issues caused by VPNs using the Tun/Tap adapter.</p>
                 </div>
 
-                <div class="glass-card" style="padding: 20px;">
-                    <h3 style="color: var(--primary-glow); margin-bottom: 10px;" data-lang-key="faq_mac_q">Do you
-                        support Mac M1/M2?</h3>
-                    <p style="color: var(--text-muted);" data-lang-key="faq_mac_a">Yes, we have native builds for Apple
+                <div class="glass-card" style="padding: 24px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;" data-lang-key="faq_mac_q">Do you
+                        support Mac M1/M2/M3/M4?</h3>
+                    <p style="color: var(--text-secondary);" data-lang-key="faq_mac_a">Yes, we have native builds for Apple
                         Silicon (ARM64) as well as Intel Macs. Check the Download page for the correct version.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Antigravity <span>Cleaner</span></h2>
+                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-lang-key="product">Product</h4>
+                        <ul>
+                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="features.html" data-lang-key="features">Features</a></li>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-lang-key="support">Support</h4>
+                        <ul>
+                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
+                <div class="social-links">
+                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
         </div>
     </footer>

@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing - Antigravity Cleaner</title>
+    <title>Pricing &amp; Freedom Guarantee - Antigravity Cleaner</title>
+
+    <!-- Meta Tags -->
+    <meta name="description"
+        content="Antigravity Cleaner is 100% free and open-source under GNU GPL-3.0. No subscriptions, no paywalls, zero telemetry. Forever free for developers worldwide.">
+    <meta name="keywords"
+        content="antigravity cleaner pricing, free antigravity cleaner, open source ide patcher, free developer tools">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
         rel="stylesheet">
@@ -22,11 +31,11 @@
                     <li><a href="index.html" data-lang-key="home">Home</a></li>
                     <li><a href="features.html" data-lang-key="features">Features</a></li>
                     <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="pricing.html" class="active" data-lang-key="pricing">Pricing</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
-                <div class="nav-controls">
+                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
                     <div class="lang-switcher">
                         <select id="langSelect"
                             style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
@@ -34,90 +43,108 @@
                             <option value="fa">FA</option>
                             <option value="ru">RU</option>
                             <option value="zh">ZH</option>
+                            <option value="ar">AR</option>
+                            <option value="es">ES</option>
+                            <option value="tr">TR</option>
                         </select>
                     </div>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="padding-top: 150px;">
+    <section class="section" style="padding-top: 150px; padding-bottom: 80px;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" data-lang-key="pricing">Premium Solutions</h2>
-                <p class="section-subtitle">Dedicated support and high-performance networks.</p>
+                <div style="display: inline-block; background: rgba(0, 255, 159, 0.1); padding: 6px 16px; border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(0, 255, 159, 0.3);">
+                    <span style="color: #00ff9f; font-weight: 600; font-size: 0.85rem;">🕊️ 100% FREE &amp; OPEN SOURCE</span>
+                </div>
+                <h1 class="section-title">Zero Cost. Forever Free.</h1>
+                <p class="section-subtitle" style="max-width: 700px;">Antigravity Cleaner is built as public good software under GNU GPL-3.0. No paywalls, no subscriptions, and zero corporate telemetry.</p>
             </div>
 
-            <div class="grid-3">
-                <!-- Free -->
-                <div class="glass-card feature-item" style="text-align: center; border-color: var(--text-muted);">
-                    <h3 style="margin-bottom: 10px;" data-lang-key="price_free_title">Community</h3>
-                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">$0</div>
-                    <ul style="list-style: none; text-align: left; margin-bottom: 30px; color: var(--text-muted);">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--success); margin-right: 10px;"></i> <span
-                                data-lang-key="price_free_1">Open Source Core</span></li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--success); margin-right: 10px;"></i> <span
-                                data-lang-key="price_free_2">GitHub Issues Support</span></li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--success); margin-right: 10px;"></i> <span
-                                data-lang-key="price_free_3">All Basic Features</span></li>
-                    </ul>
-                    <a href="download.html" class="btn btn-secondary" style="width: 100%;"
-                        data-lang-key="download_free">Download Free</a>
-                </div>
+            <!-- Single Showcase Card -->
+            <div style="max-width: 680px; margin: 0 auto;">
+                <div class="glass-card feature-item" style="padding: 48px 40px; text-align: center; border-color: rgba(250, 35, 59, 0.4); box-shadow: 0 10px 40px rgba(250, 35, 59, 0.15);">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;">
+                        $0 <span style="font-size: 1.1rem; color: var(--text-secondary); font-weight: 400;">/ Forever</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 24px;">Community &amp; Enterprise Full Edition</h3>
 
-                <!-- Pro -->
-                <div class="glass-card feature-item"
-                    style="text-align: center; border-color: var(--primary); box-shadow: 0 0 20px rgba(109, 40, 217, 0.2);">
-                    <div style="position: absolute; top: 0; right: 0; background: var(--primary); padding: 5px 15px; border-bottom-left-radius: 10px; font-size: 0.8rem; font-weight: bold;"
-                        data-lang-key="price_popular">POPULAR</div>
-                    <h3 style="margin-bottom: 10px;" data-lang-key="price_pro_title">Pro Network</h3>
-                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">$5<span
-                            style="font-size: 1rem; color: var(--text-muted);">/mo</span></div>
-                    <ul style="list-style: none; text-align: left; margin-bottom: 30px; color: var(--text-muted);">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--primary); margin-right: 10px;"></i> <span
-                                data-lang-key="price_pro_1">Private V2Ray Servers</span></li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--primary); margin-right: 10px;"></i> <span
-                                data-lang-key="price_pro_2">Low Latency Routing</span></li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--primary); margin-right: 10px;"></i> <span
-                                data-lang-key="price_pro_3">Priority Support</span></li>
+                    <ul style="list-style: none; text-align: left; margin: 0 auto 36px; max-width: 480px; color: var(--text-primary); font-size: 1rem;">
+                        <li style="margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
+                            <span><strong>100% Offline &amp; Telemetry-Free</strong> (Zero tracking)</span>
+                        </li>
+                        <li style="margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
+                            <span><strong>All Features Included</strong> (One-Click Clean, Region Bypass, Session Backup)</span>
+                        </li>
+                        <li style="margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
+                            <span><strong>Retro KeyGen Desktop GUI</strong> + CLI Automation Engine</span>
+                        </li>
+                        <li style="margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
+                            <span><strong>Multi-Platform Binaries</strong> for Windows, Linux &amp; macOS</span>
+                        </li>
+                        <li style="margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
+                            <span><strong>GNU GPL-3.0 License</strong> (Inspect, modify, fork freely)</span>
+                        </li>
                     </ul>
-                    <a href="https://t.me/panbehnet" class="btn btn-primary" style="width: 100%;"
-                        data-lang-key="get_started">Get Started</a>
-                </div>
 
-                <!-- Business -->
-                <div class="glass-card feature-item" style="text-align: center; border-color: var(--accent);">
-                    <h3 style="margin-bottom: 10px;" data-lang-key="price_ent_title">Enterprise</h3>
-                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;" data-lang-key="price_custom">
-                        Custom</div>
-                    <ul style="list-style: none; text-align: left; margin-bottom: 30px; color: var(--text-muted);">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--accent); margin-right: 10px;"></i> <span
-                                data-lang-key="price_ent_1">Dedicated IPs</span></li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--accent); margin-right: 10px;"></i> <span
-                                data-lang-key="price_ent_2">Fleet Management</span></li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                                style="color: var(--accent); margin-right: 10px;"></i> <span
-                                data-lang-key="price_ent_3">24/7 SLA Support</span></li>
-                    </ul>
-                    <a href="https://t.me/RAHBARUSD" class="btn btn-secondary" style="width: 100%;"
-                        data-lang-key="contact_sales">Contact Sales</a>
+                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="download.html" class="btn btn-primary" style="font-size: 1.05rem; padding: 14px 32px;">
+                            <i class="fas fa-download"></i> Download Free (v5.2.0)
+                        </a>
+                        <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary" style="font-size: 1.05rem; padding: 14px 32px;">
+                            <i class="fab fa-github"></i> Star on GitHub
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Antigravity <span>Cleaner</span></h2>
+                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4 data-lang-key="product">Product</h4>
+                        <ul>
+                            <li><a href="download.html" data-lang-key="download">Download</a></li>
+                            <li><a href="features.html" data-lang-key="features">Features</a></li>
+                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4 data-lang-key="support">Support</h4>
+                        <ul>
+                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2025 Tawroot. Open Source (MIT).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
+                <div class="social-links">
+                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
         </div>
     </footer>

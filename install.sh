@@ -4,7 +4,7 @@ set -e
 APP_NAME="antigravity-cleaner"
 INSTALL_DIR="${HOME}/.local/bin"
 REPO="tawroot/antigravity-cleaner"
-VERSION="v5.1.0"
+VERSION="v5.2.0"
 
 echo "===================================================="
 echo "  ⚡ Antigravity Cleaner — Universal AI Freedom Toolkit (${VERSION})"
@@ -46,7 +46,7 @@ elif [ -f "${SCRIPT_DIR}/bin/antigravity" ]; then
     cp "${SCRIPT_DIR}/bin/antigravity" "${DEST}"
 else
     echo "🌐 Downloading ${TARGET_NAME} from GitHub Releases..."
-    DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${VERSION}/${TARGET_NAME}"
+    DOWNLOAD_URL="https://github.com/${REPO}/releases/latest/download/${TARGET_NAME}"
     curl -fsSL "${DOWNLOAD_URL}" -o "${DEST}" || {
         echo "❌ Download failed. Please build locally with: make release"
         exit 1
