@@ -964,74 +964,214 @@ footer {
   margin-bottom: 28px;
 }
 
-.country-flags-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 14px;
+/* ==========================================================================
+   Global Telemetry Status Board (تخته بُرد زنده مانیتورینگ زبان‌ها و مناطق)
+   ========================================================================== */
+.telemetry-board {
+  background: rgba(10, 15, 26, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   margin-bottom: 30px;
 }
 
-.country-badge {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 12px 14px;
+.board-top-bar {
+  background: rgba(0, 240, 255, 0.04);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.14);
+  padding: 14px 22px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  user-select: none;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  font-size: 0.82rem;
 }
 
-.country-badge:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(0, 240, 255, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 12px rgba(0, 240, 255, 0.1);
-}
-
-.country-badge .c-flag-box {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
+.board-top-title {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  flex-shrink: 0;
+  gap: 10px;
+  color: #00f0ff;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.board-top-title .radar-pulse {
+  width: 9px;
+  height: 9px;
+  background: #00ff9f;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff9f;
+  animation: pulseGreen 1.6s infinite;
+}
+
+.board-telemetry-tags {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.board-telemetry-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 9px;
+  border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.country-badge .c-info {
+.board-telemetry-tags strong {
+  color: #fff;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 14px;
+  padding: 20px;
+}
+
+.board-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-width: 0;
-}
-
-.country-badge .c-name {
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: var(--text-primary);
-  white-space: nowrap;
+  gap: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.country-badge .badge-status {
+.board-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #00f0ff, transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.board-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 240, 255, 0.38);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 240, 255, 0.1);
+}
+
+.board-card:hover::before {
+  opacity: 1;
+}
+
+.board-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.board-card-flag-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.board-flag {
+  font-size: 1.6rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.board-region-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.board-region-primary {
+  font-weight: 700;
+  font-size: 0.94rem;
+  color: #fff;
+}
+
+.board-region-secondary {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.board-lang-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  color: #00f0ff;
+  white-space: nowrap;
+}
+
+.board-card-body {
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.board-native-quote {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  line-height: 1.45;
+  margin-bottom: 5px;
+}
+
+.board-native-sub {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+}
+
+.board-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.74rem;
+  padding-top: 2px;
+}
+
+.board-tech-pill {
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.board-status-badge {
   font-size: 0.72rem;
   font-weight: 700;
   color: #00ff9f;
   background: rgba(0, 255, 159, 0.1);
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 20px;
   border: 1px solid rgba(0, 255, 159, 0.25);
-  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .pulse-dot {

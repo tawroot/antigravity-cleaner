@@ -245,79 +245,196 @@
                 </p>
             </div>
 
-            <!-- Country Flags Grid (Redesigned with Fixed Dimensions & Pulsing Dots) -->
-            <div class="country-flags-grid">
-                <div class="country-badge">
-                    <div class="c-flag-box">🇮🇷</div>
-                    <div class="c-info">
-                        <span class="c-name">Iran</span>
+            <!-- Global Telemetry Status Board (تخته بُرد زنده و مانیتورینگ زبان‌ها و مناطق) -->
+            <div class="telemetry-board">
+                <div class="board-top-bar">
+                    <div class="board-top-title">
+                        <span class="radar-pulse"></span>
+                        <span>STATUS BOARD // GLOBAL REGION BYPASS &amp; MULTILINGUAL MATRIX</span>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
+                    <div class="board-telemetry-tags">
+                        <span><i class="fas fa-microchip"></i> ENGINE: <strong>v5.2.0 STANDALONE</strong></span>
+                        <span><i class="fas fa-network-wired"></i> ROUTING: <strong>ZERO-TUN (NO-TUN)</strong></span>
+                        <span><i class="fas fa-language"></i> LOCALES: <strong>7+ NATIVE SCRIPTS</strong></span>
+                    </div>
                 </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇷🇺</div>
-                    <div class="c-info">
-                        <span class="c-name">Russia</span>
+
+                <div class="board-grid">
+                    <!-- Card 1: Iran -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇮🇷</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Iran</span>
+                                    <span class="board-region-secondary">ایران</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">فارسی (RTL)</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«رفع خطای ۴۰۳، صفر شدن ارور ۴۲۹ و حفظ نشست‌ها»</div>
+                            <div class="board-native-sub">Smart SOCKS5 Direct &bull; 15s KeepAlive</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-shield-alt"></i> Native Go Patch</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
-                </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇨🇳</div>
-                    <div class="c-info">
-                        <span class="c-name">China</span>
+
+                    <!-- Card 2: Russia -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇷🇺</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Russia</span>
+                                    <span class="board-region-secondary">Россия</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">Русский</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«Обход ошибки 403 и сброс лимитов 429»</div>
+                            <div class="board-native-sub">No-TUN Injection &bull; Чистка GPU кэша</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-bolt"></i> Anti-DPI Pulse</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
-                </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇨🇺</div>
-                    <div class="c-info">
-                        <span class="c-name">Cuba</span>
+
+                    <!-- Card 3: China -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇨🇳</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">China</span>
+                                    <span class="board-region-secondary">中国</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">简体中文</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«解除 403 地区封锁与保留登录凭据»</div>
+                            <div class="board-native-sub">本地进程代理 &bull; 零 TUN 额外开销</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-lock-open"></i> Login Safe</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
-                </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇸🇾</div>
-                    <div class="c-info">
-                        <span class="c-name">Syria</span>
+
+                    <!-- Card 4: Turkey -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇹🇷</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Turkey</span>
+                                    <span class="board-region-secondary">Türkiye</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">Türkçe</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«403 Bölge Kilidi ve 429 Kota Sıfırlama»</div>
+                            <div class="board-native-sub">Akıllı Proxy &bull; Oturum ve Çerez Güvenli</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-sync-alt"></i> Auto-Repair</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
-                </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇻🇪</div>
-                    <div class="c-info">
-                        <span class="c-name">Venezuela</span>
+
+                    <!-- Card 5: Latin America (Cuba, Venezuela) -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇨🇺</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Cuba &amp; Venezuela</span>
+                                    <span class="board-region-secondary">Latinoamérica 🇻🇪</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">Español</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«Desbloqueo de región 403 y cuota 429»</div>
+                            <div class="board-native-sub">Proxy Directo Sin TUN &bull; Sesión Intacta</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-globe-americas"></i> Geo Bypass</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
-                </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇵🇰</div>
-                    <div class="c-info">
-                        <span class="c-name">Pakistan</span>
+
+                    <!-- Card 6: Arab World (Syria, etc.) -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇸🇾</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Syria &amp; Arab World</span>
+                                    <span class="board-region-secondary">العالم العربي 🇸🇦</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">العربية (RTL)</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«تجاوز الحظر الإقليمي 403 دون فقدان البيانات»</div>
+                            <div class="board-native-sub">KeepAlive 15s &bull; وكيل محلي مباشر</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-feather-alt"></i> Zero Telemetry</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
-                </div>
-                <div class="country-badge">
-                    <div class="c-flag-box">🇹🇷</div>
-                    <div class="c-info">
-                        <span class="c-name">Turkey</span>
+
+                    <!-- Card 7: Pakistan & South Asia -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🇵🇰</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Pakistan</span>
+                                    <span class="board-region-secondary">پاکستان</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">اردو / English</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«DPI Throttling &amp; Middlebox Reset Bypass»</div>
+                            <div class="board-native-sub">HTTP/2 Multiplexing &bull; KeepAlive Active</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-tachometer-alt"></i> Low Latency</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
+                        </div>
                     </div>
-                    <span class="badge-status" data-lang-key="status_bypassed">
-                        <span class="pulse-dot"></span> Bypassed
-                    </span>
+
+                    <!-- Card 8: Universal / Global -->
+                    <div class="board-card">
+                        <div class="board-card-header">
+                            <div class="board-card-flag-title">
+                                <span class="board-flag">🌐</span>
+                                <div class="board-region-names">
+                                    <span class="board-region-primary">Global Developers</span>
+                                    <span class="board-region-secondary">Worldwide</span>
+                                </div>
+                            </div>
+                            <span class="board-lang-pill">English</span>
+                        </div>
+                        <div class="board-card-body">
+                            <div class="board-native-quote">«Universal 403 Bypass &amp; Stale Lock Purge»</div>
+                            <div class="board-native-sub">100% Offline &bull; Free &amp; Open-Source</div>
+                        </div>
+                        <div class="board-card-footer">
+                            <span class="board-tech-pill"><i class="fas fa-balance-scale"></i> GNU GPL-3.0</span>
+                            <span class="board-status-badge"><span class="pulse-dot"></span> Verified</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
