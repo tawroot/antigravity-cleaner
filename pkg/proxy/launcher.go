@@ -87,6 +87,13 @@ func BuildProxyEnv(proxyURL string) []string {
 	return cleanEnv
 }
 
+// CleanChromiumProxyURL normalizes proxy schemes for Chromium/Electron.
+// Chromium does NOT support socks5h:// (it causes ERR_NO_SUPPORTED_PROXIES).
+// Chromium's socks5:// implementation automatically performs DNS resolution on the proxy.
+func CleanChromiumProxyURL(proxyURL string) string {
+	return strings.Replace(proxyURL, "socks5h://", "socks5://", 1)
+}
+
 // LaunchAntigravityWithProxy launches Antigravity with injected proxy variables (No TUN needed)
 func LaunchAntigravityWithProxy(appPath string, proxyURL string, extraArgs []string) error {
 	if appPath == "" {
@@ -104,13 +111,16 @@ func LaunchAntigravityWithProxy(appPath string, proxyURL string, extraArgs []str
 		proxyURL = best.URL
 	}
 
-	// Build arguments: pass --proxy-server to Chromium/Electron
+	chromiumProxy := CleanChromiumProxyURL(proxyURL)
+
+	// Build arguments: pass --proxy-server to Chromium/Electron without quotes
 	args := []string{
-		fmt.Sprintf("--proxy-server=%s", proxyURL),
+		fmt.Sprintf("--proxy-server=%s", chromiumProxy),
 	}
 	args = append(args, extraArgs...)
 
 	cmd := exec.Command(appPath, args...)
+	cmd.Dir = filepath.Dir(appPath)
 	cmd.Env = BuildProxyEnv(proxyURL)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -122,7 +132,7 @@ func LaunchAntigravityWithProxy(appPath string, proxyURL string, extraArgs []str
 	return nil
 }
 
-// GenerateNoTunDesktopLauncher creates a .desktop shortcut or Windows script
+// GenerateNoTunDesktopLauncher creates .desktop shortcuts for both Antigravity and Antigravity Cleaner GUI
 func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 	appPath := FindAntigravityExecutable()
 	if appPath == "" {
@@ -140,42 +150,124 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 	home, _ := os.UserHomeDir()
 
 	if runtime.GOOS == "linux" {
+		binDir := filepath.Join(home, ".local", "bin")
+		_ = os.MkdirAll(binDir, 0755)
+
 		desktopAppDir := filepath.Join(home, ".local", "share", "applications")
 		_ = os.MkdirAll(desktopAppDir, 0755)
-		appMenuPath := filepath.Join(desktopAppDir, "antigravity.desktop")
 
+		cleanerBin, _ := os.Executable()
+		if cleanerBin == "" || strings.Contains(cleanerBin, "/tmp/") || strings.Contains(cleanerBin, "go-build") {
+			cleanerBin = filepath.Join(binDir, "antigravity-cleaner")
+		}
+
+		// 1. Create Smart Launcher script in ~/.local/bin/antigravity-smart-launcher.sh
+		smartLauncherScript := filepath.Join(binDir, "antigravity-smart-launcher.sh")
+		scriptContent := fmt.Sprintf(`#!/usr/bin/env bash
+# Smart Proxy Launcher for Google Antigravity
+# Auto-detects running proxy (v2ray, NekoBox, Clash, Hiddify) and launches Antigravity
+
+APP_PATH="%s"
+CANDIDATES=("10808" "2080" "7890" "1080" "10809" "2081")
+ACTIVE_PORT=""
+
+for port in "${CANDIDATES[@]}"; do
+    if (echo > /dev/tcp/127.0.0.1/$port) >/dev/null 2>&1; then
+        ACTIVE_PORT="$port"
+        break
+    fi
+done
+
+if [ -z "$ACTIVE_PORT" ]; then
+    if [ -n "$ALL_PROXY" ] || [ -n "$HTTPS_PROXY" ]; then
+        exec "$APP_PATH" "$@"
+    fi
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send "Antigravity Smart Launcher" "⚠️ هیچ پروکسی فعالی یافت نشد!\nبرای حفظ لاگین و جلوگیری از خطای ۴۰۳، لطفاً ابتدا فیلترشکن خود را روشن کنید." -i dialog-warning -u critical
+    fi
+    CLEANER_BIN="%s"
+    if [ -x "$CLEANER_BIN" ]; then
+        exec "$CLEANER_BIN" gui
+    fi
+    exit 1
+fi
+
+PROXY_TYPE="socks5"
+if [ "$ACTIVE_PORT" = "10809" ] || [ "$ACTIVE_PORT" = "2081" ]; then
+    PROXY_TYPE="http"
+fi
+
+export ALL_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
+export HTTPS_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
+export HTTP_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
+
+# Pass socks5:// without quotes to Chromium (Chromium does not support socks5h)
+exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
+`, appPath, cleanerBin)
+
+		_ = os.WriteFile(smartLauncherScript, []byte(scriptContent), 0755)
+
+		// 2. Setup icons
 		iconPath := filepath.Join(filepath.Dir(appPath), "icon.png")
 		if fi, err := os.Stat(iconPath); err != nil || fi.Size() < 100 {
 			userIcon := filepath.Join(home, ".local", "share", "icons", "antigravity.png")
 			iconPath = EnsureDefaultIcon(userIcon)
 		}
+		cleanerIconPath := EnsureDefaultIcon(filepath.Join(home, ".local", "share", "icons", "antigravity-cleaner.png"))
 
-		content := fmt.Sprintf(`[Desktop Entry]
+		// 3. Create Antigravity IDE Desktop Launcher
+		appMenuPath := filepath.Join(desktopAppDir, "antigravity.desktop")
+		contentAntigravity := fmt.Sprintf(`[Desktop Entry]
 Version=1.0
 Name=Antigravity
 GenericName=AI Code Editor
 Comment=Google Antigravity with Smart No-TUN Proxy
-Exec=env ALL_PROXY=%s HTTPS_PROXY=%s HTTP_PROXY=%s %s --proxy-server="%s"
+Exec=%s %%F
 Icon=%s
+Path=%s
 Terminal=false
 Type=Application
 Categories=Development;IDE;
 StartupNotify=true
 StartupWMClass=antigravity
-`, proxyURL, proxyURL, proxyURL, appPath, proxyURL, iconPath)
+`, smartLauncherScript, iconPath, filepath.Dir(appPath))
 
-		if err := os.WriteFile(appMenuPath, []byte(content), 0755); err != nil {
+		if err := os.WriteFile(appMenuPath, []byte(contentAntigravity), 0755); err != nil {
 			return "", err
 		}
 
-		// Also create on ~/Desktop if Desktop directory exists
+		// 4. Create Antigravity Cleaner GUI Desktop Launcher
+		cleanerMenuPath := filepath.Join(desktopAppDir, "antigravity-cleaner.desktop")
+		contentCleaner := fmt.Sprintf(`[Desktop Entry]
+Version=1.0
+Name=Antigravity Cleaner
+GenericName=Optimization & Proxy Toolkit
+Comment=Retro Diagnostic & Auto-Fix GUI for Google Antigravity
+Exec=%s gui
+Icon=%s
+Path=%s
+Terminal=false
+Type=Application
+Categories=Development;Utility;
+StartupNotify=true
+StartupWMClass=antigravity-patcher
+`, cleanerBin, cleanerIconPath, home)
+
+		_ = os.WriteFile(cleanerMenuPath, []byte(contentCleaner), 0755)
+
+		// 5. Also create on ~/Desktop if Desktop directory exists
 		desktopDir := filepath.Join(home, "Desktop")
 		createdPaths := appMenuPath
 		if fi, err := os.Stat(desktopDir); err == nil && fi.IsDir() {
 			desktopShortcut := filepath.Join(desktopDir, "Antigravity.desktop")
-			_ = os.WriteFile(desktopShortcut, []byte(content), 0755)
+			_ = os.WriteFile(desktopShortcut, []byte(contentAntigravity), 0755)
 			_ = exec.Command("gio", "set", desktopShortcut, "metadata::trusted", "true").Run()
-			createdPaths = fmt.Sprintf("%s and Desktop shortcut", appMenuPath)
+
+			cleanerShortcut := filepath.Join(desktopDir, "Antigravity-Cleaner.desktop")
+			_ = os.WriteFile(cleanerShortcut, []byte(contentCleaner), 0755)
+			_ = exec.Command("gio", "set", cleanerShortcut, "metadata::trusted", "true").Run()
+
+			createdPaths = fmt.Sprintf("%s, %s and Desktop shortcuts", appMenuPath, cleanerMenuPath)
 		}
 
 		// Refresh GNOME/KDE application database
@@ -185,13 +277,14 @@ StartupWMClass=antigravity
 	}
 
 	if runtime.GOOS == "windows" {
+		chromiumProxy := CleanChromiumProxyURL(proxyURL)
 		batPath := filepath.Join(home, "Desktop", "Antigravity-NoTUN.bat")
 		content := fmt.Sprintf(`@echo off
 set "ALL_PROXY=%s"
 set "HTTPS_PROXY=%s"
 set "HTTP_PROXY=%s"
-start "" "%s" --proxy-server="%s"
-`, proxyURL, proxyURL, proxyURL, appPath, proxyURL)
+start "" "%s" --proxy-server=%s
+`, proxyURL, proxyURL, proxyURL, appPath, chromiumProxy)
 
 		if err := os.WriteFile(batPath, []byte(content), 0755); err != nil {
 			return "", err
