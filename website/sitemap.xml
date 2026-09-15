@@ -1,49 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- English (Default) -->
+  <!-- Home Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Features Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/features.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Docs Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/docs.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- FAQ Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Troubleshooting Page (GEO & SEO Priority) -->
+  <!-- Troubleshooting Page (Cornerstone) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/troubleshooting.html</loc>
     <lastmod>2026-09-16</lastmod>
@@ -51,9 +17,41 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- LLMs.txt for AI Search Engines -->
+  <!-- Features Page -->
   <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/llms.txt</loc>
+    <loc>https://tawroot.github.io/antigravity-cleaner/features.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Download Page -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/download.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Docs Page -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/docs.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pricing Page -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/pricing.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- FAQ Page -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
     <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -67,7 +65,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Article 1: Google Antigravity 403 Forbidden & Region Lock -->
+  <!-- Technical Article 1: Google Antigravity 403 Forbidden & Region Lock (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html</loc>
     <lastmod>2026-09-16</lastmod>
@@ -75,7 +73,7 @@
     <priority>0.95</priority>
   </url>
 
-  <!-- Article 2: Configure V2Ray, Clash & SOCKS5 for Antigravity (No TUN Mode) -->
+  <!-- Technical Article 2: Configure V2Ray, Clash & SOCKS5 without TUN Mode (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html</loc>
     <lastmod>2026-09-16</lastmod>
@@ -83,7 +81,7 @@
     <priority>0.95</priority>
   </url>
 
-  <!-- Article 3: Iranian Developer Guide (Farsi) -->
+  <!-- Technical Article 3: Iranian Developer Guide (Farsi) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html</loc>
     <lastmod>2026-09-16</lastmod>
@@ -91,7 +89,7 @@
     <priority>0.95</priority>
   </url>
 
-  <!-- Article 4: Russian Developer Guide (Russian) -->
+  <!-- Technical Article 4: Russian Developer Guide (Russian) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html</loc>
     <lastmod>2026-09-16</lastmod>
@@ -99,115 +97,10 @@
     <priority>0.95</priority>
   </url>
 
-
-  <!-- Persian (Farsi) -->
+  <!-- LLMs.txt for AI Search Engines -->
   <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/fa/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Chinese Simplified -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/zh/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Russian -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/ru/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Turkish -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/tr/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Spanish -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/es/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Arabic -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/ar/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Urdu -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/ur/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tawroot.github.io/antigravity-cleaner/"/>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://tawroot.github.io/antigravity-cleaner/fa/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://tawroot.github.io/antigravity-cleaner/zh/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://tawroot.github.io/antigravity-cleaner/ru/"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://tawroot.github.io/antigravity-cleaner/tr/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tawroot.github.io/antigravity-cleaner/es/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://tawroot.github.io/antigravity-cleaner/ar/"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://tawroot.github.io/antigravity-cleaner/ur/"/>
-    <lastmod>2024-12-23</lastmod>
+    <loc>https://tawroot.github.io/antigravity-cleaner/llms.txt</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
