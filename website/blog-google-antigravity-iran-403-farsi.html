@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آموزش جامع رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران (اتصال با V2Ray بدون افت پینگ)</title>
+
+    <!-- SEO & GEO Meta Tags -->
+    <meta name="description"
+        content="راهنمای تخصصی و فنی برای برنامه‌نویسان ایرانی: رفع خطای ۴۰۳ و پیام Your current account is not eligible for Antigravity در گوگل آنتی‌گرویتی، اتصال از طریق V2Ray و کلش بدون حالت TUN، و راه‌اندازی بدون قطعی استریم کدنویسی.">
+    <meta name="keywords"
+        content="رفع ارور 403 گوگل آنتی گرویتی, تحریم گوگل آنتی گرویتی, وصل کردن v2ray به antigravity, رفع خطای Your current account is not eligible, پروکسی antigravity, اجرای antigravity در ایران, دور زدن تحریم گوگل آنتی گرویتی, antigravity v2ray">
+    <meta name="author" content="Tawroot & جامعه متن‌باز Antigravity Cleaner">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html">
+    <meta property="og:title" content="آموزش جامع رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران">
+    <meta property="og:description"
+        content="حل قطعی مشکل ریجن لاک و خطای ۴۰۳ گوگل آنتی‌گرویتی با V2Ray و کلش بدون کندی سرعت اینترنت و بدون پریدن لاگین اکانت گوگل.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
+
+    <!-- Schema.org JSON-LD (TechArticle + FAQPage + BreadcrumbList) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "خانه",
+              "item": "https://tawroot.github.io/antigravity-cleaner/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "وبلاگ",
+              "item": "https://tawroot.github.io/antigravity-cleaner/blog.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "آموزش رفع تحریم گوگل آنتی‌گرویتی در ایران",
+              "item": "https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "آموزش جامع رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران",
+          "description": "بررسی فنی دلایل خطای ۴۰۳ گوگل آنتی‌گرویتی، مشکلات نشت DNS با TUN mode و روش اتصال مستقیم از طریق پورت SOCKS5 در v2rayN و کلش.",
+          "inLanguage": "fa",
+          "author": {
+            "@type": "Organization",
+            "name": "Antigravity Cleaner"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Antigravity Cleaner",
+            "url": "https://tawroot.github.io/antigravity-cleaner/"
+          },
+          "datePublished": "2026-09-16",
+          "dateModified": "2026-09-16",
+          "proficiencyLevel": "Expert"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "چرا با روشن بودن VPN باز هم خطای ۴۰۳ در Google Antigravity دریافت می‌کنیم؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "گوگل آنتی‌گرویتی علاوه بر بررسی IP در سمت سرور، قبل از ارسال ریکوئست، از طریق فایل‌های جاوااسکریپتی محلی (مانند main.js و ماژول‌های الکترون) محیط سیستم و ارتباطات شبکه را بررسی می‌کند. همچنین در صورت نشت DNS یا قطع و وصل لحظه‌ای، آی‌پی ایران شناسایی شده و سشن اکانت گوگل معلق می‌شود."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "چرا استفاده از حالت TUN برای برنامه‌نویسان توصیه نمی‌شود؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "حالت TUN تمام ترافیک سیستم شما شامل پکیج‌منیجرها (npm, pip, docker) و سایت‌های داخلی را از سرور فیلترشکن عبور می‌دهد که باعث کندی شدید، بالا رفتن پینگ و ریست شدن ارتباط استریم هوش مصنوعی توسط سیستم فیلترینگ داخلی می‌شود."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "پورت لوکال پروکسی v2rayN و Clash چیست؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "به صورت پیش‌فرض در v2rayN پورت SOCKS5 برابر 10808 و پورت HTTP برابر 10809 است. در کلاینت‌های Clash و Clash Verge این پورت 7890 و در NekoBox برابر 2080 است."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "ابزار Antigravity Cleaner چگونه مشکل را برای همیشه حل می‌کند؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "این ابزار با پچ کردن ماژول‌های کلاینت آنتی‌گرویتی، غیرفعال‌سازی چک‌های ریجن‌لاک محلی، تنظیم پکت‌های KeepAlive برای جلوگیری از قطع شدن استریم، و تزریق خودکار پورت لوپ‌بک پروکسی، بدون نیاز به حالت TUN ادیتور را به پایدارترین شکل ممکن اجرا می‌کند."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-align: right;
+        }
+        .article-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+        }
+        .star-banner {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.15), rgba(0, 240, 255, 0.15));
+            border: 1px solid #ffaa00;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 35px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .article-body {
+            color: var(--text-secondary);
+            line-height: 2;
+            font-size: 1.05rem;
+        }
+        .article-body h2 {
+            color: #fff;
+            margin: 45px 0 18px;
+            font-size: 1.7rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+        .article-body h3 {
+            color: #00f0ff;
+            margin: 28px 0 12px;
+            font-size: 1.35rem;
+        }
+        .article-body p {
+            margin-bottom: 22px;
+        }
+        .article-body ul, .article-body ol {
+            margin: 15px 30px 25px 0;
+        }
+        .article-body li {
+            margin-bottom: 12px;
+        }
+        .code-snippet {
+            direction: ltr;
+            text-align: left;
+            background: #0b0f19;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 18px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #00f0ff;
+            margin: 22px 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .code-snippet span.comment {
+            color: #6b7280;
+        }
+        .code-snippet span.cmd {
+            color: #ffd700;
+        }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(11, 15, 25, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tech-table th, .tech-table td {
+            padding: 14px 18px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
+        }
+        .tech-table th {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00f0ff;
+            font-weight: 600;
+        }
+        .info-box {
+            background: rgba(0, 240, 255, 0.05);
+            border-right: 4px solid #00f0ff;
+            padding: 16px 20px;
+            border-radius: 8px 0 0 8px;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="features.html">امکانات</a></li>
+                    <li><a href="download.html">دانلود</a></li>
+                    <li><a href="docs.html">مستندات</a></li>
+                    <li><a href="faq.html">پرسش و پاسخ</a></li>
+                    <li><a href="troubleshooting.html">عیب‌یابی</a></li>
+                    <li><a href="blog.html" class="active">وبلاگ</a></li>
+                    <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> گیت‌هاب</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <span style="color: #00f0ff; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">راهنمای تخصصی شبکه و توسعه &bull; شهریور ۱۴۰۵</span>
+        <h1 style="font-size: 2.4rem; color: #fff; margin: 15px 0 20px; line-height: 1.35;">
+            آموزش جامع رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران (اتصال با V2Ray بدون افت پینگ)
+        </h1>
+        <p style="font-size: 1.15rem; color: #94a3b8; margin-bottom: 30px;">
+            بررسی مهندسی دلایل بروز خطای ۴۰۳ و ریجن‌لاک، جلوگیری از قطع شدن استریم پاسخ‌های هوش مصنوعی و اجرای ادیتور با پروکسی لوکال بدون نیاز به حالت سنگین TUN.
+        </p>
+
+        <!-- Star Callout Banner -->
+        <div class="star-banner">
+            <div>
+                <strong style="color: #fff; font-size: 1.1rem;"><i class="fas fa-star" style="color: #ffaa00;"></i> از آزادی کدنویسی لذت می‌برید؟</strong>
+                <p style="color: #ccc; margin: 6px 0 0; font-size: 0.9rem;">پروژه متن‌باز Antigravity Cleaner صددرصد رایگان و آفلاین است. با دادن یک ستاره در گیت‌هاب از جامعه برنامه‌نویسان حمایت کنید!</p>
+            </div>
+            <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-primary" style="white-space: nowrap;">
+                <i class="fab fa-github"></i> ثبت ستاره در گیت‌هاب
+            </a>
+        </div>
+
+        <article class="article-body">
+            <p>
+                محیط برنامه‌نویسی <strong>Google Antigravity</strong> که توسط تیم Google DeepMind توسعه یافته، یکی از پیشرفته‌ترین ابزارهای کدنویسی مبتنی بر ایجنت‌های هوش مصنوعی مستقل است. با این حال، برنامه‌نویسان در ایران به محض باز کردن این برنامه یا ورود با اکانت گوگل، با خطای مسدودسازی منطقه جغرافیایی مواجه می‌شوند:
+            </p>
+
+            <div class="code-snippet" style="border-color: #ff0055; color: #ff5577;">
+                HTTP 403 Forbidden: "Your current account is not eligible for Antigravity, because it is not currently available in your location."
+            </div>
+
+            <p>
+                بسیاری از برنامه‌نویسان بلافاصله VPN یا حالت TUN مود در نرم‌افزارهایی مثل v2rayN یا نکو‌باکس را فعال می‌کنند؛ اما بعد از چند دقیقه با قطع ناگهانی تولید کد، باطل شدن نشست اکانت گوگل، یا خطای قفل دایرکتوری (<code>SingletonLock</code>) روبرو می‌شوند. در این مقاله ریشه فنی این مشکلات را کالبدشکافی کرده و راه‌حل دائمی و استاندارد آن را ارائه می‌دهیم.
+            </p>
+
+            <h2>۱. ریشه‌یابی فنی: چرا فعال کردن VPN معمولی مشکل را حل نمی‌کند؟</h2>
+            <p>
+                مکانیزم اعتبارسنجی Google Antigravity یک سیستم دو مرحله‌ای پیچیده است:
+            </p>
+
+            <ul>
+                <li><strong>اعتبارسنجی سمت کلاینت (Client-Side Verification):</strong> در فایل‌های هسته ادیتور (مانند <code>main.js</code>، ماژول‌های باینری Go بنام <code>agy</code> و فایل‌های اکستنشن)، توابعی تعبیه شده که قبل از اتصال، محیط سیستم، تایم‌زون و اتصالات محلی را بررسی می‌کنند.</li>
+                <li><strong>نشت لحظه‌ای DNS و شناسایی توسط گوگل:</strong> در حالت‌های معمول فیلترشکن، سیستم‌عامل ویندوز یا لینوکس ممکن است درخواست تبدیل نام دامنه (DNS Resolution) سرورهای گوگل را از طریق DNS کارت شبکه واقعی ارسال کند. با ثبت حتی یک درخواست با آی‌پی ایران، کل سشن احراز هویت گوگل بی‌اعتبار می‌شود.</li>
+                <li><strong>ریست شدن کانکشن توسط فیلترینگ داخلی (Middlebox TLS Reset):</strong> استریم کدهای طولانی توسط مدل‌های DeepMind روی کانکشن‌های پایدار HTTP/2 برقرار می‌شود. سیستم‌های بازرسی عمیق پکت (DPI) در اینترنت ایران، در صورتی که روی کانکشن چند ثانیه سکوت برقرار شود یا پکت‌های KeepAlive ارسال نشود، کانکشن TCP را با تزریق پکت RST قطع می‌کنند.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>نکته کلیدی معماری:</strong> نرم‌افزار آنتی‌گرویتی بر پایه فریم‌ورک Electron ساخته شده است. بهترین و تمیزترین روش، تزریق پروکسی به صورت مستقیم در <strong>لایه ۷ (Process Level)</strong> است؛ یعنی تنها ترافیک این نرم‌افزار از فیلترشکن عبور داده شود و سیستم‌عامل وارد حالت سنگین و ناپایدار TUN نشود.
+            </div>
+
+            <h2>۲. پورت‌های استاندارد پروکسی در نرم‌افزارهای رایج</h2>
+            <p>
+                تقریباً تمام ابزارهای عبور از فیلترینگ یک پورت محلی لوپ‌بک (روی <code>127.0.0.1</code>) باز می‌کنند. جدول زیر پورت‌های استاندارد را نشان می‌دهد:
+            </p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>نرم‌افزار کلاینت</th>
+                        <th>نوع پروتکل</th>
+                        <th>پورت پیش‌فرض</th>
+                        <th>آدرس کامل لوکال</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>v2rayN / هسته Xray</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>10808</code></td>
+                        <td><code>socks5://127.0.0.1:10808</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clash / Clash Verge / Mihomo</strong></td>
+                        <td>Mixed (SOCKS5/HTTP)</td>
+                        <td><code>7890</code></td>
+                        <td><code>socks5://127.0.0.1:7890</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>NekoBox / NekoRay</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>2080</code></td>
+                        <td><code>socks5://127.0.0.1:2080</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outline / Shadowsocks</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>1080</code></td>
+                        <td><code>socks5://127.0.0.1:1080</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>۳. اجرای تمیز با تزریق فلگ‌های کرومیوم (بدون TUN Mode)</h2>
+            <p>
+                اگر می‌خواهید آنتی‌گرویتی را به صورت دستی بدون دستکاری تنظیمات کل ویندوز یا لینوکس اجرا کنید:
+            </p>
+
+            <h3>در لینوکس (ترمینال Bash):</h3>
+            <div class="code-snippet">
+                <span class="comment"># اجرای اختصاصی ادیتور با پروکسی لوکال V2Ray (پورت 10808)</span><br>
+                <span class="cmd">antigravity</span> \
+                  --proxy-server="socks5://127.0.0.1:10808" \
+                  --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE 127.0.0.1" \
+                  --no-sandbox
+            </div>
+
+            <h3>در ویندوز (PowerShell):</h3>
+            <div class="code-snippet">
+                <span class="comment"># تنظیم متغیرهای محیطی برای ساب‌پراسس‌های Node.js و اجرای ادیتور</span><br>
+                $env:ALL_PROXY = "socks5://127.0.0.1:10808"<br>
+                & "$env:LOCALAPPDATA\Programs\Antigravity\Antigravity.exe" --proxy-server="socks5://127.0.0.1:10808"
+            </div>
+
+            <h2>۴. راه‌حل خودکار و یک‌کلیکه: Antigravity Cleaner</h2>
+            <p>
+                نوشتن دستورات و باز کردن دستی ترمینال در هر بار اجرای برنامه، زمان‌بر است. اسکریپت متن‌باز <strong>Antigravity Cleaner</strong> تمام مراحل را به صورت خودکار انجام می‌دهد:
+            </p>
+
+            <ol>
+                <li><strong>پچ خودکار فایل‌های برنامه:</strong> توابع چک‌کننده ریجن در هسته برنامه خنثی می‌شوند تا لاگین اکانت گوگل باطل نشود.</li>
+                <li><strong>تشخیص هوشمند پورت فعال:</strong> سیستم بررسی می‌کند کدام پورت (۱۰۸۰۸ یا ۷۸۹۰ یا ۲۰۸۰) فعال است و پروکسی را به برنامه متصل می‌کند.</li>
+                <li><strong>ارسال پکت‌های پایداری (KeepAlive ۱۵ ثانیه‌ای):</strong> با ارسال هارت‌بیت فعال در تونل لوکال، فایروال اینترنت ایران اجازه قطع کردن استریم را پیدا نمی‌کند.</li>
+                <li><strong>ساخت شورت‌کات دسکتاپ:</strong> یک آیکون آماده روی دسکتاپ ایجاد می‌کند تا با یک دابل‌کلیک ساده، برنامه همیشه به درستی بالا بیاید.</li>
+            </ol>
+
+            <div class="code-snippet">
+                <span class="comment"># نصب سریع در لینوکس و مک:</span><br>
+                <span class="cmd">curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</span><br><br>
+                <span class="comment"># اجرای خودکار بدون دردسر:</span><br>
+                <span class="cmd">ag-cleaner launch</span>
+            </div>
+
+            <p><em>دستور نصب در ویندوز (پاورشل Run as Administrator):</em></p>
+            <div class="code-snippet">
+                <span class="cmd">irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</span><br>
+                <span class="cmd">ag-cleaner launch</span>
+            </div>
+
+            <h2>۵. جدول عیب‌یابی سریع و رفع خطاها</h2>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>پیام خطا در سیستم</th>
+                        <th>علت اصلی بروز خطا</th>
+                        <th>روش حل قطعی و دائمی</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>HTTP 403 / Account Not Eligible</code></td>
+                        <td>شناسایی موقعیت ایران به دلیل نشت DNS یا اتصال مستقیم</td>
+                        <td>اجرای دستور <code>ag-cleaner patch</code> و شروع با لانچر اختصاصی</td>
+                    </tr>
+                    <tr>
+                        <td><code>SingletonLock: Could not acquire lock</code></td>
+                        <td>بسته شدن ناگهانی برنامه و جا ماندن فایل‌های قفل</td>
+                        <td>اجرای دستور <code>ag-cleaner clean</code> برای پاکسازی ایمن قفل‌ها</td>
+                    </tr>
+                    <tr>
+                        <td><code>HTTP 429 Quota Exceeded</code></td>
+                        <td>اتمام سهمیه ساعتی آی‌پی مشترک سرور فیلترشکن</td>
+                        <td>تغییر لوکیشن سرور در v2rayN یا سوییچ به کانفیگ خلوت‌تر</td>
+                    </tr>
+                    <tr>
+                        <td><code>قطع ناگهانی کدنویسی وسط استریم</code></td>
+                        <td>ریست شدن پکت‌های TCP به دلیل سکوت روی کانکشن</td>
+                        <td>استفاده از <code>ag-cleaner launch</code> با فعال بودن KeepAlive خودکار</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="star-banner" style="margin-top: 50px;">
+                <div>
+                    <strong style="color: #fff; font-size: 1.15rem;">این آموزش به رفع مشکل شما کمک کرد؟</strong>
+                    <p style="color: #ccc; margin-top: 6px; font-size: 0.95rem;">
+                        با دادن یک ستاره (Star) به ریپازیتوری <strong>Antigravity Cleaner</strong> در گیت‌هاب، به بیشتر دیده شدن این ابزار رایگان برای سایر برنامه‌نویسان کمک کنید.
+                    </p>
+                </div>
+                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> ستاره در گیت‌هاب
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: var(--text-muted); font-size: 14px;">پروژه متن‌باز Antigravity Cleaner &bull; تحت مجوز GPL-3.0 &bull; تقدیم به برنامه‌نویسان ایران و سراسر جهان. 🕊️</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Configure V2Ray, Clash & SOCKS5 Proxy for Google Antigravity (Without TUN Mode)</title>
+
+    <!-- SEO & Search Engine Optimization Meta Tags -->
+    <meta name="description"
+        content="In-depth architectural guide to running Google Antigravity IDE behind V2Ray, Xray, Clash, or NekoBox SOCKS5 proxies without system-wide TUN mode. Prevent HTTP/2 stream disconnects, fix 403 region locks, and isolate development traffic.">
+    <meta name="keywords"
+        content="Google Antigravity proxy, Antigravity v2ray, Antigravity clash, Antigravity no tun mode, Antigravity socks5 proxy, Google Antigravity 403 fix, Antigravity 10808 proxy, Antigravity middlebox disconnect, Antigravity keepalive">
+    <meta name="author" content="Tawroot & Antigravity Cleaner Community">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html">
+
+    <!-- Open Graph / Social Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html">
+    <meta property="og:title" content="How to Configure V2Ray, Clash & SOCKS5 Proxy for Google Antigravity (Without TUN Mode)">
+    <meta property="og:description"
+        content="Step-by-step technical guide to routing Google Antigravity through local SOCKS5 loopbacks without TUN mode packet leaks or DPI resets.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
+
+    <!-- Schema.org JSON-LD Structured Data (TechArticle + FAQPage + BreadcrumbList) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://tawroot.github.io/antigravity-cleaner/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://tawroot.github.io/antigravity-cleaner/blog.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Antigravity No-TUN Proxy Guide",
+              "item": "https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "How to Configure V2Ray, Clash & SOCKS5 Proxy for Google Antigravity (Without TUN Mode)",
+          "description": "Comprehensive engineering breakdown of Google Antigravity network topology, Electron proxy injection, and stable proxying via local loopbacks.",
+          "author": {
+            "@type": "Organization",
+            "name": "Antigravity Cleaner Core Team"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Antigravity Cleaner",
+            "url": "https://tawroot.github.io/antigravity-cleaner/"
+          },
+          "datePublished": "2026-09-16",
+          "dateModified": "2026-09-16",
+          "proficiencyLevel": "Expert",
+          "dependencies": "Google Antigravity IDE, V2Ray / Xray / Clash / NekoBox"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Why does Google Antigravity fail with standard TUN mode VPNs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Virtual TUN network adapters capture all operating system packets indiscriminately. Under heavy network traffic or state ISP Deep Packet Inspection (DPI), long-lived HTTP/2 gRPC streaming connections between Antigravity and Google DeepMind servers suffer TCP RST packets, causing stream dropouts and authentication token invalidation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the standard local SOCKS5 proxy ports for V2Ray, Clash, and NekoBox?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The default loopback ports are: 10808 for V2RayN and Xray core, 7890 for Clash and Mihomo, 2080 for NekoBox, and 1080 for generic Shadowsocks clients."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Antigravity Cleaner automate proxy launching?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Antigravity Cleaner inspects active local listening ports using netstat/ss, selects your operational proxy daemon (e.g., 127.0.0.1:10808), injects Chromium proxy flags (--proxy-server=socks5://127.0.0.1:port) into the binary arguments, and creates an isolated desktop launcher."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .article-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+        }
+        .star-banner {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.15), rgba(0, 240, 255, 0.15));
+            border: 1px solid #ffaa00;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 35px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .article-body {
+            color: var(--text-secondary);
+            line-height: 1.85;
+            font-size: 1.05rem;
+        }
+        .article-body h2 {
+            color: #fff;
+            margin: 45px 0 18px;
+            font-size: 1.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
+        }
+        .article-body h3 {
+            color: #00f0ff;
+            margin: 28px 0 12px;
+            font-size: 1.35rem;
+        }
+        .article-body p {
+            margin-bottom: 20px;
+        }
+        .article-body ul, .article-body ol {
+            margin: 15px 0 25px 25px;
+        }
+        .article-body li {
+            margin-bottom: 10px;
+        }
+        .code-snippet {
+            background: #0b0f19;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 18px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #00f0ff;
+            margin: 22px 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .code-snippet span.comment {
+            color: #6b7280;
+        }
+        .code-snippet span.cmd {
+            color: #ffd700;
+        }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(11, 15, 25, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tech-table th, .tech-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
+        }
+        .tech-table th {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00f0ff;
+            font-weight: 600;
+        }
+        .info-box {
+            background: rgba(0, 240, 255, 0.05);
+            border-left: 4px solid #00f0ff;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="download.html">Download</a></li>
+                    <li><a href="docs.html">Docs</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <span style="color: #00f0ff; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Network Architecture &bull; Updated September 2026</span>
+        <h1 style="font-size: 2.5rem; color: #fff; margin: 15px 0 20px; line-height: 1.25;">
+            How to Configure V2Ray, Clash & SOCKS5 Proxy for Google Antigravity (Without TUN Mode)
+        </h1>
+        <p style="font-size: 1.15rem; color: #94a3b8; margin-bottom: 30px;">
+            A senior DevOps breakdown of Electron process proxy injection, loopback socket isolation, and eliminating gRPC stream drops during autonomous agent generation.
+        </p>
+
+        <!-- Star Callout Banner -->
+        <div class="star-banner">
+            <div>
+                <strong style="color: #fff; font-size: 1.1rem;"><i class="fas fa-star" style="color: #ffaa00;"></i> Support Open-Source Access for Sanctioned Developers</strong>
+                <p style="color: #ccc; margin: 6px 0 0; font-size: 0.9rem;">Antigravity Cleaner is 100% free, offline, and auditable. Star our repository to boost visibility!</p>
+            </div>
+            <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-primary" style="white-space: nowrap;">
+                <i class="fab fa-github"></i> Star on GitHub
+            </a>
+        </div>
+
+        <article class="article-body">
+            <p>
+                When software developers in restricted regions (such as Iran, Russia, and China) attempt to run <strong>Google Antigravity</strong> through standard VPN clients, they quickly face severe connection stability issues. Long-running AI coding sessions frequently stall with stream resets, and attempting to log in triggers the infamous:
+            </p>
+
+            <div class="code-snippet" style="border-color: #ff0055; color: #ff5577;">
+                HTTP 403 Forbidden: "Your current account is not eligible for Antigravity, because it is not currently available in your location."
+            </div>
+
+            <p>
+                The instinctive reaction is to turn on <strong>System-Wide TUN Mode</strong> in clients like V2RayN, Clash Verge, or NekoBox. In this guide, we examine why TUN mode is fundamentally flawed for Google Antigravity, and demonstrate the robust alternative: <strong>Targeted Loopback SOCKS5 Proxy Injection</strong>.
+            </p>
+
+            <h2>1. Why System-Wide TUN Mode Fails for AI IDEs</h2>
+            <p>
+                Virtual TUN adapters (like WinTun or Linux <code>tun0</code>) operate at Layer 3 (Network Layer). While convenient for general web browsing, they introduce major architectural hazards for developer environments:
+            </p>
+
+            <ul>
+                <li><strong>Local ISP Deep Packet Inspection (DPI):</strong> TUN adapters route <em>all</em> device traffic through the encrypted tunnel. High traffic spikes trigger ISP middleboxes to inject TCP RST packets into continuous HTTP/2 multiplexed streams, abruptly severing code generation midway.</li>
+                <li><strong>DNS Leakage & Dual-Stack Conflicts:</strong> Windows and macOS often resolve Google API hostnames through domestic physical NIC DNS resolvers before the TUN interface captures them. Google's Edge CDN instantly tags the request from an unsupported territory.</li>
+                <li><strong>Domestic Traffic Slowdown:</strong> Local package managers (npm, pip, cargo, docker) and internal dev databases (Postgres, Redis) get routed through international proxy hops, drastically degrading development speed.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Key Architectural Insight:</strong> Google Antigravity is built on the Electron framework (Chromium runtime + Node.js worker threads + native Go daemons). The most reliable way to route it is at the <strong>Process Layer (Layer 7)</strong>, leaving the rest of your operating system on direct, high-speed local networking.
+            </div>
+
+            <h2>2. Standard Local SOCKS5 Proxy Ports</h2>
+            <p>
+                Most modern anti-censorship daemons run a local loopback proxy listener on <code>127.0.0.1</code>. Here is the reference table of standard client ports:
+            </p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Proxy Client / Core</th>
+                        <th>Default Protocol</th>
+                        <th>Default Port</th>
+                        <th>Loopback URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>V2RayN / Xray Core</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>10808</code></td>
+                        <td><code>socks5://127.0.0.1:10808</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clash / Clash Verge / Mihomo</strong></td>
+                        <td>Mixed (HTTP/SOCKS5)</td>
+                        <td><code>7890</code></td>
+                        <td><code>socks5://127.0.0.1:7890</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>NekoBox / NekoRay</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>2080</code></td>
+                        <td><code>socks5://127.0.0.1:2080</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shadowsocks / Outline</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>1080</code></td>
+                        <td><code>socks5://127.0.0.1:1080</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Manual Process Proxy Injection (Under the Hood)</h2>
+            <p>
+                To launch Google Antigravity through your loopback proxy without touching global OS network routes, supply Chromium command-line flags directly to the executable:
+            </p>
+
+            <h3>On Linux:</h3>
+            <div class="code-snippet">
+                <span class="comment"># Launch Antigravity through active V2Ray SOCKS5 port (10808)</span><br>
+                <span class="cmd">antigravity</span> \
+                  --proxy-server="socks5://127.0.0.1:10808" \
+                  --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE 127.0.0.1" \
+                  --no-sandbox
+            </div>
+
+            <h3>On Windows (PowerShell):</h3>
+            <div class="code-snippet">
+                <span class="comment"># Set environment variables for Node.js worker subprocesses</span><br>
+                $env:HTTP_PROXY = "http://127.0.0.1:10809"<br>
+                $env:HTTPS_PROXY = "http://127.0.0.1:10809"<br>
+                $env:ALL_PROXY = "socks5://127.0.0.1:10808"<br><br>
+                <span class="comment"># Launch Antigravity binary with Chromium proxy argument</span><br>
+                & "$env:LOCALAPPDATA\Programs\Antigravity\Antigravity.exe" --proxy-server="socks5://127.0.0.1:10808"
+            </div>
+
+            <h2>4. The 1-Click Automated Solution: Antigravity Cleaner</h2>
+            <p>
+                Manually managing terminal flags every time you launch the IDE is tedious and error-prone. <strong>Antigravity Cleaner</strong> automates this workflow end-to-end:
+            </p>
+
+            <ol>
+                <li><strong>Automatic Port Probe:</strong> Scans active loopback sockets to detect whether V2Ray (<code>10808</code>), Clash (<code>7890</code>), or NekoBox (<code>2080</code>) is running.</li>
+                <li><strong>Core Patcher:</strong> Neutralizes client-side regional checks in <code>main.js</code>, <code>agy</code>, and <code>extension.js</code> so Google account sessions never get invalidated.</li>
+                <li><strong>Desktop Launcher Creation:</strong> Generates a permanent desktop shortcut and application menu launcher with embedded proxy arguments.</li>
+            </ol>
+
+            <div class="code-snippet">
+                <span class="comment"># Step 1: Install Antigravity Cleaner (Linux / macOS)</span><br>
+                <span class="cmd">curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</span><br><br>
+                <span class="comment"># Step 2: Auto-detect proxy and launch</span><br>
+                <span class="cmd">ag-cleaner launch</span>
+            </div>
+
+            <p><em>Windows PowerShell equivalent:</em></p>
+            <div class="code-snippet">
+                <span class="cmd">irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</span><br>
+                <span class="cmd">ag-cleaner launch</span>
+            </div>
+
+            <h2>5. Preventing Middlebox Disconnects (TCP KeepAlive)</h2>
+            <p>
+                During extensive reasoning or refactoring tasks, Google DeepMind's LLM generation stream may remain idle between chunks for 10 to 30 seconds. State firewall middleboxes often drop idle TCP sessions.
+            </p>
+            <p>
+                Antigravity Cleaner incorporates an active <strong>15-second TCP KeepAlive heartbeat</strong> on the injected proxy tunnel. This ensures middlebox firewalls never time out long-running code generation queries.
+            </p>
+
+            <h2>6. Troubleshooting Matrix</h2>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Observed Symptom</th>
+                        <th>Underlying Root Cause</th>
+                        <th>Permanent Resolution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>HTTP 403 Forbidden / Account Not Eligible</code></td>
+                        <td>Geo-IP check failed due to direct egress or DNS leak</td>
+                        <td>Run <code>ag-cleaner patch</code> and launch via <code>ag-cleaner launch</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>SingletonLock: Lock could not be acquired</code></td>
+                        <td>Previous IDE instance crashed and orphaned socket lock</td>
+                        <td>Run <code>ag-cleaner clean</code> to remove stale locks safely</td>
+                    </tr>
+                    <tr>
+                        <td><code>HTTP 429 Quota Exceeded (RESOURCE_EXHAUSTED)</code></td>
+                        <td>Shared IP address exhausted rate limits across users</td>
+                        <td>Switch proxy server node or cycle proxy connection in V2Ray</td>
+                    </tr>
+                    <tr>
+                        <td><code>Code generation stream aborts after ~30s</code></td>
+                        <td>Middlebox DPI reset idle TCP connection</td>
+                        <td>Launch via <code>ag-cleaner launch</code> (enables 15s TCP KeepAlive)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="star-banner" style="margin-top: 50px;">
+                <div>
+                    <strong style="color: #fff; font-size: 1.15rem;">Found this technical guide helpful?</strong>
+                    <p style="color: #ccc; margin-top: 6px; font-size: 0.95rem;">
+                        Help fellow software engineers bypass artificial regional barriers by starring <strong>Antigravity Cleaner</strong> on GitHub!
+                    </p>
+                </div>
+                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> Star on GitHub
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: var(--text-muted); font-size: 14px;">Antigravity Cleaner &bull; Open Source under GPL-3.0 &bull; Dedicated to developers worldwide. 🕊️</p>
+        </div>
+    </footer>
+</body>
+</html>

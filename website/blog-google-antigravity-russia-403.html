@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Antigravity в России: Как обойти ошибку 403 и настроить V2Ray без TUN</title>
+
+    <!-- SEO & Search Engine Optimization Meta Tags -->
+    <meta name="description"
+        content="Техническое руководство: почему Google Antigravity не работает с обычным VPN в России, как исправить ошибку 403 'Your current account is not eligible' и настроить стабильный прокси через V2Ray/Xray без сбоев потока кода.">
+    <meta name="keywords"
+        content="Google Antigravity в России, Antigravity ошибка 403, Antigravity не работает с впн, Google Antigravity как установить в россии, обход блокировки Antigravity, Antigravity v2ray, Antigravity socks5 10808">
+    <meta name="author" content="Tawroot & Open-Source Community">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html">
+    <meta property="og:title" content="Google Antigravity в России: Обход ошибки 403 и настройка V2Ray">
+    <meta property="og:description"
+        content="Пошаговое решение геоблокировок Google Antigravity в РФ без разрыва сессий и без утечек DNS.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
+
+    <!-- Schema.org JSON-LD (TechArticle + FAQPage + BreadcrumbList) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Главная",
+              "item": "https://tawroot.github.io/antigravity-cleaner/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Блог",
+              "item": "https://tawroot.github.io/antigravity-cleaner/blog.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Google Antigravity в России",
+              "item": "https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html"
+            }
+          ]
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "Google Antigravity в России: Как обойти ошибку 403 и настроить V2Ray без TUN",
+          "description": "Руководство для разработчиков по обходу региональных ограничений Google Antigravity в РФ и изоляции трафика IDE через SOCKS5 loopback.",
+          "inLanguage": "ru",
+          "author": {
+            "@type": "Organization",
+            "name": "Antigravity Cleaner Core Team"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Antigravity Cleaner",
+            "url": "https://tawroot.github.io/antigravity-cleaner/"
+          },
+          "datePublished": "2026-09-16",
+          "dateModified": "2026-09-16",
+          "proficiencyLevel": "Expert"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Почему Google Antigravity выдает ошибку 403 даже при включенном VPN в РФ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Antigravity проводит многоуровневую валидацию: локальные модули JavaScript (main.js) проверяют системные маркеры перед отправкой запроса, а датацентровые IP большинства бесплатных VPN попадают в списки блокировок Google API. Кроме того, при утечках DNS через основной шлюз сессия аккаунта мгновенно помечается как недопустимая."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Чем плох режим TUN для работы с AI IDE?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Режим глобального TUN перенаправляет весь трафик ОС через шифрованный адаптер. Это вызывает задержки при обращении к локальным сервисам и провоцирует ТСПУ сбрасывать долгоживущие сессии HTTP/2, прерывая стриминг генерации кода."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Как запустить Google Antigravity через V2Ray без TUN-режима?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Используйте открытую утилиту Antigravity Cleaner: выполните ag-cleaner patch для нейтрализации локальных проверок и ag-cleaner launch для автоматической инъекции флагов Chromium --proxy-server=socks5://127.0.0.1:10808."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .article-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+        }
+        .star-banner {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.15), rgba(0, 240, 255, 0.15));
+            border: 1px solid #ffaa00;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 35px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .article-body {
+            color: var(--text-secondary);
+            line-height: 1.85;
+            font-size: 1.05rem;
+        }
+        .article-body h2 {
+            color: #fff;
+            margin: 45px 0 18px;
+            font-size: 1.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
+        }
+        .article-body h3 {
+            color: #00f0ff;
+            margin: 28px 0 12px;
+            font-size: 1.35rem;
+        }
+        .article-body p {
+            margin-bottom: 20px;
+        }
+        .article-body ul, .article-body ol {
+            margin: 15px 0 25px 25px;
+        }
+        .article-body li {
+            margin-bottom: 10px;
+        }
+        .code-snippet {
+            background: #0b0f19;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 18px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #00f0ff;
+            margin: 22px 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .code-snippet span.comment {
+            color: #6b7280;
+        }
+        .code-snippet span.cmd {
+            color: #ffd700;
+        }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(11, 15, 25, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tech-table th, .tech-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
+        }
+        .tech-table th {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00f0ff;
+            font-weight: 600;
+        }
+        .info-box {
+            background: rgba(0, 240, 255, 0.05);
+            border-left: 4px solid #00f0ff;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="features.html">Возможности</a></li>
+                    <li><a href="download.html">Скачать</a></li>
+                    <li><a href="docs.html">Документация</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="troubleshooting.html">Решение проблем</a></li>
+                    <li><a href="blog.html" class="active">Блог</a></li>
+                    <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <span style="color: #00f0ff; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Инженерия и сетевой стек &bull; Сентябрь 2026</span>
+        <h1 style="font-size: 2.5rem; color: #fff; margin: 15px 0 20px; line-height: 1.25;">
+            Google Antigravity в России: Как обойти ошибку 403 и настроить V2Ray без TUN
+        </h1>
+        <p style="font-size: 1.15rem; color: #94a3b8; margin-bottom: 30px;">
+            Инженерный разбор геоблокировок Google DeepMind: почему Antigravity вылетает с ошибкой «Account not eligible» даже с VPN, и как запустить среду разработки через точечный SOCKS5 прокси.
+        </p>
+
+        <!-- Star Callout Banner -->
+        <div class="star-banner">
+            <div>
+                <strong style="color: #fff; font-size: 1.1rem;"><i class="fas fa-star" style="color: #ffaa00;"></i> Поддержите свободный доступ к AI-разработке!</strong>
+                <p style="color: #ccc; margin: 6px 0 0; font-size: 0.9rem;">Antigravity Cleaner полностью бесплатен, работает автономно и открыт под GPL-3.0. Поставьте нам звезду на GitHub!</p>
+            </div>
+            <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-primary" style="white-space: nowrap;">
+                <i class="fab fa-github"></i> Поставить Star на GitHub
+            </a>
+        </div>
+
+        <article class="article-body">
+            <p>
+                Автономная среда разработки <strong>Google Antigravity</strong> — один из самых мощных инструментов программирования на базе моделей нового поколения. Однако российские разработчики сталкиваются с непреодолимым барьером при попытке входа или генерации кода:
+            </p>
+
+            <div class="code-snippet" style="border-color: #ff0055; color: #ff5577;">
+                HTTP 403 Forbidden: "Your current account is not eligible for Antigravity, because it is not currently available in your location."
+            </div>
+
+            <p>
+                Многие пытаются решить проблему включением глобального TUN-режима в клиентах V2RayN, Hiddify, Clash Verge или NekoBox. Однако через 10–15 минут работы генерация кода зависает, соединение сбрасывается (<code>ECONNRESET</code>), а сессия аккаунта сбрасывается в разлогин.
+            </p>
+
+            <h2>1. Почему стандартный VPN не работает стабильно</h2>
+            <p>
+                Google Antigravity использует гибридную клиент-серверную проверку локации:
+            </p>
+
+            <ul>
+                <li><strong>Локальные скрипты валидации:</strong> Внутренние файлы Electron (<code>main.js</code>, вспомогательный бинарный демон <code>agy</code> и <code>extension.js</code>) выполняют превентивную проверку системных переменных окружения.</li>
+                <li><strong>Сброс сессий узлами ТСПУ (DPI):</strong> Длинные стримы рассуждений LLM передаются по протоколу HTTP/2 multiplexed streams. При включенном общем VPN и кратковременном простое (пауза между токенами 10–20 секунд) фильтрующее оборудование провайдера посылает пакет TCP RST, разрывая сессию.</li>
+                <li><strong>Утечка DNS через системный шлюз:</strong> Если ОС отправляет хотя бы один запрос к доменам Google напрямую через провайдерский DNS, бэкенд Google мгновенно помечает сессию как недопустимую.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Архитектурный вывод:</strong> Включать глобальный TUN-режим для всей операционной системы — неэффективно и рискованно. Гораздо надежнее изолировать процесс Antigravity и направить только его через <strong>локальный SOCKS5 loopback порт (127.0.0.1:10808)</strong>.
+            </div>
+
+            <h2>2. Таблица стандартных локальных портов прокси</h2>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Клиент / Ядро прокси</th>
+                        <th>Протокол</th>
+                        <th>Порт по умолчанию</th>
+                        <th>Локальный адрес</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>V2RayN / Xray Core</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>10808</code></td>
+                        <td><code>socks5://127.0.0.1:10808</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clash / Clash Verge / Mihomo</strong></td>
+                        <td>Mixed (SOCKS5/HTTP)</td>
+                        <td><code>7890</code></td>
+                        <td><code>socks5://127.0.0.1:7890</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>NekoBox / NekoRay</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>2080</code></td>
+                        <td><code>socks5://127.0.0.1:2080</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shadowsocks / Outline</strong></td>
+                        <td>SOCKS5</td>
+                        <td><code>1080</code></td>
+                        <td><code>socks5://127.0.0.1:1080</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Запуск без TUN-режима: инъекция параметров в процесс</h2>
+            <p>
+                Поскольку Antigravity работает на базе Electron, ему можно напрямую передать флаги управления сетевым стеком Chromium, оставив весь остальной трафик системы прямым и быстрым.
+            </p>
+
+            <h3>Linux (Bash):</h3>
+            <div class="code-snippet">
+                <span class="comment"># Запуск Antigravity через активный порт V2Ray (10808)</span><br>
+                <span class="cmd">antigravity</span> \
+                  --proxy-server="socks5://127.0.0.1:10808" \
+                  --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE 127.0.0.1" \
+                  --no-sandbox
+            </div>
+
+            <h3>Windows (PowerShell):</h3>
+            <div class="code-snippet">
+                <span class="comment"># Настройка переменных окружения для воркеров Node.js</span><br>
+                $env:ALL_PROXY = "socks5://127.0.0.1:10808"<br>
+                & "$env:LOCALAPPDATA\Programs\Antigravity\Antigravity.exe" --proxy-server="socks5://127.0.0.1:10808"
+            </div>
+
+            <h2>4. Автоматическое решение в 1 клик: Antigravity Cleaner</h2>
+            <p>
+                Утилита с открытым исходным кодом <strong>Antigravity Cleaner</strong> полностью автоматизирует этот процесс:
+            </p>
+
+            <ol>
+                <li><strong>Патчинг ядра:</strong> Нейтрализует клиентские гео-проверки в <code>main.js</code> и <code>agy</code>, предотвращая разлогин аккаунта Google.</li>
+                <li><strong>Автоопределение порта:</strong> Сканирует локальные сокеты и находит запущенный клиент (V2Ray на 10808, Clash на 7890 или NekoBox на 2080).</li>
+                <li><strong>Активный KeepAlive (15 сек):</strong> Посылает проверочные пакеты в туннель, исключая тайм-ауты и сбросы сессий провайдерскими ТСПУ.</li>
+                <li><strong>Создание ярлыка:</strong> Создает ярлык запуска на рабочем столе с уже прописанными сетевыми аргументами.</li>
+            </ol>
+
+            <div class="code-snippet">
+                <span class="comment"># Установка для Linux / macOS:</span><br>
+                <span class="cmd">curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</span><br><br>
+                <span class="comment"># Автоматический запуск через рабочий прокси:</span><br>
+                <span class="cmd">ag-cleaner launch</span>
+            </div>
+
+            <p><em>Команда установки в Windows (PowerShell от имени администратора):</em></p>
+            <div class="code-snippet">
+                <span class="cmd">irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</span><br>
+                <span class="cmd">ag-cleaner launch</span>
+            </div>
+
+            <h2>5. Таблица устранения неполадок</h2>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Ошибка / Симптом</th>
+                        <th>Техническая причина</th>
+                        <th>Способ устранения</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>HTTP 403 / Account Not Eligible</code></td>
+                        <td>Блокировка по IP или утечка DNS-запроса</td>
+                        <td>Выполнить <code>ag-cleaner patch</code> и запускать через лаунчер</td>
+                    </tr>
+                    <tr>
+                        <td><code>SingletonLock: Lock could not be acquired</code></td>
+                        <td>Зависший сокет от предыдущего незавершенного процесса</td>
+                        <td>Выполнить <code>ag-cleaner clean</code> для безопасной очистки</td>
+                    </tr>
+                    <tr>
+                        <td><code>HTTP 429 Too Many Requests (Quota)</code></td>
+                        <td>Перегрузка лимитов на публичном IP ноды прокси</td>
+                        <td>Сменить серверную ноду в V2Ray или Xray</td>
+                    </tr>
+                    <tr>
+                        <td><code>Обрыв генерации кода на длинных ответах</code></td>
+                        <td>Сброс idle TCP соединения фильтрами DPI</td>
+                        <td>Запускать через <code>ag-cleaner launch</code> (включен KeepAlive 15с)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="star-banner" style="margin-top: 50px;">
+                <div>
+                    <strong style="color: #fff; font-size: 1.15rem;">Инструкция помогла настроить Antigravity?</strong>
+                    <p style="color: #ccc; margin-top: 6px; font-size: 0.95rem;">
+                        Помогите другим инженерам узнать об этом инструменте — поставьте звездочку проекту <strong>Antigravity Cleaner</strong> на GitHub!
+                    </p>
+                </div>
+                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> Star на GitHub
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: var(--text-muted); font-size: 14px;">Antigravity Cleaner &bull; Open Source под лицензией GPL-3.0 &bull; Для разработчиков по всему миру. 🕊️</p>
+        </div>
+    </footer>
+</body>
+</html>

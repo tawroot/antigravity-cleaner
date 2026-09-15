@@ -56,4 +56,7 @@ if ($UserPath -notlike "*$InstallDir*") {
 
 Write-Host ""
 Write-Host "Installation Complete! Launching Antigravity Cleaner..." -ForegroundColor Green
+Write-Host "⭐ If this tool helped you, please star our repository on GitHub:" -ForegroundColor Yellow
+Write-Host "   https://github.com/tawroot/antigravity-cleaner" -ForegroundColor Cyan
+Write-Host ""
 Start-Process $TargetFile

@@ -75,3 +75,8 @@ if [[ ":$PATH:" != *":${INSTALL_DIR}:"* ]]; then
     echo "⚠️  Note: ${INSTALL_DIR} is not in your current PATH."
     echo "   Add it by running: export PATH=\"\$HOME/.local/bin:\$PATH\""
 fi
+
+echo ""
+echo -e "\033[1;33m⭐ If Antigravity Cleaner helped you, please give it a star on GitHub:\033[0m"
+echo -e "\033[1;36m   https://github.com/tawroot/antigravity-cleaner\033[0m"
+echo ""

@@ -6,6 +6,12 @@ Antigravity Cleaner neutralizes client-side and network-level regional restricti
 
 - **GitHub Repository**: https://github.com/tawroot/antigravity-cleaner
 - **Official Documentation & Website**: https://tawroot.github.io/antigravity-cleaner/
+- **Deep Technical Guides**:
+  - [Fixing Error 403 Forbidden & Region Lock Guide](https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html)
+  - [Configuring V2Ray, Clash & SOCKS5 without TUN Mode](https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html)
+  - [Persian Guide for Iranian Developers (راهنمای رفع تحریم)](https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html)
+  - [Russian Guide for CIS Developers (Обход блокировки в РФ)](https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html)
+  - [Full Troubleshooting & Diagnostic Matrix](https://tawroot.github.io/antigravity-cleaner/troubleshooting.html)
 - **License**: GPL-3.0 (100% auditable, offline, zero-telemetry)
 - **Supported Platforms**: Linux (Ubuntu, Debian, Fedora, Arch), Windows 10/11 (x64), macOS (Apple Silicon & Intel)
 

@@ -4,12 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Antigravity Cleaner</title>
+    <title>Blog & Technical Guides - Antigravity Cleaner</title>
+
+    <!-- SEO Meta -->
+    <meta name="description"
+        content="In-depth technical guides, release announcements, and networking tutorials on bypassing Google Antigravity regional restrictions, configuring V2Ray/SOCKS5 proxies, and resolving Error 403.">
+    <meta name="keywords"
+        content="Google Antigravity blog, Antigravity 403 guide, Antigravity v2ray tutorial, Antigravity no tun proxy, Antigravity Russia, Antigravity Iran">
+    <meta name="author" content="Tawroot & Community">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/blog.html">
+
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .blog-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+        .badge-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .badge-en { background: rgba(0, 240, 255, 0.15); color: #00f0ff; }
+        .badge-fa { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .badge-ru { background: rgba(255, 170, 0, 0.15); color: #ffaa00; }
+    </style>
 </head>
 
 <body data-theme="dark">
@@ -19,26 +55,16 @@
             <nav>
                 <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" data-lang-key="home">Home</a></li>
-                    <li><a href="features.html" data-lang-key="features">Features</a></li>
-                    <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
-                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
-                    <li><a href="blog.html" class="active" data-lang-key="blog">Blog</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="download.html">Download</a></li>
+                    <li><a href="docs.html">Docs</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
                 </ul>
                 <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
-                    <div class="lang-switcher">
-                        <select id="langSelect"
-                            style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
-                            <option value="en">EN</option>
-                            <option value="fa">FA</option>
-                            <option value="ru">RU</option>
-                            <option value="zh">ZH</option>
-                            <option value="ar">AR</option>
-                            <option value="es">ES</option>
-                            <option value="tr">TR</option>
-                        </select>
-                    </div>
                     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                         <span></span>
                         <span></span>
@@ -52,38 +78,102 @@
     <section class="section" style="padding-top: 150px; padding-bottom: 80px;">
         <div class="container">
             <div class="section-header">
-                <h1 class="section-title" data-lang-key="blog">Latest News &amp; Updates</h1>
-                <p class="section-subtitle">Engineering updates, tutorials, and release announcements.</p>
+                <h1 class="section-title">Developer Guides &amp; Insights</h1>
+                <p class="section-subtitle">Cornerstone technical deep-dives on Google Antigravity networking, proxy architectures, and regional bypasses.</p>
             </div>
 
-            <div class="grid-3">
-                <div class="glass-card feature-item" style="text-align: left;">
-                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; font-weight: 600;">September 2026</div>
-                    <h3>Antigravity Cleaner v5.2.0 Released</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Introducing the Retro KeyGen desktop GUI with chiptune audio, universal Apple Silicon/Intel support, and safe process termination.</p>
-                    <a href="download.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 16px;">
-                        Read Release &amp; Download
+            <div class="grid-3" style="gap: 25px;">
+
+                <!-- Guide 1: English 403 -->
+                <div class="glass-card feature-item blog-card" style="text-align: left;">
+                    <div>
+                        <span class="badge-tag badge-en">English &bull; Networking</span>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">September 2026 &bull; 6 min read</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">How to Fix Google Antigravity Error 403 Forbidden &amp; Region Lock</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+                            Step-by-step breakdown of "Your current account is not eligible for Antigravity, because it is not currently available in your location" and client-side patch routines.
+                        </p>
+                    </div>
+                    <a href="blog-google-antigravity-403-region-lock.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
+                        Read Full Guide <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>
                     </a>
                 </div>
 
-                <div class="glass-card feature-item" style="text-align: left;">
-                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; font-weight: 600;">December 2025</div>
-                    <h3 data-lang-key="blog_1_title">Fixing SSL Handshake Errors</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;" data-lang-key="blog_1_desc">A
-                        comprehensive guide to understanding and fixing SSL/TLS errors in restricted network
-                        environments.</p>
-                    <a href="troubleshooting.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 16px;"
-                        data-lang-key="read_more">Read Guide</a>
+                <!-- Guide 2: English No-TUN -->
+                <div class="glass-card feature-item blog-card" style="text-align: left;">
+                    <div>
+                        <span class="badge-tag badge-en">English &bull; DevOps Architecture</span>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">September 2026 &bull; 8 min read</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Configure V2Ray, Clash &amp; SOCKS5 for Antigravity (No TUN Mode)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+                            Architectural analysis of Electron process proxy injection vs virtual TUN adapters. Stop stream drops and Middlebox TLS resets.
+                        </p>
+                    </div>
+                    <a href="blog-antigravity-no-tun-proxy-guide.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
+                        Read Full Guide <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>
+                    </a>
                 </div>
 
-                <div class="glass-card feature-item" style="text-align: left;">
-                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; font-weight: 600;">November 2025</div>
-                    <h3 data-lang-key="blog_3_title">Understanding Region Locks</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;" data-lang-key="blog_3_desc">How software
-                        limits access based on geography and what you can do about it legally.</p>
-                    <a href="docs.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 16px;"
-                        data-lang-key="read_more">Read Docs</a>
+                <!-- Guide 3: Persian Farsi -->
+                <div class="glass-card feature-item blog-card" style="text-align: right; direction: rtl; font-family: 'Vazirmatn', sans-serif;">
+                    <div>
+                        <span class="badge-tag badge-fa">فارسی &bull; راهنمای جامع ایران</span>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">شهریور ۱۴۰۵ &bull; خواندن در ۷ دقیقه</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">آموزش رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; line-height: 1.8;">
+                            آموزش اتصال V2Ray و کلش به Google Antigravity بدون افت پینگ اینترنت، بدون پریدن لاگین اکانت گوگل و حل قطعی استریم کدنویسی.
+                        </p>
+                    </div>
+                    <a href="blog-google-antigravity-iran-403-farsi.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
+                        مطالعه آموزش <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>
+                    </a>
                 </div>
+
+                <!-- Guide 4: Russian -->
+                <div class="glass-card feature-item blog-card" style="text-align: left;">
+                    <div>
+                        <span class="badge-tag badge-ru">Русский &bull; Гайд для РФ</span>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Сентябрь 2026 &bull; 7 мин чтения</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Google Antigravity в России: Обход 403 и настройка V2Ray</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+                            Почему Antigravity выдает «Account not eligible» даже с VPN, и как настроить изолированный SOCKS5 прокси без тяжелого TUN-режима.
+                        </p>
+                    </div>
+                    <a href="blog-google-antigravity-russia-403.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
+                        Читать гайд <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>
+                    </a>
+                </div>
+
+                <!-- Guide 5: v5.2.0 Release -->
+                <div class="glass-card feature-item blog-card" style="text-align: left;">
+                    <div>
+                        <span class="badge-tag badge-en">Release Note</span>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">September 2026</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Antigravity Cleaner v5.2.0 Released</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+                            Retro KeyGen GUI with 8-bit chiptune audio, 1-click desktop launcher generator, and multi-architecture Apple Silicon &amp; Linux support.
+                        </p>
+                    </div>
+                    <a href="download.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
+                        Download v5.2.0 <i class="fas fa-download" style="margin-left: 5px;"></i>
+                    </a>
+                </div>
+
+                <!-- Guide 6: Troubleshooting Reference -->
+                <div class="glass-card feature-item blog-card" style="text-align: left;">
+                    <div>
+                        <span class="badge-tag badge-en">Reference Docs</span>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Updated 2026</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Antigravity IDE Troubleshooting Matrix</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+                            Full matrix of status codes: 403 Forbidden, 429 Quota Exhausted, SingletonLock corruption, and Middlebox DPI connection resets.
+                        </p>
+                    </div>
+                    <a href="troubleshooting.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
+                        View Matrix <i class="fas fa-bug" style="margin-left: 5px;"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -94,32 +184,32 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <h2>Antigravity <span>Cleaner</span></h2>
-                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
+                    <p>Supporting open internet, developer productivity, and borderless AI coding.</p>
                 </div>
                 <div class="footer-links">
                     <div class="link-group">
-                        <h4 data-lang-key="product">Product</h4>
+                        <h4>Product</h4>
                         <ul>
-                            <li><a href="download.html" data-lang-key="download">Download</a></li>
-                            <li><a href="features.html" data-lang-key="features">Features</a></li>
-                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
+                            <li><a href="download.html">Download</a></li>
+                            <li><a href="features.html">Features</a></li>
+                            <li><a href="docs.html">Documentation</a></li>
                         </ul>
                     </div>
                     <div class="link-group">
-                        <h4 data-lang-key="support">Support</h4>
+                        <h4>Support &amp; Guides</h4>
                         <ul>
-                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
                             <li><a href="troubleshooting.html">Troubleshooting</a></li>
-                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
+                            <li><a href="blog.html">Blog &amp; Guides</a></li>
+                            <li><a href="llms.txt">llms.txt (AI Specification)</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
+                <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0). Dedicated to developers worldwide. 🕊️</div>
                 <div class="social-links">
-                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
-                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                    <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>

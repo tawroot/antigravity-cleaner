@@ -59,6 +59,46 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Blog Index -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/blog.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Article 1: Google Antigravity 403 Forbidden & Region Lock -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Article 2: Configure V2Ray, Clash & SOCKS5 for Antigravity (No TUN Mode) -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Article 3: Iranian Developer Guide (Farsi) -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Article 4: Russian Developer Guide (Russian) -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
 
   <!-- Persian (Farsi) -->
   <url>
