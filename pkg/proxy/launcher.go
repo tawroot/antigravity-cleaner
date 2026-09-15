@@ -207,15 +207,14 @@ exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
 
 		_ = os.WriteFile(smartLauncherScript, []byte(scriptContent), 0755)
 
-		// 2. Setup icons
+		// 2. Setup icon
 		iconPath := filepath.Join(filepath.Dir(appPath), "icon.png")
 		if fi, err := os.Stat(iconPath); err != nil || fi.Size() < 100 {
 			userIcon := filepath.Join(home, ".local", "share", "icons", "antigravity.png")
 			iconPath = EnsureDefaultIcon(userIcon)
 		}
-		cleanerIconPath := EnsureDefaultIcon(filepath.Join(home, ".local", "share", "icons", "antigravity-cleaner.png"))
 
-		// 3. Create Antigravity IDE Desktop Launcher
+		// 3. Create single Antigravity IDE Desktop Launcher
 		appMenuPath := filepath.Join(desktopAppDir, "antigravity.desktop")
 		contentAntigravity := fmt.Sprintf(`[Desktop Entry]
 Version=1.0
@@ -236,26 +235,7 @@ StartupWMClass=antigravity
 			return "", err
 		}
 
-		// 4. Create Antigravity Cleaner GUI Desktop Launcher
-		cleanerMenuPath := filepath.Join(desktopAppDir, "antigravity-cleaner.desktop")
-		contentCleaner := fmt.Sprintf(`[Desktop Entry]
-Version=1.0
-Name=Antigravity Cleaner
-GenericName=Optimization & Proxy Toolkit
-Comment=Retro Diagnostic & Auto-Fix GUI for Google Antigravity
-Exec=%s gui
-Icon=%s
-Path=%s
-Terminal=false
-Type=Application
-Categories=Development;Utility;
-StartupNotify=true
-StartupWMClass=antigravity-patcher
-`, cleanerBin, cleanerIconPath, home)
-
-		_ = os.WriteFile(cleanerMenuPath, []byte(contentCleaner), 0755)
-
-		// 5. Also create on ~/Desktop if Desktop directory exists
+		// 4. Also create on ~/Desktop if Desktop directory exists
 		desktopDir := filepath.Join(home, "Desktop")
 		createdPaths := appMenuPath
 		if fi, err := os.Stat(desktopDir); err == nil && fi.IsDir() {
@@ -263,11 +243,7 @@ StartupWMClass=antigravity-patcher
 			_ = os.WriteFile(desktopShortcut, []byte(contentAntigravity), 0755)
 			_ = exec.Command("gio", "set", desktopShortcut, "metadata::trusted", "true").Run()
 
-			cleanerShortcut := filepath.Join(desktopDir, "Antigravity-Cleaner.desktop")
-			_ = os.WriteFile(cleanerShortcut, []byte(contentCleaner), 0755)
-			_ = exec.Command("gio", "set", cleanerShortcut, "metadata::trusted", "true").Run()
-
-			createdPaths = fmt.Sprintf("%s, %s and Desktop shortcuts", appMenuPath, cleanerMenuPath)
+			createdPaths = fmt.Sprintf("%s and Desktop shortcut", appMenuPath)
 		}
 
 		// Refresh GNOME/KDE application database
