@@ -1,17 +1,41 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Allow: /llms.txt
 Allow: /website/
 Allow: /website/og-image.png
 Allow: /icon.png
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
+# Explicitly welcome AI Search Crawlers & Generative Engines (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# LLM Standard documentation file
+# https://llmstxt.org/
+LLM-txt: https://tawroot.github.io/antigravity-cleaner/llms.txt
 
 # Sitemap
 Sitemap: https://tawroot.github.io/antigravity-cleaner/sitemap.xml
 
-# Disallow build artifacts
+# Disallow internal build artifacts
 Disallow: /build/
 Disallow: /dist/
 Disallow: /.git/

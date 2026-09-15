@@ -10,6 +10,48 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Schema.org JSON-LD for AI Search & GEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I fix Google Antigravity 403 Forbidden / Region Lock?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run 'antigravity-cleaner patch' or click [Auto-Fix] in the Retro GUI. It patches the internal JavaScript region-checking hooks in main.js, agy, and extensions, and routes IDE traffic through your local proxy without TUN mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to resolve Error 429 Quota Exceeded in Google Antigravity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run 'antigravity-cleaner clean' or click [Reset 429] in the GUI to surgically reset corrupted rate-limit and token cache files without losing your account login, cookies, or chat history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Antigravity Cleaner require TUN mode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Antigravity Cleaner uses Smart Proxy Injection (--proxy-server=socks5://127.0.0.1:<port>) directly into the IDE process. Your domestic internet, banking sites, and downloads run unhindered on direct connection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Antigravity Cleaner safe to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is 100% open-source under GPL-3.0, runs completely offline on your local computer, contains zero telemetry, and never accesses your project source code."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body data-theme="dark">
@@ -57,12 +99,24 @@
             </div>
 
             <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+                <div class="glass-card" style="padding: 24px; border-color: #00f0ff;">
+                    <h3 style="color: #00f0ff; margin-bottom: 10px;">How do I bypass Google Antigravity Error 403 Forbidden / Region Lock?</h3>
+                    <p style="color: var(--text-secondary);">Run <code>antigravity-cleaner patch</code> or click <strong>[Auto-Fix]</strong> in the Retro GUI. This neutralizes client-side restriction checks in <code>main.js</code>, <code>agy</code>, and extensions. Then launch with <code>antigravity-cleaner launch</code> to route the IDE through your local proxy without TUN mode.</p>
+                </div>
+
                 <div class="glass-card" style="padding: 24px;">
-                    <h3 style="color: var(--primary); margin-bottom: 10px;" data-lang-key="faq_safe_q">Is it safe
-                        to use?</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="faq_safe_a">Yes. Antigravity Cleaner
-                        specifically targets temporary files, caches, and invalid registry keys associated with known
-                        IDE errors. It does not touch your personal documents or project source codes.</p>
+                    <h3 style="color: var(--primary); margin-bottom: 10px;">How to resolve Error 429 Quota Exceeded without losing chats?</h3>
+                    <p style="color: var(--text-secondary);">Click <strong>[Reset 429]</strong> in the GUI or run <code>antigravity-cleaner clean</code>. It surgically resets rate-limit blobs and token cache while keeping your Google login session, cookies, and chat history 100% intact.</p>
+                </div>
+
+                <div class="glass-card" style="padding: 24px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;">Does it work without VPN TUN mode?</h3>
+                    <p style="color: var(--text-secondary);">Yes! Antigravity Cleaner uses direct Smart Proxy Injection (<code>--proxy-server=socks5://127.0.0.1:<port></code>). Your domestic internet and banking apps stay fast on direct connection, while only Antigravity routes through your proxy.</p>
+                </div>
+
+                <div class="glass-card" style="padding: 24px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;" data-lang-key="faq_safe_q">Is it safe to use?</h3>
+                    <p style="color: var(--text-secondary);" data-lang-key="faq_safe_a">Yes. Antigravity Cleaner is 100% open-source, runs offline on your local computer, contains zero telemetry, and never touches your personal project source code.</p>
                 </div>
 
                 <div class="glass-card" style="padding: 24px;">

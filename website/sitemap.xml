@@ -38,15 +38,23 @@
   <!-- FAQ Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Troubleshooting Page (SEO Priority) -->
+  <!-- Troubleshooting Page (GEO & SEO Priority) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/troubleshooting.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- LLMs.txt for AI Search Engines -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/llms.txt</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

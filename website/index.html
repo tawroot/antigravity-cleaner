@@ -22,8 +22,67 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/">
+
+    <!-- Open Graph & Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/">
+    <meta property="og:title" content="Antigravity Cleaner | Free & Offline Toolkit for Google Antigravity">
+    <meta property="og:description"
+        content="Fix Google Antigravity Error 403 region lock, 429 quota exhaustion, and proxy connection drops without TUN mode. 100% offline open-source solution.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
+
+    <!-- Schema.org JSON-LD (SoftwareApplication + FAQPage for AI Engines & Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Antigravity Cleaner",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Linux, Windows 10/11, macOS",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Open-source diagnostic and self-healing toolkit for Google Antigravity AI IDE. Resolves region locks (Error 403), 429 quota exhaustion, and enables smart proxy injection without TUN mode.",
+          "url": "https://tawroot.github.io/antigravity-cleaner/",
+          "license": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How to fix Google Antigravity 403 Forbidden / Not Available in Your Region?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Run 'antigravity-cleaner patch' or click [Auto-Fix] in the Retro GUI. It removes internal region lock checks in main.js, agy CLI, and extension.js, and routes IDE traffic through your local proxy without TUN mode."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How to fix Error 429 Quota Exceeded in Antigravity without losing login?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Run 'antigravity-cleaner clean' or click [Reset 429] in the GUI. It surgically purges rate-limit counters and temporary token caches while strictly preserving your Google account login and chat history."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use Google Antigravity with v2ray or Clash without TUN mode?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Antigravity Cleaner automatically detects active local proxy ports (10808, 2080, 7890) and launches Antigravity with dedicated proxy flags, keeping domestic traffic and banking apps fast on direct connection."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body data-theme="dark">
@@ -42,6 +101,7 @@
                     <li><a href="#download" data-lang-key="download">Download</a></li>
                     <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
                     <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
+                    <li><a href="troubleshooting.html">Troubleshooting</a></li>
                     <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
 
@@ -478,6 +538,7 @@
                         <ul>
                             <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
                             <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                            <li><a href="llms.txt">llms.txt (AI)</a></li>
                             <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
                         </ul>
                     </div>
