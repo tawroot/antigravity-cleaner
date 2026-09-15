@@ -250,7 +250,7 @@
     <!-- Titlebar -->
     <div class="title-bar">
       <div class="title-bar-text">
-        <span>💾</span> Antigravity PATCH v5.1 - [dalroot]
+        <span>💾</span> Antigravity PATCH v5.2 - [dalroot]
       </div>
       <div class="title-bar-controls">
         <div class="close-btn" onclick="soundBeep(400)">_</div>
@@ -296,10 +296,13 @@
         <span style="color:#000080;">🛡️ GPL-3.0 Auditable</span>
       </div>
 
-      <!-- Classic Buttons Row with Restore Button -->
-      <div class="buttons-row">
-        <button class="win95-btn" id="btnPatch" onclick="actionPatch()" title="Full Auto-Fix: Core, CLI, IDE & VS Code + Smart Proxy">Auto-Fix</button>
-        <button class="win95-btn" id="btnLaunch" onclick="actionLaunch()" title="Start Antigravity with injected proxy">Launch</button>
+      <!-- Classic Buttons Rows -->
+      <div class="buttons-row" style="margin-top: 2px; padding-top: 4px;">
+        <button class="win95-btn" id="btnPatch" onclick="actionPatch()" title="Full Auto-Fix: Core, CLI, IDE & VS Code + Smart Proxy">⚡ Auto-Fix</button>
+        <button class="win95-btn" id="btnLaunch" onclick="actionLaunch()" title="Start Antigravity with injected proxy">🚀 Launch</button>
+        <button class="win95-btn" id="btnShortcut" onclick="actionCreateLauncher()" title="Create Desktop Shortcut with Smart Proxy">📌 Shortcut</button>
+      </div>
+      <div class="buttons-row" style="margin-top: 4px; padding-top: 0; border-top: none; box-shadow: none;">
         <button class="win95-btn" id="btnReset" onclick="actionReset()" title="Flush 429 tokens without chat loss">Reset 429</button>
         <button class="win95-btn" id="btnRestore" onclick="actionRestore()" title="Revert to original .agybak backup">Restore</button>
         <button class="win95-btn" id="btnDoctor" onclick="actionDoctor()" title="Audit connection & proxy health">Doctor</button>
@@ -436,6 +439,26 @@
           setStatus('ERROR: ' + (data.message || 'Launch failed'), '#ff0055');
         }
       } catch (err) {
+        setStatus('ERROR: Communication failure', '#ff0055');
+      }
+    }
+
+    // Create Desktop Shortcut Action
+    async function actionCreateLauncher() {
+      soundBeep(523, 0.1);
+      setStatus('🛠️ SHORTCUT: Generating Smart Desktop Launcher...', '#00f0ff');
+      try {
+        const res = await fetch('/api/create-launcher', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          soundBeep(1174, 0.15);
+          setStatus('✔ ' + (data.message || 'Desktop shortcut created successfully!'), '#00ff00');
+        } else {
+          soundBeep(250, 0.2);
+          setStatus('ERROR: ' + (data.message || 'Failed to create shortcut'), '#ff0055');
+        }
+      } catch (err) {
+        soundBeep(250, 0.2);
         setStatus('ERROR: Communication failure', '#ff0055');
       }
     }

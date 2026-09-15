@@ -68,6 +68,7 @@ func NewServer() (*Server, error) {
 	mux.HandleFunc("/api/detect", s.handleDetect)
 	mux.HandleFunc("/api/patch", s.handlePatch)
 	mux.HandleFunc("/api/launch", s.handleLaunch)
+	mux.HandleFunc("/api/create-launcher", s.handleCreateLauncher)
 	mux.HandleFunc("/api/reset", s.handleReset)
 	mux.HandleFunc("/api/restore", s.handleRestore)
 	mux.HandleFunc("/api/doctor", s.handleDoctor)
@@ -185,6 +186,28 @@ func (s *Server) handleLaunch(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(Response{
 		Success: true,
 		Message: "Antigravity launched successfully with injected proxy!",
+	})
+}
+
+func (s *Server) handleCreateLauncher(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	path, err := proxy.GenerateNoTunDesktopLauncher("")
+	if err != nil {
+		_ = json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Message: "Error creating launcher: " + err.Error(),
+		})
+		return
+	}
+
+	_ = json.NewEncoder(w).Encode(Response{
+		Success: true,
+		Message: "Desktop shortcut created at " + path,
 	})
 }
 
