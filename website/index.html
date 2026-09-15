@@ -93,7 +93,30 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">
-                    Antigravity <span>Cleaner</span>
+                    <div class="logo-orbit">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="16" stroke="url(#ag-grad-1)" stroke-width="2" stroke-dasharray="6 3" class="orbit-outer"/>
+                            <ellipse cx="20" cy="20" rx="17" ry="7" stroke="url(#ag-grad-2)" stroke-width="2" transform="rotate(-35 20 20)" class="orbit-inner"/>
+                            <circle cx="20" cy="20" r="5" fill="url(#ag-grad-core)" class="orbit-core"/>
+                            <circle cx="20" cy="4" r="2.5" fill="#00f0ff" class="orbit-sat"/>
+                            <defs>
+                                <linearGradient id="ag-grad-1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#fa233b"/>
+                                    <stop offset="1" stop-color="#00f0ff"/>
+                                </linearGradient>
+                                <linearGradient id="ag-grad-2" x1="40" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00f0ff"/>
+                                    <stop offset="1" stop-color="#ffaa00"/>
+                                </linearGradient>
+                                <radialGradient id="ag-grad-core" cx="20" cy="20" r="5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ffffff"/>
+                                    <stop offset="0.6" stop-color="#fa233b"/>
+                                    <stop offset="1" stop-color="#b00020"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
                 </a>
 
                 <ul class="nav-links" id="navLinks">
@@ -106,19 +129,56 @@
                     <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
 
-                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
-                    <div class="lang-switcher">
-                        <select id="langSelect"
-                            style="background: transparent; color: white; border: 1px solid #333; padding: 5px; border-radius: 5px;">
-                            <option value="en">EN</option>
-                            <option value="fa">FA</option>
-                            <option value="ru">RU</option>
-                            <option value="zh">ZH</option>
-                            <option value="ar">AR</option>
-                            <option value="es">ES</option>
-                            <option value="tr">TR</option>
-                        </select>
+                <div class="nav-controls">
+                    <!-- Custom Glassmorphism Language Dropdown -->
+                    <div class="custom-lang-selector" id="customLangSelector">
+                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
+                            <span class="curr-name" id="currLangName">English</span>
+                            <i class="fas fa-chevron-down curr-arrow"></i>
+                        </button>
+                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
+                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
+                                <div><span class="opt-flag">🇺🇸</span> English</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
+                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
+                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
+                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
+                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
+                                <div><span class="opt-flag">🇪🇸</span> Español</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
+                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                        </div>
                     </div>
+
+                    <!-- Hidden native select for full backwards-compatibility -->
+                    <select id="langSelect" style="display: none;">
+                        <option value="en">EN</option>
+                        <option value="fa">FA</option>
+                        <option value="ru">RU</option>
+                        <option value="zh">ZH</option>
+                        <option value="ar">AR</option>
+                        <option value="es">ES</option>
+                        <option value="tr">TR</option>
+                    </select>
 
                     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                         <span></span>
@@ -185,47 +245,79 @@
                 </p>
             </div>
 
-            <!-- Country Flags Grid -->
+            <!-- Country Flags Grid (Redesigned with Fixed Dimensions & Pulsing Dots) -->
             <div class="country-flags-grid">
                 <div class="country-badge">
-                    <span class="c-flag">🇮🇷</span>
-                    <span class="c-name">Iran</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇮🇷</div>
+                    <div class="c-info">
+                        <span class="c-name">Iran</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇨🇺</span>
-                    <span class="c-name">Cuba</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇷🇺</div>
+                    <div class="c-info">
+                        <span class="c-name">Russia</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇸🇾</span>
-                    <span class="c-name">Syria</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇨🇳</div>
+                    <div class="c-info">
+                        <span class="c-name">China</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇷🇺</span>
-                    <span class="c-name">Russia</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇨🇺</div>
+                    <div class="c-info">
+                        <span class="c-name">Cuba</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇻🇪</span>
-                    <span class="c-name">Venezuela</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇸🇾</div>
+                    <div class="c-info">
+                        <span class="c-name">Syria</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇨🇳</span>
-                    <span class="c-name">China</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇻🇪</div>
+                    <div class="c-info">
+                        <span class="c-name">Venezuela</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇵🇰</span>
-                    <span class="c-name">Pakistan</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇵🇰</div>
+                    <div class="c-info">
+                        <span class="c-name">Pakistan</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
                 <div class="country-badge">
-                    <span class="c-flag">🇹🇷</span>
-                    <span class="c-name">Turkey</span>
-                    <span class="badge-status" data-lang-key="status_bypassed">Bypassed</span>
+                    <div class="c-flag-box">🇹🇷</div>
+                    <div class="c-info">
+                        <span class="c-name">Turkey</span>
+                    </div>
+                    <span class="badge-status" data-lang-key="status_bypassed">
+                        <span class="pulse-dot"></span> Bypassed
+                    </span>
                 </div>
             </div>
 
@@ -242,6 +334,71 @@
                     <a href="#download" class="btn btn-primary" style="font-size: 0.88rem; padding: 10px 20px;">
                         <i class="fas fa-arrow-down"></i> <span data-lang-key="download_now">Download Now</span>
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3-Step Installation & Process Flow -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 25px;">
+                <span class="freedom-pill" style="margin: 0 auto 14px;" data-lang-key="how_it_works_badge">
+                    <i class="fas fa-bolt"></i> ⚡ INSTANT 3-STEP RECOVERY &amp; BYPASS
+                </span>
+                <h2 class="section-title" data-lang-key="how_it_works_title">How It Works — Fix Your IDE in Under 30 Seconds</h2>
+                <p class="section-subtitle" style="margin: 0 auto; max-width: 750px;" data-lang-key="how_it_works_subtitle">
+                    Autonomous self-healing architecture designed for seamless, zero-config developer onboarding.
+                </p>
+            </div>
+
+            <div class="process-grid">
+                <!-- Step 1 -->
+                <div class="process-card">
+                    <div class="process-top-row">
+                        <span class="step-num-pill">STEP 01</span>
+                        <div class="step-icon"><i class="fas fa-terminal"></i></div>
+                    </div>
+                    <h3 data-lang-key="step1_title">01. Launch Tool or Terminal</h3>
+                    <p data-lang-key="step1_desc">
+                        Run the universal 1-line script or launch the Retro KeyGen GUI on your desktop. Zero root or administrator rights required.
+                    </p>
+                    <div class="process-terminal-pill">
+                        <i class="fas fa-angle-right"></i>
+                        <code>ag-cleaner launch</code>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-card">
+                    <div class="process-top-row">
+                        <span class="step-num-pill">STEP 02</span>
+                        <div class="step-icon"><i class="fas fa-magic"></i></div>
+                    </div>
+                    <h3 data-lang-key="step2_title">02. 1-Click Auto-Fix &amp; Neutralize</h3>
+                    <p data-lang-key="step2_desc">
+                        Click [Auto-Fix] in GUI or run 'ag-cleaner patch'. Neutralizes client-side region locks in main.js and agy CLI while preserving your Google account login.
+                    </p>
+                    <div class="process-terminal-pill">
+                        <i class="fas fa-shield-alt"></i>
+                        <code>✓ 4 Targets Patched &amp; Cleaned</code>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-card">
+                    <div class="process-top-row">
+                        <span class="step-num-pill">STEP 03</span>
+                        <div class="step-icon"><i class="fas fa-rocket"></i></div>
+                    </div>
+                    <h3 data-lang-key="step3_title">03. Isolated Proxy &amp; KeepAlive</h3>
+                    <p data-lang-key="step3_desc">
+                        Antigravity launches with direct loopback SOCKS5 proxy arguments. 15-second TCP KeepAlive packets prevent DPI middlebox disconnects during AI reasoning.
+                    </p>
+                    <div class="process-terminal-pill">
+                        <i class="fas fa-plug"></i>
+                        <code>● SOCKS5: 127.0.0.1:10808 (Ready)</code>
+                    </div>
                 </div>
             </div>
         </div>
@@ -545,11 +702,18 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                 <div class="copyright">© 2026 Tawroot. Open Source (GPL-3.0).</div>
-                <div class="social-links">
-                    <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i></a>
-                    <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i></a>
+                <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                    <a href="https://buymeacoffee.com/tawroot" target="_blank" class="bmac-btn" rel="noopener noreferrer">
+                        <span class="bmac-cup">☕</span>
+                        <span class="bmac-label">Buy Me a Coffee</span>
+                        <span class="bmac-badge" data-lang-key="coming_soon">Coming Soon</span>
+                    </a>
+                    <div class="social-links">
+                        <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://t.me/panbehnet" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

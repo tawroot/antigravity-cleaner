@@ -49,7 +49,17 @@ const translations = {
         gui_f1: "1-Click Automatic Repair & Bypass",
         gui_f2: "100% Offline & Telemetry-Free",
         gui_f3: "Built-in 8-Bit Chiptune Synthesizer",
-        gui_f4: "Session & Credential Preservation"
+        gui_f4: "Session & Credential Preservation",
+        coming_soon: "Coming Soon",
+        how_it_works_badge: "⚡ INSTANT 3-STEP RECOVERY & BYPASS",
+        how_it_works_title: "How It Works — Fix Your IDE in Under 30 Seconds",
+        how_it_works_subtitle: "Autonomous self-healing architecture designed for seamless, zero-config developer onboarding.",
+        step1_title: "01. Launch Tool or Terminal",
+        step1_desc: "Run the universal 1-line script or launch the Retro KeyGen GUI on your desktop. Zero root or administrator rights required.",
+        step2_title: "02. 1-Click Auto-Fix & Neutralize",
+        step2_desc: "Click [Auto-Fix] in GUI or run 'ag-cleaner patch'. Neutralizes client-side region locks in main.js and agy CLI while preserving your Google account login.",
+        step3_title: "03. Isolated Proxy & KeepAlive",
+        step3_desc: "Antigravity launches with direct loopback SOCKS5 proxy arguments. 15-second TCP KeepAlive packets prevent DPI middlebox disconnects during AI reasoning."
     },
     fa: {
         home: "خانه", features: "ویژگی‌ها", download: "دانلود", pricing: "تعرفه‌ها", blog: "وبلاگ", faq: "سوالات", get_app: "دانلود برنامه",
@@ -74,21 +84,13 @@ const translations = {
         blog_1_title: "حل خطاهای SSL Handshake", blog_1_desc: "راهنمای جامع برای رفع خطاهای SSL/TLS در محیط‌های شبکه محدود.", read_more: "ادامه مطلب",
         blog_2_title: "یادداشت‌های انتشار نسخه ۴.۰", blog_2_desc: "انتشار بزرگترین آپدیت ما با رابط کاربری جدید و موتور پاکسازی سریع‌تر.",
         blog_3_title: "درک قفل‌های منطقه‌ای", blog_3_desc: "چگونه نرم‌افزارها دسترسی را محدود می‌کنند و راه حل‌ها چیست.",
-
-        // Community & Support
         community_title: "به جامعه ما بپیوندید", community_subtitle: "کمک بگیرید، ایده‌ها را به اشتراک بگذارید و از آخرین اخبار مطلع شوید.",
         star_title: "ستاره در گیت‌هاب", star_desc: "با ستاره دادن به مخزن ما، حمایت خود را نشان دهید. این به رشد ما کمک می‌کند!", star_btn: "ستاره دادن",
         telegram_title: "کانال تلگرام", telegram_desc: "برای دریافت به‌روزرسانی‌ها، نکات و پشتیبانی جامعه به کانال تلگرام ما بپیوندید.", telegram_btn: "عضویت در کانال",
         donate_title: "حمایت از توسعه", donate_desc: "با کمک مالی به ما در نگهداری و بهبود این ابزار رایگان کمک کنید.", donate_btn: "حمایت مالی",
-
-        // Features Preview
         why_choose: "چرا آنتی‌گرویتی کلینر؟", why_choose_desc: "امکانات قدرتمند طراحی شده برای توسعه‌دهندگان و کاربران حرفه‌ای.", view_all_features: "مشاهده تمام ویژگی‌ها",
-
-        // CTA
         cta_title: "آماده رفع مشکلات IDE خود هستید؟", cta_desc: "همین حالا دانلود کنید و خطاهای نصب را در چند ثانیه حل کنید.",
         download_now: "دانلود فوری", view_on_github: "مشاهده در گیت‌هاب",
-
-        // Freedom & Region Bypass
         freedom_badge: "🌍 آزادی جهانی هوش مصنوعی و رفع تحریم‌های منطقه‌ای",
         freedom_title: "آیا دسترسی شما به آنتی‌گرویتی و ابزارهای هوش مصنوعی تحریم شده است؟",
         freedom_desc: "خطاهای ۴۰۳ جغرافیایی و تحریم‌های ناعادلانه نباید مانع پیشرفت برنامه‌نویسان شود. آنتی‌گرویتی کلینر توکن‌های قفل منطقه‌ای را پاکسازی کرده، تداخل شبکه را رفع می‌کند و دسترسی کامل را به شما بازمی‌گرداند.",
@@ -100,17 +102,29 @@ const translations = {
         gui_f1: "پاکسازی خودکار و رفع قفل با یک کلیک",
         gui_f2: "۱۰۰٪ آفلاین و بدون هیچ ارسال داده یا ردگیری",
         gui_f3: "پخش‌کننده داخلی موزیک خاطره‌انگیز ۸-بیتی",
-        gui_f4: "حفظ کامل سشن‌ها، کوکی‌ها و پروژه‌های شما"
+        gui_f4: "حفظ کامل سشن‌ها، کوکی‌ها و پروژه‌های شما",
+        coming_soon: "به‌زودی",
+        how_it_works_badge: "⚡ فرآیند ۳ مرحله‌ای بازیابی و دور زدن تحریم",
+        how_it_works_title: "چگونه کار می‌کند — رفع خطاهای ادیتور در ۳۰ ثانیه",
+        how_it_works_subtitle: "معماری خودترمیم‌شونده برای شروع فوری و بدون نیاز به کانفیگ‌های پیچیده شبکه.",
+        step1_title: "۰۱. اجرای اسکریپت یا محیط گرافیکی",
+        step1_desc: "دستور تک‌خطی را در ترمینال یا نرم‌افزار گرافیکی رترو روی سیستم خود اجرا کنید. نیازی به دسترسی ادمین یا روت نیست.",
+        step2_title: "۰۲. پچ خودکار و رفع تحریم با یک کلیک",
+        step2_desc: "با زدن دکمه Auto-Fix در برنامه گرافیکی یا دستور ag-cleaner patch، چک‌های ریجن‌لاک در main.js و agy خنثی شده و سشن اکانت گوگل شما دست‌نخورده باقی می‌ماند.",
+        step3_title: "۰۳. اتصال ایزوله پروکسی و استریم پایدار",
+        step3_desc: "ادیتور مستقیماً با پورت لوکال پروکسی (10808 یا 7890) اجرا شده و پکت‌های 15s KeepAlive مانع از قطع شدن استریم پاسخ هوش مصنوعی می‌شوند."
     },
     ru: {
         home: "Главная", features: "Функции", download: "Скачать", pricing: "Цены", blog: "Блог", faq: "FAQ",
         hero_title: "Исправьте ошибки Antigravity мгновенно",
-        hero_subtitle: "Самый мощный инструмент для обслуживания ошибок установки и сетевых помех."
+        hero_subtitle: "Самый мощный инструмент для обслуживания ошибок установки и сетевых помех.",
+        coming_soon: "Скоро"
     },
     zh: {
         home: "首页", features: "功能", download: "下载", pricing: "价格", blog: "博客", faq: "常见问题",
         hero_title: "立即修复 Antigravity IDE",
-        hero_subtitle: "最强大的安装错误和网络干扰维护工具。"
+        hero_subtitle: "最强大的安装错误和网络干扰维护工具。",
+        coming_soon: "即将推出"
     }
 };
 
@@ -118,6 +132,32 @@ const langSelect = document.getElementById('langSelect');
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 const header = document.querySelector('header');
+
+const langMap = {
+    en: { flag: '🇺🇸', name: 'English' },
+    fa: { flag: '🇮🇷', name: 'فارسی' },
+    ru: { flag: '🇷🇺', name: 'Русский' },
+    zh: { flag: '🇨🇳', name: '简体中文' },
+    tr: { flag: '🇹🇷', name: 'Türkçe' },
+    es: { flag: '🇪🇸', name: 'Español' },
+    ar: { flag: '🇸🇦', name: 'العربية' }
+};
+
+function updateCustomDropdownUI(lang) {
+    const flagElem = document.getElementById('currLangFlag');
+    const nameElem = document.getElementById('currLangName');
+    if (langMap[lang]) {
+        if (flagElem) flagElem.innerText = langMap[lang].flag;
+        if (nameElem) nameElem.innerText = langMap[lang].name;
+    }
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        if (opt.getAttribute('data-lang') === lang) {
+            opt.classList.add('active');
+        } else {
+            opt.classList.remove('active');
+        }
+    });
+}
 
 function setLanguage(lang) {
     document.documentElement.lang = lang;
@@ -135,13 +175,41 @@ function setLanguage(lang) {
 
     localStorage.setItem('ag_lang', lang);
     if (langSelect) langSelect.value = lang;
+    updateCustomDropdownUI(lang);
+}
+
+// Custom Language Dropdown Event Handlers
+const customLangSelector = document.getElementById('customLangSelector');
+const langDropdownBtn = document.getElementById('langDropdownBtn');
+
+if (langDropdownBtn && customLangSelector) {
+    langDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        customLangSelector.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const lang = opt.getAttribute('data-lang');
+            setLanguage(lang);
+            customLangSelector.classList.remove('open');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!customLangSelector.contains(e.target)) {
+            customLangSelector.classList.remove('open');
+        }
+    });
 }
 
 if (langSelect) {
     langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
-    const savedLang = localStorage.getItem('ag_lang') || (navigator.language.startsWith('fa') ? 'fa' : 'en');
-    setLanguage(savedLang);
 }
+
+const savedLang = localStorage.getItem('ag_lang') || (navigator.language.startsWith('fa') ? 'fa' : 'en');
+setLanguage(savedLang);
 
 if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', () => {

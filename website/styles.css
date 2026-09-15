@@ -151,11 +151,52 @@ nav {
 }
 
 .logo {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.4rem;
   font-weight: 700;
   font-family: var(--font-display);
   color: var(--text-primary);
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.logo-orbit {
+  width: 38px;
+  height: 38px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-orbit svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 8px rgba(250, 35, 59, 0.4));
+}
+
+.orbit-outer {
+  transform-origin: center;
+  animation: orbitSpin 16s linear infinite;
+}
+
+.orbit-sat {
+  transform-origin: center;
+  animation: satPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes satPulse {
+  0% { filter: drop-shadow(0 0 2px #00f0ff); opacity: 0.7; }
+  100% { filter: drop-shadow(0 0 8px #00f0ff); opacity: 1; }
 }
 
 .logo span {
@@ -204,25 +245,133 @@ nav {
   gap: 16px;
 }
 
-.lang-switcher select {
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+/* Custom Glassmorphism Language Dropdown */
+.custom-lang-selector {
+  position: relative;
+  user-select: none;
+}
+
+.custom-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 6px 14px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  outline: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
 }
 
-.lang-switcher select:hover {
-  border-color: var(--text-tertiary);
+.custom-lang-btn:hover,
+.custom-lang-selector.open .custom-lang-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
 }
 
-.lang-switcher select:focus {
-  border-color: var(--primary);
+.curr-flag {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.curr-name {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+
+.curr-arrow {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  transition: transform 0.25s ease;
+  margin-inline-start: 2px;
+}
+
+.custom-lang-selector.open .curr-arrow {
+  transform: rotate(180deg);
+}
+
+.custom-lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 175px;
+  background: #0d111a;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 10px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 240, 255, 0.08);
+  padding: 6px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+}
+
+[dir="rtl"] .custom-lang-menu {
+  right: auto;
+  left: 0;
+}
+
+.custom-lang-selector.open .custom-lang-menu {
+  display: flex;
+  animation: dropFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+[dir="rtl"] .lang-option {
+  text-align: right;
+}
+
+.lang-option:hover {
+  background: rgba(0, 240, 255, 0.12);
+  color: #fff;
+}
+
+.lang-option.active {
+  background: rgba(250, 35, 59, 0.18);
+  color: #fff;
+  font-weight: 700;
+}
+
+.opt-flag {
+  font-size: 1.15rem;
+  margin-inline-end: 8px;
+}
+
+.opt-check {
+  font-size: 0.75rem;
+  color: #00ff9f;
+  display: none;
+}
+
+.lang-option.active .opt-check {
+  display: block;
 }
 
 /* Mobile Menu Toggle */
@@ -817,52 +966,88 @@ footer {
 
 .country-flags-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 12px;
-  margin-bottom: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+  margin-bottom: 30px;
 }
 
 .country-badge {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
 
 .country-badge:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(250, 35, 59, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(0, 240, 255, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(250, 35, 59, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 12px rgba(0, 240, 255, 0.1);
 }
 
-.country-badge .c-flag {
+.country-badge .c-flag-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.35rem;
-  line-height: 1;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.country-badge .c-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
 .country-badge .c-name {
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 700;
+  font-size: 0.92rem;
   color: var(--text-primary);
-  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.badge-status {
-  font-size: 0.68rem;
+.country-badge .badge-status {
+  font-size: 0.72rem;
   font-weight: 700;
   color: #00ff9f;
-  background: rgba(0, 255, 159, 0.12);
-  padding: 2px 6px;
-  border-radius: 4px;
+  background: rgba(0, 255, 159, 0.1);
+  padding: 4px 8px;
+  border-radius: 20px;
   border: 1px solid rgba(0, 255, 159, 0.25);
-  letter-spacing: 0.02em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #00ff9f;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px #00ff9f;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 10px #00ff9f; }
+  100% { transform: scale(0.95); opacity: 0.7; }
 }
 
 .freedom-footer {
@@ -927,4 +1112,168 @@ footer {
 
 .gui-preview-img:hover {
   transform: scale(1.02);
+}
+
+/* ========================================
+   3-Step Installation & Process Flow
+   ======================================== */
+.process-section {
+  padding: 60px 0 40px;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  position: relative;
+  margin-top: 40px;
+}
+
+@media (max-width: 960px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.process-card {
+  background: rgba(15, 19, 30, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.process-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #fa233b, #00f0ff);
+  opacity: 0.85;
+}
+
+.process-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 240, 255, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 25px rgba(0, 240, 255, 0.12);
+}
+
+.process-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.step-num-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.step-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(250, 35, 59, 0.2), rgba(0, 240, 255, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.process-card h3 {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.process-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 22px;
+  flex: 1;
+}
+
+.process-terminal-pill {
+  background: #070a12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: #00f0ff;
+  direction: ltr;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.process-terminal-pill i {
+  color: #00ff9f;
+}
+
+/* ========================================
+   Buy Me a Coffee Button
+   ======================================== */
+.bmac-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(255, 170, 0, 0.15), rgba(255, 221, 0, 0.08));
+  border: 1px solid #ffaa00;
+  border-radius: 980px;
+  padding: 8px 18px;
+  color: #ffd700;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(255, 170, 0, 0.15);
+}
+
+.bmac-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 170, 0, 0.25), rgba(255, 221, 0, 0.18));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 170, 0, 0.3);
+  color: #fff;
+}
+
+.bmac-cup {
+  font-size: 1.15rem;
+}
+
+.bmac-badge {
+  font-size: 0.7rem;
+  background: rgba(255, 170, 0, 0.2);
+  border: 1px solid rgba(255, 170, 0, 0.4);
+  color: #ffaa00;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }

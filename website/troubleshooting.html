@@ -189,7 +189,32 @@
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <a href="index.html" class="logo">
+                    <div class="logo-orbit">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="16" stroke="url(#ag-grad-1)" stroke-width="2" stroke-dasharray="6 3" class="orbit-outer"/>
+                            <ellipse cx="20" cy="20" rx="17" ry="7" stroke="url(#ag-grad-2)" stroke-width="2" transform="rotate(-35 20 20)" class="orbit-inner"/>
+                            <circle cx="20" cy="20" r="5" fill="url(#ag-grad-core)" class="orbit-core"/>
+                            <circle cx="20" cy="4" r="2.5" fill="#00f0ff" class="orbit-sat"/>
+                            <defs>
+                                <linearGradient id="ag-grad-1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#fa233b"/>
+                                    <stop offset="1" stop-color="#00f0ff"/>
+                                </linearGradient>
+                                <linearGradient id="ag-grad-2" x1="40" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00f0ff"/>
+                                    <stop offset="1" stop-color="#ffaa00"/>
+                                </linearGradient>
+                                <radialGradient id="ag-grad-core" cx="20" cy="20" r="5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ffffff"/>
+                                    <stop offset="0.6" stop-color="#fa233b"/>
+                                    <stop offset="1" stop-color="#b00020"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
+                </a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="features.html">Features</a></li>
