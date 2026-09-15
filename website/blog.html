@@ -53,18 +53,88 @@
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <a href="index.html" class="logo">
+                    <div class="logo-orbit">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="16" stroke="url(#ag-grad-1)" stroke-width="2" stroke-dasharray="6 3" class="orbit-outer"/>
+                            <ellipse cx="20" cy="20" rx="17" ry="7" stroke="url(#ag-grad-2)" stroke-width="2" transform="rotate(-35 20 20)" class="orbit-inner"/>
+                            <circle cx="20" cy="20" r="5" fill="url(#ag-grad-core)" class="orbit-core"/>
+                            <circle cx="20" cy="4" r="2.5" fill="#00f0ff" class="orbit-sat"/>
+                            <defs>
+                                <linearGradient id="ag-grad-1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#fa233b"/>
+                                    <stop offset="1" stop-color="#00f0ff"/>
+                                </linearGradient>
+                                <linearGradient id="ag-grad-2" x1="40" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00f0ff"/>
+                                    <stop offset="1" stop-color="#ffaa00"/>
+                                </linearGradient>
+                                <radialGradient id="ag-grad-core" cx="20" cy="20" r="5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ffffff"/>
+                                    <stop offset="0.6" stop-color="#fa233b"/>
+                                    <stop offset="1" stop-color="#b00020"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
+                </a>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="download.html">Download</a></li>
-                    <li><a href="docs.html">Docs</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html" data-lang-key="home">Home</a></li>
+                    <li><a href="features.html" data-lang-key="features">Features</a></li>
+                    <li><a href="download.html" data-lang-key="download">Download</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
+                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
                     <li><a href="troubleshooting.html">Troubleshooting</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
-                    <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="blog.html" class="active" data-lang-key="blog">Blog</a></li>
                 </ul>
-                <div class="nav-controls" style="display: flex; gap: 15px; align-items: center;">
+                <div class="nav-controls">
+                    <div class="custom-lang-selector" id="customLangSelector">
+                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
+                            <span class="curr-name" id="currLangName">English</span>
+                            <i class="fas fa-chevron-down curr-arrow"></i>
+                        </button>
+                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
+                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
+                                <div><span class="opt-flag">🇺🇸</span> English</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
+                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
+                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
+                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
+                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
+                                <div><span class="opt-flag">🇪🇸</span> Español</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
+                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <select id="langSelect" style="display: none;">
+                        <option value="en">EN</option>
+                        <option value="fa">FA</option>
+                        <option value="ru">RU</option>
+                        <option value="zh">ZH</option>
+                        <option value="ar">AR</option>
+                        <option value="es">ES</option>
+                        <option value="tr">TR</option>
+                    </select>
                     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                         <span></span>
                         <span></span>

@@ -215,15 +215,68 @@
                     </div>
                     <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
                 </a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="download.html">Download</a></li>
-                    <li><a href="docs.html">Docs</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" data-lang-key="home">Home</a></li>
+                    <li><a href="features.html" data-lang-key="features">Features</a></li>
+                    <li><a href="download.html" data-lang-key="download">Download</a></li>
+                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
+                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
                     <li><a href="troubleshooting.html" class="active">Troubleshooting</a></li>
-                    <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
                 </ul>
+                <div class="nav-controls">
+                    <div class="custom-lang-selector" id="customLangSelector">
+                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
+                            <span class="curr-name" id="currLangName">English</span>
+                            <i class="fas fa-chevron-down curr-arrow"></i>
+                        </button>
+                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
+                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
+                                <div><span class="opt-flag">🇺🇸</span> English</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
+                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
+                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
+                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
+                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
+                                <div><span class="opt-flag">🇪🇸</span> Español</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
+                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <select id="langSelect" style="display: none;">
+                        <option value="en">EN</option>
+                        <option value="fa">FA</option>
+                        <option value="ru">RU</option>
+                        <option value="zh">ZH</option>
+                        <option value="ar">AR</option>
+                        <option value="es">ES</option>
+                        <option value="tr">TR</option>
+                    </select>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -369,5 +422,6 @@ rm -f ~/.config/Antigravity/SingletonLock ~/.config/Antigravity/SingletonSocket 
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
