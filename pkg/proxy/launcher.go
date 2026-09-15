@@ -168,6 +168,18 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 # Auto-detects running proxy (v2ray, NekoBox, Clash, Hiddify) and launches Antigravity
 
 APP_PATH="%s"
+
+# 1. Clean stale singleton locks from ungraceful exits or display disconnects
+LOCK_FILE="$HOME/.config/Antigravity/SingletonLock"
+if [ -L "$LOCK_FILE" ]; then
+    LOCK_TARGET=$(readlink "$LOCK_FILE" 2>/dev/null)
+    LOCK_PID="${LOCK_TARGET##*-}"
+    if [ -n "$LOCK_PID" ] && ! kill -0 "$LOCK_PID" 2>/dev/null; then
+        rm -f "$LOCK_FILE" "$HOME/.config/Antigravity/SingletonSocket" "$HOME/.config/Antigravity/SingletonCookie" 2>/dev/null
+    fi
+fi
+
+# 2. Dynamic proxy port detection
 CANDIDATES=("10808" "2080" "7890" "1080" "10809" "2081")
 ACTIVE_PORT=""
 
@@ -178,18 +190,12 @@ for port in "${CANDIDATES[@]}"; do
     fi
 done
 
+# 3. Resilient fallback: Never abort or lock out the user!
 if [ -z "$ACTIVE_PORT" ]; then
-    if [ -n "$ALL_PROXY" ] || [ -n "$HTTPS_PROXY" ]; then
-        exec "$APP_PATH" "$@"
-    fi
+    ACTIVE_PORT="10808"
     if command -v notify-send >/dev/null 2>&1; then
-        notify-send "Antigravity Smart Launcher" "⚠️ هیچ پروکسی فعالی یافت نشد!\nبرای حفظ لاگین و جلوگیری از خطای ۴۰۳، لطفاً ابتدا فیلترشکن خود را روشن کنید." -i dialog-warning -u critical
+        notify-send "Antigravity" "⚠️ پروکسی فعالی شناسایی نشد؛ در حال استفاده از پورت پیش‌فرض 10808..." -i dialog-warning -t 3000 &
     fi
-    CLEANER_BIN="%s"
-    if [ -x "$CLEANER_BIN" ]; then
-        exec "$CLEANER_BIN" gui
-    fi
-    exit 1
 fi
 
 PROXY_TYPE="socks5"
@@ -203,7 +209,7 @@ export HTTP_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
 
 # Pass socks5:// without quotes to Chromium (Chromium does not support socks5h)
 exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
-`, appPath, cleanerBin)
+`, appPath)
 
 		_ = os.WriteFile(smartLauncherScript, []byte(scriptContent), 0755)
 
@@ -252,6 +258,44 @@ StartupWMClass=antigravity
 		return createdPaths, nil
 	}
 
+	if runtime.GOOS == "darwin" {
+		cmdPath := filepath.Join(home, "Desktop", "Antigravity-Proxy.command")
+		content := fmt.Sprintf(`#!/usr/bin/env bash
+# macOS Smart Proxy Launcher for Google Antigravity
+APP_PATH="%s"
+if [ ! -f "$APP_PATH" ]; then
+    APP_PATH="/Applications/Antigravity.app/Contents/MacOS/Antigravity"
+fi
+if [ ! -f "$APP_PATH" ]; then
+    APP_PATH="/Applications/Antigravity.app/Contents/MacOS/Electron"
+fi
+
+CANDIDATES=("10808" "2080" "7890" "1080")
+ACTIVE_PORT=""
+for port in "${CANDIDATES[@]}"; do
+    if nc -z -w 1 127.0.0.1 "$port" 2>/dev/null; then
+        ACTIVE_PORT="$port"
+        break
+    fi
+done
+
+if [ -z "$ACTIVE_PORT" ]; then
+    ACTIVE_PORT="10808"
+fi
+
+export ALL_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+export HTTPS_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+export HTTP_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+
+exec "$APP_PATH" --proxy-server="socks5://127.0.0.1:${ACTIVE_PORT}" "$@"
+`, appPath)
+
+		if err := os.WriteFile(cmdPath, []byte(content), 0755); err != nil {
+			return "", err
+		}
+		return cmdPath, nil
+	}
+
 	if runtime.GOOS == "windows" {
 		chromiumProxy := CleanChromiumProxyURL(proxyURL)
 		batPath := filepath.Join(home, "Desktop", "Antigravity-NoTUN.bat")
@@ -265,6 +309,20 @@ start "" "%s" --proxy-server=%s
 		if err := os.WriteFile(batPath, []byte(content), 0755); err != nil {
 			return "", err
 		}
+
+		// Also generate native Windows shortcut (.lnk) via PowerShell if possible
+		lnkScript := fmt.Sprintf(`
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("%s\Desktop\Antigravity.lnk")
+$Shortcut.TargetPath = "%s"
+$Shortcut.Arguments = "--proxy-server=%s"
+$Shortcut.WorkingDirectory = "%s"
+$Shortcut.IconLocation = "%s,0"
+$Shortcut.Description = "Google Antigravity with Smart Proxy"
+$Shortcut.Save()
+`, home, appPath, chromiumProxy, filepath.Dir(appPath), appPath)
+		_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", lnkScript).Run()
+
 		return batPath, nil
 	}
 
