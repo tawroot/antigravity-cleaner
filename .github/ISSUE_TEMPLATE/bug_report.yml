@@ -54,7 +54,7 @@ body:
     attributes:
       label: "تأییدیه‌ها / Checklist"
       options:
-        - label: "من از آخرین نسخه پایدار (v5.1.0 به بالا) استفاده می‌کنم / Using latest release."
+        - label: "من از آخرین نسخه پایدار (v5.2.0 به بالا) استفاده می‌کنم / Using latest release (v5.2.0+)."
           required: true
         - label: "فایل راهنما (README.md) و چنج‌لاگ را بررسی کرده‌ام / Checked README & CHANGELOG."
           required: false
