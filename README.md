@@ -283,3 +283,24 @@ make release
 - **Co-Pilot & Pair Programming:** **Antigravity AI (Google DeepMind)** — *Crafted in creative pair-programming using Google's own AI agent to liberate Google's developer tools for restricted coders worldwide!* 🤖
 - **License:** GNU General Public License v3.0 (GPL-3.0)
 - Dedicated to uncensored technology, open-source accessibility, and developer freedom everywhere.
+
+---
+
+## 📈 Star History
+
+If this tool unblocked your workflow, a ⭐ star helps other developers discover it.
+
+<a href="https://star-history.com/#tawroot/antigravity-cleaner&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=tawroot/antigravity-cleaner&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=tawroot/antigravity-cleaner&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=tawroot/antigravity-cleaner&type=Date" />
+ </picture>
+</a>
+
+---
+
+## 💬 Community & Discussions
+
+Questions, feature requests, or want to share your setup?
+[**Open a Discussion →**](https://github.com/tawroot/antigravity-cleaner/discussions)
