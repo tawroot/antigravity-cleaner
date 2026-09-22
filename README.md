@@ -55,13 +55,13 @@ Prefer a simple graphical interface? Download the standalone executable for your
 
 <br>
 
-| Operating System | Standalone Binary (Direct Download) | Mode |
-| :--- | :--- | :--- |
-| 🪟 **Windows** (64-bit) | [**`antigravity-cleaner-windows-amd64.exe`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click `.exe` (opens GUI automatically) |
-| 🍎 **macOS** (Apple Silicon M1–M4) | [**`antigravity-cleaner-darwin-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `./antigravity-cleaner-darwin-arm64` |
-| 🍎 **macOS** (Intel) | [**`antigravity-cleaner-darwin-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `./antigravity-cleaner-darwin-amd64` |
-| 🐧 **Linux** (x86_64) | [**`antigravity-cleaner-linux-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `ag-cleaner gui` |
-| 🐧 **Linux** (ARM64) | [**`antigravity-cleaner-linux-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | Double-click or `ag-cleaner gui` |
+| Operating System | Standalone Binary | Mode |
+| :--- | :---: | :--- |
+| 🪟 **Windows** (64-bit) | [![Direct Download](https://img.shields.io/badge/Direct_Download-.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe)<br><sub>[View on Releases](https://github.com/tawroot/antigravity-cleaner/releases/latest)</sub> | Double-click `.exe` (opens GUI automatically) |
+| 🍎 **macOS** (Apple Silicon M1–M4) | [![Direct Download](https://img.shields.io/badge/Direct_Download-ARM64-white?style=for-the-badge&logo=apple&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64)<br><sub>[View on Releases](https://github.com/tawroot/antigravity-cleaner/releases/latest)</sub> | Double-click or `./antigravity-cleaner-darwin-arm64` |
+| 🍎 **macOS** (Intel) | [![Direct Download](https://img.shields.io/badge/Direct_Download-Intel_x64-gray?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64)<br><sub>[View on Releases](https://github.com/tawroot/antigravity-cleaner/releases/latest)</sub> | Double-click or `./antigravity-cleaner-darwin-amd64` |
+| 🐧 **Linux** (x86_64) | [![Direct Download](https://img.shields.io/badge/Direct_Download-x86__64-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64)<br><sub>[View on Releases](https://github.com/tawroot/antigravity-cleaner/releases/latest)</sub> | Double-click or `ag-cleaner gui` |
+| 🐧 **Linux** (ARM64) | [![Direct Download](https://img.shields.io/badge/Direct_Download-ARM64-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64)<br><sub>[View on Releases](https://github.com/tawroot/antigravity-cleaner/releases/latest)</sub> | Double-click or `ag-cleaner gui` |
 
 <br>
 

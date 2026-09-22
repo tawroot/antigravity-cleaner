@@ -54,13 +54,66 @@
 
 <br>
 
-| سیستم‌عامل | نسخه فایل مستقل (بدون نیاز به نصب) | نحوه اجرا |
-| :--- | :--- | :--- |
-| 🪟 **ویندوز** (نسخه‌های ۱۰ و ۱۱ - ۶۴ بیتی) | [**`antigravity-cleaner-windows-amd64.exe`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک روی فایل اجرایی (باز شدن خودکار محیط گرافیکی) |
-| 🍎 **مک‌او‌اس** (تراشه‌های اپل M1 تا M4) | [**`antigravity-cleaner-darwin-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک یا اجرای مستقیم فایل باینری |
-| 🍎 **مک‌او‌اس** (پردازنده‌های اینتل) | [**`antigravity-cleaner-darwin-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | دابل‌کلیک یا اجرای مستقیم فایل باینری |
-| 🐧 **لینوکس** (معماری x86_64) | [**`antigravity-cleaner-linux-amd64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | اجرای مستقیم یا دستور `ag-cleaner gui` |
-| 🐧 **لینوکس** (معماری ARM64) | [**`antigravity-cleaner-linux-arm64`**](https://github.com/tawroot/antigravity-cleaner/releases/latest) | اجرای مستقیم یا دستور `ag-cleaner gui` |
+<div dir="rtl">
+
+<table style="width: 100%; border-collapse: collapse; text-align: right;" dir="rtl">
+  <thead>
+    <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 2px solid rgba(255, 255, 255, 0.1);">
+      <th style="padding: 12px 16px; text-align: right; width: 30%;">🖥️ سیستم‌عامل</th>
+      <th style="padding: 12px 16px; text-align: center; width: 38%;">⬇️ دریافت فایل باینری</th>
+      <th style="padding: 12px 16px; text-align: right; width: 32%;">⚡ نحوه اجرا</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+      <td style="padding: 14px 16px;">🪟 <strong>ویندوز</strong><br><small style="opacity: 0.75;">(نسخه‌های ۱۰ و ۱۱ - ۶۴ بیتی)</small></td>
+      <td style="padding: 14px 16px; text-align: center;">
+        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe"><img src="https://img.shields.io/badge/دانلود_مستقیم-.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="دانلود ویندوز"></a>
+        <br>
+        <small><a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" style="opacity: 0.85;">📦 مشاهده در صفحه ریلیزها</a></small>
+      </td>
+      <td style="padding: 14px 16px;">دابل‌کلیک روی فایل اجرایی (باز شدن خودکار محیط گرافیکی)</td>
+    </tr>
+    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+      <td style="padding: 14px 16px;">🍎 <strong>مک‌او‌اس Apple Silicon</strong><br><small style="opacity: 0.75;">(تراشه‌های M1 تا M4)</small></td>
+      <td style="padding: 14px 16px; text-align: center;">
+        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64"><img src="https://img.shields.io/badge/دانلود_مستقیم-ARM64-white?style=for-the-badge&logo=apple&logoColor=black" alt="دانلود مک آرم"></a>
+        <br>
+        <small><a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" style="opacity: 0.85;">📦 مشاهده در صفحه ریلیزها</a></small>
+      </td>
+      <td style="padding: 14px 16px;">دابل‌کلیک یا اجرای مستقیم فایل باینری</td>
+    </tr>
+    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+      <td style="padding: 14px 16px;">🍎 <strong>مک‌او‌اس Intel</strong><br><small style="opacity: 0.75;">(پردازنده‌های اینتل)</small></td>
+      <td style="padding: 14px 16px; text-align: center;">
+        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64"><img src="https://img.shields.io/badge/دانلود_مستقیم-Intel_x64-gray?style=for-the-badge&logo=apple&logoColor=white" alt="دانلود مک اینتل"></a>
+        <br>
+        <small><a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" style="opacity: 0.85;">📦 مشاهده در صفحه ریلیزها</a></small>
+      </td>
+      <td style="padding: 14px 16px;">دابل‌کلیک یا اجرای مستقیم فایل باینری</td>
+    </tr>
+    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+      <td style="padding: 14px 16px;">🐧 <strong>لینوکس x86_64</strong><br><small style="opacity: 0.75;">(اوبونتو، دبیان، آرچ، فدورا)</small></td>
+      <td style="padding: 14px 16px; text-align: center;">
+        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64"><img src="https://img.shields.io/badge/دانلود_مستقیم-x86__64-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="دانلود لینوکس"></a>
+        <br>
+        <small><a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" style="opacity: 0.85;">📦 مشاهده در صفحه ریلیزها</a></small>
+      </td>
+      <td style="padding: 14px 16px;">اجرای مستقیم یا دستور <code>ag-cleaner gui</code></td>
+    </tr>
+    <tr>
+      <td style="padding: 14px 16px;">🐧 <strong>لینوکس ARM64</strong><br><small style="opacity: 0.75;">(رزبری‌پای و سرورهای ARM)</small></td>
+      <td style="padding: 14px 16px; text-align: center;">
+        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64"><img src="https://img.shields.io/badge/دانلود_مستقیم-ARM64-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="دانلود لینوکس آرم"></a>
+        <br>
+        <small><a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" style="opacity: 0.85;">📦 مشاهده در صفحه ریلیزها</a></small>
+      </td>
+      <td style="padding: 14px 16px;">اجرای مستقیم یا دستور <code>ag-cleaner gui</code></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
 
 <br>
 
@@ -122,6 +175,8 @@ graph TD
 
 ## 📊 گزارش تست‌های زنده و بنچمارک سیستم
  
+<div dir="rtl">
+
 | شاخص عملکردی | مقدار اندازه‌گیری‌شده | سند لاگ رسمی |
 | :--- | :--- | :--- |
 | **سرعت اسکن بایت‌کد در حافظه RAM** | **۱,۹۰۱ مگابایت بر ثانیه (~۱.۹ گیگابایت/ثانیه)** | [`benchmarks.log`](docs/test-reports/benchmarks.log) |
@@ -130,9 +185,13 @@ graph TD
 | **پاکسازی دقیق کش سهمیه (ارور ۴۲۹)** | **حذف ۱۶ کش معیوب (بدون حذف حتی یک چت)** | [`live_system_test.log`](docs/test-reports/live_system_test.log) |
 | **تست‌های واحد سیستمی (Unit Tests)** | **۱۰۰٪ موفق و پاس‌شده** | [`benchmarks.log`](docs/test-reports/benchmarks.log) |
 
+</div>
+
 ---
 
 ## 🥊 جدول مقایسه جامع با سایر ابزارها
+
+<div dir="rtl">
 
 | شاخص و قابلیت فنی | پچرهای تک‌منظوره پایتونی (`open-patcher` و غیره) | اسکریپت‌های متفرقه (پاورشل و شل) | **⚡ Antigravity Cleaner (نسخه ۵.۲)** |
 | :--- | :---: | :---: | :---: |
@@ -146,6 +205,8 @@ graph TD
 | **جلوگیری از بازدانلود خودکار ادیتور** | ✅ نسخه اولیه | ❌ ندارد | ✅ **قفل کانال به‌روزرسانی و جلوگیری از لغو پچ‌ها** |
 | **ابزار بررسی سلامت سیستم (`doctor`)** | ❌ ندارد | ⚠️ محدود | ✅ **تست هم‌زمان تاخیر پینگ، سلامت DNS و ارتباط با مدل Gemini** |
 | **جایگزینی اتمیک فایل‌ها روی دیسک** | فایل‌های موقت پایتون | ❌ ندارد | ✅ **تعویض اتمیک Inode بدون کرش یا مسدود شدن برنامه حین کار** |
+
+</div>
 
 ---
 
@@ -233,6 +294,8 @@ ag-cleaner about
 
 این ابزار برای حل دقیق و فوری پرتکرارترین ارورهای گزارش‌شده توسعه‌دهندگان طراحی شده است:
 
+<div dir="rtl">
+
 | متن دقیق ارور (Error Message) | ریشه فنی مشکل | راه‌حل فوری و خودکار |
 | :--- | :--- | :--- |
 | **`Your current account is not eligible for Antigravity, because it is not currently available in your location`** | اعتبارسنجی کلاینت‌ساید ریجن در `main.js`، باینری `agy` و اکستنشن VS Code | اجرای دستور `ag-cleaner patch all` (یا کلیک روی **[Auto-Fix]** در رابط کاربری) |
@@ -243,6 +306,8 @@ ag-cleaner about
 | **عدم باز شدن برنامه / خطای `SingletonLock`** | بسته شدن ناگهانی سیستم یا سرور گرافیکی و باقی ماندن فایل قفل روی دیسک | اجرای دستور `ag-cleaner clean` یا `ag-cleaner launch` (حذف خودکار قفل‌های معلق) |
 | **`Failed to fetch` / کرش کردن یا پاسخ ندادن `language_server`** | فرآیندهای زامبی در پس‌زمینه سیستم | اجرای دستور `ag-cleaner kill` برای توقف پردازش‌های مرده و راه‌اندازی تمیز |
 | **افت فریم، کندی محیط و تأخیر در تایپ پاسخ‌ها** | تورم کش دیتای GPU/Dawn و وب‌سوکت‌های قطع‌شده در پس‌زمینه | اجرای دستور `ag-cleaner clean` برای تخلیه ایمن حافظه موقت |
+
+</div>
 
 ---
 
