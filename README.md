@@ -135,9 +135,9 @@ graph TD
 
 ## 🥊 Comparison Matrix
 
-| Feature | `open-antigravity-patcher` | Conventional Scripts | **⚡ Antigravity Cleaner (v5.1)** |
+| Feature | Single-Purpose Patchers (`open-antigravity-patcher`, `QNIX`, `yhan-sun`) | Process/DLL Injectors (`antigravity-proxy`) | **⚡ Antigravity Cleaner (v5.2)** |
 | :--- | :---: | :---: | :---: |
-| **Language & Runtime** | Python 3 (requires `pip`/`venv`) | PowerShell (Windows only) | **Pure Go (Zero dependencies, Single Binary)** |
+| **Language & Architecture** | Python 3 (requires runtime, `pip`, external packages) | Windows-only C++ / DLL injection | **Native Pure Go (Zero dependencies, Single Executable)** |
 | **User Interface (TUI)** | Basic text stdout | Basic console | **2026 Lipgloss Rounded Dashboard** |
 | **No-TUN Proxy Launcher** | ❌ (Forces root TUN mode) | ❌ None | ✅ **Auto-detects Xray/Clash/NekoBox & Injects** |
 | **Stream KeepAlive Tuner** | ❌ (Frequent stream drops) | ❌ None | ✅ **Aggressive socket keepalive against DPI drops** |
@@ -249,14 +249,20 @@ Antigravity Cleaner provides a native **Agent Skill** (`skills/antigravity-clean
 
 ---
 
-## 🔧 Troubleshooting Matrix
+## 🔧 Troubleshooting Matrix (Supported Error Codes & Issues)
 
-| Issue / Error | Root Cause | Instant Fix |
+Antigravity Cleaner provides exact fixes for the most common real-world errors encountered by developers worldwide:
+
+| Error Code / Message | Primary Trigger | Instant Automated Fix |
 | :--- | :--- | :--- |
-| **"Region Not Supported" / Gate 1 Block** | Official machine code checking IP/account region | Run `ag-cleaner patch all` |
-| **HTTP 429 Quota Exhausted** | Corrupted session tokens & stale HTTP cookies | Run `ag-cleaner clean` (Keeps chats intact) |
-| **Stream Dropouts / Middlebox Resets** | ISP DPI firewall closing idle TLS connections | Run `ag-cleaner launch` (Enables 15s TCP KeepAlive) |
-| **Sluggish Workspace / Laggy Queries** | Bloated Electron network state & cache | Run `ag-cleaner clean` |
+| **`Your current account is not eligible for Antigravity, because it is not currently available in your location`** | Client-side eligibility checks in `main.js`, `agy` binary, and VS Code extension | Run `ag-cleaner patch all` (or click **[Auto-Fix]** in Retro GUI) |
+| **`Antigravity Gemini: opaque "User location is not supported" (HTTP 400)`** | Upstream API regional gating + direct connection through unsupported ISP | Launch with `ag-cleaner launch` (Direct proxy injection without TUN mode) |
+| **`Unknown: There was a network issue connecting to the server, please try again.`** | Middlebox / DPI firewall terminating idle TLS/SSE streams during agent thinking | Launch with `ag-cleaner launch` (Enforces 15s TCP KeepAlive socket tuning) |
+| **`HTTP 429 Quota Exceeded` / `Too Many Requests`** | Corrupted session tokens, rate-limit buckets, and bloated cache | Run `ag-cleaner clean` (Surgically purges rate-limit tokens, **100% chats preserved!**) |
+| **`isGoogleInternal` / Local Eligibility Gate check failed** | Embedded machine-code check in `language_server` / core engine | Run `ag-cleaner patch all` (IDA-style MultiGate binary patch) |
+| **`Antigravity won't launch` / Stale `SingletonLock` error** | Unclean exit or display server crash leaving dead PID lockfile | Run `ag-cleaner launch` or `ag-cleaner clean` (Auto-removes dead lockfiles) |
+| **`Failed to fetch` / `language_server crashed / connection refused`** | Zombie background processes or orphaned Electron sockets | Run `ag-cleaner kill` to terminate zombies, then launch cleanly |
+| **Sluggish Workspace & Token Generation Lag** | Accumulated GPU/Dawn cache and dead WebSocket buffers | Run `ag-cleaner clean` to flush GPU and network cache |
 
 ---
 

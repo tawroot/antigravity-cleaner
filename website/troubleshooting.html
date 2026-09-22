@@ -8,9 +8,9 @@
 
     <!-- SEO & GEO Meta Tags -->
     <meta name="description"
-        content="Complete technical guide to fix Google Antigravity IDE errors: Error 403 Forbidden (Country Not Supported / Region Lock), 429 Quota Exceeded, Language Server crashes, and Middlebox TLS resets. 100% offline open-source solution.">
+        content="Fix Google Antigravity errors: 'Your current account is not eligible for Antigravity, because it is not currently available in your location', 'User location is not supported' (HTTP 400), Error 429 Quota Exceeded, and 'There was a network issue connecting to the server'. 100% offline open-source solution.">
     <meta name="keywords"
-        content="Google Antigravity, Google Antigravity 403, Antigravity region lock, Antigravity not available in your country, Antigravity 429 quota exceeded, Antigravity fix, Antigravity Iran, Antigravity Russia, Antigravity proxy, Antigravity no TUN, Antigravity cleaner, Antigravity language server crashed">
+        content="Google Antigravity, Your current account is not eligible for Antigravity, Antigravity User location is not supported, Antigravity 400 error, Antigravity 403 region lock, Antigravity not available in your country, Antigravity 429 quota exceeded, Antigravity network issue connecting to server, Antigravity stream drop, Antigravity region bypass, Antigravity no TUN, Antigravity cleaner, open antigravity patcher, QNIX eligibility patcher, Antigravity proxy">
     <meta name="author" content="Tawroot">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/troubleshooting.html">
@@ -70,10 +70,26 @@
         },
         {
           "@type": "Question",
-          "name": "How to fix 'Antigravity won't launch' or stuck singleton lock on Linux?",
+          "name": "How to fix 'Your current account is not eligible for Antigravity, because it is not currently available in your location'?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "If Antigravity crashes or is killed ungracefully, Chromium leaves a stale SingletonLock file in ~/.config/Antigravity/SingletonLock. Antigravity Cleaner automatically audits the locking PID, deletes dead locks, and spawns the IDE cleanly."
+            "text": "This error occurs because Antigravity checks account eligibility across three separate layers: local JavaScript bundles (main.js, agy CLI, extension.js), core binary eligibility gates (isGoogleInternal), and upstream API GeoIP headers. Running 'antigravity-cleaner patch all' neutralizes the local machine-code and JavaScript gate checks across all components, allowing your account to authenticate cleanly when paired with an active loopback proxy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to fix Antigravity Gemini: opaque 'User location is not supported' (HTTP 400)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HTTP 400 'User location is not supported' happens when outgoing API requests originate from an unsanctioned or unverified IP address. Instead of running a heavy system-wide TUN VPN, launch Antigravity with 'antigravity-cleaner launch'. It probes your local proxy ports (10808, 2080, 7890) and launches the IDE with targeted process-level proxy routing, resolving the 400 error immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to fix 'Unknown: There was a network issue connecting to the server, please try again.' in Antigravity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This message indicates that your streaming SSE connection to Google's inference servers was abruptly severed—often by ISP Middlebox firewalls or DPI filters timing out silent TLS connections while the AI model is thinking. Launching Antigravity via Antigravity Cleaner applies an aggressive 15-second TCP KeepAlive socket configuration that keeps the connection active and prevents sudden drops."
           }
         }
       ]

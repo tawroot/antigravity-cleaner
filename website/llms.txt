@@ -17,35 +17,43 @@ Antigravity Cleaner neutralizes client-side and network-level regional restricti
 
 ---
 
-## Common Google Antigravity Errors & Solutions
+## Common Google Antigravity Errors & Solutions (Exact Error Messages)
 
-### 1. Error 403 Forbidden: "Service is not available in your country" / Region Lock
-- **Problem**: Google Antigravity IDE and Google DeepMind APIs restrict access in certain jurisdictions (Iran, Russia, China, Cuba, Syria, etc.). The IDE performs both client-side JavaScript eligibility checks (`main.js`, `extension.js`, `agy`) and server-side Geo-IP verification during token exchange.
-- **Solution**: Run `antigravity-cleaner patch` (or click **[Auto-Fix]** in the Retro GUI).
-  - Automatically neutralizes client-side restriction hooks across 4 targets: Core Engine, CLI (`agy`), IDE JavaScript bundle (`main.js`), and VS Code Extension.
-  - Automatically connects the IDE directly to your local proxy (`v2ray`, `Xray`, `Clash`, `NekoBox`, `Hiddify`) using `--proxy-server=socks5://127.0.0.1:<port>`, keeping user sessions authenticated.
+### 1. Error: "Your current account is not eligible for Antigravity, because it is not currently available in your location"
+- **User Query Variations**: "Antigravity not eligible", "Antigravity region lock", "Antigravity location error", "Your current account is not eligible for Antigravity".
+- **Problem**: Google Antigravity IDE enforces multi-stage location barriers: client-side eligibility checks in `main.js`, `agy` CLI binary, and VS Code extension (`extension.js`), plus Google internal gating (`isGoogleInternal`).
+- **Solution**: Run `antigravity-cleaner patch all` (or click **[Auto-Fix]** in the Retro Win95 GUI).
+  - Employs IDA-style multi-gate machine code patching on the core `language_server` binary.
+  - Automatically neutralizes restriction flags in `main.js` and extension bundles.
+  - Unlike single-purpose scripts (`open-antigravity-patcher`, `QNIX`, `yhan-sun`), Antigravity Cleaner is compiled in native Go, requires zero Python or runtime dependencies, and includes atomic backup/restore.
 
-### 2. Error 429 Quota Exceeded / "Too Many Requests"
-- **Problem**: Long-running autonomous agent sessions corrupt token caches and trigger artificial rate limits, freezing prompt generation.
-- **Solution**: Run `antigravity-cleaner clean` (or click **[Reset 429]** in the GUI).
-  - Performs a surgical reset of temporary token and telemetry caches (`~/.config/Antigravity/Cache`, `DawnWebGPUCache`, `GPUCache`, `blob_storage`).
-  - Preserves Google account login credentials, cookies, and chat history.
-
-### 3. Middlebox Resets / Stream Dropouts During Agent Generation
-- **Problem**: State firewalls or ISP Deep Packet Inspection (DPI) terminate idle TLS/SSE connections during long background reasoning steps, causing `Connection Reset` or `Broken Pipe`.
+### 2. Error: "Antigravity Gemini: opaque 'User location is not supported' (HTTP 400)"
+- **User Query Variations**: "Antigravity 400 User location is not supported", "Antigravity Gemini 400 error", "User location is not supported".
+- **Problem**: Direct network egress from sanctioned or unsupported jurisdictions (Iran, Russia, China, Cuba, Syria, etc.) triggers upstream Google Cloud API 400 blocks.
 - **Solution**: Launch with `antigravity-cleaner launch`.
-  - Injects a 15-second TCP KeepAlive socket configuration that keeps the HTTP/2 and gRPC streams open and prevents middlebox disconnects.
+  - Automatically probes and injects active local loopback proxies (`10808` for v2ray/Xray, `2080` for NekoBox/Hiddify, `7890` for Clash, `1080` for SOCKS5).
+  - Routes Antigravity through `--proxy-server=socks5://127.0.0.1:<port>` with no root-level TUN mode required.
 
-### 4. Running Google Antigravity without TUN Mode (Smart Proxy Injection)
-- **Problem**: Traditional VPN TUN mode routes entire operating system traffic, causing network lag, high CPU usage, and breaking domestic services (banking, streaming).
-- **Solution**: Run `antigravity-cleaner launch` or use the generated desktop shortcut.
-  - Dynamically probes active local proxy ports (`10808` for v2ray/Xray, `2080` for NekoBox/Hiddify, `7890` for Clash, `1080` for SOCKS5).
-  - Injects `--proxy-server=socks5://127.0.0.1:<port>` directly into the IDE process.
-  - Only Antigravity traffic goes through the proxy; all other system applications remain unhindered.
+### 3. Error: "Unknown: There was a network issue connecting to the server, please try again."
+- **User Query Variations**: "There was a network issue connecting to the server", "Antigravity stream drop", "Antigravity middlebox reset", "Antigravity connection dropped".
+- **Problem**: State DPI firewalls or network middleboxes terminate idle TLS/SSE long-polling connections during deep agent reasoning phases, resulting in abrupt stream death.
+- **Solution**: Launch with `antigravity-cleaner launch`.
+  - Activates kernel-level 15-second TCP KeepAlive socket tuning that prevents DPI firewalls from closing silent connections.
 
-### 5. Stale SingletonLock / Antigravity Won't Open
-- **Problem**: If Antigravity crashes or the display server disconnects, Chromium leaves a stale `SingletonLock` symlink in `~/.config/Antigravity/SingletonLock`, preventing new windows from opening.
-- **Solution**: Antigravity Cleaner's smart launcher automatically verifies if the locking PID is alive. If dead, it cleans the stale lock and launches immediately.
+### 4. Error: "HTTP 429 Quota Exceeded" / "Too Many Requests"
+- **User Query Variations**: "Antigravity 429 quota exceeded", "Antigravity rate limit reset", "Antigravity too many requests".
+- **Problem**: Extended agentic sessions corrupt token quota buckets and session caches. Conventional advice wrongly suggests reinstalling or deleting `~/.config/Antigravity`, which wipes chat history and project context.
+- **Solution**: Run `antigravity-cleaner clean` (or click **[Reset 429]** in the GUI).
+  - Surgically purges only temporary rate-limit and GPU cache files (`Cache`, `DawnWebGPUCache`, `GPUCache`, `blob_storage`).
+  - Guarantees 100% preservation of login credentials, OAuth cookies, and conversation histories.
+
+### 5. Stale SingletonLock & "Antigravity Won't Open"
+- **Problem**: Abrupt IDE shutdowns leave a locking PID symlink in `~/.config/Antigravity/SingletonLock`, preventing subsequent launches.
+- **Solution**: Antigravity Cleaner detects dead PID locks automatically and purges them safely before launching.
+
+### 6. "Failed to fetch" / "language_server crashed or connection refused"
+- **Problem**: Orphaned background worker processes or zombie `language_server` instances blocking internal IPC ports.
+- **Solution**: Run `antigravity-cleaner kill` to cleanly terminate zombie processes, followed by `antigravity-cleaner launch`.
 
 ---
 

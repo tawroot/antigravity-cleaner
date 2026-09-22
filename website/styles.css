@@ -575,6 +575,178 @@ nav {
   font-size: 3rem;
   margin-bottom: 20px;
   display: block;
+/* ==========================================================================
+   Trust Stickers & Holographic Badge Cards
+   ========================================================================== */
+.trust-stickers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.trust-sticker-card {
+  background: rgba(14, 20, 32, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.trust-sticker-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--card-accent, #00f0ff);
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.trust-sticker-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-accent, #00f0ff);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.15);
+  background: rgba(20, 28, 45, 0.85);
+}
+
+.trust-sticker-card:hover::after {
+  opacity: 1;
+}
+
+.sticker-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sticker-svg-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.trust-sticker-card:hover .sticker-svg-icon {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.sticker-tag {
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  border: 1px solid;
+}
+
+.sticker-title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: #fff;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.sticker-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Upgraded OS Download Cards
+   ========================================================================== */
+.download-os-card {
+  background: rgba(14, 20, 32, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.download-os-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--os-glow, rgba(0, 240, 255, 0.2));
+  border-color: var(--os-accent, #00f0ff);
+}
+
+.os-badge-header {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.os-svg-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  filter: drop-shadow(0 4px 12px var(--os-glow, rgba(0, 0, 0, 0.4)));
+  transition: transform 0.3s ease;
+}
+
+.download-os-card:hover .os-svg-icon {
+  transform: scale(1.1);
+}
+
+.os-pill-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  border: 1px solid;
+}
+
+.os-specs-list {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0 20px;
+}
+
+.os-spec-badge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace, sans-serif;
 }
 
 /* Terminal Block - Apple Music Style */
