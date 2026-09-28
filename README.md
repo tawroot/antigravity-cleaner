@@ -9,12 +9,18 @@
   <a href="README.ur.md">🇵🇰 اردو</a>
 </p>
 
-# ⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.2.0)
+<p align="center">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="280">
+</p>
+
+<h1 align="center">⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.2.0)</h1>
+
+<p align="center">
+  <strong>Enterprise-Grade Self-Healing, Sanction Bypass & Diagnostics Engine for Google Antigravity IDE</strong>
+</p>
 
 <div align="center">
-  <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="85%">
-  <br>
-  
+
   [![Version](https://img.shields.io/badge/Version-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go Report](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
   [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
@@ -25,6 +31,10 @@
 
 > *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
 > — **@dalroot**
+
+<p align="center">
+  <img src="docs/images/banner.png" alt="Antigravity Cleaner Architecture" width="100%">
+</p>
 
 ---
 

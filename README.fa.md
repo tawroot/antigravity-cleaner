@@ -9,11 +9,17 @@
   <a href="README.ur.md">🇵🇰 اردو</a>
 </p>
 
-# ⚡ آنتی‌گراویتی کلینر (Antigravity Cleaner) — جعبه‌ابزار آزادی هوش مصنوعی (نسخه ۵.۲.۰)
+<p align="center">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="280">
+</p>
+
+<h1 align="center">⚡ آنتی‌گراویتی کلینر (Antigravity Cleaner) — جعبه‌ابزار آزادی هوش مصنوعی (نسخه ۵.۲.۰)</h1>
+
+<p align="center">
+  <strong>موتور خودمختار تشخیص و رفع تحریم‌ها، پاکسازی کش‌های فاسد و هدایت مستقیم به پروکسی بدون سربار TUN</strong>
+</p>
 
 <div align="center">
-  <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
-  <br>
   
   [![Version](https://img.shields.io/badge/نسخه-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
@@ -25,6 +31,10 @@
 
 > *از صمیم قلب تقدیم به تمام مردم، توسعه‌دهندگان و پژوهشگرانی که هم‌زمان میان تیغ فیلترینگ داخلی و سد تحریم‌های ناعادلانه خارجی گرفتار شده‌اند — در 🇮🇷 ایران، 🇨🇳 چین، 🇷🇺 روسیه، 🇹🇷 ترکیه، 🇨🇺 کوبا، 🇸🇾 سوریه، 🇰🇵 کره شمالی، 🇧🇾 بلاروس، 🇸🇩 سودان، 🇻🇪 ونزوئلا، 🇦🇫 افغانستان، 🇲🇲 میانمار و تمام سرزمین‌های محدود شده جهان. دسترسی آزاد به دانش، هوش مصنوعی و فناوری، حق ذاتی تمام بشریت است، نه امتیازی گزینشی.*  
 > — **دل‌نوشته‌ای از @dalroot**
+
+<p align="center">
+  <img src="docs/images/banner.png" alt="معماری آنتی‌گراویتی کلینر" width="100%">
+</p>
 
 ---
 

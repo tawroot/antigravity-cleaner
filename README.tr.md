@@ -1,8 +1,10 @@
-# Antigravity Cleaner Shell (v4.1.0)
+<p align="center">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="280">
+</p>
+
+<h1 align="center">Antigravity Cleaner Shell (v4.1.0)</h1>
 
 <div align="center">
-  <img src="docs/images/banner.png" alt="Antigravity Cleaner Banner" width="100%">
-  <br>
 
   [![Version](https://img.shields.io/badge/Version-4.1.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![License](https://img.shields.io/badge/License-TACL-red.svg?style=for-the-badge)](docs/LICENSE.md)
