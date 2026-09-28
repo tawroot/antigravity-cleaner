@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="280">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
 <h1 align="center">Antigravity Cleaner Shell (v4.1.0)</h1>

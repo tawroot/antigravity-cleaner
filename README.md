@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="280">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
 <h1 align="center">⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.2.0)</h1>
@@ -32,13 +32,13 @@
 > *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
 > — **@dalroot**
 
-<p align="center">
-  <img src="docs/images/banner.png" alt="Antigravity Cleaner Architecture" width="100%">
-</p>
-
 ---
 
 ## ⚡ What is Antigravity Cleaner?
+
+<p align="center">
+  <img src="docs/images/error-notice.png" alt="Google Region Restriction Notice" width="680">
+</p>
 
 **Antigravity Cleaner** is an enterprise-grade, high-performance systems utility engineered in **pure Go** with both an authentic **1-Click Retro KeyGen GUI** and a 2026-standard terminal dashboard (**Lipgloss & Bubbletea**). It completely solves region blocking, account eligibility barriers, 429 quota exhaustion, and streaming connection drops for:
 - **Google Antigravity 2.x**
