@@ -163,7 +163,7 @@ func printAbout() {
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("  - Co-Pilot & Pair Programming: Antigravity AI (Google DeepMind)"))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#8BE9FD")).Render("  - Repository: https://github.com/tawroot/antigravity-cleaner"))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  - Dedicated to developers navigating digital sanctions worldwide."))
-	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  - License: GNU General Public License v3.0"))
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  - License: Apache License 2.0"))
 	fmt.Println()
 }
 

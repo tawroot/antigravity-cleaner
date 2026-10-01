@@ -316,7 +316,7 @@ This is a **major milestone** release with a complete UI/UX redesign, new featur
 
 ### 🌟 Branding & Marketing
 
-- 🎨 **Tawana Network Branding** throughout the application
+- 🎨 **Professional CLI & Retro UI** throughout the application
 - 🎨 **Professional Logo** and icon design
 - 🎨 **Consistent Visual Identity** across all platforms
 - 🎨 **Premium Services Integration**
@@ -350,7 +350,7 @@ This is a **major milestone** release with a complete UI/UX redesign, new featur
 
 ### 🙏 Credits
 
-**Developed by:** Tawana Mohammadi / Tawana Network  
+**Developed by:** Antigravity Cleaner Team  
 **Contributors:** Community feedback and testing  
 **Special Thanks:** All users who reported issues and suggested features
 
@@ -397,8 +397,8 @@ This is a **major milestone** release with a complete UI/UX redesign, new featur
 
 ---
 
-**Powered by TAWANA NETWORK**  
-**Copyright © 2024-2025 Tawana Mohammadi. All Rights Reserved.**
+**Apache License 2.0**  
+**Copyright © 2024-2026 Antigravity Cleaner Authors. All Rights Reserved.**
 
 ---
 

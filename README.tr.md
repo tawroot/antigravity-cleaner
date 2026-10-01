@@ -7,7 +7,7 @@
 <div align="center">
 
   [![Version](https://img.shields.io/badge/Version-4.1.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
-  [![License](https://img.shields.io/badge/License-TACL-red.svg?style=for-the-badge)](docs/LICENSE.md)
+  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
   [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue.svg?style=for-the-badge&logo=platform.sh)](https://github.com/tawroot/antigravity-cleaner)
   [![Language](https://img.shields.io/badge/Language-PowerShell-yellow.svg?style=for-the-badge&logo=powershell)]()
   [![Security](https://img.shields.io/badge/Security-Zero%20Telemetry-green.svg?style=for-the-badge&logo=shields)](docs/SECURITY.md)
@@ -209,7 +209,7 @@ Eğer bu araç sizi saatlerce hata ayıklamaktan kurtardıysa veya Google hesab�
 ---
 
 ## Yazar Hakkında
-**Tawana Network** tarafından geliştirilmiştir.
+**Antigravity Cleaner Authors** tarafından geliştirilmiştir.
 *Başkalarının duvar ördüğü yerlere biz köprüler kuruyoruz.*
 
 <!--

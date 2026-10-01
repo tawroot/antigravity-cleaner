@@ -4,7 +4,7 @@
 .DESCRIPTION
     A powerful shell-based tool for system cleaning, session management, and network optimization.
 .AUTHOR
-    Tawana Network
+    Antigravity Cleaner Authors
 .VERSION
     4.1.0 (Shell Edition)
 #>
@@ -51,7 +51,7 @@ function Show-Header {
     Write-Host ""
     Write-Host "  ================================================================" -ForegroundColor Cyan
     Write-Host "       $AppTitle v$Version" -ForegroundColor White
-    Write-Host "       (c) Tawana Network - Professional Shell Edition" -ForegroundColor DarkGray
+    Write-Host "       (c) Antigravity Cleaner Authors" -ForegroundColor DarkGray
     Write-Host "  ================================================================" -ForegroundColor Cyan
     Write-Host ""
 }

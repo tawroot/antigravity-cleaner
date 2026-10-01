@@ -49,7 +49,7 @@
 Unlike conventional scripts that force users to route their entire operating system through a heavy, root-permission **TUN Mode (VPN)**, Antigravity Cleaner introduces an automated **No-TUN Smart Proxy Injector** that routes Antigravity traffic directly to local proxies (Xray, Clash, NekoBox, Hiddify) with zero system overhead.
 
 > 🔒 **100% Offline & Zero-Track Guarantee:**
-> Antigravity Cleaner operates **100% locally on `127.0.0.1`**. It contains **ZERO telemetry, ZERO analytics, and ZERO remote network requests**. Your source code, API keys, and chats are never uploaded or tracked. Fully open-source and auditable under GPL-3.0.
+> Antigravity Cleaner operates **100% locally on `127.0.0.1`**. It contains **ZERO telemetry, ZERO analytics, and ZERO remote network requests**. Your source code, API keys, and chats are never uploaded or tracked. Fully open-source and auditable under Apache License 2.0.
 
 ---
 
@@ -297,7 +297,7 @@ make release
 
 - **Lead Architect & Maintainer:** **[@dalroot](https://github.com/dalroot)**
 - **Co-Pilot & Pair Programming:** **Antigravity AI (Google DeepMind)** — *Crafted in creative pair-programming using Google's own AI agent to liberate Google's developer tools for restricted coders worldwide!* 🤖
-- **License:** GNU General Public License v3.0 (GPL-3.0)
+- **License:** Apache License 2.0 (Apache-2.0)
 - Dedicated to uncensored technology, open-source accessibility, and developer freedom everywhere.
 
 ---
