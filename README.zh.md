@@ -33,6 +33,16 @@
 > *谨以此项目献给所有身处网络审查与国际数字制裁双重限制下的开发者、研究者与创作者 — 无论是在 🇨🇳 中国、🇮🇷 伊朗、🇷🇺 俄罗斯、🇧🇾 白俄罗斯、🇹🇷 土耳其、🇨🇺 古巴、🇸🇾 叙利亚、🇰🇵 朝鲜、🇸🇩 苏丹还是世界任何受到限制的角落。自由获取知识、技术与人工智能是每个人的基本权利，而非特权。*  
 > — **@dalroot**
 
+<div align="center">
+
+[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+&nbsp;
+**⭐ 如果 Antigravity Cleaner 帮助您绕过了 Google 制裁或修复了配额错误，请为本项目点亮 Star — 帮助更多受限地区的开发者发现它！**
+&nbsp;
+[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+
+</div>
+
 ---
 
 ## ⚡ 什么是 Antigravity Cleaner？

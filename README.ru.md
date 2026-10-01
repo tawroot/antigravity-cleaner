@@ -33,6 +33,16 @@
 > *От всего сердца посвящается всем разработчикам, исследователям и создателям, оказавшимся между внутренней сетевой фильтрацией и международными цифровыми санкциями — в 🇷🇺 России, 🇮🇷 Иране, 🇨🇳 Китае, 🇧🇾 Беларуси, 🇹🇷 Турции, 🇨🇺 Кубе, 🇸🇾 Сирии, 🇰🇵 Северной Корее, 🇸🇩 Судане, 🇻🇪 Венесуэле и во всех ограниченных уголках мира. Свободный доступ к знаниям, технологиям и искусственному интеллекту — это фундаментальное право человека, а не привилегия.*  
 > — **@dalroot**
 
+<div align="center">
+
+[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+&nbsp;
+**⭐ Если Antigravity Cleaner помог вам обойти санкции Google или исправить ошибки квот, поставьте Star репозиторию — это поможет другим разработчикам найти проект!**
+&nbsp;
+[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+
+</div>
+
 ---
 
 ## ⚡ Что такое Antigravity Cleaner?

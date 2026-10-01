@@ -1,339 +1,138 @@
-# Antigravity Cleaner v2.1.1 🌍
-### Herramienta de limpieza y reparación multiplataforma | Solucionar errores de instalación y red
+<p align="center">
+  <a href="README.md">🇺🇸 English</a> •
+  <a href="README.fa.md">🇮🇷 فارسی</a> •
+  <a href="README.ar.md">🇸🇦 العربية</a> •
+  <a href="README.ru.md">🇷🇺 Русский</a> •
+  <a href="README.es.md">🇪🇸 Español</a> •
+  <a href="README.tr.md">🇹🇷 Türkçe</a> •
+  <a href="README.zh.md">🇨🇳 简体中文</a> •
+  <a href="README.ur.md">🇵🇰 اردو</a>
+</p>
 
-[![Python](https://img.shields.io/badge/Made%20with-Python-blue?style=for-the-badge&logo=python)](https://python.org)
-[![OS](https://img.shields.io/badge/Platform-Win%20|%20Mac%20|%20Linux-lightgrey?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue?style=for-the-badge)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+<p align="center">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
+</p>
+
+<h1 align="center">⚡ Antigravity Cleaner — Toolkit definitivo para la libertad de IA (v5.2.0)</h1>
+
+<p align="center">
+  <strong>Motor empresarial de autorrecuperación, evasión de sanciones y diagnóstico para Google Antigravity IDE</strong>
+</p>
 
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=00BFFF&height=300&section=header&text=Antigravity%20Cleaner&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Fix%20Install%20Errors%20%26%20Network%20Issues&descAlignY=51&descAlign=62" alt="Antigravity Header" />
+
+  [![Version](https://img.shields.io/badge/Versión-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Go Report](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
+  [![Tests](https://img.shields.io/badge/Pruebas-100%25_Superadas-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
+  [![Benchmark](https://img.shields.io/badge/Escaneo_Bytecode-1.9_GB%2Fs-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
+  [![Platform](https://img.shields.io/badge/Plataforma-Linux%20%7C%20macOS%20%7C%20Windows-brightgreen.svg?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner)
+  [![License](https://img.shields.io/badge/Licencia-Apache_2.0-blue?style=for-the-badge)](LICENSE)
+  [![Security](https://img.shields.io/badge/Privacidad-100%25_Offline_%7C_Cero--Rastreo-success?style=for-the-badge)]()
+</div>
+
+> *Dedicado desde el corazón a todas las personas, desarrolladores y creadores atrapados entre el filtrado interno y las sanciones digitales internacionales — en 🇨🇺 Cuba, 🇻🇪 Venezuela, 🇮🇷 Irán, 🇨🇳 China, 🇷🇺 Rusia, 🇸🇾 Siria, 🇰🇵 Corea del Norte, 🇧🇾 Bielorrusia, 🇸🇩 Sudán y en cada rincón restringido del mundo. El acceso libre al conocimiento, la tecnología y la inteligencia artificial es un derecho humano fundamental, no un privilegio.*  
+> — **@dalroot**
+
+<div align="center">
+
+[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+&nbsp;
+**⭐ Si Antigravity Cleaner te ayudó a eludir sanciones o resolver errores de cuota, ¡danos una estrella en GitHub para ayudar a otros desarrolladores a descubrirlo!**
+&nbsp;
+[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+
 </div>
 
 ---
 
-## 🌐 Idiomas disponibles | Available Languages
+## ⚡ ¿Qué es Antigravity Cleaner?
 
-| 🇬🇧 [English](README.md) | 🇮🇷 [فارسی](README.fa.md) | 🇨🇳 [中文](README.zh.md) | 🇷🇺 [Русский](README.ru.md) |
-|:---:|:---:|:---:|:---:|
-| 🇹🇷 [Türkçe](README.tr.md) | 🇪🇸 **Español** | 🇦🇪 [العربية](README.ar.md) | 🇵🇰 [اردو](README.ur.md) |
+<p align="center">
+  <img src="docs/images/error-notice.png" alt="Aviso de restricción regional de Google" width="680">
+</p>
 
----
+**Antigravity Cleaner** es una utilidad de sistemas de alto rendimiento desarrollada en **Go puro**. Ofrece una interfaz gráfica retro **1-Click KeyGen GUI** y un panel interactivo para terminal (**Lipgloss & Bubbletea**). Resuelve de forma definitiva los bloqueos regionales, restricciones geográficas (HTTP 403 Forbidden / Location not supported), agotamiento de cuotas (HTTP 429 Quota Exhausted) y caídas en la transmisión de código para:
+- **Google Antigravity 2.x**
+- **Antigravity IDE**
+- **Antigravity CLI (`agy`)**
+- **Extensión oficial para VS Code (`google.google-antigravity`)**
 
-## 🌍 El problema global que resolvemos
+A diferencia de los scripts pesados que obligan a enrutar todo el sistema operativo a través de un modo **TUN (VPN)** con privilegios de root, Antigravity Cleaner integra un **Inyector Smart Proxy Sin TUN** que dirige el tráfico de Antigravity directamente a clientes proxy locales (Xray, Clash, NekoBox, Hiddify) con cero sobrecarga en el sistema.
 
-**Antigravity Cleaner** fue desarrollado originalmente para usuarios en Irán, pero los problemas que resuelve son **universales en todo el mundo**.
-
-### 🎯 Qué problemas resolvemos:
-
-- **🚫 Restricciones regionales**: Los servicios de Google no están disponibles en ciertos países debido a sanciones (Irán, Cuba, Siria, Corea del Norte, Crimea)
-- **🌐 Interferencia de red**: Manipulación de DNS, conflictos de proxy, restricciones de firewall
-- **🔒 Errores de bloqueo regional**: Mensaje "No disponible en tu región" al iniciar sesión
-- **📡 Problemas de conectividad**: Errores de red, tiempos de espera, fallos de certificado SSL
-- **🔄 Errores de instalación**: Descargas corruptas, procesos atascados, archivos residuales
-- **🔐 Expiración de sesión**: Solicitudes repetidas de inicio de sesión, corrupción de cookies
-
-### 👥 Quién usa esta herramienta:
-
-- **🚨 Redes altamente restringidas**: Países con filtrado de internet integral (China, Turkmenistán, Corea del Norte, Irán)
-- **⚖️ Regiones sancionadas**: Áreas donde los servicios de Google están oficialmente bloqueados (Irán, Cuba, Siria, Crimea)
-- **🌐 Redes parcialmente filtradas**: Regiones con restricciones selectivas de servicios (Rusia, Turquía, Egipto, Pakistán)
-- **🏢 Entornos con red limitada**: Redes corporativas, instituciones educativas, WiFi público
-- **✈️ Viajeros y expatriados**: Usuarios que experimentan bloqueo regional al viajar
-- **🔧 Desarrolladores y profesionales de TI**: Administradores de sistemas que solucionan problemas de instalación y red
+> 🔒 **Garantía 100% Offline y Cero Rastreo:**  
+> Antigravity Cleaner opera **estrictamente en local (`127.0.0.1`)**. Contiene **CERO telemetría, CERO analíticas y CERO llamadas a servidores remotos**. Tu código fuente, claves de API y conversaciones nunca se transmiten ni registran. Código 100% abierto bajo la licencia Apache 2.0.
 
 ---
 
-## 🖥️ Captura de pantalla del terminal
+## 💾 GUI Retro KeyGen de 1 Clic (Sin usar terminal)
 
-```console
-+-------------------------------------------------------------+
-|               ANTIGRAVITY CLEANER v2.1.1                    |
-|        Running on Windows 10 | Python 3.12.0                |
-+-------------------------------------------------------------+
-| Opciones:                                                   |
-|  [1] Limpieza rápida  (Rutas estándar)                      |
-|  [2] Limpieza profunda  (Registro + Temp + Cache + Ext)     |
-|  [3] Reinicio de red  (DNS Flush + Winsock Reset)           |
-|  [4] Reparación completa  (Limpieza profunda + Reinicio red)|
-|  [5] Modo de prueba  (Dry Run)                              |
-|  [6] Ayudante de inicio de sesión  ⭐ NUEVO                 |
-|  [7] Gestor de sesiones  (Respaldo/Restaurar) ⭐ NUEVO      |
-|  [0] Salir                                                  |
-+-------------------------------------------------------------+
+¿Prefieres una interfaz gráfica sencilla? Descarga el ejecutable para tu sistema operativo desde [Releases](https://github.com/tawroot/antigravity-cleaner/releases) y haz **doble clic**. ¡Sin comandos, sin entorno Python y sin dependencias externas!
+
+<div align="center">
+  <img src="assets/shot.jpg" alt="Antigravity Retro KeyGen GUI (Estilo Win95)" width="440">
+  <br>
+  <sub><em>Patcher auténtico estilo Windows 95/98 con campo estelar interactivo, efectos de sonido Web Audio chiptune de 8 bits y reparación automática en un clic.</em></sub>
+</div>
+
+<br>
+
+| Sistema Operativo | Binario Autónomo | Modo de Ejecución |
+| :--- | :---: | :--- |
+| 🪟 **Windows** (64-bit) | [![Descarga Directa](https://img.shields.io/badge/Descarga_Directa-.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe) | Doble clic en `.exe` (abre la GUI automáticamente) |
+| 🍎 **macOS** (Apple Silicon M1–M4) | [![Descarga Directa](https://img.shields.io/badge/Descarga_Directa-ARM64-white?style=for-the-badge&logo=apple&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64) | Doble clic o `./antigravity-cleaner-darwin-arm64` |
+| 🍎 **macOS** (Intel) | [![Descarga Directa](https://img.shields.io/badge/Descarga_Directa-Intel_x64-gray?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64) | Doble clic o `./antigravity-cleaner-darwin-amd64` |
+| 🐧 **Linux** (x86_64) | [![Descarga Directa](https://img.shields.io/badge/Descarga_Directa-x86__64-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64) | Doble clic o `ag-cleaner gui` |
+| 🐧 **Linux** (ARM64) | [![Descarga Directa](https://img.shields.io/badge/Descarga_Directa-ARM64-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64) | Doble clic o `ag-cleaner gui` |
+
+---
+
+## 🚀 Instalación rápida CLI (Un solo comando)
+
+### Linux / macOS
+```bash
+curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
 ```
 
----
-
-## 🚀 Instalación y ejecución con un solo comando
-
-### 🪟 Windows (PowerShell)
+### Windows (PowerShell)
 ```powershell
-iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
-```
-
-### 🍎 macOS / 🐧 Linux (Terminal)
-```bash
-curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
+irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
 ---
 
-## ✨ Características principales
-
-### 🧹 Limpieza profunda
-- Elimina rastros de AppData, Temp, Registro y **extensiones de Chrome**
-- Limpieza completa de archivos residuales
-- Respaldo automático antes de eliminar
-
-### 🌐 Reinicio de red
-- Ejecución automática de `netsh` y `flushdns`
-- Corrección de errores "Error de red" o "Bloqueo regional"
-- Detección y corrección de problemas de DNS
-
-### 🔧 Gestión de procesos
-- Terminación automática de procesos atascados
-- Detección de servicios en ejecución
-- Limpieza segura sin pérdida de datos
-
-### 🌐 Ayudante de inicio de sesión del navegador (v2.1+)
-
-¿Tienes problemas para iniciar sesión en Antigravity? Esta función ayuda:
-
-**Limpieza segura del navegador:**
-- Solo se eliminan los datos relacionados con Antigravity
-- Los demás datos del navegador permanecen intactos
-- Respaldo automático antes de eliminar
-- Soporte para Chrome, Edge, Brave y Firefox
-
-**Gestión de sesiones:**
-- Respaldo de sesión después de un inicio de sesión exitoso
-- Restauración de sesión para evitar inicios de sesión repetidos
-- Almacenamiento cifrado (AES-256)
-- Validez de 30 días
-
-**Optimización de red:**
-- Prueba de conexión a servicios de Google
-- Diagnóstico de problemas de DNS y proxy
-- Corrección de problemas de certificado SSL
-- Informes de diagnóstico detallados
-
----
-
-## 📋 Guía completa de funciones
-
-### 1️⃣ Limpieza rápida (Rutas estándar)
-**Qué hace:**
-- Escanea las carpetas de instalación estándar de Antigravity
-- Elimina archivos residuales de AppData y Roaming
-- Limpia archivos de configuración básicos
-
-**Cuándo usar:**
-- Después de desinstalar Antigravity normalmente
-- Para limpieza rutinaria
-- Cuando quieres limpiar rápida y seguramente
-
-**Seguridad:** ✅ Muy seguro - solo archivos de Antigravity
-
----
-
-### 2️⃣ Limpieza profunda (Escaneo agresivo)
-**Qué hace:**
-- Todo lo de Limpieza rápida, más:
-- Escaneo del Registro de Windows para entradas de Antigravity
-- Eliminación de archivos temporales de instalación
-- Limpieza de extensiones del navegador relacionadas con Antigravity
-- Búsqueda de archivos de caché ocultos
-
-**Cuándo usar:**
-- Cuando la Limpieza rápida no resolvió el problema
-- Antes de una reinstalación limpia
-- Cuando tienes errores de instalación persistentes
-
-**Seguridad:** ✅ Seguro - crea respaldo antes de eliminar
-
----
-
-### 3️⃣ Reinicio de red
-**Qué hace:**
-- Limpia la caché de DNS
-- Reinicia la pila de red de Windows
-- Reinicia la configuración TCP/IP
-
-**Cuándo usar:**
-- "Error de red" al iniciar sesión
-- Problemas de tiempo de espera de conexión
-- Después de cambiar VPN/proxy
-
-**Seguridad:** ⚠️ Requiere reinicio - pero completamente seguro
-
----
-
-### 4️⃣ Reparación completa
-**Qué hace:**
-- Ejecuta Limpieza profunda (opción 2)
-- Luego ejecuta Reinicio de red (opción 3)
-- Limpieza completa del sistema y corrección de red
-
-**Cuándo usar:**
-- Necesitas limpieza máxima
-- Múltiples intentos de instalación fallidos
-- Problemas tanto de archivos como de red
-
-**Seguridad:** ✅ Seguro - combinación de dos operaciones seguras
-
----
-
-### 5️⃣ Modo de prueba (Dry Run)
-**Qué hace:**
-- Activa el "modo de prueba"
-- Muestra qué se eliminará sin eliminar realmente
-- Permite previsualizar todas las operaciones
-
-**Cuándo usar:**
-- Primera vez que usas la herramienta
-- Quieres ver qué se limpiará
-- Prueba antes de la limpieza real
-
-**Seguridad:** ✅ Completamente seguro - sin cambios reales
-
----
-
-### 6️⃣ Ayudante de inicio de sesión del navegador ⭐ NUEVO
-
-**Opción 1: Limpiar rastros de Antigravity en el navegador (Seguro)**
-- Escanea Chrome, Edge, Brave y Firefox
-- Encuentra solo cookies/caché relacionados con Antigravity
-- Elimina datos de inicio de sesión atascados
-- Respaldo automático antes de eliminar
-
-**Opción 2: Optimizar red para inicio de sesión**
-- Limpia la caché de DNS
-- Prueba la conexión a servicios de Google
-- Corrige conflictos de proxy
-
-**Opción 3: Informe de diagnóstico de red**
-- Prueba la conexión a servidores de Google
-- Verifica la resolución de DNS
-- Detecta problemas de proxy/VPN
-- Verifica certificados SSL
-
-**Opción 4: Reparación completa de inicio de sesión**
-- Combina las opciones 1, 2 y 3
-- Corrección completa de navegador y red
-
-**Navegadores soportados:**
-- ✅ Google Chrome
-- ✅ Microsoft Edge
-- ✅ Brave Browser
-- ✅ Mozilla Firefox
-
----
-
-### 7️⃣ Gestor de sesiones ⭐ NUEVO
-
-**Opción 1: Respaldar sesión actual**
-- Guarda tu sesión de inicio de sesión actual
-- Cifra las cookies con AES-256
-- Almacena de forma segura en `~/.antigravity-cleaner/sessions/`
-
-**Opción 2: Restaurar sesión guardada**
-- Restaura la sesión guardada previamente
-- Evita volver a ingresar credenciales
-- Inicio de sesión automático
-
-**Opción 3: Listar todas las sesiones guardadas**
-- Muestra todas las sesiones respaldadas
-- Muestra la antigüedad y el estado de la sesión
-
-**Opción 4: Eliminar sesiones antiguas**
-- Elimina sesiones expiradas (más de 30 días)
-- Libera espacio en disco
-
-**Seguridad:**
-- 🔒 Cifrado AES-256-GCM
-- 🔒 Solo almacenamiento local (sin nube)
-- 🔒 Expiración automática de 30 días
-- 🔒 Permisos de archivo restrictivos
-
----
-
-## 🔗 Enlaces útiles
-
-- **Verificar región de Google**: Si tienes el problema "No disponible en tu región":
-  [Formulario de asociación de país de Google](https://policies.google.com/country-association-form)
-
-- **Sitio web del proyecto**: [tawroot.github.io/antigravity-cleaner](https://tawroot.github.io/antigravity-cleaner)
-
-- **Reportar problemas**: [GitHub Issues](https://github.com/tawroot/antigravity-cleaner/issues)
-
----
-
-## 🛡️ Características de seguridad
-
-### Respaldo automático
-- ✅ Respaldo antes de cualquier eliminación
-- ✅ Archivos de respaldo con marca de tiempo
-- ✅ Reversión fácil si es necesario
-- ✅ Almacenamiento en `~/.antigravity-cleaner/backups/`
-
-### Modo de prueba
-- ✅ Previsualización de todas las operaciones
-- ✅ Sin cambios reales
-- ✅ Prueba segura
-- ✅ Activar con `python src/main.py --dry-run`
-
-### Eliminación selectiva
-- ✅ Solo datos relacionados con Antigravity
-- ✅ Otros datos del navegador seguros
-- ✅ Marcadores preservados
-- ✅ Contraseñas preservadas
-
-### Cifrado
-- 🔒 AES-256-GCM para sesiones
-- 🔒 Seguridad de estándar industrial
-- 🔒 Solo almacenamiento local
-- 🔒 Sin transmisión a la nube
-
----
-
-## 🛠️ Instalación manual (Desarrolladores)
+## 🛠️ Subcomandos CLI
 
 ```bash
-git clone https://github.com/tawroot/antigravity-cleaner.git
-cd antigravity-cleaner
-pip install -r src/requirements.txt
-python src/main.py
+# Diagnóstico completo de salud del sistema, sockets y variables proxy
+ag-cleaner doctor
+
+# Limpieza quirúrgica de cuota y bloqueos (sin borrar código de tus proyectos)
+ag-cleaner clean
+
+# Parcheo de bytecode de language_server para anular el bloqueo regional (403)
+ag-cleaner patch
+
+# Enrutamiento inteligente a proxy local sin modo TUN (SOCKS5 / HTTP)
+ag-cleaner proxy --socks5 127.0.0.1:10808
+
+# Iniciar Antigravity IDE con soporte KeepAlive activo
+ag-cleaner run
 ```
 
 ---
 
-## 🔍 Palabras clave SEO
+## 🥊 Matriz comparativa
 
-<details>
-<summary>Haz clic para ver las palabras clave</summary>
-
-**Instalación y errores:**
-corrección antigravity IDE, desinstalar antigravity, reinstalación limpia, error de instalación, descarga fallida, instalación corrupta, proceso atascado, archivos residuales, limpiador de registro
-
-**Red y conectividad:**
-error de red antigravity, corrección inicio sesión google, corrección bloqueo regional, países sancionados google, herramienta limpieza DNS, reinicio de red, conflicto proxy, error certificado SSL
-
-**Sesión y navegador:**
-administrador sesiones navegador, respaldo cookies, restauración sesión, almacenamiento sesión cifrado, administrador perfiles chrome
-
-**Regional y acceso:**
-herramienta redes restringidas, desbloqueo regional, cambio región cuenta google, alternativa VPN, elusión censura, herramienta libertad internet
-
-**Técnico:**
-limpiador windows, limpiador macos, limpiador linux, script python, herramienta multiplataforma, herramienta automatización
-
-</details>
+| Característica | Scripts Tradicionales | Modo TUN / VPN del Sistema | **Antigravity Cleaner (v5.2.0)** |
+| :--- | :---: | :---: | :---: |
+| **Arquitectura** | Python / Shell antiguo | Controlador virtual TUN | **Binario Go estático de alto rendimiento** |
+| **Evasión de Sanciones (403)** | ❌ No soportado | ⚠️ Inconsistente por fugas DNS | **✅ Parcheo de bytecode in-situ (1.9 GB/s)** |
+| **Restablecimiento de Cuota (429)** | ❌ Borra todo el perfil | ❌ No aplicable | **✅ Reinicio quirúrgico de tokens y bloqueos** |
+| **Requiere Permisos Root** | ⚠️ Frecuente | ❌ Obligatorio | **✅ Cero privilegios root requeridos** |
+| **Sobrecarga de Red** | Alta | Muy alta | **✅ Cero sobrecarga (Loopback directo)** |
+| **Privacidad y Telemetría** | ❓ Desconocida | ❓ Varía según el proveedor | **✅ 100% Offline (Zero-Tracking verificado)** |
 
 ---
 
-<div align="center">
-  <b>Proyecto de código abierto</b><br>
-  <i>Empoderando a los usuarios con herramientas de código abierto</i><br><br>
-  <a href="https://github.com/tawroot/antigravity-cleaner">⭐ Estrella en GitHub</a>
-</div>
+## 📜 Licencia
+Este proyecto se distribuye bajo la licencia **Apache License 2.0**.

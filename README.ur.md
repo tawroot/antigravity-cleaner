@@ -1,151 +1,125 @@
-# Antigravity Cleaner v2.1.1 🌍
-### کراس پلیٹ فارم صفائی اور مرمت کا آلہ
+<p align="center">
+  <a href="README.md">🇺🇸 English</a> •
+  <a href="README.fa.md">🇮🇷 فارسی</a> •
+  <a href="README.ar.md">🇸🇦 العربية</a> •
+  <a href="README.ru.md">🇷🇺 Русский</a> •
+  <a href="README.es.md">🇪🇸 Español</a> •
+  <a href="README.tr.md">🇹🇷 Türkçe</a> •
+  <a href="README.zh.md">🇨🇳 简体中文</a> •
+  <a href="README.ur.md">🇵🇰 اردو</a>
+</p>
 
-<div dir="rtl">
+<p align="center">
+  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
+</p>
 
-## 🌐 دستیاب زبانیں
+<h1 align="center">⚡ Antigravity Cleaner — ڈیجیٹل آزادی برائے مصنوعی ذہانت (v5.2.0)</h1>
 
-| 🇬🇧 [English](README.md) | 🇮🇷 [فارسی](README.fa.md) | 🇨🇳 [中文](README.zh.md) | 🇷🇺 [Русский](README.ru.md) |
-|:---:|:---:|:---:|:---:|
-| 🇹🇷 [Türkçe](README.tr.md) | 🇪🇸 [Español](README.es.md) | 🇦🇪 [العربية](README.ar.md) | 🇵🇰 **اردو** |
-
----
-
-## 🌍 ہم جو عالمی مسئلہ حل کرتے ہیں
-
-**Antigravity Cleaner** اصل میں ایران کے صارفین کے لیے بنایا گیا تھا، لیکن جو مسائل یہ حل کرتا ہے وہ **دنیا بھر میں عالمگیر** ہیں۔
-
-### 🎯 ہم کون سے مسائل حل کرتے ہیں:
-
-- **🚫 علاقائی پابندیاں**: پابندیوں کی وجہ سے Google کی خدمات دستیاب نہیں (ایران، کیوبا، شام، شمالی کوریا)
-- **🌐 نیٹ ورک میں مداخلت**: DNS ہیرا پھیری، پراکسی تنازعات
-- **🔒 ریجن لاک غلطیاں**: "آپ کے علاقے میں دستیاب نہیں" پیغام
-- **📡 کنکشن کے مسائل**: نیٹ ورک غلطیاں، ٹائم آؤٹ، SSL
-- **🔄 انسٹالیشن کی غلطیاں**: خراب ڈاؤن لوڈز، پھنسے ہوئے عمل
-
-### 👥 یہ ٹول کون استعمال کرتا ہے:
-
-- **🚨 سخت پابندیوں والے نیٹ ورکس**: چین، ترکمانستان، ایران
-- **⚖️ پابندیوں والے علاقے**: ایران، کیوبا، شام
-- **🌐 جزوی طور پر فلٹر شدہ نیٹ ورکس**: روس، ترکی، مصر، پاکستان
-- **🏢 محدود نیٹ ورک ماحول**: کارپوریٹ نیٹ ورکس، تعلیمی ادارے
-- **✈️ مسافر**: سفر کے دوران ریجن لاک کا سامنا کرنے والے
-
----
-
-## 🚀 ایک کمانڈ سے انسٹال اور چلائیں
-
-### 🪟 Windows (PowerShell)
-```powershell
-iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
-```
-
-### 🍎 macOS / 🐧 Linux
-```bash
-curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
-```
-
----
-
-## ✨ اہم خصوصیات
-
-### 🧹 گہری صفائی
-- AppData، Temp، رجسٹری اور Chrome ایکسٹینشنز سے نشانات ہٹانا
-- حذف کرنے سے پہلے خودکار بیک اپ
-
-### 🌐 نیٹ ورک ری سیٹ
-- `netsh` اور `flushdns` خودکار عمل
-- "نیٹ ورک غلطی" یا "ریجن لاک" مسائل کی مرمت
-
-### 🌐 براؤزر لاگ ان مددگار (v2.1+)
-
-**محفوظ براؤزر صفائی:**
-- صرف Antigravity سے متعلق ڈیٹا صاف ہوتا ہے
-- دوسرا براؤزر ڈیٹا محفوظ رہتا ہے
-- Chrome، Edge، Brave اور Firefox کی حمایت
-
-**سیشن مینجمنٹ:**
-- کامیاب لاگ ان کے بعد سیشن بیک اپ
-- دوبارہ لاگ ان سے بچنے کے لیے سیشن بحال کریں
-- AES-256 انکرپٹڈ سٹوریج
-- 30 دن کی میعاد
-
-### 7️⃣ سیشن مینیجر ⭐ نیا
-
-**آپشن 1: موجودہ سیشن کا بیک اپ**
-- آپ کا موجودہ لاگ ان سیشن محفوظ کرتا ہے
-- AES-256 کے ساتھ کوکیز کو خفیہ کرتا ہے
-
-**آپشن 2: محفوظ شدہ سیشن بحال کریں**
-- پہلے سے محفوظ سیشن بحال کرتا ہے
-- خودکار لاگ ان
-
-**سیکیورٹی:**
-- 🔒 AES-256-GCM خفیہ کاری
-- 🔒 صرف مقامی سٹوریج (کلاؤڈ نہیں)
-- 🔒 30 دن میں خودکار میعاد ختم
-
----
-
-## 🛡️ سیکیورٹی کی خصوصیات
-
-### خودکار بیک اپ
-- ✅ کسی بھی حذف سے پہلے بیک اپ
-- ✅ ٹائم سٹیمپ والی بیک اپ فائلیں
-- ✅ `~/.antigravity-cleaner/backups/` میں سٹوریج
-
-### ٹیسٹ موڈ (Dry Run)
-- ✅ تمام آپریشنز کا پیش نظارہ
-- ✅ کوئی اصل تبدیلی نہیں
-- ✅ `python src/main.py --dry-run` سے فعال کریں
-
-### خفیہ کاری
-- 🔒 سیشنز کے لیے AES-256-GCM
-- 🔒 صرف مقامی سٹوریج
-- 🔒 کوئی کلاؤڈ ٹرانسمیشن نہیں
-
----
-
-## 🛠️ دستی انسٹالیشن (ڈویلپرز)
-
-```bash
-git clone https://github.com/tawroot/antigravity-cleaner.git
-cd antigravity-cleaner
-pip install -r src/requirements.txt
-python src/main.py
-```
-
----
-
-## 🔗 مفید روابط
-
-- **پروجیکٹ ویب سائٹ**: [tawroot.github.io/antigravity-cleaner](https://tawroot.github.io/antigravity-cleaner)
-- **مسائل کی رپورٹ**: [GitHub Issues](https://github.com/tawroot/antigravity-cleaner/issues)
-
----
-
-## 🔍 SEO کلیدی الفاظ
-
-<details>
-<summary>کلیدی الفاظ دیکھنے کے لیے کلک کریں</summary>
-
-**تنصیب اور خرابیاں:**
-antigravity IDE ٹھیک کریں، antigravity ان انسٹال کریں، صاف دوبارہ تنصیب، تنصیب کی خرابی
-
-**نیٹ ورک اور رابطہ:**
-نیٹ ورک کی خرابی antigravity، google لاگ ان ٹھیک کریں، علاقائی تالا ٹھیک کریں
-
-**سیشن اور براؤزر:**
-براؤزر سیشن منیجر، کوکی بیک اپ، سیشن بحال کریں
-
-</details>
-
----
+<p align="center">
+  <strong>گوگل اینٹی گریوٹی کے لیے خودکار تشخیص، علاقائی پابندیوں کا خاتمہ اور نو-ٹن اسمارٹ پراکسی انجن</strong>
+</p>
 
 <div align="center">
-  <b>اوپن سورس پروجیکٹ</b><br>
-  <i>اوپن سورس ٹولز کے ساتھ صارفین کو بااختیار بنانا</i><br><br>
-  <a href="https://github.com/tawroot/antigravity-cleaner">⭐ GitHub پر اسٹار دیں</a>
+
+  [![Version](https://img.shields.io/badge/ورژن-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Go Report](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
+  [![Tests](https://img.shields.io/badge/ٹیسٹ-100%25_کامیاب-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
+  [![Benchmark](https://img.shields.io/badge/اسکین_رفتار-1.9_GB%2Fs-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
+  [![Platform](https://img.shields.io/badge/پلیٹ_فارم-Linux%20%7C%20macOS%20%7C%20Windows-brightgreen.svg?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner)
+  [![License](https://img.shields.io/badge/لائسنس-Apache_2.0-blue?style=for-the-badge)](LICENSE)
+  [![Security](https://img.shields.io/badge/پرائیویسی-100%25_آف_لائن_%7C_زیرو_ٹریکنگ-success?style=for-the-badge)]()
 </div>
 
+> *دلی خلوص کے ساتھ ان تمام ڈیولپرز اور محققین کے نام جو داخلی انٹرنیٹ فلٹرنگ اور بین الاقوامی ڈیجیٹل پابندیوں کی زد میں ہیں — پاکستان، ایران، چین، روس، ترکی، اور دنیا کے تمام پابندی زدہ خطوں میں۔ علم، ٹیکنالوجی اور مصنوعی ذہانت تک آزادانہ رسائی ہر انسان کا بنیادی حق ہے۔*  
+> — **@dalroot**
+
+<div align="center">
+
+[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+&nbsp;
+**⭐ اگر اس ٹول نے گوگل کی پابندیوں یا کوٹہ کی غلطیوں کو حل کرنے میں آپ کی مدد کی ہے، تو براہ کرم گٹ ہب پر ایک اسٹار ضرور دیں!**
+&nbsp;
+[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+
 </div>
+
+---
+
+## ⚡ اینٹی گریوٹی کلینر کیا ہے؟
+
+<p align="center">
+  <img src="docs/images/error-notice.png" alt="گوگل ریجن پابندی نوٹس" width="680">
+</p>
+
+**Antigravity Cleaner** ایک جدید اور تیز رفتار سسٹم ٹول ہے جسے **خالص Go لینگویج** میں تیار کیا گیا ہے۔ یہ ون-کلک ریٹرو گرافیکل انٹرفیس (**Retro KeyGen GUI**) اور جدید ٹرمینل ڈیش بورڈ (**Lipgloss & Bubbletea**) دونوں فراہم کرتا ہے۔ یہ گوگل اینٹی گریوٹی کے تمام مسائل بشمول 403 Forbidden (User location is not supported)، 429 کوٹہ کی بندش، اور کوڈ اسٹریمنگ کے انقطاع کو مکمل طور پر حل کرتا ہے:
+- **Google Antigravity 2.x**
+- **Antigravity IDE**
+- **Antigravity CLI (`agy`)**
+- **آفیشل VS Code ایکسٹینشن (`google.google-antigravity`)**
+
+روایتی سکرپٹس کے برعکس جو پورے آپریٹنگ سسٹم کو بھاری **TUN (VPN)** موڈ پر مجبور کرتی ہیں، یہ ٹول بغیر روٹ اور بغیر سسٹم ٹن کے، ٹریفک کو براہ راست مقامی پراکسی (Clash, Xray, Hiddify) سے جوڑتا ہے۔
+
+> 🔒 **100٪ آف لائن اور زیرو ٹریکنگ کی ضمانت:**  
+> یہ ٹول مکمل طور پر آپ کے اپنے کمپیوٹر پر لوکل طور پر چلتا ہے۔ اس میں کوئی ٹیلی میٹری، ڈیٹا جمع کرنے یا بیرونی کنکشن کا عمل موجود نہیں ہے۔ کوڈ اور چیٹس بالکل محفوظ رہتے ہیں۔
+
+---
+
+## 💾 1-کلک ریٹرو گرافیکل انٹرفیس (ٹرمینل کے بغیر)
+
+کیا آپ گرافیکل انٹرفیس کو ترجیح دیتے ہیں؟ [Releases](https://github.com/tawroot/antigravity-cleaner/releases) سے اپنے سسٹم کے لیے فائل ڈاؤن لوڈ کریں اور **ڈبل کلک** کر کے چلائیں:
+
+<div align="center">
+  <img src="assets/shot.jpg" alt="اینٹی گریوٹی ریٹرو انٹرفیس" width="440">
+  <br>
+  <sub><em>کلاسک ونڈوز 95 اسٹائل، اینیمیٹڈ اسٹار فیلڈ اور ون-کلک آٹو فکس بٹن کے ساتھ۔</em></sub>
+</div>
+
+<br>
+
+| آپریٹنگ سسٹم | ڈائریکٹ بائنری | طریقہ کار |
+| :--- | :---: | :--- |
+| 🪟 **Windows** (64-bit) | [![براہ راست ڈاؤن لوڈ](https://img.shields.io/badge/ڈاؤن_لوڈ-.exe-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe) | ڈبل کلک `.exe` (خودکار GUI کھولتا ہے) |
+| 🍎 **macOS** (Apple Silicon M1–M4) | [![براہ راست ڈاؤن لوڈ](https://img.shields.io/badge/ڈاؤن_لوڈ-ARM64-white?style=for-the-badge&logo=apple&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64) | ڈبل کلک یا `./antigravity-cleaner-darwin-arm64` |
+| 🍎 **macOS** (Intel) | [![براہ راست ڈاؤن لوڈ](https://img.shields.io/badge/ڈاؤن_لوڈ-Intel_x64-gray?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64) | ڈبل کلک یا `./antigravity-cleaner-darwin-amd64` |
+| 🐧 **Linux** (x86_64) | [![براہ راست ڈاؤن لوڈ](https://img.shields.io/badge/ڈاؤن_لوڈ-x86__64-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64) | ڈبل کلک یا `ag-cleaner gui` |
+| 🐧 **Linux** (ARM64) | [![براہ راست ڈاؤن لوڈ](https://img.shields.io/badge/ڈاؤن_لوڈ-ARM64-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64) | ڈبل کلک یا `ag-cleaner gui` |
+
+---
+
+## 🚀 فوری ٹرمینل انسٹالیشن
+
+### Linux / macOS
+```bash
+curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
+```
+
+### Windows (PowerShell)
+```powershell
+irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
+```
+
+---
+
+## 🛠️ کمانڈ لائن سب کمانڈز
+
+```bash
+# سسٹم کی صحت اور پراکسی کنکشن کا تفصیلی معائنہ
+ag-cleaner doctor
+
+# کوٹہ اور بلاکس کی صفائی (آپ کے پروجیکٹ کوڈ کو چھیڑے بغیر)
+ag-cleaner clean
+
+# ریجن اور 403 پابندی کو ختم کرنے کے لیے بائٹ کوڈ پیچ
+ag-cleaner patch
+
+# بغیر TUN موڈ کے پراکسی کنکشن
+ag-cleaner proxy --socks5 127.0.0.1:10808
+
+# ادیتور کو محفوظ پراکسی ماحول میں چلانا
+ag-cleaner run
+```
+
+---
+
+## 📜 لائسنس
+یہ پراجیکٹ بین الاقوامی **Apache License 2.0** کے تحت شائع کیا گیا ہے۔

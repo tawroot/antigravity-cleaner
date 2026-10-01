@@ -32,6 +32,16 @@
 > *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
 > — **@dalroot**
 
+<div align="center">
+
+[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+&nbsp;
+**⭐ If Antigravity Cleaner helped you bypass Google sanctions or fix quota errors, please Star this repo — it helps restricted developers discover this tool!**
+&nbsp;
+[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+
+</div>
+
 ---
 
 ## ⚡ What is Antigravity Cleaner?

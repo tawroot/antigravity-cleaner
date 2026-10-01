@@ -32,6 +32,16 @@
 > *از صمیم قلب تقدیم به تمام مردم، توسعه‌دهندگان و پژوهشگرانی که هم‌زمان میان تیغ فیلترینگ داخلی و سد تحریم‌های ناعادلانه خارجی گرفتار شده‌اند — در 🇮🇷 ایران، 🇨🇳 چین، 🇷🇺 روسیه، 🇹🇷 ترکیه، 🇨🇺 کوبا، 🇸🇾 سوریه، 🇰🇵 کره شمالی، 🇧🇾 بلاروس، 🇸🇩 سودان، 🇻🇪 ونزوئلا، 🇦🇫 افغانستان، 🇲🇲 میانمار و تمام سرزمین‌های محدود شده جهان. دسترسی آزاد به دانش، هوش مصنوعی و فناوری، حق ذاتی تمام بشریت است، نه امتیازی گزینشی.*  
 > — **دل‌نوشته‌ای از @dalroot**
 
+<div align="center">
+
+[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+&nbsp;
+**⭐ اگر این ابزار به دور زدن تحریم‌های گوگل یا حل خطاهای سهمیه کمک کرد، با دادن ستاره (Star) به دیده شدن آن توسط سایر برنامه‌نویسان کمک کنید!**
+&nbsp;
+[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+
+</div>
+
 ---
 
 ## ⚡ آنتی‌گراویتی کلینر چیست؟
