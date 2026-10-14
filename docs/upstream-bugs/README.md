@@ -14,7 +14,7 @@ Each record documents:
 
 | Bug ID | Title & Component | Severity | Mitigation Status in Toolkit |
 | :--- | :--- | :---: | :--- |
-| [**UPSTREAM-001**](UPSTREAM-001-electron-log-write-eio.md) | `Uncaught Exception: Error: write EIO` in `electron-log` Console Transport | Low (UX / Noise) | ✅ **Resolved** (Detached stdio pipes + pipe suppression) |
+| [**UPSTREAM-001**](UPSTREAM-001-electron-log-write-eio.md) | `Uncaught Exception: Error: write EIO` in `electron-log` Console Transport | Low (UX / Noise) | 🟡 **In Progress** (Launcher workaround applied; ASAR root patch planned in v5.4.0) |
 
 ---
 
