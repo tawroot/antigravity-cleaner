@@ -23,3 +23,7 @@ Data/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Research notes & scratch scripts (private)
+docs/RESEARCH_*.md
+scripts/

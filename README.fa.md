@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ آنتی‌گراویتی کلینر (Antigravity Cleaner) — جعبه‌ابزار آزادی هوش مصنوعی (نسخه ۵.۲.۰)</h1>
+<h1 align="center">⚡ آنتی‌گراویتی کلینر (Antigravity Cleaner) — جعبه‌ابزار آزادی هوش مصنوعی (نسخه ۵.۳.۰)</h1>
 
 <p align="center">
   <strong>موتور خودمختار تشخیص و رفع تحریم‌ها، پاکسازی کش‌های فاسد و هدایت مستقیم به پروکسی بدون سربار TUN</strong>
@@ -21,8 +21,9 @@
 
 <div align="center">
   
-  [![Version](https://img.shields.io/badge/نسخه-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Version](https://img.shields.io/badge/نسخه-5.3.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
+  [![کانال تلگرام](https://img.shields.io/badge/کانال_تلگرام-@dallrep-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/dallrep)
   [![پشتیبانی نسخه‌ها](https://img.shields.io/badge/پشتیبانی-تمام_نسخه‌های_انتی‌گراویتی-purple?style=for-the-badge)]()
   [![تست‌ها](https://img.shields.io/badge/تست‌ها-۱۰۰٪_موفق-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
   [![بنچمارک](https://img.shields.io/badge/سرعت_اسکن-۱.۹_گیگابایت_بر_ثانیه-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
@@ -37,6 +38,8 @@
 [![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
 &nbsp;
 **⭐ اگر این ابزار به دور زدن تحریم‌های گوگل یا حل خطاهای سهمیه کمک کرد، با دادن ستاره (Star) به دیده شدن آن توسط سایر برنامه‌نویسان کمک کنید!**
+&nbsp;
+[![کانال پشتیبانی تلگرام](https://img.shields.io/badge/کانال_پشتیبانی-t.me%2Fdallrep-blue?style=social&logo=telegram)](https://t.me/dallrep)
 &nbsp;
 [![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
 
@@ -345,6 +348,31 @@ make build
 # بیلد کراس‌پلتفرم برای لینوکس، مک (Intel و Apple Silicon) و ویندوز
 make release
 ```
+
+---
+
+<div dir="rtl">
+
+## 🔬 آزمایشگاه تحقیقاتی آنتی‌گراویتی و اکوسیستم اختصاصی (بیش از ۱۰۰ پچ داخلی)
+
+پشت این ابزار، یک فرآیند مهندسی معکوس و پژوهش امنیتی بسیار عمیق و مداوم قرار دارد. در آزمایشگاه تحقیقاتی و امنیتی خصوصی ما، کدهای داخلی Google Antigravity در ده‌ها نسخه مختلف به صورت سطح پایین دیکامپایل و کالبدشکافی شده‌اند:
+
+- **بیش از ۱۰۰ پچ بایت‌کد و پل ارتباطی پروتکل:** در مخزن خصوصی آزمایشگاه، آرشیوی غنی از بیش از ۱۰۰ پچ سطح پایین هسته، متوقف‌کننده‌های تله‌متری گوگل، پل‌های ارتباطی Stubby RPC و کانکتورهای اختصاصی اتصال مدل‌های شخصی (BYOM) نگهداری و توسعه داده می‌شود.
+- **فرآیند پایدارسازی و تست‌های فازینگ:** یافته‌های تحقیقاتی پیش از این‌که به نسخه عمومی اوپن‌سورس راه پیدا کنند، در محیط‌های آزمایشگاهی لینوکس، مک و ویندوز تحت تست‌های سنگین پایداری قرار می‌گیرند تا هیچ سشن فعالی دچار قطعی نشود.
+- **پروژه‌ای پایدار و واقعی برای توسعه‌دهندگان جهان:** این یک اسکریپت ساده نیست؛ بلکه یک معماری واقعی مهندسی سیستم است که برای تضمین دسترسی نامحدود برنامه‌نویسان در هر کجای دنیا توسعه یافته است.
+- **حمایت از پروژه و ثبت ستاره (⭐ Star):** حمایت شما با ثبت ستاره در گیت‌هاب، بزرگترین انگیزه برای عمومی‌سازی قابلیت‌های جدیدتر از آزمایشگاه خصوصی ما به این مخزن اوپن‌سورس است!
+
+---
+
+## 🚦 مسیر استاندارد و رسمی گزارش باگ‌ها و مشکلات
+
+برای دریافت سریع‌ترین پاسخ و رسیدگی فنی:
+۱. **فرم رسمی و ساختاریافته گیت‌هاب:** در صورت مواجهه با هرگونه خطا، از [فرم هوشمند گزارش باگ](https://github.com/tawroot/antigravity-cleaner/issues/new?template=bug_report.yml) استفاده کنید.
+۲. **تالار گفت‌وگو و تنظیمات پروکسی:** برای سوالات عمومی و کانفیگ‌ها به [بخش Discussions](https://github.com/tawroot/antigravity-cleaner/discussions) مراجعه فرمایید.
+۳. **کانال رسمی تلگرام:** برای اخبار فوری و تبادل نظر، به کانال تلگرام [@dallrep](https://t.me/dallrep) بپیوندید.
+۴. **گزارش‌های امنیتی:** موارد آسیب‌پذیری احتمالی را مطابق [سیاست امنیتی SECURITY.md](.github/SECURITY.md) از طریق پنل خصوصی امنیت گزارش فرمایید.
+
+</div>
 
 ---
 

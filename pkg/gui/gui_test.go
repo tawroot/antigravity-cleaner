@@ -67,4 +67,34 @@ func TestGuiServerAndEndpoints(t *testing.T) {
 	if dResp.OS == "" {
 		t.Errorf("Expected non-empty OS in detect response")
 	}
+	if dResp.Arch == "" {
+		t.Errorf("Expected non-empty Arch in detect response")
+	}
+
+	// Test 3: /api/privacy GET method not allowed
+	privGet, err := client.Get(server.URL() + "api/privacy")
+	if err == nil {
+		defer privGet.Body.Close()
+		if privGet.StatusCode != http.StatusMethodNotAllowed {
+			t.Errorf("Expected 405 Method Not Allowed for GET /api/privacy, got %d", privGet.StatusCode)
+		}
+	}
+
+	// Test 4: /api/open-external security check
+	extBad, err := client.Get(server.URL() + "api/open-external?url=https://malicious.site")
+	if err == nil {
+		defer extBad.Body.Close()
+		if extBad.StatusCode != http.StatusForbidden {
+			t.Errorf("Expected 403 Forbidden for unauthorized URL, got %d", extBad.StatusCode)
+		}
+	}
+
+	extGood, err := client.Get(server.URL() + "api/open-external?url=https://t.me/dallrep")
+	if err == nil {
+		defer extGood.Body.Close()
+		if extGood.StatusCode != http.StatusOK {
+			t.Errorf("Expected 200 OK for allowed Telegram URL, got %d", extGood.StatusCode)
+		}
+	}
 }
+

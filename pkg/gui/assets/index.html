@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Antigravity Patcher v5.1 - by dalroot</title>
+  <title>Antigravity Patcher v5.3 - by dalroot</title>
   <style>
     * {
       box-sizing: border-box;
@@ -83,16 +83,16 @@
 
     /* Window Content Body */
     .window-body {
-      padding: 6px;
+      padding: 5px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 5px;
     }
 
     /* Top Retro Demoscene Box */
     .graphic-box {
       width: 100%;
-      height: 110px;
+      height: 85px;
       background: #000000;
       border: 2px solid;
       border-color: #808080 #ffffff #ffffff #808080;
@@ -119,31 +119,31 @@
     }
 
     .dalroot-logo {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 900;
       font-family: Impact, "Arial Black", sans-serif;
       letter-spacing: 3px;
       color: #ffff00;
-      text-shadow: 2px 2px #ff0000, 4px 4px #000080;
+      text-shadow: 2px 2px #ff0000, 3px 3px #000080;
       text-transform: uppercase;
     }
 
     .logo-sub {
-      font-size: 10px;
+      font-size: 9px;
       color: #00ffea;
       font-family: monospace;
       font-weight: bold;
       letter-spacing: 1px;
       background: rgba(0,0,0,0.6);
       padding: 1px 6px;
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
     /* Form Fields Section */
     .field-group {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
 
     .field-label {
@@ -153,7 +153,7 @@
 
     .field-input {
       width: 100%;
-      height: 23px;
+      height: 22px;
       background: #ffffff;
       border: 2px solid;
       border-color: #808080 #ffffff #ffffff #808080;
@@ -171,7 +171,20 @@
       font-family: "Courier New", monospace;
       text-align: center;
       letter-spacing: 0.5px;
-      font-size: 10.5px;
+      font-size: 11px;
+    }
+
+    /* Clean Info Panel */
+    .info-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      background: #d4d0c8;
+      border: 1px solid;
+      border-color: #808080 #ffffff #ffffff #808080;
     }
 
     /* Classic Beveled Buttons */
@@ -179,8 +192,8 @@
       display: flex;
       justify-content: space-between;
       gap: 5px;
-      margin-top: 4px;
-      padding-top: 6px;
+      margin-top: 3px;
+      padding-top: 4px;
       border-top: 1px solid #808080;
       box-shadow: 0 -1px 0 #ffffff;
     }
@@ -214,6 +227,13 @@
     .win95-btn:disabled {
       color: #808080;
       cursor: not-allowed;
+    }
+
+    .win95-btn.step-active {
+      background: #eef2ff;
+      border-color: #000080 #808080 #808080 #000080;
+      color: #000080;
+      font-weight: 900;
     }
 
     /* Bottom Scroller / Credits */
@@ -250,7 +270,7 @@
     <!-- Titlebar -->
     <div class="title-bar">
       <div class="title-bar-text">
-        <span>💾</span> Antigravity PATCH v5.2 - [dalroot]
+        <span>💾</span> Antigravity PATCH v5.3 - [dalroot]
       </div>
       <div class="title-bar-controls">
         <div class="close-btn" onclick="soundBeep(400)">_</div>
@@ -286,32 +306,46 @@
 
       <!-- Step-by-Step Guidance / Status Output Box -->
       <div class="field-group">
-        <label class="field-label">Status & Next Step:</label>
-        <input type="text" class="field-input status-box" id="statusOutput" value="READY: Click [ Auto-Fix ] to unlock 4 targets & proxy" readonly>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <label class="field-label">Workflow Status:</label>
+          <span id="stepIndicator" style="color:#000080; font-weight:bold; font-size:9.5px;">[ Step 1: Auto-Fix ]</span>
+        </div>
+        <input type="text" class="field-input status-box" id="statusOutput" value="READY: Click [ ① ⚡ Auto-Fix ] to unlock targets & proxy" readonly>
       </div>
 
-      <!-- Privacy & Trust Indicator -->
-      <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:#005500; font-weight:bold; padding:1px 2px;">
-        <span>🔒 100% Offline & Zero-Track</span>
-        <span style="color:#000080;">🛡️ Apache-2.0 Auditable</span>
+      <!-- Clean Consolidated System & Privacy Status Panel -->
+      <div class="info-panel">
+        <span id="archBadge">⚙️ Linux / x86_64</span>
+        <label style="cursor:pointer; display:flex; align-items:center; gap:4px; color:#005500; font-weight:bold; user-select:none;">
+          <input type="checkbox" id="chkPrivacy" onchange="actionTogglePrivacy()"> 🛡️ Zero-Telemetry
+        </label>
+        <span id="pidBadge" style="color:#000080;">🟢 PID: --</span>
       </div>
 
-      <!-- Classic Buttons Rows -->
-      <div class="buttons-row" style="margin-top: 2px; padding-top: 4px;">
-        <button class="win95-btn" id="btnPatch" onclick="actionPatch()" title="Full Auto-Fix: Core, CLI, IDE & VS Code + Smart Proxy">⚡ Auto-Fix</button>
-        <button class="win95-btn" id="btnLaunch" onclick="actionLaunch()" title="Start Antigravity with injected proxy">🚀 Launch</button>
-        <button class="win95-btn" id="btnShortcut" onclick="actionCreateLauncher()" title="Create Desktop Shortcut with Smart Proxy">📌 Shortcut</button>
+      <!-- Row 1: The 3 Main Sequential Steps (Spacious & Clean) -->
+      <div class="buttons-row" style="margin-top: 3px; padding-top: 4px;">
+        <button class="win95-btn step-active" id="btnPatch" onclick="actionPatch()" title="Step 1: Patch Core, CLI, IDE & VS Code + Setup Smart Proxy">① ⚡ Auto-Fix</button>
+        <button class="win95-btn" id="btnLaunch" onclick="actionLaunch()" title="Step 2: Start Antigravity with injected proxy">② 🚀 Launch IDE</button>
+        <button class="win95-btn" id="btnShortcut" onclick="actionCreateLauncher()" title="Step 3: Create Desktop Shortcut with Smart Proxy">③ 📌 Shortcut</button>
       </div>
-      <div class="buttons-row" style="margin-top: 4px; padding-top: 0; border-top: none; box-shadow: none;">
-        <button class="win95-btn" id="btnReset" onclick="actionReset()" title="Flush 429 tokens without chat loss">Reset 429</button>
-        <button class="win95-btn" id="btnRestore" onclick="actionRestore()" title="Revert to original .agybak backup">Restore</button>
-        <button class="win95-btn" id="btnDoctor" onclick="actionDoctor()" title="Audit connection & proxy health">Doctor</button>
-        <button class="win95-btn" id="btnExit" onclick="actionExit()" title="Close application">Exit</button>
+
+      <!-- Row 2: Secondary Maintenance & Utilities -->
+      <div class="buttons-row" style="margin-top: 3px; padding-top: 0; border-top: none; box-shadow: none;">
+        <button class="win95-btn" id="btnReset" onclick="actionReset()" title="Flush 429 quota tokens without chat loss">🧹 Reset 429</button>
+        <button class="win95-btn" id="btnRestore" onclick="actionRestore()" title="Revert to original .agybak backup">↺ Restore</button>
+        <button class="win95-btn" id="btnDoctor" onclick="actionDoctor()" title="Audit connection & proxy health">🩺 Doctor</button>
+        <button class="win95-btn" id="btnExit" onclick="actionExit()" title="Close application">✕ Exit</button>
+      </div>
+
+      <!-- Community, Star & Support Links -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:1px 4px; font-size:9.5px; border-top:1px dotted #808080; margin-top:2px;">
+        <a href="javascript:void(0)" onclick="openExternal('https://github.com/tawroot/antigravity-cleaner')" style="color:#000080; text-decoration:underline; font-weight:bold; cursor:pointer;" title="Support the project with a Star on GitHub">⭐ Star on GitHub</a>
+        <a href="javascript:void(0)" onclick="openExternal('https://t.me/dallrep')" style="color:#000080; text-decoration:underline; font-weight:bold; cursor:pointer;" title="Join Telegram channel for community support & updates">💬 Support: t.me/dallrep</a>
       </div>
 
       <!-- Classic Statusbar -->
       <div class="statusbar">
-        <span class="marquee-text">&bull;&bull;&bull; 🔒 100% OFFLINE & ZERO-TRACK &bull;&bull;&bull; NO TELEMETRY &bull;&bull;&bull; ANTIGRAVITY PATCHER 5.2 BY DALROOT &bull;&bull;&bull; ZERO-TUN PROXY INJECTION &bull;&bull;&bull; OPEN-SOURCE & SAFE &bull;&bull;&bull;</span>
+        <span class="marquee-text">&bull;&bull;&bull; ⭐ IF THIS TOOL HELPED YOU, STAR US ON GITHUB! &bull;&bull;&bull; 💬 TELEGRAM COMMUNITY & SUPPORT: https://t.me/dallrep &bull;&bull;&bull; 🔒 100% OFFLINE & ZERO-TRACK &bull;&bull;&bull; ANTIGRAVITY PATCHER 5.3 BY DALROOT &bull;&bull;&bull;</span>
       </div>
 
     </div>
@@ -384,6 +418,35 @@
       statusBox.style.color = color;
     }
 
+    // Open link in external system browser
+    function openExternal(url) {
+      soundBeep(520, 0.08);
+      fetch('/api/open-external?url=' + encodeURIComponent(url));
+    }
+
+    // Workflow Step Manager (3 sequential primary steps)
+    function setStep(stepNum) {
+      const stepIndicator = document.getElementById('stepIndicator');
+      const bPatch = document.getElementById('btnPatch');
+      const bLaunch = document.getElementById('btnLaunch');
+      const bShortcut = document.getElementById('btnShortcut');
+
+      if (bPatch) bPatch.classList.remove('step-active');
+      if (bLaunch) bLaunch.classList.remove('step-active');
+      if (bShortcut) bShortcut.classList.remove('step-active');
+
+      if (stepNum === 1) {
+        if (bPatch) bPatch.classList.add('step-active');
+        if (stepIndicator) stepIndicator.innerText = '[ Step 1: Auto-Fix ]';
+      } else if (stepNum === 2) {
+        if (bLaunch) bLaunch.classList.add('step-active');
+        if (stepIndicator) stepIndicator.innerText = '[ Step 2: Launch IDE ]';
+      } else if (stepNum === 3) {
+        if (bShortcut) bShortcut.classList.add('step-active');
+        if (stepIndicator) stepIndicator.innerText = '[ Step 3: Shortcut ]';
+      }
+    }
+
     // Auto-Detect on Load
     async function loadDetection() {
       try {
@@ -391,10 +454,33 @@
         const data = await res.json();
         targetApp.value = data.app || 'Google Antigravity 2.x';
         pathInput.value = data.path || 'Not detected (custom location)';
+
+        const archBadge = document.getElementById('archBadge');
+        if (archBadge && data.arch && data.os) {
+          archBadge.innerText = '⚙️ ' + data.os.toUpperCase() + ' / ' + data.arch;
+        }
+
+        const pidBadge = document.getElementById('pidBadge');
+        if (pidBadge) {
+          if (data.process_running && data.running_pid > 0) {
+            pidBadge.innerText = '🟢 PID: ' + data.running_pid;
+            pidBadge.style.color = '#006600';
+          } else {
+            pidBadge.innerText = '⚪ IDE: STANDBY';
+            pidBadge.style.color = '#555555';
+          }
+        }
+
+        const chkPrivacy = document.getElementById('chkPrivacy');
+        if (chkPrivacy) {
+          chkPrivacy.checked = data.wrapper_active;
+        }
+
         if (data.detected) {
           detectedBadge.innerText = '✔ [ AUTO-DETECTED ]';
           detectedBadge.style.color = '#008000';
-          setStatus('READY: Click [ Auto-Fix ] to unlock 4 targets & proxy', '#00ff00');
+          setStep(1);
+          setStatus('READY: Click [ ① ⚡ Auto-Fix ] to unlock targets & proxy', '#00ff00');
         } else {
           detectedBadge.innerText = '⚠️ [ NOT FOUND ]';
           detectedBadge.style.color = '#c00000';
@@ -403,12 +489,37 @@
       } catch (err) {
         targetApp.value = 'Google Antigravity 2.x (IDE & Language Server)';
         pathInput.value = '~/Applications/Antigravity/resources/bin/language_server';
-        setStatus('READY: Click [ Auto-Fix ] to unlock 4 targets & proxy', '#00ff00');
+        setStep(1);
+        setStatus('READY: Click [ ① ⚡ Auto-Fix ] to unlock targets & proxy', '#00ff00');
       }
     }
     window.addEventListener('DOMContentLoaded', loadDetection);
 
-    // Patch Action with step guidance
+    // Toggle Privacy & Zero-Telemetry Wrapper Checkbox
+    async function actionTogglePrivacy() {
+      soundBeep(740, 0.1);
+      const chk = document.getElementById('chkPrivacy');
+      setStatus('🛡️ PRIVACY: Updating Zero-Telemetry configuration...', '#ffff00');
+      try {
+        const res = await fetch('/api/privacy', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          soundBeep(1174, 0.15);
+          setStatus('✔ ' + (data.message || 'Privacy state updated'), '#00ff00');
+          loadDetection();
+        } else {
+          soundBeep(250, 0.2);
+          setStatus('ERROR: ' + (data.message || 'Privacy toggle failed'), '#ff0055');
+          if (chk) chk.checked = !chk.checked;
+        }
+      } catch (err) {
+        soundBeep(250, 0.2);
+        setStatus('ERROR: Communication failure', '#ff0055');
+        if (chk) chk.checked = !chk.checked;
+      }
+    }
+
+    // Patch Action (Step 1)
     async function actionPatch() {
       soundBeep(880, 0.12);
       setStatus('STEP 1/3: Patching 4 Targets (Core, CLI, IDE, VS Code)...', '#ffff00');
@@ -417,7 +528,8 @@
         const data = await res.json();
         soundBeep(1174, 0.18);
         if (data.success) {
-          setStatus('✔ STEP 2/3: 4 Targets Patched & Proxy Ready! Click [ Launch ]', '#00ff00');
+          setStep(2);
+          setStatus('✔ STEP 1 DONE! Next: Click [ ② 🚀 Launch IDE ]', '#00ff00');
         } else {
           setStatus('ERROR: ' + (data.message || 'Patch failed'), '#ff0055');
         }
@@ -426,7 +538,7 @@
       }
     }
 
-    // Launch Action
+    // Launch Action (Step 2)
     async function actionLaunch() {
       soundBeep(659, 0.1);
       setStatus('🚀 LAUNCHING: Spawning Antigravity with smart proxy...', '#00ffea');
@@ -434,7 +546,8 @@
         const res = await fetch('/api/launch', { method: 'POST' });
         const data = await res.json();
         if (data.success) {
-          setStatus('🚀 RUNNING: Antigravity is active with injected proxy.', '#00ffea');
+          setStep(3);
+          setStatus('🚀 RUNNING: Antigravity active! Optional: Click [ ③ 📌 Shortcut ]', '#00ffea');
         } else {
           setStatus('ERROR: ' + (data.message || 'Launch failed'), '#ff0055');
         }
@@ -443,7 +556,7 @@
       }
     }
 
-    // Create Desktop Shortcut Action
+    // Create Desktop Shortcut Action (Step 3)
     async function actionCreateLauncher() {
       soundBeep(523, 0.1);
       setStatus('🛠️ SHORTCUT: Generating Smart Desktop Launcher...', '#00f0ff');

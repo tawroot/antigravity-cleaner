@@ -1,5 +1,5 @@
 name: "🐛 گزارش باگ / Bug Report"
-description: "ثبت گزارش باگ یا خطا در اجرای Antigravity Cleaner"
+description: "ثبت گزارش باگ، خطای لایسنس، سهمیه یا مسیر اجرایی در Antigravity Cleaner"
 title: "[Bug]: "
 labels: ["bug", "triage"]
 body:
@@ -7,18 +7,32 @@ body:
     attributes:
       value: |
         ### ⚡ سپاس از گزارش و همراهی شما / Thank you for reporting!
-        پیش از ثبت ایشو، لطفاً بررسی کنید که آیا با اجرای دستور زیر مشکل شما تشخیص داده یا حل می‌شود:
+        قبل از ثبت گزارش، پیشنهاد می‌شود آخرین نسخه **v5.3.0** را دریافت کرده و دستور خودکار زیر را اجرا کنید:
         ```bash
-        ag-cleaner doctor
+        antigravity auto-fix
         ```
-  - type: textarea
-    id: description
+        یا وضعیت سیستم را با دستور زیر بررسی کنید:
+        ```bash
+        antigravity doctor
+        ```
+        💬 برای سوالات عمومی، راهنمایی فیلترشکن و مشکلات سریع، می‌توانید در [کانال تلگرام @dallrep](https://t.me/dallrep) یا [GitHub Discussions](https://github.com/tawroot/antigravity-cleaner/discussions) نیز پیام دهید.
+
+  - type: dropdown
+    id: category
     attributes:
-      label: "شرح مشکل / Problem Description"
-      description: "توضیح دهید چه کاری انجام دادید و چه خطایی رخ داد / Describe what happened and what you expected."
-      placeholder: "مثال: پس از اجرای پچ، لاگین هنوز با خطا مواجه می‌شود..."
+      label: "دسته‌بندی خطا / Issue Category"
+      description: "نوع خطایی که دریافت می‌کنید را انتخاب کنید / Select the category that best matches your issue"
+      options:
+        - "License Error (#3501 - You do not have a valid license)"
+        - "Location Restriction (HTTP 400 - User location is not supported)"
+        - "Quota 429 (Rate limit / Too Many Requests)"
+        - "Path Discovery (Core Engine CHECK Not Found in Doctor)"
+        - "Startup / UI Issue (Black screen, crash on launch, window sizing)"
+        - "Proxy / Network Connection (Doctor proxy failed, timeout)"
+        - "Other / Other Unhandled Error"
     validations:
       required: true
+
   - type: dropdown
     id: os
     attributes:
@@ -32,29 +46,44 @@ body:
         - "Other"
     validations:
       required: true
+
   - type: input
-    id: version
+    id: cleaner_version
     attributes:
       label: "نسخه Antigravity Cleaner / Version"
-      description: "نسخه ابزار (خروجی دستور `ag-cleaner --version`)"
-      placeholder: "v5.1.0"
+      description: "نسخه برنامه (خروجی دستور `antigravity --version` یا عنوان پنجره GUI)"
+      placeholder: "v5.3.0"
+      value: "v5.3.0"
     validations:
-      required: false
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "شرح مشکل و مراحل بازتولید / Problem Description & Steps to Reproduce"
+      description: "توضیح دهید چه کاری انجام دادید و چه خطایی رخ داد / Describe what happened and what you expected."
+      placeholder: "مثال: پس از اجرای پچ، هنگام ارسال اولین پرامپت خطای #3501 نمایش داده می‌شود..."
+    validations:
+      required: true
+
   - type: textarea
     id: doctor_output
     attributes:
-      label: "خروجی دیاگنوستیک داکتر / Doctor Diagnostics Output"
-      description: "خروجی دستور `ag-cleaner doctor` را در این بخش پیست کنید:"
-      placeholder: "Paste 'ag-cleaner doctor' output here..."
+      label: "خروجی دستور Doctor یا لاگ ترمینال / Doctor Output or Logs"
+      description: "خروجی دستور `antigravity doctor` یا لاگ خطای ترمینال را در این بخش پیست کنید:"
+      placeholder: "Paste 'antigravity doctor' output or terminal logs here..."
       render: shell
     validations:
       required: false
+
   - type: checkboxes
     id: checklist
     attributes:
       label: "تأییدیه‌ها / Checklist"
       options:
-        - label: "من از آخرین نسخه پایدار (v5.2.0 به بالا) استفاده می‌کنم / Using latest release (v5.2.0+)."
+        - label: "من از آخرین نسخه پایدار (v5.3.0 به بالا) استفاده می‌کنم / Using latest release (v5.3.0+)."
           required: true
+        - label: "دستور `antigravity auto-fix` یا ابزار GUI را یک‌بار اجرا کرده‌ام / Tried running auto-fix."
+          required: false
         - label: "فایل راهنما (README.md) و چنج‌لاگ را بررسی کرده‌ام / Checked README & CHANGELOG."
           required: false

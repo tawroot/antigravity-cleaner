@@ -15,12 +15,16 @@ func FindAntigravityExecutable() string {
 
 	candidates := []string{
 		filepath.Join(home, "Applications", "Antigravity", "antigravity"),
+		filepath.Join(home, "Applications", "antigravity", "antigravity"),
 		filepath.Join(home, "Applications", "Antigravity-x64", "antigravity"),
 		filepath.Join(home, "antigravity", "antigravity"),
 		filepath.Join(home, "antigravity", "antigravity.exe"),
 		"/usr/share/antigravity-ide/antigravity",
+		"/usr/share/antigravity/antigravity",
 		"/usr/bin/antigravity",
+		"/opt/antigravity/antigravity",
 		"/opt/Antigravity/antigravity",
+		"/opt/antigravity-ide/antigravity",
 		"/opt/Antigravity IDE/antigravity",
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "Antigravity.exe"),
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "Antigravity IDE.exe"),
@@ -218,6 +222,8 @@ exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
 		if fi, err := os.Stat(iconPath); err != nil || fi.Size() < 100 {
 			userIcon := filepath.Join(home, ".local", "share", "icons", "antigravity.png")
 			iconPath = EnsureDefaultIcon(userIcon)
+			hicolorIcon := filepath.Join(home, ".local", "share", "icons", "hicolor", "256x256", "apps", "antigravity.png")
+			EnsureDefaultIcon(hicolorIcon)
 		}
 
 		// 3. Create single Antigravity IDE Desktop Launcher

@@ -4,6 +4,10 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
+	"strings"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/mattn/go-isatty"
@@ -15,7 +19,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/ui"
 )
 
-const Version = "5.2.0"
+const Version = "5.3.0"
 
 func main() {
 	if len(os.Args) > 1 {
@@ -42,25 +46,28 @@ func main() {
 		clearScreen()
 		ui.PrintBanner(Version)
 
-		menuItems := []struct {
-			key  string
-			desc string
-		}{
-			{"1", "⚡ Quick Auto-Fix (Full Patch + Injected Proxy)"},
-			{"2", "🔓 Patch Core (language_server & agy Machine Code)"},
-			{"3", "🎨 Patch IDE (main.js & VS Code Extension Guard)"},
-			{"4", "🚀 Launch Antigravity with Smart Proxy (No TUN!)"},
-			{"5", "📌 Create Desktop Shortcut with Injected Proxy"},
-			{"6", "🧹 Surgical 429 Quota Reset (Preserves Chats & Settings)"},
-			{"7", "🩺 Run Antigravity Doctor (System & Connection Health)"},
-			{"8", "🔄 Restore Backups (.agybak)"},
-			{"9", "🖥️ Launch Retro GUI (Classic Win95 Patcher)"},
-			{"0", "🚪 Exit"},
-		}
+		sectionWorkflow := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("─── 🚀 Sequential Workflow (مراحل گام‌به‌گام) ───────────────────")
+		sectionTools := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("─── 🛠️ Maintenance & Diagnostics ───────────────────────────────")
+		sectionCommunity := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("─── ⭐ Community & Support ──────────────────────────────────────")
 
-		for _, item := range menuItems {
-			fmt.Printf("  [%s] %s\n", keyStyle.Render(item.key), descStyle.Render(item.desc))
-		}
+		fmt.Println("  " + sectionWorkflow)
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("1"), descStyle.Render("⚡ Step 1: Quick Auto-Fix (Full Patch + Injected Proxy)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("2"), descStyle.Render("🛡️ Step 2: Enterprise & Privacy Flags (Mute Telemetry & Insiders)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("3"), descStyle.Render("🚀 Step 3: Launch Antigravity with Smart Proxy (No TUN!)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("4"), descStyle.Render("📌 Step 4: Create Desktop Shortcut with Injected Proxy"))
+		fmt.Println()
+
+		fmt.Println("  " + sectionTools)
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("5"), descStyle.Render("🧹 Surgical 429 Quota Reset (Preserves Chats & Settings)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("6"), descStyle.Render("🩺 Run Antigravity Doctor (System & Connection Health)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("7"), descStyle.Render("🔄 Restore Backups (.agybak)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("8"), descStyle.Render("🖥️ Launch Retro GUI (Classic Win95 Patcher)"))
+		fmt.Println()
+
+		fmt.Println("  " + sectionCommunity)
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("t"), descStyle.Render("💬 Join Telegram Community (@dallrep) for help & updates"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("s"), descStyle.Render("⭐ Star on GitHub (github.com/tawroot/antigravity-cleaner)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("0"), descStyle.Render("🚪 Exit"))
 		fmt.Println()
 
 		choice := ui.ReadInput("Select an option")
@@ -68,37 +75,58 @@ func main() {
 		case "1":
 			runQuickAutoFix()
 			ui.PromptKey()
-		case "2":
-			runPatchCore()
+		case "2", "e", "E", "flags", "enterprise":
+			runEnterpriseMenu()
 			ui.PromptKey()
 		case "3":
-			runPatchIde()
-			ui.PromptKey()
-		case "4":
 			runLaunchProxy()
 			ui.PromptKey()
-		case "5":
+		case "4":
 			runCreateLauncher()
 			ui.PromptKey()
-		case "6":
+		case "5":
 			runSurgicalClean()
 			ui.PromptKey()
-		case "7":
+		case "6":
 			runDoctor(false)
 			ui.PromptKey()
-		case "8":
+		case "7":
 			runRestore()
 			ui.PromptKey()
-		case "9", "gui":
+		case "8", "9", "gui":
 			runGui()
+		case "t", "T", "telegram":
+			openTerminalURL("https://t.me/dallrep")
+			ui.PromptKey()
+		case "s", "S", "star":
+			openTerminalURL("https://github.com/tawroot/antigravity-cleaner")
+			ui.PromptKey()
 		case "0", "exit", "q":
-			fmt.Printf("\n  %s\n\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🦅 Farewell! Happy Coding with Antigravity."))
+			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("⭐ If this tool helped you, please give it a Star on GitHub!"))
+			fmt.Printf("  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#00BFFF")).Render("💬 Join Telegram for support & updates: https://t.me/dallrep"))
+			fmt.Printf("  %s\n\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🦅 Farewell! Happy Coding with Antigravity."))
 			return
 		default:
-			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Invalid option. Please choose between 0-9."))
+			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Invalid option. Please choose an option from the menu."))
 			ui.PromptKey()
 		}
 	}
+}
+
+func openTerminalURL(target string) {
+	fmt.Printf("\n  %s %s\n",
+		lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("🔗 Opening:"),
+		target)
+	var cmd *exec.Cmd
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", target)
+	case "darwin":
+		cmd = exec.Command("open", target)
+	default:
+		cmd = exec.Command("xdg-open", target)
+	}
+	_ = cmd.Start()
 }
 
 func clearScreen() {
@@ -138,6 +166,12 @@ func handleSubcommand(cmd string, args []string) {
 		runGui()
 	case "clean":
 		runSurgicalClean()
+	case "enterprise", "flags":
+		action := "status"
+		if len(args) > 0 {
+			action = args[0]
+		}
+		runEnterpriseFlags(action)
 	case "kill":
 		runKillProcesses()
 	case "create-launcher":
@@ -147,7 +181,7 @@ func handleSubcommand(cmd string, args []string) {
 	case "version", "-v", "--version":
 		fmt.Printf("Antigravity Cleaner Toolkit v%s (@dalroot)\n", Version)
 	default:
-		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [gui|doctor|patch|launch|clean|kill|create-launcher|about|version]\n", cmd)
+		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [gui|doctor|patch|launch|clean|enterprise|kill|create-launcher|about|version]\n", cmd)
 		os.Exit(1)
 	}
 }
@@ -368,6 +402,12 @@ func runRestore() {
 	ui.PrintSection("Restore Backups")
 	lsPath := patcher.FindLanguageServer()
 	if lsPath != "" {
+		wm := patcher.NewWrapperManager(filepath.Dir(lsPath), nil)
+		if wm.IsWrapperInstalled() {
+			if err := wm.RemoveWrapper(); err == nil {
+				ui.PrintStatus("OK", "Enterprise Wrapper", "Removed wrapper and restored original binary")
+			}
+		}
 		if err := patcher.RestoreFile(lsPath); err == nil {
 			ui.PrintStatus("OK", "Language Server", "Restored original backup")
 		}
@@ -382,6 +422,106 @@ func runRestore() {
 	if idePath != "" {
 		if err := patcher.RestoreFile(idePath); err == nil {
 			ui.PrintStatus("OK", "IDE main.js", "Restored original backup")
+		}
+	}
+}
+
+func runEnterpriseFlags(action string) {
+	ui.PrintSection("Enterprise & Privacy Flags Manager")
+	lsPath := patcher.FindLanguageServer()
+	if lsPath == "" {
+		ui.PrintStatus("FAIL", "Language Server", "Could not locate language_server binary")
+		return
+	}
+
+	wm := patcher.NewWrapperManager(filepath.Dir(lsPath), nil)
+	switch strings.ToLower(action) {
+	case "enable", "install", "on":
+		if !ensureRunningSafety(false) {
+			return
+		}
+		opts := patcher.DefaultEnterpriseFlagsOptions()
+		if err := wm.InstallWrapper(opts); err != nil {
+			ui.PrintStatus("FAIL", "Enterprise Wrapper", err.Error())
+		} else {
+			ui.PrintStatus("OK", "Enterprise Wrapper", "Installed! Telemetry muted, Google Internal & Insiders enabled.")
+		}
+	case "disable", "remove", "off":
+		if !ensureRunningSafety(false) {
+			return
+		}
+		if err := wm.RemoveWrapper(); err != nil {
+			ui.PrintStatus("FAIL", "Enterprise Wrapper", err.Error())
+		} else {
+			ui.PrintStatus("OK", "Enterprise Wrapper", "Removed! Original binary restored.")
+		}
+	case "status":
+		installed := wm.IsWrapperInstalled()
+		if installed {
+			ui.PrintStatus("OK", "Wrapper Status", "Active (Injecting enterprise flags & muting telemetry)")
+			fmt.Println("    • --disable_telemetry=true")
+			fmt.Println("    • --is_google_internal=true")
+			fmt.Println("    • --jetbox_release_channel=insiders")
+			fmt.Println("    • --stubby_auth_mode=business_licensed_enterprise")
+			fmt.Println("    • --use_local_chrome=true & --browser_eval_env=true")
+		} else {
+			ui.PrintStatus("INFO", "Wrapper Status", "Not Installed (Running standard unflagged binary)")
+		}
+	default:
+		fmt.Printf("Unknown action: %s. Use enable, disable, or status.\n", action)
+	}
+}
+
+func runEnterpriseMenu() {
+	ui.PrintSection("Enterprise & Privacy Flags Configuration")
+	lsPath := patcher.FindLanguageServer()
+	if lsPath == "" {
+		ui.PrintStatus("FAIL", "Language Server", "Could not locate language_server binary")
+		return
+	}
+
+	wm := patcher.NewWrapperManager(filepath.Dir(lsPath), nil)
+	installed := wm.IsWrapperInstalled()
+	if installed {
+		ui.PrintStatus("ACTIVE", "Wrapper Status", "Enterprise wrapper is currently ACTIVE")
+		fmt.Println("  Active Flags:")
+		fmt.Println("    • --disable_telemetry=true (Halts telemetry, Git logging & error traces)")
+		fmt.Println("    • --is_google_internal=true (Unlocks internal payload metadata & URL bypass)")
+		fmt.Println("    • --jetbox_release_channel=insiders")
+		fmt.Println("    • --stubby_auth_mode=business_licensed_enterprise")
+		fmt.Println("    • --use_local_chrome=true & --browser_eval_env=true")
+		fmt.Println()
+		confirm := ui.ReadInput("Do you want to REMOVE the wrapper and restore standard binary? (y/N)")
+		if confirm == "y" || confirm == "Y" {
+			if !ensureRunningSafety(false) {
+				return
+			}
+			if err := wm.RemoveWrapper(); err != nil {
+				ui.PrintStatus("FAIL", "Restore Error", err.Error())
+			} else {
+				ui.PrintStatus("OK", "Wrapper Removed", "Original binary restored successfully.")
+			}
+		}
+	} else {
+		ui.PrintStatus("INACTIVE", "Wrapper Status", "Enterprise wrapper is NOT installed")
+		fmt.Println("  Enabling this will transparently inject:")
+		fmt.Println("    • --disable_telemetry=true (Halts telemetry, Git logging & error traces)")
+		fmt.Println("    • --is_google_internal=true (Unlocks internal payload metadata & URL bypass)")
+		fmt.Println("    • --jetbox_release_channel=insiders")
+		fmt.Println("    • --stubby_auth_mode=business_licensed_enterprise")
+		fmt.Println("    • --use_local_chrome=true & --browser_eval_env=true")
+		fmt.Println()
+		confirm := ui.ReadInput("Do you want to INSTALL the enterprise wrapper? (y/N)")
+		if confirm == "y" || confirm == "Y" {
+			if !ensureRunningSafety(false) {
+				return
+			}
+			opts := patcher.DefaultEnterpriseFlagsOptions()
+			if err := wm.InstallWrapper(opts); err != nil {
+				ui.PrintStatus("FAIL", "Install Error", err.Error())
+			} else {
+				ui.PrintStatus("OK", "Wrapper Installed", "Enterprise flags enabled successfully!")
+			}
 		}
 	}
 }

@@ -55,6 +55,40 @@ func IsAntigravityRunning() bool {
 	return false
 }
 
+// isProtectedPID checks whether a PID belongs to our current process, its ancestors, or protected env
+func isProtectedPID(pid int, selfPID int) bool {
+	if pid <= 1 || pid == selfPID {
+		return true
+	}
+	if env := os.Getenv("ANTIGRAVITY_PROTECT_PID"); env != "" {
+		var p int
+		if _, err := fmt.Sscanf(env, "%d", &p); err == nil && pid == p {
+			return true
+		}
+	}
+	// Protect parent and ancestor processes
+	curr := os.Getppid()
+	for curr > 1 {
+		if pid == curr {
+			return true
+		}
+		data, err := os.ReadFile(fmt.Sprintf("/proc/%d/stat", curr))
+		if err != nil {
+			break
+		}
+		fields := strings.Fields(string(data))
+		if len(fields) > 3 {
+			var ppid int
+			if _, err := fmt.Sscanf(fields[3], "%d", &ppid); err == nil && ppid > 1 {
+				curr = ppid
+				continue
+			}
+		}
+		break
+	}
+	return false
+}
+
 // KillAntigravityProcesses terminates active Antigravity and language_server instances safely
 func KillAntigravityProcesses() (int, error) {
 	killedCount := 0
@@ -71,7 +105,7 @@ func KillAntigravityProcesses() (int, error) {
 	outLS, _ := exec.Command("pgrep", "-f", "language_server").Output()
 	for _, pStr := range strings.Fields(string(outLS)) {
 		var pid int
-		if _, err := fmt.Sscanf(pStr, "%d", &pid); err == nil && pid != selfPID {
+		if _, err := fmt.Sscanf(pStr, "%d", &pid); err == nil && !isProtectedPID(pid, selfPID) {
 			if p, err := os.FindProcess(pid); err == nil {
 				_ = p.Kill()
 				killedCount++
@@ -86,7 +120,7 @@ func KillAntigravityProcesses() (int, error) {
 		parts := strings.Fields(line)
 		if len(parts) > 1 {
 			var pid int
-			if _, err := fmt.Sscanf(parts[0], "%d", &pid); err == nil && pid != selfPID {
+			if _, err := fmt.Sscanf(parts[0], "%d", &pid); err == nil && !isProtectedPID(pid, selfPID) {
 				cmd := strings.Join(parts[1:], " ")
 				// Strictly ignore our own cleaner process and the patcher GUI window
 				if strings.Contains(cmd, "antigravity-cleaner") ||
@@ -106,3 +140,4 @@ func KillAntigravityProcesses() (int, error) {
 	time.Sleep(500 * time.Millisecond)
 	return killedCount, nil
 }
+

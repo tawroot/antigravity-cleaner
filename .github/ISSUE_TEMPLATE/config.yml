@@ -1,5 +1,11 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
   - name: "💬 پرسش و پاسخ و گفتگو / Community Discussions"
     url: "https://github.com/tawroot/antigravity-cleaner/discussions"
     about: "برای گفتگو، سوالات عمومی، پرسش درباره تنظیمات پروکسی و تبادل نظر"
+  - name: "📢 کانال تلگرام و پشتیبانی زنده / Official Telegram Channel"
+    url: "https://t.me/dallrep"
+    about: "دریافت آخرین اخبار، راهنمای دور زدن لیمیت‌ها و ارتباط مستقیم با کامیونیتی"
+  - name: "🛡️ گزارش آسیب‌پذیری امنیتی / Security Vulnerability"
+    url: "https://github.com/tawroot/antigravity-cleaner/security/advisories/new"
+    about: "گزارش محرمانه باگ‌های امنیتی یا نشت توکن بر اساس استاندارد SECURITY.md"

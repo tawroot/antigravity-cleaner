@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.3.0] - 2026-10-14
+
+### 🛡️ 7-Flag Zero-Telemetry Engine, Staged Retro GUI & 16-Target Surgical Quota Reset
+
+This release introduces major enterprise-level privacy protections, intelligent dynamic process discovery, and a completely streamlined, staged GUI workflow based on deep reverse-engineering of Antigravity binaries.
+
+- **7-Flag Zero-Telemetry & Enterprise Engine:** Transparently injects internal runtime flags (`--disable_telemetry=true`, `--is_google_internal=true`, `--jetbox_release_channel=insiders`, `--stubby_auth_mode=business_licensed_enterprise`, `--use_local_chrome=true`, `--browser_eval_env=true`, `--local_chrome_headless=false`) via an atomic wrapper script while keeping original binary backups safe. Completely halts IP and git trace leakage to Google.
+- **16-Target Surgical Quota 429 Reset:** Enhanced quota flusher surgically purges corrupted rate-limit cookies, DIPS databases, TransportSecurity, Trust Tokens, and session storage tokens across 16 targets in 0.002s without deleting chat history, projects, or credentials.
+- **Streamlined Staged Retro KeyGen GUI (Win95):** Redesigned the retro interface into a guided 3-step workflow (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`) with compact dimensions (480x530) ensuring zero window scrollbars or clipping. Converted the telemetry toggle into an authentic Win95 interactive checkbox in the info bar.
+- **Dynamic Multi-Platform Process Discovery:** Replaced static path assumptions with live `/proc` (Linux), `ps` (macOS), and PowerShell (Windows) process table inspection to dynamically discover custom Antigravity and `language_server` installations.
+- **Session Immunity Shield:** Protected ancestor and active terminal PIDs from being terminated during `Auto-Fix`, ensuring interactive chat sessions are never disrupted.
+- **XDG Standard Linux Desktop Launcher & Icon:** Automatically installs `antigravity.desktop` and a 256x256 high-resolution icon in `~/.local/share/icons/hicolor/256x256/apps/` for native desktop integration.
+- **Official Telegram Support & Community Channel:** Integrated direct links to the official support channel ([@dallrep](https://t.me/dallrep)) both in terminal CLI and desktop GUI.
+
+### 🐛 Resolved Issues & Community Disconnect Fixes
+- **Dynamic Binary Discovery (Closes #11):** Resolved critical issue where Linux, macOS, and custom install directories reported `Core Engine CHECK Not Found` in Doctor, leaving `language_server` unpatched.
+- **Persistent License Error #3501 (Closes #13, Discussion #12):** Eliminated the `#3501` license validation rejection by combining atomic 4-target unlocking (`main.js` + `workbench.desktop.main.js` + `language_server`) with `--stubby_auth_mode=business_licensed_enterprise` and `--is_google_internal=true`.
+- **Location Error 400 & Disconnects (Discussion #14):** Fixed `User location is not supported` disconnects caused by Google telemetry beacons by deploying the 7-Flag Zero-Telemetry wrapper and 16-target token/DIPS surgical cache wipe.
+- **macOS Startup & Environment Sanitation (Discussion #15):** Resolved blank screen on launch by providing clean process spawning and unified desktop launchers.
+
+---
+
 ## [5.2.0] - 2026-09-13
 
 ### 💾 Retro KeyGen Desktop GUI & GitHub Actions Release Pipeline

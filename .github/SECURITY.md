@@ -12,9 +12,9 @@ Only the latest release versions receive active security updates and patch updat
 
 | Version | Supported | Status |
 | :--- | :--- | :--- |
-| `v5.2.x` | :white_check_mark: | Current Stable Release |
-| `v5.1.x` | :white_check_mark: | Maintenance Only |
-| `< v5.0.0` | :x: | End of Life (Deprecated) |
+| `v5.3.x` | :white_check_mark: | Current Stable Release |
+| `v5.2.x` | :white_check_mark: | Maintenance Only |
+| `< v5.2.0` | :x: | End of Life (Deprecated) |
 
 ---
 

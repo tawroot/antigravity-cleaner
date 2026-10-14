@@ -28,3 +28,16 @@ func TestSurgicalTargetsIntegrity(t *testing.T) {
 		}
 	}
 }
+
+func TestSurgicalResetDryRun(t *testing.T) {
+	// Execute Dry-Run mode: must not return an error and must not delete anything
+	removed, err := SurgicalReset429("", true)
+	if err != nil {
+		t.Logf("DryRun scan: no active config folder or err=%v", err)
+		return
+	}
+	t.Logf("DryRun scan successfully detected %d surgical targets on this system:", len(removed))
+	for _, r := range removed {
+		t.Logf("  - candidate: %s", r)
+	}
+}

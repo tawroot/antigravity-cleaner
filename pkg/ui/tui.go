@@ -85,6 +85,12 @@ func PrintBanner(version string) {
 		lipgloss.NewStyle().Foreground(ColorMuted).Render(" | @dalroot"))
 	fmt.Printf("  %s\n", lipgloss.NewStyle().Bold(true).Foreground(ColorSuccess).Render("✔ Universal Auto-Detection: Supports ALL Antigravity Versions (1.x, 2.x, IDE & CLI)"))
 	fmt.Printf("  %s\n", lipgloss.NewStyle().Foreground(ColorPrimary).Render("🔒 100% Offline & Zero-Track: Zero telemetry, zero analytics, completely local & safe"))
+	fmt.Printf("  %s %s\n",
+		lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("⭐ Star on GitHub:"),
+		lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFFFF")).Underline(true).Render("https://github.com/tawroot/antigravity-cleaner"))
+	fmt.Printf("  %s %s\n",
+		lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00BFFF")).Render("💬 Community & Help:"),
+		lipgloss.NewStyle().Foreground(lipgloss.Color("#00FFFF")).Underline(true).Render("https://t.me/dallrep"))
 	fmt.Printf("  %s\n\n", StyleAuthor.Render("Crafted in creative pair-programming with Antigravity AI (Google DeepMind)"))
 }
 

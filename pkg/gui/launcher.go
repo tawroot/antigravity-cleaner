@@ -30,7 +30,7 @@ func LaunchWindow(url string) error {
 			if _, err := os.Stat(b); err == nil {
 				cmd = exec.Command(b,
 					fmt.Sprintf("--app=%s", url),
-					"--window-size=440,510",
+					"--window-size=480,530",
 					fmt.Sprintf("--user-data-dir=%s", tempProfile),
 					"--no-first-run",
 					"--no-default-browser-check",
@@ -52,7 +52,7 @@ func LaunchWindow(url string) error {
 			if _, err := os.Stat(b); err == nil {
 				cmd = exec.Command(b,
 					fmt.Sprintf("--app=%s", url),
-					"--window-size=440,510",
+					"--window-size=480,530",
 					fmt.Sprintf("--user-data-dir=%s", tempProfile),
 					"--no-first-run",
 					"--no-default-browser-check",
@@ -78,7 +78,7 @@ func LaunchWindow(url string) error {
 			if p, err := exec.LookPath(b); err == nil {
 				cmd = exec.Command(p,
 					fmt.Sprintf("--app=%s", url),
-					"--window-size=440,510",
+					"--window-size=480,530",
 					fmt.Sprintf("--user-data-dir=%s", tempProfile),
 					"--class=antigravity-patcher",
 					"--no-first-run",

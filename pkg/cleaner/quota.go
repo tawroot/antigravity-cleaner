@@ -14,6 +14,8 @@ func AntigravityConfigPaths() []string {
 	return []string{
 		filepath.Join(home, ".config", "Antigravity"),
 		filepath.Join(home, ".config", "Antigravity IDE"),
+		filepath.Join(home, ".gemini", "antigravity"),
+		filepath.Join(home, ".gemini", "antigravity-ide"),
 		filepath.Join(os.Getenv("APPDATA"), "Antigravity"),
 		filepath.Join(os.Getenv("APPDATA"), "Antigravity IDE"),
 		filepath.Join(home, "Library", "Application Support", "Antigravity"),

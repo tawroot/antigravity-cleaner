@@ -45,31 +45,9 @@ var (
 	}()
 )
 
-// FindLanguageServer searches for language_server binary in standard locations
+// FindLanguageServer searches for language_server binary using process inspection and standard locations
 func FindLanguageServer() string {
-	home, _ := os.UserHomeDir()
-
-	candidates := []string{
-		filepath.Join(home, "Applications", "Antigravity", "resources", "bin", "language_server"),
-		filepath.Join(home, "Applications", "Antigravity-x64", "resources", "bin", "language_server"),
-		filepath.Join(home, "antigravity", "resources", "bin", "language_server"),
-		filepath.Join(home, "antigravity", "resources", "bin", "language_server.exe"),
-		"/usr/share/antigravity-ide/resources/bin/language_server",
-		"/opt/Antigravity/resources/bin/language_server",
-		"/opt/Antigravity IDE/resources/bin/language_server",
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "resources", "bin", "language_server.exe"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "bin", "language_server.exe"),
-		"/Applications/Antigravity.app/Contents/Resources/bin/language_server",
-		"/Applications/Antigravity IDE.app/Contents/Resources/bin/language_server",
-		filepath.Join(home, "Applications", "Antigravity.app", "Contents", "Resources", "bin", "language_server"),
-	}
-
-	for _, c := range candidates {
-		if fi, err := os.Stat(c); err == nil && !fi.IsDir() {
-			return c
-		}
-	}
-	return ""
+	return FindLanguageServerModular(nil)
 }
 
 // PatchLanguageServer patches the language_server binary to unlock auth and region checks

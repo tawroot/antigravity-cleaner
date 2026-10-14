@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.2.0)</h1>
+<h1 align="center">⚡ Antigravity Cleaner — Ultimate AI Freedom Toolkit (v5.3.0)</h1>
 
 <p align="center">
   <strong>Enterprise-Grade Self-Healing, Sanction Bypass & Diagnostics Engine for Google Antigravity IDE</strong>
@@ -21,12 +21,13 @@
 
 <div align="center">
 
-  [![Version](https://img.shields.io/badge/Version-5.2.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Version](https://img.shields.io/badge/Version-5.3.0-blue?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go Report](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
+  [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/tawroot/antigravity-cleaner/actions/workflows/security.yml)
+  [![Telegram Community](https://img.shields.io/badge/Telegram-@dallrep-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/dallrep)
   [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge)](docs/test-reports/benchmarks.log)
-  [![Benchmark](https://img.shields.io/badge/Bytecode_Scan-1.9_GB%2Fs-blueviolet?style=for-the-badge)](docs/test-reports/benchmarks.log)
   [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-brightgreen.svg?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner)
-  [![Security](https://img.shields.io/badge/Privacy-100%25_Offline_%7C_Zero--Tracking-success?style=for-the-badge)]()
+  [![Privacy](https://img.shields.io/badge/Privacy-Zero--Telemetry-success?style=for-the-badge)]()
 </div>
 
 > *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
@@ -37,6 +38,8 @@
 [![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
 &nbsp;
 **⭐ If Antigravity Cleaner helped you bypass Google sanctions or fix quota errors, please Star this repo — it helps restricted developers discover this tool!**
+&nbsp;
+[![Telegram Support](https://img.shields.io/badge/Community-t.me%2Fdallrep-blue?style=social&logo=telegram)](https://t.me/dallrep)
 &nbsp;
 [![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
 
@@ -300,6 +303,27 @@ make build
 # Cross-compile for Linux, macOS (Intel & ARM64), and Windows
 make release
 ```
+
+---
+
+## 🔬 The Antigravity Research Lab & Ecosystem (100+ Internal Patches)
+
+Behind **Antigravity Cleaner Pro** stands an active, deep reverse-engineering and security research effort. In our private security research laboratory, we have systematically deconstructed and analyzed Google Antigravity internals across dozens of release channels.
+
+- **100+ Internal Patches & Protocol Bridges:** Our private laboratory repository maintains a library of over 100+ low-level bytecode patches, telemetry nullifiers, Stubby RPC bridges, and BYOM (Bring-Your-Own-Model) connectors.
+- **Production Hardening Pipeline:** Advanced research findings undergo extensive fuzzing and compatibility testing across Windows, macOS, and Linux before being safely graduated into public open-source releases.
+- **Global Developer Backing:** This is a real, battle-tested engineering project dedicated to providing long-term reliability for developers facing digital isolation and network restrictions.
+- **Support the Project:** If our work keeps your IDE online and productive, please **star this repository** ⭐. Your community engagement directly accelerates public releases from our private laboratory!
+
+---
+
+## 🚦 Standard Bug & Issue Reporting Pathway
+
+To ensure rapid triage and resolution:
+1. **Interactive GitHub Issue Forms:** If you experience an edge case, please open an issue using our structured [Bug Report Form](https://github.com/tawroot/antigravity-cleaner/issues/new?template=bug_report.yml).
+2. **Community Q&A & Proxy Setups:** For general questions, VPN configurations, and advice, use [GitHub Discussions](https://github.com/tawroot/antigravity-cleaner/discussions).
+3. **Live Community & Updates:** Join the official Telegram channel at [t.me/dallrep](https://t.me/dallrep).
+4. **Security Vulnerabilities:** Follow our [SECURITY.md](.github/SECURITY.md) guidelines and report privately via GitHub Security Advisories.
 
 ---
 

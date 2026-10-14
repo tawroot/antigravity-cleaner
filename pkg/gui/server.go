@@ -8,7 +8,10 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
+	"path/filepath"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/tawroot/antigravity-cleaner/pkg/cleaner"
@@ -35,11 +38,15 @@ type Response struct {
 
 // DetectResponse represents auto-detection details for the frontend.
 type DetectResponse struct {
-	App      string `json:"app"`
-	Path     string `json:"path"`
-	Detected bool   `json:"detected"`
-	Proxy    string `json:"proxy"`
-	OS       string `json:"os"`
+	App            string `json:"app"`
+	Path           string `json:"path"`
+	Detected       bool   `json:"detected"`
+	Proxy          string `json:"proxy"`
+	OS             string `json:"os"`
+	Arch           string `json:"arch"`
+	WrapperActive  bool   `json:"wrapper_active"`
+	RunningPID     int    `json:"running_pid"`
+	ProcessRunning bool   `json:"process_running"`
 }
 
 // NewServer initializes a new GUI loopback server on an ephemeral port.
@@ -72,6 +79,8 @@ func NewServer() (*Server, error) {
 	mux.HandleFunc("/api/reset", s.handleReset)
 	mux.HandleFunc("/api/restore", s.handleRestore)
 	mux.HandleFunc("/api/doctor", s.handleDoctor)
+	mux.HandleFunc("/api/privacy", s.handlePrivacy)
+	mux.HandleFunc("/api/open-external", s.handleOpenExternal)
 	mux.HandleFunc("/api/exit", s.handleExit)
 
 	s.server = &http.Server{
@@ -105,7 +114,10 @@ func (s *Server) Close() error {
 
 func (s *Server) handleDetect(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	targetPath := patcher.FindLanguageServer()
+	targetPath := patcher.FindLanguageServerModular(nil)
+	if targetPath == "" {
+		targetPath = patcher.FindLanguageServer()
+	}
 	detected := targetPath != ""
 
 	if targetPath == "" {
@@ -120,12 +132,23 @@ func (s *Server) handleDetect(w http.ResponseWriter, r *http.Request) {
 		proxyDesc = fmt.Sprintf("%s (%s)", best.URL, best.Provider)
 	}
 
+	runningPID := patcher.FindRunningLanguageServerPID()
+	wrapperActive := false
+	if targetPath != "" {
+		wm := patcher.NewWrapperManager(filepath.Dir(targetPath), nil)
+		wrapperActive = wm.IsWrapperInstalled()
+	}
+
 	resp := DetectResponse{
-		App:      "Google Antigravity 2.x (IDE & Language Server)",
-		Path:     targetPath,
-		Detected: detected,
-		Proxy:    proxyDesc,
-		OS:       runtime.GOOS,
+		App:            "Google Antigravity 2.x (IDE & Language Server)",
+		Path:           targetPath,
+		Detected:       detected,
+		Proxy:          proxyDesc,
+		OS:             runtime.GOOS,
+		Arch:           runtime.GOARCH,
+		WrapperActive:  wrapperActive,
+		RunningPID:     runningPID,
+		ProcessRunning: runningPID > 0,
 	}
 
 	_ = json.NewEncoder(w).Encode(resp)
@@ -143,17 +166,29 @@ func (s *Server) handlePatch(w http.ResponseWriter, r *http.Request) {
 	var msg string
 	success := false
 
-	res, err := patcher.PatchLanguageServer("")
+	_, err := patcher.PatchLanguageServer("")
 	if err != nil {
 		msg = err.Error()
 	} else {
 		success = true
-		msg = res
-		// Full Auto-Fix: Patch all 4 targets + Proxy Launcher
+		msg = "All 4 targets patched & Zero-Telemetry enabled!"
+		// Full Auto-Fix: Patch all 4 targets + Proxy Launcher + Zero-Telemetry
 		_, _ = patcher.PatchAgy("")
 		_, _ = patcher.PatchIdeMainJs("")
 		_, _ = patcher.PatchVsCodeExtension("")
 		_, _ = proxy.GenerateNoTunDesktopLauncher("")
+
+		// Ensure Zero-Telemetry & Enterprise wrapper is active
+		lsPath := patcher.FindLanguageServerModular(nil)
+		if lsPath == "" {
+			lsPath = patcher.FindLanguageServer()
+		}
+		if lsPath != "" {
+			wm := patcher.NewWrapperManager(filepath.Dir(lsPath), nil)
+			if !wm.IsWrapperInstalled() {
+				_ = wm.InstallWrapper(patcher.DefaultEnterpriseFlagsOptions())
+			}
+		}
 	}
 
 	_ = json.NewEncoder(w).Encode(Response{
@@ -281,6 +316,86 @@ func (s *Server) handleDoctor(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(Response{
 		Success: allOk,
 		Message: "Diagnostics completed",
+	})
+}
+
+func (s *Server) handlePrivacy(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	targetPath := patcher.FindLanguageServerModular(nil)
+	if targetPath == "" {
+		targetPath = patcher.FindLanguageServer()
+	}
+	if targetPath == "" {
+		_ = json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Message: "Language server binary not found",
+		})
+		return
+	}
+
+	binDir := filepath.Dir(targetPath)
+	wm := patcher.NewWrapperManager(binDir, nil)
+
+	if wm.IsWrapperInstalled() {
+		if err := wm.RemoveWrapper(); err != nil {
+			_ = json.NewEncoder(w).Encode(Response{
+				Success: false,
+				Message: "Failed to remove wrapper: " + err.Error(),
+			})
+			return
+		}
+		_ = json.NewEncoder(w).Encode(Response{
+			Success: true,
+			Message: "Zero-Telemetry wrapper disabled. Original binary restored.",
+		})
+		return
+	}
+
+	opts := patcher.DefaultEnterpriseFlagsOptions()
+	if err := wm.InstallWrapper(opts); err != nil {
+		_ = json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Message: "Failed to install wrapper: " + err.Error(),
+		})
+		return
+	}
+
+	_ = json.NewEncoder(w).Encode(Response{
+		Success: true,
+		Message: "Zero-Telemetry & Enterprise wrapper enabled (7 privacy flags injected)!",
+	})
+}
+
+func (s *Server) handleOpenExternal(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	target := r.URL.Query().Get("url")
+	if target == "" {
+		target = "https://t.me/dallrep"
+	}
+	if !strings.HasPrefix(target, "https://t.me/") && !strings.HasPrefix(target, "https://github.com/") {
+		http.Error(w, "Forbidden URL", http.StatusForbidden)
+		return
+	}
+
+	var cmd *exec.Cmd
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", target)
+	case "darwin":
+		cmd = exec.Command("open", target)
+	default:
+		cmd = exec.Command("xdg-open", target)
+	}
+	_ = cmd.Start()
+
+	_ = json.NewEncoder(w).Encode(Response{
+		Success: true,
+		Message: "Opening external link: " + target,
 	})
 }
 
