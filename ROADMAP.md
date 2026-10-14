@@ -53,8 +53,8 @@ Instead of presenting opaque, cryptic Google backend codes that frighten users (
 ### 2. 🧯 Electron Logger Pipe Sanitization (`write EIO` Prevention)
 - Direct patch to `electron-log` console transport in `resources/app.asar` to catch unhandled broken-pipe exceptions when launched detached from terminal, ensuring clean operation without unexpected JS error dialogues.
 
-### 3. 🔬 Laboratory Staging Graduation
-- Systematically review, fuzz-test, and graduate stable components from our private 100+ patch reverse-engineering laboratory into the public open-source codebase.
+### 3. 🔬 Multi-Ecosystem Applied AI Security Lab (Google DeepMind, OpenAI, Anthropic, Cursor)
+- Our research scope extends beyond Antigravity to reverse-engineer and liberate developer tooling across leading AI paradigms: Google DeepMind (Gemini / Cloud Code), OpenAI APIs, Anthropic Claude Code, and Cursor. Antigravity Cleaner serves as the pioneering foundation of this initiative, with subsequent specialized tools planned for release as mature independent open-source projects.
 
 ### 4. 📚 Comprehensive Patch-by-Patch Technical Whitepaper & Inventory
 - Publish an exhaustive, transparent technical reference detailing the exact machine-code, JavaScript, and runtime mechanisms of every single patch applied by the toolkit:

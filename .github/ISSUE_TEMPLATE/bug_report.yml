@@ -1,35 +1,20 @@
 name: "🐛 گزارش باگ / Bug Report"
-description: "ثبت گزارش باگ، خطای لایسنس، سهمیه یا مسیر اجرایی در Antigravity Cleaner"
+description: "ثبت سریع گزارش باگ یا خطای عملکردی در Antigravity Cleaner"
 title: "[Bug]: "
-labels: ["bug", "triage"]
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        ### ⚡ سپاس از گزارش و همراهی شما / Thank you for reporting!
-        قبل از ثبت گزارش، پیشنهاد می‌شود آخرین نسخه **v5.3.0** را دریافت کرده و دستور خودکار زیر را اجرا کنید:
-        ```bash
-        antigravity auto-fix
-        ```
-        یا وضعیت سیستم را با دستور زیر بررسی کنید:
-        ```bash
-        antigravity doctor
-        ```
-        💬 برای سوالات عمومی، راهنمایی فیلترشکن و مشکلات سریع، می‌توانید در [کانال تلگرام @dallrep](https://t.me/dallrep) یا [GitHub Discussions](https://github.com/tawroot/antigravity-cleaner/discussions) نیز پیام دهید.
+        ### ⚡ سپاس از گزارش شما / Thank you for helping improve Antigravity Cleaner!
+        قبل از ارسال، پیشنهاد می‌شود دستور `antigravity auto-fix` را یک‌بار اجرا کنید.
 
-  - type: dropdown
-    id: category
+  - type: textarea
+    id: description
     attributes:
-      label: "دسته‌بندی خطا / Issue Category"
-      description: "نوع خطایی که دریافت می‌کنید را انتخاب کنید / Select the category that best matches your issue"
-      options:
-        - "License Error (#3501 - You do not have a valid license)"
-        - "Location Restriction (HTTP 400 - User location is not supported)"
-        - "Quota 429 (Rate limit / Too Many Requests)"
-        - "Path Discovery (Core Engine CHECK Not Found in Doctor)"
-        - "Startup / UI Issue (Black screen, crash on launch, window sizing)"
-        - "Proxy / Network Connection (Doctor proxy failed, timeout)"
-        - "Other / Other Unhandled Error"
+      label: "شرح مشکل / Problem Description"
+      description: "توضیح کوتاه در مورد خطایی که رخ داده است / Describe what happened and what you expected."
+      placeholder: "مثال: هنگام زدن Auto-Fix در مک، پیام فلان خطا نمایش داده می‌شود..."
     validations:
       required: true
 
@@ -38,52 +23,19 @@ body:
     attributes:
       label: "سیستم‌عامل / Operating System"
       options:
-        - "Linux (Ubuntu / Debian / Arch / Fedora)"
-        - "Windows 11"
-        - "Windows 10"
-        - "macOS (Apple Silicon M1/M2/M3/M4)"
-        - "macOS (Intel x86_64)"
+        - "Linux"
+        - "Windows"
+        - "macOS"
         - "Other"
     validations:
       required: true
 
-  - type: input
-    id: cleaner_version
-    attributes:
-      label: "نسخه Antigravity Cleaner / Version"
-      description: "نسخه برنامه (خروجی دستور `antigravity --version` یا عنوان پنجره GUI)"
-      placeholder: "v5.3.0"
-      value: "v5.3.0"
-    validations:
-      required: true
-
   - type: textarea
-    id: description
+    id: logs
     attributes:
-      label: "شرح مشکل و مراحل بازتولید / Problem Description & Steps to Reproduce"
-      description: "توضیح دهید چه کاری انجام دادید و چه خطایی رخ داد / Describe what happened and what you expected."
-      placeholder: "مثال: پس از اجرای پچ، هنگام ارسال اولین پرامپت خطای #3501 نمایش داده می‌شود..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: doctor_output
-    attributes:
-      label: "خروجی دستور Doctor یا لاگ ترمینال / Doctor Output or Logs"
-      description: "خروجی دستور `antigravity doctor` یا لاگ خطای ترمینال را در این بخش پیست کنید:"
-      placeholder: "Paste 'antigravity doctor' output or terminal logs here..."
+      label: "خروجی داکتر یا لاگ خطا (اختیاری) / Doctor Output or Logs (Optional)"
+      description: "خروجی دستور `antigravity doctor` یا متن خطا را در صورت تمایل اینجا قرار دهید:"
+      placeholder: "Paste logs or doctor output here (optional)..."
       render: shell
     validations:
       required: false
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: "تأییدیه‌ها / Checklist"
-      options:
-        - label: "من از آخرین نسخه پایدار (v5.3.0 به بالا) استفاده می‌کنم / Using latest release (v5.3.0+)."
-          required: true
-        - label: "دستور `antigravity auto-fix` یا ابزار GUI را یک‌بار اجرا کرده‌ام / Tried running auto-fix."
-          required: false
-        - label: "فایل راهنما (README.md) و چنج‌لاگ را بررسی کرده‌ام / Checked README & CHANGELOG."
-          required: false

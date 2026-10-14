@@ -89,15 +89,20 @@ Prefer a simple graphical interface? Download the standalone executable for your
 <br>
 
 ### 📑 Quick Navigation
-- [💾 1-Click Graphical Patcher](#-1-click-retro-keygen-gui-zero-terminal-required)
-- [🚀 Quick CLI Install (One-Liner)](#-quick-install-one-liner)
-- [💻 2026 Visual Dashboard (TUI)](#-2026-visual-dashboard-tui)
-- [🛠️ CLI Subcommands & Diagnostics](#️-cli-subcommands)
+- [💾 Standalone Retro KeyGen GUI](#-1-click-retro-keygen-gui-zero-terminal-required)
 - [🏛️ System Architecture](#️-system-architecture)
-- [🛡️ Security, Privacy & Integrity Guarantee](#️-security-privacy--integrity-guarantee)
+- [⚡ Core 4-Target Unlocking Architecture](#-core-4-target-unlocking-architecture)
+- [🛡️ Security, Privacy & The Zero-Telemetry Engine](#️-security-privacy--the-zero-telemetry-engine)
 - [📊 Benchmarks & Verified Test Reports](#-benchmarks--verified-test-reports)
 - [🥊 Comparison Matrix](#-comparison-matrix)
+- [🚀 Quick CLI Install (One-Liner)](#-quick-install-one-liner)
+- [💻 Visual Interfaces: GUI & Terminal](#-visual-interfaces-retro-keygen-gui--terminal-dashboard)
+- [🛠️ CLI Subcommands & Diagnostics](#️-cli-subcommands)
+- [🤖 Autonomous AI Agent Skill](#-ai-agent-skill-skillsantigravity-cleaner)
 - [🔧 Troubleshooting Matrix](#-troubleshooting-matrix)
+- [🔬 Multi-Ecosystem Applied AI Security Lab](#-multi-ecosystem-applied-ai-security-lab-google-deepmind-openai-anthropic)
+- [🚦 Standard Bug & Issue Reporting Pathway](#-standard-bug--issue-reporting-pathway)
+- [🗺️ Project Roadmap](#️-project-roadmap)
 - [👥 Credits & Attribution](#-credits--attribution)
 
 ---
@@ -133,6 +138,19 @@ graph TD
     KEEPALIVE -.->|Prevents Middlebox DPI Drops| XRAY
     XRAY -->|Stable Uninterrupted Stream| GOOGLE
 ```
+
+---
+
+## ⚡ Core 4-Target Unlocking Architecture
+
+Antigravity Cleaner Pro executes atomic, surgical unlocking across 4 critical layers without breaking system stability:
+
+| Target Layer | Target Component | Modification & Purpose |
+| :--- | :--- | :--- |
+| **1. Core Engine** | `language_server` (Binary) | MultiGate machine-code patch (`RAX+8 hasValidAuth = 1`) unlocking backend gate. |
+| **2. IDE Frontend** | `main.js` (JavaScript) | Unlocks `isGoogleInternal` flag in Electron frontend & flushes compile cache. |
+| **3. Chat UI Guard** | `workbench.desktop.main.js` | Unlocks client-side entitlement gate for chat panels and assistant views. |
+| **4. Zero-Telemetry Wrapper** | `language_server` Wrapper | Transparently injects 7 enterprise & privacy flags (`--disable_telemetry=true`). |
 
 ---
 
@@ -300,11 +318,12 @@ make release
 
 ---
 
-## 🔬 The Antigravity Research Lab & Ecosystem (100+ Internal Patches)
+## 🔬 Multi-Ecosystem Applied AI Security Lab (Google DeepMind, OpenAI, Anthropic, Cursor)
 
-Behind **Antigravity Cleaner Pro** stands an active, deep reverse-engineering and security research effort. In our private security research laboratory, we have systematically deconstructed and analyzed Google Antigravity internals across dozens of release channels.
+Behind **Antigravity Cleaner Pro** stands an active, deep reverse-engineering and security research initiative. In our private security research laboratory, we systematically deconstruct and analyze developer tools across the global AI ecosystem: **Google DeepMind (Antigravity & Gemini), OpenAI, Anthropic (Claude Code), and Cursor**.
 
 - **100+ Internal Patches & Protocol Bridges:** Our private laboratory repository maintains a library of over 100+ low-level bytecode patches, telemetry nullifiers, Stubby RPC bridges, and BYOM (Bring-Your-Own-Model) connectors.
+- **Foundational Flagship Release:** Antigravity Cleaner Pro serves as the foundational flagship project of this initiative, with subsequent specialized tools planned for release across other AI developer stacks.
 - **Production Hardening Pipeline:** Advanced research findings undergo extensive fuzzing and compatibility testing across Windows, macOS, and Linux before being safely graduated into public open-source releases.
 - **Global Developer Backing:** This is a real, battle-tested engineering project dedicated to providing long-term reliability for developers facing digital isolation and network restrictions.
 - **Support the Project:** If our work keeps your IDE online and productive, please **star this repository** ⭐. Your community engagement directly accelerates public releases from our private laboratory!
