@@ -76,7 +76,8 @@ The tool applies surgical modifications across four critical system layers:
 │   └── antigravity-cleaner/    # Standardized autonomous AI Agent Skill
 │       └── SKILL.md            # LLM-executable operational specification
 ├── docs/                       # Architecture diagrams, test logs, error screenshots
-│   └── test-reports/           # benchmarks.log, live_system_test.log
+│   ├── test-reports/           # benchmarks.log, live_system_test.log
+│   └── upstream-bugs/          # Upstream bug registry & knowledge base (e.g. UPSTREAM-001)
 ├── .github/
 │   ├── ISSUE_TEMPLATE/         # Streamlined bug_report.yml and feature_request.yml
 │   └── workflows/              # GitHub Actions cross-compile matrix
