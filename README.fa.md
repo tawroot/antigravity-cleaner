@@ -249,27 +249,33 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ---
 
-## 💻 محیط گرافیکی ۲۰۲۶ در ترمینال
+<div dir="rtl">
 
-با اجرای دستور `ag-cleaner doctor`، یک کارت وضعیت شیک و آرامش‌بخش بدون شلوغی‌های ترساننده دریافت می‌کنید:
+## 💻 رابط‌های بصری: محیط گرافیکی رترو (Win95 GUI) و داشبورد ترمینال
 
-```text
-╭────────────────────────────────────────────────────────────────────────────╮
-│  🩺 Antigravity Cleaner — Health & Connectivity Audit                      │
-│ ────────────────────────────────────────────────────────────────────────   │
-│                                                                            │
-│  Antigravity IDE         READY   Installed & Detected                      │
-│  Core Engine             READY   Unlocked (Patched)                        │
-│  Proxy Connection        READY   Active on 127.0.0.1:10808 (v2ray / Xray)  │
-│  Google DNS              READY   Healthy (16 IPs resolved)                 │
-│  Cloud Code Service      READY   Connected (1100ms, Fast)                  │
-│  Google Accounts         READY   Connected (1800ms, Fast)                  │
-│  Gemini AI API           READY   Connected (950ms, Fast)                   │
-│                                                                            │
-╰────────────────────────────────────────────────────────────────────────────╯
-                                                                              
-   ONLINE  System is optimized. You can launch Antigravity with Smart Proxy!
-```
+### 💾 پنجره دسکتاپ گرافیکی رترو (نسخه ۵.۳)
+با اجرای دستور `antigravity gui` (یا با دابل کلیک مستقیم روی فایل بدون نیاز به ترمینال)، پنجره نوستالژیک و سبک رترو با ۳ مرحله متوالی (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`)، چک‌باکس تله‌متری صفر و مانیتورینگ زنده پروسه باز می‌شود:
+
+</div>
+
+<div align="center">
+  <img src="docs/images/gui.png" alt="پنجره دسکتاپ گرافیکی رترو نسخه ۵.۳" width="460">
+</div>
+
+---
+
+<div dir="rtl">
+
+### 🖥️ داشبورد تعاملی ترمینال (TUI) و کارت بررسی سلامت (Doctor)
+با اجرای دستور `antigravity` (یا `ag-cleaner`)، منوی تمام‌صفحه و با انتخاب گزینه `7`، کارت وضعیت پینگ و اتصالات بدون شلوغی‌های ترساننده نمایش داده می‌شود:
+
+</div>
+
+<div align="center">
+  <img src="docs/images/terminal.png" alt="منوی تعاملی ترمینال" width="720">
+  <br>
+  <img src="docs/images/terminal-doctor.png" alt="خروجی داکتر و کارت سلامت ارتباطات" width="720">
+</div>
 
 ---
 

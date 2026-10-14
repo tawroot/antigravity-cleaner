@@ -189,40 +189,25 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ---
 
-## 💻 2026 Visual Dashboard (TUI)
- 
-Run `ag-cleaner` in your terminal for an interactive, beautifully styled terminal menu:
+## 💻 Visual Interfaces: Retro KeyGen GUI & Terminal Dashboard
+
+### 💾 Retro KeyGen Desktop GUI (v5.3)
+Launch standalone or with `antigravity gui` for a guided 3-step workflow (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`), real-time Zero-Telemetry toggle, and dynamic process monitoring:
 
 <div align="center">
-  <img src="docs/images/terminal.png" alt="Antigravity Cleaner TUI" width="75%">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3" width="460">
 </div>
 
-### 🎬 Live Demo Walkthrough
-See Antigravity Cleaner v5.1 in action — automated detection, zero-TUN proxy injection, and one-click unlocking:
+---
 
-https://github.com/user-attachments/assets/demo.webm
+### 🖥️ Interactive Terminal TUI & Diagnostics Doctor
+Run `antigravity` (or `ag-cleaner`) in your terminal for an interactive Lipgloss dashboard, and select option `7` to run instant connectivity diagnostics:
 
-> *Video demo: [`docs/images/demo.webm`](docs/images/demo.webm)*
-
-Run `ag-cleaner doctor` for a non-intimidating, high-aesthetic health card:
-
-```text
-╭────────────────────────────────────────────────────────────────────────────╮
-│  🩺 Antigravity Cleaner — Health & Connectivity Audit                      │
-│ ────────────────────────────────────────────────────────────────────────   │
-│                                                                            │
-│  Antigravity IDE         READY   Installed & Detected                      │
-│  Core Engine             READY   Unlocked (Patched)                        │
-│  Proxy Connection        READY   Active on 127.0.0.1:10808 (v2ray / Xray)  │
-│  Google DNS              READY   Healthy (16 IPs resolved)                 │
-│  Cloud Code Service      READY   Connected (1100ms, Fast)                  │
-│  Google Accounts         READY   Connected (1800ms, Fast)                  │
-│  Gemini AI API           READY   Connected (950ms, Fast)                   │
-│                                                                            │
-╰────────────────────────────────────────────────────────────────────────────╯
-                                                                              
-   ONLINE  System is optimized. You can launch Antigravity with Smart Proxy!
-```
+<div align="center">
+  <img src="docs/images/terminal.png" alt="Antigravity Cleaner Interactive TUI" width="720">
+  <br>
+  <img src="docs/images/terminal-doctor.png" alt="Antigravity Cleaner Doctor Diagnostics" width="720">
+</div>
 
 ---
 
