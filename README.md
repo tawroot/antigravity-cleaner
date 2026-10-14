@@ -30,7 +30,7 @@
   [![Privacy](https://img.shields.io/badge/Privacy-Zero--Telemetry-success?style=for-the-badge)]()
 </div>
 
-> *Dedicated from the heart to all people, developers, and creators who are caught between domestic filtering from within and digital sanctions from without — in 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇰🇵 North Korea, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every restricted corner of our world. Access to knowledge, technology, and artificial intelligence is a fundamental human right, not a privilege.*  
+> *Dedicated from the heart to every human being, child, student, teacher, creator, and independent developer striving for learning and growth — especially those caught between domestic filtering from within and digital sanctions from without. Across 🇰🇵 North Korea, 🇮🇷 Iran, 🇨🇳 China, 🇷🇺 Russia, 🇹🇷 Turkey, 🇨🇺 Cuba, 🇸🇾 Syria, 🇧🇾 Belarus, 🇸🇩 Sudan, 🇻🇪 Venezuela, 🇦🇫 Afghanistan, 🇲🇲 Myanmar, and every developing corner of our world. Artificial intelligence is the collective heritage of humanity. Access to knowledge, education, and AI is a fundamental human right for all people, not a privilege reserved for wealthy borders.*  
 > — **@dalroot**
 
 <div align="center">
