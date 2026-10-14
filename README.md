@@ -136,11 +136,20 @@ graph TD
 
 ---
 
-## 🛡️ Security, Privacy & Integrity Guarantee
+## 🛡️ Security, Privacy & The Zero-Telemetry Engine
 
-- 🔒 **100% Local Execution**: Zero external telemetry, no remote analytics, and no third-party network calls. The tool operates entirely on your machine.
-- 💬 **Conversation Preservation**: The surgical quota reset (`ag-cleaner clean`) targets only corrupt session cookies and DIPS caches. Your prompts, global storage, and project chat histories are **strictly protected and preserved**.
-- ⚛️ **POSIX Atomic Safety**: Core binaries are patched using atomic inode replacement (`os.Rename`), ensuring running processes never crash, corrupt, or lock with `ETXTBSY`.
+### 🛑 What is Google Telemetry & Why is it Dangerous?
+By default, Google Antigravity continuously transmits hidden background telemetry packets to Google surveillance and tracking endpoints (`googleapis.com`, `cloudcode-pa.googleapis.com`):
+- **Real IP & Geolocation Leaks:** Even if you use a proxy, background telemetry probes can report your unmasked local network IP and latency profile, triggering immediate regional locks (`User location is not supported HTTP 400`).
+- **Git Metadata & Workspace Surveillance:** Telemetry beacons report active git commit hashes, repository remotes, and file extension activity.
+- **Error & Crash Beacons:** Diagnostic traces broadcast error states to Google Cloud Code logging services.
+
+### 🛡️ How Antigravity Cleaner Pro Protects You
+With our **7-Flag Zero-Telemetry Engine** (integrated into `Auto-Fix` and available as a toggle in the Win95 GUI):
+- **100% Severed Phone-Home Channels:** Automatically injects `--disable_telemetry=true` and enterprise isolation flags into the core binary runtime. Google receives **zero telemetry packets, zero git metadata, and zero IP trace beacons** from your machine.
+- **100% Local Execution:** The toolkit operates entirely on your local machine with zero external analytics or network calls.
+- **100% Conversation Preservation:** The surgical quota reset (`ag-cleaner clean`) targets only corrupt rate-limit cookies and DIPS caches. Your prompts, global storage, and project chat histories are **strictly protected and preserved**.
+- **POSIX Atomic Safety:** Core binaries are modified using atomic inode replacement (`os.Rename`), ensuring running processes never crash or lock with `ETXTBSY`.
 
 ---
 

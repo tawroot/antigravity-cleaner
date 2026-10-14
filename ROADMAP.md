@@ -54,6 +54,16 @@ Instead of presenting opaque, cryptic Google backend codes that frighten users (
 ### 3. 🔬 Laboratory Staging Graduation
 - Systematically review, fuzz-test, and graduate stable components from our private 100+ patch reverse-engineering laboratory into the public open-source codebase.
 
+### 4. 📚 Comprehensive Patch-by-Patch Technical Whitepaper & Inventory
+- Publish an exhaustive, transparent technical reference detailing the exact machine-code, JavaScript, and runtime mechanisms of every single patch applied by the toolkit:
+  1. **Core MultiGate Bytecode Patch (`language_server`):** Disassembly analysis of eligibility checks, IDA byte patterns, and the `RAX+8 (hasValidAuth = 1)` register mutation on x86_64 and ARM64.
+  2. **Electron Frontend Gate (`main.js`):** AST modification unlocking `isGoogleInternal` and cache eviction from `Code Cache` / `CachedData`.
+  3. **Workbench UI Gate (`workbench.desktop.main.js`):** Interception of client-side chat panel entitlement gates.
+  4. **Standalone CLI Gate (`agy`):** Binary patch disabling regional locks in the terminal assistant.
+  5. **7-Flag Zero-Telemetry Engine:** In-depth explanation of `--disable_telemetry=true`, `--stubby_auth_mode=business_licensed_enterprise`, and Chrome flag overrides.
+  6. **16-Target Quota Sanitizer:** Exact breakdown of purged databases (`DIPS`, `TransportSecurity`, `Trust Tokens`, `SharedStorage`, `Network Persistent State`, `Dawn/GPU Cache`) with proof of zero chat history loss.
+  7. **No-TUN Proxy Socket Layer:** Technical analysis of 15-second TCP KeepAlive socket tuning preventing DPI stream termination.
+
 ---
 
 ## 🔵 Long-Term Horizon: v6.0.0 (Universal BYOM & Decentralized AI Hub)
