@@ -1,37 +1,39 @@
 # 🗺️ Antigravity Cleaner Pro — Project Roadmap & Architectural Vision
 
-> *"A transparent, battle-tested blueprint charting the evolution of developer freedom — from humble beginnings to an autonomous, zero-telemetry self-healing ecosystem."*
+> *"A transparent, battle-tested blueprint charting the evolution of developer freedom — from initial utility releases to an autonomous, zero-telemetry self-healing ecosystem."*
 
 ---
 
-## 🧭 Project Evolution & Historic Milestones
+## 🧭 Milestone Timeline & Version Evolution
 
-Every milestone in Antigravity Cleaner's history was built in direct response to real-world developer struggles against digital barriers and regional restrictions.
+| Version | Release Date | Core Technical Breakthrough | UI & Application Architecture | Status |
+| :---: | :---: | :--- | :--- | :---: |
+| **v1.0 & v2.1** | Dec 2025 | Cache sanitation, Windows registry unfreezing & bilingual support | Command-line interface + initial Windows utility | Archived |
+| **v4.0** | Dec 2025 | Multi-platform diagnostics, live Google health card & AES-256 session backup | Portable standalone GUI (zero install, no root privileges) | Completed |
+| **v5.1** | Sep 2026 | Pure Go core rewrite, IDA bytecode scanner & No-TUN proxy injection | Single compiled native binary + Lipgloss terminal TUI | Completed |
+| **v5.2** | Sep 2026 | Retro KeyGen Win95 standalone GUI & automated GitHub Actions CI/CD | Double-click desktop GUI window (zero dependencies) | Completed |
+| **v5.3** | Oct 2026 | 7-Flag Zero-Telemetry engine, dynamic `/proc` discovery & 16-target quota reset | 3-Step guided Retro GUI + Autonomous AI Agent Skill | **Current Stable** |
+| **v5.4** | Planned | Intelligent Error Normalizer with real-time egress IP & jurisdiction detection | Frontend interceptor with humanized action prompts | 🚀 Horizon |
 
-```
- [v1.0 - 2024] ➔ [v2.1 - 2024] ➔ [v4.0 - 2025] ➔ [v5.1 - 2026] ➔ [v5.2 - 2026] ➔ [v5.3 - 2026] ➔ 🚀 [v5.4 - Horizon]
-  CLI Prototype    First Public    Full GUI &      Pure Go Core,    Retro KeyGen     7-Flag Zero-     Intelligent Error
-  & Registry       GUI + Backup    Diagnostics     No-TUN Proxy     GUI + CI/CD      Telemetry & 429  Normalizer & BYOM
-```
+---
 
-### 🟢 Completed Milestones
+### 🟢 Completed Milestones: Detailed Retrospective
 
-#### 📦 Phase 1: Genesis & Foundations (2024)
-- **v1.0.0 (Dec 2024) — Internal Beta Prototype:** The very first proof-of-concept created to solve registry corruption and unfreeze locked IDE processes on Windows.
-- **v2.1.0 (Dec 2024) — First Public Release:** Introduced our first graphical utility, Windows registry deep-clean, dual-language support (EN/FA), and browser session detection for Chrome and Edge.
+#### 📦 Phase 1: Genesis & Foundations (Dec 2025)
+- **v1.0.0 & v2.1.0:** The first publicly tracked utility created to resolve Windows registry locks, unfreeze hung language servers, and provide an accessible bilingual (EN/FA) interface for restricted developers.
 
-#### 🎨 Phase 2: Complete UI/UX & Diagnostics Overhaul (2025)
-- **v4.0.0 (Dec 2025) — Multi-Platform Architecture:** Complete Apple-style redesign with glassmorphism UI, real-time Google services connectivity card, 8-browser profile detection with AES-256 backup encryption, and multi-language user guides across 8 languages.
+#### 🎨 Phase 2: Standalone Portable GUI Architecture (Dec 2025)
+- **v4.0.0:** Major cross-platform architecture evolution. Completely transitioned into a **portable, standalone graphical desktop utility** requiring zero installation steps, zero Python/runtime setups, and zero privileged root/administrator permissions. Integrated real-time Google services connectivity audits and AES-256 encrypted multi-browser session backups.
 
-#### ⚡ Phase 3: The Pure Go Revolution (2026)
-- **v5.1.0 (Sep 2026) — Pure Go Core (Zero Dependencies):** Completely rewrote the core into a blazing-fast, compiled Go binary. Eliminated all Python/PowerShell runtime requirements, introduced the IDA-style in-memory MultiGate bytecode scanner (<0.22s on 170MB binaries), POSIX atomic inode swapping, smart No-TUN proxy injection, and aggressive 15s TCP KeepAlive socket tuning.
-- **v5.1.1 (Sep 2026) — Safety Guard & Session Shield:** Real-time process table auditing to prevent accidental termination of active coding sessions.
-- **v5.2.0 (Sep 2026) — Classic Retro KeyGen GUI & Automated CI/CD:** Authentic Windows 95/98 warez-aesthetic graphical patcher with beveled 3D controls, demoscene starfield, Web Audio 8-bit sound fx, and fully automated GitHub Actions releases with cross-compilation for Linux, macOS (Apple Silicon & Intel), and Windows.
-- **v5.3.0 (Oct 2026) — 7-Flag Zero-Telemetry Engine & 16-Target Quota Reset:**
-  - Injected 7 enterprise & privacy runtime flags (`--disable_telemetry=true`, `--is_google_internal=true`, `--stubby_auth_mode=business_licensed_enterprise`, `--jetbox_release_channel=insiders`, `--use_local_chrome=true`).
+#### ⚡ Phase 3: The Pure Go Revolution (Sep – Oct 2026)
+- **v5.1.0 (Pure Go Core — Zero Dependencies):** Rewrote the entire toolkit into a single compiled Go binary. Eliminated all external scripting runtimes, introduced in-memory IDA-style MultiGate bytecode scanning (<0.22s on 170MB binaries), POSIX atomic inode swapping, smart No-TUN proxy injection, and 15s TCP KeepAlive socket tuning to defeat DPI stream resets.
+- **v5.1.1 (Session Immunity Shield):** Real-time process table auditing preventing accidental termination of active coding sessions.
+- **v5.2.0 (Retro KeyGen Standalone Desktop GUI):** Authentic Windows 95/98 warez-aesthetic graphical patcher with beveled 3D controls, Web Audio 8-bit sound effects, and automated cross-compilation pipeline for Linux, macOS (Apple Silicon & Intel), and Windows.
+- **v5.3.0 (7-Flag Zero-Telemetry Engine & 16-Target Quota Reset):**
+  - Injected 7 enterprise and privacy runtime flags (`--disable_telemetry=true`, `--is_google_internal=true`, `--stubby_auth_mode=business_licensed_enterprise`, `--jetbox_release_channel=insiders`, `--use_local_chrome=true`).
   - Modular `/proc` and `ps` process table discovery across Linux, macOS, and Windows.
-  - 16-target surgical Quota 429 reset in 0.002s with 100% chat preservation.
-  - Streamlined 3-step Win95 GUI (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`) with zero clipping.
+  - 16-target surgical Quota 429 reset in 0.002s with 100% chat history preservation.
+  - Streamlined 3-step Win95 GUI (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`) with zero window clipping.
   - Standardized autonomous AI Agent Skill protocol (`skills/antigravity-cleaner/SKILL.md`).
 
 ---
