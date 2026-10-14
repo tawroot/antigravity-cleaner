@@ -321,6 +321,13 @@ To ensure rapid triage and resolution:
 
 ---
 
+## 🗺️ Project Roadmap
+
+Curious about upcoming features, standard error normalizers, and laboratory prototypes?  
+Check out our official [**ROADMAP.md**](ROADMAP.md) for planned milestones.
+
+---
+
 ## 📈 Star History
 
 If this tool unblocked your workflow, a ⭐ star helps other developers discover it.
