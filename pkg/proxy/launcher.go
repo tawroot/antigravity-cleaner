@@ -126,8 +126,10 @@ func LaunchAntigravityWithProxy(appPath string, proxyURL string, extraArgs []str
 	cmd := exec.Command(appPath, args...)
 	cmd.Dir = filepath.Dir(appPath)
 	cmd.Env = BuildProxyEnv(proxyURL)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	// Detach stdio pipes to prevent broken-pipe write EIO crashes when parent terminal closes
+	cmd.Stdout = nil
+	cmd.Stderr = nil
+	cmd.Stdin = nil
 
 	if err := cmd.Start(); err != nil {
 		return fmt.Errorf("failed to start Antigravity with proxy: %w", err)
@@ -212,7 +214,8 @@ export HTTPS_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
 export HTTP_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
 
 # Pass socks5:// without quotes to Chromium (Chromium does not support socks5h)
-exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
+# Redirect stdout/stderr to /dev/null to prevent electron-log write EIO broken-pipe popups
+exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@" >/dev/null 2>&1
 `, appPath)
 
 		_ = os.WriteFile(smartLauncherScript, []byte(scriptContent), 0755)
