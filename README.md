@@ -324,7 +324,7 @@ To ensure rapid triage and resolution:
 ## 🗺️ Project Roadmap
 
 Curious about upcoming features, standard error normalizers, and laboratory prototypes?  
-Check out our official [**ROADMAP.md**](ROADMAP.md) for planned milestones.
+Check out our official [**ROADMAP.md**](ROADMAP.md) (or [🇮🇷 Persian Roadmap](ROADMAP.fa.md)) for planned milestones.
 
 ---
 
