@@ -172,10 +172,10 @@ func (s *Server) handlePatch(w http.ResponseWriter, r *http.Request) {
 	} else {
 		success = true
 		msg = "All 4 targets patched & Zero-Telemetry enabled!"
-		// Full Auto-Fix: Patch all 4 targets + Proxy Launcher + Zero-Telemetry
 		_, _ = patcher.PatchAgy("")
 		_, _ = patcher.PatchIdeMainJs("")
 		_, _ = patcher.PatchVsCodeExtension("")
+		_, _ = patcher.PatchAsarZeroLog("")
 		_, _ = proxy.GenerateNoTunDesktopLauncher("")
 
 		// Ensure Zero-Telemetry & Enterprise wrapper is active
