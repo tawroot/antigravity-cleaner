@@ -144,7 +144,18 @@ make release
 
 ---
 
+## 🔒 Research Archive & Private Security Dossiers (Local Storage)
+For ongoing reverse engineering, binary investigations, and session continuity across AI agents, private dossiers and upstream bug registries are maintained exclusively in local secure storage outside Git:
+* **Secure Vault Path:** `~/.antigravity-private/` (Restricted `chmod 700`)
+* **Vault Contents:**
+  - 📖 Comprehensive Private Security Findings (`security-dossiers/PRIVATE_SECURITY_FINDINGS.fa.md`)
+  - 🪲 Upstream Bug Registry & Disassembly Evidence (`upstream-bugs/`)
+  - 🔬 Live Session Captures & REA Forensic Reports (`captures/`)
+
+---
+
 ## 💡 Quick Tips for New AI Sessions
 - If a user asks to run an auto-fix, refer to `skills/antigravity-cleaner/SKILL.md`.
 - If a user asks about the GitHub branch warning (`Your main branch isn't protected`), remind them it's a security best-practice suggestion and recommend enabling *Block force pushes* and *Do not allow deletions* without requiring PR approvals for solo workflow.
 - All core code resides in pure Go packages under `pkg/`.
+
