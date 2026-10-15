@@ -1,5 +1,5 @@
 APP_NAME := antigravity-cleaner
-VERSION := 5.2.0
+VERSION := 5.3.1
 BUILD_DIR := dist
 
 .PHONY: all build clean test release

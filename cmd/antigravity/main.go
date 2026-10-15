@@ -19,7 +19,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/ui"
 )
 
-const Version = "5.3.0"
+const Version = "5.3.1"
 
 func main() {
 	if len(os.Args) > 1 {
