@@ -162,10 +162,6 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 		desktopAppDir := filepath.Join(home, ".local", "share", "applications")
 		_ = os.MkdirAll(desktopAppDir, 0755)
 
-		cleanerBin, _ := os.Executable()
-		if cleanerBin == "" || strings.Contains(cleanerBin, "/tmp/") || strings.Contains(cleanerBin, "go-build") {
-			cleanerBin = filepath.Join(binDir, "antigravity-cleaner")
-		}
 
 		// 1. Create Smart Launcher script in ~/.local/bin/antigravity-smart-launcher.sh
 		smartLauncherScript := filepath.Join(binDir, "antigravity-smart-launcher.sh")

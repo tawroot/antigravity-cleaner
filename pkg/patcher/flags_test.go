@@ -12,11 +12,11 @@ func TestBuildServerFlags(t *testing.T) {
 	}
 
 	flags := BuildServerFlags(opts, logger)
-	if len(flags) != 7 {
-		t.Fatalf("expected 7 flags, got %d: %v", len(flags), flags)
+	if len(flags) != 8 {
+		t.Fatalf("expected 8 flags, got %d: %v", len(flags), flags)
 	}
 
-	var hasTelemetry, hasInternal, hasChannel, hasStubby, hasChrome, hasBrowserEval, hasVisualHeadless bool
+	var hasTelemetry, hasInternal, hasChannel, hasStubby, hasChrome, hasBrowserEval, hasVisualHeadless, hasSidecars bool
 	for _, f := range flags {
 		switch f {
 		case "--disable_telemetry=true":
@@ -33,6 +33,8 @@ func TestBuildServerFlags(t *testing.T) {
 			hasBrowserEval = true
 		case "--local_chrome_headless=false":
 			hasVisualHeadless = true
+		case "--allow_all_sidecars=true":
+			hasSidecars = true
 		}
 	}
 
@@ -57,10 +59,14 @@ func TestBuildServerFlags(t *testing.T) {
 	if !hasVisualHeadless {
 		t.Errorf("missing --local_chrome_headless=false flag")
 	}
-	if len(logs) != 7 {
-		t.Errorf("expected 7 log entries, got %d", len(logs))
+	if !hasSidecars {
+		t.Errorf("missing --allow_all_sidecars=true flag")
+	}
+	if len(logs) != 8 {
+		t.Errorf("expected 8 log entries, got %d", len(logs))
 	}
 }
+
 
 func TestMergeLaunchArguments(t *testing.T) {
 	existing := []string{"--standalone", "--override_ide_name=antigravity", "--disable_telemetry=false"}
