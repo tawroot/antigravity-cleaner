@@ -282,6 +282,12 @@ func runQuickAutoFix() {
 		ui.PrintStatus("OK", "IDE main.js", res)
 	}
 
+	if res, err := patcher.PatchAsarZeroLog(""); err != nil {
+		ui.PrintStatus("INFO", "Zero-Log ASAR", "Antigravity Standalone (app.asar optional)")
+	} else {
+		ui.PrintStatus("OK", "Zero-Log ASAR", res)
+	}
+
 	fmt.Println()
 	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF")).Render("  Step 2: Smart Proxy & Desktop Launcher Setup..."))
 	if path, err := proxy.GenerateNoTunDesktopLauncher(""); err != nil {
@@ -340,6 +346,12 @@ func runPatchIde() {
 		ui.PrintStatus("WARN", "VS Code Extension", err.Error())
 	} else {
 		ui.PrintStatus("OK", "VS Code Extension", res)
+	}
+
+	if res, err := patcher.PatchAsarZeroLog(""); err != nil {
+		ui.PrintStatus("WARN", "Zero-Log ASAR", err.Error())
+	} else {
+		ui.PrintStatus("OK", "Zero-Log ASAR", res)
 	}
 }
 
