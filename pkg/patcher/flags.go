@@ -26,6 +26,8 @@ type EnterpriseFlagsOptions struct {
 	BrowserEvalEnv bool
 	// LocalChromeHeadless controls whether local Chrome is headless
 	LocalChromeHeadless bool
+	// AllowAllSidecars permits running any sidecar or MCP process without signature restrictions
+	AllowAllSidecars bool
 }
 
 // DefaultEnterpriseFlagsOptions returns the recommended production defaults based on REA findings
@@ -38,8 +40,10 @@ func DefaultEnterpriseFlagsOptions() EnterpriseFlagsOptions {
 		UseLocalChrome:        true,
 		BrowserEvalEnv:        true,
 		LocalChromeHeadless:   false,
+		AllowAllSidecars:      true,
 	}
 }
+
 
 // BuildServerFlags generates the slice of CLI arguments to pass to language_server
 func BuildServerFlags(opts EnterpriseFlagsOptions, logger LogFunc) []string {
@@ -84,8 +88,14 @@ func BuildServerFlags(opts EnterpriseFlagsOptions, logger LogFunc) []string {
 		logger("Applied visual browser flag: --local_chrome_headless=false")
 	}
 
+	if opts.AllowAllSidecars {
+		flags = append(flags, "--allow_all_sidecars=true")
+		logger("Applied sidecar policy flag: --allow_all_sidecars=true (Unlocks all local companion processes and MCPs)")
+	}
+
 	return flags
 }
+
 
 // MergeLaunchArguments merges recommended flags into an existing argument list without duplicates
 func MergeLaunchArguments(existingArgs []string, opts EnterpriseFlagsOptions, logger LogFunc) []string {

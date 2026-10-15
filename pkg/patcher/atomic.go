@@ -81,10 +81,19 @@ func BackupFile(filePath string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("cannot create backup file: %w", err)
 	}
-	defer dst.Close()
 
 	if _, err := io.Copy(dst, src); err != nil {
+		_ = dst.Close()
 		return "", fmt.Errorf("failed to copy bytes to backup: %w", err)
+	}
+
+	if err := dst.Sync(); err != nil {
+		_ = dst.Close()
+		return "", fmt.Errorf("failed to flush backup file: %w", err)
+	}
+
+	if err := dst.Close(); err != nil {
+		return "", fmt.Errorf("failed to close backup file: %w", err)
 	}
 
 	return bakPath, nil
