@@ -1,7 +1,7 @@
-# 🏛️ Technical Architecture (v5.2.0)
+# 🏛️ Technical Architecture (v5.3.1)
 
 ## Overview
-**Antigravity Cleaner** is an enterprise-grade, high-performance systems utility engineered in **pure Go (1.22+)**. It is compiled into a single, zero-dependency native binary for Linux, macOS, and Windows. It provides automated self-healing, regional sanction bypass, quota reset, and smart proxy injection for **Google Antigravity IDE**, the `agy` CLI, and the Google Antigravity VS Code extension.
+**Antigravity Cleaner Pro** is an enterprise-grade, high-performance systems utility engineered in **pure Go (1.22+)**. It is compiled into a single, zero-dependency native binary for Linux (amd64, arm64), macOS (Intel, Apple Silicon M1–M4), and Windows. It provides automated self-healing, regional sanction bypass, quota reset, and smart proxy injection for **Google Antigravity IDE**, the `agy` CLI, and the Google Antigravity VS Code extension.
 
 ---
 
@@ -12,61 +12,68 @@ graph TD
     subgraph Host OS Environment
         IDE[Google Antigravity IDE / agy CLI]
         LS[Core Engine: language_server]
+        ASAR[IDE Archive: app.asar]
         LocalProxy[Local Proxy: SOCKS5 / HTTP<br>Xray / Clash / Sing-box / Hiddify]
     end
 
     subgraph Antigravity Cleaner Engine [Go Runtime]
         Doctor[pkg/doctor: Health & Diagnostic Engine]
-        Cleaner[pkg/cleaner: Surgical Quota & Cache Cleaner]
-        Patcher[pkg/patcher: Boyer-Moore Bytecode Scanner]
+        Cleaner[pkg/cleaner: 16-Target Surgical Quota Cleaner]
+        Patcher[pkg/patcher: MultiGate IDA Scanner & Inode Patcher]
+        AsarShield[pkg/patcher: Zero-Log ASAR Shield]
+        FlagsEngine[pkg/patcher: 8-Flag Zero-Telemetry & MCP Wrapper]
         ProxyInj[pkg/proxy: Smart No-TUN Route Injector]
+        Discovery[pkg/patcher: Dynamic /proc & ps Process Discovery]
         
         subgraph User Interface Layer
             GUI[Retro KeyGen GUI<br>Win95 Demoscene Starfield]
             TUI[Modern Terminal UI<br>Bubbletea & Lipgloss]
-            CLI[Headless CLI Commands<br>doctor / clean / patch / proxy]
+            CLI[Headless CLI Commands<br>doctor / clean / patch / proxy / restore]
         end
     end
 
-    IDE -->|IPC / gRPC| LS
-    Patcher -.->|Neutralize 403 / Region Lock| LS
-    Cleaner -.->|Reset Quota / Dead PID Locks| IDE
+    Discovery -->|Live Process Table Inspection| LS
+    Patcher -.->|Neutralize 403 / RAX+8 hasValidAuth = 1| LS
+    AsarShield -.->|Silence EIO & electron-log silly| ASAR
+    FlagsEngine -.->|Inject 8 Enterprise Flags & Allow MCP| LS
+    Cleaner -.->|Reset 16 Quota Targets / 0 Chat Loss| IDE
     ProxyInj -->|Zero-TUN SOCKS5 Socket Routing| LocalProxy
-    LocalProxy -->|Encrypted Outbound| GoogleCloud[Google Cloud Endpoints]
-    Doctor -.->|Inspect Sockets & State| IDE
+    LocalProxy -->|Encrypted Outbound Stream| GoogleCloud[Google Cloud Gemini Endpoints]
+    Doctor -.->|Inspect Sockets & Connectivity| IDE
 ```
 
 ---
 
-### 1. Diagnostic Engine (`pkg/doctor`)
-* **Process Table Inspection:** Scans active processes for `antigravity`, `language_server`, and zombie child processes.
-* **Port Conflict & Socket Monitoring:** Verifies binding availability for Antigravity IPC and internal gRPC channels.
-* **Network & Gateway Probing:** Measures latency and SSL handshake completion against Google Cloud API endpoints (`cloudcode.googleapis.com`).
-* **Environment Validation:** Verifies environment variable state (`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, `NO_PROXY`).
+### 1. Diagnostic Engine (`pkg/doctor/doctor.go`)
+* **Process Table Inspection:** Scans active processes for `antigravity`, `language_server`, and orphaned child processes.
+* **Socket & Gateway Probing:** Measures concurrent latency, SSL handshake completion, and DNS leak resistance against Google Cloud endpoints (`cloudcode.googleapis.com`).
+* **Environment Validation:** Audits local proxy variables (`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, `GRPC_PROXY`).
 
-### 2. Surgical Quota & Cache Cleaner (`pkg/cleaner`)
-* **Atomic Reset:** Clears corrupted session locks, stale telemetry buffers, and transient rate-limit counters (HTTP 429) without affecting user workspaces or project configurations.
+### 2. 16-Target Surgical Quota Cleaner (`pkg/cleaner/quota.go`)
+* **Atomic Reset in 0.002s:** Purges corrupted session locks, stale DIPS databases, TransportSecurity, Trust Tokens, and rate-limit counters without deleting chat history, projects, or credentials.
 * **File Lock Reaping:** Safely releases stale PID handles and dangling socket descriptors.
-* **Backup Preservation:** Automatically retains a rollback snapshot before performing file modifications.
+* **User Data Backup:** Optionally creates full timestamped backups of `User/` in `~/Antigravity-Backups/`.
 
-### 3. High-Speed Bytecode Patcher (`pkg/patcher`)
-* **Boyer-Moore Scan:** Scans `language_server` binary payloads at up to 1.9 GB/s throughput to locate regional eligibility and geo-fencing routines.
-* **In-Place Neutralization:** Modifies branch conditions responsible for `User location is not supported` (HTTP 403 Forbidden) errors.
-* **SHA-256 Checksum Validation:** Computes before-and-after cryptographic hashes ensuring absolute binary integrity.
+### 3. Core MultiGate Patcher & ASAR Shield (`pkg/patcher/`)
+* **IDA-Style Byte Pattern Scanning (`manager.go`, `cli.go`):** In-memory pattern scanning at ~1.9 GB/s throughput to locate and patch `hasValidAuth` (`RAX+8 = 1`) on x86_64 and ARM64.
+* **Zero-Log ASAR Shield (`asar.go`):** Applies exact-byte patches to `app.asar` silencing `electron-log` (`level: false`) and wrapping `writeFn` in `try/catch` to eliminate broken-pipe `write EIO` exceptions.
+* **VS Code Anti Re-Download Guard (`vscode.go`):** Locks extension channel and injects download guards into `extension.js`.
+* **POSIX Atomic Inode Replacement (`atomic.go`):** Replaces files on disk using atomic inode swaps (`os.Rename`), ensuring running processes never crash with `ETXTBSY`.
 
-### 4. Smart Proxy & No-TUN Injector (`pkg/proxy`)
-* **Direct Socket Routing:** Routes outbound Antigravity IDE gRPC/HTTPS streams directly into local SOCKS5/HTTP proxy listeners (ports `10808`, `7890`, `1080`, etc.).
-* **Zero TUN Overhead:** Eliminates the CPU, driver, and system routing table overhead of full-system VPN/TUN mode.
-* **Active TCP KeepAlive:** Prevents intermediate stateful firewall timeouts on long-running LLM streaming responses.
+### 4. 8-Flag Zero-Telemetry & Enterprise Engine (`pkg/patcher/flags.go`, `wrapper.go`)
+* **Full Isolation Flags:** Transparently injects `--disable_telemetry=true`, `--is_google_internal=true`, `--jetbox_release_channel=insiders`, `--stubby_auth_mode=business_licensed_enterprise`, `--use_local_chrome=true`, `--browser_eval_env=true`, `--local_chrome_headless=false`, and `--allow_all_sidecars=true`.
+* **Companion & MCP Liberation:** The `--allow_all_sidecars=true` flag unlocks all local companion processes and Model Context Protocol (MCP) servers without signature restrictions.
 
-### 5. Multi-Mode Presentation Layer
-* **1-Click Retro KeyGen GUI:** Standalone executable requiring zero terminal interaction. Features Windows 95 aesthetics, procedural demoscene starfield, and retro sound effects.
-* **Interactive Terminal UI (TUI):** Built with `charmbracelet/bubbletea` and `charmbracelet/lipgloss` for keyboard navigation, real-time gauges, and live diagnostic output.
-* **Headless Scriptable CLI:** Deterministic exit codes and UNIX-pipeable JSON output for automated CI/CD and script integration.
+### 5. Smart Proxy & No-TUN Injector (`pkg/proxy/`)
+* **Direct Socket Routing (`launcher.go`):** Routes outbound Antigravity gRPC/HTTPS streams directly into local SOCKS5/HTTP listeners (ports `10808`, `2080`, `7890`, etc.).
+* **Zero TUN Overhead:** Eliminates CPU, kernel driver, and system routing table overhead of full-system VPN/TUN mode.
+* **Chromium Proxy Sanitizer:** Automatically converts `socks5h://` schemes into `socks5://` for Chromium/Electron, preventing `ERR_NO_SUPPORTED_PROXIES`.
+* **TCP KeepAlive Heartbeat (`keepalive.go`):** Emits periodic 15-second socket probes to prevent stateful DPI middlebox timeouts during long agent responses.
 
 ---
 
 ## 🔒 Security & Privacy Guarantees
-1. **100% Offline Execution:** Runs strictly on localhost (`127.0.0.1`). Contains no remote telemetry, analytics, or background call-homes.
-2. **Deterministic & Reversible:** Every patching or cleaning operation can be inspected or reversed.
-3. **Open Source:** Licensed under the international standard **Apache License 2.0**.
+1. **100% Offline Execution:** Runs strictly on localhost (`127.0.0.1`). Does not require internet connectivity to execute. Contains zero remote telemetry, analytics, or external calls.
+2. **Automated Rollback Guarantee:** Every patched file is preceded by an atomic `.agybak` backup. A single command (`ag-cleaner restore`) or GUI button instantly restores pristine factory files.
+3. **Continuous Security Audits:** Audited and verified with automated GitHub Actions CodeQL security workflows (`.github/workflows/security.yml`).
+4. **Open Source & Auditable:** Released under the international standard **Apache License 2.0**.

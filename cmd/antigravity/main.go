@@ -302,12 +302,13 @@ func runQuickAutoFix() {
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color("#00FF9F")).
 			Padding(0, 2).
-			Render(fmt.Sprintf("%s\n\n%s\n%s\n%s\n\n%s",
+			Render(fmt.Sprintf("%s\n\n%s\n%s\n%s\n\n%s\n%s",
 				lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("🎉 AUTO-FIX COMPLETED SUCCESSFULLY!"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Core Engine:      UNLOCKED (MultiGate hasValidAuth Bypass Active)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Smart Proxy:      CONFIGURED (Direct socket, Zero TUN mode needed)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Desktop Shortcut: READY (Click 'Antigravity' in App Menu or Desktop)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🚀 You can now launch Antigravity with full region freedom!"),
+				lipgloss.NewStyle().Foreground(lipgloss.Color("#FFD700")).Render("⭐ If this helped you, star us: https://github.com/tawroot/antigravity-cleaner"),
 			))
 		fmt.Println(successBox)
 	}
