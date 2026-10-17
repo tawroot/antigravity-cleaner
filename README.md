@@ -199,12 +199,46 @@ Google assigns region restrictions based on account history:
 ---
 
 ### 2. Launch Cleaner: Apply Auto-Fix in Seconds
-* **Graphical Interface (GUI):** Run the standalone executable and click **`[Auto-Fix]`**. All patches and proxy injection apply in under 1 second without restarting your OS.
-* **Terminal CLI:**
-  ```bash
-  ag-cleaner patch all
-  ag-cleaner launch
-  ```
+Once your account region is verified, launching Cleaner is available through two straightforward pathways (Graphical Window or Terminal Console):
+
+#### 🖥️ Option 1: Standalone Retro GUI (Win95 Style — Simplest, Zero Terminal Required)
+Simply double-click the standalone executable to launch the nostalgic GUI window. The workflow is an intuitive, automated 3-step sequence:
+1. **Step 1 — Click `[ ① ⚡ Auto-Fix ]`:**  
+   Click the button and wait a couple of seconds. Cleaner automatically patches the core engine, CLI, IDE frontend, extension guard, and Zero-Log ASAR shield. Upon completion, the status box displays `✔ STEP 1 DONE! Next: Click [ ② 🚀 Launch IDE ]` in green and activates the second step button.
+2. **Step 2 — Click `[ ② 🚀 Launch IDE ]`:**  
+   Launches Google Antigravity with smart direct proxy injection (bypassing the need for whole-system TUN mode). The IDE is instantly ready with full AI capabilities.
+3. **Step 3 — Click `[ ③ 📌 Shortcut ]`:**  
+   Creates a permanent desktop shortcut and application menu launcher pre-configured with proxy routing. For future coding sessions, you can launch Antigravity directly from this shortcut without reopening Cleaner!
+
+---
+
+#### ⌨️ Option 2: Terminal CLI Dashboard (For Power Users & Developers)
+If you prefer working in a command-line environment:
+* **Interactive Fullscreen TUI:**  
+  Run `antigravity` (or `ag-cleaner`) to open the interactive Lipgloss dashboard. Select option `1` (**Auto-Fix**). Cleaner will verify every component and confirm with a green `🎉 AUTO-FIX COMPLETED SUCCESSFULLY!` box.
+* **Direct Scriptable Commands:**
+  * **Windows (CMD or PowerShell):**
+    ```cmd
+    # 1. Apply all patches and auto-generate proxy launcher
+    antigravity-cleaner.exe patch all
+
+    # 2. Launch Antigravity directly with smart No-TUN proxy
+    antigravity-cleaner.exe launch
+
+    # 3. (Optional) Create permanent desktop shortcut
+    antigravity-cleaner.exe create-launcher
+    ```
+  * **Linux & macOS (Terminal):**
+    ```bash
+    # 1. Apply all patches and auto-generate proxy launcher
+    ./antigravity-cleaner patch all
+
+    # 2. Launch Antigravity directly with smart No-TUN proxy
+    ./antigravity-cleaner launch
+
+    # 3. (Optional) Create permanent desktop shortcut
+    ./antigravity-cleaner create-launcher
+    ```
 
 ---
 

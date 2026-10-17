@@ -199,12 +199,46 @@ Google 会根据账号历史活动位置判定归属区域，从而实施制裁�
 ---
 
 ### 2. 运行 Cleaner：数秒内完成全自动修复
-* **图形界面版 (GUI)：** 启动独立可执行文件，点击 **`[Auto-Fix]`**。所有补丁与代理配置将在 1 秒内生效，无需重启操作系统。
-* **终端命令行版 (CLI)：**
-  ```bash
-  ag-cleaner patch all
-  ag-cleaner launch
-  ```
+在确认账号归属地后，您可以通过两种极为简便的方式运行 Cleaner（独立图形窗口或终端控制台）：
+
+#### 🖥️ 方案 1：独立复古图形界面（Win95 风格 —— 最简单，无需使用终端）
+只需双击下载的独立可执行文件，即可打开经典的怀旧 GUI 窗口。整体工作流为直观且全自动的三步操作：
+1. **第 1 步 —— 点击 `[ ① ⚡ Auto-Fix ]`：**  
+   点击该按钮并静候数秒。Cleaner 将自动修补核心底层引擎、CLI、IDE 前端、扩展防护守卫以及 Zero-Log ASAR 静音盾。完成后，状态框将显示绿色的 `✔ STEP 1 DONE! Next: Click [ ② 🚀 Launch IDE ]` 提示，并自动激活第二步按钮。
+2. **第 2 步 —— 点击 `[ ② 🚀 Launch IDE ]`：**  
+   直接启动 Google Antigravity，并通过智能定向注入本地代理端口（完全无需开启占用系统全局网卡的 TUN 模式）。IDE 启动后即可无限制享受完整 AI 功能。
+3. **第 3 步 —— 点击 `[ ③ 📌 Shortcut ]`：**  
+   在桌面和系统应用菜单中生成预先配置好代理路由规则的永久快捷方式。日后进行编码时，只需双击该快捷方式即可直接启动 Antigravity，无需每次重新打开 Cleaner！
+
+---
+
+#### ⌨️ 方案 2：终端 CLI 命令行（面向高级用户与开发者）
+如果您更偏好在终端环境中操作：
+* **全屏交互式 TUI 菜单：**  
+  运行 `antigravity`（或 `ag-cleaner`）打开基于 Lipgloss 的终端交互面板。选择选项 `1`（**Auto-Fix**）。Cleaner 将逐项校验各组件，并弹出绿色提示框 `🎉 AUTO-FIX COMPLETED SUCCESSFULLY!`。
+* **直接运行自动化脚本命令：**
+  * **Windows (CMD 或 PowerShell)：**
+    ```cmd
+    # 1. 应用全部补丁并自动生成代理启动器
+    antigravity-cleaner.exe patch all
+
+    # 2. 直接以智能 No-TUN 代理模式启动 Antigravity
+    antigravity-cleaner.exe launch
+
+    # 3. (可选) 创建永久桌面快捷方式
+    antigravity-cleaner.exe create-launcher
+    ```
+  * **Linux 与 macOS (Terminal)：**
+    ```bash
+    # 1. 应用全部补丁并自动生成代理启动器
+    ./antigravity-cleaner patch all
+
+    # 2. 直接以智能 No-TUN 代理模式启动 Antigravity
+    ./antigravity-cleaner launch
+
+    # 3. (可选) 创建永久桌面快捷方式
+    ./antigravity-cleaner create-launcher
+    ```
 
 ---
 

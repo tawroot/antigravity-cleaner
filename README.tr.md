@@ -199,12 +199,46 @@ Google, hesabınızın geçmiş hareketlerine göre bölgesel kısıtlamalar uyg
 ---
 
 ### 2. Cleaner'ı Çalıştırın: Saniyeler İçinde Otomatik Düzeltme
-* **Grafik Arayüz (GUI):** Bağımsız yürütülebilir dosyayı açın ve **`[Auto-Fix]`** butonuna tıklayın. Tüm yamalar ve proxy enjeksiyonu 1 saniyeden kısa sürede, işletim sistemini yeniden başlatmadan uygulanır.
-* **Terminal CLI:**
-  ```bash
-  ag-cleaner patch all
-  ag-cleaner launch
-  ```
+Hesap bölgeniz doğrulandıktan sonra, Cleaner'ı iki pratik yöntemle (Grafik Arayüz veya Terminal Konsolu) başlatabilirsiniz:
+
+#### 🖥️ Seçenek 1: Bağımsız Retro GUI (Win95 Tarzı — En Kolayı, Sıfır Terminal Gereksinimi)
+Nostaljik grafik arayüz penceresini açmak için bağımsız yürütülebilir dosyaya çift tıklamanız yeterlidir. Bu arayüzdeki iş akışı, sezgisel ve otomatik 3 adımlı bir diziden oluşur:
+1. **1. Adım — `[ ① ⚡ Auto-Fix ]` Butonuna Tıklayın:**  
+   Butona tıklayın ve birkaç saniye bekleyin. Cleaner; çekirdek motoru, CLI'yı, IDE önyüzünü, eklenti korumasını ve Zero-Log ASAR kalkanını otomatik olarak yamalar. İşlem tamamlandığında, durum kutusunda yeşil renkte `✔ STEP 1 DONE! Next: Click [ ② 🚀 Launch IDE ]` mesajı görüntülenir ve ikinci adım butonu aktif hale gelir.
+2. **2. Adım — `[ ② 🚀 Launch IDE ]` Butonuna Tıklayın:**  
+   Google Antigravity'yi akıllı doğrudan proxy enjeksiyonuyla başlatır (tüm sistemi TUN moduna alma zorunluluğunu ortadan kaldırır). IDE, tam yapay zeka yetenekleriyle anında kullanıma hazır hale gelir.
+3. **3. Adım — `[ ③ 📌 Shortcut ]` Butonuna Tıklayın:**  
+   Masaüstünüzde ve uygulama menünüzde, proxy yönlendirmesi önceden yapılandırılmış kalıcı bir kısayol oluşturur. Sonraki kodlama oturumlarınızda, Cleaner'ı yeniden açmadan doğrudan bu kısayola tıklayarak Antigravity'yi başlatabilirsiniz!
+
+---
+
+#### ⌨️ Seçenek 2: Terminal CLI Paneli (Gelişmiş Kullanıcılar ve Geliştiriciler İçin)
+Komut satırı ortamında çalışmayı tercih ediyorsanız:
+* **Etkileşimli Tam Ekran TUI:**  
+  Lipgloss etkileşimli kontrol panelini açmak için `antigravity` (veya `ag-cleaner`) komutunu çalıştırın. `1` (**Auto-Fix**) seçeneğini seçin. Cleaner her bir bileşeni doğrulayacak ve yeşil `🎉 AUTO-FIX COMPLETED SUCCESSFULLY!` kutusuyla başarıyı bildirecektir.
+* **Doğrudan Betiklenebilir Komutlar:**
+  * **Windows (CMD veya PowerShell):**
+    ```cmd
+    # 1. Tüm yamaları uygulayın ve otomatik proxy başlatıcısını oluşturun
+    antigravity-cleaner.exe patch all
+
+    # 2. Akıllı No-TUN proxy ile Antigravity'yi doğrudan başlatın
+    antigravity-cleaner.exe launch
+
+    # 3. (İsteğe bağlı) Kalıcı masaüstü kısayolu oluşturun
+    antigravity-cleaner.exe create-launcher
+    ```
+  * **Linux ve macOS (Terminal):**
+    ```bash
+    # 1. Tüm yamaları uygulayın ve otomatik proxy başlatıcısını oluşturun
+    ./antigravity-cleaner patch all
+
+    # 2. Akıllı No-TUN proxy ile Antigravity'yi doğrudan başlatın
+    ./antigravity-cleaner launch
+
+    # 3. (İsteğe bağlı) Kalıcı masaüstü kısayolu oluşturun
+    ./antigravity-cleaner create-launcher
+    ```
 
 ---
 
