@@ -419,6 +419,119 @@ rm -f ~/.config/Antigravity/SingletonLock ~/.config/Antigravity/SingletonSocket 
             </p>
         </article>
 
+
+        <!-- Error 6: Agent Terminated Due to Error (write EIO) -->
+        <article class="error-card" id="error-agent-terminated">
+            <span class="error-badge badge-danger">STREAM CRASH &bull; WRITE EIO / BROKEN PIPE</span>
+            <h2>"Agent terminated due to error" & Broken Pipe Exceptions</h2>
+            <div style="margin: 15px 0; text-align: center;">
+                <img src="../docs/images/errors/google-antigravity-agent-terminated-due-to-error.png" alt="Google Antigravity Agent terminated due to error" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            </div>
+            <div class="code-box" style="border-color: #ff0055;">
+                <code>Agent terminated due to error
+You can prompt the model to try again or start a new conversation if the error persists.
+See our troubleshooting guide for more help.
+
+Dismiss  Copy debug info  Retry</code>
+            </div>
+            <p style="color: var(--text-secondary);">
+                <strong>Root Cause:</strong> Sudden pipe breakdown caused by verbose raw logging (<code>write EIO</code>) or middlebox connection timeouts during streaming agent thought loops.
+            </p>
+            <h4>Instant Fix with Antigravity Cleaner:</h4>
+            <p style="color: var(--text-secondary);">
+                Click <strong>[ ① ⚡ Auto-Fix ]</strong> in the Retro GUI or run <code>antigravity-cleaner patch all</code>. Our Zero-Log ASAR Shield silences verbose console outputs, eliminates broken pipe exceptions, and enforces 15s TCP KeepAlive heartbeat tuning to keep streaming inference alive.
+            </p>
+        </article>
+
+        <!-- Error 7: Network Issue Connecting to Server -->
+        <article class="error-card" id="error-network-issue">
+            <span class="error-badge badge-warning">CONNECTION DROP &bull; DPI & TELEMETRY LEAK</span>
+            <h2>"Unknown: There was a network issue connecting to the server"</h2>
+            <div style="margin: 15px 0; text-align: center;">
+                <img src="../docs/images/errors/google-antigravity-network-issue-connecting-to-server.png" alt="Network issue connecting to server" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            </div>
+            <div class="code-box" style="border-color: #ffaa00;">
+                <code>Error Unknown: There was a network issue connecting to the server, please try again.
+Error ID: 95ea05dd-6419-4bf0-a8ce-8faf25687606-108
+Unknown: There was a network issue connecting to the server, please try again.</code>
+            </div>
+            <p style="color: var(--text-secondary);">
+                <strong>Root Cause:</strong> Middlebox/DPI firewalls terminating idle TLS/gRPC streams during prolonged reasoning phases, or background telemetry probes leaking real unmasked IP midway through a task.
+            </p>
+            <h4>Instant Fix:</h4>
+            <p style="color: var(--text-secondary);">
+                Launch Antigravity via <strong>[ ② 🚀 Launch IDE ]</strong> or <code>antigravity-cleaner launch</code>. Traffic is isolated over a direct SOCKS5h loopback socket with the 8-flag Zero-Telemetry wrapper active.
+            </p>
+        </article>
+
+        <!-- Error 8: 403 Forbidden /auth-success -->
+        <article class="error-card" id="error-auth-success-403">
+            <span class="error-badge badge-danger">AUTH BLOCK &bull; 403 THAT’S AN ERROR</span>
+            <h2>"403. That’s an error. /auth-success"</h2>
+            <div style="margin: 15px 0; text-align: center;">
+                <img src="../docs/images/errors/google-antigravity-error-403-forbidden-auth-success.png" alt="Google 403 Forbidden auth-success error" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            </div>
+            <div class="code-box" style="border-color: #ff0055;">
+                <code>Google
+
+403. That’s an error.
+
+Your client does not have permission to get URL /auth-success from this server. That’s all we know.</code>
+            </div>
+            <p style="color: var(--text-secondary);">
+                <strong>Root Cause:</strong> Google regional authentication gateway flagging the browser login redirect from sanctioned regions due to historical device fingerprints or unshielded telemetry beacons.
+            </p>
+            <h4>Instant Fix:</h4>
+            <p style="color: var(--text-secondary);">
+                Run <strong>[ ① ⚡ Auto-Fix ]</strong>. Cleaner patches the core binary machine code (<code>hasValidAuth = true</code>), injects enterprise auth mode flags, and purges tainted authentication tokens.
+            </p>
+        </article>
+
+        <!-- Error 9: Proxy Connection Refused -->
+        <article class="error-card" id="error-proxy-refused">
+            <span class="error-badge badge-info">PROXY MISMATCH &bull; DIAL TCP 127.0.0.1:10808</span>
+            <h2>"proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"</h2>
+            <div style="margin: 15px 0; text-align: center;">
+                <img src="../docs/images/errors/google-antigravity-loadcodeassist-proxy-connection-refused.png" alt="Proxy connection refused dial 10808" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            </div>
+            <div class="code-box" style="border-color: #00f0ff;">
+                <code>There was an unexpected issue setting up your account.
+
+failed to get load code assist response: Post "https://cloudcode-pa.googleapis.com/v1internal:loadCodeAssist": proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused</code>
+            </div>
+            <p style="color: var(--text-secondary);">
+                <strong>Root Cause:</strong> Local proxy client (Xray, Clash, NekoBox) is either closed or listening on an unexpected port.
+            </p>
+            <h4>Instant Fix:</h4>
+            <p style="color: var(--text-secondary);">
+                Run <code>antigravity-cleaner doctor</code> (or click <strong>[ 🩺 Doctor ]</strong> in GUI). The diagnostics engine dynamically scans active ports and aligns your IDE proxy configuration automatically.
+            </p>
+        </article>
+
+        <!-- Error 10: Failed to fetch / Setting up account -->
+        <article class="error-card" id="error-failed-to-fetch">
+            <span class="error-badge badge-warning">STATE CORRUPTION &bull; FAILED TO FETCH</span>
+            <h2>"There was an unexpected issue setting up your account. Failed to fetch"</h2>
+            <div style="margin: 15px 0; text-align: center;">
+                <img src="../docs/images/errors/google-antigravity-setting-up-account-failed-to-fetch.png" alt="Setting up account Failed to fetch" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            </div>
+            <div class="code-box" style="border-color: #ffaa00;">
+                <code>There was an unexpected issue setting up your account.
+
+Failed to fetch
+
+Continue with different account
+Having trouble? Let us know</code>
+            </div>
+            <p style="color: var(--text-secondary);">
+                <strong>Root Cause:</strong> Corrupted DIPS database records and orphaned WebSocket caches in application state.
+            </p>
+            <h4>Instant Fix:</h4>
+            <p style="color: var(--text-secondary);">
+                Click <strong>[ 🧹 Reset 429 ]</strong> in the GUI or execute <code>antigravity-cleaner clean</code>. Purges 16 cached quota artifacts in 0.002s while 100% preserving your projects and chat history.
+            </p>
+        </article>
+
     </main>
 
     <!-- Footer -->

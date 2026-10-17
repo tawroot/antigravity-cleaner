@@ -287,11 +287,16 @@ window.copyTerminal = function () {
 
 window.fetchStats = async function () {
     try {
-        const res = await fetch('https://api.github.com/repos/tawroot/antigravity-cleaner');
-        const data = await res.json();
+        const [repoRes, relRes] = await Promise.all([
+            fetch('https://api.github.com/repos/tawroot/antigravity-cleaner'),
+            fetch('https://api.github.com/repos/tawroot/antigravity-cleaner/releases')
+        ]);
+        const data = await repoRes.json();
+        const releases = await relRes.json();
 
         const starCount = document.getElementById('star-count');
         const forkCount = document.getElementById('fork-count');
+        const dlCount = document.getElementById('download-count');
 
         if (starCount && data.stargazers_count) {
             starCount.innerText = data.stargazers_count.toLocaleString();
@@ -301,6 +306,14 @@ window.fetchStats = async function () {
         });
         if (forkCount && data.forks_count) {
             forkCount.innerText = data.forks_count.toLocaleString();
+        }
+
+        if (dlCount && Array.isArray(releases)) {
+            let totalDl = 0;
+            releases.forEach(r => (r.assets || []).forEach(a => totalDl += (a.download_count || 0)));
+            if (totalDl > 0) {
+                dlCount.innerText = totalDl.toLocaleString() + '+';
+            }
         }
     } catch (e) {
         console.error('Failed to fetch GitHub stats:', e);
