@@ -19,9 +19,8 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=5.3.1-pro">
 
     <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/">
 
@@ -150,8 +149,20 @@
 
                     <!-- Theme Toggle Button -->
                     <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
-                        <i class="fas fa-sun theme-icon-sun"></i>
-                        <i class="fas fa-moon theme-icon-moon"></i>
+                        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
                     </button>
 
                     <!-- Hidden native select for full backwards-compatibility -->
@@ -868,6 +879,109 @@
         </div>
     </section>
 
+    <!-- FAQ & Error Resolution Section -->
+    <section class="section" id="faq" style="padding: 90px 0 80px 0; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <span class="faq-badge faq-badge-info" style="margin-bottom: 12px; font-size: 0.8rem; padding: 5px 12px;" data-lang-key="home_faq_badge">⚡ ERROR RESOLUTION &amp; KNOWLEDGE BASE</span>
+                <h2 class="section-title" data-lang-key="home_faq_title">Frequently Asked Questions &amp; Error Solutions</h2>
+                <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;" data-lang-key="home_faq_subtitle">Direct, verified solutions for Error 403, 429 quota exhaustion, broken pipes, and proxy connections.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <!-- Item 1: Error 403 Region Lock -->
+                <div class="faq-accordion-item active">
+                    <div class="faq-accordion-header">
+                        <div class="faq-header-content">
+                            <span class="faq-badge faq-badge-danger" data-lang-key="faq_err_403_badge">ERROR 403 • REGION LOCK</span>
+                            <h3 class="faq-title-text" data-lang-key="faq_err_403_q">How do I fix "Your current account is not eligible for Antigravity" / Error 403 Forbidden?</h3>
+                        </div>
+                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-accordion-body" data-lang-key="faq_err_403_a" data-lang-html="true">
+                        Google DeepMind and Google Cloud enforce geographic restrictions in countries like Iran, Russia, China, and Syria. Antigravity Cleaner solves this in 2 steps: 1) Click <strong>[ ① ⚡ Auto-Fix ]</strong> (or run <code>antigravity-cleaner patch all</code>) to neutralize local gatekeeper functions in <code>main.js</code>, <code>agy</code> CLI, and extensions. 2) Click <strong>[ ② 🚀 Launch IDE ]</strong> to inject an isolated loopback proxy without requiring root TUN mode.
+                    </div>
+                </div>
+
+                <!-- Item 2: Error 429 Quota Exhausted -->
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header">
+                        <div class="faq-header-content">
+                            <span class="faq-badge faq-badge-warning" data-lang-key="faq_err_429_badge">ERROR 429 • QUOTA EXHAUSTED</span>
+                            <h3 class="faq-title-text" data-lang-key="faq_err_429_q">How to resolve Error 429 "Resource has been exhausted / Too Many Requests"?</h3>
+                        </div>
+                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-accordion-body" data-lang-key="faq_err_429_a" data-lang-html="true">
+                        Autonomous agent tool calls and search queries desynchronize local token buckets in <code>Cache</code> and <code>DawnWebGPUCache</code>, triggering false 429 limits. Click <strong>[ 🧹 Reset 429 ]</strong> in the Cleaner GUI or execute <code>antigravity-cleaner clean</code>. It flushes corrupted quota artifacts in 0.002s while 100% preserving your Google login session, cookies, and chat history.
+                    </div>
+                </div>
+
+                <!-- Item 3: Stream Dropouts & Broken Pipes -->
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header">
+                        <div class="faq-header-content">
+                            <span class="faq-badge faq-badge-danger" data-lang-key="faq_err_stream_badge">STREAM DROP • WRITE EIO</span>
+                            <h3 class="faq-title-text" data-lang-key="faq_err_stream_q">Why does Antigravity show "Agent terminated due to error" or "Network issue connecting to server"?</h3>
+                        </div>
+                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-accordion-body" data-lang-key="faq_err_stream_a" data-lang-html="true">
+                        During extended thinking loops, silent HTTP/2 SSE connections are abruptly dropped by ISP Middlebox firewalls (sending TCP RST packets). Antigravity Cleaner injects a <strong>15-second TCP KeepAlive heartbeat</strong> and enables the Zero-Log ASAR Shield to eliminate <code>write EIO</code> broken pipe exceptions.
+                    </div>
+                </div>
+
+                <!-- Item 4: Proxy Config No-TUN -->
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header">
+                        <div class="faq-header-content">
+                            <span class="faq-badge faq-badge-info" data-lang-key="faq_err_proxy_badge">PROXY CONFIG • NO-TUN</span>
+                            <h3 class="faq-title-text" data-lang-key="faq_err_proxy_q">How do I fix "dial tcp 127.0.0.1:10808: connect: connection refused" without TUN mode?</h3>
+                        </div>
+                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-accordion-body" data-lang-key="faq_err_proxy_a" data-lang-html="true">
+                        This occurs when your proxy client (v2ray, Xray, Clash, NekoBox) runs on a different port. Click <strong>[ 🩺 Doctor ]</strong> or run <code>antigravity-cleaner doctor</code>. The engine automatically detects your active port (10808, 2080, 7890) and launches Antigravity with dedicated process-level proxy routing (leaving your system internet direct and fast).
+                    </div>
+                </div>
+
+                <!-- Item 5: Failed to fetch -->
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header">
+                        <div class="faq-header-content">
+                            <span class="faq-badge faq-badge-warning" data-lang-key="faq_err_fetch_badge">AUTH STATE • FAILED TO FETCH</span>
+                            <h3 class="faq-title-text" data-lang-key="faq_err_fetch_q">How to fix "There was an unexpected issue setting up your account. Failed to fetch"?</h3>
+                        </div>
+                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-accordion-body" data-lang-key="faq_err_fetch_a" data-lang-html="true">
+                        This error stems from corrupted DIPS database entries and orphaned WebSocket records. Running <code>antigravity-cleaner clean</code> flushes these 16 corrupted artifacts instantly without losing your project files or settings.
+                    </div>
+                </div>
+
+                <!-- Item 6: Security & Privacy -->
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header">
+                        <div class="faq-header-content">
+                            <span class="faq-badge faq-badge-success" data-lang-key="faq_err_safety_badge">SECURITY &amp; PRIVACY</span>
+                            <h3 class="faq-title-text" data-lang-key="faq_err_safety_q">Will using Antigravity Cleaner log me out of my Google account or risk my code?</h3>
+                        </div>
+                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-accordion-body" data-lang-key="faq_err_safety_a" data-lang-html="true">
+                        No! Antigravity Cleaner features guaranteed Session Preservation: <code>Cookies</code>, <code>Preferences</code>, <code>app_storage.json</code>, and workspaces are strictly excluded from deletion. The tool is 100% offline, contains zero telemetry, and is open-source under GNU GPL v3.0.
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="troubleshooting.html" class="btn btn-secondary" style="padding: 12px 28px; font-size: 0.95rem;">
+                    <i class="fas fa-stethoscope"></i> <span data-lang-key="home_faq_view_all">Explore Complete 10-Error Troubleshooting Center &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="section"
         style="background: linear-gradient(135deg, rgba(250, 35, 59, 0.1) 0%, rgba(0, 0, 0, 0) 100%); padding: 100px 0;">
@@ -935,7 +1049,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script src="script.js?v=5.3.1-pro"></script>
     <script>
         // Initialize stats
         fetchStats();

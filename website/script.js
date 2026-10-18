@@ -6,6 +6,28 @@
 // Language Content
 const translations = {
     "en": {
+        "home_faq_badge": "⚡ ERROR RESOLUTION & KNOWLEDGE BASE",
+        "home_faq_title": "Frequently Asked Questions & Error Solutions",
+        "home_faq_subtitle": "Direct, verified solutions for Error 403, 429 quota exhaustion, broken pipes, and proxy connections.",
+        "home_faq_view_all": "Explore Complete 10-Error Troubleshooting Center →",
+        "faq_err_403_badge": "ERROR 403 • REGION LOCK",
+        "faq_err_403_q": "How do I fix \"Your current account is not eligible for Antigravity\" / Error 403 Forbidden?",
+        "faq_err_403_a": "Google DeepMind and Google Cloud enforce geographic restrictions in countries like Iran, Russia, China, and Syria. Antigravity Cleaner solves this in 2 steps: 1) Click <strong>[ ① ⚡ Auto-Fix ]</strong> (or run <code>antigravity-cleaner patch all</code>) to neutralize local gatekeeper functions in <code>main.js</code>, <code>agy</code> CLI, and extensions. 2) Click <strong>[ ② 🚀 Launch IDE ]</strong> to inject an isolated loopback proxy without requiring root TUN mode.",
+        "faq_err_429_badge": "ERROR 429 • QUOTA EXHAUSTED",
+        "faq_err_429_q": "How to resolve Error 429 \"Resource has been exhausted / Too Many Requests\"?",
+        "faq_err_429_a": "Autonomous agent tool calls and search queries desynchronize local token buckets in <code>Cache</code> and <code>DawnWebGPUCache</code>, triggering false 429 limits. Click <strong>[ 🧹 Reset 429 ]</strong> in the Cleaner GUI or execute <code>antigravity-cleaner clean</code>. It flushes corrupted quota artifacts in 0.002s while 100% preserving your Google login session, cookies, and chat history.",
+        "faq_err_stream_badge": "STREAM DROP • WRITE EIO",
+        "faq_err_stream_q": "Why does Antigravity show \"Agent terminated due to error\" or \"Network issue connecting to server\"?",
+        "faq_err_stream_a": "During extended thinking loops, silent HTTP/2 SSE connections are abruptly dropped by ISP Middlebox firewalls (sending TCP RST packets). Antigravity Cleaner injects a <strong>15-second TCP KeepAlive heartbeat</strong> and enables the Zero-Log ASAR Shield to eliminate <code>write EIO</code> broken pipe exceptions.",
+        "faq_err_proxy_badge": "PROXY CONFIG • NO-TUN",
+        "faq_err_proxy_q": "How do I fix \"dial tcp 127.0.0.1:10808: connect: connection refused\" without TUN mode?",
+        "faq_err_proxy_a": "This occurs when your proxy client (v2ray, Xray, Clash, NekoBox) runs on a different port. Click <strong>[ 🩺 Doctor ]</strong> or run <code>antigravity-cleaner doctor</code>. The engine automatically detects your active port (10808, 2080, 7890) and launches Antigravity with dedicated process-level proxy routing (leaving your system internet direct and fast).",
+        "faq_err_fetch_badge": "AUTH STATE • FAILED TO FETCH",
+        "faq_err_fetch_q": "How to fix \"There was an unexpected issue setting up your account. Failed to fetch\"?",
+        "faq_err_fetch_a": "This error stems from corrupted DIPS database entries and orphaned WebSocket records. Running <code>antigravity-cleaner clean</code> flushes these 16 corrupted artifacts instantly without losing your project files or settings.",
+        "faq_err_safety_badge": "SECURITY & PRIVACY",
+        "faq_err_safety_q": "Will using Antigravity Cleaner log me out of my Google account or risk my code?",
+        "faq_err_safety_a": "No! Antigravity Cleaner features guaranteed Session Preservation: <code>Cookies</code>, <code>Preferences</code>, <code>app_storage.json</code>, and workspaces are strictly excluded from deletion. The tool is 100% offline, contains zero telemetry, and is open-source under GNU GPL v3.0.",
         "home": "Home",
         "features": "Features",
         "download": "Download",
@@ -180,6 +202,28 @@ const translations = {
         "tb_err10_sol_title": "Instant Fix:"
     },
     "fa": {
+        "home_faq_badge": "⚡ راهنمای رفع خطاها و پرسش‌های متداول",
+        "home_faq_title": "عیب‌یابی سریع و سوالات متداول خطاهای Antigravity",
+        "home_faq_subtitle": "راهکارهای قطعی و تست‌شده برای خطای ۴۰۳ (تحریم)، خطای ۴۲۹ (سهمیه کاذب)، قطعی استریم و تنظیم پروکسی.",
+        "home_faq_view_all": "مشاهده مرکز جامع عیب‌یابی ۱۰ خطای متداول ←",
+        "faq_err_403_badge": "خطای ۴۰۳ • قفل منطقه‌ای و تحریم",
+        "faq_err_403_q": "چگونه خطای «Your current account is not eligible» یا ۴۰۳ Forbidden را حل کنم؟",
+        "faq_err_403_a": "گوگل ادیتور Antigravity را در مناطقی مانند ایران، روسیه و چین تحریم کرده است. آنتی‌گرویتی کلینر در ۲ مرحله این مشکل را حل می‌کند: ۱) کلیک روی <strong>[ ① ⚡ Auto-Fix ]</strong> (یا اجرای <code>antigravity-cleaner patch all</code>) جهت خنثی‌سازی کدهای مسدودکننده در <code>main.js</code>، CLI و اکستنشن‌ها. ۲) کلیک روی <strong>[ ② 🚀 Launch IDE ]</strong> برای اتصال ایزوله به پروکسی لوکال بدون نیاز به حالت سنگین TUN.",
+        "faq_err_429_badge": "خطای ۴۲۹ • اتمام سهمیه کاذب",
+        "faq_err_429_q": "چگونه خطای ۴۲۹ «Resource has been exhausted / Too Many Requests» را برطرف کنم؟",
+        "faq_err_429_a": "فراخوانی‌های متعدد توابع توسط هوش مصنوعی کش محلی توکن‌ها را با سرورهای گوگل ناهماهنگ می‌کند. با کلیک روی <strong>[ 🧹 Reset 429 ]</strong> یا اجرای <code>antigravity-cleaner clean</code>، ۱۶ فایل کش معیوب در ۰.۰۰۲ ثانیه پاکسازی می‌شوند در حالی که نشست کاربری گوگل، کوکی‌ها و تاریخچه چت‌ها ۱۰۰٪ دست‌نخورده باقی می‌مانند.",
+        "faq_err_stream_badge": "قطعی استریم • خطای WRITE EIO",
+        "faq_err_stream_q": "چرا پیام «Agent terminated due to error» یا «Network issue connecting to server» رخ می‌دهد؟",
+        "faq_err_stream_a": "هنگام پردازش‌های طولانی هوش مصنوعی، فایروال‌های میانی (Middlebox) به دلیل ساکت بودن اتصال HTTP/2 پکت ریست (TCP RST) می‌فرستند. کلینر یک سیگنال زنده <strong>TCP KeepAlive هر ۱۵ ثانیه</strong> تزریق کرده و با شیلد Zero-Log خطاهای Broken Pipe و write EIO را متوقف می‌کند.",
+        "faq_err_proxy_badge": "تنظیمات پروکسی • بدون TUN",
+        "faq_err_proxy_q": "چگونه خطای «dial tcp 127.0.0.1:10808: connection refused» را حل کنم؟",
+        "faq_err_proxy_a": "این خطا زمانی رخ می‌دهد که کلاینت پروکسی شما (Xray، Clash، NekoBox و...) روی پورت متفاوتی باشد. با کلیک روی <strong>[ 🩺 Doctor ]</strong> یا اجرای <code>antigravity-cleaner doctor</code>، پورت‌های فعال سیستم خودکار شناسایی شده و لانچر ادیتور را با پورت صحیح ست می‌کند (بدون درگیر شدن کل سیستم‌عامل با TUN).",
+        "faq_err_fetch_badge": "خطای احراز هویت • FAILED TO FETCH",
+        "faq_err_fetch_q": "چگونه خطای «There was an unexpected issue setting up your account. Failed to fetch» را حل کنم؟",
+        "faq_err_fetch_a": "این خطا ناشی از رکوردهای خراب دیتابیس DIPS و کش‌های وب‌سوکت معلق است. اجرای دستور <code>antigravity-cleaner clean</code> فوراً این فایل‌های موقت معیوب را پاکسازی کرده و مشکل را حل می‌کند.",
+        "faq_err_safety_badge": "امنیت و حفظ حریم خصوصی",
+        "faq_err_safety_q": "آیا استفاده از این ابزار باعث خروج از اکانت گوگل یا حذف پروژه‌ها و کدها می‌شود؟",
+        "faq_err_safety_a": "خیر، به هیچ وجه! آنتی‌گرویتی کلینر مجهز به معماری Session Preservation است: فایل‌های <code>Cookies</code>، <code>Preferences</code>، <code>app_storage.json</code> و پروژه‌ها هرگز دستکاری نمی‌شوند. ابزار کاملاً آفلاین، بدون ردگیری و تحت مجوز معتبر GNU GPL v3.0 است.",
         "home": "خانه",
         "features": "ویژگی‌ها",
         "download": "دانلود",
@@ -354,6 +398,28 @@ const translations = {
         "tb_err10_sol_title": "رفع فوری:"
     },
     "ru": {
+        "home_faq_badge": "⚡ БАЗА ЗНАНИЙ И РЕШЕНИЕ ОШИБОК",
+        "home_faq_title": "Часто задаваемые вопросы и устранение ошибок",
+        "home_faq_subtitle": "Прямые проверенные решения для ошибки 403, исчерпания квоты 429, обрывов потока и настройки прокси.",
+        "home_faq_view_all": "Открыть полный центр устранения 10 ошибок →",
+        "faq_err_403_badge": "ОШИБКА 403 • РЕГИОНАЛЬНАЯ БЛОКИРОВКА",
+        "faq_err_403_q": "Как исправить ошибку «Your current account is not eligible» / Error 403 Forbidden?",
+        "faq_err_403_a": "Google блокирует доступ из РФ. Antigravity Cleaner решает это в 2 шага: 1) Нажмите <strong>[ ① ⚡ Auto-Fix ]</strong> (или выполните <code>antigravity-cleaner patch all</code>) для патча проверок в <code>main.js</code>, <code>agy</code> и расширении. 2) Нажмите <strong>[ ② 🚀 Launch IDE ]</strong> для прямого запуска через локальный прокси без системного TUN.",
+        "faq_err_429_badge": "ОШИБКА 429 • ИСЧЕРПАНИЕ ЛИМИТА",
+        "faq_err_429_q": "Как устранить ошибку 429 «Resource has been exhausted / Too Many Requests»?",
+        "faq_err_429_a": "Сбросьте поврежденные кэши квот с помощью кнопки <strong>[ 🧹 Reset 429 ]</strong> или команды <code>antigravity-cleaner clean</code>. Сессия Google, куки и история чатов сохраняются на 100%.",
+        "faq_err_stream_badge": "ОБРЫВ ПОТОКА • WRITE EIO",
+        "faq_err_stream_q": "Почему появляется «Agent terminated due to error» или «Network issue connecting to server»?",
+        "faq_err_stream_a": "Сетевые экраны провайдеров сбрасывают неактивные HTTP/2 соединения. Клинер активирует <strong>TCP KeepAlive каждые 15 сек</strong> и отключает шумные логи через Zero-Log Shield.",
+        "faq_err_proxy_badge": "НАСТРОЙКА ПРОКСИ • NO-TUN",
+        "faq_err_proxy_q": "Как исправить «dial tcp 127.0.0.1:10808: connection refused»?",
+        "faq_err_proxy_a": "Запустите <code>antigravity-cleaner doctor</code>. Утилита автоматически определит активный порт вашего прокси (10808, 2080, 7890) и настроит процесс.",
+        "faq_err_fetch_badge": "ОШИБКА АВТОРИЗАЦИИ • FAILED TO FETCH",
+        "faq_err_fetch_q": "Как исправить «Failed to fetch» при настройке аккаунта?",
+        "faq_err_fetch_a": "Выполните <code>antigravity-cleaner clean</code> для сброса поврежденной базы DIPS и кэша WebSocket без потери проектов.",
+        "faq_err_safety_badge": "БЕЗОПАСНОСТЬ И КОНФИДЕНЦИАЛЬНОСТЬ",
+        "faq_err_safety_q": "Безопасно ли использовать утилиту? Сбросится ли аккаунт?",
+        "faq_err_safety_a": "Абсолютно безопасно. Технология Session Preservation гарантирует сохранение Cookies, Preferences и файлов проектов. Полностью оффлайн и открытый исходный код.",
         "home": "Главная",
         "features": "Функции",
         "download": "Скачать",
@@ -433,6 +499,28 @@ const translations = {
         "tb_err10_sol_title": "Мгновенное решение:"
     },
     "zh": {
+        "home_faq_badge": "⚡ 错误排查与知识库",
+        "home_faq_title": "常见问题与错误解决方案",
+        "home_faq_subtitle": "针对 Error 403 区域锁定、429 配额假死、长流中断及无 TUN 代理的权威指南。",
+        "home_faq_view_all": "查看完整 10 大错误排查中心 →",
+        "faq_err_403_badge": "错误 403 • 区域封锁",
+        "faq_err_403_q": "如何解决“Your current account is not eligible for Antigravity” / 403 区域限制？",
+        "faq_err_403_a": "点击 <strong>[ ① ⚡ Auto-Fix ]</strong>（或运行 <code>antigravity-cleaner patch all</code>）解除前端 JS 和核心二进制代码中的地域锁；随后使用 <strong>[ ② 🚀 Launch IDE ]</strong> 启动免 TUN 代理管道。",
+        "faq_err_429_badge": "错误 429 • 配额异常",
+        "faq_err_429_q": "如何解决 429 Too Many Requests 错误且不丢失数据？",
+        "faq_err_429_a": "在客户端点击 <strong>[ 🧹 Reset 429 ]</strong> 或运行 <code>antigravity-cleaner clean</code>，秒级清理损坏的令牌配额缓存，100% 完整保留您的登录状态、Cookie 及项目历史。",
+        "faq_err_stream_badge": "流中断 • WRITE EIO",
+        "faq_err_stream_q": "为什么会提示“Agent terminated due to error”或网络连接异常？",
+        "faq_err_stream_a": "长时间思考导致空闲连接被防火墙掐断。Cleaner 注入 <strong>15秒 TCP KeepAlive 心跳</strong>，结合 Zero-Log 屏蔽彻底杜绝断流。",
+        "faq_err_proxy_badge": "代理配置 • 免 TUN",
+        "faq_err_proxy_q": "如何修复 10808 端口连接被拒绝？",
+        "faq_err_proxy_a": "运行 <code>antigravity-cleaner doctor</code> 自动探测活跃代理端口（10808/2080/7890）并自动适配。",
+        "faq_err_fetch_badge": "状态损坏 • FAILED TO FETCH",
+        "faq_err_fetch_q": "如何解决“Setting up account. Failed to fetch”错误？",
+        "faq_err_fetch_a": "运行 <code>antigravity-cleaner clean</code> 清除受损的 DIPS 数据库和无效 WebSocket 缓存。",
+        "faq_err_safety_badge": "安全与隐私保证",
+        "faq_err_safety_q": "使用该工具是否安全？会丢失登录状态吗？",
+        "faq_err_safety_a": "100% 安全离线运行，具备 Session Preservation 保护技术，绝不删除个人 Cookie 与代码文件。",
         "home": "首页",
         "features": "功能",
         "download": "下载",
@@ -512,6 +600,28 @@ const translations = {
         "tb_err10_sol_title": "即时修复方案："
     },
     "tr": {
+        "home_faq_badge": "⚡ HATA ÇÖZÜMÜ VE SSS",
+        "home_faq_title": "Sıkça Sorulan Sorular ve Hata Çözümleri",
+        "home_faq_subtitle": "Hata 403 bölge kilidi, 429 kota aşımı ve proxy kopmaları için anında çözümler.",
+        "home_faq_view_all": "10 Hatalı Kapsamlı Sorun Giderme Merkezini Keşfedin →",
+        "faq_err_403_badge": "HATA 403 • BÖLGE KİLİDİ",
+        "faq_err_403_q": "Error 403 Forbidden ve bölge kilidi nasıl düzeltilir?",
+        "faq_err_403_a": "Retro Arayüzde <strong>[ ① ⚡ Auto-Fix ]</strong> butonuna tıklayın ve ardından <strong>[ ② 🚀 Launch IDE ]</strong> ile TUN modu olmadan başlatın.",
+        "faq_err_429_badge": "HATA 429 • KOTA AŞIMI",
+        "faq_err_429_q": "Veri kaybetmeden Error 429 nasıl temizlenir?",
+        "faq_err_429_a": "<strong>[ 🧹 Reset 429 ]</strong> butonuna tıklayarak geçici kota önbelleğini temizleyin. Google oturumunuz ve sohbetleriniz korunur.",
+        "faq_err_stream_badge": "BAĞLANTI KOPMASI • WRITE EIO",
+        "faq_err_stream_q": "\"Agent terminated due to error\" sorunu nasıl önlenir?",
+        "faq_err_stream_a": "Antigravity Cleaner, <strong>15 saniyelik TCP KeepAlive</strong> sinyali enjekte ederek akışın kesilmesini önler.",
+        "faq_err_proxy_badge": "PROXY • NO-TUN MODU",
+        "faq_err_proxy_q": "\"dial tcp 127.0.0.1:10808: connection refused\" hatası nasıl çözülür?",
+        "faq_err_proxy_a": "<code>antigravity-cleaner doctor</code> komutunu çalıştırarak aktif proxy portlarınızı otomatik eşitleyin.",
+        "faq_err_fetch_badge": "HESAP HATASI • FAILED TO FETCH",
+        "faq_err_fetch_q": "\"Failed to fetch\" hatası nasıl düzeltilir?",
+        "faq_err_fetch_a": "<code>antigravity-cleaner clean</code> çalıştırarak bozuk DIPS veritabanı kayıtlarını anında sıfırlayın.",
+        "faq_err_safety_badge": "GÜVENLİK VE GİZLİLİK",
+        "faq_err_safety_q": "Kullanımı güvenli midir?",
+        "faq_err_safety_a": "Evet, %100 açık kaynaklı ve yerel çalışır. Şahsi kodlarınıza ve şifrelerinize asla müdahale etmez.",
         "offline_privacy": "Çevrimdışı ve Gizli",
         "troubleshooting": "Sorun Giderme",
         "tb_hero_badge": "RESMİ SORUN GİDERME BİLGİ BANKASI",
@@ -588,6 +698,28 @@ const translations = {
         "tb_err10_sol_title": "Anında Düzeltme:"
     },
     "es": {
+        "home_faq_badge": "⚡ BASE DE CONOCIMIENTO Y RESOLUCIÓN DE ERRORES",
+        "home_faq_title": "Preguntas Frecuentes y Soluciones de Errores",
+        "home_faq_subtitle": "Soluciones verificadas para Error 403 bloqueo regional, 429 cuota y proxy sin modo TUN.",
+        "home_faq_view_all": "Explorar el Centro Completo de 10 Errores →",
+        "faq_err_403_badge": "ERROR 403 • BLOQUEO REGIONAL",
+        "faq_err_403_q": "¿Cómo solucionar el Error 403 Forbidden / Bloqueo Regional?",
+        "faq_err_403_a": "Haga clic en <strong>[ ① ⚡ Auto-Fix ]</strong> (o ejecute <code>antigravity-cleaner patch all</code>) y luego inicie con <strong>[ ② 🚀 Launch IDE ]</strong> usando proxy local sin modo TUN.",
+        "faq_err_429_badge": "ERROR 429 • CUOTA AGOTADA",
+        "faq_err_429_q": "¿Cómo resolver el Error 429 sin perder conversaciones?",
+        "faq_err_429_a": "Haga clic en <strong>[ 🧹 Reset 429 ]</strong> en la GUI. Limpia los cachés de cuota corruptos preservando al 100% sus cookies y sesiones.",
+        "faq_err_stream_badge": "CAÍDA DE FLUJO • WRITE EIO",
+        "faq_err_stream_q": "¿Por qué aparece \"Agent terminated due to error\"?",
+        "faq_err_stream_a": "Cleaner inyecta un latido <strong>TCP KeepAlive de 15 segundos</strong> que evita que los cortafuegos cierren la conexión HTTP/2.",
+        "faq_err_proxy_badge": "CONFIGURACIÓN PROXY • SIN TUN",
+        "faq_err_proxy_q": "¿Cómo reparar el error de conexión rechazada en 10808?",
+        "faq_err_proxy_a": "Ejecute <code>antigravity-cleaner doctor</code> para detectar automáticamente los puertos activos de v2ray o Clash.",
+        "faq_err_fetch_badge": "ESTADO • FAILED TO FETCH",
+        "faq_err_fetch_q": "¿Cómo solucionar \"Failed to fetch\" al configurar la cuenta?",
+        "faq_err_fetch_a": "Ejecute <code>antigravity-cleaner clean</code> para purgar los registros DIPS dañados al instante.",
+        "faq_err_safety_badge": "SEGURIDAD Y PRIVACIDAD",
+        "faq_err_safety_q": "¿Es seguro usar Antigravity Cleaner?",
+        "faq_err_safety_a": "Sí, 100% de código abierto, funciona completamente sin conexión y preserva sus archivos y sesiones.",
         "offline_privacy": "100% Desconectado y Privado",
         "troubleshooting": "Solución de problemas",
         "tb_hero_badge": "BASE DE CONOCIMIENTOS OFICIAL PARA SOLUCIÓN DE PROBLEMAS",
@@ -664,6 +796,28 @@ const translations = {
         "tb_err10_sol_title": "Solución Instantánea:"
     },
     "ar": {
+        "home_faq_badge": "⚡ قاعدة المعرفة وحلول الأخطاء",
+        "home_faq_title": "الأسئلة الشائعة وحلول أخطاء Antigravity",
+        "home_faq_subtitle": "حلول مؤكدة لخطأ 403 الحظر الإقليمي، 429 استنزاف الحصة، وانقطاع البث بدون وضع TUN.",
+        "home_faq_view_all": "استكشف مركز معالجة الأخطاء العشرة الكامل ←",
+        "faq_err_403_badge": "خطأ 403 • قفل المنطقة والحظر",
+        "faq_err_403_q": "كيف أحل خطأ \"Your current account is not eligible\" أو 403 Forbidden؟",
+        "faq_err_403_a": "انقر على <strong>[ ① ⚡ Auto-Fix ]</strong> لتعطيل فحوصات الحظر الإقليمي في كود البرنامج، ثم انقر <strong>[ ② 🚀 Launch IDE ]</strong> للتشغيل عبر البروكسي المحلي دون الحاجة لوضع TUN.",
+        "faq_err_429_badge": "خطأ 429 • استنفاد الحصة الزائف",
+        "faq_err_429_q": "كيفية حل خطأ 429 Too Many Requests دون فقدان البيانات؟",
+        "faq_err_429_a": "انقر على زر <strong>[ 🧹 Reset 429 ]</strong> في الواجهة لتفريغ ذاكرة الحصة المؤقتة مع الحفاظ التام 100% على تسجيل دخول Google وسجل المحادثات.",
+        "faq_err_stream_badge": "انقطاع التدفق • خطأ WRITE EIO",
+        "faq_err_stream_q": "لماذا يظهر خطأ \"Agent terminated due to error\"؟",
+        "faq_err_stream_a": "يقوم البرنامج بحقن نبضات <strong>TCP KeepAlive كل 15 ثانية</strong> لمنع جدران الحماية من قطع الاتصال وتفعيل درع Zero-Log.",
+        "faq_err_proxy_badge": "إعدادات البروكسي • بدون TUN",
+        "faq_err_proxy_q": "كيف أحل خطأ رفض الاتصال بالمنفذ 10808؟",
+        "faq_err_proxy_a": "شغّل أمر <code>antigravity-cleaner doctor</code> ليكتشف منافذ البروكسي النشطة تلقائياً ويضبط إعدادات المحرر.",
+        "faq_err_fetch_badge": "حالة الحساب • FAILED TO FETCH",
+        "faq_err_fetch_q": "كيف أحل مشكلة \"Failed to fetch\" أثناء إعداد الحساب؟",
+        "faq_err_fetch_a": "نفّذ أمر <code>antigravity-cleaner clean</code> لمسح سجلات قاعدة بيانات DIPS التالفة فوراً.",
+        "faq_err_safety_badge": "الأمان والخصوصية",
+        "faq_err_safety_q": "هل استخدام البرنامج آمن؟ هل أفقد حسابي أو مشاريعي؟",
+        "faq_err_safety_a": "آمن تماماً بنسبة 100%، يعمل دون اتصال بالإنترنت ومزود بتقنية Session Preservation لحماية كوكيز وملفات المشاريع.",
         "offline_privacy": "أوفلاين وخاص بالكامل",
         "troubleshooting": "حل المشكلات",
         "tb_hero_badge": "قاعدة المعرفة الرسمية لحل المشكلات",
@@ -755,26 +909,16 @@ const langMap = {
 // THEME MANAGEMENT SYSTEM
 // ========================================
 
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (document.body) {
+        document.body.setAttribute('data-theme', theme);
+    }
+}
+
 function initThemeToggle() {
     const savedTheme = localStorage.getItem('ag_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if (document.body) {
-        document.body.setAttribute('data-theme', savedTheme);
-    }
-
-    const toggleBtn = document.getElementById('themeToggleBtn');
-    if (toggleBtn) {
-        toggleBtn.onclick = function (e) {
-            e.preventDefault();
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-            const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', nextTheme);
-            if (document.body) {
-                document.body.setAttribute('data-theme', nextTheme);
-            }
-            localStorage.setItem('ag_theme', nextTheme);
-        };
-    }
+    applyTheme(savedTheme);
 }
 
 // ========================================
@@ -798,13 +942,18 @@ function updateCustomDropdownUI(lang) {
 }
 
 function setLanguage(lang) {
-    document.documentElement.lang = lang;
+    const validLang = translations[lang] ? lang : 'en';
+    document.documentElement.lang = validLang;
     const rtlLanguages = ['fa', 'ar', 'ur'];
-    document.documentElement.dir = rtlLanguages.includes(lang) ? 'rtl' : 'ltr';
+    const isRtl = rtlLanguages.includes(validLang);
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    if (document.body) {
+        document.body.dir = isRtl ? 'rtl' : 'ltr';
+    }
 
     document.querySelectorAll('[data-lang-key]').forEach(elem => {
         const key = elem.getAttribute('data-lang-key');
-        const text = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]);
+        const text = (translations[validLang] && translations[validLang][key]) || (translations['en'] && translations['en'][key]);
         if (text !== undefined && text !== null) {
             if (elem.getAttribute('data-lang-html') === 'true' || text.includes('<') || text.includes('&')) {
                 elem.innerHTML = text;
@@ -814,39 +963,69 @@ function setLanguage(lang) {
         }
     });
 
-    localStorage.setItem('ag_lang', lang);
+    localStorage.setItem('ag_lang', validLang);
     const langSelect = document.getElementById('langSelect');
-    if (langSelect) langSelect.value = lang;
-    updateCustomDropdownUI(lang);
+    if (langSelect) langSelect.value = validLang;
+    updateCustomDropdownUI(validLang);
 }
 
-function initCustomLangDropdown() {
-    const customLangSelector = document.getElementById('customLangSelector');
-    const langDropdownBtn = document.getElementById('langDropdownBtn');
-
-    if (langDropdownBtn && customLangSelector) {
-        langDropdownBtn.onclick = function (e) {
-            e.stopPropagation();
-            customLangSelector.classList.toggle('open');
-        };
-
-        customLangSelector.querySelectorAll('.lang-option').forEach(opt => {
-            opt.onclick = function (e) {
-                e.stopPropagation();
-                const lang = opt.getAttribute('data-lang');
-                setLanguage(lang);
-                customLangSelector.classList.remove('open');
-            };
-        });
-    }
-}
-
+// Unified Document-Level Event Delegation
 document.addEventListener('click', (e) => {
+    // 1. Theme toggle button (handles SVG child elements cleanly)
+    const themeBtn = e.target.closest('#themeToggleBtn');
+    if (themeBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(nextTheme);
+        localStorage.setItem('ag_theme', nextTheme);
+        return;
+    }
+
+    // 2. Custom language dropdown toggle button
+    const langBtn = e.target.closest('#langDropdownBtn');
     const customLangSelector = document.getElementById('customLangSelector');
+    if (langBtn && customLangSelector) {
+        e.preventDefault();
+        e.stopPropagation();
+        customLangSelector.classList.toggle('open');
+        return;
+    }
+
+    // 3. Language option selected
+    const langOpt = e.target.closest('.lang-option');
+    if (langOpt) {
+        e.preventDefault();
+        e.stopPropagation();
+        const lang = langOpt.getAttribute('data-lang');
+        if (lang) {
+            setLanguage(lang);
+        }
+        if (customLangSelector) customLangSelector.classList.remove('open');
+        return;
+    }
+
+    // 4. FAQ Accordion Click
+    const faqHeader = e.target.closest('.faq-accordion-header');
+    if (faqHeader) {
+        const item = faqHeader.closest('.faq-accordion-item');
+        if (item) {
+            item.classList.toggle('active');
+        }
+        return;
+    }
+
+    // 5. Close dropdown if clicking outside
     if (customLangSelector && !customLangSelector.contains(e.target)) {
         customLangSelector.classList.remove('open');
     }
 });
+
+function initCustomLangDropdown() {
+    const savedLang = localStorage.getItem('ag_lang') || 'en';
+    updateCustomDropdownUI(savedLang);
+}
 
 // Native hidden select fallback
 const langSelect = document.getElementById('langSelect');
@@ -949,14 +1128,24 @@ window.fetchStats = async function () {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+// ========================================
+// APPLICATION BOOTSTRAPPER
+// ========================================
+
+function bootAntigravity() {
     initThemeToggle();
     initCustomLangDropdown();
     const savedLang = localStorage.getItem('ag_lang') || 'en';
     setLanguage(savedLang);
     if (document.getElementById('star-count')) fetchStats();
     initHybridNavigation();
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootAntigravity);
+} else {
+    bootAntigravity();
+}
 
 // ========================================
 // HYBRID NAVIGATION SYSTEM (PJAX)
@@ -1017,8 +1206,7 @@ async function loadPage(url, pushState = true) {
 
         // Maintain user theme across page loads
         const currentTheme = localStorage.getItem('ag_theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        document.body.setAttribute('data-theme', currentTheme);
+        applyTheme(currentTheme);
 
         if (newTitle) {
             document.title = newTitle.textContent;
@@ -1104,3 +1292,4 @@ function updateActiveNavLink() {
         }
     });
 }
+
