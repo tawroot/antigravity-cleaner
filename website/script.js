@@ -1016,7 +1016,27 @@ document.addEventListener('click', (e) => {
         return;
     }
 
-    // 5. Close dropdown if clicking outside
+    // 5. Terminal Tabs Delegation
+    const tabBtn = e.target.closest('.t-tab');
+    if (tabBtn) {
+        e.preventDefault();
+        if (tabBtn.id === 'tabWin' || tabBtn.textContent.toLowerCase().includes('win')) {
+            window.toggleTerminal('win');
+        } else {
+            window.toggleTerminal('unix');
+        }
+        return;
+    }
+
+    // 6. Terminal Copy Delegation
+    const termCopyBtn = e.target.closest('.t-copy-btn');
+    if (termCopyBtn) {
+        e.preventDefault();
+        window.copyTerminal();
+        return;
+    }
+
+    // 7. Close dropdown if clicking outside
     if (customLangSelector && !customLangSelector.contains(e.target)) {
         customLangSelector.classList.remove('open');
     }
@@ -1082,6 +1102,48 @@ window.copyCode = function (btn, text) {
             btn.style.color = '';
         }, 2000);
     }).catch(err => console.error('Failed to copy:', err));
+};
+
+// Terminal Tab Switcher
+window.toggleTerminal = function (os) {
+    document.querySelectorAll('.t-tab').forEach(tab => tab.classList.remove('active'));
+    const winTabs = document.querySelectorAll('#tabWin, [data-tab="win"]');
+    const unixTabs = document.querySelectorAll('#tabUnix, [data-tab="unix"]');
+    const winCmds = document.querySelectorAll('#cmdWin, .cmd-win');
+    const unixCmds = document.querySelectorAll('#cmdUnix, .cmd-unix');
+
+    if (os === 'win') {
+        winTabs.forEach(t => t.classList.add('active'));
+        winCmds.forEach(c => c.style.display = 'block');
+        unixCmds.forEach(c => c.style.display = 'none');
+    } else {
+        unixTabs.forEach(t => t.classList.add('active'));
+        unixCmds.forEach(c => c.style.display = 'block');
+        winCmds.forEach(c => c.style.display = 'none');
+    }
+};
+
+// Terminal Copy Helper
+window.copyTerminal = function () {
+    const cmdWin = document.getElementById('cmdWin');
+    const isWin = cmdWin && cmdWin.style.display !== 'none';
+    const textToCopy = isWin
+        ? 'iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex'
+        : 'curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash';
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            document.querySelectorAll('.t-copy-btn').forEach(btn => {
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check" style="color: #00ff9f;"></i>';
+                btn.style.color = '#00ff9f';
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.style.color = '';
+                }, 2000);
+            });
+        });
+    }
 };
 
 // GitHub Stats Fetcher

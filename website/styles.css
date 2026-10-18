@@ -474,27 +474,28 @@ nav {
 }
 
 .faq-accordion-item {
-  background: rgba(18, 24, 38, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  background: rgba(18, 24, 38, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
   overflow: hidden;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 }
 
 .faq-accordion-item:hover {
-  border-color: rgba(0, 240, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-color: rgba(0, 240, 255, 0.35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
 }
 
 .faq-accordion-item.active {
-  background: rgba(18, 24, 38, 0.95);
-  border-color: rgba(0, 240, 255, 0.5);
-  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.12);
+  background: rgba(18, 24, 38, 0.98);
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.12);
 }
 
 .faq-accordion-header {
-  padding: 18px 24px;
+  padding: 20px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -506,19 +507,30 @@ nav {
 .faq-header-content {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   flex: 1;
-  flex-wrap: wrap;
+}
+
+/* In RTL: Question text begins on the right, and the error badge is placed on the left */
+[dir="rtl"] .faq-header-content {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
 .faq-badge {
   display: inline-block;
-  padding: 3px 9px;
+  padding: 4px 10px;
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   white-space: nowrap;
+}
+
+[dir="rtl"] .faq-badge {
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: normal;
 }
 
 .faq-badge-danger {
@@ -546,11 +558,17 @@ nav {
 }
 
 .faq-title-text {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
   flex: 1;
+}
+
+[dir="rtl"] .faq-title-text {
+  text-align: right;
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
 }
 
 .faq-icon-chevron {
@@ -571,8 +589,14 @@ nav {
   transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
   padding: 0 24px;
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.75;
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+[dir="rtl"] .faq-accordion-body {
+  text-align: right;
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.85;
 }
 
 .faq-accordion-item.active .faq-accordion-body {
@@ -969,6 +993,8 @@ nav {
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   border: 1px solid var(--border-color);
+  direction: ltr !important;
+  text-align: left !important;
 }
 
 .terminal-header {
@@ -978,6 +1004,8 @@ nav {
   align-items: center;
   border-bottom: 1px solid var(--border-color);
   gap: 16px;
+  direction: ltr !important;
+  text-align: left !important;
 }
 
 .terminal-buttons {
@@ -1005,30 +1033,34 @@ nav {
 
 .terminal-tabs {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  direction: ltr !important;
 }
 
 .t-tab {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-tertiary);
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 0.875rem;
-  padding: 6px 12px;
+  padding: 6px 14px;
   font-weight: 500;
   transition: all 0.2s;
   border-radius: var(--radius-sm);
 }
 
 .t-tab:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .t-tab.active {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(250, 35, 59, 0.4);
 }
 
 .terminal-content {
@@ -1041,13 +1073,16 @@ nav {
   font-family: var(--font-mono);
   font-size: 0.9375rem;
   line-height: 1.6;
+  direction: ltr !important;
+  text-align: left !important;
 }
 
 .t-prompt {
   color: var(--primary);
-  margin-inline-end: 12px;
+  margin-right: 12px;
   user-select: none;
   font-weight: 600;
+  direction: ltr !important;
 }
 
 .t-cmd {
@@ -1055,12 +1090,16 @@ nav {
   word-break: break-all;
   font-weight: 400;
   letter-spacing: -0.01em;
+  direction: ltr !important;
+  text-align: left !important;
+  font-family: var(--font-mono) !important;
 }
 
 .t-copy-btn {
   position: absolute;
-  inset-inline-end: 24px;
+  right: 24px;
   top: 24px;
+  left: auto;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
@@ -1942,30 +1981,106 @@ footer {
   background: #0f172a;
 }
 
+/* Comprehensive Light Theme Cards & Containers */
 [data-theme="light"] .trust-sticker-card,
 [data-theme="light"] .download-os-card,
 [data-theme="light"] .feature-card,
+[data-theme="light"] .feature-item,
+[data-theme="light"] .glass-card,
 [data-theme="light"] .faq-item,
 [data-theme="light"] .pricing-card,
 [data-theme="light"] .blog-card,
 [data-theme="light"] .community-card,
 [data-theme="light"] .how-step,
-[data-theme="light"] .error-card {
+[data-theme="light"] .error-card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .telemetry-board,
+[data-theme="light"] .board-card {
   background: #ffffff !important;
-  border-color: rgba(15, 23, 42, 0.09) !important;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05) !important;
+  color: #0f172a !important;
 }
 
 [data-theme="light"] .trust-sticker-card:hover,
 [data-theme="light"] .download-os-card:hover,
 [data-theme="light"] .feature-card:hover,
-[data-theme="light"] .error-card:hover {
+[data-theme="light"] .feature-item:hover,
+[data-theme="light"] .glass-card:hover,
+[data-theme="light"] .error-card:hover,
+[data-theme="light"] .stat-card:hover,
+[data-theme="light"] .board-card:hover {
   background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.09) !important;
 }
 
+/* Global Telemetry Matrix in Light Theme */
+[data-theme="light"] .telemetry-board {
+  background: #f8fafc !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .board-top-bar {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="light"] .board-top-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .board-telemetry-tags span {
+  background: #f1f5f9 !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .board-telemetry-tags strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .board-card-body {
+  background: #f8fafc !important;
+  border: 1px solid rgba(15, 23, 42, 0.07) !important;
+}
+
+[data-theme="light"] .board-region-primary {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .board-region-secondary {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .board-native-quote {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .board-native-sub {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .board-tech-pill {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .board-lang-pill {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border: 1px solid rgba(2, 132, 199, 0.25) !important;
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .stat-value {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .stat-label {
+  color: #64748b !important;
+}
+
 [data-theme="light"] .sticker-title {
-  color: #0f172a;
+  color: #0f172a !important;
 }
 
 [data-theme="light"] .sticker-svg-icon,
@@ -1985,53 +2100,93 @@ footer {
 }
 
 [data-theme="light"] .freedom-banner {
-  background: linear-gradient(135deg, rgba(241, 245, 249, 0.95), rgba(255, 255, 255, 0.98)) !important;
-  border-color: rgba(15, 23, 42, 0.08) !important;
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.98), rgba(255, 255, 255, 0.98)) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05) !important;
 }
 
 [data-theme="light"] .terminal-window {
-  background: #0f172a;
-  border-color: rgba(15, 23, 42, 0.15);
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  background: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12) !important;
 }
 
 [data-theme="light"] .terminal-header {
-  background: #1e293b;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: #1e293b !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .t-tab {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+}
+
+[data-theme="light"] .t-tab.active {
+  background: var(--primary) !important;
+  color: #ffffff !important;
 }
 
 [data-theme="light"] .faq-question {
-  color: #0f172a;
+  color: #0f172a !important;
 }
 
 [data-theme="light"] .faq-answer {
-  color: #475569;
+  color: #475569 !important;
 }
 
+/* FAQ Accordion in Light Theme */
 [data-theme="light"] .faq-accordion-item {
   background: #ffffff !important;
-  border-color: rgba(15, 23, 42, 0.08) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04) !important;
 }
 
 [data-theme="light"] .faq-accordion-item:hover {
-  border-color: rgba(99, 102, 241, 0.35) !important;
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.08) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.09) !important;
 }
 
 [data-theme="light"] .faq-accordion-item.active {
   background: #ffffff !important;
   border-color: #6366f1 !important;
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.12) !important;
 }
 
 [data-theme="light"] .faq-title-text {
   color: #0f172a !important;
 }
 
+[data-theme="light"] .faq-accordion-body {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .faq-badge-danger {
+  background: rgba(255, 0, 85, 0.08) !important;
+  border-color: rgba(255, 0, 85, 0.4) !important;
+  color: #e11d48 !important;
+}
+
+[data-theme="light"] .faq-badge-warning {
+  background: rgba(217, 119, 6, 0.08) !important;
+  border-color: rgba(217, 119, 6, 0.4) !important;
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .faq-badge-info {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.4) !important;
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .faq-badge-success {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  color: #059669 !important;
+}
+
 [data-theme="light"] .solution-list {
-  color: var(--text-secondary);
+  color: #334155 !important;
 }
 
 [data-theme="light"] footer {
@@ -2077,18 +2232,34 @@ footer {
   color: #b45309 !important;
 }
 
+/* Comprehensive Table Styling for Light Theme */
+[data-theme="light"] table,
 [data-theme="light"] .tech-table {
   background: #ffffff !important;
-  border-color: rgba(15, 23, 42, 0.1) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
 }
 
+[data-theme="light"] table th,
 [data-theme="light"] .tech-table th {
   background: #f8fafc !important;
   color: #0f172a !important;
-  border-bottom-color: rgba(15, 23, 42, 0.1) !important;
+  border-bottom: 2px solid rgba(15, 23, 42, 0.1) !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
 }
 
+[data-theme="light"] table td,
 [data-theme="light"] .tech-table td {
   color: #334155 !important;
-  border-bottom-color: rgba(15, 23, 42, 0.06) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06) !important;
+  background: #ffffff !important;
+  padding: 12px 16px !important;
+}
+
+[data-theme="light"] table tr:hover td,
+[data-theme="light"] .tech-table tr:hover td {
+  background: #f1f5f9 !important;
 }
