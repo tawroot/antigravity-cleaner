@@ -1,5 +1,6 @@
-:root {
-  /* Apple Music Color Palette */
+:root,
+[data-theme="dark"] {
+  /* Apple / Cyberpunk Dark Palette (Default) */
   --bg-main: #000000;
   --bg-secondary: #0a0a0a;
   --bg-elevated: #1a1a1a;
@@ -28,6 +29,51 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.24);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.32);
+
+  --header-bg: rgba(0, 0, 0, 0.8);
+  --card-bg: rgba(18, 24, 38, 0.85);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --code-bg: #0b0f19;
+  --code-color: #00f0ff;
+  --code-border: rgba(255, 255, 255, 0.08);
+  --menu-bg: #0d111a;
+  --menu-border: rgba(0, 240, 255, 0.25);
+  --menu-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 240, 255, 0.08);
+}
+
+/* ==========================================================================
+   Modular Light Theme - Apple / Stripe Aesthetic
+   ========================================================================== */
+[data-theme="light"] {
+  --bg-main: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --primary: #fa233b;
+  --primary-hover: #e01b32;
+  --accent: #e11d48;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+
+  --border-color: rgba(15, 23, 42, 0.08);
+  --divider: rgba(15, 23, 42, 0.08);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.08), 0 4px 10px rgba(15, 23, 42, 0.04);
+
+  --header-bg: rgba(248, 250, 252, 0.88);
+  --card-bg: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.09);
+  --code-bg: #f1f5f9;
+  --code-color: #0284c7;
+  --code-border: rgba(15, 23, 42, 0.1);
+  --menu-bg: #ffffff;
+  --menu-border: rgba(15, 23, 42, 0.12);
+  --menu-shadow: 0 18px 40px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
 /* RTL Font Override */
@@ -372,6 +418,47 @@ nav {
 
 .lang-option.active .opt-check {
   display: block;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.theme-icon-sun {
+  display: block;
+  color: #ffaa00;
+  filter: drop-shadow(0 0 4px rgba(255, 170, 0, 0.4));
+  transition: transform 0.25s ease;
+}
+
+.theme-icon-moon {
+  display: none;
+  color: #6366f1;
+  filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.4));
+  transition: transform 0.25s ease;
 }
 
 /* Mobile Menu Toggle */
@@ -1590,4 +1677,278 @@ footer {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Modular Light Theme Component Rules (Apple / Stripe Aesthetic)
+   ========================================================================== */
+[data-theme="light"] body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] header.scrolled {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .nav-links a {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a.active {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .gradient-text {
+  background: linear-gradient(135deg, #0f172a 10%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .hero::before {
+  background: radial-gradient(circle, rgba(250, 35, 59, 0.08) 0%, transparent 70%);
+}
+
+[data-theme="light"] .glass {
+  background: var(--bg-glass);
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .glass-card {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .glass-card:hover {
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .stat-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .stat-card:hover {
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .stat-label {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .btn-secondary {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.14);
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.25);
+  color: #0f172a;
+}
+
+[data-theme="light"] .custom-lang-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+}
+
+[data-theme="light"] .custom-lang-btn:hover,
+[data-theme="light"] .custom-lang-selector.open .custom-lang-btn {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.22);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .curr-name {
+  color: #0f172a;
+}
+
+[data-theme="light"] .curr-arrow {
+  color: #64748b;
+}
+
+[data-theme="light"] .custom-lang-menu {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .lang-option {
+  color: #334155;
+}
+
+[data-theme="light"] .lang-option:hover {
+  background: rgba(15, 23, 42, 0.05);
+  color: #0f172a;
+}
+
+[data-theme="light"] .lang-option.active {
+  background: rgba(250, 35, 59, 0.1);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+[data-theme="light"] .theme-toggle-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.22);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .theme-icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon-moon {
+  display: block;
+}
+
+[data-theme="light"] .menu-toggle span {
+  background: #0f172a;
+}
+
+[data-theme="light"] .trust-sticker-card,
+[data-theme="light"] .download-os-card,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .faq-item,
+[data-theme="light"] .pricing-card,
+[data-theme="light"] .blog-card,
+[data-theme="light"] .community-card,
+[data-theme="light"] .how-step,
+[data-theme="light"] .error-card {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .trust-sticker-card:hover,
+[data-theme="light"] .download-os-card:hover,
+[data-theme="light"] .feature-card:hover,
+[data-theme="light"] .error-card:hover {
+  background: #ffffff !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.09) !important;
+}
+
+[data-theme="light"] .sticker-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .sticker-svg-icon,
+[data-theme="light"] .os-svg-icon {
+  background: rgba(15, 23, 42, 0.03);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .code-box {
+  background: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  color: #0369a1 !important;
+}
+
+[data-theme="light"] .code-box code {
+  color: #0369a1 !important;
+}
+
+[data-theme="light"] .freedom-banner {
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.95), rgba(255, 255, 255, 0.98)) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .terminal-window {
+  background: #0f172a;
+  border-color: rgba(15, 23, 42, 0.15);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .terminal-header {
+  background: #1e293b;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .faq-question {
+  color: #0f172a;
+}
+
+[data-theme="light"] .faq-answer {
+  color: #475569;
+}
+
+[data-theme="light"] .solution-list {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .bg-animation {
+  opacity: 0.12;
+}
+
+[data-theme="light"] .article-container h1,
+[data-theme="light"] .article-body h2 {
+  color: #0f172a !important;
+  border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="light"] .article-body h3 {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .article-body {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .star-banner {
+  background: linear-gradient(135deg, rgba(255, 170, 0, 0.08), rgba(255, 221, 0, 0.04)) !important;
+  border-color: rgba(255, 170, 0, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .star-banner strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .code-snippet {
+  background: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #0369a1 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .code-snippet span.cmd {
+  color: #b45309 !important;
+}
+
+[data-theme="light"] .tech-table {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] .tech-table th {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-bottom-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] .tech-table td {
+  color: #334155 !important;
+  border-bottom-color: rgba(15, 23, 42, 0.06) !important;
 }

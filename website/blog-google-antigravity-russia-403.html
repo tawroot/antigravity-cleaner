@@ -198,6 +198,7 @@
             margin: 25px 0;
         }
     </style>
+    <script>(function(){const t=localStorage.getItem('ag_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 
 <body>
@@ -206,7 +207,10 @@
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">Antigravity <span>Cleaner</span></a>
+                <a href="index.html" class="logo">
+                    <img src="logo.png" alt="Antigravity Cleaner Logo" style="width: 36px; height: 36px; border-radius: 8px; margin-inline-end: 8px;">
+                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
+                </a>
                 <ul class="nav-links">
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="features.html">Возможности</a></li>
@@ -217,6 +221,12 @@
                     <li><a href="blog.html" class="active">Блог</a></li>
                     <li><a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
                 </ul>
+                <div class="nav-controls">
+                    <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
+                        <i class="fas fa-sun theme-icon-sun"></i>
+                        <i class="fas fa-moon theme-icon-moon"></i>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
