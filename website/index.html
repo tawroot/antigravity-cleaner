@@ -144,6 +144,10 @@
                                 <div><span class="opt-flag">🇸🇦</span> العربية</div>
                                 <i class="fas fa-check opt-check"></i>
                             </button>
+                            <button type="button" class="lang-option" data-lang="ur" role="menuitem">
+                                <div><span class="opt-flag">🇵🇰</span> اردو</div>
+                                <i class="fas fa-check opt-check"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -172,6 +176,7 @@
                         <option value="ru">RU</option>
                         <option value="zh">ZH</option>
                         <option value="ar">AR</option>
+                        <option value="ur">UR</option>
                         <option value="es">ES</option>
                         <option value="tr">TR</option>
                     </select>
@@ -190,41 +195,152 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h1 class="gradient-text fade-in" style="animation-delay: 0.1s;" data-lang-key="hero_title">Fix Antigravity
-                IDE Instantly</h1>
-            <p class="fade-in" style="animation-delay: 0.2s;" data-lang-key="hero_subtitle">
-                The most powerful maintenance tool for installation errors, network interference, and region
-                restrictions.
-            </p>
-            <div class="hero-btns fade-in" style="animation-delay: 0.3s;">
-                <a href="#download" class="btn btn-primary">
-                    <i class="fas fa-arrow-down"></i> <span data-lang-key="get_started">Get Started</span>
-                </a>
-                <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary" target="_blank">
-                    <i class="fab fa-github"></i> <span data-lang-key="view_source">Star on GitHub</span> <span class="badge-status github-stars-val" style="margin-inline-start: 6px; font-size: 0.75rem;">⭐ Star</span>
-                </a>
-            </div>
+    <!-- Hero Showcase Section (Hero-Centric Design + Interactive Workbench) -->
+    <section class="hero-showcase-section">
+        <div class="container">
+            <div class="hero-grid-2col">
+                <!-- Left: Value Prop, Typography, CTAs & Live Stats -->
+                <div class="hero-text-col fade-in">
+                    <div class="hero-pill-badge">
+                        <span class="pulse-dot"></span>
+                        <span data-lang-key="hero_badge_pill">v5.3.1 Standalone Engine • Zero-TUN Native Proxy</span>
+                    </div>
+                    <h1 class="gradient-text hero-main-title" data-lang-key="hero_title">
+                        Fix Antigravity IDE Instantly
+                    </h1>
+                    <p class="hero-main-subtitle" data-lang-key="hero_subtitle">
+                        The most powerful maintenance tool for installation errors, network interference, and region restrictions.
+                    </p>
+                    <div class="hero-actions-row">
+                        <a href="#download" class="btn btn-primary btn-hero-lg">
+                            <i class="fas fa-download"></i> <span data-lang-key="get_started">Get Started</span>
+                        </a>
+                        <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary btn-hero-lg" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> <span data-lang-key="view_source">Star on GitHub</span>
+                            <span class="hero-star-pill github-stars-val">⭐ Star</span>
+                        </a>
+                    </div>
+                    <div class="hero-trust-row">
+                        <span class="hero-trust-item"><i class="fas fa-shield-alt"></i> 100% Offline &amp; Private</span>
+                        <span class="hero-trust-item"><i class="fas fa-user-check"></i> Preserves Google Login</span>
+                        <span class="hero-trust-item"><i class="fas fa-bolt"></i> Zero TUN Overhead</span>
+                    </div>
 
-            <!-- Bento Stats -->
-            <div class="stats fade-in" style="animation-delay: 0.5s;">
-                <div class="stat-card">
-                    <span class="stat-value" id="star-count">...</span>
-                    <span class="stat-label" data-lang-key="stars">GitHub Stars</span>
+                    <!-- Hero Quick Stats Ribbon -->
+                    <div class="hero-stats-ribbon">
+                        <div class="hero-stat-box">
+                            <span class="val" id="star-count">...</span>
+                            <span class="lbl" data-lang-key="stars">GitHub Stars</span>
+                        </div>
+                        <div class="hero-stat-box">
+                            <span class="val" id="fork-count">...</span>
+                            <span class="lbl" data-lang-key="forks">Forks</span>
+                        </div>
+                        <div class="hero-stat-box">
+                            <span class="val" id="download-count">+4.9K</span>
+                            <span class="lbl" data-lang-key="downloads">Downloads</span>
+                        </div>
+                        <div class="hero-stat-box">
+                            <span class="val" style="color: #22c55e;">100%</span>
+                            <span class="lbl" data-lang-key="offline_privacy">Offline &amp; Private</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-value" id="fork-count">...</span>
-                    <span class="stat-label" data-lang-key="forks">Forks</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value" id="download-count">+4.9K</span>
-                    <span class="stat-label" data-lang-key="downloads">Downloads</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">100%</span>
-                    <span class="stat-label" data-lang-key="offline_privacy">Offline &amp; Private</span>
+
+                <!-- Right: Graphic Developer Workbench Terminal -->
+                <div class="hero-interactive-workbench fade-in" style="animation-delay: 0.2s;">
+                    <div class="workbench-terminal">
+                        <div class="workbench-header">
+                            <div class="workbench-dots">
+                                <span class="w-red"></span>
+                                <span class="w-yellow"></span>
+                                <span class="w-green"></span>
+                            </div>
+                            <div class="workbench-title-bar">
+                                <i class="fas fa-terminal" style="color: #00f0ff;"></i>
+                                <span>antigravity-cleaner // workbench v5.3.1</span>
+                            </div>
+                            <span class="workbench-live-badge"><i class="fas fa-circle" style="font-size: 6px; vertical-align: middle;"></i> LIVE</span>
+                        </div>
+
+                        <!-- Mode Switcher Tabs -->
+                        <div class="workbench-tabs">
+                            <button type="button" class="workbench-tab-btn active" data-tab="install">
+                                <i class="fas fa-bolt"></i> Quick Install
+                            </button>
+                            <button type="button" class="workbench-tab-btn" data-tab="doctor">
+                                <i class="fas fa-stethoscope"></i> Doctor Scan
+                            </button>
+                            <button type="button" class="workbench-tab-btn" data-tab="launch">
+                                <i class="fas fa-rocket"></i> No-TUN Launch
+                            </button>
+                        </div>
+
+                        <!-- Workbench Body Panes -->
+                        <div class="workbench-body">
+                            <!-- Pane 1: Install -->
+                            <div class="workbench-pane active" id="wb-pane-install">
+                                <div class="wb-os-switch">
+                                    <button type="button" class="wb-os-btn active" data-os="win">PowerShell (Win)</button>
+                                    <button type="button" class="wb-os-btn" data-os="unix">Bash (Linux / macOS)</button>
+                                </div>
+                                <div class="wb-code-block" id="wb-cmd-win">
+                                    <code>iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code>
+                                    <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i> Copy</button>
+                                </div>
+                                <div class="wb-code-block" id="wb-cmd-unix" style="display: none;">
+                                    <code>curl -sL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code>
+                                    <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i> Copy</button>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-ok">[✓]</span> <span>Auto-detects OS architecture (x64, arm64, Apple Silicon)</span>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-ok">[✓]</span> <span>Zero external dependencies, instant binary deployment</span>
+                                </div>
+                                <div class="wb-log-line" style="margin-top: 10px;">
+                                    <span class="tag-info">$</span> <span>ready to repair<span class="wb-cursor"></span></span>
+                                </div>
+                            </div>
+
+                            <!-- Pane 2: Doctor Scan -->
+                            <div class="workbench-pane" id="wb-pane-doctor">
+                                <div class="wb-code-block">
+                                    <code>antigravity-cleaner doctor</code>
+                                    <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i> Copy</button>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-info">[i]</span> <span>Probing local loopback ports (10808, 2080, 7890)...</span>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-ok">[✓]</span> <span>Active SOCKS5 detected on 127.0.0.1:10808 (Latency: 1.2ms)</span>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-warn">[!]</span> <span>16 corrupted rate-limit &amp; DawnWebGPU cache items found</span>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-ok">[✓]</span> <span>Client-side 403 gatekeepers ready to neutralize in 0.002s</span>
+                                </div>
+                            </div>
+
+                            <!-- Pane 3: No-TUN Launch -->
+                            <div class="workbench-pane" id="wb-pane-launch">
+                                <div class="wb-code-block">
+                                    <code>antigravity-cleaner launch --socks5=127.0.0.1:10808 --keepalive=15s</code>
+                                    <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i> Copy</button>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-ok">[✓]</span> <span>Spawning Antigravity IDE process with isolated loopback proxy</span>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-ok">[✓]</span> <span>Host OS network remains 100% DIRECT (Zero TUN slowdown)</span>
+                                </div>
+                                <div class="wb-log-line">
+                                    <span class="tag-info">[i]</span> <span>15s TCP KeepAlive heartbeat injected (Middlebox shield active)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -839,137 +955,304 @@
         </div>
     </section>
 
-    <!-- Features Preview Section -->
-    <section class="section" style="background: var(--bg-secondary); padding: 80px 0;">
+    <!-- Apple-Style Bento Grid Showcase (ui-ux-pro-max pattern) -->
+    <section class="bento-section" id="features">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-lang-key="why_choose">Why Choose Antigravity Cleaner?</h2>
-                <p class="section-subtitle" data-lang-key="why_choose_desc">Powerful features designed for developers
-                    and power users.</p>
+            <div class="section-header" style="text-align: center; margin-bottom: 30px;">
+                <span class="freedom-pill" style="margin: 0 auto 14px;">
+                    <i class="fas fa-cubes"></i> MODULAR SYSTEM ARCHITECTURE
+                </span>
+                <h2 class="section-title" data-lang-key="bento_title">
+                    Engineered for Developer Freedom &amp; Peak Performance
+                </h2>
+                <p class="section-subtitle" style="margin: 0 auto; max-width: 720px;" data-lang-key="bento_subtitle">
+                    Modular self-healing architecture: zero TUN latency, surgical cache resets, and instant region bypass.
+                </p>
             </div>
 
-            <div class="grid-3">
-                <div class="glass-card feature-item">
-                    <div class="feature-icon">🚀</div>
-                    <h3 data-lang-key="feat_clean_title">One-Click Clean</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="feat_clean_desc">Remove corrupted
-                        installation files, cache, and registry keys instantly.</p>
+            <div class="bento-grid">
+                <!-- Card 1 (Span 8): Zero-TUN Process Proxy Injection -->
+                <div class="bento-card bento-span-8">
+                    <div class="bento-card-header">
+                        <div class="bento-card-icon cyan"><i class="fas fa-network-wired"></i></div>
+                        <span class="bento-badge">ZERO-TUN ROUTING</span>
+                    </div>
+                    <h3>Smart Process-Level Proxy Launcher</h3>
+                    <p>
+                        Eliminate heavy virtual network adapters (TUN mode) that slow down your system. Antigravity Cleaner launches the IDE with targeted loopback socket injection (SOCKS5/HTTP), preserving high-speed direct internet for your browser and tools.
+                    </p>
+                    <div class="bento-proxy-visual">
+                        <div class="bento-node">
+                            <div class="bento-node-icon"><i class="fas fa-code"></i></div>
+                            <span>Antigravity IDE</span>
+                        </div>
+                        <div class="bento-flow-arrow">
+                            <span class="pulse-line"></span>
+                            <span>SOCKS5 Direct</span>
+                        </div>
+                        <div class="bento-node">
+                            <div class="bento-node-icon" style="color: #22c55e;"><i class="fas fa-shield-alt"></i></div>
+                            <span>Active Proxy Port</span>
+                        </div>
+                        <div class="bento-flow-arrow">
+                            <span class="pulse-line"></span>
+                            <span>&lt; 2ms Latency</span>
+                        </div>
+                        <div class="bento-node">
+                            <div class="bento-node-icon" style="color: #ff3b4f;"><i class="fas fa-globe"></i></div>
+                            <span>Google Edge AI</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="glass-card feature-item">
-                    <div class="feature-icon">🌍</div>
-                    <h3 data-lang-key="feat_region_title">Region Bypass</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="feat_region_desc">Automatically fix
-                        region-locked errors for constrained networks.</p>
+                <!-- Card 2 (Span 4): Instant 429 Quota Reset -->
+                <div class="bento-card bento-span-4">
+                    <div class="bento-card-header">
+                        <div class="bento-card-icon green"><i class="fas fa-broom"></i></div>
+                        <span class="bento-badge">0.002s SPEED</span>
+                    </div>
+                    <div class="bento-stat-num">0.002s</div>
+                    <h3>Surgical 429 &amp; Cache Flush</h3>
+                    <p>
+                        Autonomous agent tool loops freeze local token counters. Flush corrupted <code>DawnWebGPUCache</code> and DIPS artifacts instantly while keeping your Google cookies, sessions, and chat workspaces 100% intact.
+                    </p>
+                    <div class="bento-chips-row">
+                        <span class="bento-chip"><i class="fas fa-check" style="color: #22c55e;"></i> Cookies Intact</span>
+                        <span class="bento-chip"><i class="fas fa-check" style="color: #22c55e;"></i> Login Saved</span>
+                    </div>
                 </div>
 
-                <div class="glass-card feature-item">
-                    <div class="feature-icon">🛡️</div>
-                    <h3 data-lang-key="feat_session_title">Session Preservation</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="feat_session_desc">Clean the system without
-                        losing your browser cookies or login sessions.</p>
+                <!-- Card 3 (Span 5): 15-Second TCP KeepAlive Heartbeat -->
+                <div class="bento-card bento-span-5">
+                    <div class="bento-card-header">
+                        <div class="bento-card-icon amber"><i class="fas fa-heartbeat"></i></div>
+                        <span class="bento-badge">ANTI-DPI SHIELD</span>
+                    </div>
+                    <div class="bento-stat-num" style="color: #eab308;">15s Pulse</div>
+                    <h3>Middlebox &amp; DPI Stream Shield</h3>
+                    <p>
+                        During deep AI reasoning loops, silent HTTP/2 connections are terminated by ISP Middlebox firewalls. Antigravity Cleaner injects continuous KeepAlive packets to eradicate <code>write EIO</code> broken pipe disconnects.
+                    </p>
+                    <div class="bento-chips-row">
+                        <span class="bento-chip">Zero TCP RST Drops</span>
+                        <span class="bento-chip">Continuous SSE Stream</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 (Span 7): Universal 403 Sanction & Region Bypass -->
+                <div class="bento-card bento-span-7">
+                    <div class="bento-card-header">
+                        <div class="bento-card-icon"><i class="fas fa-globe-americas"></i></div>
+                        <span class="bento-badge">GLOBAL BYPASS</span>
+                    </div>
+                    <h3>Universal 403 &amp; Region Gate Patch</h3>
+                    <p>
+                        Neutralizes client-side eligibility gatekeepers across <code>main.js</code>, <code>agy</code> CLI, and extension bundles. Full native script and RTL support for developers in censored or restricted regions worldwide.
+                    </p>
+                    <div class="bento-chips-row">
+                        <span class="bento-chip">🇮🇷 Iran (فارسی)</span>
+                        <span class="bento-chip">🇷🇺 Russia (Русский)</span>
+                        <span class="bento-chip">🇨🇳 China (中文)</span>
+                        <span class="bento-chip">🇹🇷 Turkey (Türkçe)</span>
+                        <span class="bento-chip">🇸🇦 Arab (العربية)</span>
+                        <span class="bento-chip">🇵🇰 Pakistan (اردو)</span>
+                        <span class="bento-chip">🇨🇺 Cuba &amp; LATAM</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 (Span 4): 100% Offline & Zero Telemetry -->
+                <div class="bento-card bento-span-4">
+                    <div class="bento-card-header">
+                        <div class="bento-card-icon green"><i class="fas fa-user-shield"></i></div>
+                        <span class="bento-badge">PRIVACY FIRST</span>
+                    </div>
+                    <div class="bento-stat-num" style="color: #22c55e;">0 Bytes</div>
+                    <h3>Zero Telemetry Guarantee</h3>
+                    <p>
+                        No phone-home trackers, no analytics, no remote pings. 100% standalone binary built in Go with complete source code available on GitHub.
+                    </p>
+                    <div class="bento-chips-row">
+                        <span class="bento-chip"><i class="fab fa-github"></i> Apache-2.0</span>
+                        <span class="bento-chip"><i class="fas fa-lock"></i> Air-Gapped Safe</span>
+                    </div>
+                </div>
+
+                <!-- Card 6 (Span 8): Retro Desktop GUI & Chiptune Synthesizer -->
+                <div class="bento-card bento-span-8">
+                    <div class="bento-card-header">
+                        <div class="bento-card-icon cyan"><i class="fas fa-music"></i></div>
+                        <span class="bento-badge">RETRO GUI &amp; CHIPTUNE</span>
+                    </div>
+                    <h3>Retro KeyGen GUI with 8-Bit Chiptune Synthesizer</h3>
+                    <p>
+                        Prefer a visual interface over terminal commands? Launch the standalone Retro KeyGen GUI featuring classic demoscene visuals, 8-bit chiptune audio, and one-click diagnostic auto-repair buttons for instant recovery.
+                    </p>
+                    <div class="bento-chips-row">
+                        <span class="bento-chip"><i class="fas fa-play"></i> 8-Bit Chiptune Player</span>
+                        <span class="bento-chip"><i class="fas fa-magic"></i> 1-Click Auto-Fix</span>
+                        <span class="bento-chip"><i class="fas fa-desktop"></i> Cross-Platform GUI</span>
+                    </div>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 48px;">
-                <a href="features.html" class="btn btn-primary">
-                    <span data-lang-key="view_all_features">View All Features</span> <i class="fas fa-arrow-right"></i>
+            <div style="text-align: center; margin-top: 36px;">
+                <a href="features.html" class="btn btn-primary" style="padding: 12px 28px;">
+                    <span data-lang-key="view_all_features">View All Features &amp; Architecture Details</span> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- FAQ & Error Resolution Section -->
-    <section class="section" id="faq" style="padding: 90px 0 80px 0; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+    <!-- Interactive Visual Error Diagnostics & FAQ Hub -->
+    <section class="faq-diagnostic-hub" id="faq">
         <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                <span class="faq-badge faq-badge-info" style="margin-bottom: 12px; font-size: 0.8rem; padding: 5px 12px;" data-lang-key="home_faq_badge">⚡ ERROR RESOLUTION &amp; KNOWLEDGE BASE</span>
-                <h2 class="section-title" data-lang-key="home_faq_title">Frequently Asked Questions &amp; Error Solutions</h2>
-                <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;" data-lang-key="home_faq_subtitle">Direct, verified solutions for Error 403, 429 quota exhaustion, broken pipes, and proxy connections.</p>
+            <div class="section-header" style="text-align: center; margin-bottom: 36px;">
+                <span class="faq-badge faq-badge-info" style="margin-bottom: 12px; font-size: 0.8rem; padding: 5px 14px;" data-lang-key="home_faq_badge">
+                    ⚡ ERROR RESOLUTION &amp; KNOWLEDGE BASE
+                </span>
+                <h2 class="section-title" data-lang-key="home_faq_title">
+                    Frequently Asked Questions &amp; Error Solutions
+                </h2>
+                <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;" data-lang-key="home_faq_subtitle">
+                    Direct, verified solutions for Error 403, 429 quota exhaustion, broken pipes, and proxy connections.
+                </p>
             </div>
 
-            <div class="faq-accordion">
-                <!-- Item 1: Error 403 Region Lock -->
-                <div class="faq-accordion-item active">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-danger" data-lang-key="faq_err_403_badge">ERROR 403 • REGION LOCK</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_403_q">How do I fix "Your current account is not eligible for Antigravity" / Error 403 Forbidden?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+            <!-- Category Filter Navigation Pills -->
+            <div class="diag-filter-nav">
+                <button type="button" class="diag-filter-btn active" data-filter="all">All Solutions</button>
+                <button type="button" class="diag-filter-btn" data-filter="403">403 Region Lock</button>
+                <button type="button" class="diag-filter-btn" data-filter="429">429 Quota Reset</button>
+                <button type="button" class="diag-filter-btn" data-filter="stream">Stream Drops &amp; DPI</button>
+                <button type="button" class="diag-filter-btn" data-filter="proxy">Proxy &amp; No-TUN</button>
+                <button type="button" class="diag-filter-btn" data-filter="session">Session Safety</button>
+            </div>
+
+            <!-- Diagnostics Cards Grid -->
+            <div class="diag-grid">
+                <!-- Card 1: Error 403 -->
+                <div class="diag-card" data-category="403">
+                    <div class="diag-card-top">
+                        <span class="diag-badge-critical" data-lang-key="faq_err_403_badge">ERROR 403 • REGION LOCK</span>
+                        <span style="font-size: 0.75rem; color: var(--text-tertiary);"><i class="fas fa-bolt"></i> Instant Patch</span>
                     </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_403_a" data-lang-html="true">
+                    <h3 class="diag-title" data-lang-key="faq_err_403_q">
+                        How do I fix "Your current account is not eligible for Antigravity" / Error 403 Forbidden?
+                    </h3>
+                    <div class="diag-quote-box">
+                        "Your current account is not eligible for Antigravity, because it is not currently available in your location"
+                    </div>
+                    <p class="diag-desc" data-lang-key="faq_err_403_a" data-lang-html="true">
                         Google DeepMind and Google Cloud enforce geographic restrictions in countries like Iran, Russia, China, and Syria. Antigravity Cleaner solves this in 2 steps: 1) Click <strong>[ ① ⚡ Auto-Fix ]</strong> (or run <code>antigravity-cleaner patch all</code>) to neutralize local gatekeeper functions in <code>main.js</code>, <code>agy</code> CLI, and extensions. 2) Click <strong>[ ② 🚀 Launch IDE ]</strong> to inject an isolated loopback proxy without requiring root TUN mode.
+                    </p>
+                    <div class="diag-cmd-bar">
+                        <code>antigravity-cleaner patch all</code>
+                        <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i></button>
                     </div>
                 </div>
 
-                <!-- Item 2: Error 429 Quota Exhausted -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-warning" data-lang-key="faq_err_429_badge">ERROR 429 • QUOTA EXHAUSTED</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_429_q">How to resolve Error 429 "Resource has been exhausted / Too Many Requests"?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                <!-- Card 2: Error 429 -->
+                <div class="diag-card" data-category="429">
+                    <div class="diag-card-top">
+                        <span class="diag-badge-warn" data-lang-key="faq_err_429_badge">ERROR 429 • QUOTA EXHAUSTED</span>
+                        <span style="font-size: 0.75rem; color: var(--text-tertiary);"><i class="fas fa-clock"></i> 0.002s</span>
                     </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_429_a" data-lang-html="true">
+                    <h3 class="diag-title" data-lang-key="faq_err_429_q">
+                        How to resolve Error 429 "Resource has been exhausted / Too Many Requests"?
+                    </h3>
+                    <div class="diag-quote-box">
+                        "Resource has been exhausted (e.g. check quota) - Too Many Requests"
+                    </div>
+                    <p class="diag-desc" data-lang-key="faq_err_429_a" data-lang-html="true">
                         Autonomous agent tool calls and search queries desynchronize local token buckets in <code>Cache</code> and <code>DawnWebGPUCache</code>, triggering false 429 limits. Click <strong>[ 🧹 Reset 429 ]</strong> in the Cleaner GUI or execute <code>antigravity-cleaner clean</code>. It flushes corrupted quota artifacts in 0.002s while 100% preserving your Google login session, cookies, and chat history.
+                    </p>
+                    <div class="diag-cmd-bar">
+                        <code>antigravity-cleaner clean</code>
+                        <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i></button>
                     </div>
                 </div>
 
-                <!-- Item 3: Stream Dropouts & Broken Pipes -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-danger" data-lang-key="faq_err_stream_badge">STREAM DROP • WRITE EIO</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_stream_q">Why does Antigravity show "Agent terminated due to error" or "Network issue connecting to server"?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                <!-- Card 3: Stream Drops -->
+                <div class="diag-card" data-category="stream">
+                    <div class="diag-card-top">
+                        <span class="diag-badge-critical" data-lang-key="faq_err_stream_badge">STREAM DROP • WRITE EIO</span>
+                        <span style="font-size: 0.75rem; color: var(--text-tertiary);"><i class="fas fa-shield-alt"></i> 15s Heartbeat</span>
                     </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_stream_a" data-lang-html="true">
+                    <h3 class="diag-title" data-lang-key="faq_err_stream_q">
+                        Why does Antigravity show "Agent terminated due to error" or "Network issue connecting to server"?
+                    </h3>
+                    <div class="diag-quote-box">
+                        "Agent terminated due to error: write EIO / Network issue connecting to the server"
+                    </div>
+                    <p class="diag-desc" data-lang-key="faq_err_stream_a" data-lang-html="true">
                         During extended thinking loops, silent HTTP/2 SSE connections are abruptly dropped by ISP Middlebox firewalls (sending TCP RST packets). Antigravity Cleaner injects a <strong>15-second TCP KeepAlive heartbeat</strong> and enables the Zero-Log ASAR Shield to eliminate <code>write EIO</code> broken pipe exceptions.
+                    </p>
+                    <div class="diag-cmd-bar">
+                        <code>antigravity-cleaner launch --keepalive=15s</code>
+                        <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i></button>
                     </div>
                 </div>
 
-                <!-- Item 4: Proxy Config No-TUN -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-info" data-lang-key="faq_err_proxy_badge">PROXY CONFIG • NO-TUN</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_proxy_q">How do I fix "dial tcp 127.0.0.1:10808: connect: connection refused" without TUN mode?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                <!-- Card 4: Proxy Config No-TUN -->
+                <div class="diag-card" data-category="proxy">
+                    <div class="diag-card-top">
+                        <span class="diag-badge-info" data-lang-key="faq_err_proxy_badge">PROXY CONFIG • NO-TUN</span>
+                        <span style="font-size: 0.75rem; color: var(--text-tertiary);"><i class="fas fa-stethoscope"></i> Auto-Probe</span>
                     </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_proxy_a" data-lang-html="true">
+                    <h3 class="diag-title" data-lang-key="faq_err_proxy_q">
+                        How do I fix "dial tcp 127.0.0.1:10808: connect: connection refused" without TUN mode?
+                    </h3>
+                    <div class="diag-quote-box">
+                        "proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"
+                    </div>
+                    <p class="diag-desc" data-lang-key="faq_err_proxy_a" data-lang-html="true">
                         This occurs when your proxy client (v2ray, Xray, Clash, NekoBox) runs on a different port. Click <strong>[ 🩺 Doctor ]</strong> or run <code>antigravity-cleaner doctor</code>. The engine automatically detects your active port (10808, 2080, 7890) and launches Antigravity with dedicated process-level proxy routing (leaving your system internet direct and fast).
+                    </p>
+                    <div class="diag-cmd-bar">
+                        <code>antigravity-cleaner doctor</code>
+                        <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i></button>
                     </div>
                 </div>
 
-                <!-- Item 5: Failed to fetch -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-warning" data-lang-key="faq_err_fetch_badge">AUTH STATE • FAILED TO FETCH</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_fetch_q">How to fix "There was an unexpected issue setting up your account. Failed to fetch"?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                <!-- Card 5: Failed to fetch -->
+                <div class="diag-card" data-category="proxy">
+                    <div class="diag-card-top">
+                        <span class="diag-badge-warn" data-lang-key="faq_err_fetch_badge">AUTH STATE • FAILED TO FETCH</span>
+                        <span style="font-size: 0.75rem; color: var(--text-tertiary);"><i class="fas fa-sync"></i> 16 Artifacts</span>
                     </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_fetch_a" data-lang-html="true">
+                    <h3 class="diag-title" data-lang-key="faq_err_fetch_q">
+                        How to fix "There was an unexpected issue setting up your account. Failed to fetch"?
+                    </h3>
+                    <div class="diag-quote-box">
+                        "There was an unexpected issue setting up your account. Failed to fetch"
+                    </div>
+                    <p class="diag-desc" data-lang-key="faq_err_fetch_a" data-lang-html="true">
                         This error stems from corrupted DIPS database entries and orphaned WebSocket records. Running <code>antigravity-cleaner clean</code> flushes these 16 corrupted artifacts instantly without losing your project files or settings.
+                    </p>
+                    <div class="diag-cmd-bar">
+                        <code>antigravity-cleaner clean</code>
+                        <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i></button>
                     </div>
                 </div>
 
-                <!-- Item 6: Security & Privacy -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-success" data-lang-key="faq_err_safety_badge">SECURITY &amp; PRIVACY</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_safety_q">Will using Antigravity Cleaner log me out of my Google account or risk my code?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
+                <!-- Card 6: Security & Privacy -->
+                <div class="diag-card" data-category="session">
+                    <div class="diag-card-top">
+                        <span class="diag-badge-safe" data-lang-key="faq_err_safety_badge">SECURITY &amp; PRIVACY</span>
+                        <span style="font-size: 0.75rem; color: var(--text-tertiary);"><i class="fas fa-lock"></i> 100% Guaranteed</span>
                     </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_safety_a" data-lang-html="true">
+                    <h3 class="diag-title" data-lang-key="faq_err_safety_q">
+                        Will using Antigravity Cleaner log me out of my Google account or risk my code?
+                    </h3>
+                    <div class="diag-quote-box">
+                        "Session Preservation Guarantee: Cookies, Preferences &amp; Workspaces excluded"
+                    </div>
+                    <p class="diag-desc" data-lang-key="faq_err_safety_a" data-lang-html="true">
                         No! Antigravity Cleaner features guaranteed Session Preservation: <code>Cookies</code>, <code>Preferences</code>, <code>app_storage.json</code>, and workspaces are strictly excluded from deletion. The tool is 100% offline, contains zero telemetry, and is open-source under GNU GPL v3.0.
+                    </p>
+                    <div class="diag-cmd-bar">
+                        <code>antigravity-cleaner --dry-run</code>
+                        <button type="button" class="wb-copy-action" title="Copy Command"><i class="far fa-copy"></i></button>
                     </div>
                 </div>
             </div>
