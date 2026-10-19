@@ -78,12 +78,41 @@ func FindRunningAntigravityApp(logger LogFunc) string {
 	return ""
 }
 
+// isSelfOrCleanerProcess determines if a process is the cleaner itself or related tool
+func isSelfOrCleanerProcess(pid int, exePath string) bool {
+	if pid > 0 {
+		if pid == os.Getpid() || (os.Getppid() > 0 && pid == os.Getppid()) {
+			return true
+		}
+	}
+
+	if selfExe, err := os.Executable(); err == nil && selfExe != "" {
+		if exePath == selfExe || filepath.Base(exePath) == filepath.Base(selfExe) {
+			return true
+		}
+	}
+
+	base := strings.ToLower(filepath.Base(exePath))
+	base = strings.TrimSuffix(base, ".exe")
+
+	cleanerKeywords := []string{"cleaner", "patcher", "ag-cleaner", "gui"}
+	for _, kw := range cleanerKeywords {
+		if strings.Contains(base, kw) {
+			return true
+		}
+	}
+
+	return false
+}
+
 // scanLinuxProc inspects /proc for running processes matching target substring
 func scanLinuxProc(targetSubstr string) string {
 	entries, err := os.ReadDir("/proc")
 	if err != nil {
 		return ""
 	}
+
+	targetLow := strings.ToLower(targetSubstr)
 
 	for _, entry := range entries {
 		if !entry.IsDir() {
@@ -96,10 +125,16 @@ func scanLinuxProc(targetSubstr string) string {
 
 		exeLink := fmt.Sprintf("/proc/%d/exe", pid)
 		target, err := os.Readlink(exeLink)
-		if err == nil && strings.Contains(strings.ToLower(target), strings.ToLower(targetSubstr)) {
-			// Verify file exists
-			if fi, err := os.Stat(target); err == nil && !fi.IsDir() {
-				return target
+		if err == nil {
+			if isSelfOrCleanerProcess(pid, target) {
+				continue
+			}
+			base := strings.ToLower(filepath.Base(target))
+			if strings.Contains(base, targetLow) {
+				// Verify file exists
+				if fi, err := os.Stat(target); err == nil && !fi.IsDir() {
+					return target
+				}
 			}
 		}
 
@@ -109,7 +144,11 @@ func scanLinuxProc(targetSubstr string) string {
 			args := strings.Split(string(data), "\x00")
 			if len(args) > 0 {
 				arg0 := args[0]
-				if strings.Contains(strings.ToLower(arg0), strings.ToLower(targetSubstr)) {
+				if isSelfOrCleanerProcess(pid, arg0) {
+					continue
+				}
+				base := strings.ToLower(filepath.Base(arg0))
+				if strings.Contains(base, targetLow) {
 					if fi, err := os.Stat(arg0); err == nil && !fi.IsDir() {
 						return arg0
 					}
@@ -128,20 +167,31 @@ func scanUnixPs(targetSubstr string) string {
 		return ""
 	}
 
+	targetLow := strings.ToLower(targetSubstr)
 	scanner := bufio.NewScanner(bytes.NewReader(out))
 	for scanner.Scan() {
 		line := scanner.Text()
-		if strings.Contains(strings.ToLower(line), strings.ToLower(targetSubstr)) {
-			fields := strings.Fields(line)
-			if len(fields) >= 2 {
-				// Search fields for an existing executable path
-				for _, f := range fields[1:] {
-					if strings.Contains(strings.ToLower(f), strings.ToLower(targetSubstr)) {
-						clean := strings.Trim(f, "\"'")
-						if fi, err := os.Stat(clean); err == nil && !fi.IsDir() {
-							return clean
-						}
-					}
+		if !strings.Contains(strings.ToLower(line), targetLow) {
+			continue
+		}
+
+		fields := strings.Fields(line)
+		if len(fields) < 2 {
+			continue
+		}
+
+		pid, _ := strconv.Atoi(fields[0])
+
+		// Search fields for an existing executable path
+		for _, f := range fields[1:] {
+			clean := strings.Trim(f, "\"'")
+			if isSelfOrCleanerProcess(pid, clean) {
+				continue
+			}
+			base := strings.ToLower(filepath.Base(clean))
+			if strings.Contains(base, targetLow) {
+				if fi, err := os.Stat(clean); err == nil && !fi.IsDir() {
+					return clean
 				}
 			}
 		}
@@ -165,40 +215,224 @@ func scanWindowsProcess(targetName string) string {
 	return ""
 }
 
+// GetLanguageServerBinaryNames returns architecture-aware binary names across Linux, macOS, and Windows
+func GetLanguageServerBinaryNames() []string {
+	switch runtime.GOOS {
+	case "linux":
+		if runtime.GOARCH == "arm64" {
+			return []string{
+				"language_server_linux_arm64",
+				"language_server_linux_x64",
+				"language_server",
+			}
+		}
+		return []string{
+			"language_server_linux_x64",
+			"language_server_linux_arm64",
+			"language_server",
+		}
+	case "darwin":
+		if runtime.GOARCH == "arm64" {
+			return []string{
+				"language_server_macos_arm64",
+				"language_server_darwin_arm64",
+				"language_server_macos_x64",
+				"language_server_darwin_x64",
+				"language_server",
+			}
+		}
+		return []string{
+			"language_server_macos_x64",
+			"language_server_darwin_x64",
+			"language_server_macos_arm64",
+			"language_server_darwin_arm64",
+			"language_server",
+		}
+	case "windows":
+		if runtime.GOARCH == "arm64" {
+			return []string{
+				"language_server_windows_arm64.exe",
+				"language_server_windows_x64.exe",
+				"language_server.exe",
+				"language_server",
+			}
+		}
+		return []string{
+			"language_server_windows_x64.exe",
+			"language_server_windows_arm64.exe",
+			"language_server.exe",
+			"language_server",
+		}
+	default:
+		return []string{
+			"language_server_linux_x64",
+			"language_server_linux_arm64",
+			"language_server",
+		}
+	}
+}
+
+// getCandidateRoots extracts possible application root directories from an executable path
+func getCandidateRoots(exePath string) []string {
+	if realPath, err := filepath.EvalSymlinks(exePath); err == nil && realPath != "" {
+		exePath = realPath
+	}
+	dir := filepath.Dir(exePath)
+	roots := []string{dir}
+
+	baseDir := filepath.Base(dir)
+	if strings.EqualFold(baseDir, "bin") || strings.EqualFold(baseDir, "MacOS") {
+		parent := filepath.Dir(dir)
+		roots = append(roots, parent)
+		roots = append(roots, filepath.Dir(parent))
+	} else {
+		roots = append(roots, filepath.Dir(dir))
+	}
+	return roots
+}
+
+// probeRootsForLanguageServer probes candidate root directories for language server binaries
+func probeRootsForLanguageServer(roots []string) string {
+	subpaths := []string{
+		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "bin"),
+		filepath.Join("Contents", "Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("Contents", "Resources", "bin"),
+		filepath.Join("Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("Resources", "bin"),
+	}
+	binNames := GetLanguageServerBinaryNames()
+
+	for _, root := range roots {
+		if root == "" {
+			continue
+		}
+		for _, sub := range subpaths {
+			for _, binName := range binNames {
+				candidate := filepath.Join(root, sub, binName)
+				if fi, err := os.Stat(candidate); err == nil && !fi.IsDir() {
+					return candidate
+				}
+			}
+		}
+	}
+	return ""
+}
+
 // GetStandardLanguageServerCandidates returns all standard paths across Linux, Windows, macOS
 func GetStandardLanguageServerCandidates() []string {
 	home, _ := os.UserHomeDir()
 
-	return []string{
-		// Linux & User Applications directory (Discovered via REA on modern Linux)
-		filepath.Join(home, "Applications", "Antigravity", "resources", "bin", "language_server"),
-		filepath.Join(home, "Applications", "antigravity", "resources", "bin", "language_server"),
-		filepath.Join(home, "Applications", "Antigravity-x64", "resources", "bin", "language_server"),
-		"/opt/antigravity/resources/bin/language_server",
-		"/opt/Antigravity/resources/bin/language_server",
-		"/opt/antigravity-ide/resources/bin/language_server",
-		"/opt/Antigravity IDE/resources/bin/language_server",
-		"/usr/share/antigravity/resources/bin/language_server",
-		"/usr/share/antigravity-ide/resources/bin/language_server",
-		filepath.Join(home, ".local", "share", "antigravity", "resources", "bin", "language_server"),
-
-		// Legacy & home relative paths
-		filepath.Join(home, "antigravity", "resources", "bin", "language_server"),
-		filepath.Join(home, "antigravity", "resources", "bin", "language_server.exe"),
-
-		// Windows paths
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "resources", "bin", "language_server.exe"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity", "resources", "bin", "language_server.exe"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "bin", "language_server.exe"),
-		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity", "resources", "bin", "language_server.exe"),
-		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity", "resources", "bin", "language_server.exe"),
-
-		// macOS paths
-		"/Applications/Antigravity.app/Contents/Resources/bin/language_server",
-		"/Applications/Antigravity IDE.app/Contents/Resources/bin/language_server",
-		filepath.Join(home, "Applications", "Antigravity.app", "Contents", "Resources", "bin", "language_server"),
-		filepath.Join(home, "Applications", "Antigravity IDE.app", "Contents", "Resources", "bin", "language_server"),
+	var candidates []string
+	seen := make(map[string]bool)
+	addCandidate := func(p string) {
+		if p != "" && !seen[p] {
+			seen[p] = true
+			candidates = append(candidates, p)
+		}
 	}
+
+	linuxRoots := []string{
+		filepath.Join(home, "Applications", "Antigravity"),
+		filepath.Join(home, "Applications", "antigravity"),
+		filepath.Join(home, "Applications", "Antigravity-x64"),
+		"/usr/share/antigravity",
+		"/usr/share/antigravity-ide",
+		"/opt/antigravity",
+		"/opt/Antigravity",
+		"/opt/antigravity-ide",
+		"/opt/Antigravity IDE",
+		filepath.Join(home, ".local", "share", "antigravity"),
+		filepath.Join(home, "antigravity"),
+	}
+
+	linuxBins := []string{
+		"language_server_linux_x64",
+		"language_server_linux_arm64",
+		"language_server",
+	}
+
+	linuxSubdirs := []string{
+		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "bin"),
+	}
+
+	// 1. Linux RPM & standard candidates
+	for _, root := range linuxRoots {
+		for _, sub := range linuxSubdirs {
+			for _, b := range linuxBins {
+				addCandidate(filepath.Join(root, sub, b))
+			}
+		}
+	}
+
+	// 2. Legacy & home relative paths (ensure classic paths preserved)
+	addCandidate(filepath.Join(home, "antigravity", "resources", "bin", "language_server"))
+	addCandidate(filepath.Join(home, "antigravity", "resources", "bin", "language_server.exe"))
+
+	// 3. Windows candidate roots
+	winRoots := []string{
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE"),
+		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
+		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
+		filepath.Join(home, "antigravity"),
+	}
+
+	winBins := []string{
+		"language_server_windows_x64.exe",
+		"language_server_windows_arm64.exe",
+		"language_server.exe",
+		"language_server",
+	}
+
+	winSubdirs := []string{
+		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "bin"),
+	}
+
+	for _, root := range winRoots {
+		if root == "" {
+			continue
+		}
+		for _, sub := range winSubdirs {
+			for _, b := range winBins {
+				addCandidate(filepath.Join(root, sub, b))
+			}
+		}
+	}
+
+	// 4. macOS candidate roots
+	macRoots := []string{
+		"/Applications/Antigravity.app/Contents",
+		"/Applications/Antigravity IDE.app/Contents",
+		filepath.Join(home, "Applications", "Antigravity.app", "Contents"),
+		filepath.Join(home, "Applications", "Antigravity IDE.app", "Contents"),
+	}
+
+	macBins := []string{
+		"language_server_macos_arm64",
+		"language_server_macos_x64",
+		"language_server_darwin_arm64",
+		"language_server_darwin_x64",
+		"language_server",
+	}
+
+	macSubdirs := []string{
+		filepath.Join("Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("Resources", "bin"),
+	}
+
+	for _, root := range macRoots {
+		for _, sub := range macSubdirs {
+			for _, b := range macBins {
+				addCandidate(filepath.Join(root, sub, b))
+			}
+		}
+	}
+
+	return candidates
 }
 
 // FindLanguageServerModular searches for language_server with live process probing and full logging
@@ -223,14 +457,22 @@ func FindLanguageServerModular(logger LogFunc) string {
 
 	// 3. If language_server is not running directly, check if Antigravity app is running
 	if runningApp := FindRunningAntigravityApp(logger); runningApp != "" {
-		binName := "language_server"
-		if runtime.GOOS == "windows" {
-			binName = "language_server.exe"
+		roots := getCandidateRoots(runningApp)
+		if found := probeRootsForLanguageServer(roots); found != "" {
+			logger("Deduced language_server path from running app: %s", found)
+			return found
 		}
-		deducedPath := filepath.Join(filepath.Dir(runningApp), "resources", "bin", binName)
-		if fi, err := os.Stat(deducedPath); err == nil && !fi.IsDir() {
-			logger("Deduced language_server path from running app: %s", deducedPath)
-			return deducedPath
+	}
+
+	// 3.5. Dynamic PATH discovery via exec.LookPath (Works even when Antigravity is NOT running!)
+	lookNames := []string{"antigravity", "antigravity.exe", "antigravity-ide"}
+	for _, name := range lookNames {
+		if p, err := exec.LookPath(name); err == nil && p != "" {
+			roots := getCandidateRoots(p)
+			if found := probeRootsForLanguageServer(roots); found != "" {
+				logger("Discovered language_server via PATH (%s): %s", p, found)
+				return found
+			}
 		}
 	}
 
@@ -262,8 +504,14 @@ func FindRunningLanguageServerPID() int {
 				}
 				exeLink := fmt.Sprintf("/proc/%d/exe", pid)
 				target, err := os.Readlink(exeLink)
-				if err == nil && strings.Contains(strings.ToLower(target), "language_server") {
-					return pid
+				if err == nil {
+					if isSelfOrCleanerProcess(pid, target) {
+						continue
+					}
+					base := strings.ToLower(filepath.Base(target))
+					if strings.Contains(base, "language_server") {
+						return pid
+					}
 				}
 			}
 		}
@@ -272,9 +520,14 @@ func FindRunningLanguageServerPID() int {
 	// Cross-platform fallback using pgrep / ps
 	out, err := exec.Command("pgrep", "-f", "language_server").Output()
 	if err == nil {
+		selfPid := os.Getpid()
+		ppid := os.Getppid()
 		for _, pStr := range strings.Fields(string(out)) {
 			var pid int
 			if _, err := fmt.Sscanf(pStr, "%d", &pid); err == nil && pid > 0 {
+				if pid == selfPid || (ppid > 0 && pid == ppid) {
+					continue
+				}
 				return pid
 			}
 		}

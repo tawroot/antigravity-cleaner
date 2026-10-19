@@ -3,6 +3,7 @@ package patcher
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 )
@@ -16,20 +17,80 @@ var (
 func FindIdeMainJs() string {
 	home, _ := os.UserHomeDir()
 
+	// 1. Dynamic discovery via running app or PATH lookup
+	var appPaths []string
+	if running := FindRunningAntigravityApp(nil); running != "" {
+		appPaths = append(appPaths, running)
+	}
+	for _, name := range []string{"antigravity", "antigravity.exe", "antigravity-ide"} {
+		if p, err := exec.LookPath(name); err == nil && p != "" {
+			appPaths = append(appPaths, p)
+		}
+	}
+
+	jsSubpaths := []string{
+		filepath.Join("resources", "app", "out", "main.js"),
+		filepath.Join("resources", "app", "main.js"),
+		filepath.Join("Contents", "Resources", "app", "out", "main.js"),
+		filepath.Join("Contents", "Resources", "app", "main.js"),
+		filepath.Join("Resources", "app", "out", "main.js"),
+		filepath.Join("Resources", "app", "main.js"),
+	}
+
+	for _, appPath := range appPaths {
+		for _, root := range getCandidateRoots(appPath) {
+			for _, sub := range jsSubpaths {
+				target := filepath.Join(root, sub)
+				if fi, err := os.Stat(target); err == nil && !fi.IsDir() {
+					return target
+				}
+			}
+		}
+	}
+
+	// 2. Comprehensive candidate list across all supported OSes & package distributions
 	candidates := []string{
+		// Official Linux RPM & System paths (Fedora, RHEL, CentOS, Debian, Ubuntu)
+		"/usr/share/antigravity/resources/app/out/main.js",
+		"/usr/share/antigravity/resources/app/main.js",
+		"/usr/share/antigravity-ide/resources/app/out/main.js",
+		"/usr/share/antigravity-ide/resources/app/main.js",
+		"/opt/antigravity/resources/app/out/main.js",
+		"/opt/antigravity/resources/app/main.js",
+		"/opt/Antigravity/resources/app/out/main.js",
+		"/opt/Antigravity/resources/app/main.js",
+		"/opt/antigravity-ide/resources/app/out/main.js",
+		"/opt/Antigravity IDE/resources/app/out/main.js",
+
+		// User local share & home applications
+		filepath.Join(home, ".local", "share", "antigravity", "resources", "app", "out", "main.js"),
+		filepath.Join(home, ".local", "share", "antigravity", "resources", "app", "main.js"),
 		filepath.Join(home, "Applications", "Antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "Applications", "Antigravity", "resources", "app", "main.js"),
+		filepath.Join(home, "Applications", "antigravity", "resources", "app", "out", "main.js"),
+		filepath.Join(home, "Applications", "antigravity", "resources", "app", "main.js"),
 		filepath.Join(home, "Applications", "Antigravity-x64", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "antigravity", "resources", "app", "main.js"),
-		"/usr/share/antigravity-ide/resources/app/out/main.js",
-		"/usr/share/antigravity-ide/resources/app/main.js",
-		"/opt/Antigravity IDE/resources/app/out/main.js",
+
+		// Windows paths
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "resources", "app", "out", "main.js"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "resources", "app", "main.js"),
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "app", "out", "main.js"),
+		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity", "resources", "app", "out", "main.js"),
+		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity", "resources", "app", "out", "main.js"),
+
+		// macOS paths
+		"/Applications/Antigravity.app/Contents/Resources/app/out/main.js",
+		"/Applications/Antigravity.app/Contents/Resources/app/main.js",
 		"/Applications/Antigravity IDE.app/Contents/Resources/app/out/main.js",
+		filepath.Join(home, "Applications", "Antigravity.app", "Contents", "Resources", "app", "out", "main.js"),
 	}
 
 	for _, c := range candidates {
+		if c == "" {
+			continue
+		}
 		if fi, err := os.Stat(c); err == nil && !fi.IsDir() {
 			return c
 		}

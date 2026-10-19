@@ -3,6 +3,7 @@ package patcher
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -58,5 +59,89 @@ func TestWrapperManagerInstallAndRemove(t *testing.T) {
 	}
 	if string(restored) != "#!/bin/sh\necho real" {
 		t.Errorf("restored content mismatch: %s", string(restored))
+	}
+}
+
+func TestWrapperManagerCustomBinaryName(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "wrapper-custom-*")
+	if err != nil {
+		t.Fatalf("failed to create temp dir: %v", err)
+	}
+	defer os.RemoveAll(tempDir)
+
+	customName := "language_server_linux_x64"
+	fakeBinaryPath := filepath.Join(tempDir, customName)
+	originalContent := "#!/bin/sh\necho custom-real"
+	if err := os.WriteFile(fakeBinaryPath, []byte(originalContent), 0755); err != nil {
+		t.Fatalf("failed to create fake custom binary: %v", err)
+	}
+
+	// 1. Pass full binary file path
+	mgr := NewWrapperManager(fakeBinaryPath, func(format string, args ...interface{}) {})
+
+	if mgr.GetBinaryName() != customName {
+		t.Errorf("expected binary name %q, got %q", customName, mgr.GetBinaryName())
+	}
+	if mgr.GetBinaryDir() != tempDir {
+		t.Errorf("expected binary dir %q, got %q", tempDir, mgr.GetBinaryDir())
+	}
+
+	if mgr.IsWrapperInstalled() {
+		t.Errorf("expected wrapper not installed initially")
+	}
+
+	opts := DefaultEnterpriseFlagsOptions()
+	if err := mgr.InstallWrapper(opts); err != nil {
+		t.Fatalf("failed to install wrapper: %v", err)
+	}
+
+	if !mgr.IsWrapperInstalled() {
+		t.Errorf("expected wrapper to be installed")
+	}
+
+	// Verify backup file exists with correct name
+	backupFile := filepath.Join(tempDir, BackupFileName(customName))
+	backupContent, err := os.ReadFile(backupFile)
+	if err != nil {
+		t.Fatalf("failed to read backup file %s: %v", backupFile, err)
+	}
+	if string(backupContent) != originalContent {
+		t.Errorf("backup content mismatch: got %q, want %q", string(backupContent), originalContent)
+	}
+
+	// Verify wrapper script content references backup file
+	wrapperContent, err := os.ReadFile(fakeBinaryPath)
+	if err != nil {
+		t.Fatalf("failed to read wrapper script: %v", err)
+	}
+	if !strings.Contains(string(wrapperContent), BackupFileName(customName)) {
+		t.Errorf("wrapper script does not reference backup name %s: %s", BackupFileName(customName), string(wrapperContent))
+	}
+
+	// 2. Test directory-based initialization when wrapper is already installed
+	dirMgr := NewWrapperManager(tempDir, func(format string, args ...interface{}) {})
+	if dirMgr.GetBinaryName() != customName {
+		t.Errorf("expected dirMgr to detect %q from backup, got %q", customName, dirMgr.GetBinaryName())
+	}
+	if !dirMgr.IsWrapperInstalled() {
+		t.Errorf("expected dirMgr to recognize wrapper is installed")
+	}
+
+	// 3. Remove wrapper via dirMgr
+	if err := dirMgr.RemoveWrapper(); err != nil {
+		t.Fatalf("failed to remove wrapper via dirMgr: %v", err)
+	}
+
+	if dirMgr.IsWrapperInstalled() {
+		t.Errorf("expected wrapper to be uninstalled")
+	}
+
+	// Verify original file restored
+	restored, err := os.ReadFile(fakeBinaryPath)
+	if err != nil {
+		t.Fatalf("failed to read restored binary: %v", err)
+	}
+	if string(restored) != originalContent {
+		t.Errorf("restored content mismatch: got %q, want %q", string(restored), originalContent)
 	}
 }

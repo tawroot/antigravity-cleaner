@@ -11,6 +11,20 @@ import (
 
 // FindAntigravityExecutable finds the main Antigravity GUI application
 func FindAntigravityExecutable() string {
+	// 1. Dynamic PATH discovery
+	for _, name := range []string{"antigravity", "antigravity.exe", "antigravity-ide"} {
+		if path, err := exec.LookPath(name); err == nil && path != "" {
+			if realPath, err := filepath.EvalSymlinks(path); err == nil && realPath != "" {
+				if fi, err := os.Stat(realPath); err == nil && !fi.IsDir() {
+					return realPath
+				}
+			}
+			if fi, err := os.Stat(path); err == nil && !fi.IsDir() {
+				return path
+			}
+		}
+	}
+
 	home, _ := os.UserHomeDir()
 
 	candidates := []string{
@@ -19,8 +33,9 @@ func FindAntigravityExecutable() string {
 		filepath.Join(home, "Applications", "Antigravity-x64", "antigravity"),
 		filepath.Join(home, "antigravity", "antigravity"),
 		filepath.Join(home, "antigravity", "antigravity.exe"),
-		"/usr/share/antigravity-ide/antigravity",
+		"/usr/share/antigravity/bin/antigravity",
 		"/usr/share/antigravity/antigravity",
+		"/usr/share/antigravity-ide/antigravity",
 		"/usr/bin/antigravity",
 		"/opt/antigravity/antigravity",
 		"/opt/Antigravity/antigravity",
@@ -145,6 +160,11 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 		return "", fmt.Errorf("Antigravity executable not found")
 	}
 
+	// Resolve symlinks on appPath before extracting icons/dir
+	if realPath, err := filepath.EvalSymlinks(appPath); err == nil && realPath != "" {
+		appPath = realPath
+	}
+
 	if proxyURL == "" {
 		best, err := GetBestProxy()
 		if err != nil {
@@ -162,6 +182,11 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 		desktopAppDir := filepath.Join(home, ".local", "share", "applications")
 		_ = os.MkdirAll(desktopAppDir, 0755)
 
+		appDir := filepath.Dir(appPath)
+		workDir := appDir
+		if strings.EqualFold(filepath.Base(appDir), "bin") {
+			workDir = filepath.Dir(appDir)
+		}
 
 		// 1. Create Smart Launcher script in ~/.local/bin/antigravity-smart-launcher.sh
 		smartLauncherScript := filepath.Join(binDir, "antigravity-smart-launcher.sh")
@@ -217,8 +242,24 @@ exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@" 
 		_ = os.WriteFile(smartLauncherScript, []byte(scriptContent), 0755)
 
 		// 2. Setup icon
-		iconPath := filepath.Join(filepath.Dir(appPath), "icon.png")
-		if fi, err := os.Stat(iconPath); err != nil || fi.Size() < 100 {
+		iconCandidates := []string{
+			filepath.Join(appDir, "icon.png"),
+			filepath.Join(filepath.Dir(appDir), "icon.png"),
+			filepath.Join(appDir, "antigravity.png"),
+			filepath.Join(filepath.Dir(appDir), "antigravity.png"),
+			filepath.Join(filepath.Dir(appDir), "resources", "app", "resources", "linux", "code.png"),
+			"/usr/share/pixmaps/antigravity.png",
+		}
+
+		var iconPath string
+		for _, cand := range iconCandidates {
+			if fi, err := os.Stat(cand); err == nil && fi.Size() >= 100 {
+				iconPath = cand
+				break
+			}
+		}
+
+		if iconPath == "" {
 			userIcon := filepath.Join(home, ".local", "share", "icons", "antigravity.png")
 			iconPath = EnsureDefaultIcon(userIcon)
 			hicolorIcon := filepath.Join(home, ".local", "share", "icons", "hicolor", "256x256", "apps", "antigravity.png")
@@ -240,7 +281,7 @@ Type=Application
 Categories=Development;IDE;
 StartupNotify=true
 StartupWMClass=antigravity
-`, smartLauncherScript, iconPath, filepath.Dir(appPath))
+`, smartLauncherScript, iconPath, workDir)
 
 		if err := os.WriteFile(appMenuPath, []byte(contentAntigravity), 0755); err != nil {
 			return "", err

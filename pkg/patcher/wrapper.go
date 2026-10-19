@@ -10,37 +10,113 @@ import (
 
 // WrapperManager manages transparent flag injection wrappers around language_server
 type WrapperManager struct {
-	binDir string
-	logger LogFunc
+	binDir  string
+	binName string
+	logger  LogFunc
 }
 
-// NewWrapperManager creates a new WrapperManager for a given binary directory
-func NewWrapperManager(binDir string, logger LogFunc) *WrapperManager {
+// BackupFileName returns the backup file name for a given binary name
+func BackupFileName(binName string) string {
+	if runtime.GOOS == "windows" {
+		if strings.HasSuffix(strings.ToLower(binName), ".exe") {
+			return strings.TrimSuffix(binName, filepath.Ext(binName)) + ".bin.exe"
+		}
+		return binName + ".bin.exe"
+	}
+	return binName + ".bin"
+}
+
+// NewWrapperManager creates a new WrapperManager for a given binary directory or executable path
+func NewWrapperManager(pathOrDir string, logger LogFunc) *WrapperManager {
 	if logger == nil {
 		logger = defaultFlagsLogger
 	}
-	return &WrapperManager{
-		binDir: binDir,
-		logger: logger,
+
+	binDir := pathOrDir
+	binName := ""
+
+	if fi, err := os.Stat(pathOrDir); err == nil && !fi.IsDir() {
+		// pathOrDir is an existing file
+		binDir = filepath.Dir(pathOrDir)
+		binName = filepath.Base(pathOrDir)
+	} else if filepath.Ext(pathOrDir) != "" && !strings.HasSuffix(pathOrDir, string(filepath.Separator)) {
+		// Could be a file path that doesn't exist yet or is currently moved/backed up
+		dir := filepath.Dir(pathOrDir)
+		base := filepath.Base(pathOrDir)
+		if fiDir, errDir := os.Stat(dir); errDir == nil && fiDir.IsDir() {
+			binDir = dir
+			binName = base
+		}
 	}
+
+	// Normalize if binName was passed as a .bin backup
+	if strings.HasSuffix(binName, ".bin.exe") {
+		binName = strings.TrimSuffix(binName, ".bin.exe") + ".exe"
+	} else if strings.HasSuffix(binName, ".bin") {
+		binName = strings.TrimSuffix(binName, ".bin")
+	}
+
+	// If binName was not explicitly identified from a file path:
+	if binName == "" {
+		// Search for GetLanguageServerBinaryNames() in binDir
+		for _, name := range GetLanguageServerBinaryNames() {
+			target := filepath.Join(binDir, name)
+			if fi, err := os.Stat(target); err == nil && !fi.IsDir() {
+				binName = name
+				break
+			}
+			backup := filepath.Join(binDir, BackupFileName(name))
+			if fi, err := os.Stat(backup); err == nil && !fi.IsDir() {
+				binName = name
+				break
+			}
+		}
+
+		// Fallback default
+		if binName == "" {
+			if runtime.GOOS == "windows" {
+				binName = "language_server.exe"
+			} else {
+				binName = "language_server"
+			}
+		}
+	}
+
+	return &WrapperManager{
+		binDir:  binDir,
+		binName: binName,
+		logger:  logger,
+	}
+}
+
+// GetBinaryName returns the resolved binary name (e.g. language_server_linux_x64)
+func (m *WrapperManager) GetBinaryName() string {
+	return m.binName
+}
+
+// GetBinaryDir returns the directory containing the binary
+func (m *WrapperManager) GetBinaryDir() string {
+	return m.binDir
+}
+
+// ServerBin returns the full path of the server binary or wrapper
+func (m *WrapperManager) ServerBin() string {
+	return filepath.Join(m.binDir, m.binName)
+}
+
+// OriginalBin returns the full path of the backed-up original binary
+func (m *WrapperManager) OriginalBin() string {
+	return filepath.Join(m.binDir, BackupFileName(m.binName))
 }
 
 // IsWrapperInstalled checks whether a wrapper script is active and original binary backed up
 func (m *WrapperManager) IsWrapperInstalled() bool {
-	serverBin := filepath.Join(m.binDir, "language_server")
-	originalBin := filepath.Join(m.binDir, "language_server.bin")
-
-	if runtime.GOOS == "windows" {
-		serverBin = filepath.Join(m.binDir, "language_server.exe")
-		originalBin = filepath.Join(m.binDir, "language_server.bin.exe")
-	}
-
-	origInfo, err := os.Stat(originalBin)
+	origInfo, err := os.Stat(m.OriginalBin())
 	if err != nil || origInfo.IsDir() {
 		return false
 	}
 
-	serverInfo, err := os.Stat(serverBin)
+	serverInfo, err := os.Stat(m.ServerBin())
 	if err != nil || serverInfo.IsDir() {
 		return false
 	}
@@ -50,22 +126,17 @@ func (m *WrapperManager) IsWrapperInstalled() bool {
 
 // InstallWrapper backs up the original binary and installs the flag-forwarding wrapper
 func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
-	serverBin := filepath.Join(m.binDir, "language_server")
-	originalBin := filepath.Join(m.binDir, "language_server.bin")
-
-	if runtime.GOOS == "windows" {
-		serverBin = filepath.Join(m.binDir, "language_server.exe")
-		originalBin = filepath.Join(m.binDir, "language_server.bin.exe")
-	}
+	serverBin := m.ServerBin()
+	originalBin := m.OriginalBin()
 
 	// 1. If original backup doesn't exist, backup the real binary
 	if _, err := os.Stat(originalBin); os.IsNotExist(err) {
 		if _, err := os.Stat(serverBin); err != nil {
-			return fmt.Errorf("language_server not found at %s: %w", serverBin, err)
+			return fmt.Errorf("%s not found at %s: %w", m.binName, serverBin, err)
 		}
 		m.logger("Backing up original binary to %s", originalBin)
 		if err := os.Rename(serverBin, originalBin); err != nil {
-			return fmt.Errorf("failed to backup language_server: %w", err)
+			return fmt.Errorf("failed to backup %s: %w", m.binName, err)
 		}
 	}
 
@@ -74,11 +145,12 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 	flagsStr := strings.Join(flags, " ")
 
 	// 3. Create wrapper script
+	backupName := BackupFileName(m.binName)
 	var scriptContent string
 	if runtime.GOOS == "windows" {
-		scriptContent = fmt.Sprintf("@echo off\r\n\"%%~dp0language_server.bin.exe\" %s %%*\r\n", flagsStr)
+		scriptContent = fmt.Sprintf("@echo off\r\n\"%%~dp0%s\" %s %%*\r\n", backupName, flagsStr)
 	} else {
-		scriptContent = fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexec \"$DIR/language_server.bin\" %s \"$@\"\n", flagsStr)
+		scriptContent = fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexec \"$DIR/%s\" %s \"$@\"\n", backupName, flagsStr)
 	}
 
 	if err := os.WriteFile(serverBin, []byte(scriptContent), 0755); err != nil {
@@ -91,13 +163,8 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 
 // RemoveWrapper restores the original binary and removes the wrapper
 func (m *WrapperManager) RemoveWrapper() error {
-	serverBin := filepath.Join(m.binDir, "language_server")
-	originalBin := filepath.Join(m.binDir, "language_server.bin")
-
-	if runtime.GOOS == "windows" {
-		serverBin = filepath.Join(m.binDir, "language_server.exe")
-		originalBin = filepath.Join(m.binDir, "language_server.bin.exe")
-	}
+	serverBin := m.ServerBin()
+	originalBin := m.OriginalBin()
 
 	if _, err := os.Stat(originalBin); os.IsNotExist(err) {
 		m.logger("Original binary not found; wrapper is not currently installed")
