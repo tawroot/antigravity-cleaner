@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.3.2] - 2026-10-19
+
+### 🌐 Universal Multi-Architecture Discovery & Official Google RPM/DEB Hierarchy Support
+
+This release eliminates all path-matching edge cases across modern Linux distributions (Fedora, RHEL, openSUSE, Ubuntu, Debian), adds multi-architecture binary resolution, and enables offline target discovery without requiring the IDE to be running.
+
+- **Dynamic Multi-Architecture Binary Resolution:** Replaced static binary naming with dynamic architecture-aware detection across Linux (`language_server_linux_x64`, `language_server_linux_arm64`), macOS (`language_server_darwin_arm64`, `language_server_darwin_x64`), and Windows (`language_server_windows_x64.exe`, `language_server_windows_arm64.exe`).
+- **Google Official RPM & DEB Layout Support:** Fully maps the modern Electron extension hierarchy (`resources/app/extensions/antigravity/bin/`) used by official Google Linux packages, ensuring seamless zero-config patching.
+- **Offline Dynamic PATH Discovery:** Antigravity no longer needs to be actively running in RAM to be patched. The cleaner dynamically resolves the application root via system `PATH` (`exec.LookPath`) and follows symlinks (`filepath.EvalSymlinks`) directly to the core binary.
+- **Self-Process Collision Guard:** Implemented `isSelfOrCleanerProcess` to strictly filter out current PIDs (`os.Getpid()`), ancestor PIDs, and cleaner/patcher binaries from process discovery tables, preventing false-positive self-detection.
+- **Dynamic Architecture-Aware Wrapper:** Refactored `WrapperManager` to dynamically detect, back up (`<binName>.bin`), and generate custom shell/batch wrappers matching the exact detected architecture binary.
+- **Frontend IDE JS & Launcher Resolution:** Added missing `/usr/share/antigravity/resources/app/out/main.js` candidates and resolved symlinks in desktop launcher creation for pristine icon and working directory setup.
+
+### 🐛 Resolved Issues
+- **Fedora 44 & Google RPM Discovery Failure (Closes #27):** Resolved the critical bug where `language_server` was reported missing on Fedora 44 with Google's official RPM repository due to self-process false positives and architecture suffix naming.
+
+---
+
+## [5.3.1] - 2026-10-15
+
+### 🔇 Zero-Log ASAR Shield & EIO Broken-Pipe Hotfix
+
+This release introduces an in-place bytecode patch for `electron-log` inside `app.asar` to eliminate annoying OS error popups on terminal disconnects.
+
+- **Zero-Log ASAR Shield (`pkg/patcher/asar.go`):** Silences console logging in `electron-log` transport by patching `level: 'silly'` to `level: false` and shielding `writeFn` within a `try/catch` block.
+- **EIO Exception Suppression:** Prevents annoying broken-pipe `EIO` crash dialogs and stdout exceptions when closing terminal sessions or launching through background wrappers.
+- **Automatic ASAR Backup:** Generates timestamped `.agybak` backups before applying in-place ASAR modifications.
+
+### 🐛 Resolved Issues
+- **Broken Pipe Write EIO Popup (Closes #21, PR #22):** Fixed annoying OS modal error dialogs when Antigravity closes background stdout pipes.
+
+---
+
 ## [5.3.0] - 2026-10-14
 
 ### 🛡️ 7-Flag Zero-Telemetry Engine, Staged Retro GUI & 16-Target Surgical Quota Reset
