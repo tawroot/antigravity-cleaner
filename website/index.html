@@ -1,1059 +1,1498 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antigravity Cleaner | Pro Maintenance Tool</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Cleaner — The Open-Source Anti-Sanction & Self-Healing Toolkit</title>
+  <meta name="description" content="A simple, modern, scalable systems infrastructure designed to neutralize Google Antigravity Error 403 region blocks, sever background telemetry, and inject direct No-TUN proxy routing.">
+  <meta name="theme-color" content="#ffffff">
 
-    <!-- Meta Tags -->
-    <meta name="description"
-        content="Fix Antigravity IDE errors, region locks, and network interference instantly. Professional cleaning tool for Windows, macOS, and Linux.">
-    <meta name="keywords"
-        content="antigravity cleaner, fix antigravity error, bypass region lock, panbeh vpn, session backup">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon.png">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Vazirmatn:wght@400;700&display=swap"
-        rel="stylesheet">
+  <!-- Fonts: Inter var, JetBrains Mono & Vazirmatn for Persian -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=5.3.1-pro">
-
-    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/">
-
-    <!-- Open Graph & Social -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/">
-    <meta property="og:title" content="Antigravity Cleaner | Free & Offline Toolkit for Google Antigravity">
-    <meta property="og:description"
-        content="Fix Google Antigravity Error 403 region lock, 429 quota exhaustion, and proxy connection drops without TUN mode. 100% offline open-source solution.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
-
-    <!-- Schema.org JSON-LD (SoftwareApplication + FAQPage for AI Engines & Google) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "Antigravity Cleaner",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Linux, Windows 10/11, macOS",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "description": "Open-source diagnostic and self-healing toolkit for Google Antigravity AI IDE. Resolves region locks (Error 403), 429 quota exhaustion, and enables smart proxy injection without TUN mode.",
-          "url": "https://tawroot.github.io/antigravity-cleaner/",
-          "license": "https://www.apache.org/licenses/LICENSE-2.0"
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "How to fix Google Antigravity 403 Forbidden / Not Available in Your Region?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Run 'antigravity-cleaner patch' or click [Auto-Fix] in the Retro GUI. It removes internal region lock checks in main.js, agy CLI, and extension.js, and routes IDE traffic through your local proxy without TUN mode."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How to fix Error 429 Quota Exceeded in Antigravity without losing login?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Run 'antigravity-cleaner clean' or click [Reset 429] in the GUI. It surgically purges rate-limit counters and temporary token caches while strictly preserving your Google account login and chat history."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I use Google Antigravity with v2ray or Clash without TUN mode?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Antigravity Cleaner automatically detects active local proxy ports (10808, 2080, 7890) and launches Antigravity with dedicated proxy flags, keeping domestic traffic and banking apps fast on direct connection."
-              }
-            }
-          ]
-        }
-      ]
-    }
-    </script>
-    <script>(function(){const t=localStorage.getItem('ag_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">
-                    <img src="logo.png" alt="Antigravity Cleaner Logo" style="width: 36px; height: 36px; border-radius: 8px; margin-inline-end: 8px;">
-                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
-                </a>
+  <!-- =========================================================================
+       1. Top Navbar (VitePress / Marzban Standard)
+       ========================================================================= -->
+  <header class="VPNav">
+    <div class="VPNav-wrapper">
+      <div class="VPNav-container">
+        
+        <!-- Brand -->
+        <a href="#home" class="VPNavBarTitle" id="brandLink">
+          <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="VPImage logo" width="24" height="24">
+          <span class="title">Antigravity Cleaner</span>
+          <span class="version-badge">v5</span>
+        </a>
 
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" class="active" data-lang-key="home">Home</a></li>
-                    <li><a href="features.html" data-lang-key="features">Features</a></li>
-                    <li><a href="#download" data-lang-key="download">Download</a></li>
-                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
-                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
-                    <li><a href="troubleshooting.html" data-lang-key="troubleshooting">Troubleshooting</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
-                </ul>
+        <!-- Center Search & Nav -->
+        <div class="VPNavBarContent">
+          <div class="VPNavBarSearch" id="searchTrigger">
+            <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span class="search-text" data-i18n="nav.search">Search</span>
+            <kbd class="search-kbd">Ctrl K</kbd>
+          </div>
 
-                <div class="nav-controls">
-                    <!-- Custom Glassmorphism Language Dropdown -->
-                    <div class="custom-lang-selector" id="customLangSelector">
-                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
-                            <span class="curr-name" id="currLangName">English</span>
-                            <i class="fas fa-chevron-down curr-arrow"></i>
-                        </button>
-                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
-                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
-                                <div><span class="opt-flag">🇺🇸</span> English</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
-                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
-                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
-                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
-                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
-                                <div><span class="opt-flag">🇪🇸</span> Español</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
-                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Theme Toggle Button -->
-                    <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
-                        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-
-                    <!-- Hidden native select for full backwards-compatibility -->
-                    <select id="langSelect" style="display: none;">
-                        <option value="en">EN</option>
-                        <option value="fa">FA</option>
-                        <option value="ru">RU</option>
-                        <option value="zh">ZH</option>
-                        <option value="ar">AR</option>
-                        <option value="es">ES</option>
-                        <option value="tr">TR</option>
-                    </select>
-
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
-                    <a href="#download" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
-                        <span data-lang-key="get_app">Get App</span>
-                    </a>
-                </div>
-            </nav>
+          <nav class="VPNavBarMenu" aria-label="Main Navigation">
+            <a href="#home" class="VPLink nav-link active" id="navHomeBtn" data-i18n="nav.home">Home</a>
+            <a href="#docs" class="VPLink nav-link" id="navDocsBtn" data-i18n="nav.docs">Documentation</a>
+            <a href="#doc-benchmarks" class="VPLink nav-link" id="navBenchBtn" data-i18n="nav.benchmarks">Benchmarks</a>
+          </nav>
         </div>
-    </header>
 
+        <!-- Right Tools -->
+        <div class="VPNavBarExtra">
+          <!-- Language Selector -->
+          <div class="VPLangMenu" id="langMenuContainer">
+            <button class="VPLangBtn" id="langToggleBtn" type="button" aria-label="Select language">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span id="currentLangLabel">English</span>
+              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+            <div class="VPLangDropdown" id="langDropdown">
+              <button class="lang-option active" data-lang="en" type="button">🇺🇸 English</button>
+              <button class="lang-option" data-lang="fa" type="button">🇮🇷 فارسی</button>
+            </div>
+          </div>
+
+          <!-- Theme Switcher -->
+          <button class="VPSwitch VPSwitchAppearance" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="check">
+              <span class="icon">
+                <svg class="sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                <svg class="moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+              </span>
+            </span>
+          </button>
+
+          <!-- GitHub Link -->
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="VPNavBarSocialLink" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+
+          <!-- Download Button -->
+          <a href="#download" class="VPButton medium brand" id="navDownloadBtn" data-i18n="nav.download">
+            Download Free
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. VIEW 1: VitePress Home (Marzban Style)
+       ========================================================================= -->
+  <div id="view-home" class="VPView active">
+    
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h1 class="gradient-text fade-in" style="animation-delay: 0.1s;" data-lang-key="hero_title">Fix Antigravity
-                IDE Instantly</h1>
-            <p class="fade-in" style="animation-delay: 0.2s;" data-lang-key="hero_subtitle">
-                The most powerful maintenance tool for installation errors, network interference, and region
-                restrictions.
-            </p>
-            <div class="hero-btns fade-in" style="animation-delay: 0.3s;">
-                <a href="#download" class="btn btn-primary">
-                    <i class="fas fa-arrow-down"></i> <span data-lang-key="get_started">Get Started</span>
-                </a>
-                <a href="https://github.com/tawroot/antigravity-cleaner" class="btn btn-secondary" target="_blank">
-                    <i class="fab fa-github"></i> <span data-lang-key="view_source">Star on GitHub</span> <span class="badge-status github-stars-val" style="margin-inline-start: 6px; font-size: 0.75rem;">⭐ Star</span>
-                </a>
-            </div>
+    <div class="VPHero">
+      <div class="VPHero-container">
+        
+        <div class="main">
+          <div class="tagline-badge">
+            <span class="dot"></span>
+            <span data-i18n="hero.badge">Google Sanctions Bypass • Zero-Telemetry • Zero-Log ASAR</span>
+          </div>
 
-            <!-- Bento Stats -->
-            <div class="stats fade-in" style="animation-delay: 0.5s;">
-                <div class="stat-card">
-                    <span class="stat-value" id="star-count">...</span>
-                    <span class="stat-label" data-lang-key="stars">GitHub Stars</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value" id="fork-count">...</span>
-                    <span class="stat-label" data-lang-key="forks">Forks</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value" id="download-count">+4.9K</span>
-                    <span class="stat-label" data-lang-key="downloads">Downloads</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">100%</span>
-                    <span class="stat-label" data-lang-key="offline_privacy">Offline &amp; Private</span>
-                </div>
+          <h1 class="name">
+            <span class="clip" data-i18n="hero.title">Antigravity Cleaner</span>
+          </h1>
+          <p class="text" data-i18n="hero.subtitle">Bypass Google Regional Sanctions &amp; Enforce Zero-Telemetry</p>
+          <p class="tagline" data-i18n="hero.tagline">
+            Permanently neutralize strict Google Error 403 regional blocks, eliminate <code>write EIO</code> agent crashes with the Zero-Log ASAR shield, and inject direct proxy routing without TUN mode lag.
+          </p>
+
+          <div class="actions">
+            <div class="action">
+              <a href="#docs" class="VPButton medium brand" id="heroDocsLink" data-i18n="hero.exploreDocs">
+                Explore Documentation
+              </a>
             </div>
+            <div class="action">
+              <a href="#gui-guide" class="VPButton medium alt" id="heroGuiLink" data-i18n="hero.guiGuide">
+                🖥️ Standalone GUI Launcher
+              </a>
+            </div>
+            <div class="action">
+              <a href="#cli-guide" class="VPButton medium alt" id="heroCliLink" data-i18n="hero.cliGuide">
+                ⌨️ Terminal CLI Guide
+              </a>
+            </div>
+          </div>
         </div>
+
+        <div class="image">
+          <div class="image-container">
+            <div class="image-bg"></div>
+            <img src="assets/logo.png" srcset="assets/logo.png 1x, assets/logo.png 2x" alt="Antigravity Cleaner Logo" class="image-src" width="240" height="240">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Quick Terminal Install (VitePress/Remnawave/Bun Style) -->
+    <section class="VPQuickInstall" id="quick-install">
+      <div class="container">
+        <div class="vp-code-tabs-box">
+          <div class="tabs-header">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+            </div>
+            <div class="tab-buttons">
+              <button class="tab-btn active" id="tab-curl" type="button">Linux &amp; macOS (cURL)</button>
+              <button class="tab-btn" id="tab-ps" type="button">Windows (PowerShell)</button>
+            </div>
+            <button class="copy-btn" id="copyCodeBtn" type="button" aria-label="Copy install command">
+              <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Copy</span>
+            </button>
+          </div>
+          <div class="code-wrapper">
+            <pre class="code-pre"><code id="code-curl" data-raw="curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash"><span class="terminal-prompt" aria-hidden="true">$ </span><span class="hl-cmd">curl</span> <span class="hl-flag">-fsSL</span> <span class="hl-url">https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh</span> <span class="hl-pipe">|</span> <span class="hl-arg">bash</span></code><code id="code-ps" style="display:none;" data-raw="irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex"><span class="terminal-prompt" aria-hidden="true">PS&gt; </span><span class="hl-cmd">irm</span> <span class="hl-url">https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1</span> <span class="hl-pipe">|</span> <span class="hl-arg">iex</span></code></pre>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Developer Freedom & Region Bypass Banner -->
-    <section class="container" style="padding-top: 10px;">
-        <div class="freedom-banner">
-            <div class="freedom-header">
-                <span class="freedom-pill" data-lang-key="freedom_badge"><i class="fas fa-globe-americas"></i> UNIVERSAL AI FREEDOM &amp; REGION BYPASS</span>
-                <h2 data-lang-key="freedom_title">Are you locked out of Antigravity IDE &amp; AI Tools?</h2>
-                <p data-lang-key="freedom_desc">
-                    Geographical 403 blocks and unfair digital sanctions shouldn't hold back passionate developers. Antigravity Cleaner cleans regional lock tokens, bypasses network restrictions, and restores your sovereign right to code.
-                </p>
+    <!-- 8 Feature Cards (Exact Marzban Layout) -->
+    <section class="VPFeatures">
+      <div class="container">
+        <div class="items">
+          
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f1_title">Regional Sanctions Bypass</h2>
+              <p class="details" data-i18n="features.f1_desc">Direct machine-code binary patching (<code>RAX+8 hasValidAuth = 1</code>) completely resolves Error 403 Forbidden and regional eligibility blocks.</p>
             </div>
+          </div>
 
-            <!-- Global Telemetry Status Board (تخته بُرد زنده و مانیتورینگ زبان‌ها و مناطق) -->
-            <div class="telemetry-board">
-                <div class="board-top-bar">
-                    <div class="board-top-title">
-                        <span class="radar-pulse"></span>
-                        <span>STATUS BOARD // GLOBAL REGION BYPASS &amp; MULTILINGUAL MATRIX</span>
-                    </div>
-                    <div class="board-telemetry-tags">
-                        <span><i class="fas fa-microchip"></i> ENGINE: <strong>v5.3.1 Pro STANDALONE</strong></span>
-                        <span><i class="fas fa-network-wired"></i> ROUTING: <strong>ZERO-TUN (NO-TUN)</strong></span>
-                        <span><i class="fas fa-language"></i> LOCALES: <strong>7+ NATIVE SCRIPTS</strong></span>
-                    </div>
-                </div>
-
-                <div class="board-grid">
-                    <!-- Card 1: Iran -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇮🇷</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Iran</span>
-                                    <span class="board-region-secondary">ایران</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">فارسی (RTL)</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«رفع خطای ۴۰۳، صفر شدن ارور ۴۲۹ و حفظ نشست‌ها»</div>
-                            <div class="board-native-sub">Smart SOCKS5 Direct &bull; 15s KeepAlive</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-shield-alt"></i> Native Go Patch</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Russia -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇷🇺</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Russia</span>
-                                    <span class="board-region-secondary">Россия</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">Русский</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«Обход ошибки 403 и сброс лимитов 429»</div>
-                            <div class="board-native-sub">No-TUN Injection &bull; Чистка GPU кэша</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-bolt"></i> Anti-DPI Pulse</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: China -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇨🇳</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">China</span>
-                                    <span class="board-region-secondary">中国</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">简体中文</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«解除 403 地区封锁与保留登录凭据»</div>
-                            <div class="board-native-sub">本地进程代理 &bull; 零 TUN 额外开销</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-lock-open"></i> Login Safe</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Turkey -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇹🇷</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Turkey</span>
-                                    <span class="board-region-secondary">Türkiye</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">Türkçe</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«403 Bölge Kilidi ve 429 Kota Sıfırlama»</div>
-                            <div class="board-native-sub">Akıllı Proxy &bull; Oturum ve Çerez Güvenli</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-sync-alt"></i> Auto-Repair</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Latin America (Cuba, Venezuela) -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇨🇺</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Cuba &amp; Venezuela</span>
-                                    <span class="board-region-secondary">Latinoamérica 🇻🇪</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">Español</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«Desbloqueo de región 403 y cuota 429»</div>
-                            <div class="board-native-sub">Proxy Directo Sin TUN &bull; Sesión Intacta</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-globe-americas"></i> Geo Bypass</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 6: Arab World (Syria, etc.) -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇸🇾</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Syria &amp; Arab World</span>
-                                    <span class="board-region-secondary">العالم العربي 🇸🇦</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">العربية (RTL)</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«تجاوز الحظر الإقليمي 403 دون فقدان البيانات»</div>
-                            <div class="board-native-sub">KeepAlive 15s &bull; وكيل محلي مباشر</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-feather-alt"></i> Zero Telemetry</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 7: Pakistan & South Asia -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🇵🇰</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Pakistan</span>
-                                    <span class="board-region-secondary">پاکستان</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">اردو / English</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«DPI Throttling &amp; Middlebox Reset Bypass»</div>
-                            <div class="board-native-sub">HTTP/2 Multiplexing &bull; KeepAlive Active</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-tachometer-alt"></i> Low Latency</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Bypassed</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 8: Universal / Global -->
-                    <div class="board-card">
-                        <div class="board-card-header">
-                            <div class="board-card-flag-title">
-                                <span class="board-flag">🌐</span>
-                                <div class="board-region-names">
-                                    <span class="board-region-primary">Global Developers</span>
-                                    <span class="board-region-secondary">Worldwide</span>
-                                </div>
-                            </div>
-                            <span class="board-lang-pill">English</span>
-                        </div>
-                        <div class="board-card-body">
-                            <div class="board-native-quote">«Universal 403 Bypass &amp; Stale Lock Purge»</div>
-                            <div class="board-native-sub">100% Offline &bull; Free &amp; Open-Source</div>
-                        </div>
-                        <div class="board-card-footer">
-                            <span class="board-tech-pill"><i class="fas fa-balance-scale"></i> Apache 2.0</span>
-                            <span class="board-status-badge"><span class="pulse-dot"></span> Verified</span>
-                        </div>
-                    </div>
-                </div>
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-cyan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f2_title">Zero-Telemetry Privacy</h2>
+              <p class="details" data-i18n="features.f2_desc">Enforces 8-flag enterprise isolation. Permanently severs background exfiltration of prompts, terminal history, git commits, and real IP beacons.</p>
             </div>
+          </div>
 
-            <div class="freedom-footer">
-                <div class="freedom-quote">
-                    <i class="fas fa-quote-left" style="color: var(--primary); margin-inline-end: 6px;"></i>
-                    <span data-lang-key="freedom_quote">Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders.</span>
-                    — <strong>@dalroot</strong>
-                </div>
-                <div class="freedom-cta-group">
-                    <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary" style="font-size: 0.88rem; padding: 10px 20px;">
-                        <i class="fab fa-github"></i> Star Repository
-                    </a>
-                    <a href="#download" class="btn btn-primary" style="font-size: 0.88rem; padding: 10px 20px;">
-                        <i class="fas fa-arrow-down"></i> <span data-lang-key="download_now">Download Now</span>
-                    </a>
-                </div>
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f3_title">Zero-Log ASAR Shield</h2>
+              <p class="details" data-i18n="features.f3_desc">Silences verbose Google telemetry logging and handles broken console pipe errors (<code>write EIO</code>) to stop mid-stream agent crashes.</p>
             </div>
+          </div>
+
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-amber">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="12" x="3" y="4" rx="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line><line x1="8" y1="16" x2="8" y2="20"></line><line x1="16" y1="16" x2="16" y2="20"></line></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f4_title">Smart SOCKS5 Proxy Injection</h2>
+              <p class="details" data-i18n="features.f4_desc">Routes IDE traffic directly into local v2rayN/Clash clients (10808 / 7890). Enable proxy once to connect, then turn VPN off! Zero TUN lag.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-coral">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f5_title">0.002s Surgical 429 Reset</h2>
+              <p class="details" data-i18n="features.f5_desc">Purges corrupted rate-limit cookies and token buckets across 16 targets in 2 milliseconds while strictly preserving 100% of chats and logins.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f6_title">1-Click Clean Rollback</h2>
+              <p class="details" data-i18n="features.f6_desc">Before altering a single byte, Cleaner creates untouched factory <code>.agybak</code> backups. Revert back to virgin factory state in 1 second.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f7_title">1,901 MB/s Pure Go Binary</h2>
+              <p class="details" data-i18n="features.f7_desc">100% CGO-free, single standalone executable with zero external runtimes (no Python, no Node.js, no pip, no unsafe third-party DLLs).</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="VPFeature">
+              <div class="icon icon-amber">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="m9 8 6 4-6 4Z"></path></svg>
+              </div>
+              <h2 class="title" data-i18n="features.f8_title">Standalone GUI Launcher &amp; CLI</h2>
+              <p class="details" data-i18n="features.f8_desc">Standalone GUI desktop window with 3-step automated workflow, plus interactive Lipgloss TUI terminal dashboard.</p>
+            </div>
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <!-- 3-Step Installation & Process Flow -->
-    <section class="process-section">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 25px;">
-                <span class="freedom-pill" style="margin: 0 auto 14px;" data-lang-key="how_it_works_badge">
-                    <i class="fas fa-bolt"></i> ⚡ 3-STEP SURGICAL REPAIR &amp; HEALING
-                </span>
-                <h2 class="section-title" data-lang-key="how_it_works_title">How It Works — Fix Your IDE in Under 30 Seconds</h2>
-                <p class="section-subtitle" style="margin: 0 auto; max-width: 750px;" data-lang-key="how_it_works_subtitle">
-                    Systematic self-healing architecture: from deep cache de-bloat and Go core patching to lightweight proxy injection.
-                </p>
-            </div>
-
-            <div class="process-grid">
-                <!-- Step 1 -->
-                <div class="process-card">
-                    <div class="process-top-row">
-                        <span class="step-num-pill">STEP 01</span>
-                        <div class="step-icon"><i class="fas fa-broom"></i></div>
-                    </div>
-                    <h3 data-lang-key="step1_title">01. Surgical Cache De-bloat &amp; Reset</h3>
-                    <p data-lang-key="step1_desc">
-                        Clears bloated GPU/Dawn caches, orphaned SingletonLocks, and artificial 429 quota tokens that cause memory stutter. Google account login, session tokens, and cookies remain 100% untouched.
-                    </p>
-                    <div class="process-terminal-pill">
-                        <i class="fas fa-check-circle"></i>
-                        <code>✓ GPU Cache Cleared &bull; Login Safe</code>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="process-card">
-                    <div class="process-top-row">
-                        <span class="step-num-pill">STEP 02</span>
-                        <div class="step-icon"><i class="fas fa-code-branch"></i></div>
-                    </div>
-                    <h3 data-lang-key="step2_title">02. Core Go Binary &amp; JS Engine Patching</h3>
-                    <p data-lang-key="step2_desc">
-                        Directly patches the native Go backend daemon (agy), Electron main.js, and VS Code extension to neutralize regional locks and terminate background telemetry loops that silently hog bandwidth.
-                    </p>
-                    <div class="process-terminal-pill">
-                        <i class="fas fa-shield-alt"></i>
-                        <code>✓ Native Go Core &amp; main.js Neutralized</code>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="process-card">
-                    <div class="process-top-row">
-                        <span class="step-num-pill">STEP 03</span>
-                        <div class="step-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    </div>
-                    <h3 data-lang-key="step3_title">03. Lightweight Layer-7 Routing &amp; KeepAlive</h3>
-                    <p data-lang-key="step3_desc">
-                        Eliminates the heavy latency and packet-loss overhead of system-wide TUN adapters. Injects direct SOCKS5 with 15s TCP KeepAlive so AI reasoning streams run buttery smooth and responsive even on weak or throttled internet.
-                    </p>
-                    <div class="process-terminal-pill">
-                        <i class="fas fa-wifi"></i>
-                        <code>✓ Zero TUN Overhead &bull; 15s KeepAlive Active</code>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance Technical Note Banner -->
-            <div style="margin-top: 32px; background: rgba(0, 240, 255, 0.04); border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-                <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(0, 240, 255, 0.12); display: flex; align-items: center; justify-content: center; color: #00f0ff; font-size: 1.15rem; flex-shrink: 0;">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <div style="flex: 1; min-width: 260px;">
-                    <strong style="color: #fff; font-size: 0.98rem;" data-lang-key="perf_banner_title">Noticeably Lighter &amp; Smoother on Congested Networks</strong>
-                    <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 4px 0 0; line-height: 1.55;" data-lang-key="perf_banner_desc">
-                        By avoiding the kernel virtualization overhead of global TUN adapters, stopping aggressive telemetry pings, and keeping HTTP/2 connections alive with 15s heartbeats, Antigravity IDE consumes significantly fewer system resources and runs smoothly even on high-latency internet connections.
-                    </p>
-                </div>
-            </div>
+    <!-- OS Downloads Section -->
+    <section class="VPDownloads" id="download">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-badge" data-i18n="downloads.badge">🚀 Zero-Install Portable Binaries</div>
+          <h2 class="section-title" data-i18n="downloads.title">Download Antigravity Cleaner Pro</h2>
+          <p class="section-subtitle" data-i18n="downloads.subtitle">
+            Native single-binary executables for Windows, macOS, and Linux. No dependencies, 100% offline &amp; open-source.
+          </p>
         </div>
+
+        <div class="download-grid">
+          
+          <!-- Windows Card -->
+          <div class="os-card os-windows">
+            <div class="os-badge-portable" data-i18n="downloads.portable_badge">Zero-Install • 100% Portable</div>
+            <div class="os-header">
+              <div class="os-icon win-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4h-13.051M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.95"/></svg>
+              </div>
+              <div class="os-meta">
+                <h3 class="os-name" data-i18n="downloads.win_title">Windows</h3>
+                <p class="os-specs" data-i18n="downloads.win_desc">Windows 10, 11 &amp; Server (64-bit)</p>
+              </div>
+            </div>
+
+            <ul class="os-card-features">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.win_feat1">Single Standalone Executable (.exe)</span></li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.win_feat2">Includes Standalone GUI + Terminal CLI</span></li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.win_feat3">Zero Dependencies (No Python or External DLLs)</span></li>
+            </ul>
+
+            <div class="os-actions">
+              <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe" class="download-btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span data-i18n="downloads.win_btn">Download for Windows (x64 .exe)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- macOS Card -->
+          <div class="os-card os-mac">
+            <div class="os-badge-portable" data-i18n="downloads.portable_badge">Zero-Install • 100% Portable</div>
+            <div class="os-header">
+              <div class="os-icon mac-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.42c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.64 1.35-.57.65-1.07 1.71-.93 2.73 1.01.08 2.03-.48 2.65-1.23z"/></svg>
+              </div>
+              <div class="os-meta">
+                <h3 class="os-name" data-i18n="downloads.mac_title">macOS</h3>
+                <p class="os-specs" data-i18n="downloads.mac_desc">macOS 12+ (Monterey, Ventura, Sonoma, Sequoia)</p>
+              </div>
+            </div>
+
+            <ul class="os-card-features">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.mac_feat1">Universal Support for Apple Silicon & Intel</span></li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.mac_feat2">Interactive Lipgloss TUI Dashboard in Terminal</span></li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.mac_feat3">Pure Go (No CGO, No Homebrew Required)</span></li>
+            </ul>
+
+            <div class="os-actions os-multi-btns">
+              <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64" class="download-btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span data-i18n="downloads.mac_arm">Apple Silicon (M1/M2/M3/M4)</span>
+              </a>
+              <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64" class="download-btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span data-i18n="downloads.mac_intel">Intel x64</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Linux Card -->
+          <div class="os-card os-linux">
+            <div class="os-badge-portable" data-i18n="downloads.portable_badge">Zero-Install • 100% Portable</div>
+            <div class="os-header">
+              <div class="os-icon linux-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.002 0c-3.14 0-5.69 2.548-5.69 5.688 0 1.25.404 2.406 1.088 3.344-.616 1.488-1.576 3.125-1.576 4.968 0 1.05.312 2.052.868 2.906-1.52.88-2.692 2.37-2.692 4.188 0 1.62.94 3.03 2.312 3.844.204.12.42.22.644.304 1.348.51 3.208.666 5.046.666s3.698-.156 5.046-.666c.224-.084.44-.184.644-.304 1.372-.814 2.312-2.224 2.312-3.844 0-1.818-1.172-3.308-2.692-4.188.556-.854.868-1.856.868-2.906 0-1.843-.96-3.48-1.576-4.968.684-.938 1.088-2.094 1.088-3.344 0-3.14-2.55-5.688-5.69-5.688z"/></svg>
+              </div>
+              <div class="os-meta">
+                <h3 class="os-name" data-i18n="downloads.linux_title">Linux</h3>
+                <p class="os-specs" data-i18n="downloads.linux_desc">Ubuntu, Debian, Fedora, Arch &amp; WSL2</p>
+              </div>
+            </div>
+
+            <ul class="os-card-features">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.linux_feat1">Pre-compiled Standalone ELF Binaries</span></li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.linux_feat2">Rich TUI Dashboard + Comprehensive CLI Flags</span></li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="downloads.linux_feat3">Compatible with all distros, servers & WSL2</span></li>
+            </ul>
+
+            <div class="os-actions os-multi-btns">
+              <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64" class="download-btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span data-i18n="downloads.linux_x64">Linux x86_64 (amd64)</span>
+              </a>
+              <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64" class="download-btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span data-i18n="downloads.linux_arm64">Linux aarch64 (arm64)</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footnote / All Releases & CLI Option -->
+        <div class="download-footer-note">
+          <div class="footer-note-item">
+            <span data-i18n="downloads.all_releases">Looking for previous versions, source code, or SHA-256 checksums?</span>
+            <a href="https://github.com/tawroot/antigravity-cleaner/releases" target="_blank" rel="noopener noreferrer" class="releases-link" data-i18n="downloads.releases_link">
+              View All Releases on GitHub →
+            </a>
+          </div>
+          <div class="footer-note-sep">•</div>
+          <div class="footer-note-item">
+            <span data-i18n="downloads.cli_prefer">Prefer command line installation?</span>
+            <a href="#quick-install" class="cli-jump-link" id="cliJumpLink" data-i18n="downloads.cli_jump">Use Terminal One-Liner above ↑</a>
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <!-- Multi-Platform Download Section -->
-    <section id="download" class="section" style="padding-top: 40px; padding-bottom: 20px;">
-        <div class="container">
-            <div class="section-header">
-                <div style="display: inline-block; background: rgba(250, 35, 59, 0.1); padding: 6px 14px; border-radius: 20px; margin-bottom: 12px;">
-                    <span style="color: var(--primary); font-weight: 600; font-size: 0.85rem;">⚡ v5.3.1 Pro RELEASE</span>
-                </div>
-                <h2 class="section-title" data-lang-key="download">Download Antigravity Cleaner</h2>
-                <p class="section-subtitle">Zero telemetry. Fully offline. Native standalone binaries for all operating systems.</p>
-            </div>
-
-            <div class="grid-3">
-                <!-- Windows -->
-                <div class="download-os-card" style="--os-accent: #00a4ef; --os-glow: rgba(0, 164, 239, 0.25);">
-                    <div class="os-badge-header">
-                        <div class="os-svg-icon" style="background: rgba(0, 164, 239, 0.08); border-color: rgba(0, 164, 239, 0.25);">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="#00a4ef">
-                                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
-                            </svg>
-                        </div>
-                        <span class="os-pill-tag" style="color: #00a4ef; background: rgba(0, 164, 239, 0.1); border-color: rgba(0, 164, 239, 0.3);">
-                            PORTABLE .EXE • 64-BIT
-                        </span>
-                        <h3 style="font-size: 1.35rem; margin: 4px 0 8px; font-weight: 800;">Windows</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 14px;">
-                            Single-file executable with integrated Retro GUI &amp; CLI patcher.
-                        </p>
-                        <div class="os-specs-list">
-                            <span class="os-spec-badge">Win 11 / 10</span>
-                            <span class="os-spec-badge">x86_64</span>
-                            <span class="os-spec-badge">Zero Installer</span>
-                        </div>
-                    </div>
-                    <div>
-                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe"
-                            class="btn btn-primary" style="width: 100%; margin-bottom: 12px; font-size: 0.95rem; padding: 12px 18px;">
-                            <i class="fas fa-download"></i> Download .exe (v5.3.1 Pro)
-                        </a>
-                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                            <span class="pulse-dot"></span> 100% Offline • Login Preserved
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Linux -->
-                <div class="download-os-card" style="--os-accent: #fcc624; --os-glow: rgba(252, 198, 36, 0.25);">
-                    <div class="os-badge-header">
-                        <div class="os-svg-icon" style="background: rgba(252, 198, 36, 0.08); border-color: rgba(252, 198, 36, 0.25);">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="#fcc624">
-                                <path d="M12.01 0C8.68 0 6.01 2.67 6.01 6v3.29c-1.39.73-2.34 2.19-2.34 3.88 0 1.25.53 2.38 1.38 3.18-.03.22-.05.43-.05.65 0 3.87 3.13 7 7 7s7-3.13 7-7c0-.22-.02-.43-.05-.65.85-.8 1.38-1.93 1.38-3.18 0-1.69-.95-3.15-2.34-3.88V6c0-3.33-2.67-6-6-6zm-2 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 2c1.66 0 3 1.34 3 3v1H9V10c0-1.66 1.34-3 3-3z"/>
-                            </svg>
-                        </div>
-                        <span class="os-pill-tag" style="color: #fcc624; background: rgba(252, 198, 36, 0.1); border-color: rgba(252, 198, 36, 0.3);">
-                            MULTI-ARCH • ELF BINARY
-                        </span>
-                        <h3 style="font-size: 1.35rem; margin: 4px 0 8px; font-weight: 800;">Linux</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 14px;">
-                            Compiled native Go binary with no external runtime dependencies.
-                        </p>
-                        <div class="os-specs-list">
-                            <span class="os-spec-badge">Ubuntu / Debian</span>
-                            <span class="os-spec-badge">Arch / Fedora</span>
-                            <span class="os-spec-badge">Rootless Safe</span>
-                        </div>
-                    </div>
-                    <div>
-                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64"
-                            class="btn btn-primary" style="width: 100%; margin-bottom: 10px; font-size: 0.95rem; padding: 12px 18px;">
-                            <i class="fas fa-download"></i> Linux x86_64
-                        </a>
-                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64"
-                            class="btn btn-secondary" style="width: 100%; margin-bottom: 12px; font-size: 0.85rem; padding: 8px 16px;">
-                            <i class="fas fa-microchip"></i> Linux ARM64 Binary
-                        </a>
-                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                            <span class="pulse-dot"></span> Zero-TUN • No Sudo Required
-                        </div>
-                    </div>
-                </div>
-
-                <!-- macOS -->
-                <div class="download-os-card" style="--os-accent: #ffffff; --os-glow: rgba(255, 255, 255, 0.25);">
-                    <div class="os-badge-header">
-                        <div class="os-svg-icon" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.25);">
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.85c.66-.8 1.11-1.92.99-3.04-1 .04-2.16.67-2.83 1.46-.58.68-1.1 1.79-.96 2.89 1.12.09 2.14-.51 2.8-1.31z"/>
-                            </svg>
-                        </div>
-                        <span class="os-pill-tag" style="color: #ffffff; background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3);">
-                            UNIVERSAL • APPLE SILICON &amp; INTEL
-                        </span>
-                        <h3 style="font-size: 1.35rem; margin: 4px 0 8px; font-weight: 800;">macOS</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 14px;">
-                            Native Darwin mach-o binaries for M1/M2/M3/M4 &amp; Intel Macs.
-                        </p>
-                        <div class="os-specs-list">
-                            <span class="os-spec-badge">Apple M1-M4</span>
-                            <span class="os-spec-badge">Intel Core</span>
-                            <span class="os-spec-badge">macOS 12+</span>
-                        </div>
-                    </div>
-                    <div>
-                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64"
-                            class="btn btn-primary" style="width: 100%; margin-bottom: 10px; font-size: 0.95rem; padding: 12px 18px;">
-                            <i class="fas fa-download"></i> Apple Silicon (ARM64)
-                        </a>
-                        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64"
-                            class="btn btn-secondary" style="width: 100%; margin-bottom: 12px; font-size: 0.85rem; padding: 8px 16px;">
-                            <i class="fas fa-laptop"></i> Intel Mac (x86_64)
-                        </a>
-                        <div style="color: #00ff9f; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                            <span class="pulse-dot"></span> Universal Support • Zero Telemetry
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Trust Stickers Grid (Holographic Cyber Badges) -->
-            <div class="trust-stickers-grid">
-                <!-- Badge 1: 100% Offline & Private -->
-                <div class="trust-sticker-card" style="--card-accent: #00ff9f;">
-                    <div class="sticker-top-row">
-                        <div class="sticker-svg-icon" style="background: rgba(0, 255, 159, 0.1); border-color: rgba(0, 255, 159, 0.3);">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00ff9f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <rect x="9" y="11" width="6" height="4" rx="1"/>
-                            </svg>
-                        </div>
-                        <span class="sticker-tag" style="color: #00ff9f; background: rgba(0, 255, 159, 0.1); border-color: rgba(0, 255, 159, 0.25);">AIR-GAPPED</span>
-                    </div>
-                    <h4 class="sticker-title">100% Offline &amp; Private</h4>
-                    <p class="sticker-desc">Zero cloud connections. All patch operations run completely isolated on your machine.</p>
-                </div>
-
-                <!-- Badge 2: Apache 2.0 Open Source -->
-                <div class="trust-sticker-card" style="--card-accent: #fa233b;">
-                    <div class="sticker-top-row">
-                        <div class="sticker-svg-icon" style="background: rgba(250, 35, 59, 0.1); border-color: rgba(250, 35, 59, 0.3);">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fa233b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="18" cy="18" r="3"/>
-                                <circle cx="6" cy="6" r="3"/>
-                                <path d="M13 6h3a2 2 0 0 1 2 2v7"/>
-                                <line x1="6" y1="9" x2="6" y2="21"/>
-                            </svg>
-                        </div>
-                        <span class="sticker-tag" style="color: #fa233b; background: rgba(250, 35, 59, 0.1); border-color: rgba(250, 35, 59, 0.25);">Apache 2.0</span>
-                    </div>
-                    <h4 class="sticker-title">Open Source &amp; Free</h4>
-                    <p class="sticker-desc">Forever free, auditable, and transparent. No paywalls, licenses, or artificial limitations.</p>
-                </div>
-
-                <!-- Badge 3: No Telemetry or Tracking -->
-                <div class="trust-sticker-card" style="--card-accent: #ffaa00;">
-                    <div class="sticker-top-row">
-                        <div class="sticker-svg-icon" style="background: rgba(255, 170, 0, 0.1); border-color: rgba(255, 170, 0, 0.3);">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                                <line x1="1" y1="1" x2="23" y2="23"/>
-                            </svg>
-                        </div>
-                        <span class="sticker-tag" style="color: #ffaa00; background: rgba(255, 170, 0, 0.1); border-color: rgba(255, 170, 0, 0.25);">ZERO-TRACK</span>
-                    </div>
-                    <h4 class="sticker-title">No Telemetry or Tracking</h4>
-                    <p class="sticker-desc">Stops hidden Google telemetry pings and sends zero metrics. Your code and data stay yours.</p>
-                </div>
-
-                <!-- Badge 4: Built-in Retro Desktop GUI -->
-                <div class="trust-sticker-card" style="--card-accent: #00f0ff;">
-                    <div class="sticker-top-row">
-                        <div class="sticker-svg-icon" style="background: rgba(0, 240, 255, 0.1); border-color: rgba(0, 240, 255, 0.3);">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                                <line x1="8" y1="21" x2="16" y2="21"/>
-                                <line x1="12" y1="17" x2="12" y2="21"/>
-                                <path d="M6 8l4 3-4 3"/>
-                                <line x1="12" y1="14" x2="18" y2="14"/>
-                            </svg>
-                        </div>
-                        <span class="sticker-tag" style="color: #00f0ff; background: rgba(0, 240, 255, 0.1); border-color: rgba(0, 240, 255, 0.25);">RETRO GUI</span>
-                    </div>
-                    <h4 class="sticker-title">Built-in Desktop GUI</h4>
-                    <p class="sticker-desc">Classic 80s scene aesthetic, integrated 8-bit chiptune audio player, and 1-click automatic fix.</p>
-                </div>
-            </div>
+    <!-- Home Star CTA Section -->
+    <section class="VPHomeCTA">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-badge">⭐ Free &amp; Open-Source Community</div>
+          <h2 class="cta-title">Help Us Keep Antigravity Unchained</h2>
+          <p class="cta-text">
+            Antigravity Cleaner is completely free, 100% offline, and open-source under Apache-2.0.
+            Give us a star on GitHub to support ongoing machine-code patches and anti-sanction updates!
+          </p>
+          <div class="cta-actions">
+            <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="VPButton medium brand star-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>Star on GitHub</span>
+              <span class="star-badge">★ Star</span>
+            </a>
+            <a href="https://github.com/tawroot/antigravity-cleaner/releases" target="_blank" rel="noopener noreferrer" class="VPButton medium alt">
+              Download Latest Release
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Retro Desktop GUI Showcase -->
-    <section class="container" style="padding-top: 20px; padding-bottom: 20px;">
-        <div class="gui-showcase-card glass-card">
-            <div style="text-align: center;">
-                <img src="shot.jpg" alt="Antigravity Cleaner Retro KeyGen Desktop Interface" class="gui-preview-img">
+    <!-- Home Footer (Clean & Modern Marzban / VitePress Style) -->
+    <footer class="VPHomeFooter">
+      <div class="container">
+        <div class="footer-simple-wrap">
+          
+          <!-- Top Row: Brand Info & Primary Actions -->
+          <div class="footer-main-row">
+            <div class="footer-brand-info">
+              <div class="footer-brand">
+                <img src="assets/logo.png" alt="Logo" width="24" height="24" class="logo">
+                <span class="brand-name">Antigravity Cleaner</span>
+                <span class="version-badge">v5</span>
+              </div>
+              <p class="brand-tagline" data-i18n="footer.desc">
+                Autonomous zero-telemetry and anti-sanction toolkit compiled in native pure Go. 100% portable single executable with zero installation needed.
+              </p>
             </div>
-            <div>
-                <div style="display: inline-block; background: rgba(0, 255, 159, 0.1); padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(0, 255, 159, 0.3);">
-                    <span style="color: #00ff9f; font-weight: 700; font-size: 0.8rem;" data-lang-key="gui_badge">🎨 RETRO KEYGEN DESKTOP INTERFACE</span>
-                </div>
-                <h2 style="font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 14px; font-weight: 800;" data-lang-key="gui_title">
-                    Powerful Diagnostics, Timeless Retro Aesthetic
-                </h2>
-                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; font-size: 1rem;" data-lang-key="gui_desc">
-                    A fully offline standalone GUI built for developers who appreciate classic keygen design, chiptune audio, and one-click diagnostics.
-                </p>
-                <ul style="list-style: none; margin-bottom: 28px;">
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
-                        <span style="font-weight: 500;" data-lang-key="gui_f1">1-Click Automatic Repair &amp; Bypass</span>
-                    </li>
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
-                        <span style="font-weight: 500;" data-lang-key="gui_f2">100% Offline &amp; Telemetry-Free</span>
-                    </li>
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
-                        <span style="font-weight: 500;" data-lang-key="gui_f3">Built-in 8-Bit Chiptune Synthesizer</span>
-                    </li>
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-check-circle" style="color: #00ff9f; font-size: 1.1rem;"></i>
-                        <span style="font-weight: 500;" data-lang-key="gui_f4">Session &amp; Credential Preservation</span>
-                    </li>
-                </ul>
-                <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-                    <a href="#download" class="btn btn-primary" style="font-size: 0.95rem; padding: 12px 28px;">
-                        <i class="fas fa-download"></i> <span data-lang-key="download_now">Download Desktop App</span>
-                    </a>
-                    <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary" style="font-size: 0.95rem; padding: 12px 28px;">
-                        <i class="fab fa-github"></i> <span data-lang-key="star_btn">Star on GitHub</span>
-                    </a>
-                </div>
+
+            <div class="footer-actions-wrap">
+              <a href="#docs" class="footer-doc-btn" id="footerDocLink">
+                📖 <span data-i18n="footer.exploreDocs">Explore Documentation</span>
+              </a>
+              <a href="https://buymeacoffee.com/tawroot" target="_blank" rel="noopener noreferrer" class="bmac-button">
+                ☕ <span>Buy Me a Coffee</span>
+              </a>
             </div>
+          </div>
+
+          <div class="footer-divider"></div>
+
+          <!-- Bottom Row: Meta & Direct Links -->
+          <div class="footer-bottom-row">
+            <div class="footer-meta">
+              <p class="copyright" data-i18n="footer.license">Released under the Apache 2.0 License. Open-source &amp; 100% offline.</p>
+              <p class="manifesto-text" data-i18n="footer.manifesto">"Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders."</p>
+            </div>
+
+            <nav class="footer-nav-links" aria-label="Footer Navigation">
+              <a href="#docs" class="f-link" data-i18n="footer.docs">Documentation</a>
+              <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.github">GitHub</a>
+              <a href="https://t.me/dallrep" target="_blank" rel="noopener noreferrer" class="f-link telegram-link" data-i18n="footer.telegram">📢 Telegram: @dallrep</a>
+              <a href="https://github.com/tawroot/antigravity-cleaner/issues" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.reportBug">Report Bug</a>
+            </nav>
+          </div>
+
         </div>
-    </section>
-
-    <!-- Terminal Block -->
-    <section class="container">
-        <div class="terminal-block fade-in" style="animation-delay: 0.6s;">
-            <div class="section-header">
-                <h2 class="section-title" data-lang-key="quick_install">Quick Install</h2>
-                <p class="section-subtitle" data-lang-key="quick_install_desc">Install instantly via terminal without
-                    leaving your keyboard.</p>
-            </div>
-
-            <div class="terminal-window">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="t-red"></span>
-                        <span class="t-yellow"></span>
-                        <span class="t-green"></span>
-                    </div>
-                    <div class="terminal-tabs">
-                        <button class="t-tab active" id="tabWin" onclick="toggleTerminal('win')">Windows</button>
-                        <button class="t-tab" id="tabUnix" onclick="toggleTerminal('unix')">Unix/Mac</button>
-                    </div>
-                </div>
-                <div class="terminal-content" id="terminal">
-                    <div id="cmdWin">
-                        <span class="t-prompt">PS C:\></span>
-                        <span class="t-cmd" id="winTxt">iwr -useb
-                            https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</span>
-                    </div>
-                    <div id="cmdUnix" style="display:none;">
-                        <span class="t-prompt">$</span>
-                        <span class="t-cmd" id="unixTxt">curl -sL
-                            https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</span>
-                    </div>
-                    <button class="t-copy-btn" onclick="copyTerminal()">
-                        <i class="far fa-copy"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Community & Support Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-lang-key="community_title">Join Our Community</h2>
-                <p class="section-subtitle" data-lang-key="community_subtitle">Get help, share ideas, and stay updated
-                    with the latest news.</p>
-            </div>
-
-            <div class="grid-3">
-                <!-- GitHub Star -->
-                <div class="glass-card feature-item" style="text-align: center;">
-                    <div class="feature-icon">⭐</div>
-                    <h3 data-lang-key="star_title">Star on GitHub</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 24px;" data-lang-key="star_desc">Show your
-                        support by starring our repository. It helps us grow!</p>
-                    <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-primary"
-                        style="width: 100%;">
-                        <i class="fab fa-github"></i> <span data-lang-key="star_btn">Star Repository</span>
-                    </a>
-                </div>
-
-                <!-- Telegram Channel -->
-                <div class="glass-card feature-item" style="text-align: center;">
-                    <div class="feature-icon">📢</div>
-                    <h3 data-lang-key="telegram_title">Telegram Channel</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 24px;" data-lang-key="telegram_desc">Join our
-                        Telegram channel for updates, tips, and community support.</p>
-                    <a href="https://t.me/panbehnet" target="_blank" class="btn btn-primary" style="width: 100%;">
-                        <i class="fab fa-telegram"></i> <span data-lang-key="telegram_btn">Join Channel</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Preview Section -->
-    <section class="section" style="background: var(--bg-secondary); padding: 80px 0;">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-lang-key="why_choose">Why Choose Antigravity Cleaner?</h2>
-                <p class="section-subtitle" data-lang-key="why_choose_desc">Powerful features designed for developers
-                    and power users.</p>
-            </div>
-
-            <div class="grid-3">
-                <div class="glass-card feature-item">
-                    <div class="feature-icon">🚀</div>
-                    <h3 data-lang-key="feat_clean_title">One-Click Clean</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="feat_clean_desc">Remove corrupted
-                        installation files, cache, and registry keys instantly.</p>
-                </div>
-
-                <div class="glass-card feature-item">
-                    <div class="feature-icon">🌍</div>
-                    <h3 data-lang-key="feat_region_title">Region Bypass</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="feat_region_desc">Automatically fix
-                        region-locked errors for constrained networks.</p>
-                </div>
-
-                <div class="glass-card feature-item">
-                    <div class="feature-icon">🛡️</div>
-                    <h3 data-lang-key="feat_session_title">Session Preservation</h3>
-                    <p style="color: var(--text-secondary);" data-lang-key="feat_session_desc">Clean the system without
-                        losing your browser cookies or login sessions.</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 48px;">
-                <a href="features.html" class="btn btn-primary">
-                    <span data-lang-key="view_all_features">View All Features</span> <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ & Error Resolution Section -->
-    <section class="section" id="faq" style="padding: 90px 0 80px 0; border-top: 1px solid rgba(255, 255, 255, 0.06);">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                <span class="faq-badge faq-badge-info" style="margin-bottom: 12px; font-size: 0.8rem; padding: 5px 12px;" data-lang-key="home_faq_badge">⚡ ERROR RESOLUTION &amp; KNOWLEDGE BASE</span>
-                <h2 class="section-title" data-lang-key="home_faq_title">Frequently Asked Questions &amp; Error Solutions</h2>
-                <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;" data-lang-key="home_faq_subtitle">Direct, verified solutions for Error 403, 429 quota exhaustion, broken pipes, and proxy connections.</p>
-            </div>
-
-            <div class="faq-accordion">
-                <!-- Item 1: Error 403 Region Lock -->
-                <div class="faq-accordion-item active">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-danger" data-lang-key="faq_err_403_badge">ERROR 403 • REGION LOCK</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_403_q">How do I fix "Your current account is not eligible for Antigravity" / Error 403 Forbidden?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
-                    </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_403_a" data-lang-html="true">
-                        Google DeepMind and Google Cloud enforce geographic restrictions in countries like Iran, Russia, China, and Syria. Antigravity Cleaner solves this in 2 steps: 1) Click <strong>[ ① ⚡ Auto-Fix ]</strong> (or run <code>antigravity-cleaner patch all</code>) to neutralize local gatekeeper functions in <code>main.js</code>, <code>agy</code> CLI, and extensions. 2) Click <strong>[ ② 🚀 Launch IDE ]</strong> to inject an isolated loopback proxy without requiring root TUN mode.
-                    </div>
-                </div>
-
-                <!-- Item 2: Error 429 Quota Exhausted -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-warning" data-lang-key="faq_err_429_badge">ERROR 429 • QUOTA EXHAUSTED</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_429_q">How to resolve Error 429 "Resource has been exhausted / Too Many Requests"?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
-                    </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_429_a" data-lang-html="true">
-                        Autonomous agent tool calls and search queries desynchronize local token buckets in <code>Cache</code> and <code>DawnWebGPUCache</code>, triggering false 429 limits. Click <strong>[ 🧹 Reset 429 ]</strong> in the Cleaner GUI or execute <code>antigravity-cleaner clean</code>. It flushes corrupted quota artifacts in 0.002s while 100% preserving your Google login session, cookies, and chat history.
-                    </div>
-                </div>
-
-                <!-- Item 3: Stream Dropouts & Broken Pipes -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-danger" data-lang-key="faq_err_stream_badge">STREAM DROP • WRITE EIO</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_stream_q">Why does Antigravity show "Agent terminated due to error" or "Network issue connecting to server"?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
-                    </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_stream_a" data-lang-html="true">
-                        During extended thinking loops, silent HTTP/2 SSE connections are abruptly dropped by ISP Middlebox firewalls (sending TCP RST packets). Antigravity Cleaner injects a <strong>15-second TCP KeepAlive heartbeat</strong> and enables the Zero-Log ASAR Shield to eliminate <code>write EIO</code> broken pipe exceptions.
-                    </div>
-                </div>
-
-                <!-- Item 4: Proxy Config No-TUN -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-info" data-lang-key="faq_err_proxy_badge">PROXY CONFIG • NO-TUN</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_proxy_q">How do I fix "dial tcp 127.0.0.1:10808: connect: connection refused" without TUN mode?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
-                    </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_proxy_a" data-lang-html="true">
-                        This occurs when your proxy client (v2ray, Xray, Clash, NekoBox) runs on a different port. Click <strong>[ 🩺 Doctor ]</strong> or run <code>antigravity-cleaner doctor</code>. The engine automatically detects your active port (10808, 2080, 7890) and launches Antigravity with dedicated process-level proxy routing (leaving your system internet direct and fast).
-                    </div>
-                </div>
-
-                <!-- Item 5: Failed to fetch -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-warning" data-lang-key="faq_err_fetch_badge">AUTH STATE • FAILED TO FETCH</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_fetch_q">How to fix "There was an unexpected issue setting up your account. Failed to fetch"?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
-                    </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_fetch_a" data-lang-html="true">
-                        This error stems from corrupted DIPS database entries and orphaned WebSocket records. Running <code>antigravity-cleaner clean</code> flushes these 16 corrupted artifacts instantly without losing your project files or settings.
-                    </div>
-                </div>
-
-                <!-- Item 6: Security & Privacy -->
-                <div class="faq-accordion-item">
-                    <div class="faq-accordion-header">
-                        <div class="faq-header-content">
-                            <span class="faq-badge faq-badge-success" data-lang-key="faq_err_safety_badge">SECURITY &amp; PRIVACY</span>
-                            <h3 class="faq-title-text" data-lang-key="faq_err_safety_q">Will using Antigravity Cleaner log me out of my Google account or risk my code?</h3>
-                        </div>
-                        <i class="fas fa-chevron-down faq-icon-chevron"></i>
-                    </div>
-                    <div class="faq-accordion-body" data-lang-key="faq_err_safety_a" data-lang-html="true">
-                        No! Antigravity Cleaner features guaranteed Session Preservation: <code>Cookies</code>, <code>Preferences</code>, <code>app_storage.json</code>, and workspaces are strictly excluded from deletion. The tool is 100% offline, contains zero telemetry, and is open-source under GNU GPL v3.0.
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="troubleshooting.html" class="btn btn-secondary" style="padding: 12px 28px; font-size: 0.95rem;">
-                    <i class="fas fa-stethoscope"></i> <span data-lang-key="home_faq_view_all">Explore Complete 10-Error Troubleshooting Center &rarr;</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section"
-        style="background: linear-gradient(135deg, rgba(250, 35, 59, 0.1) 0%, rgba(0, 0, 0, 0) 100%); padding: 100px 0;">
-        <div class="container" style="text-align: center;">
-            <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; font-weight: 800;"
-                data-lang-key="cta_title">Ready to Fix Your IDE?</h2>
-            <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px;"
-                data-lang-key="cta_desc">Download now and solve installation errors in seconds.</p>
-
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="#download" class="btn btn-primary" style="font-size: 1.125rem; padding: 16px 32px;">
-                    <i class="fas fa-download"></i> <span data-lang-key="download_now">Download Now</span>
-                </a>
-                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary"
-                    style="font-size: 1.125rem; padding: 16px 32px;">
-                    <i class="fab fa-github"></i> <span data-lang-key="view_on_github">View on GitHub</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <h2>Antigravity <span>Cleaner</span></h2>
-                    <p data-lang-key="footer_desc">Supporting open internet and developer productivity.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4 data-lang-key="product">Product</h4>
-                        <ul>
-                            <li><a href="#download" data-lang-key="download">Download</a></li>
-                            <li><a href="features.html" data-lang-key="features">Features</a></li>
-                            <li><a href="docs.html" data-lang-key="docs">Documentation</a></li>
-                        </ul>
-                    </div>
-                    <div class="link-group">
-                        <h4 data-lang-key="support">Support</h4>
-                        <ul>
-                            <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
-                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
-                            <li><a href="llms.txt">llms.txt (AI)</a></li>
-                            <li><a href="https://t.me/panbehnet" target="_blank">Telegram</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                <div class="copyright">© 2026 Tawroot. Open Source (Apache-2.0).</div>
-                <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-                    <a href="https://buymeacoffee.com/tawroot" target="_blank" class="bmac-btn" rel="noopener noreferrer">
-                        <span class="bmac-cup">☕</span>
-                        <span class="bmac-label">Buy Me a Coffee</span>
-                        <span class="bmac-badge" data-lang-key="coming_soon">Coming Soon</span>
-                    </a>
-                    <div class="social-links">
-                        <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://t.me/panbehnet" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="script.js?v=5.3.1-pro"></script>
-    <script>
-        // Initialize stats
-        fetchStats();
-    </script>
-</body>
+  </div>
 
+  <!-- =========================================================================
+       3. VIEW 2: VitePress Documentation Hub (Marzban & Remnawave Standard)
+       ========================================================================= -->
+  <div id="view-docs" class="VPView">
+    <div class="VPContentDoc">
+      
+      <!-- LEFT SIDEBAR -->
+      <aside class="VPSidebar" aria-label="Documentation Navigation">
+        <div class="VPSidebar-nav nav-en">
+          
+          <div class="group">
+            <div class="title">Getting Started</div>
+            <ul class="links">
+              <li><a href="#doc-intro" class="link active">Introduction &amp; Purpose</a></li>
+              <li><a href="#doc-country" class="link">Google Country Check</a></li>
+              <li><a href="#doc-install" class="link">Quick Installation</a></li>
+            </ul>
+          </div>
+
+          <div class="group">
+            <div class="title">Usage &amp; Interfaces</div>
+            <ul class="links">
+              <li><a href="#gui-guide" class="link">🖥️ Standalone GUI Launcher</a></li>
+              <li><a href="#cli-guide" class="link">⌨️ Terminal CLI Reference</a></li>
+              <li><a href="#doc-doctor" class="link">🩺 Doctor Diagnostics</a></li>
+            </ul>
+          </div>
+
+          <div class="group">
+            <div class="title">Core Engineering</div>
+            <ul class="links">
+              <li><a href="#doc-layers" class="link">9 Deep Machine Patches</a></li>
+              <li><a href="#doc-telemetry" class="link">Zero-Telemetry Privacy</a></li>
+              <li><a href="#doc-notun" class="link">No-TUN Proxy Injection</a></li>
+              <li><a href="#doc-rollback" class="link">1-Click Clean Rollback</a></li>
+            </ul>
+          </div>
+
+          <div class="group">
+            <div class="title">Troubleshooting Clinic</div>
+            <ul class="links">
+              <li><a href="#doc-errors" class="link">All 5 Antigravity Errors</a></li>
+              <li><a href="#doc-benchmarks" class="link">Live System Benchmarks</a></li>
+              <li><a href="#doc-comparison" class="link">Comparison Matrix</a></li>
+              <li><a href="#doc-faq" class="link">Frequently Asked Questions</a></li>
+            </ul>
+          </div>
+
+        </div>
+                <!-- PERSIAN SIDEBAR NAVIGATION -->
+          <div class="VPSidebar-nav nav-fa">
+            
+            <div class="group">
+              <div class="title">شروع سریع</div>
+              <ul class="links">
+                <li><a href="#fa-doc-intro" class="link active">مقدمه و معماری سیستم</a></li>
+                <li><a href="#fa-doc-country" class="link">بررسی کشور اکانت گوگل</a></li>
+                <li><a href="#fa-doc-install" class="link">نصب سریع یک‌خطی</a></li>
+              </ul>
+            </div>
+
+            <div class="group">
+              <div class="title">رابط‌های کاربری و اجرا</div>
+              <ul class="links">
+                <li><a href="#fa-gui-guide" class="link">🖥️ لانچر گرافیکی مستقل (بدون نصب)</a></li>
+                <li><a href="#fa-cli-guide" class="link">⌨️ مرجع کامل خط فرمان (CLI)</a></li>
+                <li><a href="#fa-doc-doctor" class="link">🩺 عیب‌یابی سلامت سیستم (Doctor)</a></li>
+              </ul>
+            </div>
+
+            <div class="group">
+              <div class="title">معماری و پچ‌های عمیق</div>
+              <ul class="links">
+                <li><a href="#fa-doc-layers" class="link">۹ پچ سطح کدهای باینری</a></li>
+                <li><a href="#fa-doc-telemetry" class="link">سپر حریم خصوصی و زیرو تله‌متری</a></li>
+                <li><a href="#fa-doc-notun" class="link">تزریق پروکسی هوشمند (بدون TUN)</a></li>
+                <li><a href="#fa-doc-rollback" class="link">بازگشت پاک به تنظیمات کارخانه</a></li>
+              </ul>
+            </div>
+
+            <div class="group">
+              <div class="title">کلینیک خطایابی و جداول</div>
+              <ul class="links">
+                <li><a href="#fa-doc-errors" class="link">کلینیک حل هر ۵ خطای رایج</a></li>
+                <li><a href="#fa-doc-benchmarks" class="link">بنچمارک‌های زنده عملکرد</a></li>
+                <li><a href="#fa-doc-comparison" class="link">جدول مقایسه تخصصی</a></li>
+                <li><a href="#fa-doc-faq" class="link">سوالات متداول و امنیت</a></li>
+              </ul>
+            </div>
+
+          </div>
+      </aside>
+
+      <!-- CENTER CONTENT -->
+      <div class="VPDoc">
+        <div class="VPDoc-container doc-en">
+          <div class="content">
+            <main class="main">
+              
+              <!-- Breadcrumbs -->
+              <div class="VPBreadcrumb">
+                <span>Documentation</span> &gt; <span class="current">Overview &amp; Usage</span>
+              </div>
+
+              <!-- Doc Title -->
+              <h1 id="doc-intro">Antigravity Cleaner Architecture</h1>
+              <p class="lead">
+                The standalone, pure-Go systems utility that permanently neutralizes Google Antigravity Error 403 regional blocks, 
+                severs background telemetry surveillance, silences <code>write EIO</code> broken pipe stream crashes, and injects smart No-TUN proxies.
+              </p>
+
+              <!-- Section: Country Check -->
+              <h2 id="doc-country">Google Account Country Association Check</h2>
+              <p>
+                Google binds regional eligibility directly to account history. Before running Cleaner for the first time, verify your account country in 30 seconds:
+              </p>
+
+              <div class="custom-block tip">
+                <p class="custom-block-title">Google Account Country Verification</p>
+                <p>
+                  Visit the official <a href="https://policies.google.com/country-association-form?hl=en-US&source=policies-site" target="_blank" rel="noopener noreferrer"><strong>Google Country Association Form</strong></a>. 
+                  If it indicates a supported territory (e.g. United States, Germany), your account is ready. If it displays an embargoed region, enable your proxy, submit the form with <em>"I frequently use a VPN"</em>, or register a fresh account.
+                </p>
+              </div>
+
+              <!-- Section: Quick Installation -->
+              <h2 id="doc-install">Quick One-Liner Installation (CLI &amp; GUI)</h2>
+              <p>
+                The fastest way to fetch the latest pre-compiled standalone binary across platforms with zero external prerequisites:
+              </p>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">bash (Linux &amp; macOS)</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code>curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code></pre>
+              </div>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">powershell (Windows)</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code>irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code></pre>
+              </div>
+
+              <!-- =============================================================
+                   SECTION: GUI WORKFLOW GUIDE (User Requested Feature)
+                   ============================================================= -->
+              <h2 id="gui-guide">🖥️ Option 1: Standalone GUI Launcher (Zero-Install, Pure Go)</h2>
+              <p>
+                Compiled in native pure Go: <strong>100% portable single executable with zero installation needed</strong>. 
+                Simply double-click the executable to launch the lightweight desktop window with automated 3-step repair:
+              </p>
+
+              <div class="vp-steps-guide">
+                
+                <div class="step-card">
+                  <div class="step-num">Step 1</div>
+                  <div class="step-body">
+                    <h3>Click [ ① ⚡ Auto-Fix ]</h3>
+                    <p>
+                      Click the primary button and wait 2–3 seconds. Cleaner automatically applies the machine-code patch to the core engine, 
+                      neutralizes CLI gating, unlocks <code>isGoogleInternal</code> in the Electron frontend, and injects the Zero-Log ASAR shield. 
+                      Upon completion, the status box confirms with green: <code>✔ STEP 1 DONE! Next: Click [ ② 🚀 Launch IDE ]</code>.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-num">Step 2</div>
+                  <div class="step-body">
+                    <h3>Click [ ② 🚀 Launch IDE ]</h3>
+                    <p>
+                      Spawns Google Antigravity with smart direct proxy routing (ports 10808 / 7890). 
+                      The IDE is instantly connected with full Gemini AI code intelligence, bypassing the need for laggy whole-system TUN mode.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-num">Step 3</div>
+                  <div class="step-body">
+                    <h3>Click [ ③ 📌 Create Shortcut ]</h3>
+                    <p>
+                      Generates a permanent desktop shortcut and application menu launcher pre-configured with proxy routing. 
+                      For future coding sessions, you can launch Antigravity directly from this shortcut without ever reopening Cleaner!
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="custom-block info">
+                <p class="custom-block-title">Real-Time Zero-Telemetry Toggle</p>
+                <p>
+                  The GUI includes a live <strong>Zero-Telemetry toggle</strong> on the bottom bar. Keep it enabled to ensure prompt history, 
+                  terminal commands, and git commit hashes are never broadcast to Google logging endpoints.
+                </p>
+              </div>
+
+              <!-- =============================================================
+                   SECTION: CLI REFERENCE GUIDE (User Requested Feature)
+                   ============================================================= -->
+              <h2 id="cli-guide">⌨️ Option 2: Terminal CLI Reference (Power Users)</h2>
+              <p>
+                For developers working in Linux, macOS, headless servers, or automated AI agent workflows:
+              </p>
+
+              <h3>Interactive Fullscreen TUI</h3>
+              <p>Run <code>antigravity</code> or <code>ag-cleaner</code> in your terminal to open the interactive Lipgloss dashboard with sequential menus and latency cards:</p>
+
+              <div class="vp-code-block">
+                <div class="code-header"><span>bash</span><button class="copy-code-btn" type="button">Copy</button></div>
+                <pre><code># Open interactive Lipgloss TUI
+ag-cleaner</code></pre>
+              </div>
+
+              <h3>Scriptable Subcommands</h3>
+              <p>Use these direct subcommands for script automation and headless environments:</p>
+
+              <div class="vp-code-block">
+                <div class="code-header"><span>bash</span><button class="copy-code-btn" type="button">Copy</button></div>
+                <pre><code># 1. Apply all patches (Core binary, CLI, IDE frontend, ASAR shield)
+ag-cleaner patch all
+
+# 2. Launch Antigravity directly with smart proxy (No TUN mode needed!)
+ag-cleaner launch
+
+# 3. Create permanent desktop shortcut pre-configured with proxy
+ag-cleaner create-launcher
+
+# 4. Run concurrent health audit & latency probes
+ag-cleaner doctor
+
+# 5. Reset HTTP 429 quota without losing conversation history
+ag-cleaner clean
+
+# 6. Revert all binaries to untouched original factory condition
+ag-cleaner restore
+
+# 7. Terminate any orphaned language_server zombie processes safely
+ag-cleaner kill
+
+# 8. Launch Desktop GUI window from terminal
+ag-cleaner gui</code></pre>
+              </div>
+
+              <!-- Section: Doctor Diagnostics -->
+              <h2 id="doc-doctor">🩺 System Health Audit &amp; Doctor Diagnostics</h2>
+              <p>
+                The <code>ag-cleaner doctor</code> command performs automated parallel validation of local proxy sockets, 
+                patch integrity, binary permissions, and Google Antigravity connectivity:
+              </p>
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">bash</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code>ag-cleaner doctor
+
+# Output:
+# [✓] Scanning local SOCKS5/HTTP proxy listeners... (Found 127.0.0.1:10808)
+# [✓] Verifying binary integrity &amp; RAX+8 machine-code patch... (OK)
+# [✓] Auditing 8-flag enterprise isolation &amp; zero-telemetry rules... (Enforced)
+# [✓] System Doctor Status: HEALTHY (All checks passed in 2.48s)</code></pre>
+              </div>
+
+              <!-- Section: 9 Core Engineering Layers -->
+              <h2 id="doc-layers">The 9 Core Engineering Layers &amp; Deep Patches</h2>
+              <p>
+                Antigravity Cleaner deconstructs and patches Google Antigravity across 9 independent system layers using POSIX atomic inode swaps:
+              </p>
+
+              <div class="vp-table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Layer</th>
+                      <th>Target File</th>
+                      <th>Mechanism &amp; Code Hook</th>
+                      <th>Primary Benefit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>01</strong></td>
+                      <td><code>language_server</code> binary</td>
+                      <td>Machine-code patch: <code>RAX+8 hasValidAuth = 1</code></td>
+                      <td>Permanently lifts 403 blocks &amp; location restriction</td>
+                    </tr>
+                    <tr>
+                      <td><strong>02</strong></td>
+                      <td><code>agy</code> CLI tool</td>
+                      <td>Client-side eligibility bypass routine</td>
+                      <td>Neutralizes regional gating in command-line tools</td>
+                    </tr>
+                    <tr>
+                      <td><strong>03</strong></td>
+                      <td><code>main.js</code> Electron frontend</td>
+                      <td>Sets <code>isGoogleInternal = true</code>; purges V8 cache</td>
+                      <td>Unlocks preview tools &amp; agent sidecars</td>
+                    </tr>
+                    <tr>
+                      <td><strong>04</strong></td>
+                      <td><code>app.asar</code> bundle</td>
+                      <td>Silences <code>level: 'silly'</code>; captures <code>write EIO</code></td>
+                      <td>Stops broken pipe stream termination</td>
+                    </tr>
+                    <tr>
+                      <td><strong>05</strong></td>
+                      <td>VS Code Extension</td>
+                      <td>Update channel lock &amp; hash check suppression</td>
+                      <td>Prevents background silent overwriting</td>
+                    </tr>
+                    <tr>
+                      <td><strong>06</strong></td>
+                      <td>Runtime Wrapper</td>
+                      <td>Enforces 8 enterprise flags (<code>--disable_telemetry</code>)</td>
+                      <td>Allows sidecars &amp; blocks beacons</td>
+                    </tr>
+                    <tr>
+                      <td><strong>07</strong></td>
+                      <td>Network Layer</td>
+                      <td>Strict local loopback on <code>127.0.0.1</code></td>
+                      <td>Zero prompt &amp; git metadata exfiltration</td>
+                    </tr>
+                    <tr>
+                      <td><strong>08</strong></td>
+                      <td>Quota Storage</td>
+                      <td>Flushes 16 cached rate-limit tokens in 0.002s</td>
+                      <td>Instant 429 reset with 100% chat preservation</td>
+                    </tr>
+                    <tr>
+                      <td><strong>09</strong></td>
+                      <td>Proxy Engine</td>
+                      <td>Direct SOCKS5 injection (10808/7890) + 15s KeepAlive</td>
+                      <td>Zero TUN friction; resists DPI drops</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Rollback Guarantee -->
+              <div class="custom-block note" id="doc-rollback">
+                <p class="custom-block-title">1-Click Clean Rollback Guarantee (.agybak)</p>
+                <p>
+                  Every binary modification is 100% reversible. Before altering a single byte, Cleaner automatically creates an untouched factory backup with the <code>.agybak</code> extension. Revert back to virgin factory state anytime via GUI <code>[Restore]</code> button or CLI <code>ag-cleaner restore</code>.
+                </p>
+              </div>
+
+              <!-- Zero Telemetry -->
+              <h2 id="doc-telemetry">Zero-Telemetry Engine &amp; Privacy Shield</h2>
+              <p>
+                By default, Google Antigravity continuously transmits background telemetry packets to Google endpoints. 
+                Our 8-flag enterprise isolation wrapper injects <code>--disable_telemetry=true</code> into the core binary runtime:
+              </p>
+
+              <ul>
+                <li><strong>100% Severed Phone-Home Channels:</strong> Google receives zero telemetry packets, zero git metadata, and zero IP trace beacons.</li>
+                <li><strong>100% Offline Local Execution:</strong> Operates entirely locally on <code>127.0.0.1</code> with zero external network requests during patching.</li>
+                <li><strong>Zero Chat Loss:</strong> Surgical quota reset targets only corrupt rate-limit cookies and DIPS caches. Prompts and project histories remain intact.</li>
+              </ul>
+
+              <!-- Smart Proxy Injection -->
+              <h2 id="doc-notun">Smart SOCKS5 Proxy Injection (One-Time Temporary Connect)</h2>
+              <p>
+                Cleaner eliminates the friction of configuring proxy settings or running CPU-intensive system-wide TUN adapters:
+              </p>
+
+              <div class="custom-block tip" id="proxy-smart-tip">
+                <p class="custom-block-title">Zero-Configuration &amp; Turn Off VPN After Launch</p>
+                <p>
+                  <strong>1. Zero Manual IP/Port Setup:</strong> Cleaner automatically detects your local proxy client (v2rayN, Nekoray, Clash, Sing-box) on standard SOCKS5 ports (10808 / 7890).<br>
+                  <strong>2. Connect Once &amp; Turn Off:</strong> Simply launch your proxy client, click <strong>[Launch IDE]</strong> (or run <code>ag-cleaner launch</code>), and once Antigravity establishes connection, <strong>you can safely turn off your VPN/proxy completely!</strong> The IDE maintains its authorized stream and works stably without keeping a VPN running in the background.<br>
+                  <strong>3. Only Reconnect If Dropped:</strong> Only in the rare event that your network node drops will you need to briefly enable the proxy again to re-authenticate.<br>
+                  <strong>4. Traditional VPNs:</strong> Full-tunnel VPNs (like Windscribe) that route the entire operating system require zero extra configuration.
+                </p>
+              </div>
+
+              <!-- Error Clinic -->
+              <h2 id="doc-errors">Real-World Error Troubleshooting Clinic</h2>
+              <p>Diagnoses and instant surgical fixes for the 5 most common failure modes encountered by Antigravity developers:</p>
+
+              <div class="custom-block danger">
+                <p class="custom-block-title">Error 01: Agent Terminated Due to Error (write EIO / Pipe Failure)</p>
+                <p>
+                  <strong>Quote:</strong> <em>"Agent terminated due to error. You can prompt the model to try again..."</em><br>
+                  <strong>Cause:</strong> Sudden pipe breakdown caused by verbose raw logging (<code>write EIO</code>) or middlebox TCP connection timeouts during long reasoning chains.<br>
+                  <strong>Fix:</strong> Click <strong>[Auto-Fix]</strong>. The ASAR Zero-Log Shield silences broken pipe exceptions and injects 15s TCP KeepAlive heartbeat socket tuning.
+                </p>
+              </div>
+
+              <div class="custom-block warning">
+                <p class="custom-block-title">Error 02: Network Issue Connecting to Server (DPI Severance)</p>
+                <p>
+                  <strong>Quote:</strong> <em>"There was a network issue connecting to the server, please try again. Error ID: 95ea05dd..."</em><br>
+                  <strong>Cause:</strong> Deep Packet Inspection (DPI) firewalls dropping idle gRPC streams or telemetry probes exposing real IP midway through conversation.<br>
+                  <strong>Fix:</strong> Launch with <code>ag-cleaner launch</code> (or GUI Launch IDE). Isolates streams over direct SOCKS5h socket with zero telemetry exfiltration.
+                </p>
+              </div>
+
+              <div class="custom-block tip">
+                <p class="custom-block-title">Error 03: Authentication Gating / 403 Forbidden (/auth-success)</p>
+                <p>
+                  <strong>Quote:</strong> <em>"Google 403. That's an error. Your client does not have permission to get URL /auth-success..."</em><br>
+                  <strong>Cause:</strong> Google regional check flagging browser login redirect from sanctioned regions.<br>
+                  <strong>Fix:</strong> Run <strong>[Auto-Fix]</strong>. Sets <code>hasValidAuth = true</code>, passes enterprise stubby flags, and clears poisoned auth tokens.
+                </p>
+              </div>
+
+              <div class="custom-block info">
+                <p class="custom-block-title">Error 04: Proxy Connection Refused (dial tcp 127.0.0.1:10808)</p>
+                <p>
+                  <strong>Quote:</strong> <em>"proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"</em><br>
+                  <strong>Cause:</strong> Local proxy client (Xray, Clash, Sing-box, NekoBox) is closed or listening on a different port (e.g. 7890 / 2080).<br>
+                  <strong>Fix:</strong> Run <code>ag-cleaner doctor</code>. Automatically scans open local proxy ports and re-configures IDE routing instantly.
+                </p>
+              </div>
+
+              <!-- Benchmarks -->
+              <h2 id="doc-benchmarks">Live System Benchmarks &amp; Test Logs</h2>
+              <div class="vp-table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th>Measured Value</th>
+                      <th>Verification Source</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>In-Memory Pattern Scanning</strong></td>
+                      <td><code>1,901.84 MB/s (~1.9 GB/s)</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/benchmarks.log" target="_blank" rel="noopener noreferrer">benchmarks.log</a></td>
+                      <td><span class="badge-ok">Verified</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>171MB Binary Patch Duration</strong></td>
+                      <td><code>0.23 seconds</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/benchmarks.log" target="_blank" rel="noopener noreferrer">benchmarks.log</a></td>
+                      <td><span class="badge-ok">Verified</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Doctor Concurrent Audit</strong></td>
+                      <td><code>~2.5 seconds</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/live_system_test.log" target="_blank" rel="noopener noreferrer">live_system_test.log</a></td>
+                      <td><span class="badge-ok">Verified</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Surgical 429 Cache Flush</strong></td>
+                      <td><code>16 artifacts in 0.002s</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/live_system_test.log" target="_blank" rel="noopener noreferrer">live_system_test.log</a></td>
+                      <td><span class="badge-ok">0 Chat Loss</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Comparison -->
+              <h2 id="doc-comparison">Comparison Matrix</h2>
+              <div class="vp-table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th>Python Patchers</th>
+                      <th>DLL Injectors</th>
+                      <th>⚡ Antigravity Cleaner Pro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Language &amp; Runtime</strong></td>
+                      <td>Python 3 (requires pip)</td>
+                      <td>Windows C++ / DLL</td>
+                      <td><strong>Pure Go (Zero runtime)</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>User Interface</strong></td>
+                      <td>Terminal stdout</td>
+                      <td>Basic console</td>
+                      <td><strong>Standalone GUI + Lipgloss TUI</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>No-TUN Proxy Launcher</strong></td>
+                      <td>❌ Forces root TUN</td>
+                      <td>❌ None</td>
+                      <td><strong>✅ Direct SOCKS5 10808/7890</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Zero-Log ASAR Shield</strong></td>
+                      <td>❌ None</td>
+                      <td>❌ None</td>
+                      <td><strong>✅ Catches write EIO crashes</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Surgical 429 Reset</strong></td>
+                      <td>❌ Wipes all chat history</td>
+                      <td>❌ Deletes everything</td>
+                      <td><strong>✅ Cleans cache, 0 chat loss</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- FAQ -->
+              <h2 id="doc-faq">Frequently Asked Questions</h2>
+              <div class="faq-entry">
+                <h3>Is Antigravity Cleaner safe to run on my system?</h3>
+                <p>Yes. 100% auditable open-source code under Apache 2.0. Cleaner runs completely locally on <code>127.0.0.1</code> with zero internet access required during patching. It contains no shady DLLs, no telemetry beacons, and passes continuous GitHub CodeQL and Govulncheck automated security audits.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>Will running Cleaner wipe my conversation history or project workspaces?</h3>
+                <p>Zero Chat Loss Guarantee. Unlike alternative scripts that destructively delete your entire <code>User/globalStorage</code> folder, Antigravity Cleaner's surgical 429 reset flushes only the 16 corrupted rate-limit cookies and DIPS cache tokens. Your chat history, login session, and workspace settings remain 100% intact.</p>
+              </div>
+
+            </main>
+
+            <!-- Document Footer -->
+            <footer class="VPDocFooter">
+              <div class="meta">
+                <span>License: Apache 2.0 (100% Free &amp; Open-Source)</span>
+                <span>•</span>
+                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+              </div>
+              <div class="manifesto">
+                "Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders." — <strong>@dalroot</strong>
+              </div>
+            </footer>
+
+          </div>
+        </div>
+
+        <!-- PERSIAN DOCUMENTATION CONTAINER -->
+        <div class="VPDoc-container doc-fa">
+          <div class="content">
+            <main class="main">
+              
+              <!-- نان‌ریزه (Breadcrumbs) -->
+              <div class="VPBreadcrumb">
+                <span>مستندات</span> &gt; <span class="current">معماری و راهنمای کاربری</span>
+              </div>
+
+              <!-- عنوان اصلی داکیومنت -->
+              <h1 id="fa-doc-intro">معماری و راهنمای جامع Antigravity Cleaner</h1>
+              <p class="lead">
+                ابزار مستقل و فوق‌سریع سیستمی بر پایه زبان خالص Go جهت خنثی‌سازی تحریم‌های منطقه‌ای و خطای ۴۰۳ گوگل، 
+                قطع کامل سرویس‌های تله‌متری و رهگیری اطلاعات، مهار کرش‌های ناگهانی استریم ترمینال (<code>write EIO</code>) با شیلد بدون لاگ ASAR، 
+                و تزریق هوشمند پروکسی محلی بدون نیاز به درگیر کردن کارت شبکه در مود سنگین TUN.
+              </p>
+
+              <!-- بخش: بررسی کشور اکانت گوگل -->
+              <h2 id="fa-doc-country">بررسی کشور ثبت‌شده در حساب کاربری گوگل</h2>
+              <p>
+                گوگل دسترسی کاربران به مدل‌های پیشرفته هوش مصنوعی Antigravity را بر اساس تاریخچه کشور ثبت‌شده در حساب کاربری اعتبارسنجی می‌کند. 
+                پیش از اجرای ابزار برای نخستین بار، توصیه می‌شود در کمتر از ۳۰ ثانیه وضعیت کشور اکانت خود را بررسی فرمایید:
+              </p>
+
+              <div class="custom-block tip">
+                <p class="custom-block-title">فرم رسمی تایید کشور حساب کاربری گوگل</p>
+                <p>
+                  به <a href="https://policies.google.com/country-association-form?hl=en-US&source=policies-site" target="_blank" rel="noopener noreferrer"><strong>فرم رسمی تعیین کشور گوگل (Country Association Form)</strong></a> مراجعه کنید. 
+                  اگر در فرم، کشوری غیرتحریمی (مانند ایالات متحده یا آلمان) درج شده باشد، اکانت شما کاملاً آماده است. چنانچه کشور تحریم‌شده ثبت است، با روشن کردن پروکسی گزینه <em>"I frequently use a VPN"</em> را انتخاب و ثبت کنید یا یک حساب کاربری تازه ایجاد نمایید.
+                </p>
+              </div>
+
+              <!-- بخش: نصب سریع یک‌خطی -->
+              <h2 id="fa-doc-install">نصب سریع یک‌خطی (CLI &amp; GUI)</h2>
+              <p>
+                سریع‌ترین روش برای دریافت آخرین نسخه باینری کامپایل‌شده روی سیستم‌عامل‌های مختلف بدون نیاز به هیچ ابزار جانبی:
+              </p>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">bash (Linux &amp; macOS)</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code>curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code></pre>
+              </div>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">powershell (Windows)</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code>irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code></pre>
+              </div>
+
+              <!-- =============================================================
+                   بخش: راهنمای لانچر گرافیکی
+                   ============================================================= -->
+              <h2 id="fa-gui-guide">🖥️ گزینه اول: لانچر گرافیکی مستقل (بدون نیاز به نصب، خالص Go)</h2>
+              <p>
+                توسعه‌یافته با زبان نیتیو خالص Go به عنوان یک فایل اجرایی مستقل و بدون وابستگی: 
+                <strong>۱۰۰٪ پرتابل و بدون نیاز به نصب یا پیش‌نیاز نرم‌افزاری (بدون نیاز به Python، Node.js، pip یا کتابخانه‌های DLL متفرقه)</strong>. 
+                تنها با دوبار کلیک بر روی فایل اجرایی، پنجره سبک دسکتاپ باز شده و فرایند هوشمند ۳ مرحله‌ای در دسترس شما قرار می‌گیرد:
+              </p>
+
+              <div class="vp-steps-guide">
+                
+                <div class="step-card">
+                  <div class="step-num">گام ۱</div>
+                  <div class="step-body">
+                    <h3>کلیک روی [ ① ⚡ Auto-Fix ]</h3>
+                    <p>
+                      دکمه اصلی را فشار داده و ۲ الی ۳ ثانیه منتظر بمانید. ابزار Cleaner به صورت خودکار پچ سطح کدهای ماشین را به موتور هسته اعمال کرده، 
+                      محدودیت‌های منطقه‌ای CLI را خنثی می‌سازد، پرچم <code>isGoogleInternal</code> را در فرانت‌اند الکترون فعال نموده، و شیلد بدون لاگ ASAR را تزریق می‌کند. 
+                      پس از پایان، پیام سبز رنگ در کادر وضعیت ظاهر می‌شود: <code>✔ STEP 1 DONE! Next: Click [ ② 🚀 Launch IDE ]</code>.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-num">گام ۲</div>
+                  <div class="step-body">
+                    <h3>کلیک روی [ ② 🚀 Launch IDE ] (اتصال موقت و سپس خاموش کردن VPN)</h3>
+                    <p>
+                      ابزار به طور خودکار پورت‌های باز پروکسی کلاینت‌های محلی شما (v2rayN، Nekoray، Clash، Sing-box) را اسکن کرده و نرم‌افزار را با تنظیمات پروکسی مستقیم به اجرا درمی‌آورد.
+                    </p>
+                    <div class="custom-block tip" style="margin-top: 12px;">
+                      <p class="custom-block-title">قاعده طلایی اتصال هوشمند پروکسی (فقط یک‌بار اتصال)</p>
+                      <p>
+                        کلاینت پروکسی محلی خود را فقط یک‌بار برای برقراری اتصال اولیه و احراز هویت IDE روشن کنید. 
+                        <strong>بلافاصله پس از باز شدن و برقراری ارتباط IDE، می‌توانید فیلترشکن خود را کاملاً خاموش کنید!</strong> 
+                        ابزار بدون نیاز به مود پرمصرف TUN و بدون درگیر کردن ترافیک کل سیستم به فعالیت پایدار خود ادامه می‌دهد (تنها در صورت افتادن ارتباط یا تعویض کانفیگ، مجدداً یک‌بار آن را روشن فرمایید).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-num">گام ۳</div>
+                  <div class="step-body">
+                    <h3>کلیک روی [ ③ 📌 Create Shortcut ]</h3>
+                    <p>
+                      جهت راحتی کار، یک کلیک روی این دکمه کافیست تا آیکون میانبر هوشمند Antigravity روی دسکتاپ و استارت‌منوی شما ایجاد شود. 
+                      این آیکون حاوی تمامی فلگ‌های قطع تله‌متری و هدایت مستقیم پروکسی است؛ در دفعات بعدی نیازی به باز کردن Cleaner نخواهید داشت و می‌توانید مستقیماً IDE را اجرا نمایید.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- =============================================================
+                   بخش: مرجع خط فرمان (CLI)
+                   ============================================================= -->
+              <h2 id="fa-cli-guide">⌨️ گزینه دوم: مرجع خط فرمان (CLI) و اتوماسیون شل</h2>
+              <p>
+                برای توسعه‌دهندگان و کاربران حرفه‌ای لینوکس، مک و ویندوز که اتوماسیون شل یا کار با ترمینال را ترجیح می‌دهند. 
+                ابزار Cleaner مجهز به یک داشبورد تعاملی زیبا (TUI) با کتابخانه Lipgloss است:
+              </p>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">bash</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code># Launch the interactive terminal dashboard (TUI)
+antigravity-cleaner
+
+# Surgical 429 quota cache reset (preserves 100% of chats and logins)
+antigravity-cleaner --clean
+
+# Apply all 9 deep machine-code binary patches directly
+antigravity-cleaner --force
+
+# Launch IDE with direct SOCKS5 local proxy routing
+antigravity-cleaner --proxy=socks5://127.0.0.1:10808
+
+# Run full system diagnostics and port audit
+antigravity-cleaner --doctor
+
+# Restore factory untouched state from backup (.agybak)
+antigravity-cleaner --rollback</code></pre>
+              </div>
+
+              <!-- بخش: عیب‌یابی سیستم (Doctor) -->
+              <h2 id="fa-doc-doctor">🩺 ابزار عیب‌یابی و سنجش سلامت سیستم (Doctor)</h2>
+              <p>
+                دستور <code>antigravity-cleaner --doctor</code> با بررسی همزمان و موازی وضعیت پورت‌های لوکال، مجوزهای دسترسی باینری، 
+                سلامت پچ‌های اعمال‌شده و لاگ‌های تله‌متری، عیب‌یابی کاملی از سیستم در کمتر از ۲.۵ ثانیه به شما تحویل می‌دهد:
+              </p>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">Terminal Output</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code>[✓] Binary Path: ~/.local/share/Google/Antigravity/antigravity
+[✓] SHA-256 Checksum: Verified against factory manifest
+[✓] Machine-Code Byte Patch: RAX+8 hasValidAuth = 1 (Active)
+[✓] Telemetry Shield: 8/8 enterprise isolation flags injected
+[✓] Zero-Log ASAR Shield: EIO pipe handler active (Console silencing enabled)
+[✓] Local Proxy Detection: Port 10808 active (SOCKS5 Ready)
+[✓] Cache Token Integrity: 0 corrupt DIPS entries, 0 chat loss
+[✓] System Doctor Status: HEALTHY (All checks passed in 2.48s)</code></pre>
+              </div>
+
+              <!-- بخش: معماری ۹ پچ باینری -->
+              <h2 id="fa-doc-layers">معماری عمیق ۹ پچ سطح کدهای باینری ماشین</h2>
+              <p>
+                برخلاف اسکریپت‌های سطحی پایتونی که صرفاً فایل‌های متنی را تغییر می‌دهند، Cleaner مستقیماً بایت‌های اجرایی ماشین را در سطح موتور هسته و فرانت‌اند الکترون بازنویسی می‌کند:
+              </p>
+
+              <div class="vp-table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>لایه پچ</th>
+                      <th>تارگت اجرایی</th>
+                      <th>منطق بازنویسی ماشین</th>
+                      <th>دستاورد مهندسی</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>لایه ۱</strong></td>
+                      <td><code>core.engine.bin</code></td>
+                      <td><code>RAX+8 hasValidAuth = 1</code></td>
+                      <td>خنثی‌سازی کامل خطای ۴۰۳ و تحریم‌های مکانی</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۲</strong></td>
+                      <td><code>core.engine.bin</code></td>
+                      <td>بای‌پس شرط <code>CountryCode != IR/CU/SY</code></td>
+                      <td>رفع بلوکه شدن منطقه‌ای پردازش مدل‌ها</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۳</strong></td>
+                      <td><code>workbench.desktop.main.js</code></td>
+                      <td>تزریق <code>isGoogleInternal = true</code></td>
+                      <td>فعال‌سازی قابلیت‌ها و سهمیه‌های ویژه مهندسی</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۴</strong></td>
+                      <td><code>app.asar (ASAR Shield)</code></td>
+                      <td>رهگیری خطای پایپ کنسول <code>write EIO</code></td>
+                      <td>جلوگیری از قطع ناگهانی و هنگ ایجنت حین فکر کردن</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۵</strong></td>
+                      <td><code>argv.json flags</code></td>
+                      <td>غیرفعال‌سازی ۸ فلگ ارسال تله‌متری</td>
+                      <td>توقف کامل ارسال پرامپت‌ها و گزارش‌های کرش</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۶</strong></td>
+                      <td><code>network.config</code></td>
+                      <td>تزریق پروکسی مستقیم SOCKS5 بدون TUN</td>
+                      <td>ترافیک مستقیم ۱۰۸۰۸/۷۸۹۰ بدون داغ شدن سیستم</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۷</strong></td>
+                      <td><code>cli.wrapper</code></td>
+                      <td>بای‌پس گیتینگ احراز هویت در CLI</td>
+                      <td>اجرای بی‌نقص تمامی دستورات ترمینالی</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۸</strong></td>
+                      <td><code>filesystem</code></td>
+                      <td>پشتیبان‌گیری بایت‌به‌بایت <code>.agybak</code></td>
+                      <td>بازگشت به وضعیت دست‌نخورده کارخانه در ۱ ثانیه</td>
+                    </tr>
+                    <tr>
+                      <td><strong>لایه ۹</strong></td>
+                      <td><code>globalStorage/DIPS</code></td>
+                      <td>پاکسازی جراحی توکن‌های محدودیت ۴۲۹</td>
+                      <td>ریست محدودیت سهمیه با حفظ ۱۰۰٪ تاریخچه چت‌ها</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- بخش: حریم خصوصی و زیرو تله‌متری -->
+              <h2 id="fa-doc-telemetry">سپر حریم خصوصی و قطع کامل تله‌متری</h2>
+              <p>
+                در نسخه خام Antigravity، صدها درخواست زمینه‌ای به سرورهای تله‌متری گوگل فرستاده می‌شود که حاوی پرامپت‌ها، ساختار پروژه‌ها، هش کامیت‌های گیت و شناسه‌های آی‌پی کاربر است. 
+                ابزار Cleaner با اعمال ۸ فلگ ایزولاسیون شرکتی، ارتباط با تمامی دامنه‌های تله‌متری زیر را مسدود می‌سازد:
+              </p>
+
+              <div class="custom-block warning">
+                <p class="custom-block-title">دامنه‌های مسدودشده توسط شیلد حریم خصوصی</p>
+                <p>
+                  <code>telemetry.googleapis.com</code> • <code>crashlytics.google.com</code> • <code>vortex.data.google.com</code> • <code>play.googleapis.com/log</code> • <code>firebaselogging-pa.googleapis.com</code>
+                </p>
+              </div>
+
+              <!-- بخش: تزریق هوشمند پروکسی (بدون TUN) -->
+              <h2 id="fa-doc-notun">تزریق هوشمند پروکسی محلی (بدون نیاز به مود TUN)</h2>
+              <p>
+                فعال‌سازی مود TUN در فیلترشکن‌ها باعث هدایت تمامی ترافیک سیستم، کندی شدید سرعت، مصرف بالای باتری و قطع اتصال سایر برنامه‌ها می‌شود. 
+                Cleaner با تزریق مستقیم فلگ‌های شبکه، تنها ترافیک موتور Antigravity را از طریق پورت محلی هدایت می‌کند:
+              </p>
+
+              <div class="custom-block tip">
+                <p class="custom-block-title">نحوه استفاده با کلاینت‌های محبوب</p>
+                <p>
+                  کافیست کلاینت پروکسی محلی خود (v2rayN پورت ۱۰۸۰۸، نکورای ۱۰۸۰۸ یا کلش ۷۸۹۰) را اجرا کنید. 
+                  ابزار به طور هوشمند پورت فعال را پیدا کرده و با آن متصل می‌شود. <strong>پس از اتصال، می‌توانید پروکسی را خاموش کنید</strong> تا IDE پایدار و بدون ایجاد ترافیک اضافه روی سیستم کار کند.
+                </p>
+              </div>
+
+              <!-- بخش: بازگشت تمیز ۱ کلیک -->
+              <h2 id="fa-doc-rollback">بازگشت سریع به تنظیمات دست‌نخورده کارخانه (.agybak)</h2>
+              <p>
+                امنیت سیستم شما اولویت اول ماست. ابزار پیش از اعمال هرگونه تغییر بر روی حتی یک بایت از فایل‌های هسته، یک نسخه پشتیبان تمیز با پسوند <code>.agybak</code> در کنار فایل اصلی ذخیره می‌کند:
+              </p>
+
+              <div class="vp-code-block">
+                <div class="code-header">
+                  <span class="lang-tag">bash</span>
+                  <button class="copy-code-btn" type="button">Copy</button>
+                </div>
+                <pre class="code-pre"><code># Revert all patched binaries back to pristine factory state
+antigravity-cleaner --rollback</code></pre>
+              </div>
+
+              <!-- =============================================================
+                   بخش: کلینیک رفع ۵ خطای رایج
+                   ============================================================= -->
+              <h2 id="fa-doc-errors">کلینیک تخصصی رفع ۵ خطای رایج Antigravity</h2>
+              <p>
+                تحلیل فنی و راه‌حل قطعی تمامی ارورهایی که توسعه‌دهندگان با آن مواجه می‌شوند:
+              </p>
+
+              <div class="error-clinic-card">
+                <div class="error-header">
+                  <span class="badge-err">Error 1</span>
+                  <h3>خطای قطع ناگهانی و قفل شدن ایجنت حین فکر کردن (<code>write EIO</code>)</h3>
+                </div>
+                <p class="error-cause"><strong>علت فنی:</strong> تلاش موتور الکترون برای نوشتن لاگ‌های حجیم تله‌متری روی پایپ استاندارد کنسول که در صورت پر شدن یا قطع سوکت باعث کرش جریان پردازش می‌شود.</p>
+                <p class="error-solution"><strong>راه‌حل با Cleaner:</strong> تزریق شیلد بدون لاگ ASAR؛ این پچ کدهای ارسال لاگ زاید را بی‌صدا کرده و با ایجاد هندلر خطای سوکت، مانع از کرش کردن ایجنت می‌شود.</p>
+              </div>
+
+              <div class="error-clinic-card">
+                <div class="error-header">
+                  <span class="badge-err">Error 2</span>
+                  <h3>خطای شبکه و شکست دست‌دادن TLS (<code>Network Issue / Handshake Failure</code>)</h3>
+                </div>
+                <p class="error-cause"><strong>علت فنی:</strong> تداخل سیستم فایروال یا بازرسی بسته‌های اینترنت با ارتباط امن TLS بین کلاینت و سرورهای هوش مصنوعی گوگل.</p>
+                <p class="error-solution"><strong>راه‌حل با Cleaner:</strong> کلیک روی دکمه [Launch IDE] جهت اتصال خودکار از طریق پروکسی سالم لوکال بدون نشت ترافیک DNS.</p>
+              </div>
+
+              <div class="error-clinic-card">
+                <div class="error-header">
+                  <span class="badge-err">Error 3</span>
+                  <h3>خطای عدم دسترسی در کشور شما (<code>Error 403 Forbidden / Not Available</code>)</h3>
+                </div>
+                <p class="error-cause"><strong>علت فنی:</strong> چک سخت‌گیرانه گوگل بر روی کدهای باینری ماشین موتور اصلی و خواندن کدهای منطقه‌ای IP.</p>
+                <p class="error-solution"><strong>راه‌حل با Cleaner:</strong> اجرای گزینه [Auto-Fix] در رابط گرافیکی یا اجرای دستور <code>antigravity-cleaner --force</code> جهت پچ دائمی شرط احراز هویت.</p>
+              </div>
+
+              <div class="error-clinic-card">
+                <div class="error-header">
+                  <span class="badge-err">Error 4</span>
+                  <h3>خطای رد اتصال به پورت پروکسی (<code>ECONNREFUSED 127.0.0.1:10808</code>)</h3>
+                </div>
+                <p class="error-cause"><strong>علت فنی:</strong> کلاینت پروکسی سیستم (مانند v2rayN یا Nekoray) بسته است یا پورت لوکال فعال روی پورت دیگری (مثل ۷۸۹۰ کلش) تنظیم شده است.</p>
+                <p class="error-solution"><strong>راه‌حل با Cleaner:</strong> کلاینت فیلترشکن خود را باز کنید یا دستور <code>antigravity-cleaner --doctor</code> را اجرا نمایید تا پورت صحیح شناسایی شود.</p>
+              </div>
+
+              <div class="error-clinic-card">
+                <div class="error-header">
+                  <span class="badge-err">Error 5</span>
+                  <h3>خطای اتمام سهمیه یا لیمیت کاذب (<code>Error 429 Too Many Requests</code>)</h3>
+                </div>
+                <p class="error-cause"><strong>علت فنی:</strong> ذخیره کوکی‌های خراب و باکت‌های محدودیت توکن در دیتابیس لوکال DIPS مرورگر الکترون که پس از تعویض آی‌پی ریست نمی‌شوند.</p>
+                <p class="error-solution"><strong>راه‌حل با Cleaner:</strong> اجرای دستور <code>antigravity-cleaner --clean</code> جهت پاکسازی جراحی ۱۶ فایل سشن در ۲ میلی‌ثانیه با حفظ ۱۰۰٪ تاریخچه چت‌ها.</p>
+              </div>
+
+              <!-- بخش: بنچمارک‌های زنده -->
+              <h2 id="fa-doc-benchmarks">بنچمارک‌های زنده عملکرد و پردازش داده</h2>
+              <p>
+                گزارش‌های رسمی ثبت‌شده توسط تیم تست در آزمایشگاه لینوکس و ویندوز:
+              </p>
+
+              <div class="vp-table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>شاخص عملکرد</th>
+                      <th>معیار ثبت‌شده</th>
+                      <th>فایل لاگ تاییدیه</th>
+                      <th>وضعیت</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>سرعت اسکن باینری موتور</strong></td>
+                      <td><code>1,901 MB/s</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/benchmarks.log" target="_blank" rel="noopener noreferrer">benchmarks.log</a></td>
+                      <td><span class="badge-ok">تایید شده</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>مدت‌زمان اعمال پچ فایل باینری ۱۷۱ مگابایتی</strong></td>
+                      <td><code>0.23 ثانیه</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/benchmarks.log" target="_blank" rel="noopener noreferrer">benchmarks.log</a></td>
+                      <td><span class="badge-ok">تایید شده</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>تست موازی بررسی سلامت سیستم (Doctor)</strong></td>
+                      <td><code>حدود ۲.۵ ثانیه</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/live_system_test.log" target="_blank" rel="noopener noreferrer">live_system_test.log</a></td>
+                      <td><span class="badge-ok">تایید شده</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>پاکسازی جراحی سهمیه خطای ۴۲۹</strong></td>
+                      <td><code>۱۶ فایل در ۰.۰۰۲ ثانیه</code></td>
+                      <td><a href="https://github.com/tawroot/antigravity-cleaner/blob/main/docs/test-reports/live_system_test.log" target="_blank" rel="noopener noreferrer">live_system_test.log</a></td>
+                      <td><span class="badge-ok">حفظ ۱۰۰٪ چت‌ها</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- بخش: جدول مقایسه تخصصی -->
+              <h2 id="fa-doc-comparison">جدول مقایسه تخصصی با سایر ابزارها</h2>
+              <div class="vp-table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>قابلیت فنی</th>
+                      <th>اسکریپت‌های پایتون</th>
+                      <th>اینجکتورهای DLL</th>
+                      <th>⚡ Antigravity Cleaner Pro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>زبان و پیش‌نیاز اجرایی</strong></td>
+                      <td>پایتون ۳ (نیاز به pip)</td>
+                      <td>کدهای C++ / DLL ویندوز</td>
+                      <td><strong>زبان خالص Go (بدون نیاز به هیچ ابزار)</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>رابط کاربری</strong></td>
+                      <td>خروجی متن ترمینال</td>
+                      <td>کنسول ساده متنی</td>
+                      <td><strong>پنجره گرافیکی مستقل + ترمینال TUI</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>هدایت پروکسی بدون TUN</strong></td>
+                      <td>❌ اجبار به مود سنگین TUN</td>
+                      <td>❌ ندارد</td>
+                      <td><strong>✅ تزریق مستقیم به ۱۰۸۰۸ یا ۷۸۹۰</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>شیلد بدون لاگ ASAR</strong></td>
+                      <td>❌ ندارد</td>
+                      <td>❌ ندارد</td>
+                      <td><strong>✅ مهار کامل کرش‌های write EIO</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>ریست جراحی خطای ۴۲۹</strong></td>
+                      <td>❌ حذف کل پوشه چت‌ها</td>
+                      <td>❌ حذف تمامی دیتابیس‌ها</td>
+                      <td><strong>✅ پاکسازی کش با حفظ ۱۰۰٪ چت‌ها</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- بخش: سوالات متداول -->
+              <h2 id="fa-doc-faq">سوالات متداول و امنیت</h2>
+              <div class="faq-entry">
+                <h3>آیا استفاده از Antigravity Cleaner برای سیستم من کاملاً امن است؟</h3>
+                <p>بله، ۱۰۰٪ متن‌باز و قابل بررسی تحت مجوز رسمی Apache 2.0. ابزار کاملاً بر روی آدرس محلی <code>127.0.0.1</code> اجرا شده و در حین اعمال پچ‌ها نیازی به اینترنت ندارد. فاقد هرگونه فایل DLL خارجی یا تله‌متری پنهان بوده و تمامی ممیزی‌های امنیتی خودکار GitHub CodeQL و Govulncheck را با موفقیت پشت سر گذاشته است.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>آیا اجرای Cleaner باعث پاک شدن تاریخچه چت‌ها یا پروژه‌های من می‌شود؟</h3>
+                <p>تضمین حفظ ۱۰۰٪ تاریخچه چت‌ها (Zero Chat Loss). برخلاف اسکریپت‌های غیررسمی دیگر که کل پوشه <code>globalStorage</code> را به صورت مخرب پاک می‌کنند، متد جراحی Cleaner صرفاً ۱۶ کوکی مسموم‌شده مربوط به لیمیت سهمیه را پاکسازی می‌کند. تاریخچه چت‌ها، فایل‌های پروژه و سشن لاگین شما کاملاً دست‌نخورده باقی می‌ماند.</p>
+              </div>
+
+            </main>
+
+            <!-- فوتر داکیومنت -->
+            <footer class="VPDocFooter">
+              <div class="meta">
+                <span>مجوز انتشار: Apache 2.0 (کاملاً رایگان و متن‌باز)</span>
+                <span>•</span>
+                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer">مخزن گیت‌هاب پروژه</a>
+              </div>
+              <div class="manifesto">
+                «تقدیم به هر توسعه‌دهنده‌ای که از درون فیلتر و از بیرون تحریم شده است. کد مرز نمی‌شناسد.» — <strong>@dalroot</strong>
+              </div>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR: Table of Contents -->
+      <aside class="VPToc" aria-label="Table of Contents">
+        <div class="VPToc-container toc-en">
+          <div class="title">On this page</div>
+          <nav class="toc-nav">
+            <ul class="toc-list">
+              <li><a href="#doc-intro" class="toc-link active">Introduction</a></li>
+              <li><a href="#doc-country" class="toc-link">Country Check</a></li>
+              <li><a href="#gui-guide" class="toc-link">🖥️ Standalone GUI Guide</a></li>
+              <li><a href="#cli-guide" class="toc-link">⌨️ Terminal CLI Guide</a></li>
+              <li><a href="#doc-layers" class="toc-link">9 Deep Patches</a></li>
+              <li><a href="#doc-telemetry" class="toc-link">Zero-Telemetry</a></li>
+              <li><a href="#doc-errors" class="toc-link">All 5 Errors</a></li>
+              <li><a href="#doc-benchmarks" class="toc-link">Live Benchmarks</a></li>
+              <li><a href="#doc-comparison" class="toc-link">Comparison Matrix</a></li>
+              <li><a href="#doc-faq" class="toc-link">FAQ &amp; Security</a></li>
+            </ul>
+          </nav>
+        </div>
+              <!-- PERSIAN TOC CONTAINER -->
+        <div class="VPToc-container toc-fa">
+          <div class="title">در این صفحه</div>
+          <nav class="toc-nav">
+            <ul class="toc-list">
+              <li><a href="#fa-doc-intro" class="toc-link active">مقدمه و معماری</a></li>
+              <li><a href="#fa-doc-country" class="toc-link">بررسی کشور اکانت</a></li>
+              <li><a href="#fa-gui-guide" class="toc-link">🖥️ لانچر گرافیکی مستقل</a></li>
+              <li><a href="#fa-cli-guide" class="toc-link">⌨️ مرجع خط فرمان (CLI)</a></li>
+              <li><a href="#fa-doc-layers" class="toc-link">۹ پچ کدهای باینری</a></li>
+              <li><a href="#fa-doc-telemetry" class="toc-link">سپر حریم خصوصی</a></li>
+              <li><a href="#fa-doc-errors" class="toc-link">کلینیک ۵ خطای رایج</a></li>
+              <li><a href="#fa-doc-benchmarks" class="toc-link">بنچمارک‌های زنده</a></li>
+              <li><a href="#fa-doc-comparison" class="toc-link">جدول مقایسه</a></li>
+              <li><a href="#fa-doc-faq" class="toc-link">سوالات متداول</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>

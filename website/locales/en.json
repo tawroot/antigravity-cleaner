@@ -1,0 +1,93 @@
+{
+  "brand": {
+    "name": "Antigravity Cleaner",
+    "version": "v5"
+  },
+  "nav": {
+    "home": "Home",
+    "docs": "Documentation",
+    "gui": "GUI Guide",
+    "cli": "CLI Reference",
+    "benchmarks": "Benchmarks",
+    "download": "Download Free",
+    "search": "Search"
+  },
+  "hero": {
+    "badge": "Google Sanctions Bypass • Zero-Telemetry • Zero-Log ASAR",
+    "title": "Antigravity Cleaner",
+    "subtitle": "Bypass Google Regional Sanctions & Enforce Zero-Telemetry",
+    "tagline": "Permanently neutralize strict Google Error 403 regional blocks, eliminate write EIO agent crashes with the Zero-Log ASAR shield, and inject direct proxy routing without TUN mode lag.",
+    "exploreDocs": "Explore Documentation",
+    "guiGuide": "🖥️ Standalone GUI Launcher",
+    "cliGuide": "⌨️ Terminal CLI Guide"
+  },
+  "features": {
+    "f1_title": "Regional Sanctions Bypass",
+    "f1_desc": "Direct machine-code binary patching (RAX+8 hasValidAuth = 1) completely resolves Error 403 Forbidden and regional eligibility blocks.",
+    "f2_title": "Zero-Telemetry Privacy",
+    "f2_desc": "Enforces 8-flag enterprise isolation. Permanently severs background exfiltration of prompts, terminal history, git commits, and real IP beacons.",
+    "f3_title": "Zero-Log ASAR Shield",
+    "f3_desc": "Silences verbose Google telemetry logging and handles broken console pipe errors (write EIO) to stop mid-stream agent crashes.",
+    "f4_title": "Smart SOCKS5 Proxy Injection",
+    "f4_desc": "Routes IDE traffic directly into local v2rayN/Clash clients (10808 / 7890). Enable proxy once to connect, then turn VPN off! Zero TUN lag.",
+    "f5_title": "0.002s Surgical 429 Reset",
+    "f5_desc": "Purges corrupted rate-limit cookies and token buckets across 16 targets in 2 milliseconds while strictly preserving 100% of chats and logins.",
+    "f6_title": "1-Click Clean Rollback",
+    "f6_desc": "Before altering a single byte, Cleaner creates untouched factory .agybak backups. Revert back to virgin factory state in 1 second.",
+    "f7_title": "1,901 MB/s Pure Go Binary",
+    "f7_desc": "100% CGO-free, single standalone executable with zero external runtimes (no Python, no Node.js, no pip, no unsafe third-party DLLs).",
+    "f8_title": "Standalone GUI Launcher & CLI",
+    "f8_desc": "Standalone GUI desktop window with 3-step automated workflow, plus interactive Lipgloss TUI terminal dashboard."
+  },
+  "cta": {
+    "badge": "⭐ Free & Open-Source Community",
+    "title": "Help Us Keep Antigravity Unchained",
+    "text": "Antigravity Cleaner is completely free, 100% offline, and open-source under Apache-2.0. Give us a star on GitHub to support ongoing machine-code patches and anti-sanction updates!",
+    "starBtn": "Star on GitHub",
+    "downloadBtn": "Download Latest Release"
+  },
+  "proxyNotice": {
+    "title": "Smart SOCKS5 Proxy Injection (One-Time Temporary Connect)",
+    "desc": "Cleaner automatically scans your local active proxy ports with zero manual setup. Simply turn on your local client (such as v2rayN, Nekoray, Clash, or Sing-box) once, launch the IDE, and after it establishes connection, you can safely TURN OFF YOUR VPN completely! The IDE keeps working stably without keeping a VPN active. If your connection drops, briefly turn on the proxy again."
+  },
+  "downloads": {
+    "badge": "🚀 Zero-Install Portable Binaries",
+    "title": "Download Antigravity Cleaner Pro",
+    "subtitle": "Native single-binary executables for Windows, macOS, and Linux. No dependencies, 100% offline & open-source.",
+    "win_title": "Windows",
+    "win_desc": "Windows 10, 11 & Server (64-bit)",
+    "win_btn": "Download for Windows (x64 .exe)",
+    "win_feat1": "Single Standalone Executable (.exe)",
+    "win_feat2": "Includes Standalone GUI + Terminal CLI",
+    "win_feat3": "Zero Dependencies (No Python or External DLLs)",
+    "mac_title": "macOS",
+    "mac_desc": "macOS 12+ (Monterey, Ventura, Sonoma, Sequoia)",
+    "mac_arm": "Apple Silicon (M1/M2/M3/M4)",
+    "mac_intel": "Intel x64",
+    "mac_feat1": "Universal Support for Apple Silicon & Intel",
+    "mac_feat2": "Interactive Lipgloss TUI Dashboard in Terminal",
+    "mac_feat3": "Pure Go (No CGO, No Homebrew Required)",
+    "linux_title": "Linux",
+    "linux_desc": "Ubuntu, Debian, Fedora, Arch & WSL2",
+    "linux_x64": "Linux x86_64 (amd64)",
+    "linux_arm64": "Linux aarch64 (arm64)",
+    "linux_feat1": "Pre-compiled Standalone ELF Binaries",
+    "linux_feat2": "Rich TUI Dashboard + Comprehensive CLI Flags",
+    "linux_feat3": "Compatible with all distros, servers & WSL2",
+    "portable_badge": "Zero-Install • 100% Portable",
+    "all_releases": "Looking for previous versions, source code, or SHA-256 checksums?",
+    "releases_link": "View All Releases on GitHub →",
+    "cli_prefer": "Prefer command line installation?",
+    "cli_jump": "Use Terminal One-Liner above ↑"
+  },
+  "footer": {
+    "desc": "Autonomous zero-telemetry and anti-sanction toolkit compiled in native pure Go. 100% portable single executable with zero installation needed.",
+    "exploreDocs": "Explore Documentation",
+    "license": "Released under the Apache 2.0 License. Open-source & 100% offline.",
+    "manifesto": "\"Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders.\"",
+    "docs": "Documentation",
+    "github": "GitHub",
+    "telegram": "📢 Telegram: @dallrep",
+    "reportBug": "Report Bug"
+  }
+}
