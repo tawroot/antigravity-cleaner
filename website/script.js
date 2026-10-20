@@ -5,6 +5,21 @@
 (function () {
   'use strict';
 
+  // Safe Umami Event Tracking helper
+  function trackUmami(name, data) {
+    if (window.umami && typeof window.umami.track === 'function') {
+      try {
+        if (data) {
+          window.umami.track(name, data);
+        } else {
+          window.umami.track(name);
+        }
+      } catch (e) {
+        // Safe silent fallback
+      }
+    }
+  }
+
   // 1. Theme Management (Light mode default)
   const root = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
@@ -26,6 +41,7 @@
     const nextTheme = isDark ? 'light' : 'dark';
     root.setAttribute('data-theme', nextTheme);
     localStorage.setItem(THEME_KEY, nextTheme);
+    trackUmami('theme_toggle', { theme: nextTheme });
   }
 
   if (themeToggle) {
@@ -41,6 +57,7 @@
   const brandLink = document.getElementById('brandLink');
 
   function showView(viewName, targetId) {
+    trackUmami('view_switch', { view: viewName, target: targetId || 'overview' });
     if (viewName === 'docs') {
       viewHome.classList.remove('active');
       viewDocs.classList.add('active');
@@ -163,6 +180,8 @@
     copyCodeBtn.addEventListener('click', async () => {
       const activeCodeEl = (codePs && codePs.style.display !== 'none') ? codePs : codeCurl;
       const cleanCmd = activeCodeEl ? (activeCodeEl.getAttribute('data-raw') || activeCodeEl.textContent) : '';
+      const tabName = (codePs && codePs.style.display !== 'none') ? 'powershell' : 'curl';
+      trackUmami('copy_cli_command', { tab: tabName });
       try {
         await navigator.clipboard.writeText(cleanCmd.trim());
         copyCodeBtn.classList.add('copied');
@@ -186,6 +205,7 @@
       if (pre) {
         try {
           await navigator.clipboard.writeText(pre.textContent.trim());
+          trackUmami('copy_docs_snippet');
           const orig = btn.textContent;
           btn.textContent = 'Copied!';
           setTimeout(() => { btn.textContent = orig; }, 2000);
@@ -293,6 +313,7 @@
     });
 
     localStorage.setItem(LANG_KEY, lang);
+    trackUmami('language_change', { lang: lang });
   }
 
   if (langToggleBtn && langDropdown) {
