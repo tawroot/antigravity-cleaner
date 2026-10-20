@@ -1,0 +1,45 @@
+name: "❓ پرسش و عیب‌یابی شبکه / Question & Troubleshooting"
+description: "پرسش درباره خطاهای لوکیشن (400/403)، نشت آی‌پی، تنظیمات پروکسی یا راهنمایی استفاده"
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 💡 قبل از ارسال این پرسش / Before submitting:
+        - اگر با خطای **`HTTP 400: User location is not supported`** یا **`HTTP 403`** مواجه شده‌اید:
+          1. این خطاها ناشی از **نشت IPv6، نشت DNS یا سرور فیلترشکن** است و باگ نرم‌افزاری نیست.
+          2. ادیتور را کاملاً ببندید و یک‌بار در کلینر دکمه **Clean** (یا دستور `clean`) را بزنید تا توکن‌های مسموم تحریم تخلیه شوند.
+          3. برنامه را حتماً از طریق کلینر با دکمه **Launch** (یا شورتکات ساخته‌شده `Antigravity-NoTUN`) اجرا کنید.
+          4. کشور اکانت خود را در [Google Country Association](https://policies.google.com/country-association-form?hl=en-US&source=policies-site) بررسی کنید.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "شرح پرسش یا مشکل شبکه / Question or Network Issue Description"
+      description: "توضیح دهید چه مشکلی در اتصال یا تنظیمات رخ داده است / Describe your question or connectivity issue."
+      placeholder: "مثال: هنگام ارسال پرامپت با خطای ۴۰۰ مواجه می‌شوم با اینکه پروکسی متصل است..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: "سیستم‌عامل / Operating System"
+      options:
+        - "Windows"
+        - "Linux"
+        - "macOS"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: doctor_logs
+    attributes:
+      label: "خروجی داکتر یا پیام خطا / Doctor Output or Error Message"
+      description: "خروجی دستور `doctor` یا متن کامل ارور را اینجا قرار دهید:"
+      placeholder: "Paste output of `antigravity doctor` or error message here..."
+      render: shell
+    validations:
+      required: false

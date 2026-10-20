@@ -7,7 +7,8 @@ body:
     attributes:
       value: |
         ### ⚡ سپاس از گزارش شما / Thank you for helping improve Antigravity Cleaner!
-        قبل از ارسال، پیشنهاد می‌شود دستور `antigravity auto-fix` را یک‌بار اجرا کنید.
+        - قبل از ارسال، پیشنهاد می‌شود دستور `antigravity auto-fix` را یک‌بار اجرا کنید.
+        - **توجه:** اگر با خطای **`HTTP 400 (User location is not supported)`** یا خطای پروکسی مواجه شدید، این مورد ناشی از نشت لوکیشن/فیلترشکن است و باگ کلینر نیست. لطفاً از قالب **«❓ پرسش و عیب‌یابی شبکه»** استفاده نمایید.
 
   - type: textarea
     id: description
