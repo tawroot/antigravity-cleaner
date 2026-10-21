@@ -1,0 +1,93 @@
+{
+  "brand": {
+    "name": "Antigravity Cleaner",
+    "version": "v5"
+  },
+  "nav": {
+    "home": "首页",
+    "docs": "文档",
+    "gui": "GUI 指南",
+    "cli": "CLI 参考",
+    "benchmarks": "性能基准",
+    "download": "免费下载",
+    "search": "搜索"
+  },
+  "hero": {
+    "badge": "Google 制裁绕过 • 零遥测保护 • Zero-Log ASAR 护盾",
+    "title": "Antigravity Cleaner",
+    "subtitle": "面向 Google Antigravity 的全自动制裁绕过与零遥测隐私引擎",
+    "tagline": "永久终结 Google Error 403 严格地域权限封锁，通过 Zero-Log ASAR 护盾彻底根除 write EIO 导致的智能体崩溃，并提供免 TUN 模式的高速直连代理注入。",
+    "exploreDocs": "查阅技术文档",
+    "guiGuide": "🖥️ 独立桌面 GUI 启动器",
+    "cliGuide": "⌨️ 终端 CLI 命令行手册"
+  },
+  "features": {
+    "f1_title": "跨越区域制裁封锁",
+    "f1_desc": "在底层机器码级别重写鉴权校验逻辑（RAX+8 hasValidAuth = 1），彻底根除 403 Forbidden 权限拒绝及账号区域受限错误。",
+    "f2_title": "零遥测企业级隐私",
+    "f2_desc": "强制注入 8 大企业级隔离参数，彻底斩断用户提示词、终端历史、Git 仓库元数据及真实公网 IP 信标的后台静默回传通道。",
+    "f3_title": "Zero-Log ASAR 护盾",
+    "f3_desc": "静音 Google 冗长的遥测日志，优雅处理 broken console pipe 管道断开错误（write EIO），杜绝智能体在流式输出中途突然崩溃。",
+    "f4_title": "智能 SOCKS5 代理直连",
+    "f4_desc": "将 IDE 流量直接导流至本地 v2rayN/Clash 等客户端端口（10808 / 7890）。仅需连接一次，握手成功后即可完全关闭 VPN！无 TUN 延迟。",
+    "f5_title": "0.002秒手术级 429 配额重置",
+    "f5_desc": "在 2 毫秒内跨 16 个缓存目标深度重置损坏的速率限制与配额令牌池，同时严格 100% 完整保留历史对话与本地登录状态。",
+    "f6_title": "一键极速纯净回滚",
+    "f6_desc": "在修改任何底层字节之前，自动创建原始 .agybak 备份镜像。1 秒内随时无损还原至官方出厂初始状态。",
+    "f7_title": "1,901 MB/s 纯 Go 独立二进制",
+    "f7_desc": "100% 无 CGO 依赖的单一独立可执行文件，无需安装任何外部运行环境（零 Python、零 Node.js、零 pip、零不安全外部动态库）。",
+    "f8_title": "独立 GUI 界面与 CLI 终端",
+    "f8_desc": "提供简洁高效的 3 步自动化桌面窗口，同时内置交互式 Lipgloss TUI 终端全功能控制面板。"
+  },
+  "cta": {
+    "badge": "⭐ 免费开源社区驱动",
+    "title": "共同守护自由纯净的 Antigravity 体验",
+    "text": "Antigravity Cleaner 完全免费、100% 离线运行，并在 Apache-2.0 协议下完全开源。欢迎在 GitHub 上为我们点亮 Star，支持持续的机器码补丁研发与反制裁更新！",
+    "starBtn": "在 GitHub 上点亮 Star",
+    "downloadBtn": "下载最新正式版"
+  },
+  "proxyNotice": {
+    "title": "智能 SOCKS5 代理注入（临时握手直连模式）",
+    "desc": "Cleaner 具备全自动本地代理端口探测能力，免去一切繁琐手动配置。只需开启一次本地代理软件（如 v2rayN、Nekoray、Clash 或 Sing-box）并启动 IDE，完成初次握手后即可安全彻底关闭 VPN！IDE 将在无全局代理环境下持续稳定高速运行。若网络偶发中断，只需重新点开代理几秒即可自动恢复。"
+  },
+  "downloads": {
+    "badge": "🚀 绿色免安装便携版",
+    "title": "下载 Antigravity Cleaner Pro",
+    "subtitle": "专为 Windows、macOS 与 Linux 编译的原生单一二进制。零依赖、100% 离线安全、完全开源透明。",
+    "win_title": "Windows",
+    "win_desc": "Windows 10、11 及 Server（64位）",
+    "win_btn": "下载 Windows 版 (x64 .exe)",
+    "win_feat1": "单一独立绿色便携可执行文件 (.exe)",
+    "win_feat2": "内置桌面图形化 GUI + 终端 CLI 命令行",
+    "win_feat3": "零外部依赖（无需 Python 或任何外部 DLL）",
+    "mac_title": "macOS",
+    "mac_desc": "macOS 12+ (Monterey, Ventura, Sonoma, Sequoia)",
+    "mac_arm": "Apple Silicon (M1/M2/M3/M4)",
+    "mac_intel": "Intel x64",
+    "mac_feat1": "全面原生支持 Apple Silicon 与 Intel 双架构",
+    "mac_feat2": "终端内置交互式 Lipgloss TUI 控制台",
+    "mac_feat3": "纯 Go 编译（无 CGO 依赖，无需 Homebrew）",
+    "linux_title": "Linux",
+    "linux_desc": "Ubuntu, Debian, Fedora, Arch 与 WSL2",
+    "linux_x64": "Linux x86_64 (amd64)",
+    "linux_arm64": "Linux aarch64 (arm64)",
+    "linux_feat1": "预先编译好的独立 ELF 原生二进制程序",
+    "linux_feat2": "丰富的终端 TUI 仪表板 + 全功能 CLI 参数",
+    "linux_feat3": "全面适配各类发行版、服务器环境及 WSL2",
+    "portable_badge": "免安装 • 100% 便携运行",
+    "all_releases": "需要历史版本、完整源代码或 SHA-256 安全哈希校验？",
+    "releases_link": "前往 GitHub Releases 查阅全部版本 →",
+    "cli_prefer": "更倾向于使用终端命令行一键安装？",
+    "cli_jump": "使用上方终端一键命令 ↑"
+  },
+  "footer": {
+    "desc": "采用纯 Go 语言原生编译的高性能自动化零遥测与反制裁工具。100% 绿色便携独立程序，无需任何安装配置。",
+    "exploreDocs": "查阅技术文档",
+    "license": "基于 Apache 2.0 开源协议发布。100% 离线、透明、安全。",
+    "manifesto": "\"谨以此工具献给所有身处困境、心怀理想的开发者。技术没有边界，代码终获自由。\"",
+    "docs": "文档指南",
+    "github": "GitHub 源码",
+    "telegram": "📢 Telegram: @dallrep",
+    "reportBug": "反馈问题与建议"
+  }
+}

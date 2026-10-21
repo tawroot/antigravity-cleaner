@@ -259,6 +259,13 @@
   const langOptions = document.querySelectorAll('.lang-option');
   const LANG_KEY = 'vp_lang_mode';
 
+  const LANG_CONFIG = {
+    en: { label: 'English', dir: 'ltr' },
+    fa: { label: 'فارسی', dir: 'rtl' },
+    ru: { label: 'Русский', dir: 'ltr' },
+    zh: { label: '简体中文', dir: 'ltr' }
+  };
+
   let locales = {};
 
   async function loadLocale(lang) {
@@ -280,19 +287,17 @@
   }
 
   async function setLanguage(lang) {
+    const config = LANG_CONFIG[lang] || LANG_CONFIG.en;
     const data = await loadLocale(lang);
-    if (!data) return;
+    const fallbackData = (lang !== 'en') ? await loadLocale('en') : null;
+    if (!data && !fallbackData) return;
 
-    // Set html lang and direction (Persian = RTL)
+    // Set html lang and direction
     root.setAttribute('lang', lang);
-    if (lang === 'fa' || lang === 'ar') {
-      root.setAttribute('dir', 'rtl');
-    } else {
-      root.setAttribute('dir', 'ltr');
-    }
+    root.setAttribute('dir', config.dir);
 
     if (currentLangLabel) {
-      currentLangLabel.textContent = lang === 'fa' ? 'فارسی' : 'English';
+      currentLangLabel.textContent = config.label;
     }
 
     langOptions.forEach(opt => {
@@ -303,10 +308,11 @@
       }
     });
 
-    // Translate all elements with data-i18n
+    // Translate all elements with data-i18n (with automatic fallback to English)
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      const val = getNestedTranslation(data, key);
+      const val = (data ? getNestedTranslation(data, key) : null) || 
+                  (fallbackData ? getNestedTranslation(fallbackData, key) : null);
       if (val) {
         el.textContent = val;
       }

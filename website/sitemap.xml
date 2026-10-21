@@ -4,7 +4,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,7 +12,7 @@
   <!-- Troubleshooting Page (Cornerstone) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/troubleshooting.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -20,7 +20,7 @@
   <!-- Features Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/features.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -28,7 +28,7 @@
   <!-- Download Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/download.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -36,7 +36,7 @@
   <!-- Docs Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/docs.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -44,7 +44,7 @@
   <!-- Pricing Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/pricing.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -52,7 +52,7 @@
   <!-- FAQ Page -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -60,7 +60,7 @@
   <!-- Blog Index -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -68,7 +68,7 @@
   <!-- Technical Article 1: Google Antigravity 403 Forbidden & Region Lock (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -76,7 +76,7 @@
   <!-- Technical Article 2: Configure V2Ray, Clash & SOCKS5 without TUN Mode (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -84,7 +84,7 @@
   <!-- Technical Article 3: Iranian Developer Guide (Farsi) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -92,7 +92,7 @@
   <!-- Technical Article 4: Russian Developer Guide (Russian) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -100,7 +100,7 @@
   <!-- LLMs.txt for AI Search Engines -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/llms.txt</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
