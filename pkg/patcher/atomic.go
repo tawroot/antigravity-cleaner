@@ -1,12 +1,67 @@
 package patcher
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
+	"syscall"
 )
+
+// IsAppManagementError checks if an error was caused by macOS App Management (EPERM / operation not permitted)
+func IsAppManagementError(err error) bool {
+	if err == nil {
+		return false
+	}
+	if runtime.GOOS != "darwin" {
+		return false
+	}
+	if errors.Is(err, syscall.EPERM) {
+		return true
+	}
+	msg := strings.ToLower(err.Error())
+	return strings.Contains(msg, "operation not permitted")
+}
+
+// FormatAppManagementError wraps an error with actionable guidance for macOS App Management consent
+func FormatAppManagementError(operation, targetPath string, err error) error {
+	if !IsAppManagementError(err) {
+		return err
+	}
+	return fmt.Errorf("%w\n\n"+
+		"🍎 [macOS App Management Protection Blocked This Action]\n"+
+		"macOS prevented %s at: %s\n"+
+		"To resolve this:\n"+
+		"  1. Open System Settings → Privacy & Security → App Management\n"+
+		"  2. Allow your Terminal (or the application running Antigravity Cleaner)\n"+
+		"  (Quick command: open \"x-apple.systempreferences:com.apple.preference.security?Privacy_AppManagement\")",
+		err, operation, targetPath)
+}
+
+// CheckAppBundleWriteability verifies that the target application or file path is writeable on macOS
+func CheckAppBundleWriteability(targetPath string) (string, error) {
+	if targetPath == "" {
+		return "", fmt.Errorf("target path is empty")
+	}
+
+	testDir := targetPath
+	if fi, err := os.Stat(targetPath); err == nil && !fi.IsDir() {
+		testDir = filepath.Dir(targetPath)
+	}
+
+	tmpFile, err := os.CreateTemp(testDir, ".ag_canary_*")
+	if err != nil {
+		return "", FormatAppManagementError("bundle write test", testDir, err)
+	}
+	tmpName := tmpFile.Name()
+	_ = tmpFile.Close()
+	_ = os.Remove(tmpName)
+
+	return "Write permissions verified", nil
+}
 
 // AtomicWrite replaces targetPath with data atomically, preserving file permissions.
 func AtomicWrite(targetPath string, data []byte) error {
@@ -20,7 +75,7 @@ func AtomicWrite(targetPath string, data []byte) error {
 	// Create temp file in same directory to ensure it is on the same filesystem
 	tmpFile, err := os.CreateTemp(dir, ".ag_patch_*")
 	if err != nil {
-		return fmt.Errorf("failed to create temp file in %s: %w", dir, err)
+		return FormatAppManagementError("creating temporary file for atomic write", dir, err)
 	}
 	tmpName := tmpFile.Name()
 	defer os.Remove(tmpName) // Cleanup on failure
@@ -52,7 +107,7 @@ func AtomicWrite(targetPath string, data []byte) error {
 
 	// Atomic rename replaces the target inode
 	if err := os.Rename(tmpName, targetPath); err != nil {
-		return fmt.Errorf("failed to atomically rename %s to %s: %w", tmpName, targetPath, err)
+		return FormatAppManagementError("atomically replacing target file", targetPath, err)
 	}
 
 	return nil
@@ -79,7 +134,7 @@ func BackupFile(filePath string) (string, error) {
 
 	dst, err := os.OpenFile(bakPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, info.Mode().Perm())
 	if err != nil {
-		return "", fmt.Errorf("cannot create backup file: %w", err)
+		return "", FormatAppManagementError("creating backup file", bakPath, err)
 	}
 
 	if _, err := io.Copy(dst, src); err != nil {
@@ -108,7 +163,7 @@ func RestoreFile(filePath string) error {
 
 	bakData, err := os.ReadFile(bakPath)
 	if err != nil {
-		return fmt.Errorf("failed to read backup: %w", err)
+		return FormatAppManagementError("reading backup file", bakPath, err)
 	}
 
 	return AtomicWrite(filePath, bakData)

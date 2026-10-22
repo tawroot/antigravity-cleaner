@@ -215,6 +215,92 @@ func scanWindowsProcess(targetName string) string {
 	return ""
 }
 
+// isBackupOrTempFile returns true if fileName ends with backup or temporary suffixes
+func isBackupOrTempFile(fileName string) bool {
+	low := strings.ToLower(fileName)
+	suffixes := []string{".agybak", ".bin", ".bak", ".tmp", ".old", ".orig"}
+	for _, s := range suffixes {
+		if strings.HasSuffix(low, s) {
+			return true
+		}
+	}
+	return false
+}
+
+// scoreBinaryForArchitecture returns a preference score for a binary file matching runtime.GOARCH
+func scoreBinaryForArchitecture(fileName string) int {
+	low := strings.ToLower(fileName)
+	arch := runtime.GOARCH
+
+	// Exact matches / high affinity
+	switch arch {
+	case "arm64":
+		if strings.Contains(low, "arm64") || strings.Contains(low, "aarch64") {
+			return 100
+		}
+		if strings.Contains(low, "arm") {
+			return 95 // Prioritize _arm on Apple Silicon
+		}
+	case "amd64":
+		if strings.Contains(low, "x64") || strings.Contains(low, "amd64") || strings.Contains(low, "x86_64") {
+			return 100
+		}
+	}
+
+	// Generic fallback names
+	if low == "language_server" || low == "language_server.exe" {
+		return 50
+	}
+
+	// Any other language_server binary
+	if strings.HasPrefix(low, "language_server") {
+		return 10
+	}
+
+	return 0
+}
+
+// DetectLanguageServerInDir dynamically scans binDir for any language_server binary matching host architecture.
+// Completely eliminates hardcoded binary name dependencies across all platforms.
+func DetectLanguageServerInDir(binDir string) string {
+	entries, err := os.ReadDir(binDir)
+	if err != nil {
+		return ""
+	}
+
+	var bestMatch string
+	bestScore := -1
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+		name := entry.Name()
+		lowName := strings.ToLower(name)
+
+		if !strings.HasPrefix(lowName, "language_server") {
+			continue
+		}
+		if isBackupOrTempFile(name) {
+			continue
+		}
+
+		fullPath := filepath.Join(binDir, name)
+		fi, err := os.Stat(fullPath)
+		if err != nil || fi.IsDir() {
+			continue
+		}
+
+		score := scoreBinaryForArchitecture(name)
+		if score > bestScore {
+			bestScore = score
+			bestMatch = fullPath
+		}
+	}
+
+	return bestMatch
+}
+
 // GetLanguageServerBinaryNames returns architecture-aware binary names across Linux, macOS, and Windows
 func GetLanguageServerBinaryNames() []string {
 	switch runtime.GOOS {
@@ -234,6 +320,7 @@ func GetLanguageServerBinaryNames() []string {
 	case "darwin":
 		if runtime.GOARCH == "arm64" {
 			return []string{
+				"language_server_macos_arm",
 				"language_server_macos_arm64",
 				"language_server_darwin_arm64",
 				"language_server_macos_x64",
@@ -244,6 +331,7 @@ func GetLanguageServerBinaryNames() []string {
 		return []string{
 			"language_server_macos_x64",
 			"language_server_darwin_x64",
+			"language_server_macos_arm",
 			"language_server_macos_arm64",
 			"language_server_darwin_arm64",
 			"language_server",
@@ -301,15 +389,20 @@ func probeRootsForLanguageServer(roots []string) string {
 		filepath.Join("Resources", "app", "extensions", "antigravity", "bin"),
 		filepath.Join("Resources", "bin"),
 	}
-	binNames := GetLanguageServerBinaryNames()
 
 	for _, root := range roots {
 		if root == "" {
 			continue
 		}
 		for _, sub := range subpaths {
-			for _, binName := range binNames {
-				candidate := filepath.Join(root, sub, binName)
+			dir := filepath.Join(root, sub)
+			// 1. Dynamic Zero-Hardcode discovery inside the directory
+			if found := DetectLanguageServerInDir(dir); found != "" {
+				return found
+			}
+			// 2. Direct fallback checks for static names
+			for _, binName := range GetLanguageServerBinaryNames() {
+				candidate := filepath.Join(dir, binName)
 				if fi, err := os.Stat(candidate); err == nil && !fi.IsDir() {
 					return candidate
 				}
@@ -412,6 +505,7 @@ func GetStandardLanguageServerCandidates() []string {
 	}
 
 	macBins := []string{
+		"language_server_macos_arm",
 		"language_server_macos_arm64",
 		"language_server_macos_x64",
 		"language_server_darwin_arm64",
@@ -433,6 +527,27 @@ func GetStandardLanguageServerCandidates() []string {
 	}
 
 	return candidates
+}
+
+// findMacAppsWithMdfind searches for Antigravity installations across macOS using Spotlight
+func findMacAppsWithMdfind() []string {
+	if runtime.GOOS != "darwin" {
+		return nil
+	}
+	cmd := exec.Command("mdfind", "kMDItemFSName == 'Antigravity*.app'")
+	out, err := cmd.Output()
+	if err != nil {
+		return nil
+	}
+	var apps []string
+	scanner := bufio.NewScanner(bytes.NewReader(out))
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line != "" {
+			apps = append(apps, line)
+		}
+	}
+	return apps
 }
 
 // FindLanguageServerModular searches for language_server with live process probing and full logging
@@ -471,6 +586,17 @@ func FindLanguageServerModular(logger LogFunc) string {
 			roots := getCandidateRoots(p)
 			if found := probeRootsForLanguageServer(roots); found != "" {
 				logger("Discovered language_server via PATH (%s): %s", p, found)
+				return found
+			}
+		}
+	}
+
+	// 3.6. Dynamic Spotlight discovery on macOS (finds app even if installed in non-standard location)
+	if runtime.GOOS == "darwin" {
+		for _, app := range findMacAppsWithMdfind() {
+			roots := getCandidateRoots(app)
+			if found := probeRootsForLanguageServer(roots); found != "" {
+				logger("Discovered language_server via Spotlight (%s): %s", app, found)
 				return found
 			}
 		}

@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"sync"
 	"time"
@@ -47,6 +48,26 @@ func RunDiagnostics(verbose bool) []DiagnosticItem {
 			HumanSummary: "Not Found in Standard Path",
 			DebugDetails: "Check /opt, /usr/share or ~/.local",
 		})
+	}
+
+	// 1.5. macOS App Management Writeability Check
+	if runtime.GOOS == "darwin" && appPath != "" {
+		writeStatus, writeErr := patcher.CheckAppBundleWriteability(appPath)
+		if writeErr != nil {
+			items = append(items, DiagnosticItem{
+				Name:         "App Management",
+				Status:       "WARN",
+				HumanSummary: "Write Blocked by macOS (Grant App Management)",
+				DebugDetails: writeErr.Error(),
+			})
+		} else {
+			items = append(items, DiagnosticItem{
+				Name:         "App Management",
+				Status:       "OK",
+				HumanSummary: "Permissions OK (Bundle Writeable)",
+				DebugDetails: writeStatus,
+			})
+		}
 	}
 
 	// 2. Language Server Core

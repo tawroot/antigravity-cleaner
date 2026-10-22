@@ -145,3 +145,43 @@ func TestWrapperManagerCustomBinaryName(t *testing.T) {
 		t.Errorf("restored content mismatch: got %q, want %q", string(restored), originalContent)
 	}
 }
+
+func TestWrapperManagerMacArmBinary(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Create language_server_macos_arm
+	macArmName := "language_server_macos_arm"
+	macArmPath := filepath.Join(tempDir, macArmName)
+	originalContent := "#!/bin/sh\necho mac-arm-binary"
+	if err := os.WriteFile(macArmPath, []byte(originalContent), 0755); err != nil {
+		t.Fatalf("failed to create fake mac arm binary: %v", err)
+	}
+
+	// Initialize WrapperManager using directory path only
+	mgr := NewWrapperManager(tempDir, func(format string, args ...interface{}) {})
+
+	if mgr.GetBinaryName() != macArmName {
+		t.Errorf("expected binary name %q, got %q", macArmName, mgr.GetBinaryName())
+	}
+
+	opts := DefaultEnterpriseFlagsOptions()
+	if err := mgr.InstallWrapper(opts); err != nil {
+		t.Fatalf("failed to install wrapper on mac arm binary: %v", err)
+	}
+
+	if !mgr.IsWrapperInstalled() {
+		t.Errorf("expected wrapper to be installed")
+	}
+
+	if err := mgr.RemoveWrapper(); err != nil {
+		t.Fatalf("failed to remove wrapper: %v", err)
+	}
+
+	restored, err := os.ReadFile(macArmPath)
+	if err != nil {
+		t.Fatalf("failed to read restored binary: %v", err)
+	}
+	if string(restored) != originalContent {
+		t.Errorf("restored content mismatch: got %q, want %q", string(restored), originalContent)
+	}
+}

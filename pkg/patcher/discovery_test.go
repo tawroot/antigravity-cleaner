@@ -182,3 +182,48 @@ func TestFindRunningLanguageServerOnCurrentHost(t *testing.T) {
 	found := FindRunningLanguageServer(logger)
 	t.Logf("Discovery result for running language_server: %s (logged %d messages)", found, len(logged))
 }
+
+func TestDetectLanguageServerInDir(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	// 1. Empty dir returns empty
+	if found := DetectLanguageServerInDir(tmpDir); found != "" {
+		t.Errorf("expected empty string in empty dir, got %q", found)
+	}
+
+	// 2. Create backup files only -> should be ignored
+	_ = os.WriteFile(filepath.Join(tmpDir, "language_server.agybak"), []byte("bak"), 0755)
+	_ = os.WriteFile(filepath.Join(tmpDir, "language_server.bin"), []byte("bin"), 0755)
+	_ = os.WriteFile(filepath.Join(tmpDir, "language_server.bak"), []byte("bak"), 0755)
+	if found := DetectLanguageServerInDir(tmpDir); found != "" {
+		t.Errorf("expected backup files to be ignored, got %q", found)
+	}
+
+	// 3. Create language_server_macos_arm (the exact filename from issue #30)
+	macArmPath := filepath.Join(tmpDir, "language_server_macos_arm")
+	if err := os.WriteFile(macArmPath, []byte("macho arm binary"), 0755); err != nil {
+		t.Fatalf("failed to create macArmPath: %v", err)
+	}
+
+	found := DetectLanguageServerInDir(tmpDir)
+	if found != macArmPath {
+		t.Errorf("DetectLanguageServerInDir() = %q; want %q", found, macArmPath)
+	}
+}
+
+func TestAppManagementHelpers(t *testing.T) {
+	// Nil error
+	if IsAppManagementError(nil) {
+		t.Errorf("nil error should not be AppManagementError")
+	}
+
+	// Test writeability check on valid dir
+	tmpDir := t.TempDir()
+	status, err := CheckAppBundleWriteability(tmpDir)
+	if err != nil {
+		t.Errorf("unexpected error on writeable tempdir: %v", err)
+	}
+	if status == "" {
+		t.Errorf("expected non-empty status string")
+	}
+}
