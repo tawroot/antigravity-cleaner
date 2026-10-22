@@ -2,509 +2,942 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fix Google Antigravity Errors: 403 Region Lock, 429 Quota & Middlebox Resets | Antigravity Cleaner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Antigravity Diagnostics &amp; Error Clinic | Fix 403, 429 &amp; write EIO | Antigravity Cleaner</title>
 
-    <!-- SEO & GEO Meta Tags -->
-    <meta name="description"
-        content="Fix Google Antigravity errors: 'Your current account is not eligible for Antigravity, because it is not currently available in your location', 'User location is not supported' (HTTP 400), Error 429 Quota Exceeded, and 'There was a network issue connecting to the server'. 100% offline open-source solution.">
-    <meta name="keywords"
-        content="Google Antigravity, Your current account is not eligible for Antigravity, Antigravity User location is not supported, Antigravity 400 error, Antigravity 403 region lock, Antigravity not available in your country, Antigravity 429 quota exceeded, Antigravity network issue connecting to server, Antigravity stream drop, Antigravity region bypass, Antigravity no TUN, Antigravity cleaner, open antigravity patcher, QNIX eligibility patcher, Antigravity proxy">
-    <meta name="author" content="Tawroot">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/troubleshooting.html">
+  <!-- SEO & Search Engine Optimization (GSC Insights Optimized) -->
+  <meta name="description"
+    content="Comprehensive troubleshooting guide for Google Antigravity: Fix 403 Forbidden region lock, 400 location not supported, 429 quota exhaustion, write EIO pipe errors, and clear Antigravity IDE cache. 100% offline open-source solution.">
+  <meta name="keywords"
+    content="clear antigravity ide cache, ubuntu uninstall antigravity, antigravity flush, Google Antigravity 403 forbidden, Your current account is not eligible for Antigravity, Antigravity User location is not supported, Antigravity 400 error, Antigravity 429 quota exceeded, Antigravity agent terminated due to error, write EIO, There was a network issue connecting to the server, proxyconnect tcp dial 127.0.0.1 10808 connection refused, Antigravity no TUN, Antigravity cleaner, Antigravity patcher, SOCKS5 proxy">
+  <meta name="author" content="Tawroot &amp; Community">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/troubleshooting.html">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/troubleshooting.html">
-    <meta property="og:title" content="Fix Google Antigravity Errors: 403 Region Lock, 429 Quota & Proxy Issues">
-    <meta property="og:description"
-        content="Step-by-step troubleshooting guide for Google Antigravity AI IDE. Fix 403 Forbidden region lock, 429 token limits, and proxy connection drops without TUN mode.">
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://tawroot.github.io/antigravity-cleaner/troubleshooting.html">
+  <meta property="og:title" content="Google Antigravity Diagnostics &amp; Error Clinic | Antigravity Cleaner">
+  <meta property="og:description"
+    content="Verified fixes for Google Antigravity Error 403, 429 Quota Exhaustion, write EIO pipe crashes, and loopback proxy routing without TUN latency.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Fix Google Antigravity Errors: 403 Region Lock & 429 Quota">
-    <meta name="twitter:description" content="100% offline open-source patcher and smart proxy launcher for Google Antigravity IDE.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fix Google Antigravity Errors: 403 Region Lock, 429 Quota &amp; write EIO">
+  <meta name="twitter:description" content="100% offline open-source diagnostics clinic and surgical patcher for Google Antigravity IDE.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/website/og-image.png">
 
-    <!-- Schema.org JSON-LD FAQPage (Optimized for AI Engines / Perplexity / ChatGPT) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How to fix Google Antigravity Error 403 Forbidden: Not Available in Your Country / Region Lock?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Google Antigravity enforces client-side eligibility gate checks in main.js, agy CLI, and extension.js alongside server-side Geo-IP verification. To fix this permanently: 1) Run 'antigravity-cleaner patch' or click [Auto-Fix] in Antigravity Cleaner Retro GUI to neutralize client-side region checks across all 4 core targets. 2) Launch with 'antigravity-cleaner launch' to inject an isolated SOCKS5/HTTP proxy directly into the IDE process without requiring root TUN mode."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How to fix Google Antigravity Error 429: Quota Exceeded / Too Many Requests?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Error 429 in Google Antigravity occurs when corrupted token caches and rate-limit counters freeze the agentic runtime. Run 'antigravity-cleaner clean' or click [Reset 429] in the GUI. This performs a surgical purge of temporary quota and telemetry cache files while strictly preserving your Google account login, session cookies, and workspace chat history."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How to run Google Antigravity with v2ray, Xray, Clash, or NekoBox without TUN mode?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "TUN mode creates a virtual network interface that slows down your system and causes Middlebox resets. Antigravity Cleaner solves this by launching Antigravity with '--proxy-server=socks5://127.0.0.1:<port>'. It automatically detects active proxy ports (10808 for v2ray/Xray, 2080 for NekoBox/Hiddify, 7890 for Clash) and routes only the IDE traffic through the proxy, leaving the rest of your system on direct high-speed internet."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why does Google Antigravity crash or disconnect during long code generation tasks?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "State-level firewalls and ISP Deep Packet Inspection (DPI) terminate idle TLS and Server-Sent Event (SSE) streams during long reasoning phases. Antigravity Cleaner's smart launcher configures TCP KeepAlive intervals (15 seconds), maintaining active gRPC and HTTP/2 multiplexed streams to Google's edge servers and preventing connection drops."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How to fix 'Your current account is not eligible for Antigravity, because it is not currently available in your location'?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "This error occurs because Antigravity checks account eligibility across three separate layers: local JavaScript bundles (main.js, agy CLI, extension.js), core binary eligibility gates (isGoogleInternal), and upstream API GeoIP headers. Running 'antigravity-cleaner patch all' neutralizes the local machine-code and JavaScript gate checks across all components, allowing your account to authenticate cleanly when paired with an active loopback proxy."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How to fix Antigravity Gemini: opaque 'User location is not supported' (HTTP 400)?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "HTTP 400 'User location is not supported' happens when outgoing API requests originate from an unsanctioned or unverified IP address. Instead of running a heavy system-wide TUN VPN, launch Antigravity with 'antigravity-cleaner launch'. It probes your local proxy ports (10808, 2080, 7890) and launches the IDE with targeted process-level proxy routing, resolving the 400 error immediately."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How to fix 'Unknown: There was a network issue connecting to the server, please try again.' in Antigravity?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "This message indicates that your streaming SSE connection to Google's inference servers was abruptly severed—often by ISP Middlebox firewalls or DPI filters timing out silent TLS connections while the AI model is thinking. Launching Antigravity via Antigravity Cleaner applies an aggressive 15-second TCP KeepAlive socket configuration that keeps the connection active and prevents sudden drops."
-          }
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon.png">
+
+  <!-- Schema.org FAQPage (Rich Snippets for Google & AI Engines) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to fix Google Antigravity Error 403 Forbidden: Region Lock / Not Available in Your Country?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google Antigravity enforces client-side eligibility checks in main.js, the agy CLI, and extension.js alongside upstream Geo-IP inspection. Run 'antigravity-cleaner patch all' to neutralize client-side region gates across all 4 targets, then launch with 'antigravity-cleaner launch' to route traffic through an isolated local loopback SOCKS5/HTTP proxy without requiring system-wide TUN mode."
         }
-      ]
-    }
-    </script>
-
-    <!-- TechArticle Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "Comprehensive Troubleshooting Guide for Google Antigravity IDE Errors",
-      "description": "Technical manual for bypassing Error 403 region blocks, resolving 429 token limits, and configuring smart proxy injection in Google Antigravity.",
-      "author": {
-        "@type": "Person",
-        "name": "Tawroot"
       },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Antigravity Cleaner Project",
-        "url": "https://tawroot.github.io/antigravity-cleaner/"
+      {
+        "@type": "Question",
+        "name": "How to clear Google Antigravity IDE cache and fix Error 429 Quota Exceeded?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Corrupted quota buckets and telemetry counters freeze the agent runtime in perpetual 429 states. Run 'antigravity-cleaner clean' or click [Reset 429] in the GUI. This executes a surgical purge of 16 temporary quota and telemetry cache files while strictly preserving your Google login cookies, preferences, and workspace chat history."
+        }
       },
-      "datePublished": "2025-01-15",
-      "dateModified": "2026-09-15"
+      {
+        "@type": "Question",
+        "name": "How to fix 'Agent terminated due to error' (write EIO broken pipe) in Antigravity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This error is triggered when verbose stdout/stderr logging fills the inter-process pipe or when ISP firewalls drop silent streaming inference connections. Antigravity Cleaner's Zero-Log ASAR shield silences raw output pipes and injects a 15-second TCP KeepAlive socket heartbeat to keep long reasoning tasks alive."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to fix 'proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused'?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This occurs when Antigravity is configured to route through a local proxy (like Xray or v2ray) that is either closed or listening on a different port. Run 'antigravity-cleaner doctor' to automatically scan active loopback ports (10808, 2080, 7890, 1080) and reconfigure IDE proxy settings dynamically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to fix 'There was an unexpected issue setting up your account. Failed to fetch'?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This error stems from corrupted DIPS database records and orphaned WebSocket caches in the application state. Running 'antigravity-cleaner clean' resets corrupted session state in under 0.01s without clearing your saved login tokens or chat archives."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to cleanly uninstall or flush Antigravity on Ubuntu Linux?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To completely purge Antigravity cache and application state on Ubuntu Linux, run 'antigravity-cleaner clean --deep' to purge cache, or remove config directories using 'rm -rf ~/.config/Antigravity' and '~/.antigravity'. Cleaner also offers an automated uninstaller via 'antigravity-cleaner uninstall'."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- TechArticle Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Google Antigravity Diagnostics & Error Clinic: Complete Technical Manual",
+    "description": "Step-by-step verified fixes for Error 403 Forbidden, 429 Quota Exhaustion, write EIO pipe errors, and No-TUN loopback proxy routing in Google Antigravity.",
+    "author": {
+      "@type": "Organization",
+      "name": "Tawroot & Community",
+      "url": "https://github.com/tawroot/antigravity-cleaner"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Antigravity Cleaner Project",
+      "url": "https://tawroot.github.io/antigravity-cleaner/"
+    },
+    "datePublished": "2025-01-15",
+    "dateModified": "2026-10-22"
+  }
+  </script>
+
+  <!-- Fonts: Inter, JetBrains Mono & Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Master VitePress Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="5aebb6c0-adab-434b-a907-ea20d6c5bc12" data-performance="true"></script>
+
+  <style>
+    /* Scoped Clinic Styles adhering 100% to VitePress variables */
+    .tb-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
     }
-    </script>
 
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@400;700&display=swap"
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=5.3.1-pro">
+    .tb-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-top: 20px;
+    }
 
-    <style>
-        .trouble-container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .tb-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
 
-        .error-card {
-            background: rgba(18, 24, 38, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 28px;
-            margin-bottom: 32px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-        }
+    .tb-badge-brand {
+      background: var(--vp-c-brand-soft);
+      color: var(--vp-c-brand);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
 
-        .error-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
+    .tb-badge-danger {
+      background: var(--ag-coral-soft);
+      color: var(--ag-coral);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
 
-        .badge-danger {
-            background: rgba(255, 0, 85, 0.15);
-            border: 1px solid #ff0055;
-            color: #ff0055;
-        }
+    .tb-badge-warning {
+      background: var(--ag-amber-soft);
+      color: var(--ag-amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
 
-        .badge-warning {
-            background: rgba(255, 170, 0, 0.15);
-            border: 1px solid #ffaa00;
-            color: #ffaa00;
-        }
+    .tb-badge-cyan {
+      background: var(--ag-cyan-soft);
+      color: var(--ag-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
 
-        .badge-info {
-            background: rgba(0, 240, 255, 0.15);
-            border: 1px solid #00f0ff;
-            color: #00f0ff;
-        }
+    .tb-badge-green {
+      background: var(--ag-green-soft);
+      color: var(--ag-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
 
-        .code-box {
-            background: #0b0f19;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 16px 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13.5px;
-            color: #00f0ff;
-            overflow-x: auto;
-            margin: 14px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .tb-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--vp-c-text-1);
+      margin-bottom: 16px;
+    }
 
-        .solution-list {
-            padding-left: 20px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin: 14px 0;
-        }
+    .tb-subtitle {
+      font-size: 1.125rem;
+      color: var(--vp-c-text-2);
+      max-width: 720px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
 
-        .solution-list li {
-            margin-bottom: 8px;
-        }
-    </style>
-    <script>(function(){const t=localStorage.getItem('ag_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();</script>
+    /* Quick Jump Pills */
+    .tb-jump-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .tb-jump-pill {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--vp-c-bg-elv);
+      border: 1px solid var(--vp-c-border);
+      color: var(--vp-c-text-2);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tb-jump-pill:hover {
+      color: var(--vp-c-brand);
+      border-color: var(--vp-c-brand);
+      background: var(--vp-c-brand-soft);
+      transform: translateY(-1px);
+    }
+
+    /* Clinic Cards */
+    .tb-card {
+      background: var(--vp-c-bg-elv);
+      border: 1px solid var(--vp-c-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-1);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tb-card:hover {
+      box-shadow: var(--shadow-2);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    .tb-card-hero {
+      border: 2px solid var(--vp-c-brand);
+      background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-bg-elv) 100%);
+    }
+
+    .tb-card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tb-card-h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--vp-c-text-1);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .tb-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--vp-c-text-3);
+    }
+
+    .tb-cause {
+      color: var(--vp-c-text-2);
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .tb-cause strong {
+      color: var(--vp-c-text-1);
+    }
+
+    /* Screenshot container */
+    .tb-screenshot-box {
+      margin: 20px 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--vp-c-border);
+      background: var(--vp-c-bg-soft);
+      box-shadow: var(--shadow-1);
+    }
+
+    .tb-screenshot-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .tb-screenshot-caption {
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: var(--vp-c-text-3);
+      background: var(--vp-c-bg-alt);
+      border-top: 1px solid var(--vp-c-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Terminal Code Block */
+    .tb-terminal {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      color: #38bdf8;
+      overflow-x: auto;
+      margin: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tb-terminal code {
+      color: #38bdf8;
+      font-family: var(--font-mono);
+      background: transparent;
+      padding: 0;
+      direction: ltr !important;
+      text-align: left !important;
+      unicode-bidi: isolate;
+    }
+
+    .tb-terminal-danger {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: #180d12;
+      color: #f87171;
+    }
+
+    .tb-terminal-danger code {
+      color: #fca5a5;
+    }
+
+    .tb-terminal-warning {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: #18140c;
+      color: #fbbf24;
+    }
+
+    .tb-terminal-warning code {
+      color: #fde68a;
+    }
+
+    .tb-copy-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .tb-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    /* Solution Steps */
+    .tb-solution-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--vp-c-text-1);
+      margin: 16px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tb-steps {
+      padding-inline-start: 22px;
+      color: var(--vp-c-text-2);
+      font-size: 14.5px;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    .tb-steps li {
+      margin-bottom: 8px;
+    }
+
+    .tb-steps li strong {
+      color: var(--vp-c-text-1);
+    }
+
+    .tb-note {
+      font-size: 13px;
+      color: var(--vp-c-text-3);
+      margin-top: 8px;
+    }
+
+    /* Live CTA Footer Box */
+    .tb-cta-card {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--vp-c-bg-soft);
+      border: 1px solid var(--vp-c-border);
+      border-radius: var(--radius-lg);
+      margin-top: 40px;
+    }
+
+    .tb-cta-card h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--vp-c-text-1);
+      margin-bottom: 10px;
+    }
+
+    .tb-cta-card p {
+      color: var(--vp-c-text-2);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      font-size: 15px;
+    }
+
+    .tb-cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bg-animation"></div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">
-                    <img src="logo.png" alt="Antigravity Cleaner Logo" style="width: 36px; height: 36px; border-radius: 8px; margin-inline-end: 8px;">
-                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
-                </a>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" data-lang-key="home">Home</a></li>
-                    <li><a href="features.html" data-lang-key="features">Features</a></li>
-                    <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
-                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
-                    <li><a href="troubleshooting.html" class="active" data-lang-key="troubleshooting">Troubleshooting</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
-                </ul>
-                <div class="nav-controls">
-                    <div class="custom-lang-selector" id="customLangSelector">
-                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
-                            <span class="curr-name" id="currLangName">English</span>
-                            <i class="fas fa-chevron-down curr-arrow"></i>
-                        </button>
-                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
-                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
-                                <div><span class="opt-flag">🇺🇸</span> English</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
-                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
-                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
-                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
-                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
-                                <div><span class="opt-flag">🇪🇸</span> Español</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
-                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Theme Toggle Button -->
-                    <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
-                        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                    <select id="langSelect" style="display: none;">
-                        <option value="en">EN</option>
-                        <option value="fa">FA</option>
-                        <option value="ru">RU</option>
-                        <option value="zh">ZH</option>
-                        <option value="ar">AR</option>
-                        <option value="es">ES</option>
-                        <option value="tr">TR</option>
-                    </select>
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
+  <!-- =========================================================================
+       1. Top Navbar (Identical to VitePress index.html)
+       ========================================================================= -->
+  <header class="VPNav">
+    <div class="VPNav-wrapper">
+      <div class="VPNav-container">
 
-    <!-- Hero -->
-    <section class="hero" style="min-height: 40vh; padding-top: 130px; text-align: center;">
-        <div class="trouble-container">
-            <span class="error-badge badge-info" data-lang-key="tb_hero_badge">OFFICIAL TROUBLESHOOTING KNOWLEDGE BASE</span>
-            <h1 style="font-size: 2.5rem; margin: 15px 0;" data-lang-key="tb_hero_title">Fix Google Antigravity Errors &amp; Region Lock</h1>
-            <p style="color: var(--text-secondary); font-size: 1.15rem; max-width: 750px; margin: 0 auto 25px;" data-lang-key="tb_hero_desc">Complete step-by-step solutions for Error 403 Forbidden, 429 Quota Exhaustion, Middlebox TLS Resets, and No-TUN Smart Proxy setup.</p>
-            <div class="btn-group" style="justify-content: center;">
-                <a href="download.html" class="btn btn-primary"><i class="fas fa-download"></i> <span data-lang-key="tb_cta_download">Get Antigravity Cleaner (Free & Offline)</span></a>
-                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> <span data-lang-key="tb_cta_star">Star on GitHub</span></a>
-            </div>
+        <!-- Brand -->
+        <a href="index.html" class="VPNavBarTitle">
+          <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="VPImage logo" width="24" height="24">
+          <span class="title">Antigravity Cleaner</span>
+          <span class="version-badge">v5</span>
+        </a>
+
+        <!-- Center Nav -->
+        <div class="VPNavBarContent">
+          <nav class="VPNavBarMenu" aria-label="Main Navigation">
+            <a href="index.html" class="VPLink nav-link">Home</a>
+            <a href="index.html#docs" class="VPLink nav-link">Documentation</a>
+            <a href="troubleshooting.html" class="VPLink nav-link active">Error Clinic</a>
+            <a href="blog.html" class="VPLink nav-link">Blog</a>
+          </nav>
         </div>
+
+        <!-- Right Tools -->
+        <div class="VPNavBarExtra">
+          <!-- Theme Switcher -->
+          <button class="VPSwitch VPSwitchAppearance" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="check">
+              <span class="icon">
+                <svg class="sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                <svg class="moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+              </span>
+            </span>
+          </button>
+
+          <!-- GitHub Link -->
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="VPNavBarSocialLink" aria-label="GitHub" data-umami-event="github-troubleshooting-click">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+
+          <!-- Download Button -->
+          <a href="index.html#download" class="VPButton medium brand" data-umami-event="tb-download-click">
+            Download Free
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Hero Header & Quick-Jump Pills
+       ========================================================================= -->
+  <main class="tb-wrapper">
+    <div class="tb-header">
+      <span class="tb-badge tb-badge-brand">Official Diagnostics Knowledge Base</span>
+      <h1 class="tb-title">Google Antigravity Diagnostics &amp; Error Clinic</h1>
+      <p class="tb-subtitle">
+        Verified solutions for Error 403 Region Lock, 429 Quota Exhaustion, write EIO Broken Pipe crashes, and No-TUN loopback proxying. All solutions are 100% open-source and run locally on your machine.
+      </p>
+
+      <!-- Quick Jump Chips -->
+      <nav class="tb-jump-nav" aria-label="Quick jump to error diagnosis">
+        <a href="#quick-fix" class="tb-jump-pill">⚡ 1-Click Auto-Fix</a>
+        <a href="#error-403" class="tb-jump-pill">🚫 403 Region Lock</a>
+        <a href="#error-429" class="tb-jump-pill">⏱️ 429 Quota Reset</a>
+        <a href="#error-agent-terminated" class="tb-jump-pill">💥 write EIO Broken Pipe</a>
+        <a href="#error-network-issue" class="tb-jump-pill">🌐 Network / DPI Reset</a>
+        <a href="#error-auth-success-403" class="tb-jump-pill">🔑 403 /auth-success</a>
+        <a href="#error-proxy-refused" class="tb-jump-pill">🔌 Proxy Refused :10808</a>
+        <a href="#error-failed-to-fetch" class="tb-jump-pill">🔄 Failed to Fetch</a>
+        <a href="#cache-flush-uninstall" class="tb-jump-pill">🧹 Cache Flush &amp; Reset</a>
+      </nav>
+    </div>
+
+    <!-- =========================================================================
+         QUICK AUTO-FIX BANNER
+         ========================================================================= -->
+    <section class="tb-card tb-card-hero" id="quick-fix">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-brand">Universal Recommended Fix</span>
+        <h2 class="tb-card-h2">1-Click Automated Diagnostics &amp; Patch Pipeline</h2>
+      </div>
+      <p class="tb-cause">
+        Instead of manually inspecting binary offsets or modifying JavaScript bundles, run Antigravity Cleaner. It automatically diagnoses active proxy ports (10808, 2080, 7890), patches all 4 eligibility targets, silences <code>write EIO</code> pipes, and creates an isolated launcher:
+      </p>
+
+      <div class="tb-terminal">
+        <code>curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash &amp;&amp; ag-cleaner patch all</code>
+        <button class="tb-copy-btn" onclick="navigator.clipboard.writeText('curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash && ag-cleaner patch all')">Copy</button>
+      </div>
+
+      <p class="tb-note">
+        <strong>On Windows PowerShell:</strong> <code>irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code>
+      </p>
     </section>
 
-    <!-- Main Troubleshooting Guide -->
-    <main class="trouble-container" style="padding-bottom: 80px;">
-
-        <!-- Quick Fix Banner -->
-        <div class="error-card" style="border-color: #00f0ff; background: rgba(0, 240, 255, 0.05);">
-            <h3 style="color: #00f0ff; margin-bottom: 10px;" data-lang-key="tb_quickfix_title"><i class="fas fa-magic"></i> 1-Click Universal Auto-Fix (Recommended)</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 15px;" data-lang-key="tb_quickfix_desc">Instead of manually editing JavaScript bundles and configuring network routing, run Antigravity Cleaner to patch all 4 targets and generate an isolated proxy launcher automatically:</p>
-            <div class="code-box">
-                <code>curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash && ag-cleaner patch</code>
-            </div>
-            <p style="font-size: 12px; color: #888;" data-lang-key="tb_quickfix_win">* On Windows: Open PowerShell and run <code>irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code></p>
+    <!-- =========================================================================
+         CLINIC 1: Error 403 Forbidden & Region Lockout
+         ========================================================================= -->
+    <article class="tb-card" id="error-403">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-danger">Error 403 Forbidden &bull; Sanction Gate</span>
+        <h2 class="tb-card-h2">"Service is not available in your country" / Region Lockout</h2>
+        <div class="tb-meta-row">
+          <span>Target: <code>main.js</code>, <code>agy CLI</code>, <code>extension.js</code>, <code>Antigravity core</code></span>
+          <span>&bull;</span>
+          <span>Affected Regions: Iran, Russia, China, Cuba, Syria</span>
         </div>
+      </div>
 
-        <!-- Error 1: 403 Region Lock -->
-        <article class="error-card" id="error-403">
-            <span class="error-badge badge-danger" data-lang-key="tb_err1_badge">ERROR 403 FORBIDDEN &bull; REGION LOCK</span>
-            <h2 data-lang-key="tb_err1_title">"Service is not available in your country" / Region Lockout</h2>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err1_cause"><strong>Root Cause:</strong> Google DeepMind and Google Cloud enforce strict geographic restrictions on Google Antigravity in countries such as Iran, Russia, China, Cuba, and Syria. The IDE runs internal JavaScript gatekeeper functions that inspect telemetry and token responses. If blocked, Antigravity forces a session invalidation and kicks you out to the login screen.</p>
-            <div class="code-box" style="border-color: #ff0055;">
-                <code>HTTP 403 Forbidden: Your region is not eligible for Google Antigravity developer preview.</code>
-            </div>
-            <h4 data-lang-key="tb_err1_sol_title">Fixing Error 403 Step-by-Step:</h4>
-            <ol class="solution-list">
-                <li data-lang-key="tb_err1_sol_1"><strong>Neutralize Client-Side Checks:</strong> Run <code>antigravity-cleaner patch</code>. This surgically unlocks <code>main.js</code>, the IDE binary, CLI (<code>agy</code>), and VS Code extension so the software never locks itself.</li>
-                <li data-lang-key="tb_err1_sol_2"><strong>Launch with Smart Proxy (No TUN):</strong> Run <code>antigravity-cleaner launch</code>. This passes <code>--proxy-server=socks5://127.0.0.1:10808</code> directly to the Chromium engine. Chromium will resolve Google auth endpoints through your foreign proxy IP, keeping your session intact.</li>
-                <li data-lang-key="tb_err1_sol_3"><strong>Avoid TUN Mode:</strong> Never use global TUN mode for Antigravity. TUN mode causes MTU packet fragmentation and triggers Middlebox DPI dropouts.</li>
-            </ol>
-        </article>
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> Google Antigravity enforces client-side eligibility gate checks inside the Electron wrapper, the CLI daemon, and the internal VS Code extensions alongside upstream Geo-IP header verification. When an unsanctioned IP or region code is detected, Antigravity revokes the active session and forces a redirect to the login screen.
+      </p>
 
-        <!-- Error 2: 429 Quota Exceeded -->
-        <article class="error-card" id="error-429">
-            <span class="error-badge badge-warning" data-lang-key="tb_err2_badge">ERROR 429 &bull; RATE LIMIT / QUOTA EXHAUSTED</span>
-            <h2 data-lang-key="tb_err2_title">"Too Many Requests" &amp; Corrupted Token Cache</h2>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err2_cause"><strong>Root Cause:</strong> Autonomous agents generate dozens of tool calls, search queries, and subagent transcripts per session. Local token buckets in <code>~/.config/Antigravity/Cache</code> and <code>DawnWebGPUCache</code> get out of sync with Google's servers, causing perpetual 429 errors even when you have quota left.</p>
-            <div class="code-box" style="border-color: #ffaa00;">
-                <code>Error 429: Resource has been exhausted (e.g. check quota).</code>
-            </div>
-            <h4 data-lang-key="tb_err2_sol_title">How to Resolve Error 429 without Losing Data:</h4>
-            <ol class="solution-list">
-                <li><span data-lang-key="tb_err2_sol_1">Click the <strong>[Reset 429]</strong> button in the Antigravity Cleaner GUI or run:</span>
-                    <div class="code-box"><code>antigravity-cleaner clean</code></div>
-                </li>
-                <li data-lang-key="tb_err2_sol_2"><strong>Session Preservation Guarantee:</strong> Our surgical reset purges corrupted quota blobs and telemetry caches while strictly preserving your <code>Cookies</code>, <code>Preferences</code>, <code>app_storage.json</code>, and chat history. You do NOT have to log in again.</li>
-            </ol>
-        </article>
+      <div class="tb-terminal tb-terminal-danger">
+        <code>HTTP 403 Forbidden: Your current account is not eligible for Antigravity, because it is not currently available in your location.</code>
+      </div>
 
-        <!-- Error 3: No-TUN Proxy Injection -->
-        <article class="error-card" id="proxy-setup">
-            <span class="error-badge badge-info" data-lang-key="tb_err3_badge">NETWORK ARCHITECTURE &bull; NO-TUN MODE</span>
-            <h2 data-lang-key="tb_err3_title">Smart Proxy Injection for v2ray, Xray, Clash, and NekoBox</h2>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err3_cause"><strong>Why traditional VPNs fail:</strong> When you enable TUN mode, your entire operating system's traffic is redirected through the VPN. This increases latency, causes packet drops, and breaks local intranet and domestic banking websites.</p>
-            <h4 data-lang-key="tb_err3_sol_title">How Antigravity Cleaner's No-TUN Injection Works:</h4>
-            <ol class="solution-list">
-                <li><span data-lang-key="tb_err3_sol_1">The Cleaner automatically scans local loopback ports:</span>
-                    <ul>
-                        <li><code>127.0.0.1:10808</code> (v2ray / Xray SOCKS5)</li>
-                        <li><code>127.0.0.1:2080</code> (NekoBox / Hiddify SOCKS5)</li>
-                        <li><code>127.0.0.1:7890</code> (Clash / Mihomo Mixed)</li>
-                        <li><code>127.0.0.1:1080</code> (Standard SOCKS5)</li>
-                    </ul>
-                </li>
-                <li data-lang-key="tb_err3_sol_2">It launches Antigravity with a dedicated pipeline: <code>--proxy-server=socks5://127.0.0.1:&lt;detected_port&gt;</code>.</li>
-                <li data-lang-key="tb_err3_sol_3">Only Google Antigravity traffic is routed through the proxy. Your web browser, terminal downloads, and domestic sites continue running at maximum local speed!</li>
-            </ol>
-            <div class="code-box">
-                <code>antigravity-cleaner create-launcher</code>
-            </div>
-            <p style="font-size: 13px; color: #888;" data-lang-key="tb_err3_note">This generates a permanent 1-click desktop launcher (<code>Antigravity.desktop</code> on Linux, <code>Antigravity.lnk</code> on Windows, <code>Antigravity-Proxy.command</code> on macOS).</p>
-        </article>
+      <div class="tb-solution-title">Verified Resolution:</div>
+      <ol class="tb-steps">
+        <li><strong>Neutralize Client-Side Gatekeeper:</strong> Run <code>ag-cleaner patch all</code> (or click [Auto-Fix] in GUI). This overrides the <code>isGoogleInternal</code> and region authorization functions across all 4 software targets.</li>
+        <li><strong>Launch via Isolated Loopback Socket:</strong> Run <code>ag-cleaner launch</code>. This passes <code>--proxy-server=socks5://127.0.0.1:&lt;port&gt;</code> directly to the process, routing only the IDE through your local VPN while keeping the rest of your system on direct high-speed internet.</li>
+        <li><strong>Avoid Global TUN Mode:</strong> TUN adapters route whole-system traffic, induce MTU packet fragmentation, and trigger Middlebox DPI disconnections.</li>
+      </ol>
+    </article>
 
-        <!-- Error 4: Middlebox TLS Resets -->
-        <article class="error-card" id="middlebox">
-            <span class="error-badge badge-warning" data-lang-key="tb_err4_badge">CONNECTION DROPOUT &bull; MIDDLEBOX DPI</span>
-            <h2 data-lang-key="tb_err4_title">Middlebox TLS Disconnects &amp; Stream Interruptions</h2>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err4_cause"><strong>The Issue:</strong> During deep thinking or multi-minute code planning, the HTTP/2 SSE connection between the IDE and Google's edge server (<code>daily-cloudcode-pa.googleapis.com</code>) remains silent. Strict ISP firewalls (Middleboxes) mistake idle TLS connections for dead tunnels and send TCP RST packets, causing "Stream Closed / Broken Pipe" errors.</p>
-            <h4 data-lang-key="tb_err4_sol_title">The Solution:</h4>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err4_sol_desc">Antigravity Cleaner patches the socket connection layer to inject a <strong>15-second TCP KeepAlive heartbeat</strong>. This keeps the stateful connection alive across all firewalls and middleboxes without dropping your agentic sessions.</p>
-        </article>
+    <!-- =========================================================================
+         CLINIC 2: Error 429 & Corrupted Token Cache
+         ========================================================================= -->
+    <article class="tb-card" id="error-429">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-warning">Error 429 &bull; Rate Limit / Quota Bucket Corrupted</span>
+        <h2 class="tb-card-h2">"Too Many Requests" &amp; Artificial Quota Freeze</h2>
+        <div class="tb-meta-row">
+          <span>Affected Files: <code>~/.config/Antigravity/Cache</code>, <code>DawnWebGPUCache</code>, <code>quota_state.json</code></span>
+        </div>
+      </div>
 
-        <!-- Error 5: Stale SingletonLock -->
-        <article class="error-card" id="singleton-lock">
-            <span class="error-badge badge-danger" data-lang-key="tb_err5_badge">STARTUP FAILURE &bull; SINGLETON LOCK</span>
-            <h2 data-lang-key="tb_err5_title">Antigravity Won't Open After Crash or Sleep</h2>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err5_cause"><strong>The Issue:</strong> If your system suspends or Antigravity crashes, Chromium leaves a lockfile at <code>~/.config/Antigravity/SingletonLock</code> pointing to a dead PID. When clicked, Antigravity thinks another instance is active and refuses to open.</p>
-            <div class="code-box">
-                <code># Manual fix:
-rm -f ~/.config/Antigravity/SingletonLock ~/.config/Antigravity/SingletonSocket ~/.config/Antigravity/SingletonCookie</code>
-            </div>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err5_sol_desc">Antigravity Cleaner's smart launcher audits and removes stale singleton locks automatically on every launch!</p>
-        </article>
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> Autonomous agents generate rapid bursts of tool invocations, bash executions, and transcript logging. When local token tracking records become desynchronized from Google Cloud's upstream quota counters, the client freezes in a persistent 429 state even after waiting out the quota window.
+      </p>
 
+      <div class="tb-terminal tb-terminal-warning">
+        <code>Error 429: Resource has been exhausted (e.g. check quota). Too Many Requests.</code>
+      </div>
 
-        <!-- Error 6: Agent Terminated Due to Error (write EIO) -->
-        <article class="error-card" id="error-agent-terminated">
-            <span class="error-badge badge-danger" data-lang-key="tb_err6_badge">STREAM CRASH &bull; WRITE EIO / BROKEN PIPE</span>
-            <h2 data-lang-key="tb_err6_title">"Agent terminated due to error" &amp; Broken Pipe Exceptions</h2>
-            <div style="margin: 15px 0; text-align: center;">
-                <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-agent-terminated-due-to-error.png" alt="Google Antigravity Agent terminated due to error" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
-            </div>
-            <div class="code-box" style="border-color: #ff0055;">
-                <code>Agent terminated due to error
+      <div class="tb-solution-title">Surgical Reset Guarantee (Zero Chat Loss):</div>
+      <ol class="tb-steps">
+        <li>Click <strong>[Reset 429]</strong> in the Retro GUI or run:
+          <div class="tb-terminal">
+            <code>ag-cleaner clean</code>
+            <button class="tb-copy-btn" onclick="navigator.clipboard.writeText('ag-cleaner clean')">Copy</button>
+          </div>
+        </li>
+        <li><strong>Zero Data Loss:</strong> Unlike crude scripts that delete the entire <code>globalStorage</code> directory, Antigravity Cleaner surgically targets only 16 corrupted telemetry and rate-limit cache files. Your cookies, active Google login, and workspace chat archives are 100% preserved.</li>
+      </ol>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 3: Agent Terminated Due to Error (write EIO) [WITH SCREENSHOT]
+         ========================================================================= -->
+    <article class="tb-card" id="error-agent-terminated">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-danger">Stream Crash &bull; write EIO / Broken Pipe</span>
+        <h2 class="tb-card-h2">"Agent terminated due to error" &amp; Unhandled Pipe Breakdowns</h2>
+        <div class="tb-meta-row">
+          <span>Location: Node.js IPC Stream &bull; Google Cloud Streaming RPC</span>
+        </div>
+      </div>
+
+      <!-- Real Visual Proof Screenshot -->
+      <div class="tb-screenshot-box">
+        <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-agent-terminated-due-to-error.png" alt="Google Antigravity Agent terminated due to error dialog screenshot" loading="lazy">
+        <div class="tb-screenshot-caption">
+          <span>📸 Visual Proof: Real-world Antigravity crash dialog during multi-step reasoning generation.</span>
+        </div>
+      </div>
+
+      <div class="tb-terminal tb-terminal-danger">
+        <code>Agent terminated due to error
 You can prompt the model to try again or start a new conversation if the error persists.
 See our troubleshooting guide for more help.
+Dismiss | Copy debug info | Retry</code>
+      </div>
 
-Dismiss  Copy debug info  Retry</code>
-            </div>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err6_cause"><strong>Root Cause:</strong> Sudden pipe breakdown caused by verbose raw logging (<code>write EIO</code>) or middlebox connection timeouts during streaming agent thought loops.</p>
-            <h4 data-lang-key="tb_err6_sol_title">Instant Fix with Antigravity Cleaner:</h4>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err6_sol_desc">Click <strong>[ ① ⚡ Auto-Fix ]</strong> in the Retro GUI or run <code>antigravity-cleaner patch all</code>. Our Zero-Log ASAR Shield silences verbose console outputs, eliminates broken pipe exceptions, and enforces 15s TCP KeepAlive heartbeat tuning to keep streaming inference alive.</p>
-        </article>
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> Two compounding factors trigger this crash: 1) Verbose console and telemetry logging overflows the inter-process communication buffer, causing an unhandled <code>write EIO</code> exception. 2) ISP Middlebox firewalls drop silent streaming inference connections while the AI model is performing deep multi-step thought planning.
+      </p>
 
-        <!-- Error 7: Network Issue Connecting to Server -->
-        <article class="error-card" id="error-network-issue">
-            <span class="error-badge badge-warning" data-lang-key="tb_err7_badge">CONNECTION DROP &bull; DPI &amp; TELEMETRY LEAK</span>
-            <h2 data-lang-key="tb_err7_title">"Unknown: There was a network issue connecting to the server"</h2>
-            <div style="margin: 15px 0; text-align: center;">
-                <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-network-issue-connecting-to-server.png" alt="Network issue connecting to server" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
-            </div>
-            <div class="code-box" style="border-color: #ffaa00;">
-                <code>Error Unknown: There was a network issue connecting to the server, please try again.
+      <div class="tb-solution-title">Instant Shield:</div>
+      <p class="tb-cause">
+        Execute <code>ag-cleaner patch all</code>. Our Zero-Log ASAR Shield silences raw stdout/stderr write pipes, intercepts broken stream exceptions gracefully, and enforces an aggressive <strong>15-second TCP KeepAlive socket heartbeat</strong> to maintain active edge server connectivity.
+      </p>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 4: Network Issue Connecting to Server [WITH SCREENSHOT]
+         ========================================================================= -->
+    <article class="tb-card" id="error-network-issue">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-warning">Connection Dropout &bull; DPI &amp; Telemetry Leak</span>
+        <h2 class="tb-card-h2">"Unknown: There was a network issue connecting to the server"</h2>
+        <div class="tb-meta-row">
+          <span>Domain: <code>cloudcode-pa.googleapis.com</code> &bull; gRPC / HTTP2</span>
+        </div>
+      </div>
+
+      <!-- Real Visual Proof Screenshot -->
+      <div class="tb-screenshot-box">
+        <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-network-issue-connecting-to-server.png" alt="Google Antigravity network issue connecting to the server screenshot" loading="lazy">
+        <div class="tb-screenshot-caption">
+          <span>📸 Visual Proof: Network drop error with unique Error ID (e.g. 95ea05dd-6419-4bf0-a8ce-8faf25687606-108).</span>
+        </div>
+      </div>
+
+      <div class="tb-terminal tb-terminal-warning">
+        <code>Error Unknown: There was a network issue connecting to the server, please try again.
 Error ID: 95ea05dd-6419-4bf0-a8ce-8faf25687606-108
 Unknown: There was a network issue connecting to the server, please try again.</code>
-            </div>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err7_cause"><strong>Root Cause:</strong> Middlebox/DPI firewalls terminating idle TLS/gRPC streams during prolonged reasoning phases, or background telemetry probes leaking real unmasked IP midway through a task.</p>
-            <h4 data-lang-key="tb_err7_sol_title">Instant Fix:</h4>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err7_sol_desc">Launch Antigravity via <strong>[ ② 🚀 Launch IDE ]</strong> or <code>antigravity-cleaner launch</code>. Traffic is isolated over a direct SOCKS5h loopback socket with the 8-flag Zero-Telemetry wrapper active.</p>
-        </article>
+      </div>
 
-        <!-- Error 8: 403 Forbidden /auth-success -->
-        <article class="error-card" id="error-auth-success-403">
-            <span class="error-badge badge-danger" data-lang-key="tb_err8_badge">AUTH BLOCK &bull; 403 THAT’S AN ERROR</span>
-            <h2 data-lang-key="tb_err8_title">"403. That’s an error. /auth-success"</h2>
-            <div style="margin: 15px 0; text-align: center;">
-                <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-error-403-forbidden-auth-success.png" alt="Google 403 Forbidden auth-success error" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
-            </div>
-            <div class="code-box" style="border-color: #ff0055;">
-                <code>Google
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> National DPI filters terminate idle TLS sessions exceeding 30 seconds of inactivity. Additionally, unshielded background telemetry probes occasionally leak your unmasked direct domestic IP, causing Google Cloud edge servers to reset the gRPC stream.
+      </p>
 
-403. That’s an error.
+      <div class="tb-solution-title">Verified Solution:</div>
+      <p class="tb-cause">
+        Launch via <code>ag-cleaner launch</code>. The process wrapper injects 8 flags that completely disable background Google telemetry beacons, while keeping the primary streaming connection pinned to your chosen loopback SOCKS5 proxy port.
+      </p>
+    </article>
 
-Your client does not have permission to get URL /auth-success from this server. That’s all we know.</code>
-            </div>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err8_cause"><strong>Root Cause:</strong> Google regional authentication gateway flagging the browser login redirect from sanctioned regions due to historical device fingerprints or unshielded telemetry beacons.</p>
-            <h4 data-lang-key="tb_err8_sol_title">Instant Fix:</h4>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err8_sol_desc">Run <strong>[ ① ⚡ Auto-Fix ]</strong>. Cleaner patches the core binary machine code (<code>hasValidAuth = true</code>), injects enterprise auth mode flags, and purges tainted authentication tokens.</p>
-        </article>
-
-        <!-- Error 9: Proxy Connection Refused -->
-        <article class="error-card" id="error-proxy-refused">
-            <span class="error-badge badge-info" data-lang-key="tb_err9_badge">PROXY MISMATCH &bull; DIAL TCP 127.0.0.1:10808</span>
-            <h2 data-lang-key="tb_err9_title">"proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"</h2>
-            <div style="margin: 15px 0; text-align: center;">
-                <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-loadcodeassist-proxy-connection-refused.png" alt="Proxy connection refused dial 10808" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
-            </div>
-            <div class="code-box" style="border-color: #00f0ff;">
-                <code>There was an unexpected issue setting up your account.
-
-failed to get load code assist response: Post "https://cloudcode-pa.googleapis.com/v1internal:loadCodeAssist": proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused</code>
-            </div>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err9_cause"><strong>Root Cause:</strong> Local proxy client (Xray, Clash, NekoBox) is either closed or listening on an unexpected port.</p>
-            <h4 data-lang-key="tb_err9_sol_title">Instant Fix:</h4>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err9_sol_desc">Run <code>antigravity-cleaner doctor</code> (or click <strong>[ 🩺 Doctor ]</strong> in GUI). The diagnostics engine dynamically scans active ports and aligns your IDE proxy configuration automatically.</p>
-        </article>
-
-        <!-- Error 10: Failed to fetch / Setting up account -->
-        <article class="error-card" id="error-failed-to-fetch">
-            <span class="error-badge badge-warning" data-lang-key="tb_err10_badge">STATE CORRUPTION &bull; FAILED TO FETCH</span>
-            <h2 data-lang-key="tb_err10_title">"There was an unexpected issue setting up your account. Failed to fetch"</h2>
-            <div style="margin: 15px 0; text-align: center;">
-                <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-setting-up-account-failed-to-fetch.png" alt="Setting up account Failed to fetch" style="max-width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
-            </div>
-            <div class="code-box" style="border-color: #ffaa00;">
-                <code>There was an unexpected issue setting up your account.
-
-Failed to fetch
-
-Continue with different account
-Having trouble? Let us know</code>
-            </div>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err10_cause"><strong>Root Cause:</strong> Corrupted DIPS database records and orphaned WebSocket caches in application state.</p>
-            <h4 data-lang-key="tb_err10_sol_title">Instant Fix:</h4>
-            <p style="color: var(--text-secondary);" data-lang-key="tb_err10_sol_desc">Click <strong>[ 🧹 Reset 429 ]</strong> in the GUI or execute <code>antigravity-cleaner clean</code>. Purges 16 cached quota artifacts in 0.002s while 100% preserving your projects and chat history.</p>
-        </article>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p style="color: var(--text-muted); font-size: 14px;" data-lang-key="footer_note">Antigravity Cleaner is a community-driven open-source project released under the GNU General Public License v3.0.<br>Dedicated to developers facing geographic restrictions and digital isolation worldwide. 🕊️</p>
-            <p style="margin-top: 10px;">
-                <a href="index.html" style="color: var(--primary); margin: 0 10px;">Home</a> |
-                <a href="download.html" style="color: var(--primary); margin: 0 10px;">Download</a> |
-                <a href="faq.html" style="color: var(--primary); margin: 0 10px;">FAQ</a> |
-                <a href="llms.txt" style="color: var(--primary); margin: 0 10px;">llms.txt (AI)</a> |
-                <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" style="color: var(--primary); margin: 0 10px;">GitHub</a>
-            </p>
+    <!-- =========================================================================
+         CLINIC 5: Error 403 /auth-success [WITH SCREENSHOT]
+         ========================================================================= -->
+    <article class="tb-card" id="error-auth-success-403">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-danger">Authentication Block &bull; 403 That's An Error</span>
+        <h2 class="tb-card-h2">"403. That's an error. /auth-success"</h2>
+        <div class="tb-meta-row">
+          <span>Target: OAuth 2.0 Loopback Redirect Callback</span>
         </div>
-    </footer>
+      </div>
 
-    <script src="script.js?v=5.3.1-pro"></script>
+      <!-- Real Visual Proof Screenshot -->
+      <div class="tb-screenshot-box">
+        <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-error-403-forbidden-auth-success.png" alt="Google 403 That is an error auth-success redirect block screenshot" loading="lazy">
+        <div class="tb-screenshot-caption">
+          <span>📸 Visual Proof: Google Accounts blocking OAuth callback with 403 Forbidden on /auth-success.</span>
+        </div>
+      </div>
+
+      <div class="tb-terminal tb-terminal-danger">
+        <code>Google: 403. That’s an error.
+Your client does not have permission to get URL /auth-success from this server. That’s all we know.</code>
+      </div>
+
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> When authenticating via the browser, Google checks the IP address of the local loopback redirect. If your browser routes the callback without proxy encapsulation or with mixed DNS resolution, Google flags the request as coming from an unauthorized geographic zone.
+      </p>
+
+      <div class="tb-solution-title">Instant Fix:</div>
+      <p class="tb-cause">
+        Run <code>ag-cleaner patch all</code>. Antigravity Cleaner patches core authentication flags (enforcing enterprise token mode) and purges tainted browser session cookies. Ensure your web browser uses the exact same proxy or clean DNS when completing the sign-in modal.
+      </p>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 6: Proxy Connection Refused 10808 [WITH SCREENSHOT]
+         ========================================================================= -->
+    <article class="tb-card" id="error-proxy-refused">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-cyan">Proxy Port Mismatch &bull; dial tcp 127.0.0.1:10808</span>
+        <h2 class="tb-card-h2">"proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"</h2>
+        <div class="tb-meta-row">
+          <span>Target: Local Proxy Client (v2ray, Xray, Clash, NekoBox)</span>
+        </div>
+      </div>
+
+      <!-- Real Visual Proof Screenshot -->
+      <div class="tb-screenshot-box">
+        <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-loadcodeassist-proxy-connection-refused.png" alt="Antigravity proxy connection refused dial 10808 loadCodeAssist screenshot" loading="lazy">
+        <div class="tb-screenshot-caption">
+          <span>📸 Visual Proof: Antigravity unable to reach proxy on port 10808 during loadCodeAssist initialization.</span>
+        </div>
+      </div>
+
+      <div class="tb-terminal">
+        <code>failed to get load code assist response: Post "https://cloudcode-pa.googleapis.com/v1internal:loadCodeAssist":
+proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused</code>
+      </div>
+
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> The IDE is looking for an active proxy at port <code>10808</code>, but your proxy client (Clash on 7890, NekoBox on 2080, or Hiddify) is running on a different port or was accidentally closed.
+      </p>
+
+      <div class="tb-solution-title">Automated Diagnostics:</div>
+      <p class="tb-cause">
+        Run <code>ag-cleaner doctor</code>. Cleaner's diagnostic engine scans all active loopback sockets, detects your running proxy port automatically, and re-aligns the IDE proxy flag without manual configuration.
+      </p>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 7: Setting Up Account / Failed to Fetch [WITH SCREENSHOT]
+         ========================================================================= -->
+    <article class="tb-card" id="error-failed-to-fetch">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-warning">State Corruption &bull; Failed to Fetch</span>
+        <h2 class="tb-card-h2">"There was an unexpected issue setting up your account. Failed to fetch"</h2>
+        <div class="tb-meta-row">
+          <span>Target: Chromium IndexedDB &bull; DIPS Cookie State</span>
+        </div>
+      </div>
+
+      <!-- Real Visual Proof Screenshot -->
+      <div class="tb-screenshot-box">
+        <img src="https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/docs/images/errors/google-antigravity-setting-up-account-failed-to-fetch.png" alt="Antigravity unexpected issue setting up your account Failed to fetch screenshot" loading="lazy">
+        <div class="tb-screenshot-caption">
+          <span>📸 Visual Proof: Persistent setup screen crash due to corrupted IndexedDB state records.</span>
+        </div>
+      </div>
+
+      <div class="tb-terminal tb-terminal-warning">
+        <code>There was an unexpected issue setting up your account.
+Failed to fetch
+Continue with different account | Having trouble? Let us know</code>
+      </div>
+
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> Corrupted DIPS database records and orphaned WebSocket caches in Electron application state prevent the onboarding handshake from concluding.
+      </p>
+
+      <div class="tb-solution-title">Instant Fix:</div>
+      <p class="tb-cause">
+        Run <code>ag-cleaner clean</code>. It clears orphaned WebSocket caches and locks in 0.002 seconds while keeping all user code, extensions, and chat archives intact.
+      </p>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 8: Stale SingletonLock & Won't Open After Crash
+         ========================================================================= -->
+    <article class="tb-card" id="singleton-lock">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-danger">Startup Lockout &bull; Dead PID Singleton</span>
+        <h2 class="tb-card-h2">Antigravity Won't Open After System Sleep or Force Quit</h2>
+        <div class="tb-meta-row">
+          <span>Target: <code>~/.config/Antigravity/SingletonLock</code> &bull; Linux / macOS</span>
+        </div>
+      </div>
+
+      <p class="tb-cause">
+        <strong>Root Cause:</strong> If your system suspends, hibernates, or the IDE is terminated abruptly, Chromium leaves an orphaned lockfile at <code>~/.config/Antigravity/SingletonLock</code> pointing to a dead PID. Subsequent launches detect the lockfile, assume another instance is running, and exit immediately without rendering a window.
+      </p>
+
+      <div class="tb-terminal">
+        <code># Manual Terminal Fix:
+rm -f ~/.config/Antigravity/SingletonLock ~/.config/Antigravity/SingletonSocket ~/.config/Antigravity/SingletonCookie</code>
+        <button class="tb-copy-btn" onclick="navigator.clipboard.writeText('rm -f ~/.config/Antigravity/SingletonLock ~/.config/Antigravity/SingletonSocket ~/.config/Antigravity/SingletonCookie')">Copy</button>
+      </div>
+
+      <p class="tb-note">
+        <strong>Automated Guard:</strong> <code>ag-cleaner launch</code> automatically inspects and cleans stale singleton locks prior to launching the IDE every time!
+      </p>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 9: No-TUN Smart Loopback Proxy Architecture
+         ========================================================================= -->
+    <article class="tb-card" id="proxy-setup">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-cyan">Architecture &bull; No-TUN Loopback Proxy</span>
+        <h2 class="tb-card-h2">Route Only Antigravity Through Proxy (Zero System Latency)</h2>
+        <div class="tb-meta-row">
+          <span>Supported Protocols: SOCKS5, SOCKS5h, HTTP/HTTPS &bull; Port Auto-Detect</span>
+        </div>
+      </div>
+
+      <p class="tb-cause">
+        <strong>Why Traditional TUN Mode Hurts Performance:</strong> System-wide TUN adapters tunnel all device network interfaces. This causes packet loss, breaks local developer servers (<code>localhost:3000</code>, <code>localhost:8080</code>), slows down terminal downloads, and breaks domestic banking or intranet sites.
+      </p>
+
+      <div class="tb-solution-title">Cleaner's Process-Level Routing:</div>
+      <ol class="tb-steps">
+        <li>Automatically detects active proxy listeners on loopback:
+          <code>10808</code> (v2ray/Xray), <code>2080</code> (NekoBox/Hiddify), <code>7890</code> (Clash/Mihomo), <code>1080</code> (Tor/Standard SOCKS).
+        </li>
+        <li>Launches Antigravity with <code>--proxy-server=socks5://127.0.0.1:&lt;detected_port&gt;</code>.</li>
+        <li>Generates a permanent 1-click desktop launcher (<code>Antigravity.desktop</code> on Linux, <code>Antigravity.lnk</code> on Windows, <code>Antigravity-Proxy.command</code> on macOS) so you never need to remember command-line arguments.</li>
+      </ol>
+    </article>
+
+    <!-- =========================================================================
+         CLINIC 10: Clear Cache, Flush & Clean Uninstall (GSC Query Clinic)
+         ========================================================================= -->
+    <article class="tb-card" id="cache-flush-uninstall">
+      <div class="tb-card-header">
+        <span class="tb-badge tb-badge-green">Maintenance Clinic &bull; GSC Top Terms</span>
+        <h2 class="tb-card-h2">Clear Antigravity IDE Cache, Flush Quotas &amp; Clean Uninstall (Ubuntu / Linux)</h2>
+        <div class="tb-meta-row">
+          <span>Top User Searches: <code>clear antigravity ide cache</code> &bull; <code>ubuntu uninstall antigravity</code> &bull; <code>antigravity flush</code></span>
+        </div>
+      </div>
+
+      <p class="tb-cause">
+        When troubleshooting deep state corruption, developers often need to completely purge cache artifacts or perform a clean reinstall on Ubuntu Linux.
+      </p>
+
+      <div class="tb-solution-title">1. Clear Antigravity IDE Cache (Safe &amp; Surgical):</div>
+      <div class="tb-terminal">
+        <code>ag-cleaner clean</code>
+        <button class="tb-copy-btn" onclick="navigator.clipboard.writeText('ag-cleaner clean')">Copy</button>
+      </div>
+      <p class="tb-note">
+        Clears <code>Cache</code>, <code>Code Cache</code>, <code>DawnWebGPUCache</code>, and temporary telemetry blobs without touching your login session, credentials, or chat transcripts.
+      </p>
+
+      <div class="tb-solution-title">2. Full Deep Flush (Reset to Factory Defaults):</div>
+      <div class="tb-terminal">
+        <code>ag-cleaner clean --deep</code>
+        <button class="tb-copy-btn" onclick="navigator.clipboard.writeText('ag-cleaner clean --deep')">Copy</button>
+      </div>
+
+      <div class="tb-solution-title">3. Complete Uninstall on Ubuntu Linux:</div>
+      <div class="tb-terminal">
+        <code># Remove binary package:
+sudo dpkg -r antigravity || sudo apt-get remove antigravity
+
+# Purge leftover user configurations and lockfiles:
+rm -rf ~/.config/Antigravity ~/.antigravity ~/.local/share/applications/Antigravity*.desktop</code>
+        <button class="tb-copy-btn" onclick="navigator.clipboard.writeText('sudo dpkg -r antigravity || sudo apt-get remove antigravity
+rm -rf ~/.config/Antigravity ~/.antigravity ~/.local/share/applications/Antigravity*.desktop')">Copy</button>
+      </div>
+    </article>
+
+    <!-- =========================================================================
+         BOTTOM CTA
+         ========================================================================= -->
+    <section class="tb-cta-card">
+      <h3>Ready to Resolve Antigravity Errors Permanently?</h3>
+      <p>
+        Antigravity Cleaner is completely free, 100% offline, and open-source under the Apache 2.0 license. Download the standalone Retro GUI or install the CLI tool in seconds.
+      </p>
+      <div class="tb-cta-actions">
+        <a href="index.html#download" class="VPButton medium brand" data-umami-event="tb-footer-download-click">
+          Download Antigravity Cleaner
+        </a>
+        <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="VPButton medium alt" data-umami-event="tb-footer-github-click">
+          View on GitHub
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       3. Footer (Consistent with index.html VitePress)
+       ========================================================================= -->
+  <footer class="VPHomeFooter">
+    <div class="footer-simple-wrap">
+      <div class="footer-main-row">
+        <div class="footer-brand-info">
+          <div class="footer-brand">
+            <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="footer-logo" width="22" height="22">
+            <span class="footer-brand-name">Antigravity Cleaner</span>
+          </div>
+          <p class="brand-tagline">Autonomous open-source utility for Google Antigravity IDE.</p>
+        </div>
+        <div class="footer-actions-wrap">
+          <a href="index.html#docs" class="footer-doc-btn">
+            📖 <span>Documentation</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom-row">
+        <div class="footer-meta">
+          <p class="copyright">Released under the Apache 2.0 License. Open-source &amp; 100% offline.</p>
+          <p class="manifesto-text">"Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders." — <strong>@dalroot</strong></p>
+        </div>
+        <nav class="footer-nav-links" aria-label="Footer Navigation">
+          <a href="index.html" class="f-link">Home</a>
+          <a href="index.html#docs" class="f-link">Documentation</a>
+          <a href="troubleshooting.html" class="f-link">Error Clinic</a>
+          <a href="blog.html" class="f-link">Blog</a>
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link">GitHub</a>
+          <a href="https://t.me/dallrep" target="_blank" rel="noopener noreferrer" class="f-link telegram-link">📢 Telegram: @dallrep</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,238 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation | Antigravity Cleaner - User Guide</title>
-
-    <!-- SEO -->
-    <meta name="description"
-        content="Complete documentation and user guide for Antigravity Cleaner. Learn how to install, configure, and use all features.">
-    <meta name="keywords"
-        content="Antigravity Cleaner documentation, user guide, how to install antigravity, tutorial, آموزش آنتی گرویتی">
-    <meta name="author" content="Tawroot">
-    <meta name="robots" content="index, follow">
-
-    <!-- Google Search Console -->
-    <meta name="google-site-verification" content="_zKMwaybu8btLgnyo58WAiQn4DdQ9nKMevHHZk2m3LY" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Antigravity Cleaner Documentation">
-    <meta property="og:description" content="Complete user guide and documentation.">
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=5.3.1-pro">
-    <script>(function(){const t=localStorage.getItem('ag_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Antigravity Cleaner Full Documentation...</title>
+  <meta http-equiv="refresh" content="0; url=index.html#docs">
+  <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/index.html#docs">
+  <meta name="robots" content="noindex, follow">
+  <script>window.location.replace("index.html#docs");</script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      background: #f6f6f7;
+      color: #213547;
+      padding: 20px;
+    }
+    .box {
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      max-width: 480px;
+    }
+    a { color: #2563EB; font-weight: 600; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
-
 <body>
-    <div class="bg-animation"></div>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">
-                    <img src="logo.png" alt="Antigravity Cleaner Logo" style="width: 36px; height: 36px; border-radius: 8px; margin-inline-end: 8px;">
-                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
-                </a>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" data-lang-key="home">Home</a></li>
-                    <li><a href="features.html" data-lang-key="features">Features</a></li>
-                    <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="docs.html" class="active" data-lang-key="docs">Docs</a></li>
-                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
-                    <li><a href="troubleshooting.html" data-lang-key="troubleshooting">Troubleshooting</a></li>
-                    <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
-                </ul>
-                <div class="nav-controls">
-                    <div class="custom-lang-selector" id="customLangSelector">
-                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
-                            <span class="curr-name" id="currLangName">English</span>
-                            <i class="fas fa-chevron-down curr-arrow"></i>
-                        </button>
-                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
-                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
-                                <div><span class="opt-flag">🇺🇸</span> English</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
-                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
-                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
-                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
-                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
-                                <div><span class="opt-flag">🇪🇸</span> Español</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
-                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Theme Toggle Button -->
-                    <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
-                        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                    <select id="langSelect" style="display: none;">
-                        <option value="en">EN</option>
-                        <option value="fa">FA</option>
-                        <option value="ru">RU</option>
-                        <option value="zh">ZH</option>
-                        <option value="ar">AR</option>
-                        <option value="es">ES</option>
-                        <option value="tr">TR</option>
-                    </select>
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero" style="min-height: 50vh;">
-        <h1>Documentation</h1>
-        <p>Everything you need to know about Antigravity Cleaner</p>
-    </section>
-
-    <!-- Quick Start -->
-    <section>
-        <h2 class="section-title">Quick Start Guide</h2>
-
-        <div class="command-section">
-            <h3 style="margin-bottom: 24px;">📥 Installation</h3>
-
-            <div class="command-box">
-                <h4><i class="fab fa-windows"></i> Windows</h4>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;">Download the portable EXE - no
-                    installation required!</p>
-                <div class="code-block">
-                    <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest" class="btn btn-primary"
-                        style="font-size: 14px;">
-                        <i class="fas fa-download"></i> Download for Windows
-                    </a>
-                </div>
-            </div>
-
-            <div class="command-box">
-                <h4><i class="fab fa-apple"></i> <i class="fab fa-linux"></i> macOS / Linux</h4>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyCode('install-cmd')">Copy</button>
-                    <code
-                        id="install-cmd">curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash</code>
-                </div>
-            </div>
-
-            <div class="command-box">
-                <h4><i class="fab fa-windows"></i> Windows PowerShell</h4>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copyCode('ps-cmd')">Copy</button>
-                    <code
-                        id="ps-cmd">iwr -useb https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex</code>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Usage Guide -->
-    <section>
-        <h2 class="section-title">How to Use</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">1️⃣</div>
-                <h3>Launch Application</h3>
-                <p>Run the downloaded executable. On first launch, you'll see the Dashboard with your system health
-                    score.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">2️⃣</div>
-                <h3>Analyze System</h3>
-                <p>Click "Analyze Now" to scan for Antigravity traces, leftover files, and browser sessions. This is
-                    100% safe - read-only scan.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">3️⃣</div>
-                <h3>Backup Sessions</h3>
-                <p>Go to Sessions tab, select browser profiles, and click Backup. Your sessions are encrypted and stored
-                    locally.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">4️⃣</div>
-                <h3>Test Google Connectivity</h3>
-                <p>Use the "Google Test" page to diagnose access to Google Account, Gemini AI, and Cloud services.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">5️⃣</div>
-                <h3>Clean System</h3>
-                <p>Go to Cleaner tab. Choose Quick Clean or Deep Clean. Review changes before confirming.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">6️⃣</div>
-                <h3>Network Tools</h3>
-                <p>Use Network tab to flush DNS, reset network stack, or run diagnostics to fix connection issues.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wiki Link -->
-    <section class="support-banner">
-        <h2>📚 Full Documentation</h2>
-        <p>For detailed guides, visit our GitHub Wiki.</p>
-        <a href="https://github.com/tawroot/antigravity-cleaner/wiki" class="star-btn" target="_blank">
-            <i class="fas fa-book"></i> Open Wiki
-        </a>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Tawroot | Antigravity Cleaner (Apache 2.0)</p>
-        <p style="margin-top: 1rem;">
-            <a href="https://github.com/tawroot/antigravity-cleaner"><i class="fab fa-github"></i> GitHub</a> |
-            <a href="https://t.me/panbehnet"><i class="fab fa-telegram"></i> Telegram</a>
-        </p>
-    </footer>
-
-    <script src="script.js?v=5.3.1-pro"></script>
+  <div class="box">
+    <h2>Redirecting...</h2>
+    <p>Please wait while we redirect you to <a href="index.html#docs">Antigravity Cleaner Full Documentation</a>.</p>
+  </div>
 </body>
-
 </html>

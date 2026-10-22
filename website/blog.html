@@ -2,286 +2,326 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Technical Guides - Antigravity Cleaner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog &amp; Technical Guides | Antigravity Cleaner</title>
 
-    <!-- SEO Meta -->
-    <meta name="description"
-        content="In-depth technical guides, release announcements, and networking tutorials on bypassing Google Antigravity regional restrictions, configuring V2Ray/SOCKS5 proxies, and resolving Error 403.">
-    <meta name="keywords"
-        content="Google Antigravity blog, Antigravity 403 guide, Antigravity v2ray tutorial, Antigravity no tun proxy, Antigravity Russia, Antigravity Iran">
-    <meta name="author" content="Tawroot & Community">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/blog.html">
+  <!-- SEO Meta -->
+  <meta name="description"
+    content="In-depth technical guides, release announcements, and networking tutorials on bypassing Google Antigravity regional restrictions, configuring V2Ray/SOCKS5 proxies, and resolving Error 403.">
+  <meta name="keywords"
+    content="Google Antigravity blog, Antigravity 403 guide, Antigravity v2ray tutorial, Antigravity no tun proxy, Antigravity Russia, Antigravity Iran">
+  <meta name="author" content="Tawroot &amp; Community">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/blog.html">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@400;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=5.3.1-pro">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon.png">
 
-    <style>
-        .blog-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 240, 255, 0.4);
-        }
-        .badge-tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-        .badge-en { background: rgba(0, 240, 255, 0.15); color: #00f0ff; }
-        .badge-fa { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
-        .badge-ru { background: rgba(255, 170, 0, 0.15); color: #ffaa00; }
-    </style>
-    <script>(function(){const t=localStorage.getItem('ag_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <!-- Fonts: Inter, JetBrains Mono & Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="5aebb6c0-adab-434b-a907-ea20d6c5bc12" data-performance="true"></script>
+
+  <style>
+    .blog-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-top: 20px;
+    }
+
+    .blog-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: var(--vp-c-brand-soft);
+      color: var(--vp-c-brand);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      margin-bottom: 16px;
+    }
+
+    .blog-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--vp-c-text-1);
+      margin-bottom: 16px;
+    }
+
+    .blog-subtitle {
+      font-size: 1.125rem;
+      color: var(--vp-c-text-2);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .blog-card {
+      background: var(--vp-c-bg-elv);
+      border: 1px solid var(--vp-c-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-1);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .blog-card:hover {
+      box-shadow: var(--shadow-2);
+      border-color: rgba(37, 99, 235, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .card-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .tag-en { background: var(--ag-cyan-soft); color: var(--ag-cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+    .tag-fa { background: var(--ag-green-soft); color: var(--ag-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-ru { background: var(--ag-amber-soft); color: var(--ag-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .card-meta {
+      font-size: 12.5px;
+      color: var(--vp-c-text-3);
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--vp-c-text-1);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 14.5px;
+      color: var(--vp-c-text-2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--vp-c-brand);
+      margin-top: auto;
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">
-                    <img src="logo.png" alt="Antigravity Cleaner Logo" style="width: 36px; height: 36px; border-radius: 8px; margin-inline-end: 8px;">
-                    <span>Antigravity <span style="color: var(--primary);">Cleaner</span></span>
-                </a>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" data-lang-key="home">Home</a></li>
-                    <li><a href="features.html" data-lang-key="features">Features</a></li>
-                    <li><a href="download.html" data-lang-key="download">Download</a></li>
-                    <li><a href="docs.html" data-lang-key="docs">Docs</a></li>
-                    <li><a href="faq.html" data-lang-key="faq">FAQ</a></li>
-                    <li><a href="troubleshooting.html" data-lang-key="troubleshooting">Troubleshooting</a></li>
-                    <li><a href="blog.html" class="active" data-lang-key="blog">Blog</a></li>
-                </ul>
-                <div class="nav-controls">
-                    <div class="custom-lang-selector" id="customLangSelector">
-                        <button class="custom-lang-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="curr-flag" id="currLangFlag">🇺🇸</span>
-                            <span class="curr-name" id="currLangName">English</span>
-                            <i class="fas fa-chevron-down curr-arrow"></i>
-                        </button>
-                        <div class="custom-lang-menu" id="langDropdownMenu" role="menu">
-                            <button type="button" class="lang-option active" data-lang="en" role="menuitem">
-                                <div><span class="opt-flag">🇺🇸</span> English</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="fa" role="menuitem">
-                                <div><span class="opt-flag">🇮🇷</span> فارسی</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ru" role="menuitem">
-                                <div><span class="opt-flag">🇷🇺</span> Русский</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="zh" role="menuitem">
-                                <div><span class="opt-flag">🇨🇳</span> 简体中文</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="tr" role="menuitem">
-                                <div><span class="opt-flag">🇹🇷</span> Türkçe</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="es" role="menuitem">
-                                <div><span class="opt-flag">🇪🇸</span> Español</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                            <button type="button" class="lang-option" data-lang="ar" role="menuitem">
-                                <div><span class="opt-flag">🇸🇦</span> العربية</div>
-                                <i class="fas fa-check opt-check"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Theme Toggle Button -->
-                    <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
-                        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                    <select id="langSelect" style="display: none;">
-                        <option value="en">EN</option>
-                        <option value="fa">FA</option>
-                        <option value="ru">RU</option>
-                        <option value="zh">ZH</option>
-                        <option value="ar">AR</option>
-                        <option value="es">ES</option>
-                        <option value="tr">TR</option>
-                    </select>
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </nav>
+  <!-- =========================================================================
+       1. Top Navbar
+       ========================================================================= -->
+  <header class="VPNav">
+    <div class="VPNav-wrapper">
+      <div class="VPNav-container">
+
+        <!-- Brand -->
+        <a href="index.html" class="VPNavBarTitle">
+          <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="VPImage logo" width="24" height="24">
+          <span class="title">Antigravity Cleaner</span>
+          <span class="version-badge">v5</span>
+        </a>
+
+        <!-- Center Nav -->
+        <div class="VPNavBarContent">
+          <nav class="VPNavBarMenu" aria-label="Main Navigation">
+            <a href="index.html" class="VPLink nav-link">Home</a>
+            <a href="index.html#docs" class="VPLink nav-link">Documentation</a>
+            <a href="troubleshooting.html" class="VPLink nav-link">Error Clinic</a>
+            <a href="blog.html" class="VPLink nav-link active">Blog</a>
+          </nav>
         </div>
-    </header>
 
-    <section class="section" style="padding-top: 150px; padding-bottom: 80px;">
-        <div class="container">
-            <div class="section-header">
-                <h1 class="section-title">Developer Guides &amp; Insights</h1>
-                <p class="section-subtitle">Cornerstone technical deep-dives on Google Antigravity networking, proxy architectures, and regional bypasses.</p>
-            </div>
+        <!-- Right Tools -->
+        <div class="VPNavBarExtra">
+          <!-- Theme Switcher -->
+          <button class="VPSwitch VPSwitchAppearance" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="check">
+              <span class="icon">
+                <svg class="sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                <svg class="moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+              </span>
+            </span>
+          </button>
 
-            <div class="grid-3" style="gap: 25px;">
+          <!-- GitHub Link -->
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="VPNavBarSocialLink" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
 
-                <!-- Guide 1: English 403 -->
-                <div class="glass-card feature-item blog-card" style="text-align: left;">
-                    <div>
-                        <span class="badge-tag badge-en">English &bull; Networking</span>
-                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">September 2026 &bull; 6 min read</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">How to Fix Google Antigravity Error 403 Forbidden &amp; Region Lock</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-                            Step-by-step breakdown of "Your current account is not eligible for Antigravity, because it is not currently available in your location" and client-side patch routines.
-                        </p>
-                    </div>
-                    <a href="blog-google-antigravity-403-region-lock.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
-                        Read Full Guide <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>
-                    </a>
-                </div>
-
-                <!-- Guide 2: English No-TUN -->
-                <div class="glass-card feature-item blog-card" style="text-align: left;">
-                    <div>
-                        <span class="badge-tag badge-en">English &bull; DevOps Architecture</span>
-                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">September 2026 &bull; 8 min read</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Configure V2Ray, Clash &amp; SOCKS5 for Antigravity (No TUN Mode)</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-                            Architectural analysis of Electron process proxy injection vs virtual TUN adapters. Stop stream drops and Middlebox TLS resets.
-                        </p>
-                    </div>
-                    <a href="blog-antigravity-no-tun-proxy-guide.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
-                        Read Full Guide <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>
-                    </a>
-                </div>
-
-                <!-- Guide 3: Persian Farsi -->
-                <div class="glass-card feature-item blog-card" style="text-align: right; direction: rtl; font-family: 'Vazirmatn', sans-serif;">
-                    <div>
-                        <span class="badge-tag badge-fa">فارسی &bull; راهنمای جامع ایران</span>
-                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">شهریور ۱۴۰۵ &bull; خواندن در ۷ دقیقه</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">آموزش رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; line-height: 1.8;">
-                            آموزش اتصال V2Ray و کلش به Google Antigravity بدون افت پینگ اینترنت، بدون پریدن لاگین اکانت گوگل و حل قطعی استریم کدنویسی.
-                        </p>
-                    </div>
-                    <a href="blog-google-antigravity-iran-403-farsi.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
-                        مطالعه آموزش <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>
-                    </a>
-                </div>
-
-                <!-- Guide 4: Russian -->
-                <div class="glass-card feature-item blog-card" style="text-align: left;">
-                    <div>
-                        <span class="badge-tag badge-ru">Русский &bull; Гайд для РФ</span>
-                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Сентябрь 2026 &bull; 7 мин чтения</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Google Antigravity в России: Обход 403 и настройка V2Ray</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-                            Почему Antigravity выдает «Account not eligible» даже с VPN, и как настроить изолированный SOCKS5 прокси без тяжелого TUN-режима.
-                        </p>
-                    </div>
-                    <a href="blog-google-antigravity-russia-403.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
-                        Читать гайд <i class="fas fa-arrow-right" style="margin-left: 5px;"></i>
-                    </a>
-                </div>
-
-                <!-- Guide 5: v5.2.0 Release -->
-                <div class="glass-card feature-item blog-card" style="text-align: left;">
-                    <div>
-                        <span class="badge-tag badge-en">Release Note</span>
-                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">September 2026</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Antigravity Cleaner v5.2.0 Released</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-                            Retro KeyGen GUI with 8-bit chiptune audio, 1-click desktop launcher generator, and multi-architecture Apple Silicon &amp; Linux support.
-                        </p>
-                    </div>
-                    <a href="download.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
-                        Download v5.2.0 <i class="fas fa-download" style="margin-left: 5px;"></i>
-                    </a>
-                </div>
-
-                <!-- Guide 6: Troubleshooting Reference -->
-                <div class="glass-card feature-item blog-card" style="text-align: left;">
-                    <div>
-                        <span class="badge-tag badge-en">Reference Docs</span>
-                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Updated 2026</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: #fff;">Antigravity IDE Troubleshooting Matrix</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-                            Full matrix of status codes: 403 Forbidden, 429 Quota Exhausted, SingletonLock corruption, and Middlebox DPI connection resets.
-                        </p>
-                    </div>
-                    <a href="troubleshooting.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 18px; align-self: flex-start;">
-                        View Matrix <i class="fas fa-bug" style="margin-left: 5px;"></i>
-                    </a>
-                </div>
-
-            </div>
+          <!-- Download Button -->
+          <a href="index.html#download" class="VPButton medium brand">
+            Download Free
+          </a>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <h2>Antigravity <span>Cleaner</span></h2>
-                    <p>Supporting open internet, developer productivity, and borderless AI coding.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Product</h4>
-                        <ul>
-                            <li><a href="download.html">Download</a></li>
-                            <li><a href="features.html">Features</a></li>
-                            <li><a href="docs.html">Documentation</a></li>
-                        </ul>
-                    </div>
-                    <div class="link-group">
-                        <h4>Support &amp; Guides</h4>
-                        <ul>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
-                            <li><a href="blog.html">Blog &amp; Guides</a></li>
-                            <li><a href="llms.txt">llms.txt (AI Specification)</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="copyright">© 2026 Tawroot. Open Source (Apache-2.0). Dedicated to developers worldwide. 🕊️</div>
-                <div class="social-links">
-                    <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Content Grid
+       ========================================================================= -->
+  <main class="blog-container">
+    <div class="blog-header">
+      <span class="blog-badge">Developer Knowledge &amp; Insights</span>
+      <h1 class="blog-title">Antigravity Technical Guides &amp; Insights</h1>
+      <p class="blog-subtitle">
+        Deep-dives on Google Antigravity reverse engineering, process-level proxy architecture, and regional bypasses.
+      </p>
+    </div>
+
+    <div class="blog-grid">
+
+      <!-- Guide 1: English 403 -->
+      <a href="blog-google-antigravity-403-region-lock.html" class="blog-card">
+        <div>
+          <span class="card-tag tag-en">English &bull; Networking</span>
+          <div class="card-meta">September 2026 &bull; 6 min read</div>
+          <h2 class="card-title">How to Fix Google Antigravity Error 403 Forbidden &amp; Region Lock</h2>
+          <p class="card-desc">
+            Step-by-step breakdown of "Your current account is not eligible for Antigravity, because it is not currently available in your location" and client-side patch routines.
+          </p>
         </div>
-    </footer>
+        <div class="card-action">Read Full Guide &rarr;</div>
+      </a>
 
-    <script src="script.js?v=5.3.1-pro"></script>
+      <!-- Guide 2: English No-TUN -->
+      <a href="blog-antigravity-no-tun-proxy-guide.html" class="blog-card">
+        <div>
+          <span class="card-tag tag-en">English &bull; DevOps</span>
+          <div class="card-meta">September 2026 &bull; 8 min read</div>
+          <h2 class="card-title">Configure V2Ray, Clash &amp; SOCKS5 for Antigravity (No TUN Mode)</h2>
+          <p class="card-desc">
+            Architectural analysis of Electron process proxy injection vs virtual TUN adapters. Stop stream drops and Middlebox TLS resets.
+          </p>
+        </div>
+        <div class="card-action">Read Full Guide &rarr;</div>
+      </a>
+
+      <!-- Guide 3: Persian Farsi -->
+      <a href="blog-google-antigravity-iran-403-farsi.html" class="blog-card" style="direction: rtl; text-align: right;">
+        <div>
+          <span class="card-tag tag-fa">فارسی &bull; راهنمای ایران</span>
+          <div class="card-meta">شهریور ۱۴۰۵ &bull; مطالعه در ۷ دقیقه</div>
+          <h2 class="card-title">آموزش رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران</h2>
+          <p class="card-desc">
+            آموزش اتصال V2Ray و کلش به Google Antigravity بدون افت پینگ اینترنت، بدون پریدن لاگین اکانت گوگل و حل قطعی استریم کدنویسی.
+          </p>
+        </div>
+        <div class="card-action" style="direction: rtl;">مطالعه کامل آموزش &larr;</div>
+      </a>
+
+      <!-- Guide 4: Russian -->
+      <a href="blog-google-antigravity-russia-403.html" class="blog-card">
+        <div>
+          <span class="card-tag tag-ru">Русский &bull; Гайд для РФ</span>
+          <div class="card-meta">Сентябрь 2026 &bull; 7 мин чтения</div>
+          <h2 class="card-title">Google Antigravity в России: Обход 403 и настройка V2Ray</h2>
+          <p class="card-desc">
+            Почему Antigravity выдает «Account not eligible» даже с VPN, и как настроить изолированный SOCKS5 прокси без тяжелого TUN-режима.
+          </p>
+        </div>
+        <div class="card-action">Читать гайд &rarr;</div>
+      </a>
+
+      <!-- Guide 5: Troubleshooting Matrix -->
+      <a href="troubleshooting.html" class="blog-card">
+        <div>
+          <span class="card-tag tag-en">Diagnostics &bull; Reference</span>
+          <div class="card-meta">Updated October 2026</div>
+          <h2 class="card-title">Antigravity Error Clinic &amp; Diagnostic Matrix</h2>
+          <p class="card-desc">
+            Full clinic for 10 critical errors: 403 Forbidden, 429 Quota Exhausted, write EIO pipe crashes, and loopback proxy timeouts with visual screenshots.
+          </p>
+        </div>
+        <div class="card-action">Open Diagnostics Clinic &rarr;</div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. Footer
+       ========================================================================= -->
+  <footer class="VPHomeFooter">
+    <div class="footer-simple-wrap">
+      <div class="footer-main-row">
+        <div class="footer-brand-info">
+          <div class="footer-brand">
+            <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="footer-logo" width="22" height="22">
+            <span class="footer-brand-name">Antigravity Cleaner</span>
+          </div>
+          <p class="brand-tagline">Autonomous open-source utility for Google Antigravity IDE.</p>
+        </div>
+        <div class="footer-actions-wrap">
+          <a href="index.html#docs" class="footer-doc-btn">
+            📖 <span>Documentation</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom-row">
+        <div class="footer-meta">
+          <p class="copyright">Released under the Apache 2.0 License. Open-source &amp; 100% offline.</p>
+          <p class="manifesto-text">"Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders." — <strong>@dalroot</strong></p>
+        </div>
+        <nav class="footer-nav-links" aria-label="Footer Navigation">
+          <a href="index.html" class="f-link">Home</a>
+          <a href="index.html#docs" class="f-link">Documentation</a>
+          <a href="troubleshooting.html" class="f-link">Error Clinic</a>
+          <a href="blog.html" class="f-link">Blog</a>
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link">GitHub</a>
+          <a href="https://t.me/dallrep" target="_blank" rel="noopener noreferrer" class="f-link telegram-link">📢 Telegram: @dallrep</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-
 </html>

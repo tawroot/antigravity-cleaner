@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Home Page -->
+  <!-- Home Page (Master Landing & Documentation) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/</loc>
     <lastmod>2026-10-22</lastmod>
@@ -9,100 +10,52 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Troubleshooting Page (Cornerstone) -->
+  <!-- Diagnostics & Error Clinic (Cornerstone Troubleshooting) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/troubleshooting.html</loc>
     <lastmod>2026-10-22</lastmod>
     <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <priority>0.95</priority>
   </url>
 
-  <!-- Features Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/features.html</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Download Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/download.html</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Docs Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/docs.html</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Pricing Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/pricing.html</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Page -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Blog Index -->
+  <!-- Technical Guides & Blog Hub -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog.html</loc>
     <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
 
-  <!-- Technical Article 1: Google Antigravity 403 Forbidden & Region Lock (English) -->
+  <!-- Article 1: Error 403 Forbidden & Region Lock (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html</loc>
     <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 
-  <!-- Technical Article 2: Configure V2Ray, Clash & SOCKS5 without TUN Mode (English) -->
+  <!-- Article 2: Configure V2Ray, Clash & SOCKS5 without TUN Mode (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html</loc>
     <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 
-  <!-- Technical Article 3: Iranian Developer Guide (Farsi) -->
+  <!-- Article 3: Iranian Developer Guide (Farsi) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html</loc>
     <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 
-  <!-- Technical Article 4: Russian Developer Guide (Russian) -->
+  <!-- Article 4: Russian Developer Guide (Russian) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html</loc>
     <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <!-- LLMs.txt for AI Search Engines -->
-  <url>
-    <loc>https://tawroot.github.io/antigravity-cleaner/llms.txt</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
 
 </urlset>

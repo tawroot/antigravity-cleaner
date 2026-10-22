@@ -59,8 +59,8 @@
   function showView(viewName, targetId) {
     trackUmami('view_switch', { view: viewName, target: targetId || 'overview' });
     if (viewName === 'docs') {
-      viewHome.classList.remove('active');
-      viewDocs.classList.add('active');
+      if (viewHome) viewHome.classList.remove('active');
+      if (viewDocs) viewDocs.classList.add('active');
       if (navHomeBtn) navHomeBtn.classList.remove('active');
       if (navDocsBtn) navDocsBtn.classList.add('active');
       window.scrollTo(0, 0);
@@ -80,8 +80,8 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } else {
-      viewDocs.classList.remove('active');
-      viewHome.classList.add('active');
+      if (viewDocs) viewDocs.classList.remove('active');
+      if (viewHome) viewHome.classList.add('active');
       if (navDocsBtn) navDocsBtn.classList.remove('active');
       if (navHomeBtn) navHomeBtn.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -218,7 +218,7 @@
 
   // 5. Docs Sidebar Links & TOC ScrollSpy
   window.addEventListener('scroll', () => {
-    if (!viewDocs.classList.contains('active')) return;
+    if (!viewDocs || !viewDocs.classList.contains('active')) return;
 
     const isFa = root.getAttribute('lang') === 'fa';
     const activeHeadings = document.querySelectorAll(isFa ? '.doc-fa h1, .doc-fa h2' : '.doc-en h1, .doc-en h2');

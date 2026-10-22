@@ -28,6 +28,12 @@ Desktop.ini
 docs/PRIVATE_*
 docs/RESEARCH_*
 docs/upstream-bugs/
+docs/stats/
 *.private.*
 scripts/
+
+# Local backup & scratch dirs
+website-legacy-backup/
+landing-v2/
+design-system-spec/
 
