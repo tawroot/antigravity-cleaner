@@ -99,6 +99,9 @@
           <nav class="VPNavBarMenu" aria-label="Main Navigation">
             <a href="#home" class="VPLink nav-link active" id="navHomeBtn" data-i18n="nav.home">Home</a>
             <a href="#docs" class="VPLink nav-link" id="navDocsBtn" data-i18n="nav.docs">Documentation</a>
+            <a href="troubleshooting.html" class="VPLink nav-link" data-i18n="nav.clinic">Error Clinic</a>
+            <a href="faq.html" class="VPLink nav-link" data-i18n="nav.faq">FAQ</a>
+            <a href="blog.html" class="VPLink nav-link" data-i18n="nav.blog">Blog</a>
             <a href="#doc-benchmarks" class="VPLink nav-link" id="navBenchBtn" data-i18n="nav.benchmarks">Benchmarks</a>
           </nav>
         </div>
@@ -172,6 +175,11 @@
             <div class="action">
               <a href="#docs" class="VPButton medium brand" id="heroDocsLink" data-i18n="hero.exploreDocs" data-umami-event="hero-docs-click">
                 Explore Documentation
+              </a>
+            </div>
+            <div class="action">
+              <a href="troubleshooting.html" class="VPButton medium alt" id="heroClinicLink" data-umami-event="hero-clinic-click">
+                🔬 <span data-i18n="nav.clinic">Error Clinic</span>
               </a>
             </div>
             <div class="action">
@@ -312,6 +320,31 @@
         </div>
       </div>
     </section>
+
+    <!-- Quick Diagnostics & Resources Banner -->
+    <div class="container" style="margin-top: 20px; margin-bottom: 30px;">
+      <div style="background: var(--vp-c-bg-elv); border: 1px solid var(--vp-c-border); border-radius: var(--radius-lg); padding: 24px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; box-shadow: var(--shadow-1);">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.15rem; color: var(--vp-c-text-1);">
+            <span>🔬 Facing Google Antigravity Errors or Region Blocks?</span>
+          </div>
+          <p style="color: var(--vp-c-text-2); margin-top: 6px; font-size: 14.5px;">
+            Visit our official <strong>Error Clinic</strong> with 10 verified solutions &amp; screenshot proofs, or explore our in-depth <strong>FAQ &amp; Technical Guides</strong>.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="troubleshooting.html" class="VPButton medium brand" data-umami-event="banner-clinic-click">
+            Error Clinic (Fix 403 &amp; 429) &rarr;
+          </a>
+          <a href="faq.html" class="VPButton medium alt" data-umami-event="banner-faq-click">
+            Frequently Asked Questions
+          </a>
+          <a href="blog.html" class="VPButton medium alt" data-umami-event="banner-blog-click">
+            Technical Blog
+          </a>
+        </div>
+      </div>
+    </div>
 
     <!-- OS Downloads Section -->
     <section class="VPDownloads" id="download">
@@ -499,6 +532,9 @@
 
             <nav class="footer-nav-links" aria-label="Footer Navigation">
               <a href="#docs" class="f-link" data-i18n="footer.docs">Documentation</a>
+              <a href="troubleshooting.html" class="f-link" data-i18n="footer.clinic">Error Clinic</a>
+              <a href="faq.html" class="f-link" data-i18n="footer.faq">FAQ</a>
+              <a href="blog.html" class="f-link" data-i18n="footer.blog">Blog</a>
               <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.github">GitHub</a>
               <a href="https://t.me/dallrep" target="_blank" rel="noopener noreferrer" class="f-link telegram-link" data-i18n="footer.telegram">📢 Telegram: @dallrep</a>
               <a href="https://github.com/tawroot/antigravity-cleaner/issues" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.reportBug">Report Bug</a>
@@ -550,12 +586,14 @@
           </div>
 
           <div class="group">
-            <div class="title">Troubleshooting Clinic</div>
+            <div class="title">Troubleshooting &amp; Guides</div>
             <ul class="links">
-              <li><a href="#doc-errors" class="link">All 5 Antigravity Errors</a></li>
+              <li><a href="#doc-errors" class="link">Quick Error Reference</a></li>
+              <li><a href="troubleshooting.html" class="link" style="color: var(--vp-c-brand); font-weight: 600;">🔬 Error Clinic (10 Errors &amp; Proofs) ↗</a></li>
+              <li><a href="faq.html" class="link" style="color: var(--vp-c-brand); font-weight: 600;">❓ Full FAQ &amp; Security ↗</a></li>
+              <li><a href="blog.html" class="link" style="color: var(--vp-c-brand); font-weight: 600;">📚 Technical Guides &amp; Blog ↗</a></li>
               <li><a href="#doc-benchmarks" class="link">Live System Benchmarks</a></li>
               <li><a href="#doc-comparison" class="link">Comparison Matrix</a></li>
-              <li><a href="#doc-faq" class="link">Frequently Asked Questions</a></li>
             </ul>
           </div>
 
@@ -592,12 +630,14 @@
             </div>
 
             <div class="group">
-              <div class="title">کلینیک خطایابی و جداول</div>
+              <div class="title">کلینیک خطایابی و راهنماها</div>
               <ul class="links">
-                <li><a href="#fa-doc-errors" class="link">کلینیک حل هر ۵ خطای رایج</a></li>
+                <li><a href="#fa-doc-errors" class="link">خلاصه ۵ خطای متداول</a></li>
+                <li><a href="troubleshooting.html" class="link" style="color: var(--vp-c-brand); font-weight: 600;">🔬 کلینیک تخصصی ۱۰ خطا با اسکرین‌شات ↖</a></li>
+                <li><a href="faq.html" class="link" style="color: var(--vp-c-brand); font-weight: 600;">❓ سوالات متداول جامع (FAQ) ↖</a></li>
+                <li><a href="blog.html" class="link" style="color: var(--vp-c-brand); font-weight: 600;">📚 مقالات و آموزش‌های تخصصی ↖</a></li>
                 <li><a href="#fa-doc-benchmarks" class="link">بنچمارک‌های زنده عملکرد</a></li>
                 <li><a href="#fa-doc-comparison" class="link">جدول مقایسه تخصصی</a></li>
-                <li><a href="#fa-doc-faq" class="link">سوالات متداول و امنیت</a></li>
               </ul>
             </div>
 
@@ -1068,6 +1108,12 @@ ag-cleaner gui</code></pre>
             <footer class="VPDocFooter">
               <div class="meta">
                 <span>License: Apache 2.0 (100% Free &amp; Open-Source)</span>
+                <span>•</span>
+                <a href="troubleshooting.html">Error Clinic</a>
+                <span>•</span>
+                <a href="faq.html">FAQ</a>
+                <span>•</span>
+                <a href="blog.html">Blog</a>
                 <span>•</span>
                 <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
               </div>
@@ -1556,6 +1602,12 @@ antigravity-cleaner --rollback</code></pre>
             <footer class="VPDocFooter">
               <div class="meta">
                 <span>مجوز انتشار: Apache 2.0 (کاملاً رایگان و متن‌باز)</span>
+                <span>•</span>
+                <a href="troubleshooting.html">کلینیک خطاها</a>
+                <span>•</span>
+                <a href="faq.html">سوالات متداول</a>
+                <span>•</span>
+                <a href="blog.html">وبلاگ تخصصی</a>
                 <span>•</span>
                 <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer">مخزن گیت‌هاب پروژه</a>
               </div>

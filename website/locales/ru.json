@@ -10,7 +10,10 @@
     "cli": "Справочник CLI",
     "benchmarks": "Бенчмарки",
     "download": "Скачать бесплатно",
-    "search": "Поиск"
+    "search": "Поиск",
+    "clinic": "Клиника ошибок",
+    "faq": "ЧаВо (FAQ)",
+    "blog": "Блог"
   },
   "hero": {
     "badge": "Обход региональных санкций Google • Нулевая телеметрия • Защита Zero-Log ASAR",
@@ -88,6 +91,9 @@
     "docs": "Документация",
     "github": "GitHub",
     "telegram": "📢 Telegram: @dallrep",
-    "reportBug": "Сообщить об ошибке"
+    "reportBug": "Сообщить об ошибке",
+    "clinic": "Клиника ошибок",
+    "faq": "ЧаВо (FAQ)",
+    "blog": "Блог"
   }
 }

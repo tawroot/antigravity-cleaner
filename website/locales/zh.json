@@ -10,7 +10,10 @@
     "cli": "CLI 参考",
     "benchmarks": "性能基准",
     "download": "免费下载",
-    "search": "搜索"
+    "search": "搜索",
+    "clinic": "故障排查",
+    "faq": "常见问题",
+    "blog": "博客"
   },
   "hero": {
     "badge": "Google 制裁绕过 • 零遥测保护 • Zero-Log ASAR 护盾",
@@ -88,6 +91,9 @@
     "docs": "文档指南",
     "github": "GitHub 源码",
     "telegram": "📢 Telegram: @dallrep",
-    "reportBug": "反馈问题与建议"
+    "reportBug": "反馈问题与建议",
+    "clinic": "故障排查",
+    "faq": "常见问题",
+    "blog": "博客"
   }
 }

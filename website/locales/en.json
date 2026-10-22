@@ -10,7 +10,10 @@
     "cli": "CLI Reference",
     "benchmarks": "Benchmarks",
     "download": "Download Free",
-    "search": "Search"
+    "search": "Search",
+    "clinic": "Error Clinic",
+    "faq": "FAQ",
+    "blog": "Blog"
   },
   "hero": {
     "badge": "Google Sanctions Bypass • Zero-Telemetry • Zero-Log ASAR",
@@ -88,6 +91,9 @@
     "docs": "Documentation",
     "github": "GitHub",
     "telegram": "📢 Telegram: @dallrep",
-    "reportBug": "Report Bug"
+    "reportBug": "Report Bug",
+    "clinic": "Error Clinic",
+    "faq": "FAQ",
+    "blog": "Blog"
   }
 }
