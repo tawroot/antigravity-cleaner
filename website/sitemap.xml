@@ -18,6 +18,14 @@
     <priority>0.95</priority>
   </url>
 
+  <!-- FAQ & Security Knowledge Base -->
+  <url>
+    <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- Technical Guides & Blog Hub -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog.html</loc>

@@ -117,100 +117,136 @@
     <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="stylesheet" href="styles.css?v=5.3.1-pro">
 
-    <style>
-        body {
-            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            text-align: right;
-        }
+        <style>
         .article-container {
             max-width: 880px;
             margin: 0 auto;
-            padding: 40px 20px 80px;
+            padding: calc(var(--vp-nav-height) + 36px) 24px 80px;
+        }
+        .article-body {
+            color: var(--vp-c-text-1);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+        .article-body h1 {
+            color: var(--vp-c-text-1);
+            font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+            font-weight: 800;
+            line-height: 1.35;
+            margin: 16px 0 20px;
+        }
+        .article-body h2 {
+            color: var(--vp-c-text-1);
+            margin: 40px 0 16px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--vp-c-border);
+            padding-bottom: 10px;
+        }
+        .article-body h3 {
+            color: var(--vp-c-brand);
+            margin: 28px 0 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .article-body p {
+            margin-bottom: 20px;
+            color: var(--vp-c-text-2);
+        }
+        .article-body strong {
+            color: var(--vp-c-text-1);
+        }
+        .article-body ul, .article-body ol {
+            margin: 15px 24px 25px;
+            color: var(--vp-c-text-2);
+        }
+        .article-body li {
+            margin-bottom: 10px;
+            line-height: 1.8;
         }
         .star-banner {
-            background: linear-gradient(135deg, rgba(255, 170, 0, 0.15), rgba(0, 240, 255, 0.15));
-            border: 1px solid #ffaa00;
-            border-radius: 12px;
+            background: var(--vp-c-brand-soft);
+            border: 1px solid var(--vp-c-brand);
+            border-radius: var(--radius-lg);
             padding: 24px;
-            margin: 35px 0;
+            margin: 32px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
         }
-        .article-body {
-            color: var(--text-secondary);
-            line-height: 2;
-            font-size: 1.05rem;
-        }
-        .article-body h2 {
+        .star-banner strong {
             color: var(--vp-c-text-1);
-            margin: 45px 0 18px;
-            font-size: 1.7rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 10px;
+            font-size: 1.1rem;
         }
-        .article-body h3 {
-            color: var(--vp-c-brand);
-            margin: 28px 0 12px;
-            font-size: 1.35rem;
-        }
-        .article-body p {
-            margin-bottom: 22px;
-        }
-        .article-body ul, .article-body ol {
-            margin: 15px 30px 25px 0;
-        }
-        .article-body li {
-            margin-bottom: 12px;
-        }
-        .code-snippet {
-            direction: ltr;
-            text-align: left;
-            background: #0f172a; border-color: rgba(255,255,255,0.1);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 8px;
-            padding: 18px 22px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: var(--vp-c-brand);
-            margin: 22px 0;
-            overflow-x: auto;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-        .code-snippet span.comment {
-            color: #6b7280;
-        }
-        .code-snippet span.cmd {
-            color: #ffd700;
+        .star-banner p {
+            color: var(--vp-c-text-2);
+            margin: 6px 0 0;
+            font-size: 0.95rem;
         }
         .tech-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
-            background: rgba(11, 15, 25, 0.7);
-            border-radius: 8px;
+            margin: 28px 0;
+            background: var(--vp-c-bg-elv);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .tech-table th, .tech-table td {
-            padding: 14px 18px;
-            text-align: right;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.95rem;
+            border: 1px solid var(--vp-c-border);
+            box-shadow: var(--shadow-1);
         }
         .tech-table th {
-            background: rgba(0, 240, 255, 0.1);
+            background: var(--vp-c-bg-soft);
             color: var(--vp-c-brand);
-            font-weight: 600;
+            font-weight: 700;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--vp-c-border);
+            font-size: 0.95rem;
+        }
+        .tech-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--vp-c-border);
+            color: var(--vp-c-text-1);
+            font-size: 0.95rem;
+        }
+        .tech-table tr:last-child td {
+            border-bottom: none;
+        }
+        .tech-table tr:hover td {
+            background: var(--vp-c-bg-soft);
+        }
+        .tech-table code {
+            background: var(--vp-c-brand-soft);
+            color: var(--vp-c-brand);
+            border: 1px solid rgba(37, 99, 235, 0.25);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            direction: ltr !important;
+            display: inline-block;
+        }
+        .code-snippet {
+            direction: ltr !important;
+            text-align: left !important;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: #38bdf8;
+            margin: 22px 0;
+            overflow-x: auto;
+            box-shadow: var(--shadow-1);
         }
         .info-box {
-            background: rgba(0, 240, 255, 0.05);
-            border-right: 4px solid #00f0ff;
+            background: var(--vp-c-brand-soft);
+            border-inline-start: 4px solid var(--vp-c-brand);
             padding: 16px 20px;
-            border-radius: 8px 0 0 8px;
+            border-radius: var(--radius-md);
             margin: 25px 0;
+            color: var(--vp-c-text-1);
         }
     </style>
     <script>(function(){const t=localStorage.getItem('ag_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();</script>
@@ -270,7 +306,7 @@
         <h1 style="font-size: 2.4rem; color: var(--vp-c-text-1); margin: 15px 0 20px; line-height: 1.35;">
             آموزش جامع رفع تحریم و ارور ۴۰۳ گوگل آنتی‌گرویتی در ایران (اتصال با V2Ray بدون افت پینگ)
         </h1>
-        <p style="font-size: 1.15rem; color: #94a3b8; margin-bottom: 30px;">
+        <p style="font-size: 1.15rem; color: var(--vp-c-text-3); margin-bottom: 30px;">
             بررسی مهندسی دلایل بروز خطای ۴۰۳ و ریجن‌لاک، جلوگیری از قطع شدن استریم پاسخ‌های هوش مصنوعی و اجرای ادیتور با پروکسی لوکال بدون نیاز به حالت سنگین TUN.
         </p>
 
@@ -278,7 +314,7 @@
         <div class="star-banner">
             <div>
                 <strong style="color: var(--vp-c-text-1); font-size: 1.1rem;"><i class="fas fa-star" style="color: #ffaa00;"></i> از آزادی کدنویسی لذت می‌برید؟</strong>
-                <p style="color: #ccc; margin: 6px 0 0; font-size: 0.9rem;">پروژه متن‌باز Antigravity Cleaner صددرصد رایگان و آفلاین است. با دادن یک ستاره در گیت‌هاب از جامعه برنامه‌نویسان حمایت کنید!</p>
+                <p style="color: var(--vp-c-text-2); margin: 6px 0 0; font-size: 0.9rem;">پروژه متن‌باز Antigravity Cleaner صددرصد رایگان و آفلاین است. با دادن یک ستاره در گیت‌هاب از جامعه برنامه‌نویسان حمایت کنید!</p>
             </div>
             <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" class="btn btn-primary" style="white-space: nowrap;">
                 <i class="fab fa-github"></i> ثبت ستاره در گیت‌هاب
@@ -437,7 +473,7 @@
             <div class="star-banner" style="margin-top: 50px;">
                 <div>
                     <strong style="color: var(--vp-c-text-1); font-size: 1.15rem;">این آموزش به رفع مشکل شما کمک کرد؟</strong>
-                    <p style="color: #ccc; margin-top: 6px; font-size: 0.95rem;">
+                    <p style="color: var(--vp-c-text-2); margin-top: 6px; font-size: 0.95rem;">
                         با دادن یک ستاره (Star) به ریپازیتوری <strong>Antigravity Cleaner</strong> در گیت‌هاب، به بیشتر دیده شدن این ابزار رایگان برای سایر برنامه‌نویسان کمک کنید.
                     </p>
                 </div>

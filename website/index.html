@@ -1032,6 +1032,36 @@ ag-cleaner gui</code></pre>
                 <p>Zero Chat Loss Guarantee. Unlike alternative scripts that destructively delete your entire <code>User/globalStorage</code> folder, Antigravity Cleaner's surgical 429 reset flushes only the 16 corrupted rate-limit cookies and DIPS cache tokens. Your chat history, login session, and workspace settings remain 100% intact.</p>
               </div>
 
+              <div class="faq-entry">
+                <h3>How does Antigravity Cleaner bypass Error 403 Forbidden without global TUN mode?</h3>
+                <p>Google Antigravity enforces client-side eligibility checks in <code>main.js</code>, <code>agy</code> CLI, and internal extensions alongside Geo-IP checks. Running <code>antigravity-cleaner patch all</code> neutralizes these client-side gates, while <code>antigravity-cleaner launch</code> injects targeted process-level proxy routing (<code>--proxy-server=socks5://127.0.0.1:&lt;port&gt;</code>) directly into Chromium, leaving the rest of your system on direct high-speed internet.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>How do I resolve Error 429: Resource has been exhausted (Too Many Requests)?</h3>
+                <p>Run <code>antigravity-cleaner clean</code> or click [Reset 429] in the GUI. In 0.002 seconds, it surgically clears corrupted GPU and rate-limit cache buckets without disturbing your credentials or chats.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>How to fix "Agent terminated due to error" (write EIO broken pipe)?</h3>
+                <p>Our Zero-Log ASAR shield intercepts verbose stdout/stderr write pipes to prevent buffer overflows, and enforces an aggressive 15-second TCP KeepAlive heartbeat to keep streaming inference alive across DPI middleboxes.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>How to fix "proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"?</h3>
+                <p>This happens when the proxy client is closed or on another port. Run <code>antigravity-cleaner doctor</code> to automatically probe active loopback ports (10808, 2080, 7890, 1080) and auto-align your IDE configuration.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>Do you support Apple Silicon (M1/M2/M3/M4) Macs and Linux?</h3>
+                <p>Yes. Native standalone binaries are available for macOS (Universal ARM64 &amp; Intel), Linux (Ubuntu, Debian, Fedora, Arch), and Windows 10/11.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>Can I restore the original files if Google updates Antigravity IDE?</h3>
+                <p>Yes. Running <code>antigravity-cleaner restore</code> instantly rolls back all binaries and JavaScript files from automatic <code>.agybak</code> snapshots.</p>
+              </div>
+
             </main>
 
             <!-- Document Footer -->
@@ -1488,6 +1518,36 @@ antigravity-cleaner --rollback</code></pre>
               <div class="faq-entry">
                 <h3>آیا اجرای Cleaner باعث پاک شدن تاریخچه چت‌ها یا پروژه‌های من می‌شود؟</h3>
                 <p>تضمین حفظ ۱۰۰٪ تاریخچه چت‌ها (Zero Chat Loss). برخلاف اسکریپت‌های غیررسمی دیگر که کل پوشه <code>globalStorage</code> را به صورت مخرب پاک می‌کنند، متد جراحی Cleaner صرفاً ۱۶ کوکی مسموم‌شده مربوط به لیمیت سهمیه را پاکسازی می‌کند. تاریخچه چت‌ها، فایل‌های پروژه و سشن لاگین شما کاملاً دست‌نخورده باقی می‌ماند.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>چگونه خطای ۴۰۳ تحریم و مسدودسازی منطقه‌ای گوگل بدون حالت TUN حل می‌شود؟</h3>
+                <p>آنتی‌گرویتی علاوه بر سرور، در سمت کلاینت (فایل‌های <code>main.js</code>، دستور باینری <code>agy</code> و اکستنشن‌ها) اقدام به بررسی موقعیت کاربر می‌کند. دستور <code>ag-cleaner patch all</code> تمام این گیت‌های لوکال را خنثی کرده و با <code>ag-cleaner launch</code> پروکسی اختصاصی (<code>--proxy-server=socks5://127.0.0.1:&lt;port&gt;</code>) مستقیماً به پروسه ادیتور تزریق می‌شود بدون اینکه سرعت کل اینترنت یا سایت‌های بانکی و دانلود شما مختل شود.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>رفع خطای ۴۲۹ (Resource has been exhausted / Too Many Requests) چگونه است؟</h3>
+                <p>کافیست دستور <code>ag-cleaner clean</code> را اجرا کرده یا دکمه <strong>[Reset 429]</strong> را در محیط گرافیکی بزنید. ظرف ۰.۰۰۲ ثانیه باکت‌های فاسدشده سهمیه و کش تله‌متری بدون دستکاری لاگین شما ریست می‌شوند.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>علت خطای «Agent terminated due to error» و ارور write EIO چیست؟</h3>
+                <p>این خطا ناشی از پر شدن بافر پایپ‌های خروجی با لاگ‌های طولانی یا قطع شدن ارتباط استریم توسط فیلترینگ اینترنت در هنگام فکر کردن ایجنت است. پچ Zero-Log ASAR خروجی‌های اضافی را خاموش کرده و با اعمال KeepAlive پانزده ثانیه‌ای سوکت، استریم را زنده نگه می‌دارد.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>ارور «proxyconnect tcp: dial 127.0.0.1:10808: connection refused» به چه معناست؟</h3>
+                <p>این ارور نشان می‌دهد ادیتور به دنبال پورت پروکسی ۱۰۸۰۸ (وی‌تو‌ری) است اما کلاینت شما بسته است یا روی پورت دیگری (مثل ۷۸۹۰ کلش یا ۲۰۸۰ نکوباکس) کار می‌کند. با اجرای <code>ag-cleaner doctor</code> پورت‌های فعال به صورت هوشمند اسکن و تنظیم می‌شوند.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>آیا مک‌های اپل سیلیکون (M1/M2/M3/M4) و توزیع‌های مختلف لینوکس پشتیبانی می‌شوند؟</h3>
+                <p>بله، فایل‌های اجرایی مستقل برای مکینتاش (ARM64 و Intel)، لینوکس (Ubuntu, Debian, Fedora, Arch) و ویندوز ۱۰ و ۱۱ به صورت نیتیو و بدون هیچ پیش‌نیازی در دسترس هستند.</p>
+              </div>
+
+              <div class="faq-entry">
+                <h3>در صورت انتشار آپدیت رسمی از سوی گوگل، چگونه می‌توان ادیتور را به حالت اولیه برگرداند؟</h3>
+                <p>هنگام اجرای هر پچ، یک نسخه پشتیبان اتومیک با پسوند <code>.agybak</code> در کنار فایل اصلی ذخیره می‌شود. با زدن دستور <code>ag-cleaner restore</code> یا کلیک روی [Restore] در نرم‌افزار، تمام باینری‌ها و اسکریپت‌ها فوراً به حالت اورجینال بازگردانی می‌شوند.</p>
               </div>
 
             </main>

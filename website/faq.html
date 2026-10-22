@@ -1,40 +1,544 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting to Antigravity Cleaner FAQ & Security...</title>
-  <meta http-equiv="refresh" content="0; url=index.html#doc-faq">
-  <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/index.html#doc-faq">
-  <meta name="robots" content="noindex, follow">
-  <script>window.location.replace("index.html#doc-faq");</script>
+  <title>Frequently Asked Questions (FAQ) | Antigravity Cleaner</title>
+
+  <!-- SEO Meta -->
+  <meta name="description"
+    content="Frequently asked questions and verified solutions for Google Antigravity IDE: Error 403 Forbidden region lock, 429 quota exhaustion, write EIO pipe crashes, No-TUN proxy injection, and session preservation.">
+  <meta name="keywords"
+    content="Antigravity FAQ, Google Antigravity 403, Antigravity 429 quota, clear antigravity ide cache, ubuntu uninstall antigravity, Antigravity no TUN, Antigravity proxy, Antigravity safe, Antigravity restore">
+  <meta name="author" content="Tawroot &amp; Community">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tawroot.github.io/antigravity-cleaner/faq.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon.png">
+
+  <!-- Schema.org FAQPage (Rich Snippets for Google & AI Engines) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I bypass Google Antigravity Error 403 Forbidden / Region Lock?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Run 'antigravity-cleaner patch all' or click [Auto-Fix] in the Retro GUI. This surgically neutralizes client-side restriction hooks across main.js, agy CLI, and extension bundles. Then launch with 'antigravity-cleaner launch' to route IDE traffic through your local loopback proxy without TUN mode."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to resolve Error 429 Quota Exceeded without losing chats or logins?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Click [Reset 429] in the GUI or run 'antigravity-cleaner clean'. It surgically purges 16 corrupted rate-limit and GPU cache files while keeping your Google login session, cookies, and chat history 100% intact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Antigravity Cleaner work without VPN TUN mode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Antigravity Cleaner uses direct process-level proxy injection (--proxy-server=socks5://127.0.0.1:<port>). Your domestic internet and banking apps stay fast on direct connection, while only Antigravity routes through your proxy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Antigravity Cleaner safe to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Antigravity Cleaner is 100% open-source under Apache-2.0, runs completely offline on your local computer, contains zero telemetry, and never accesses your project source code."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to fix 'Agent terminated due to error' (write EIO / broken pipe)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Click [Auto-Fix] or run 'antigravity-cleaner patch all'. Our Zero-Log ASAR shield silences raw stdout/stderr write pipes, intercepts broken stream exceptions gracefully, and enforces a 15-second TCP KeepAlive socket heartbeat."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to fix 'proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused'?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Run 'antigravity-cleaner doctor'. Cleaner's diagnostic engine scans all active loopback sockets, detects your running proxy port (10808, 2080, 7890, 1080), and re-aligns the IDE proxy configuration automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you support Mac Apple Silicon (M1/M2/M3/M4) and Intel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Antigravity Cleaner provides native standalone binaries for Apple Silicon (ARM64) and Intel (x86_64) Macs, as well as Windows and Linux."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I restore original unpatched files if an update arrives?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, every time a patch is applied, an atomic .agybak backup is generated. Run 'antigravity-cleaner restore' to instantly revert all binaries and JavaScript files to their pristine original state."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts: Inter, JetBrains Mono & Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Master VitePress Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Umami Analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="5aebb6c0-adab-434b-a907-ea20d6c5bc12" data-performance="true"></script>
+
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    .faq-wrapper {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: calc(var(--vp-nav-height) + 36px) 24px 80px;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .faq-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: var(--vp-c-brand-soft);
+      color: var(--vp-c-brand);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      margin-bottom: 16px;
+    }
+
+    .faq-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--vp-c-text-1);
+      margin-bottom: 16px;
+    }
+
+    .faq-subtitle {
+      font-size: 1.125rem;
+      color: var(--vp-c-text-2);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    /* Search & Filter Bar */
+    .faq-search-box {
+      max-width: 520px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+
+    .faq-search-input {
+      width: 100%;
+      padding: 12px 18px 12px 42px;
+      font-size: 15px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--vp-c-border);
+      background: var(--vp-c-bg-elv);
+      color: var(--vp-c-text-1);
+      outline: none;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-1);
+    }
+
+    .faq-search-input:focus {
+      border-color: var(--vp-c-brand);
+      box-shadow: 0 0 0 3px var(--vp-c-brand-soft);
+    }
+
+    .faq-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--vp-c-text-3);
+      pointer-events: none;
+    }
+
+    /* FAQ Item Cards */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-card {
+      background: var(--vp-c-bg-elv);
+      border: 1px solid var(--vp-c-border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-1);
+      transition: all 0.2s ease;
+    }
+
+    .faq-card:hover {
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: var(--shadow-2);
+    }
+
+    .faq-question {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--vp-c-text-1);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+
+    .faq-question .q-icon {
+      color: var(--vp-c-brand);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .faq-answer {
+      color: var(--vp-c-text-2);
+      font-size: 15px;
+      line-height: 1.8;
+      padding-left: 26px;
+    }
+
+    .faq-answer p {
+      margin-bottom: 10px;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-answer code {
+      background: var(--vp-c-brand-soft);
+      color: var(--vp-c-brand);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      direction: ltr !important;
+      display: inline-block;
+    }
+
+    .faq-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      background: var(--vp-c-bg-soft);
+      color: var(--vp-c-text-3);
+      border: 1px solid var(--vp-c-border);
+    }
+
+    /* Bilingual Switcher */
+    .faq-lang-tabs {
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 80vh;
-      text-align: center;
-      background: #f6f6f7;
-      color: #213547;
-      padding: 20px;
+      gap: 10px;
+      margin-bottom: 30px;
     }
-    .box {
-      background: #ffffff;
-      padding: 32px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      max-width: 480px;
+
+    .faq-tab-btn {
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid var(--vp-c-border);
+      background: var(--vp-c-bg-elv);
+      color: var(--vp-c-text-2);
+      cursor: pointer;
+      transition: all 0.2s;
     }
-    a { color: #2563EB; font-weight: 600; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    .faq-tab-btn.active {
+      background: var(--vp-c-brand);
+      color: #ffffff;
+      border-color: var(--vp-c-brand);
+    }
   </style>
 </head>
+
 <body>
-  <div class="box">
-    <h2>Redirecting...</h2>
-    <p>Please wait while we redirect you to <a href="index.html#doc-faq">Antigravity Cleaner FAQ & Security</a>.</p>
-  </div>
+
+  <!-- =========================================================================
+       1. Top Navbar
+       ========================================================================= -->
+  <header class="VPNav">
+    <div class="VPNav-wrapper">
+      <div class="VPNav-container">
+        <!-- Brand -->
+        <a href="index.html" class="VPNavBarTitle">
+          <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="VPImage logo" width="24" height="24">
+          <span class="title">Antigravity Cleaner</span>
+          <span class="version-badge">v5</span>
+        </a>
+
+        <!-- Center Nav -->
+        <div class="VPNavBarContent">
+          <nav class="VPNavBarMenu" aria-label="Main Navigation">
+            <a href="index.html" class="VPLink nav-link">Home</a>
+            <a href="index.html#docs" class="VPLink nav-link">Documentation</a>
+            <a href="troubleshooting.html" class="VPLink nav-link">Error Clinic</a>
+            <a href="faq.html" class="VPLink nav-link active">FAQ</a>
+            <a href="blog.html" class="VPLink nav-link">Blog</a>
+          </nav>
+        </div>
+
+        <!-- Right Tools -->
+        <div class="VPNavBarExtra">
+          <!-- Theme Switcher -->
+          <button class="VPSwitch VPSwitchAppearance" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="check">
+              <span class="icon">
+                <svg class="sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                <svg class="moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+              </span>
+            </span>
+          </button>
+
+          <!-- GitHub Link -->
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="VPNavBarSocialLink" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+
+          <!-- Download Button -->
+          <a href="index.html#download" class="VPButton medium brand">
+            Download Free
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. FAQ Content
+       ========================================================================= -->
+  <main class="faq-wrapper">
+    <div class="faq-header">
+      <span class="faq-badge">Knowledge Base &amp; Security</span>
+      <h1 class="faq-title">Frequently Asked Questions</h1>
+      <p class="faq-subtitle">
+        Detailed answers on Error 403 region bypass, Error 429 quota recovery, No-TUN proxy architecture, and security assurances.
+      </p>
+
+      <div class="faq-search-box">
+        <svg class="faq-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="faq-search-input" id="faqSearch" placeholder="Search questions (e.g. 403, 429, TUN, proxy, Mac, Linux)...">
+      </div>
+    </div>
+
+    <div class="faq-list" id="faqList">
+
+      <!-- Q1: 403 Region Lock -->
+      <article class="faq-card">
+        <span class="faq-tag">Bypass &bull; Error 403</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How do I fix Google Antigravity Error 403 Forbidden: Region Lock?</h2>
+        <div class="faq-answer">
+          <p>Google Antigravity enforces client-side eligibility checks in <code>main.js</code>, the <code>agy</code> CLI daemon, and internal extensions alongside server-side Geo-IP verification. When an unsanctioned country (such as Iran, Russia, or China) is detected, Antigravity forces a session invalidation.</p>
+          <p><strong>Solution:</strong> Run <code>antigravity-cleaner patch all</code> (or click <strong>[Auto-Fix]</strong> in the GUI). This surgically neutralizes client-side region gates across all 4 software targets. Then launch with <code>antigravity-cleaner launch</code> to route the IDE through your local loopback proxy without TUN mode.</p>
+        </div>
+      </article>
+
+      <!-- Q2: 429 Quota Exceeded -->
+      <article class="faq-card">
+        <span class="faq-tag">Recovery &bull; Error 429</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How to resolve Error 429 Quota Exceeded without losing chat history?</h2>
+        <div class="faq-answer">
+          <p>Corrupted local token buckets and rate-limit cache files in <code>~/.config/Antigravity/Cache</code> and <code>DawnWebGPUCache</code> frequently freeze the client runtime in a perpetual 429 state even after quota should have refreshed.</p>
+          <p><strong>Solution:</strong> Run <code>antigravity-cleaner clean</code> (or click <strong>[Reset 429]</strong> in GUI). Our surgical reset purges only 16 corrupted telemetry and rate-limit files in 0.002s while <strong>strictly preserving 100% of your Google login cookies, project context, and chat history</strong>.</p>
+        </div>
+      </article>
+
+      <!-- Q3: No-TUN Mode -->
+      <article class="faq-card">
+        <span class="faq-tag">Network &bull; No-TUN</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> Why does Antigravity Cleaner avoid TUN mode?</h2>
+        <div class="faq-answer">
+          <p>Enabling TUN mode creates a virtual network interface that captures all device network traffic. This causes MTU packet fragmentation, slows down terminal package downloads (npm, pip, docker), breaks local developer servers (<code>localhost:3000</code>), and breaks domestic banking or intranet sites.</p>
+          <p>Antigravity Cleaner uses <strong>Process-Level Injection</strong> (<code>--proxy-server=socks5://127.0.0.1:&lt;port&gt;</code>). Only the IDE traffic routes through your proxy, while the rest of your operating system enjoys direct high-speed internet.</p>
+        </div>
+      </article>
+
+      <!-- Q4: Safety & Privacy -->
+      <article class="faq-card">
+        <span class="faq-tag">Security &bull; Offline</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> Is Antigravity Cleaner safe, open-source, and private?</h2>
+        <div class="faq-answer">
+          <p>Yes, 100%. Antigravity Cleaner is released under the permissive <strong>Apache 2.0 license</strong>. It runs completely offline on your local loopback address (<code>127.0.0.1</code>), contains zero external telemetry, zero phoning home, and has passed automated security audits with GitHub CodeQL and Govulncheck.</p>
+          <p>It never reads, transmits, or alters your private code repositories or personal API tokens.</p>
+        </div>
+      </article>
+
+      <!-- Q5: Agent Terminated write EIO -->
+      <article class="faq-card">
+        <span class="faq-tag">Crash Fix &bull; write EIO</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How to fix "Agent terminated due to error" (write EIO broken pipe)?</h2>
+        <div class="faq-answer">
+          <p>This crash happens when verbose console and telemetry logging fills the Node.js IPC pipe, or when state firewalls drop silent streaming inference connections while the AI model is performing deep multi-step thought planning.</p>
+          <p><strong>Solution:</strong> Run <code>antigravity-cleaner patch all</code>. Our Zero-Log ASAR Shield silences raw stdout/stderr write pipes, intercepts broken stream exceptions gracefully, and enforces an aggressive <strong>15-second TCP KeepAlive socket heartbeat</strong> to maintain active edge server connectivity.</p>
+        </div>
+      </article>
+
+      <!-- Q6: Proxy Refused 10808 -->
+      <article class="faq-card">
+        <span class="faq-tag">Proxy &bull; Connection Refused</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How to fix "proxyconnect tcp: dial tcp 127.0.0.1:10808: connect: connection refused"?</h2>
+        <div class="faq-answer">
+          <p>This error indicates that the IDE is trying to connect to a local proxy on port <code>10808</code> (v2ray/Xray default), but your proxy client is either closed or listening on a different port (such as <code>7890</code> for Clash, <code>2080</code> for NekoBox, or <code>1080</code> for generic SOCKS).</p>
+          <p><strong>Solution:</strong> Run <code>antigravity-cleaner doctor</code>. The diagnostic engine dynamically scans all active loopback sockets, detects your running proxy port, and aligns your IDE proxy configuration automatically.</p>
+        </div>
+      </article>
+
+      <!-- Q7: Failed to Fetch / State Corruption -->
+      <article class="faq-card">
+        <span class="faq-tag">State Fix &bull; Failed to Fetch</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How to fix "There was an unexpected issue setting up your account. Failed to fetch"?</h2>
+        <div class="faq-answer">
+          <p>This error stems from corrupted DIPS database records and orphaned WebSocket caches in Electron application state, which blocks the initial onboarding handshake.</p>
+          <p><strong>Solution:</strong> Execute <code>antigravity-cleaner clean</code>. It resets corrupted session caches in under 0.01s while leaving your saved login tokens and chat archives completely intact.</p>
+        </div>
+      </article>
+
+      <!-- Q8: SingletonLock -->
+      <article class="faq-card">
+        <span class="faq-tag">Startup Lock &bull; SingletonLock</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> Antigravity won't open after crash or system sleep. How to fix it?</h2>
+        <div class="faq-answer">
+          <p>When Chromium is terminated abruptly or the system suspends, an orphaned lockfile at <code>~/.config/Antigravity/SingletonLock</code> is left pointing to a dead PID. Subsequent launches detect the lockfile, assume an instance is already running, and exit silently.</p>
+          <p><strong>Solution:</strong> Launching via <code>antigravity-cleaner launch</code> automatically audits and purges stale singleton lockfiles before opening the IDE every time!</p>
+        </div>
+      </article>
+
+      <!-- Q9: Clear Cache & Ubuntu Uninstall -->
+      <article class="faq-card">
+        <span class="faq-tag">Maintenance &bull; Ubuntu Linux</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How do I completely clear Antigravity IDE cache or uninstall on Ubuntu?</h2>
+        <div class="faq-answer">
+          <p><strong>To clear cache safely:</strong> Run <code>ag-cleaner clean</code> (clears temporary GPU and quota blobs without logging you out). For a full factory reset, run <code>ag-cleaner clean --deep</code>.</p>
+          <p><strong>To completely uninstall on Ubuntu:</strong></p>
+          <p><code>sudo dpkg -r antigravity || sudo apt-get remove antigravity</code></p>
+          <p><code>rm -rf ~/.config/Antigravity ~/.antigravity ~/.local/share/applications/Antigravity*.desktop</code></p>
+        </div>
+      </article>
+
+      <!-- Q10: Apple Silicon / Multi-OS -->
+      <article class="faq-card">
+        <span class="faq-tag">Compatibility &bull; macOS &amp; Linux</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> Do you support Apple Silicon (M1/M2/M3/M4) Macs and Linux?</h2>
+        <div class="faq-answer">
+          <p>Yes. Antigravity Cleaner provides native standalone executables for macOS Apple Silicon (ARM64) and Intel (x86_64), Linux (Debian, Ubuntu, Fedora, Arch), and Windows 10/11.</p>
+        </div>
+      </article>
+
+      <!-- Q11: Reversibility & Restore -->
+      <article class="faq-card">
+        <span class="faq-tag">Maintenance &bull; Atomic Backup</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> Can I restore the original files if Google releases an official IDE update?</h2>
+        <div class="faq-answer">
+          <p>Yes. Every time a patch is applied, Antigravity Cleaner generates an atomic <code>.agybak</code> backup snapshot of the original files. Simply run <code>antigravity-cleaner restore</code> (or click <strong>[Restore]</strong> in GUI) to instantly revert all binaries and JavaScript files to their pristine original state.</p>
+        </div>
+      </article>
+
+      <!-- Q12: Comparison to other scripts -->
+      <article class="faq-card">
+        <span class="faq-tag">Architecture &bull; Comparison</span>
+        <h2 class="faq-question"><span class="q-icon">Q:</span> How does Antigravity Cleaner differ from Python patchers like open-antigravity-patcher or QNIX?</h2>
+        <div class="faq-answer">
+          <p>Unlike single-purpose Python scripts that only modify one file and require Python runtimes, Antigravity Cleaner is compiled in native Go with zero dependencies. It provides a complete diagnostic doctor engine, a Retro KeyGen GUI with 8-bit sound, automatic proxy port discovery, atomic backup/restore, desktop launcher generator, and surgical quota reset.</p>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. Footer
+       ========================================================================= -->
+  <footer class="VPHomeFooter">
+    <div class="footer-simple-wrap">
+      <div class="footer-main-row">
+        <div class="footer-brand-info">
+          <div class="footer-brand">
+            <img src="assets/logo.png" alt="Antigravity Cleaner Logo" class="footer-logo" width="22" height="22">
+            <span class="footer-brand-name">Antigravity Cleaner</span>
+          </div>
+          <p class="brand-tagline">Autonomous open-source utility for Google Antigravity IDE.</p>
+        </div>
+        <div class="footer-actions-wrap">
+          <a href="index.html#docs" class="footer-doc-btn">
+            📖 <span>Documentation</span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom-row">
+        <div class="footer-meta">
+          <p class="copyright">Released under the Apache 2.0 License. Open-source &amp; 100% offline.</p>
+          <p class="manifesto-text">"Dedicated to every developer filtered from within and sanctioned from without. Code knows no borders." — <strong>@dalroot</strong></p>
+        </div>
+        <nav class="footer-nav-links" aria-label="Footer Navigation">
+          <a href="index.html" class="f-link">Home</a>
+          <a href="index.html#docs" class="f-link">Documentation</a>
+          <a href="troubleshooting.html" class="f-link">Error Clinic</a>
+          <a href="faq.html" class="f-link">FAQ</a>
+          <a href="blog.html" class="f-link">Blog</a>
+          <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link">GitHub</a>
+          <a href="https://t.me/dallrep" target="_blank" rel="noopener noreferrer" class="f-link telegram-link">📢 Telegram: @dallrep</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Live Search Filter for FAQ
+    const faqSearch = document.getElementById('faqSearch');
+    const faqCards = document.querySelectorAll('.faq-card');
+    if (faqSearch) {
+      faqSearch.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        faqCards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>
