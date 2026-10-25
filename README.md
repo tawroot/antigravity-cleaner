@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.0)</h1>
 
 <p align="center">
   <strong>Autonomous Sanction Bypass, Zero-Telemetry Engine & Direct No-TUN Proxy Injector for Google Antigravity</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.0-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -59,7 +59,7 @@
 - [🏛️ System Architecture & Traffic Flow](#️-system-architecture--traffic-flow)
 - [🛡️ Zero-Telemetry Engine & Privacy Guarantee](#️-zero-telemetry-engine--privacy-guarantee)
 - [📊 Live System Benchmarks & Audit Logs](#-live-system-benchmarks--audit-logs)
-- [🥊 Comprehensive Comparison Matrix (v5.3.1)](#-comprehensive-comparison-matrix-v531)
+- [🥊 Comprehensive Comparison Matrix (v5.4.0)](#-comprehensive-comparison-matrix-v540)
 - [🚀 Quick CLI Install (One-Liner)](#-quick-install-one-liner)
 - [💻 Visual Interfaces: Retro KeyGen GUI & Terminal Dashboard](#-visual-interfaces-retro-keygen-gui--terminal-dashboard)
 - [🛠️ CLI Subcommands & Diagnostics](#️-cli-subcommands)
@@ -152,8 +152,8 @@ On startup and during streaming, Google inspects real IP addresses, timezones, a
 <summary><strong>🔍 Click to inspect all 9 technical layers:</strong></summary>
 <br>
 
-1. **Core Engine Binary Neutralization (`language_server`)**  
-   Rewrites authentication logic directly in machine code (`RAX+8 hasValidAuth = true`), permanently resolving 403 blocks and `User location is not supported` errors.
+1. **Core Engine Binary Neutralization (`language_server`) & Universal Discovery**  
+   Dynamically detects and scans target binaries across all architecture variants (Apple Silicon `arm64`, Intel `x64`, Linux `aarch64`/`amd64`, and Google RPM/DEB layouts) without hardcoded paths, rewriting authentication logic directly in machine code (`RAX+8 hasValidAuth = true`) to permanently eliminate 403 blocks and `User location is not supported` errors.
 2. **CLI Eligibility Bypass (`agy`)**  
    Neutralizes client-side regional and eligibility gating in the official command-line executable.
 3. **IDE Frontend Capability Unlock (`main.js`)**  
@@ -382,6 +382,18 @@ Having trouble? Let us know
 
 </details>
 
+<details>
+<summary><strong>6. macOS App Management / Operation Not Permitted (syscall.EPERM)</strong></summary>
+<br>
+
+* **Cause:** macOS Ventura, Sonoma, and Sequoia enforce strict App Management sandboxing preventing external CLI tools from modifying signed application bundles inside `/Applications/Antigravity.app`.
+* **Fix:**
+  1. Open **System Settings ➔ Privacy & Security ➔ App Management**.
+  2. Toggle ON the permission switch for your terminal application (Terminal, iTerm2, Kitty, Ghostty, or VS Code).
+  3. Re-run `./antigravity-cleaner patch all`. Pre-flight canary checks in Cleaner v5.4.0 will verify write permissions and complete the patch.
+
+</details>
+
 ---
 
 ## 🏛️ System Architecture & Traffic Flow
@@ -432,9 +444,9 @@ With our **8-Flag Zero-Telemetry Engine**:
 
 ---
 
-## 🥊 Comprehensive Comparison Matrix (v5.3.1)
+## 🥊 Comprehensive Comparison Matrix (v5.4.0)
 
-| Feature | Single-Purpose Patchers (`open-antigravity-patcher`, `QNIX`) | Process/DLL Injectors (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| Feature | Single-Purpose Patchers (`open-antigravity-patcher`, `QNIX`) | Process/DLL Injectors (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.0)** |
 | :--- | :---: | :---: | :---: |
 | **Language & Architecture** | Python 3 (requires runtime, `pip`) | Windows-only C++ / DLL injection | **Native Pure Go (Zero dependencies, Single Executable)** |
 | **User Interface** | Basic text stdout | Basic console | **Win95 Retro Desktop GUI + 2026 Lipgloss TUI Dashboard** |
@@ -466,11 +478,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Visual Interfaces: Retro KeyGen GUI & Terminal Dashboard
 
-### 💾 Retro KeyGen Desktop GUI (v5.3.1)
+### 💾 Retro KeyGen Desktop GUI (v5.4.0)
 Launch standalone or with `ag-cleaner gui` for a 3-step workflow (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`), real-time Zero-Telemetry toggle, and live process monitoring:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.0" width="460">
 </div>
 
 ---

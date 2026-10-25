@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.0)</h1>
 
 <p align="center">
   <strong>Автономный обход санкций, движок нулевой телеметрии и прямой No-TUN прокси-инжектор для Google Antigravity</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.0-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -59,7 +59,7 @@
 - [🏛️ Архитектура системы и маршрутизация трафика](#️-архитектура-системы-и-маршрутизация-трафика)
 - [🛡️ Движок нулевой телеметрии и гарантия приватности](#️-движок-нулевой-телеметрии-и-гарантия-приватности)
 - [📊 Бенчмарки производительности и журналы аудита](#-бенчмарки-производительности-и-журналы-аудита)
-- [🥊 Сравнительная таблица решений (v5.3.1)](#-сравнительная-таблица-решений-v531)
+- [🥊 Сравнительная таблица решений (v5.4.0)](#-сравнительная-таблица-решений-v540)
 - [🚀 Быстрая установка через CLI (одной строкой)](#-быстрая-установка-через-cli-одной-строкой)
 - [💻 Визуальные интерфейсы: ретро-GUI KeyGen и терминальный дашборд](#-визуальные-интерфейсы-ретро-gui-keygen-и-терминальный-дашборд)
 - [🛠️ Подкоманды CLI и диагностика](#️-подкоманды-cli)
@@ -152,8 +152,8 @@
 <summary><strong>🔍 Нажмите для подробного просмотра всех 9 технических уровней:</strong></summary>
 <br>
 
-1. **Нейтрализация бинарного ядра (`language_server`)**  
-   Перезаписывает логику проверки авторизации непосредственно в машинном коде (`RAX+8 hasValidAuth = true`), навсегда устраняя ошибки 403 Forbidden и `User location is not supported`.
+1. **Нейтрализация бинарного ядра (`language_server`) и универсальное динамическое обнаружение**  
+   Динамический поиск и анализ целевых исполняемых файлов без жестко заданных путей для всех архитектур (Apple Silicon `arm64`, Intel `x64`, Linux `aarch64`/`amd64` и раскладки Google RPM/DEB). Перезаписывает логику проверки авторизации непосредственно в машинном коде (`RAX+8 hasValidAuth = true`), навсегда устраняя ошибки 403 Forbidden и `User location is not supported`.
 2. **Обход проверки региона в CLI (`agy`)**  
    Нейтрализует клиентские региональные ограничения и проверку прав доступа в официальной консольной утилите.
 3. **Разблокировка возможностей фронтенда IDE (`main.js`)**  
@@ -382,6 +382,18 @@ Having trouble? Let us know
 
 </details>
 
+<details>
+<summary><strong>6. Ошибка доступа в macOS: Operation not permitted (syscall.EPERM / App Management)</strong></summary>
+<br>
+
+* **Причина:** Начиная с macOS Ventura, Sonoma и Sequoia внедрена строгая системная защита «App Management» (Управление приложениями), которая блокирует внешним терминальным утилитам прямое изменение бандлов `.app` внутри `/Applications/Antigravity.app`.
+* **Решение с помощью Cleaner:**
+  1. Откройте **Системные настройки (System Settings) ➔ Конфиденциальность и безопасность (Privacy & Security) ➔ Управление приложениями (App Management)**.
+  2. Включите переключатель разрешений для используемого терминала (Terminal, iTerm2, Kitty, Ghostty или VS Code).
+  3. Повторно запустите `./antigravity-cleaner patch all` (движок Cleaner v5.4.0 проведет предварительную проверку прав записи и успешно завершит операцию).
+
+</details>
+
 ---
 
 ## 🏛️ Архитектура системы и маршрутизация трафика
@@ -432,9 +444,9 @@ graph LR
 
 ---
 
-## 🥊 Сравнительная таблица решений (v5.3.1)
+## 🥊 Сравнительная таблица решений (v5.4.0)
 
-| Функция | Одноцелевые патчеры (`open-antigravity-patcher`, `QNIX`) | Инжекторы процессов и DLL (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| Функция | Одноцелевые патчеры (`open-antigravity-patcher`, `QNIX`) | Инжекторы процессов и DLL (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.0)** |
 | :--- | :---: | :---: | :---: |
 | **Язык и архитектура** | Python 3 (требуется рантайм, `pip`) | Только для Windows C++ / DLL-инжекция | **Нативный чистый Go (без зависимостей, единый бинарник)** |
 | **Пользовательский интерфейс** | Простой вывод в консоль | Базовая консоль | **Ретро-интерфейс Win95 KeyGen GUI + современный Lipgloss TUI** |
@@ -466,11 +478,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Визуальные интерфейсы: ретро-GUI KeyGen и терминальный дашборд
 
-### 💾 Графический интерфейс Retro KeyGen Desktop GUI (v5.3.1)
+### 💾 Графический интерфейс Retro KeyGen Desktop GUI (v5.4.0)
 Запускайте автономно или через команду `ag-cleaner gui` для пошаговой работы в 3 клика (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`), переключения режима нулевой телеметрии и мониторинга процессов в реальном времени:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.0" width="460">
 </div>
 
 ---

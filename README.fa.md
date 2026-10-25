@@ -23,7 +23,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.0-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -152,8 +152,8 @@
 <summary><strong>🔍 برای مشاهده جزئیات فنی تک‌تک لایه‌ها کلیک کنید:</strong></summary>
 <br>
 
-1. **خنثی‌سازی بررسی‌های منطقه‌ای در هسته اصلی (`language_server`)**  
-   بازنویسی مستقیم منطق احراز هویت در بایت‌کد اجرایی موتور اصلی برنامه و تثبیت دائمی وضعیت کاربر روی حالت معتبر (`hasValidAuth = true`)؛ این تغییر ریشه اصلی ارورهای ۴۰۳ و پیام خطای `User location is not supported` را برای همیشه برطرف می‌کند.
+1. **خنثی‌سازی بررسی‌های منطقه‌ای در هسته اصلی (`language_server`) و موتور شناسایی هوشمند**  
+   شناسایی داینامیک و پویا روی تمامی معماری‌ها (Apple Silicon ARM64، Intel x64، Linux x86_64/ARM64 و توزیع‌های رسمی RPM/DEB گوگل) بدون نیاز به مسیرهای هاردکدشده؛ همراه با بازنویسی مستقیم منطق احراز هویت در بایت‌کد اجرایی (`hasValidAuth = true`) تا ریشه ارورهای ۴۰۳ و خطای `User location is not supported` برای همیشه حذف شود.
 
 2. **رفع محدودیت در نسخه خط فرمان (`agy`)**  
    خنثی‌سازی بررسی‌های واجد شرایط بودن حساب (Eligibility Checks) و سدهای مسدودکننده دسترسی در فایل اجرایی رسمی CLI.
@@ -402,6 +402,18 @@ Having trouble? Let us know
 
 </details>
 
+<details>
+<summary><strong>۶. خطای مجوز در مک: Operation not permitted (syscall.EPERM / App Management)</strong></summary>
+<br>
+
+* **علت فنی وقوع:** در مک‌های مدرن (macOS Ventura, Sonoma, Sequoia)، مکانیزم امنیتی App Management مانع از ویرایش باینری‌های داخل پکیج‌های امضاشده (`/Applications/Antigravity.app`) توسط ترمینال‌های خارجی می‌شود.
+* **راه‌حل با کلینر:**
+  ۱. به مسیر **System Settings ➔ Privacy & Security ➔ App Management** بروید.
+  ۲. کلید دسترسی ترمینال فعال خود (مانند Terminal، iTerm2، Ghostty، Kitty یا VS Code) را فعال (ON) کنید.
+  ۳. مجدداً دستور `./antigravity-cleaner patch all` را اجرا نمایید (موتور نسخه v5.4.0 با تست دسترسی امن پیش از نوشتن، عملیات را با موفقیت تکمیل می‌کند).
+
+</details>
+
 ---
 
 ## 🏛️ معماری سیستم و گردش ترافیک
@@ -453,9 +465,9 @@ graph LR
 
 ---
 
-## 🥊 جدول مقایسه جامع با سایر ابزارها (نسخه ۵.۳.۱)
+## 🥊 جدول مقایسه جامع با سایر ابزارها (نسخه ۵.۴.۰)
 
-| شاخص و قابلیت فنی | پچرهای پایتونی (`open-patcher` و...) | اسکریپت‌های پاورشل و شل | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| شاخص و قابلیت فنی | پچرهای پایتونی (`open-patcher` و...) | اسکریپت‌های پاورشل و شل | **⚡ Antigravity Cleaner Pro (v5.4.0)** |
 | :--- | :---: | :---: | :---: |
 | **زبان و معماری توسعه** | پایتون (نیازمند رانتایم و `pip`) | پاورشل (محدود به تک سیستم‌عامل) | **Go خالص (تک فایل باینری کامپایل‌شده، صفر وابستگی)** |
 | **طراحی رابط کاربری** | خط فرمان متنی ساده | کنسول سیاه متفرقه | **محیط نوستالژیک گرافیکی Win95 + منوی مدرن ترمینال TUI** |
@@ -489,7 +501,7 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 رابط‌های بصری: محیط گرافیکی رترو (Win95 GUI) و داشبورد ترمینال
 
-### 💾 پنجره دسکتاپ گرافیکی رترو (نسخه ۵.۳.۱)
+### 💾 پنجره دسکتاپ گرافیکی رترو (نسخه ۵.۴.۰)
 با اجرای دستور `antigravity gui` (یا با دابل کلیک مستقیم روی فایل بدون نیاز به ترمینال)، پنجره نوستالژیک و سبک رترو با ۳ مرحله متوالی (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`)، چک‌باکس تله‌متری صفر و مانیتورینگ زنده پروسه باز می‌شود:
 
 <div align="center">
