@@ -583,16 +583,36 @@ func runGui() {
 func runReport() {
 	ui.PrintSection("📋 Generating Diagnostic Report")
 	fmt.Println("  Scanning system state, connectivity, and Antigravity installation...")
-	report := doctor.GenerateDiagnosticReport(Version)
-	fmt.Println()
-	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render(report))
 
+	results := doctor.RunDiagnostics(true)
+	var rows []ui.CardRow
+	for _, r := range results {
+		rows = append(rows, ui.CardRow{
+			Title:   r.Name,
+			Status:  r.Status,
+			Summary: r.HumanSummary,
+			Details: r.DebugDetails,
+		})
+	}
+	ui.PrintDashboardWithTitle(" 📋 Diagnostic Report — Health & Environment Audit", rows, false)
+
+	report := doctor.BuildMarkdownReport(Version, results)
 	copied := doctor.CopyToClipboard(report)
 	if copied {
-		fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Copied diagnostic report to clipboard! You can paste it (Ctrl+V) directly into Telegram or GitHub."))
+		fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Copied diagnostic report to clipboard! You can paste (Ctrl+V) directly into Telegram or GitHub."))
 	} else {
-		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  (Tip: You can select and copy the text above to share in Telegram or GitHub)."))
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  ⚠ Could not access system clipboard."))
 	}
+
+	fmt.Println()
+	divider := lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  ────────────────────────────────────────────────────────────────────────")
+	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF")).Render("  📋 Text Preview (Markdown for Telegram / GitHub):"))
+	fmt.Println(divider)
+	lines := strings.Split(report, "\n")
+	for _, line := range lines {
+		fmt.Printf("  %s\n", line)
+	}
+	fmt.Println(divider)
 }
 
 func runUpdate() {

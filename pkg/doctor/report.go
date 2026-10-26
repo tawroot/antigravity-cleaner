@@ -1,16 +1,17 @@
 package doctor
 
 import (
+	"encoding/base64"
 	"fmt"
+	"os"
 	"os/exec"
 	"runtime"
 	"strings"
 	"time"
 )
 
-// GenerateDiagnosticReport produces a clean, structured Markdown report
-func GenerateDiagnosticReport(version string) string {
-	results := RunDiagnostics(true)
+// BuildMarkdownReport converts DiagnosticItem slice into clean, structured Markdown
+func BuildMarkdownReport(version string, results []DiagnosticItem) string {
 	var sb strings.Builder
 
 	sb.WriteString("🩺 **Antigravity Cleaner Diagnostic Report**\n")
@@ -26,12 +27,22 @@ func GenerateDiagnosticReport(version string) string {
 		}
 		sb.WriteString(fmt.Sprintf("• **%s**: %s %s\n", item.Name, icon, item.HumanSummary))
 		if item.DebugDetails != "" && item.Status != "OK" {
-			sb.WriteString(fmt.Sprintf("  ↳ `%s`\n", item.DebugDetails))
+			details := strings.TrimSpace(item.DebugDetails)
+			if len(details) > 85 {
+				details = details[:82] + "..."
+			}
+			sb.WriteString(fmt.Sprintf("  ↳ `%s`\n", details))
 		}
 	}
 
 	sb.WriteString("\n💡 *Paste this report directly into GitHub Issues or Telegram support (@dallrep)*\n")
 	return sb.String()
+}
+
+// GenerateDiagnosticReport produces a clean, structured Markdown report
+func GenerateDiagnosticReport(version string) string {
+	results := RunDiagnostics(true)
+	return BuildMarkdownReport(version, results)
 }
 
 // CopyToClipboard attempts to place text onto the system clipboard
@@ -52,10 +63,21 @@ func CopyToClipboard(text string) bool {
 		}
 	}
 
-	if cmd == nil {
-		return false
+	if cmd != nil {
+		cmd.Stdin = strings.NewReader(text)
+		if err := cmd.Run(); err == nil {
+			return true
+		}
 	}
 
-	cmd.Stdin = strings.NewReader(text)
-	return cmd.Run() == nil
+	// Fallback to OSC 52 ANSI escape sequence (supported natively by modern terminals)
+	encoded := base64.StdEncoding.EncodeToString([]byte(text))
+	osc52 := fmt.Sprintf("\x1b]52;c;%s\x07", encoded)
+	if tty, err := os.OpenFile("/dev/tty", os.O_WRONLY, 0); err == nil {
+		_, _ = tty.WriteString(osc52)
+		_ = tty.Close()
+		return true
+	}
+	_, _ = os.Stdout.WriteString(osc52)
+	return true
 }

@@ -104,6 +104,11 @@ type CardRow struct {
 
 // PrintDashboard displays an ultra-clean, modern 2026 Lipgloss Card
 func PrintDashboard(rows []CardRow, verbose bool) {
+	PrintDashboardWithTitle(" 🩺 Antigravity Cleaner — Health & Connectivity Audit", rows, verbose)
+}
+
+// PrintDashboardWithTitle displays the card with a customizable title
+func PrintDashboardWithTitle(title string, rows []CardRow, verbose bool) {
 	fmt.Println()
 
 	headerStyle := lipgloss.NewStyle().
@@ -114,7 +119,7 @@ func PrintDashboard(rows []CardRow, verbose bool) {
 		Width(72).
 		Align(lipgloss.Left)
 
-	header := headerStyle.Render(" 🩺 Antigravity Cleaner — Health & Connectivity Audit")
+	header := headerStyle.Render(title)
 	var content strings.Builder
 	content.WriteString(header + "\n\n")
 

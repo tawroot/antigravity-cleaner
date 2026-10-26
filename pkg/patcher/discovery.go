@@ -16,9 +16,11 @@ import (
 // LogFunc defines a structured logging function callback
 type LogFunc func(format string, args ...interface{})
 
-// defaultLogger provides simple standard library logging with [DISCOVERY] tag
+// defaultLogger provides silent logging by default unless AG_DEBUG=1 is set
 var defaultLogger LogFunc = func(format string, args ...interface{}) {
-	log.Printf("[DISCOVERY] "+format, args...)
+	if os.Getenv("AG_DEBUG") == "1" {
+		log.Printf("[DISCOVERY] "+format, args...)
+	}
 }
 
 // FindRunningLanguageServer discovers the exact path of an active language_server process
