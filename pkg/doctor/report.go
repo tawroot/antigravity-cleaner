@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"time"
@@ -80,4 +81,59 @@ func CopyToClipboard(text string) bool {
 	}
 	_, _ = os.Stdout.WriteString(osc52)
 	return true
+}
+
+// SaveAndOpenReport saves the report to a user-visible text file and opens it in default text viewer
+func SaveAndOpenReport(report string) (string, error) {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		homeDir = os.TempDir()
+	}
+
+	targetDir := homeDir
+	desktopDir := filepath.Join(homeDir, "Desktop")
+	if info, err := os.Stat(desktopDir); err == nil && info.IsDir() {
+		targetDir = desktopDir
+	}
+
+	filePath := filepath.Join(targetDir, "antigravity-report.txt")
+
+	instructions := "================================================================================\n" +
+		"  🩺 ANTIGRAVITY CLEANER — DIAGNOSTIC REPORT\n" +
+		"================================================================================\n" +
+		"  📋 INSTRUCTIONS (راهنمای ارسال گزارش):\n" +
+		"  1. Select and copy all text below (Ctrl+A then Ctrl+C / Cmd+A then Cmd+C).\n" +
+		"  2. Paste it into the GitHub Discussions Clinic:\n" +
+		"     👉 https://github.com/tawroot/antigravity-cleaner/discussions/34\n" +
+		"     Or Telegram Community:\n" +
+		"     👉 https://t.me/dallrep\n" +
+		"================================================================================\n\n"
+
+	fullContent := instructions + report
+	if err := os.WriteFile(filePath, []byte(fullContent), 0644); err != nil {
+		filePath = filepath.Join(os.TempDir(), "antigravity-report.txt")
+		if err2 := os.WriteFile(filePath, []byte(fullContent), 0644); err2 != nil {
+			return "", err2
+		}
+	}
+
+	openFileInDefaultEditor(filePath)
+	return filePath, nil
+}
+
+func openFileInDefaultEditor(filePath string) {
+	var cmd *exec.Cmd
+	switch runtime.GOOS {
+	case "darwin":
+		cmd = exec.Command("open", filePath)
+	case "windows":
+		cmd = exec.Command("cmd", "/c", "start", "", filePath)
+	default: // Linux
+		if _, err := exec.LookPath("xdg-open"); err == nil {
+			cmd = exec.Command("xdg-open", filePath)
+		}
+	}
+	if cmd != nil {
+		_ = cmd.Start()
+	}
 }

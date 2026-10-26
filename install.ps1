@@ -7,7 +7,7 @@ $InstallDir = Join-Path $HomePath ".antigravity\bin"
 $TargetFile = Join-Path $InstallDir "antigravity-cleaner.exe"
 
 Write-Host "====================================================" -ForegroundColor Cyan
-Write-Host "  ⚡ Antigravity Cleaner Toolkit Installer (v5.2.0)" -ForegroundColor Yellow
+Write-Host "  ⚡ Antigravity Cleaner Toolkit Installer (v5.4.1)" -ForegroundColor Yellow
 Write-Host "  ✨ Universal Support: Auto-detects ALL Antigravity Versions (1.x, 2.x, IDE & CLI)" -ForegroundColor Cyan
 Write-Host "====================================================" -ForegroundColor Cyan
 

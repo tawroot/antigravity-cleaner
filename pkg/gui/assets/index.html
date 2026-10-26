@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Antigravity Patcher v5.3 - by dalroot</title>
+  <title>Antigravity Patcher v5.4.1 - by dalroot</title>
   <style>
     * {
       box-sizing: border-box;
@@ -270,7 +270,7 @@
     <!-- Titlebar -->
     <div class="title-bar">
       <div class="title-bar-text">
-        <span>💾</span> Antigravity PATCH v5.3 - [dalroot]
+        <span>💾</span> Antigravity PATCH v5.4.1 - [dalroot]
       </div>
       <div class="title-bar-controls">
         <div class="close-btn" onclick="soundBeep(400)">_</div>
@@ -628,7 +628,7 @@
       }
     }
 
-    // Report Action (Generates diagnostic report and copies to clipboard)
+    // Report Action (Generates diagnostic report, opens text file, and copies to clipboard)
     async function actionReport() {
       soundBeep(880, 0.1);
       setStatus('📋 REPORT: Generating diagnostic report...', '#00F0FF');
@@ -636,8 +636,12 @@
         const res = await fetch('/api/report');
         const data = await res.json();
         if (data.success) {
-          setStatus('✔ COPIED: Diagnostic report copied to clipboard!', '#00ff00');
-          alert("📋 Diagnostic Report Copied to Clipboard!\n\nYou can now paste it (Ctrl+V) directly into Telegram or GitHub support.");
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            try { await navigator.clipboard.writeText(data.message); } catch (e) {}
+          }
+          const savedPath = data.filePath || 'antigravity-report.txt';
+          setStatus('✔ OPENED: Report saved to ' + savedPath, '#00ff00');
+          alert("📄 Diagnostic Report Generated & Opened!\n\nLocation: " + savedPath + "\n\nIt has also been copied to your clipboard. You can paste (Ctrl+V) directly into Telegram or GitHub support.");
         } else {
           setStatus('WARN: Could not generate report', '#ffff00');
         }

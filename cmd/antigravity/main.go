@@ -20,7 +20,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.0"
+const Version = "5.4.1"
 
 func main() {
 	if len(os.Args) > 1 {
@@ -602,6 +602,10 @@ func runReport() {
 		fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Copied diagnostic report to clipboard! You can paste (Ctrl+V) directly into Telegram or GitHub."))
 	} else {
 		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  ⚠ Could not access system clipboard."))
+	}
+
+	if filePath, err := doctor.SaveAndOpenReport(report); err == nil {
+		fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF")).Render("  📄 Opened and saved report to: " + filePath))
 	}
 
 	fmt.Println()
