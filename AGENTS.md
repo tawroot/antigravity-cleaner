@@ -39,16 +39,22 @@ In headless container, CI/CD, or automated subagent environments, execute comman
 # 1. Run complete non-interactive system diagnosis
 antigravity-cleaner doctor
 
-# 2. Surgically patch all 4 targets (CLI, Electron main.js, VS Code extension, core binary)
+# 2. Generate structured diagnostic report for telemetry/bug tickets
+antigravity-cleaner report
+
+# 3. Check for updates and self-upgrade
+antigravity-cleaner update
+
+# 4. Surgically patch all 4 targets (CLI, Electron main.js, VS Code extension, core binary)
 antigravity-cleaner patch all
 
-# 3. Clean temporary 429 quota cache without destroying user sessions
+# 5. Clean temporary 429 quota cache without destroying user sessions
 antigravity-cleaner clean
 
-# 4. Generate standalone 1-click desktop launcher
+# 6. Generate standalone 1-click desktop launcher
 antigravity-cleaner create-launcher
 
-# 5. Restore original pristine binaries from automatic .agybak snapshots
+# 7. Restore original pristine binaries from automatic .agybak snapshots
 antigravity-cleaner restore
 ```
 

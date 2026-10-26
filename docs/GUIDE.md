@@ -74,6 +74,22 @@ ag-cleaner doctor
 
 ---
 
+### `ag-cleaner report`
+Generates a markdown-formatted diagnostic card and automatically copies it to the system clipboard for sharing in support channels (Telegram, GitHub Issues).
+```bash
+ag-cleaner report
+```
+
+---
+
+### `ag-cleaner update`
+Queries GitHub releases via proxy or direct connection, compares version tags, and performs an in-place atomic self-update.
+```bash
+ag-cleaner update
+```
+
+---
+
 ### `ag-cleaner clean`
 Performs a surgical reset of volatile caches and stale lock files.
 ```bash

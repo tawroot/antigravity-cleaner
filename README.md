@@ -513,6 +513,12 @@ ag-cleaner doctor
 # Detailed diagnostics with debug traces
 ag-cleaner doctor --verbose
 
+# Generate diagnostic report & auto-copy to clipboard for Telegram/GitHub support
+ag-cleaner report
+
+# Check for updates and self-update to latest release
+ag-cleaner update
+
 # Apply all patches (Core binary, CLI, IDE frontend, ASAR shield)
 ag-cleaner patch all
 
