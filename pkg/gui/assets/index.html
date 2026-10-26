@@ -334,6 +334,7 @@
         <button class="win95-btn" id="btnReset" onclick="actionReset()" title="Flush 429 quota tokens without chat loss">🧹 Reset 429</button>
         <button class="win95-btn" id="btnRestore" onclick="actionRestore()" title="Revert to original .agybak backup">↺ Restore</button>
         <button class="win95-btn" id="btnDoctor" onclick="actionDoctor()" title="Audit connection & proxy health">🩺 Doctor</button>
+        <button class="win95-btn" id="btnReport" onclick="actionReport()" title="Generate diagnostic report and copy to clipboard">📋 Report</button>
         <button class="win95-btn" id="btnExit" onclick="actionExit()" title="Close application">✕ Exit</button>
       </div>
 
@@ -624,6 +625,24 @@
         }
       } catch (err) {
         setStatus('ERROR: Diagnostics error', '#ff0055');
+      }
+    }
+
+    // Report Action (Generates diagnostic report and copies to clipboard)
+    async function actionReport() {
+      soundBeep(880, 0.1);
+      setStatus('📋 REPORT: Generating diagnostic report...', '#00F0FF');
+      try {
+        const res = await fetch('/api/report');
+        const data = await res.json();
+        if (data.success) {
+          setStatus('✔ COPIED: Diagnostic report copied to clipboard!', '#00ff00');
+          alert("📋 Diagnostic Report Copied to Clipboard!\n\nYou can now paste it (Ctrl+V) directly into Telegram or GitHub support.");
+        } else {
+          setStatus('WARN: Could not generate report', '#ffff00');
+        }
+      } catch (err) {
+        setStatus('ERROR: Report generation failed', '#ff0055');
       }
     }
 

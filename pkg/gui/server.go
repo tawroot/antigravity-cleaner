@@ -79,6 +79,7 @@ func NewServer() (*Server, error) {
 	mux.HandleFunc("/api/reset", s.handleReset)
 	mux.HandleFunc("/api/restore", s.handleRestore)
 	mux.HandleFunc("/api/doctor", s.handleDoctor)
+	mux.HandleFunc("/api/report", s.handleReport)
 	mux.HandleFunc("/api/privacy", s.handlePrivacy)
 	mux.HandleFunc("/api/open-external", s.handleOpenExternal)
 	mux.HandleFunc("/api/exit", s.handleExit)
@@ -316,6 +317,16 @@ func (s *Server) handleDoctor(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(Response{
 		Success: allOk,
 		Message: "Diagnostics completed",
+	})
+}
+
+func (s *Server) handleReport(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	report := doctor.GenerateDiagnosticReport("5.4.0")
+	doctor.CopyToClipboard(report)
+	_ = json.NewEncoder(w).Encode(Response{
+		Success: true,
+		Message: report,
 	})
 }
 

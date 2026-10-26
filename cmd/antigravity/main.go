@@ -17,6 +17,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
 	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
 	"github.com/tawroot/antigravity-cleaner/pkg/ui"
+	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
 const Version = "5.4.0"
@@ -60,6 +61,8 @@ func main() {
 		fmt.Println("  " + sectionTools)
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("5"), descStyle.Render("🧹 Surgical 429 Quota Reset (Preserves Chats & Settings)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("6"), descStyle.Render("🩺 Run Antigravity Doctor (System & Connection Health)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("r"), descStyle.Render("📋 Generate Diagnostic Report (Copy to Clipboard)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("u"), descStyle.Render("🔄 Check for Updates (Self-Update)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("7"), descStyle.Render("🔄 Restore Backups (.agybak)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("8"), descStyle.Render("🖥️ Launch Retro GUI (Classic Win95 Patcher)"))
 		fmt.Println()
@@ -89,6 +92,12 @@ func main() {
 			ui.PromptKey()
 		case "6":
 			runDoctor(false)
+			ui.PromptKey()
+		case "r", "R", "report":
+			runReport()
+			ui.PromptKey()
+		case "u", "U", "update", "upgrade":
+			runUpdate()
 			ui.PromptKey()
 		case "7":
 			runRestore()
@@ -143,6 +152,10 @@ func handleSubcommand(cmd string, args []string) {
 			}
 		}
 		runDoctor(verbose)
+	case "report":
+		runReport()
+	case "update", "upgrade":
+		runUpdate()
 	case "patch":
 		target := "all"
 		if len(args) > 0 {
@@ -178,12 +191,32 @@ func handleSubcommand(cmd string, args []string) {
 		runCreateLauncher()
 	case "about":
 		printAbout()
+	case "help", "-h", "--help":
+		printUsage()
 	case "version", "-v", "--version":
 		fmt.Printf("Antigravity Cleaner Toolkit v%s (@dalroot)\n", Version)
 	default:
-		fmt.Printf("Unknown command: %s\nUsage: antigravity-cleaner [gui|doctor|patch|launch|clean|enterprise|kill|create-launcher|about|version]\n", cmd)
+		fmt.Printf("Unknown command: %s\n", cmd)
+		printUsage()
 		os.Exit(1)
 	}
+}
+
+func printUsage() {
+	fmt.Printf("Usage: antigravity-cleaner [gui|doctor|report|update|patch|launch|clean|enterprise|kill|create-launcher|about|version]\n\n" +
+		"Subcommands:\n" +
+		"  gui              Launch retro Win95 desktop GUI window\n" +
+		"  doctor [-v]      Run health and connectivity audit\n" +
+		"  report           Generate and copy full diagnostic report for support\n" +
+		"  update           Check GitHub for latest releases and self-update\n" +
+		"  patch [all|core] Apply multi-target bytecode and interface unlocks\n" +
+		"  launch           Start Antigravity with injected smart No-TUN proxy\n" +
+		"  clean            Surgically flush rate-limit and poisoned geo tokens\n" +
+		"  enterprise       Configure enterprise and zero-telemetry flags\n" +
+		"  kill             Safely terminate hung Antigravity processes\n" +
+		"  create-launcher  Create desktop application shortcut with proxy\n" +
+		"  about            Show project attribution and architecture overview\n" +
+		"  version          Show installed cleaner version\n")
 }
 
 func printAbout() {
@@ -546,4 +579,62 @@ func runGui() {
 		ui.PrintStatus("FAIL", "GUI Error", err.Error())
 	}
 }
+
+func runReport() {
+	ui.PrintSection("📋 Generating Diagnostic Report")
+	fmt.Println("  Scanning system state, connectivity, and Antigravity installation...")
+	report := doctor.GenerateDiagnosticReport(Version)
+	fmt.Println()
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render(report))
+
+	copied := doctor.CopyToClipboard(report)
+	if copied {
+		fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Copied diagnostic report to clipboard! You can paste it (Ctrl+V) directly into Telegram or GitHub."))
+	} else {
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  (Tip: You can select and copy the text above to share in Telegram or GitHub)."))
+	}
+}
+
+func runUpdate() {
+	ui.PrintSection("🔄 Checking for Updates")
+	fmt.Printf("  Current Version: v%s\n", Version)
+	fmt.Println("  Contacting GitHub update server...")
+
+	release, hasUpdate, err := updater.CheckLatestRelease(Version)
+	if err != nil {
+		ui.PrintStatus("FAIL", "Update Check", err.Error())
+		return
+	}
+
+	if !hasUpdate {
+		ui.PrintStatus("OK", "Up-to-Date", fmt.Sprintf("Antigravity Cleaner is already on the latest version (%s)", release.TagName))
+		return
+	}
+
+	ui.PrintStatus("UPDATE", "New Version Available", fmt.Sprintf("Found %s (Current: v%s)", release.TagName, Version))
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render(fmt.Sprintf("  Release Title: %s", release.Name)))
+
+	confirm := ui.ReadInput("Do you want to download and install this update now? (Y/n)")
+	if confirm == "n" || confirm == "N" {
+		fmt.Println("  Update cancelled.")
+		return
+	}
+
+	fmt.Println("  Downloading latest binary...")
+	err = updater.DownloadAndSelfUpdate(release, func(downloaded, total int64) {
+		if total > 0 {
+			percent := float64(downloaded) / float64(total) * 100
+			fmt.Printf("\r  Progress: %.1f%% (%d / %d bytes)", percent, downloaded, total)
+		}
+	})
+	fmt.Println()
+
+	if err != nil {
+		ui.PrintStatus("FAIL", "Update Failed", err.Error())
+		return
+	}
+
+	ui.PrintStatus("OK", "Update Complete", fmt.Sprintf("🎉 Successfully updated to %s! Please restart Antigravity Cleaner.", release.TagName))
+}
+
 

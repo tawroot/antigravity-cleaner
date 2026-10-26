@@ -32,18 +32,28 @@ func RunDiagnostics(verbose bool) []DiagnosticItem {
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	// 1. Antigravity Installation
+	// 0. System Environment
+	osInfo := DetectOSInfo()
+	items = append(items, DiagnosticItem{
+		Name:         "OS Environment",
+		Status:       "OK",
+		HumanSummary: osInfo,
+		DebugDetails: fmt.Sprintf("OS: %s, Arch: %s, CPU: %d cores", runtime.GOOS, runtime.GOARCH, runtime.NumCPU()),
+	})
+
+	// 1. Antigravity Installation & Version
+	prodName, appVersion := DetectAntigravityVersion()
 	appPath := proxy.FindAntigravityExecutable()
 	if appPath != "" {
 		items = append(items, DiagnosticItem{
-			Name:         "Antigravity IDE",
+			Name:         "Antigravity Build",
 			Status:       "OK",
-			HumanSummary: "Installed & Detected",
+			HumanSummary: fmt.Sprintf("%s (v%s)", prodName, appVersion),
 			DebugDetails: appPath,
 		})
 	} else {
 		items = append(items, DiagnosticItem{
-			Name:         "Antigravity IDE",
+			Name:         "Antigravity Build",
 			Status:       "WARN",
 			HumanSummary: "Not Found in Standard Path",
 			DebugDetails: "Check /opt, /usr/share or ~/.local",
