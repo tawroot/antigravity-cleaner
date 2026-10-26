@@ -190,7 +190,10 @@ func DownloadAndSelfUpdate(release *GitHubRelease, progressCb func(downloaded, t
 		n, rErr := resp.Body.Read(buf)
 		if n > 0 {
 			if _, wErr := out.Write(buf[:n]); wErr != nil {
-				out.Close()
+				if cErr := out.Close(); cErr != nil {
+					_ = os.Remove(tmpFile)
+					return fmt.Errorf("write error: %v (close error: %w)", wErr, cErr)
+				}
 				_ = os.Remove(tmpFile)
 				return wErr
 			}
@@ -203,12 +206,18 @@ func DownloadAndSelfUpdate(release *GitHubRelease, progressCb func(downloaded, t
 			if rErr == io.EOF {
 				break
 			}
-			out.Close()
+			if cErr := out.Close(); cErr != nil {
+				_ = os.Remove(tmpFile)
+				return fmt.Errorf("read error: %v (close error: %w)", rErr, cErr)
+			}
 			_ = os.Remove(tmpFile)
 			return rErr
 		}
 	}
-	out.Close()
+	if cErr := out.Close(); cErr != nil {
+		_ = os.Remove(tmpFile)
+		return fmt.Errorf("failed to close update file: %w", cErr)
+	}
 
 	// Ensure executable permissions
 	_ = os.Chmod(tmpFile, 0755)

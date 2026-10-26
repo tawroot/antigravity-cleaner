@@ -787,16 +787,22 @@ ag-cleaner create-launcher
 # 4. Run concurrent health audit & latency probes
 ag-cleaner doctor
 
-# 5. Reset HTTP 429 quota without losing conversation history
+# 5. Generate diagnostic report & copy to clipboard for support
+ag-cleaner report
+
+# 6. Check for updates and self-update to latest release
+ag-cleaner update
+
+# 7. Reset HTTP 429 quota without losing conversation history
 ag-cleaner clean
 
-# 6. Revert all binaries to untouched original factory condition
+# 8. Revert all binaries to untouched original factory condition
 ag-cleaner restore
 
-# 7. Terminate any orphaned language_server zombie processes safely
+# 9. Terminate any orphaned language_server zombie processes safely
 ag-cleaner kill
 
-# 8. Launch Desktop GUI window from terminal
+# 10. Launch Desktop GUI window from terminal
 ag-cleaner gui</code></pre>
               </div>
 
@@ -1261,11 +1267,17 @@ antigravity-cleaner --force
 # Launch IDE with direct SOCKS5 local proxy routing
 antigravity-cleaner --proxy=socks5://127.0.0.1:10808
 
-# Run full system diagnostics and port audit
-antigravity-cleaner --doctor
+# Run full system diagnostics and latency audit
+ag-cleaner doctor
+
+# Generate diagnostic report and copy to clipboard for Telegram/GitHub support
+ag-cleaner report
+
+# Check for updates and self-update to latest release
+ag-cleaner update
 
 # Restore factory untouched state from backup (.agybak)
-antigravity-cleaner --rollback</code></pre>
+ag-cleaner restore</code></pre>
               </div>
 
               <!-- بخش: عیب‌یابی سیستم (Doctor) -->

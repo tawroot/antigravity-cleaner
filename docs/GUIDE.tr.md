@@ -64,6 +64,18 @@ Antigravity ortamınız için kapsamlı bir sağlık ve teşhis taraması yapar.
 ag-cleaner doctor
 ```
 
+### `ag-cleaner report`
+Tanı raporunu Markdown formatında oluşturur ve doğrudan panoya kopyalar.
+```bash
+ag-cleaner report
+```
+
+### `ag-cleaner update`
+GitHub sürümlerini kontrol eder ve aracı otomatik olarak günceller.
+```bash
+ag-cleaner update
+```
+
 ### `ag-cleaner clean`
 Bozuk önbellekleri ve yetim kilit dosyalarını cerrahi olarak temizler.
 ```bash

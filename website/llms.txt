@@ -75,6 +75,8 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 - `antigravity-cleaner patch`: Auto-Fixes all 4 targets (Core, CLI, IDE, VS Code Extension) and generates the smart desktop launcher.
 - `antigravity-cleaner launch`: Launches Antigravity with smart proxy injection (No TUN mode required).
 - `antigravity-cleaner doctor`: Runs a complete system audit: checks IDE installation, patch status, proxy connectivity, Google DNS, and Gemini API latency.
+- `antigravity-cleaner report`: Generates structured Markdown diagnostic card and automatically copies it to system clipboard for support.
+- `antigravity-cleaner update`: Queries GitHub Releases and performs an in-place atomic self-update.
 - `antigravity-cleaner clean`: Surgically resets 429 quota tokens while preserving account login.
 - `antigravity-cleaner restore`: Restores original unpatched binaries from automatic `.agybak` backups.
 - `antigravity-cleaner create-launcher`: Generates native Desktop and Application Menu shortcuts (`.desktop` on Linux, `.lnk` on Windows, `.command` on macOS).
