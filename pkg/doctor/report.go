@@ -27,7 +27,10 @@ func BuildMarkdownReport(version string, results []DiagnosticItem) string {
 			icon = "❌"
 		}
 		sb.WriteString(fmt.Sprintf("• **%s**: %s %s\n", item.Name, icon, item.HumanSummary))
-		if item.DebugDetails != "" && item.Status != "OK" {
+		for _, tp := range item.TargetPaths {
+			sb.WriteString(fmt.Sprintf("  ↳ %s\n", tp))
+		}
+		if len(item.TargetPaths) == 0 && item.DebugDetails != "" && item.Status != "OK" {
 			details := strings.TrimSpace(item.DebugDetails)
 			if len(details) > 85 {
 				details = details[:82] + "..."
