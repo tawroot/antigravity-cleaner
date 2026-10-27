@@ -9,51 +9,108 @@ import (
 	"strings"
 )
 
+// AppTarget describes an installed Antigravity application target (Standard 2.0 or IDE)
+type AppTarget struct {
+	Name    string // "Antigravity" or "Antigravity IDE"
+	ExePath string
+	IsIDE   bool
+}
+
+// FindAllAntigravityExecutables finds all distinct Antigravity GUI application targets installed
+func FindAllAntigravityExecutables() []AppTarget {
+	home, _ := os.UserHomeDir()
+	var targets []AppTarget
+	seen := make(map[string]bool)
+
+	add := func(name, path string, isIDE bool) {
+		if path == "" {
+			return
+		}
+		if real, err := filepath.EvalSymlinks(path); err == nil && real != "" {
+			path = real
+		}
+		clean := filepath.Clean(path)
+		if !seen[clean] {
+			if fi, err := os.Stat(clean); err == nil && !fi.IsDir() {
+				seen[clean] = true
+				targets = append(targets, AppTarget{
+					Name:    name,
+					ExePath: clean,
+					IsIDE:   isIDE,
+				})
+			}
+		}
+	}
+
+	// 1. Windows direct program checks
+	if runtime.GOOS == "windows" {
+		localAppData := os.Getenv("LOCALAPPDATA")
+		progFiles := os.Getenv("PROGRAMFILES")
+		progFilesX86 := os.Getenv("ProgramFiles(x86)")
+
+		// Antigravity 2.0 (Official app)
+		add("Antigravity", filepath.Join(localAppData, "Programs", "antigravity", "Antigravity.exe"), false)
+		add("Antigravity", filepath.Join(localAppData, "Programs", "Antigravity", "Antigravity.exe"), false)
+		add("Antigravity", filepath.Join(progFiles, "Antigravity", "Antigravity.exe"), false)
+		add("Antigravity", filepath.Join(progFilesX86, "Antigravity", "Antigravity.exe"), false)
+
+		// Antigravity IDE (VS Code based)
+		add("Antigravity IDE", filepath.Join(localAppData, "Programs", "Antigravity IDE", "Antigravity IDE.exe"), true)
+		add("Antigravity IDE", filepath.Join(progFiles, "Antigravity IDE", "Antigravity IDE.exe"), true)
+	}
+
+	// 2. Linux checks
+	if runtime.GOOS == "linux" {
+		// Antigravity 2.0
+		add("Antigravity", filepath.Join(home, "Applications", "Antigravity", "antigravity"), false)
+		add("Antigravity", filepath.Join(home, "Applications", "antigravity", "antigravity"), false)
+		add("Antigravity", filepath.Join(home, "Applications", "Antigravity-x64", "antigravity"), false)
+		add("Antigravity", "/usr/share/antigravity/bin/antigravity", false)
+		add("Antigravity", "/usr/share/antigravity/antigravity", false)
+		add("Antigravity", "/opt/antigravity/antigravity", false)
+		add("Antigravity", "/opt/Antigravity/antigravity", false)
+		add("Antigravity", "/usr/local/bin/antigravity", false)
+		add("Antigravity", "/usr/bin/antigravity", false)
+
+		// Antigravity IDE
+		add("Antigravity IDE", "/usr/share/antigravity-ide/antigravity", true)
+		add("Antigravity IDE", "/opt/antigravity-ide/antigravity", true)
+		add("Antigravity IDE", "/opt/Antigravity IDE/antigravity", true)
+	}
+
+	// 3. macOS checks
+	if runtime.GOOS == "darwin" {
+		add("Antigravity", "/Applications/Antigravity.app/Contents/MacOS/Antigravity", false)
+		add("Antigravity", "/Applications/Antigravity.app/Contents/MacOS/Electron", false)
+		add("Antigravity IDE", "/Applications/Antigravity IDE.app/Contents/MacOS/Electron", true)
+	}
+
+	// 4. Dynamic PATH discovery
+	for _, name := range []string{"antigravity", "antigravity.exe"} {
+		if path, err := exec.LookPath(name); err == nil && path != "" {
+			add("Antigravity", path, false)
+		}
+	}
+	if path, err := exec.LookPath("antigravity-ide"); err == nil && path != "" {
+		add("Antigravity IDE", path, true)
+	}
+
+	return targets
+}
+
 // FindAntigravityExecutable finds the main Antigravity GUI application
 func FindAntigravityExecutable() string {
-	// 1. Dynamic PATH discovery
-	for _, name := range []string{"antigravity", "antigravity.exe", "antigravity-ide"} {
-		if path, err := exec.LookPath(name); err == nil && path != "" {
-			if realPath, err := filepath.EvalSymlinks(path); err == nil && realPath != "" {
-				if fi, err := os.Stat(realPath); err == nil && !fi.IsDir() {
-					return realPath
-				}
-			}
-			if fi, err := os.Stat(path); err == nil && !fi.IsDir() {
-				return path
-			}
+	targets := FindAllAntigravityExecutables()
+	if len(targets) == 0 {
+		return ""
+	}
+	// Prefer standard Antigravity if available, otherwise IDE
+	for _, t := range targets {
+		if !t.IsIDE {
+			return t.ExePath
 		}
 	}
-
-	home, _ := os.UserHomeDir()
-
-	candidates := []string{
-		filepath.Join(home, "Applications", "Antigravity", "antigravity"),
-		filepath.Join(home, "Applications", "antigravity", "antigravity"),
-		filepath.Join(home, "Applications", "Antigravity-x64", "antigravity"),
-		filepath.Join(home, "antigravity", "antigravity"),
-		filepath.Join(home, "antigravity", "antigravity.exe"),
-		"/usr/share/antigravity/bin/antigravity",
-		"/usr/share/antigravity/antigravity",
-		"/usr/share/antigravity-ide/antigravity",
-		"/usr/bin/antigravity",
-		"/opt/antigravity/antigravity",
-		"/opt/Antigravity/antigravity",
-		"/opt/antigravity-ide/antigravity",
-		"/opt/Antigravity IDE/antigravity",
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "Antigravity.exe"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "Antigravity IDE.exe"),
-		"/Applications/Antigravity.app/Contents/MacOS/Electron",
-		"/Applications/Antigravity.app/Contents/MacOS/Antigravity",
-		"/Applications/Antigravity IDE.app/Contents/MacOS/Electron",
-	}
-
-	for _, c := range candidates {
-		if fi, err := os.Stat(c); err == nil && !fi.IsDir() {
-			return c
-		}
-	}
-	return ""
+	return targets[0].ExePath
 }
 
 // BuildProxyEnv constructs clean proxy environment variables for child processes
@@ -356,19 +413,30 @@ start "" "%s" --proxy-server=%s
 			return "", err
 		}
 
-		// Also generate native Windows shortcut (.lnk) via PowerShell if possible
-		lnkScript := fmt.Sprintf(`
+		// Generate native Windows shortcuts (.lnk) for all installed targets
+		targets := FindAllAntigravityExecutables()
+		if len(targets) == 0 {
+			targets = []AppTarget{{Name: "Antigravity", ExePath: appPath}}
+		}
+
+		for _, t := range targets {
+			lnkPath := filepath.Join(home, "Desktop", fmt.Sprintf("%s.lnk", t.Name))
+			lnkScript := fmt.Sprintf(`
 $WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("%s\Desktop\Antigravity.lnk")
+$Shortcut = $WshShell.CreateShortcut("%s")
 $Shortcut.TargetPath = "%s"
 $Shortcut.Arguments = "--proxy-server=%s"
 $Shortcut.WorkingDirectory = "%s"
 $Shortcut.IconLocation = "%s,0"
-$Shortcut.Description = "Google Antigravity with Smart Proxy"
+$Shortcut.Description = "Google %s with Smart Proxy"
 $Shortcut.Save()
-`, home, appPath, chromiumProxy, filepath.Dir(appPath), appPath)
-		_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", lnkScript).Run()
+`, lnkPath, t.ExePath, chromiumProxy, filepath.Dir(t.ExePath), t.ExePath, t.Name)
+			_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", lnkScript).Run()
+		}
 
+		if len(targets) > 1 {
+			return fmt.Sprintf("Desktop shortcuts created for Antigravity & Antigravity IDE (%s)", batPath), nil
+		}
 		return batPath, nil
 	}
 

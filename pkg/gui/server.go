@@ -322,7 +322,7 @@ func (s *Server) handleDoctor(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleReport(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	report := doctor.GenerateDiagnosticReport("5.4.1")
+	report := doctor.GenerateDiagnosticReport("5.4.2")
 	doctor.CopyToClipboard(report)
 	filePath, _ := doctor.SaveAndOpenReport(report)
 	_ = json.NewEncoder(w).Encode(map[string]interface{}{

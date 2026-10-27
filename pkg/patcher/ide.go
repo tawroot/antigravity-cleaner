@@ -13,11 +13,27 @@ var (
 	idePatchedStr = "resetIsTierGCPTos(),true"
 )
 
-// FindIdeMainJs searches for main.js in Antigravity IDE installations
-func FindIdeMainJs() string {
+// FindAllIdeMainJs searches for all main.js occurrences across Antigravity IDE and installations
+func FindAllIdeMainJs() []string {
 	home, _ := os.UserHomeDir()
+	var results []string
+	seen := make(map[string]bool)
+	add := func(p string) {
+		if p == "" {
+			return
+		}
+		if real, err := filepath.EvalSymlinks(p); err == nil && real != "" {
+			p = real
+		}
+		clean := filepath.Clean(p)
+		if !seen[clean] {
+			if fi, err := os.Stat(clean); err == nil && !fi.IsDir() {
+				seen[clean] = true
+				results = append(results, clean)
+			}
+		}
+	}
 
-	// 1. Dynamic discovery via running app or PATH lookup
 	var appPaths []string
 	if running := FindRunningAntigravityApp(nil); running != "" {
 		appPaths = append(appPaths, running)
@@ -40,17 +56,12 @@ func FindIdeMainJs() string {
 	for _, appPath := range appPaths {
 		for _, root := range getCandidateRoots(appPath) {
 			for _, sub := range jsSubpaths {
-				target := filepath.Join(root, sub)
-				if fi, err := os.Stat(target); err == nil && !fi.IsDir() {
-					return target
-				}
+				add(filepath.Join(root, sub))
 			}
 		}
 	}
 
-	// 2. Comprehensive candidate list across all supported OSes & package distributions
 	candidates := []string{
-		// Official Linux RPM & System paths (Fedora, RHEL, CentOS, Debian, Ubuntu)
 		"/usr/share/antigravity/resources/app/out/main.js",
 		"/usr/share/antigravity/resources/app/main.js",
 		"/usr/share/antigravity-ide/resources/app/out/main.js",
@@ -61,8 +72,6 @@ func FindIdeMainJs() string {
 		"/opt/Antigravity/resources/app/main.js",
 		"/opt/antigravity-ide/resources/app/out/main.js",
 		"/opt/Antigravity IDE/resources/app/out/main.js",
-
-		// User local share & home applications
 		filepath.Join(home, ".local", "share", "antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(home, ".local", "share", "antigravity", "resources", "app", "main.js"),
 		filepath.Join(home, "Applications", "Antigravity", "resources", "app", "out", "main.js"),
@@ -72,15 +81,13 @@ func FindIdeMainJs() string {
 		filepath.Join(home, "Applications", "Antigravity-x64", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(home, "antigravity", "resources", "app", "main.js"),
-
-		// Windows paths
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity", "resources", "app", "main.js"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity", "resources", "app", "out", "main.js"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity", "resources", "app", "main.js"),
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "app", "out", "main.js"),
 		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity", "resources", "app", "out", "main.js"),
-
-		// macOS paths
 		"/Applications/Antigravity.app/Contents/Resources/app/out/main.js",
 		"/Applications/Antigravity.app/Contents/Resources/app/main.js",
 		"/Applications/Antigravity IDE.app/Contents/Resources/app/out/main.js",
@@ -88,12 +95,17 @@ func FindIdeMainJs() string {
 	}
 
 	for _, c := range candidates {
-		if c == "" {
-			continue
-		}
-		if fi, err := os.Stat(c); err == nil && !fi.IsDir() {
-			return c
-		}
+		add(c)
+	}
+
+	return results
+}
+
+// FindIdeMainJs searches for main.js in Antigravity IDE installations
+func FindIdeMainJs() string {
+	all := FindAllIdeMainJs()
+	if len(all) > 0 {
+		return all[0]
 	}
 	return ""
 }
@@ -115,15 +127,8 @@ func ClearIdeCache() {
 	}
 }
 
-// PatchIdeMainJs replaces the isGoogleInternal check in main.js
-func PatchIdeMainJs(mainJsPath string) (string, error) {
-	if mainJsPath == "" {
-		mainJsPath = FindIdeMainJs()
-		if mainJsPath == "" {
-			return "", fmt.Errorf("Antigravity IDE main.js not found")
-		}
-	}
-
+// PatchSingleIdeMainJs patches a single main.js file
+func PatchSingleIdeMainJs(mainJsPath string) (string, error) {
 	data, err := os.ReadFile(mainJsPath)
 	if err != nil {
 		return "", fmt.Errorf("failed to read %s: %w", mainJsPath, err)
@@ -151,6 +156,45 @@ func PatchIdeMainJs(mainJsPath string) (string, error) {
 	ClearIdeCache()
 
 	return fmt.Sprintf("Successfully patched %s (isGoogleInternal -> true) & cleared compile cache", filepath.Base(mainJsPath)), nil
+}
+
+// PatchIdeMainJs replaces the isGoogleInternal check in main.js across all installations
+func PatchIdeMainJs(mainJsPath string) (string, error) {
+	if mainJsPath != "" {
+		return PatchSingleIdeMainJs(mainJsPath)
+	}
+
+	all := FindAllIdeMainJs()
+	if len(all) == 0 {
+		return "", fmt.Errorf("Antigravity IDE main.js not found")
+	}
+
+	if len(all) == 1 {
+		return PatchSingleIdeMainJs(all[0])
+	}
+
+	var patchedCount int
+	var lastRes string
+	var lastErr error
+
+	for _, target := range all {
+		res, err := PatchSingleIdeMainJs(target)
+		if err == nil {
+			patchedCount++
+			lastRes = res
+		} else {
+			lastErr = err
+		}
+	}
+
+	if patchedCount == 0 && lastErr != nil {
+		return "", lastErr
+	}
+
+	if patchedCount > 1 {
+		return fmt.Sprintf("Successfully patched %d IDE main.js targets & cleared compile cache", patchedCount), nil
+	}
+	return lastRes, nil
 }
 
 func stringContains(s, substr string) bool {

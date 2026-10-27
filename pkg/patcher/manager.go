@@ -50,15 +50,8 @@ func FindLanguageServer() string {
 	return FindLanguageServerModular(nil)
 }
 
-// PatchLanguageServer patches the language_server binary to unlock auth and region checks
-func PatchLanguageServer(binPath string) (string, error) {
-	if binPath == "" {
-		binPath = FindLanguageServer()
-		if binPath == "" {
-			return "", fmt.Errorf("language_server binary not found in standard paths")
-		}
-	}
-
+// PatchSingleLanguageServer patches a specific language_server binary to unlock auth and region checks
+func PatchSingleLanguageServer(binPath string) (string, error) {
 	data, err := os.ReadFile(binPath)
 	if err != nil {
 		return "", fmt.Errorf("failed to read binary %s: %w", binPath, err)
@@ -106,6 +99,48 @@ func PatchLanguageServer(binPath string) (string, error) {
 	}
 
 	return fmt.Sprintf("Successfully patched %s (%s) at offset 0x%x", filepath.Base(binPath), matchedGate.Name, targetIdx), nil
+}
+
+// PatchLanguageServer patches all detected language_server binaries to unlock auth and region checks
+func PatchLanguageServer(binPath string) (string, error) {
+	if binPath != "" {
+		return PatchSingleLanguageServer(binPath)
+	}
+
+	targets := FindAllLanguageServers(nil)
+	if len(targets) == 0 {
+		return "", fmt.Errorf("language_server binary not found in standard paths")
+	}
+
+	if len(targets) == 1 {
+		return PatchSingleLanguageServer(targets[0])
+	}
+
+	var patchedCount int
+	var details []string
+	var lastErr error
+
+	for _, target := range targets {
+		_, err := PatchSingleLanguageServer(target)
+		if err == nil {
+			patchedCount++
+			details = append(details, filepath.Base(filepath.Dir(target))+"/"+filepath.Base(target))
+		} else {
+			lastErr = err
+		}
+	}
+
+	if patchedCount == 0 && lastErr != nil {
+		return "", lastErr
+	}
+
+	if patchedCount > 1 {
+		return fmt.Sprintf("Successfully unlocked %d core binaries across installations", patchedCount), nil
+	}
+	if len(details) > 0 {
+		return fmt.Sprintf("Successfully unlocked: %s", details[0]), nil
+	}
+	return "Core binary unlocked", nil
 }
 
 // CheckLanguageServerStatus checks whether the binary is patched, unpatched, or unknown

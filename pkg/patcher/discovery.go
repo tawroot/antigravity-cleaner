@@ -201,16 +201,21 @@ func scanUnixPs(targetSubstr string) string {
 	return ""
 }
 
-// scanWindowsProcess queries wmic or powershell on Windows
+// scanWindowsProcess queries powershell on Windows for running process matching target
 func scanWindowsProcess(targetName string) string {
+	cleanName := strings.TrimSuffix(targetName, ".exe")
+	filter := fmt.Sprintf("*%s*", cleanName)
 	cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
-		fmt.Sprintf("(Get-Process -Name '%s' -ErrorAction SilentlyContinue).Path", strings.TrimSuffix(targetName, ".exe")))
+		fmt.Sprintf("(Get-Process | Where-Object { $_.Name -like '%s' -or $_.ProcessName -like '%s' } | Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue)", filter, filter))
 	out, err := cmd.Output()
 	if err == nil {
-		path := strings.TrimSpace(string(out))
-		if path != "" {
-			if fi, err := os.Stat(path); err == nil && !fi.IsDir() {
-				return path
+		lines := strings.Split(strings.TrimSpace(string(out)), "\n")
+		for _, line := range lines {
+			p := strings.TrimSpace(line)
+			if p != "" {
+				if fi, err := os.Stat(p); err == nil && !fi.IsDir() {
+					return p
+				}
 			}
 		}
 	}
@@ -381,15 +386,32 @@ func getCandidateRoots(exePath string) []string {
 	return roots
 }
 
-// probeRootsForLanguageServer probes candidate root directories for language server binaries
-func probeRootsForLanguageServer(roots []string) string {
+// probeRootsForAllLanguageServers scans candidate root directories and returns all found language server binaries
+func probeRootsForAllLanguageServers(roots []string) []string {
+	var found []string
+	seen := make(map[string]bool)
+	add := func(p string) {
+		if p != "" && !seen[p] {
+			if fi, err := os.Stat(p); err == nil && !fi.IsDir() {
+				seen[p] = true
+				found = append(found, p)
+			}
+		}
+	}
+
 	subpaths := []string{
-		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
 		filepath.Join("resources", "bin"),
-		filepath.Join("Contents", "Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
 		filepath.Join("Contents", "Resources", "bin"),
-		filepath.Join("Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("Contents", "Resources", "app", "extensions", "antigravity", "bin"),
 		filepath.Join("Resources", "bin"),
+		filepath.Join("Resources", "app", "extensions", "antigravity", "bin"),
+	}
+
+	extDirs := []string{
+		filepath.Join("resources", "app", "extensions"),
+		filepath.Join("Contents", "Resources", "app", "extensions"),
+		filepath.Join("Resources", "app", "extensions"),
 	}
 
 	for _, root := range roots {
@@ -398,18 +420,39 @@ func probeRootsForLanguageServer(roots []string) string {
 		}
 		for _, sub := range subpaths {
 			dir := filepath.Join(root, sub)
-			// 1. Dynamic Zero-Hardcode discovery inside the directory
-			if found := DetectLanguageServerInDir(dir); found != "" {
-				return found
+			if f := DetectLanguageServerInDir(dir); f != "" {
+				add(f)
 			}
-			// 2. Direct fallback checks for static names
 			for _, binName := range GetLanguageServerBinaryNames() {
-				candidate := filepath.Join(dir, binName)
-				if fi, err := os.Stat(candidate); err == nil && !fi.IsDir() {
-					return candidate
+				add(filepath.Join(dir, binName))
+			}
+		}
+		// Dynamic discovery across all extension subdirectories (e.g. google.google-antigravity)
+		for _, extSub := range extDirs {
+			extDir := filepath.Join(root, extSub)
+			if entries, err := os.ReadDir(extDir); err == nil {
+				for _, e := range entries {
+					if e.IsDir() {
+						binDir := filepath.Join(extDir, e.Name(), "bin")
+						if f := DetectLanguageServerInDir(binDir); f != "" {
+							add(f)
+						}
+						for _, binName := range GetLanguageServerBinaryNames() {
+							add(filepath.Join(binDir, binName))
+						}
+					}
 				}
 			}
 		}
+	}
+	return found
+}
+
+// probeRootsForLanguageServer probes candidate root directories for language server binaries
+func probeRootsForLanguageServer(roots []string) string {
+	all := probeRootsForAllLanguageServers(roots)
+	if len(all) > 0 {
+		return all[0]
 	}
 	return ""
 }
@@ -552,68 +595,110 @@ func findMacAppsWithMdfind() []string {
 	return apps
 }
 
-// FindLanguageServerModular searches for language_server with live process probing and full logging
-func FindLanguageServerModular(logger LogFunc) string {
+// FindAllLanguageServers discovers all unique language_server binaries across running processes,
+// standard paths, and all installed Antigravity variants (Antigravity 2.0 & Antigravity IDE)
+func FindAllLanguageServers(logger LogFunc) []string {
 	if logger == nil {
 		logger = defaultLogger
 	}
 
-	// 1. Check custom environment override
-	if envPath := os.Getenv("ANTIGRAVITY_LANGUAGE_SERVER_PATH"); envPath != "" {
-		if fi, err := os.Stat(envPath); err == nil && !fi.IsDir() {
-			logger("Using custom override from ANTIGRAVITY_LANGUAGE_SERVER_PATH: %s", envPath)
-			return envPath
+	var results []string
+	seen := make(map[string]bool)
+	add := func(p string) {
+		if p == "" {
+			return
 		}
-	}
-
-	// 2. Probe active running process (Highest accuracy, works with any custom directory)
-	if runningPath := FindRunningLanguageServer(logger); runningPath != "" {
-		logger("Selected active language_server: %s", runningPath)
-		return runningPath
-	}
-
-	// 3. If language_server is not running directly, check if Antigravity app is running
-	if runningApp := FindRunningAntigravityApp(logger); runningApp != "" {
-		roots := getCandidateRoots(runningApp)
-		if found := probeRootsForLanguageServer(roots); found != "" {
-			logger("Deduced language_server path from running app: %s", found)
-			return found
+		if real, err := filepath.EvalSymlinks(p); err == nil && real != "" {
+			p = real
 		}
-	}
-
-	// 3.5. Dynamic PATH discovery via exec.LookPath (Works even when Antigravity is NOT running!)
-	lookNames := []string{"antigravity", "antigravity.exe", "antigravity-ide"}
-	for _, name := range lookNames {
-		if p, err := exec.LookPath(name); err == nil && p != "" {
-			roots := getCandidateRoots(p)
-			if found := probeRootsForLanguageServer(roots); found != "" {
-				logger("Discovered language_server via PATH (%s): %s", p, found)
-				return found
+		clean := filepath.Clean(p)
+		if !seen[clean] {
+			if fi, err := os.Stat(clean); err == nil && !fi.IsDir() {
+				seen[clean] = true
+				results = append(results, clean)
 			}
 		}
 	}
 
-	// 3.6. Dynamic Spotlight discovery on macOS (finds app even if installed in non-standard location)
+	// 1. Check custom environment override
+	if envPath := os.Getenv("ANTIGRAVITY_LANGUAGE_SERVER_PATH"); envPath != "" {
+		add(envPath)
+	}
+
+	// 2. Active running language_server
+	if running := FindRunningLanguageServer(logger); running != "" {
+		add(running)
+	}
+
+	// 3. Probing from running Antigravity app
+	if runningApp := FindRunningAntigravityApp(logger); runningApp != "" {
+		roots := getCandidateRoots(runningApp)
+		for _, found := range probeRootsForAllLanguageServers(roots) {
+			add(found)
+		}
+	}
+
+	// 4. Dynamic PATH discovery via exec.LookPath
+	for _, name := range []string{"antigravity", "antigravity.exe", "antigravity-ide"} {
+		if p, err := exec.LookPath(name); err == nil && p != "" {
+			roots := getCandidateRoots(p)
+			for _, found := range probeRootsForAllLanguageServers(roots) {
+				add(found)
+			}
+		}
+	}
+
+	// 5. Spotlight discovery on macOS
 	if runtime.GOOS == "darwin" {
 		for _, app := range findMacAppsWithMdfind() {
 			roots := getCandidateRoots(app)
-			if found := probeRootsForLanguageServer(roots); found != "" {
-				logger("Discovered language_server via Spotlight (%s): %s", app, found)
-				return found
+			for _, found := range probeRootsForAllLanguageServers(roots) {
+				add(found)
 			}
 		}
 	}
 
-	// 4. Scan all standard candidates
-	candidates := GetStandardLanguageServerCandidates()
-	for _, c := range candidates {
-		if fi, err := os.Stat(c); err == nil && !fi.IsDir() {
-			logger("Found language_server at standard path: %s", c)
-			return c
-		}
+	// 6. Scan all standard candidate paths
+	for _, c := range GetStandardLanguageServerCandidates() {
+		add(c)
 	}
 
-	logger("language_server binary not found in running processes or standard paths")
+	// 7. Dynamic scan of candidate roots for any unlisted versions
+	var candidateRoots []string
+	home, _ := os.UserHomeDir()
+	if runtime.GOOS == "windows" {
+		candidateRoots = append(candidateRoots,
+			filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity"),
+			filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity"),
+			filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE"),
+			filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
+			filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
+		)
+	} else if runtime.GOOS == "linux" {
+		candidateRoots = append(candidateRoots,
+			filepath.Join(home, "Applications", "Antigravity"),
+			filepath.Join(home, "Applications", "antigravity"),
+			"/usr/share/antigravity",
+			"/usr/share/antigravity-ide",
+			"/opt/antigravity",
+			"/opt/Antigravity",
+			"/opt/antigravity-ide",
+			"/opt/Antigravity IDE",
+		)
+	}
+	for _, found := range probeRootsForAllLanguageServers(candidateRoots) {
+		add(found)
+	}
+
+	return results
+}
+
+// FindLanguageServerModular searches for language_server with live process probing and full logging
+func FindLanguageServerModular(logger LogFunc) string {
+	all := FindAllLanguageServers(logger)
+	if len(all) > 0 {
+		return all[0]
+	}
 	return ""
 }
 

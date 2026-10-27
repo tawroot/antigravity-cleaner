@@ -20,7 +20,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.1"
+const Version = "5.4.2"
 
 func main() {
 	if len(os.Args) > 1 {
@@ -75,7 +75,7 @@ func main() {
 
 		choice := ui.ReadInput("Select an option")
 		switch choice {
-		case "1":
+		case "1", "autofix", "fix":
 			runQuickAutoFix()
 			ui.PromptKey()
 		case "2", "e", "E", "flags", "enterprise":
@@ -156,6 +156,8 @@ func handleSubcommand(cmd string, args []string) {
 		runReport()
 	case "update", "upgrade":
 		runUpdate()
+	case "autofix", "fix":
+		runQuickAutoFix()
 	case "patch":
 		target := "all"
 		if len(args) > 0 {
@@ -203,8 +205,9 @@ func handleSubcommand(cmd string, args []string) {
 }
 
 func printUsage() {
-	fmt.Printf("Usage: antigravity-cleaner [gui|doctor|report|update|patch|launch|clean|enterprise|kill|create-launcher|about|version]\n\n" +
+	fmt.Printf("Usage: antigravity-cleaner [autofix|gui|doctor|report|update|patch|launch|clean|enterprise|kill|create-launcher|about|version]\n\n" +
 		"Subcommands:\n" +
+		"  autofix, fix     One-click auto-fix: patch all targets and create desktop launcher\n" +
 		"  gui              Launch retro Win95 desktop GUI window\n" +
 		"  doctor [-v]      Run health and connectivity audit\n" +
 		"  report           Generate and copy full diagnostic report for support\n" +
