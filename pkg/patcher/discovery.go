@@ -622,7 +622,10 @@ func FindAllLanguageServers(logger LogFunc) []string {
 
 	// 1. Check custom environment override
 	if envPath := os.Getenv("ANTIGRAVITY_LANGUAGE_SERVER_PATH"); envPath != "" {
-		add(envPath)
+		if fi, err := os.Stat(envPath); err == nil && !fi.IsDir() {
+			logger("Using custom override from ANTIGRAVITY_LANGUAGE_SERVER_PATH: %s", envPath)
+			add(envPath)
+		}
 	}
 
 	// 2. Active running language_server
@@ -695,10 +698,14 @@ func FindAllLanguageServers(logger LogFunc) []string {
 
 // FindLanguageServerModular searches for language_server with live process probing and full logging
 func FindLanguageServerModular(logger LogFunc) string {
+	if logger == nil {
+		logger = defaultLogger
+	}
 	all := FindAllLanguageServers(logger)
 	if len(all) > 0 {
 		return all[0]
 	}
+	logger("language_server binary not found in running processes or standard paths")
 	return ""
 }
 
