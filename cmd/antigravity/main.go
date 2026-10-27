@@ -47,12 +47,12 @@ func main() {
 		clearScreen()
 		ui.PrintBanner(Version)
 
-		sectionWorkflow := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("─── 🚀 Sequential Workflow (مراحل گام‌به‌گام) ───────────────────")
-		sectionTools := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("─── 🛠️ Maintenance & Diagnostics ───────────────────────────────")
-		sectionCommunity := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("─── ⭐ Community & Support ──────────────────────────────────────")
+		sectionWorkflow := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("─── 🚀 Sequential Workflow ──────────────────────────────────────────")
+		sectionTools := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("─── 🛠️ Maintenance & Diagnostics ───────────────────────────────────")
+		sectionCommunity := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("─── ⭐ Community & Support ──────────────────────────────────────────")
 
 		fmt.Println("  " + sectionWorkflow)
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("1"), descStyle.Render("⚡ Step 1: Quick Auto-Fix (Full Patch + Injected Proxy)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("1"), descStyle.Render("⚡  Step 1: Quick Auto-Fix (Full Patch + Injected Proxy)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("2"), descStyle.Render("🛡️ Step 2: Enterprise & Privacy Flags (Mute Telemetry & Insiders)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("3"), descStyle.Render("🚀 Step 3: Launch Antigravity with Smart Proxy (No TUN!)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("4"), descStyle.Render("📌 Step 4: Create Desktop Shortcut with Injected Proxy"))
@@ -61,7 +61,7 @@ func main() {
 		fmt.Println("  " + sectionTools)
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("5"), descStyle.Render("🧹 Surgical 429 Quota Reset (Preserves Chats & Settings)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("6"), descStyle.Render("🩺 Run Antigravity Doctor (System & Connection Health)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("r"), descStyle.Render("📋 Generate Diagnostic Report (Copy to Clipboard)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("r"), descStyle.Render("📋 Generate Diagnostic Report (Auto-Open Text Report)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("u"), descStyle.Render("🔄 Check for Updates (Self-Update)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("7"), descStyle.Render("🔄 Restore Backups (.agybak)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("8"), descStyle.Render("🖥️ Launch Retro GUI (Classic Win95 Patcher)"))
@@ -69,7 +69,7 @@ func main() {
 
 		fmt.Println("  " + sectionCommunity)
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("t"), descStyle.Render("💬 Join Telegram Community (@dallrep) for help & updates"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("s"), descStyle.Render("⭐ Star on GitHub (github.com/tawroot/antigravity-cleaner)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("s"), descStyle.Render("⭐  Star on GitHub (github.com/tawroot/antigravity-cleaner)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("0"), descStyle.Render("🚪 Exit"))
 		fmt.Println()
 
