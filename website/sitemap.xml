@@ -5,15 +5,15 @@
   <!-- Home Page (Master Landing & Documentation) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Diagnostics & Error Clinic (Cornerstone Troubleshooting) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/troubleshooting.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -21,7 +21,7 @@
   <!-- FAQ & Security Knowledge Base -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/faq.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -29,7 +29,7 @@
   <!-- Technical Guides & Blog Hub -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -37,33 +37,33 @@
   <!-- Article 1: Error 403 Forbidden & Region Lock (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
 
   <!-- Article 2: Configure V2Ray, Clash & SOCKS5 without TUN Mode (English) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
 
   <!-- Article 3: Iranian Developer Guide (Farsi) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
 
   <!-- Article 4: Russian Developer Guide (Russian) -->
   <url>
     <loc>https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
 
 </urlset>
