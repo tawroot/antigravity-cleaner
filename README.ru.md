@@ -172,41 +172,22 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ---
 
-## 🛠️ Подкоманды CLI
+## 🛠️ Таблица подкоманд CLI
 
-Antigravity Cleaner полностью управляется из терминала:
+Antigravity Cleaner полностью управляется из командной строки:
 
-```bash
-# Интерактивное TUI-меню
-ag-cleaner
-
-# Запуск ретро-GUI Windows 95
-ag-cleaner gui
-
-# Полная диагностика здоровья и задержки сети (Doctor)
-ag-cleaner doctor
-
-# Подробная диагностика с трассировкой сети
-ag-cleaner doctor --verbose
-
-# Применение всех патчей (ядро, CLI, IDE, ASAR)
-ag-cleaner patch all
-
-# Запуск Antigravity с инъекцией прокси (без TUN)
-ag-cleaner launch
-
-# Сброс квоты 429 без потери истории переписки
-ag-cleaner clean
-
-# Атомарный откат всех файлов к заводскому состоянию (.agybak)
-ag-cleaner restore
-
-# Завершение зависших зомби-процессов
-ag-cleaner kill
-
-# Создание ярлыка с преднастроенным прокси
-ag-cleaner create-launcher
-```
+| Команда | Категория | Описание и назначение |
+| :--- | :---: | :--- |
+| `ag-cleaner` | **Интерактив** | Запуск интерактивного дашборда терминала (TUI). |
+| `ag-cleaner gui` | **Интерфейс** | Открытие классического ретро-окна Windows 95 (KeyGen GUI). |
+| `ag-cleaner doctor` | **Диагностика** | Полная проверка доступности серверов и сканирование портов прокси. |
+| `ag-cleaner doctor --verbose` | **Диагностика** | Глубокая диагностика с подробным выводом сетевых трейсов. |
+| `ag-cleaner patch all` | **Патчер** | Применение патчей ядра (`hasValidAuth = 1`), CLI, IDE и ASAR-щита. |
+| `ag-cleaner launch` | **Запуск** | Запуск Antigravity с инъекцией прокси без нагрузки TUN-режима. |
+| `ag-cleaner clean` | **Очистка** | Сброс квоты 429 без удаления проектов и истории переписки. |
+| `ag-cleaner restore` | **Откат** | Атомарное восстановление оригинальных файлов из бэкапов `.agybak`. |
+| `ag-cleaner kill` | **Процессы** | Завершение зависших зомби-процессов `language_server`. |
+| `ag-cleaner create-launcher` | **Ярлык** | Создание ярлыка рабочего стола с преднастроенными флагами. |
 
 ---
 

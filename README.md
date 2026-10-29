@@ -176,37 +176,18 @@ Run `ag-cleaner` in your terminal for an interactive Lipgloss dashboard, and sel
 
 Antigravity Cleaner can be driven entirely via command line:
 
-```bash
-# Launch interactive TUI menu
-ag-cleaner
-
-# Launch Retro KeyGen GUI (Classic Win95 Desktop Window)
-ag-cleaner gui
-
-# Run complete health & latency diagnostics (Doctor)
-ag-cleaner doctor
-
-# Detailed diagnostics with verbose debug traces
-ag-cleaner doctor --verbose
-
-# Apply all patches (Core binary, CLI, IDE frontend, ASAR shield)
-ag-cleaner patch all
-
-# Launch Antigravity with smart proxy injection (No TUN mode needed!)
-ag-cleaner launch
-
-# Reset HTTP 429 Quota without losing conversation history
-ag-cleaner clean
-
-# Restore all binaries to original factory state (.agybak)
-ag-cleaner restore
-
-# Terminate all running Antigravity & language_server zombie processes
-ag-cleaner kill
-
-# Generate standalone desktop shortcut with pre-configured proxy
-ag-cleaner create-launcher
-```
+| Command | Category | Description & Purpose |
+| :--- | :---: | :--- |
+| `ag-cleaner` | **Interactive** | Launch the interactive Bubbletea Terminal UI (TUI) menu. |
+| `ag-cleaner gui` | **Interface** | Open the standalone Retro KeyGen GUI (Classic Win95 desktop window). |
+| `ag-cleaner doctor` | **Diagnostics** | Run complete health audit, socket probe, and proxy port connectivity scan. |
+| `ag-cleaner doctor --verbose` | **Diagnostics** | Deep diagnostic scan with verbose network traces and socket telemetry. |
+| `ag-cleaner patch all` | **Patcher** | Surgically patch Core binary (`hasValidAuth = 1`), CLI, IDE frontend & ASAR shield. |
+| `ag-cleaner launch` | **Launcher** | Launch Antigravity with smart process-level proxy injection (zero TUN mode). |
+| `ag-cleaner clean` | **Cleaner** | Flush 16 temporary quota & rate-limit buckets without losing chat history. |
+| `ag-cleaner restore` | **Recovery** | Atomically restore all original binaries from factory `.agybak` backups. |
+| `ag-cleaner kill` | **Process** | Terminate all running Antigravity and orphaned `language_server` zombie processes. |
+| `ag-cleaner create-launcher` | **Desktop** | Generate a standalone 1-click desktop shortcut with pre-configured proxy flags. |
 
 ---
 
