@@ -474,6 +474,12 @@ func GetStandardLanguageServerCandidates() []string {
 		filepath.Join(home, "Applications", "Antigravity"),
 		filepath.Join(home, "Applications", "antigravity"),
 		filepath.Join(home, "Applications", "Antigravity-x64"),
+		filepath.Join(home, "Downloads", "Antigravity"),
+		filepath.Join(home, "Downloads", "antigravity"),
+		filepath.Join(home, "Downloads", "Antigravity-x64"),
+		filepath.Join(home, "Downloads", "Antigravity", "Antigravity-x64"),
+		filepath.Join(home, "Desktop", "Antigravity"),
+		filepath.Join(home, "Desktop", "antigravity"),
 		"/usr/share/antigravity",
 		"/usr/share/antigravity-ide",
 		"/opt/antigravity",
@@ -481,6 +487,7 @@ func GetStandardLanguageServerCandidates() []string {
 		"/opt/antigravity-ide",
 		"/opt/Antigravity IDE",
 		filepath.Join(home, ".local", "share", "antigravity"),
+		filepath.Join(home, ".local", "share", "Antigravity"),
 		filepath.Join(home, "antigravity"),
 	}
 
@@ -681,6 +688,11 @@ func FindAllLanguageServers(logger LogFunc) []string {
 		candidateRoots = append(candidateRoots,
 			filepath.Join(home, "Applications", "Antigravity"),
 			filepath.Join(home, "Applications", "antigravity"),
+			filepath.Join(home, "Downloads", "Antigravity"),
+			filepath.Join(home, "Downloads", "antigravity"),
+			filepath.Join(home, "Downloads", "Antigravity", "Antigravity-x64"),
+			filepath.Join(home, "Desktop", "Antigravity"),
+			filepath.Join(home, "Desktop", "antigravity"),
 			"/usr/share/antigravity",
 			"/usr/share/antigravity-ide",
 			"/opt/antigravity",
@@ -688,6 +700,44 @@ func FindAllLanguageServers(logger LogFunc) []string {
 			"/opt/antigravity-ide",
 			"/opt/Antigravity IDE",
 		)
+
+		// Scan desktop shortcuts to find custom installed paths
+		desktopDirs := []string{
+			filepath.Join(home, ".local", "share", "applications"),
+			"/usr/share/applications",
+		}
+		for _, dDir := range desktopDirs {
+			entries, _ := os.ReadDir(dDir)
+			for _, e := range entries {
+				if strings.HasSuffix(e.Name(), ".desktop") && strings.Contains(strings.ToLower(e.Name()), "antigravity") {
+					content, err := os.ReadFile(filepath.Join(dDir, e.Name()))
+					if err == nil {
+						for _, line := range strings.Split(string(content), "\n") {
+							if strings.HasPrefix(line, "Exec=") {
+								execVal := strings.TrimSpace(strings.TrimPrefix(line, "Exec="))
+								parts := strings.Fields(execVal)
+								if len(parts) > 0 {
+									tBin := parts[0]
+									if strings.HasSuffix(tBin, ".sh") {
+										shContent, _ := os.ReadFile(tBin)
+										for _, shLine := range strings.Split(string(shContent), "\n") {
+											if strings.Contains(shLine, "APP_PATH=") {
+												val := strings.Trim(strings.TrimSpace(strings.TrimPrefix(strings.TrimSpace(shLine), "APP_PATH=")), "\"")
+												if val != "" {
+													candidateRoots = append(candidateRoots, filepath.Dir(val))
+												}
+											}
+										}
+									} else {
+										candidateRoots = append(candidateRoots, filepath.Dir(tBin))
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	for _, found := range probeRootsForAllLanguageServers(candidateRoots) {
 		add(found)
@@ -711,6 +761,8 @@ func FindLanguageServerModular(logger LogFunc) string {
 
 // FindRunningLanguageServerPID returns the PID of an active language_server, or 0 if none is active
 func FindRunningLanguageServerPID() int {
+	selfPid := os.Getpid()
+
 	if runtime.GOOS == "linux" {
 		entries, err := os.ReadDir("/proc")
 		if err == nil {
@@ -719,15 +771,12 @@ func FindRunningLanguageServerPID() int {
 					continue
 				}
 				pid, err := strconv.Atoi(entry.Name())
-				if err != nil {
+				if err != nil || pid == selfPid {
 					continue
 				}
 				exeLink := fmt.Sprintf("/proc/%d/exe", pid)
 				target, err := os.Readlink(exeLink)
 				if err == nil {
-					if isSelfOrCleanerProcess(pid, target) {
-						continue
-					}
 					base := strings.ToLower(filepath.Base(target))
 					if strings.Contains(base, "language_server") {
 						return pid
@@ -740,12 +789,10 @@ func FindRunningLanguageServerPID() int {
 	// Cross-platform fallback using pgrep / ps
 	out, err := exec.Command("pgrep", "-f", "language_server").Output()
 	if err == nil {
-		selfPid := os.Getpid()
-		ppid := os.Getppid()
 		for _, pStr := range strings.Fields(string(out)) {
 			var pid int
 			if _, err := fmt.Sscanf(pStr, "%d", &pid); err == nil && pid > 0 {
-				if pid == selfPid || (ppid > 0 && pid == ppid) {
+				if pid == selfPid {
 					continue
 				}
 				return pid

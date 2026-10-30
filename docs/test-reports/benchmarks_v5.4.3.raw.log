@@ -1,0 +1,84 @@
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/account	0.011s
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/cleaner
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkSurgicalTargetsIntegrity-12    	 9811161	       338.5 ns/op	      72 B/op	       5 allocs/op
+BenchmarkSurgicalTargetsIntegrity-12    	10765412	       333.0 ns/op	      72 B/op	       5 allocs/op
+BenchmarkSurgicalTargetsIntegrity-12    	10309977	       341.1 ns/op	      72 B/op	       5 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/cleaner	11.493s
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/doctor	0.010s
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/gui	0.045s
+2026/10/30 22:29:44 [FLAGS] Applied privacy flag: --disable_telemetry=true (Halts telemetry, Git logging and error traces)
+2026/10/30 22:29:44 [FLAGS] Applied enterprise flag: --is_google_internal=true (Unlocks internal payload metadata and experiments)
+2026/10/30 22:29:44 [FLAGS] Applied release channel: --jetbox_release_channel=insiders
+2026/10/30 22:29:44 [FLAGS] Applied stubby auth mode: --stubby_auth_mode=business_licensed_enterprise
+2026/10/30 22:29:44 [FLAGS] Applied local Chrome flag: --use_local_chrome=true
+2026/10/30 22:29:44 [FLAGS] Applied browser eval flag: --browser_eval_env=true
+2026/10/30 22:29:44 [FLAGS] Applied visual browser flag: --local_chrome_headless=false
+2026/10/30 22:29:44 [FLAGS] Applied sidecar policy flag: --allow_all_sidecars=true (Unlocks all local companion processes and MCPs)
+2026/10/30 22:29:45 [FLAGS] Applied privacy flag: --disable_telemetry=true (Halts telemetry, Git logging and error traces)
+2026/10/30 22:29:45 [FLAGS] Applied enterprise flag: --is_google_internal=true (Unlocks internal payload metadata and experiments)
+2026/10/30 22:29:45 [FLAGS] Applied release channel: --jetbox_release_channel=insiders
+2026/10/30 22:29:45 [FLAGS] Applied stubby auth mode: --stubby_auth_mode=business_licensed_enterprise
+2026/10/30 22:29:45 [FLAGS] Applied local Chrome flag: --use_local_chrome=true
+2026/10/30 22:29:45 [FLAGS] Applied browser eval flag: --browser_eval_env=true
+2026/10/30 22:29:45 [FLAGS] Applied visual browser flag: --local_chrome_headless=false
+2026/10/30 22:29:45 [FLAGS] Applied sidecar policy flag: --allow_all_sidecars=true (Unlocks all local companion processes and MCPs)
+2026/10/30 22:29:45 [FLAGS] Applied privacy flag: --disable_telemetry=true (Halts telemetry, Git logging and error traces)
+2026/10/30 22:29:45 [FLAGS] Applied enterprise flag: --is_google_internal=true (Unlocks internal payload metadata and experiments)
+2026/10/30 22:29:45 [FLAGS] Applied release channel: --jetbox_release_channel=insiders
+2026/10/30 22:29:45 [FLAGS] Applied stubby auth mode: --stubby_auth_mode=business_licensed_enterprise
+2026/10/30 22:29:45 [FLAGS] Applied local Chrome flag: --use_local_chrome=true
+2026/10/30 22:29:45 [FLAGS] Applied browser eval flag: --browser_eval_env=true
+2026/10/30 22:29:45 [FLAGS] Applied visual browser flag: --local_chrome_headless=false
+2026/10/30 22:29:45 [FLAGS] Applied sidecar policy flag: --allow_all_sidecars=true (Unlocks all local companion processes and MCPs)
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/patcher
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkBuildServerFlags-12        	15216552	       237.5 ns/op	     432 B/op	       6 allocs/op
+BenchmarkBuildServerFlags-12        	15354088	       231.7 ns/op	     432 B/op	       6 allocs/op
+BenchmarkBuildServerFlags-12        	15743344	       231.3 ns/op	     432 B/op	       6 allocs/op
+BenchmarkMergeLaunchArguments-12    	 3915211	       929.4 ns/op	    1120 B/op	      20 allocs/op
+BenchmarkMergeLaunchArguments-12    	 3928206	       928.1 ns/op	    1120 B/op	      20 allocs/op
+BenchmarkMergeLaunchArguments-12    	 3921711	       939.7 ns/op	    1120 B/op	      20 allocs/op
+BenchmarkParsePattern-12            	10886185	       339.0 ns/op	     330 B/op	      15 allocs/op
+BenchmarkParsePattern-12            	10727004	       337.1 ns/op	     330 B/op	      15 allocs/op
+BenchmarkParsePattern-12            	10618332	       338.8 ns/op	     330 B/op	      15 allocs/op
+BenchmarkPatternSearch-12           	     703	   5167906 ns/op	2029.02 MB/s	       0 B/op	       0 allocs/op
+BenchmarkPatternSearch-12           	     692	   5185712 ns/op	2022.05 MB/s	       0 B/op	       0 allocs/op
+BenchmarkPatternSearch-12           	     706	   5124048 ns/op	2046.38 MB/s	       0 B/op	       0 allocs/op
+BenchmarkPatternFindAll-12          	     894	   4013924 ns/op	1306.17 MB/s	     248 B/op	       5 allocs/op
+BenchmarkPatternFindAll-12          	     898	   4017533 ns/op	1305.00 MB/s	     248 B/op	       5 allocs/op
+BenchmarkPatternFindAll-12          	     890	   4028064 ns/op	1301.59 MB/s	     248 B/op	       5 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/patcher	62.529s
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/proxy
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkCleanHostPort-12    	366185554	         9.877 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCleanHostPort-12    	355945846	        10.22 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCleanHostPort-12    	345071058	         9.815 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBuildProxyEnv-12    	  364778	      9663 ns/op	    8869 B/op	     110 allocs/op
+BenchmarkBuildProxyEnv-12    	  366501	      9721 ns/op	    8869 B/op	     110 allocs/op
+BenchmarkBuildProxyEnv-12    	  358266	      9695 ns/op	    8869 B/op	     110 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/proxy	24.586s
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/quota
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkRenderQuota-12    	  858400	      3535 ns/op	    3655 B/op	      48 allocs/op
+BenchmarkRenderQuota-12    	  973302	      3512 ns/op	    3655 B/op	      48 allocs/op
+BenchmarkRenderQuota-12    	 1000000	      3537 ns/op	    3655 B/op	      48 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/quota	10.119s
+?   	github.com/tawroot/antigravity-cleaner/pkg/ui	[no test files]
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/updater	0.005s

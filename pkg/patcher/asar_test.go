@@ -17,6 +17,54 @@ func TestAsarZeroLogByteLengths(t *testing.T) {
 		t.Fatalf("length mismatch: writeFn target is %d bytes, patched is %d bytes",
 			len(asarWriteFnTarget), len(asarWriteFnPatched))
 	}
+
+	if len(asarUpdaterTarget) != len(asarUpdaterPatched) {
+		t.Fatalf("length mismatch: updater target is %d bytes, patched is %d bytes",
+			len(asarUpdaterTarget), len(asarUpdaterPatched))
+	}
+}
+
+func TestPatchAsarAntiUpdate(t *testing.T) {
+	tmpDir := t.TempDir()
+	fakeAsar := filepath.Join(tmpDir, "app.asar")
+	fakeYml := filepath.Join(tmpDir, "app-update.yml")
+
+	fakeContent := bytes.Join([][]byte{
+		[]byte("header_metadata\n"),
+		asarUpdaterTarget,
+		[]byte("\nend_of_file"),
+	}, nil)
+
+	if err := os.WriteFile(fakeAsar, fakeContent, 0644); err != nil {
+		t.Fatalf("failed to write fake asar: %v", err)
+	}
+	if err := os.WriteFile(fakeYml, []byte("provider: generic\nurl: https://antigravity-hub-auto-updater.run.app/\n"), 0644); err != nil {
+		t.Fatalf("failed to write fake yml: %v", err)
+	}
+
+	res, err := PatchAsarAntiUpdate(fakeAsar)
+	if err != nil {
+		t.Fatalf("PatchAsarAntiUpdate failed: %v", err)
+	}
+	if res == "" {
+		t.Fatalf("expected non-empty success message")
+	}
+
+	patchedData, err := os.ReadFile(fakeAsar)
+	if err != nil {
+		t.Fatalf("failed to read patched asar: %v", err)
+	}
+	if !bytes.Contains(patchedData, asarUpdaterPatched) {
+		t.Errorf("patched asar missing updater patched bytes")
+	}
+
+	ymlData, err := os.ReadFile(fakeYml)
+	if err != nil {
+		t.Fatalf("failed to read yml: %v", err)
+	}
+	if !bytes.Contains(ymlData, []byte("127.0.0.1:0")) {
+		t.Errorf("expected neutralized yml, got: %s", string(ymlData))
+	}
 }
 
 func TestPatchAsarZeroLog(t *testing.T) {

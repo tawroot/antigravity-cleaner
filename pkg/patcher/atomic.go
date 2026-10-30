@@ -1,10 +1,12 @@
 package patcher
 
 import (
+	"encoding/binary"
 	"errors"
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -110,6 +112,41 @@ func AtomicWrite(targetPath string, data []byte) error {
 		return FormatAppManagementError("atomically replacing target file", targetPath, err)
 	}
 
+	// On macOS, if the written file is an executable Mach-O binary, clear quarantine and re-sign ad-hoc
+	// to prevent AMFI (Apple Mobile File Integrity) kernel SIGTERM/SIGKILL termination.
+	if runtime.GOOS == "darwin" && IsMachOBinary(data) {
+		_ = ResignDarwinBinary(targetPath)
+	}
+
+	return nil
+}
+
+// IsMachOBinary checks if the data slice begins with Mach-O magic numbers (32-bit, 64-bit, or Universal fat binary)
+func IsMachOBinary(data []byte) bool {
+	if len(data) < 4 {
+		return false
+	}
+	magic := binary.BigEndian.Uint32(data[:4])
+	return magic == 0xfeedface || magic == 0xcefaedfe || // 32-bit Mach-O
+		magic == 0xfeedfacf || magic == 0xcffaedfe || // 64-bit Mach-O
+		magic == 0xcafebabe || magic == 0xbebafeca // Fat / Universal binary
+}
+
+// ResignDarwinBinary clears quarantine flags and applies an ad-hoc signature on macOS binaries.
+// This prevents AMFI (Apple Mobile File Integrity) kernel crashes (SIGTERM/SIGKILL) on modified Mach-O files.
+func ResignDarwinBinary(targetPath string) error {
+	if runtime.GOOS != "darwin" {
+		return nil
+	}
+
+	// 1. Remove Apple quarantine attribute
+	_ = exec.Command("xattr", "-dr", "com.apple.quarantine", targetPath).Run()
+
+	// 2. Force ad-hoc re-signature (codesign --force --sign - <target>)
+	cmd := exec.Command("codesign", "--force", "--sign", "-", targetPath)
+	if out, err := cmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("codesign failed on %s: %s (%w)", targetPath, strings.TrimSpace(string(out)), err)
+	}
 	return nil
 }
 

@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -89,6 +90,34 @@ func isProtectedPID(pid int, selfPID int) bool {
 	return false
 }
 
+// RestartLanguageServerOnly terminates only the child language_server process.
+// Antigravity IDE's internal crash monitor (monitorLsCrashInternal in app.asar)
+// automatically respawns the newly patched language_server within 2 seconds
+// without closing the IDE window, terminals, or AI chat session.
+func RestartLanguageServerOnly() (int, error) {
+	restartedCount := 0
+	selfPID := os.Getpid()
+
+	if runtime.GOOS == "windows" {
+		_ = exec.Command("taskkill", "/F", "/IM", "language_server.exe").Run()
+		time.Sleep(500 * time.Millisecond)
+		return 1, nil
+	}
+
+	outLS, _ := exec.Command("pgrep", "-f", "language_server").Output()
+	for _, pStr := range strings.Fields(string(outLS)) {
+		var pid int
+		if _, err := fmt.Sscanf(pStr, "%d", &pid); err == nil && !isProtectedPID(pid, selfPID) {
+			if p, err := os.FindProcess(pid); err == nil {
+				_ = p.Signal(syscall.SIGTERM)
+				restartedCount++
+			}
+		}
+	}
+
+	return restartedCount, nil
+}
+
 // KillAntigravityProcesses terminates active Antigravity and language_server instances safely
 func KillAntigravityProcesses() (int, error) {
 	killedCount := 0
@@ -137,7 +166,13 @@ func KillAntigravityProcesses() (int, error) {
 		}
 	}
 
-	time.Sleep(500 * time.Millisecond)
+	// Wait up to 1.5s for processes to fully exit and release all SQLite/LevelDB locks
+	for i := 0; i < 15; i++ {
+		time.Sleep(100 * time.Millisecond)
+		if !IsAntigravityRunning() {
+			break
+		}
+	}
 	return killedCount, nil
 }
 

@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strings"
 )
 
 var (
@@ -33,6 +34,58 @@ var (
 			Patched:     p,
 			Replacement: r,
 			Offset:      8,
+		}
+	}()
+
+	cliGateARM64_W4 = func() BinaryGate {
+		u, _ := ParsePattern("?? ?? ?? b4 04 20 40 39 ?? ?? ?? 37 04 94 44 a9")
+		p, _ := ParsePattern("?? ?? ?? b4 24 00 80 52 ?? ?? ?? 37 04 94 44 a9")
+		r, _ := hex.DecodeString("24008052")
+		return BinaryGate{
+			Name:        "agy eligibility check bypass (arm64, w4)",
+			Unpatched:   u,
+			Patched:     p,
+			Replacement: r,
+			Offset:      4,
+		}
+	}()
+
+	cliGateARM64_W2 = func() BinaryGate {
+		u, _ := ParsePattern("?? ?? ?? b5 ?? ?? ?? b4 02 20 40 39 ?? ?? ?? 37")
+		p, _ := ParsePattern("?? ?? ?? b5 ?? ?? ?? b4 22 00 80 52 ?? ?? ?? 37")
+		r, _ := hex.DecodeString("22008052")
+		return BinaryGate{
+			Name:        "agy eligibility check bypass (arm64, w2)",
+			Unpatched:   u,
+			Patched:     p,
+			Replacement: r,
+			Offset:      8,
+		}
+	}()
+
+	cliGateAuthX64 = func() BinaryGate {
+		u, _ := ParsePattern("80 78 08 00 74 ?? 48 8b ?? 24 ?? 48 89 ?? 60")
+		p, _ := ParsePattern("c6 40 08 01 90 90 48 8b ?? 24 ?? 48 89 ?? 60")
+		r, _ := hex.DecodeString("c64008019090")
+		return BinaryGate{
+			Name:        "agy internal hasValidAuth (x64)",
+			Unpatched:   u,
+			Patched:     p,
+			Replacement: r,
+			Offset:      0,
+		}
+	}()
+
+	cliGateAuthARM64 = func() BinaryGate {
+		u, _ := ParsePattern("03 20 40 39 ?? ?? ?? 36 ?? ?? ?? ?? 03 10 06 a9")
+		p, _ := ParsePattern("23 00 80 52 03 20 00 39 ?? ?? ?? ?? 03 10 06 a9")
+		r, _ := hex.DecodeString("2300805203200039")
+		return BinaryGate{
+			Name:        "agy internal hasValidAuth (arm64)",
+			Unpatched:   u,
+			Patched:     p,
+			Replacement: r,
+			Offset:      0,
 		}
 	}()
 )
@@ -80,30 +133,48 @@ func PatchAgy(binPath string) (string, error) {
 		return "", fmt.Errorf("failed to read %s: %w", binPath, err)
 	}
 
-	gates := []BinaryGate{cliGateX64, cliGateARM64}
+	gates := []BinaryGate{
+		cliGateX64,
+		cliGateAuthX64,
+		cliGateARM64,
+		cliGateARM64_W4,
+		cliGateARM64_W2,
+		cliGateAuthARM64,
+	}
 	if runtime.GOARCH == "arm64" {
-		gates = []BinaryGate{cliGateARM64, cliGateX64}
-	}
-
-	for _, g := range gates {
-		if g.Patched.Find(data) != -1 {
-			return fmt.Sprintf("Already patched: %s (%s)", filepath.Base(binPath), g.Name), nil
+		gates = []BinaryGate{
+			cliGateARM64,
+			cliGateARM64_W4,
+			cliGateARM64_W2,
+			cliGateAuthARM64,
+			cliGateX64,
+			cliGateAuthX64,
 		}
 	}
 
-	var matchedGate *BinaryGate
-	var matches []int
+	patchedData := make([]byte, len(data))
+	copy(patchedData, data)
+	totalPatches := 0
+	var appliedNames []string
 
 	for _, g := range gates {
-		locs := g.Unpatched.FindAll(data)
+		locs := g.Unpatched.FindAll(patchedData)
 		if len(locs) > 0 {
-			matchedGate = &g
-			matches = locs
-			break
+			for _, idx := range locs {
+				targetIdx := idx + g.Offset
+				copy(patchedData[targetIdx:targetIdx+len(g.Replacement)], g.Replacement)
+				totalPatches++
+			}
+			appliedNames = append(appliedNames, fmt.Sprintf("%s (%d)", g.Name, len(locs)))
 		}
 	}
 
-	if matchedGate == nil {
+	if totalPatches == 0 {
+		for _, g := range gates {
+			if g.Patched.Find(data) != -1 {
+				return fmt.Sprintf("Already patched: %s (%s)", filepath.Base(binPath), g.Name), nil
+			}
+		}
 		return "", fmt.Errorf("eligibility signature not found in %s", filepath.Base(binPath))
 	}
 
@@ -111,17 +182,9 @@ func PatchAgy(binPath string) (string, error) {
 		return "", fmt.Errorf("backup failed: %w", err)
 	}
 
-	patchedData := make([]byte, len(data))
-	copy(patchedData, data)
-
-	for _, idx := range matches {
-		targetIdx := idx + matchedGate.Offset
-		copy(patchedData[targetIdx:targetIdx+len(matchedGate.Replacement)], matchedGate.Replacement)
-	}
-
 	if err := AtomicWrite(binPath, patchedData); err != nil {
 		return "", fmt.Errorf("atomic write failed: %w", err)
 	}
 
-	return fmt.Sprintf("Successfully patched %s (%d occurrences)", filepath.Base(binPath), len(matches)), nil
+	return fmt.Sprintf("Successfully patched %s [%s]", filepath.Base(binPath), strings.Join(appliedNames, ", ")), nil
 }

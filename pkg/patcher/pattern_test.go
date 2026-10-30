@@ -36,6 +36,18 @@ func TestPatternWildcardMatching(t *testing.T) {
 	}
 }
 
+func BenchmarkParsePattern(b *testing.B) {
+	patternStr := "80 78 08 00 74 ?? 48 8b ?? 24 ?? 48 89 ?? 60"
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_, err := ParsePattern(patternStr)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
 func BenchmarkPatternSearch(b *testing.B) {
 	patternStr := "80 78 08 00 74 ?? 48 8b ?? 24 ?? 48 89 ?? 60"
 	p, err := ParsePattern(patternStr)
@@ -53,11 +65,39 @@ func BenchmarkPatternSearch(b *testing.B) {
 
 	b.ResetTimer()
 	b.SetBytes(int64(size))
+	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
 		idx := p.Find(buf)
 		if idx == -1 {
 			b.Fatalf("Pattern not found in benchmark buffer")
+		}
+	}
+}
+
+func BenchmarkPatternFindAll(b *testing.B) {
+	patternStr := "80 78 08 00 74 ?? 48 8b"
+	p, err := ParsePattern(patternStr)
+	if err != nil {
+		b.Fatalf("Failed to parse pattern: %v", err)
+	}
+
+	// 5MB buffer with multiple occurrences
+	size := 5 * 1024 * 1024
+	buf := make([]byte, size)
+	target := []byte{0x80, 0x78, 0x08, 0x00, 0x74, 0x12, 0x48, 0x8b}
+	for offset := 1000; offset < size-100; offset += 500000 {
+		copy(buf[offset:], target)
+	}
+
+	b.ResetTimer()
+	b.SetBytes(int64(size))
+	b.ReportAllocs()
+
+	for i := 0; i < b.N; i++ {
+		matches := p.FindAll(buf)
+		if len(matches) == 0 {
+			b.Fatalf("Pattern occurrences not found")
 		}
 	}
 }

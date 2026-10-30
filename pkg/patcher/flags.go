@@ -28,19 +28,34 @@ type EnterpriseFlagsOptions struct {
 	LocalChromeHeadless bool
 	// AllowAllSidecars permits running any sidecar or MCP process without signature restrictions
 	AllowAllSidecars bool
+	// DisableUnleash when true halts remote Unleash feature-gating & region-locks
+	DisableUnleash bool
+	// UseSnapshotMendelfp when true prevents live Mendel experimentation polling
+	UseSnapshotMendelfp bool
+	// BypassSidecarUserConfig when true keeps all AI sidecars and companions permanently enabled
+	BypassSidecarUserConfig bool
+	// DisableLogToDisk prevents write EIO and massive local disk logs
+	DisableLogToDisk bool
+	// SuppressCppLoggerCheck suppresses C++ stderr flood
+	SuppressCppLoggerCheck bool
 }
 
 // DefaultEnterpriseFlagsOptions returns the recommended production defaults based on REA findings
 func DefaultEnterpriseFlagsOptions() EnterpriseFlagsOptions {
 	return EnterpriseFlagsOptions{
-		DisableTelemetry:      true,
-		IsGoogleInternal:      true,
-		JetboxReleaseChannel: "insiders",
-		StubbyAuthMode:        "business_licensed_enterprise",
-		UseLocalChrome:        true,
-		BrowserEvalEnv:        true,
-		LocalChromeHeadless:   false,
-		AllowAllSidecars:      true,
+		DisableTelemetry:        true,
+		IsGoogleInternal:        true,
+		JetboxReleaseChannel:   "insiders",
+		StubbyAuthMode:          "business_licensed_enterprise",
+		UseLocalChrome:          true,
+		BrowserEvalEnv:          true,
+		LocalChromeHeadless:     false,
+		AllowAllSidecars:        true,
+		DisableUnleash:          true,
+		UseSnapshotMendelfp:     true,
+		BypassSidecarUserConfig: true,
+		DisableLogToDisk:        true,
+		SuppressCppLoggerCheck:  true,
 	}
 }
 
@@ -91,6 +106,31 @@ func BuildServerFlags(opts EnterpriseFlagsOptions, logger LogFunc) []string {
 	if opts.AllowAllSidecars {
 		flags = append(flags, "--allow_all_sidecars=true")
 		logger("Applied sidecar policy flag: --allow_all_sidecars=true (Unlocks all local companion processes and MCPs)")
+	}
+
+	if opts.DisableUnleash {
+		flags = append(flags, "--disable_unleash=true")
+		logger("Applied region gate bypass flag: --disable_unleash=true (Halts remote Unleash geographic gating)")
+	}
+
+	if opts.UseSnapshotMendelfp {
+		flags = append(flags, "--use_snapshot_mendelfp=true")
+		logger("Applied experiment shield flag: --use_snapshot_mendelfp=true (Forces embedded snapshot, halts server polling)")
+	}
+
+	if opts.BypassSidecarUserConfig {
+		flags = append(flags, "--bypass_sidecar_user_config=true")
+		logger("Applied sidecar config bypass: --bypass_sidecar_user_config=true (Forces all sidecars enabled)")
+	}
+
+	if opts.DisableLogToDisk {
+		flags = append(flags, "--disable_log_to_disk=true")
+		logger("Applied disk shield flag: --disable_log_to_disk=true (Prevents massive local log dumps and write EIO)")
+	}
+
+	if opts.SuppressCppLoggerCheck {
+		flags = append(flags, "--suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true")
+		logger("Applied stderr shield: --suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true")
 	}
 
 	return flags

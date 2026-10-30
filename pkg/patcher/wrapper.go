@@ -8,6 +8,13 @@ import (
 	"strings"
 )
 
+var postInstallHooks []func(logger LogFunc)
+
+// RegisterPostInstallHook registers a hook executed during wrapper installation
+func RegisterPostInstallHook(h func(logger LogFunc)) {
+	postInstallHooks = append(postInstallHooks, h)
+}
+
 // WrapperManager manages transparent flag injection wrappers around language_server
 type WrapperManager struct {
 	binDir  string
@@ -161,17 +168,26 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 		}
 	}
 
+	if runtime.GOOS == "darwin" {
+		_ = ResignDarwinBinary(originalBin)
+	}
+
 	// 2. Build flags
 	flags := BuildServerFlags(opts, m.logger)
 	flagsStr := strings.Join(flags, " ")
 
-	// 3. Create wrapper script
+	// Execute post-install hooks (e.g. bi-directional token bridge synchronization)
+	for _, hook := range postInstallHooks {
+		hook(m.logger)
+	}
+
+	// 3. Create wrapper script with remote environment spoofing (switches language_server to file-token mode & reduces cloud fraud friction)
 	backupName := BackupFileName(m.binName)
 	var scriptContent string
 	if runtime.GOOS == "windows" {
-		scriptContent = fmt.Sprintf("@echo off\r\n\"%%~dp0%s\" %s %%*\r\n", backupName, flagsStr)
+		scriptContent = fmt.Sprintf("@echo off\r\nset \"SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22\"\r\nset \"SSH_CLIENT=127.0.0.1 1234 22\"\r\n\"%%~dp0%s\" %s %%*\r\n", backupName, flagsStr)
 	} else {
-		scriptContent = fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexec \"$DIR/%s\" %s \"$@\"\n", backupName, flagsStr)
+		scriptContent = fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexport SSH_CONNECTION=\"127.0.0.1 1234 127.0.0.1 22\"\nexport SSH_CLIENT=\"127.0.0.1 1234 22\"\nexec \"$DIR/%s\" %s \"$@\"\n", backupName, flagsStr)
 	}
 
 	if err := os.WriteFile(serverBin, []byte(scriptContent), 0755); err != nil {

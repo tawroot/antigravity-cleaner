@@ -12,11 +12,12 @@ func TestBuildServerFlags(t *testing.T) {
 	}
 
 	flags := BuildServerFlags(opts, logger)
-	if len(flags) != 8 {
-		t.Fatalf("expected 8 flags, got %d: %v", len(flags), flags)
+	if len(flags) != 13 {
+		t.Fatalf("expected 13 flags, got %d: %v", len(flags), flags)
 	}
 
 	var hasTelemetry, hasInternal, hasChannel, hasStubby, hasChrome, hasBrowserEval, hasVisualHeadless, hasSidecars bool
+	var hasUnleash, hasMendel, hasBypassSidecars, hasLogDisk, hasCppLogger bool
 	for _, f := range flags {
 		switch f {
 		case "--disable_telemetry=true":
@@ -35,6 +36,16 @@ func TestBuildServerFlags(t *testing.T) {
 			hasVisualHeadless = true
 		case "--allow_all_sidecars=true":
 			hasSidecars = true
+		case "--disable_unleash=true":
+			hasUnleash = true
+		case "--use_snapshot_mendelfp=true":
+			hasMendel = true
+		case "--bypass_sidecar_user_config=true":
+			hasBypassSidecars = true
+		case "--disable_log_to_disk=true":
+			hasLogDisk = true
+		case "--suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true":
+			hasCppLogger = true
 		}
 	}
 
@@ -62,8 +73,23 @@ func TestBuildServerFlags(t *testing.T) {
 	if !hasSidecars {
 		t.Errorf("missing --allow_all_sidecars=true flag")
 	}
-	if len(logs) != 8 {
-		t.Errorf("expected 8 log entries, got %d", len(logs))
+	if !hasUnleash {
+		t.Errorf("missing --disable_unleash=true flag")
+	}
+	if !hasMendel {
+		t.Errorf("missing --use_snapshot_mendelfp=true flag")
+	}
+	if !hasBypassSidecars {
+		t.Errorf("missing --bypass_sidecar_user_config=true flag")
+	}
+	if !hasLogDisk {
+		t.Errorf("missing --disable_log_to_disk=true flag")
+	}
+	if !hasCppLogger {
+		t.Errorf("missing --suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true flag")
+	}
+	if len(logs) != 13 {
+		t.Errorf("expected 13 log entries, got %d", len(logs))
 	}
 }
 
@@ -90,5 +116,32 @@ func TestMergeLaunchArguments(t *testing.T) {
 	}
 	if !countInternal {
 		t.Errorf("expected new internal flag to be merged")
+	}
+}
+
+func BenchmarkBuildServerFlags(b *testing.B) {
+	opts := DefaultEnterpriseFlagsOptions()
+	noopLogger := func(format string, args ...interface{}) {}
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		flags := BuildServerFlags(opts, noopLogger)
+		if len(flags) != 13 {
+			b.Fatalf("unexpected flag count: %d", len(flags))
+		}
+	}
+}
+
+func BenchmarkMergeLaunchArguments(b *testing.B) {
+	existing := []string{"--standalone", "--override_ide_name=antigravity", "--disable_telemetry=false"}
+	opts := DefaultEnterpriseFlagsOptions()
+	noopLogger := func(format string, args ...interface{}) {}
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		merged := MergeLaunchArguments(existing, opts, noopLogger)
+		if len(merged) == 0 {
+			b.Fatal("empty merged flags")
+		}
 	}
 }

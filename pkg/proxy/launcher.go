@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+
+	"github.com/tawroot/antigravity-cleaner/pkg/account"
 )
 
 // AppTarget describes an installed Antigravity application target (Standard 2.0 or IDE)
@@ -134,22 +136,36 @@ func BuildProxyEnv(proxyURL string) []string {
 	}
 
 	overrides := map[string]string{
-		"ALL_PROXY":   socksProxy,
-		"all_proxy":   socksProxy,
-		"HTTPS_PROXY": httpProxy,
-		"https_proxy": httpProxy,
-		"HTTP_PROXY":  httpProxy,
-		"http_proxy":  httpProxy,
-		"GRPC_PROXY":  httpProxy,
+		"ALL_PROXY":      socksProxy,
+		"all_proxy":      socksProxy,
+		"HTTPS_PROXY":    httpProxy,
+		"https_proxy":    httpProxy,
+		"HTTP_PROXY":     httpProxy,
+		"http_proxy":     httpProxy,
+		"GRPC_PROXY":     httpProxy,
+		"SSH_CONNECTION": "127.0.0.1 1234 127.0.0.1 22", // Remote environment spoofing: switches language_server to file-token mode
+		"SSH_CLIENT":     "127.0.0.1 1234 22",
 	}
 
-	// Filter existing proxy envs
+	// Filter existing proxy envs and sensitive leak variables
+	leakKeys := map[string]bool{
+		"JETSKI_OAUTH_TOKEN":             true,
+		"JETSKI_TEST_GAIA_TOKEN":        true,
+		"GEMINI_API_KEY":                true,
+		"GOOGLE_API_KEY":                true,
+		"GOOGLE_APPLICATION_CREDENTIALS": true,
+	}
+
 	var cleanEnv []string
 	for _, e := range env {
 		parts := strings.SplitN(e, "=", 2)
 		if len(parts) > 0 {
-			keyUpper := strings.ToUpper(parts[0])
+			key := parts[0]
+			keyUpper := strings.ToUpper(key)
 			if _, isProxy := overrides[keyUpper]; isProxy {
+				continue
+			}
+			if leakKeys[key] || leakKeys[keyUpper] {
 				continue
 			}
 		}
@@ -203,6 +219,9 @@ func LaunchAntigravityWithProxy(appPath string, proxyURL string, extraArgs []str
 	cmd.Stderr = nil
 	cmd.Stdin = nil
 
+	// Ensure bi-directional token bridge is synchronized before launching
+	_ = account.SyncTokenBridge(nil)
+
 	if err := cmd.Start(); err != nil {
 		return fmt.Errorf("failed to start Antigravity with proxy: %w", err)
 	}
@@ -231,6 +250,9 @@ func GenerateNoTunDesktopLauncher(proxyURL string) (string, error) {
 	}
 
 	home, _ := os.UserHomeDir()
+
+	// Ensure bi-directional token bridge is synchronized
+	_ = account.SyncTokenBridge(nil)
 
 	if runtime.GOOS == "linux" {
 		binDir := filepath.Join(home, ".local", "bin")
@@ -290,6 +312,10 @@ fi
 export ALL_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
 export HTTPS_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
 export HTTP_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
+
+# 4. Remote environment spoofing: switches language_server to file-token mode & reduces cloud fraud friction
+export SSH_CONNECTION="127.0.0.1 1234 127.0.0.1 22"
+export SSH_CLIENT="127.0.0.1 1234 22"
 
 # Pass socks5:// without quotes to Chromium (Chromium does not support socks5h)
 # Redirect stdout/stderr to /dev/null to prevent electron-log write EIO broken-pipe popups
@@ -389,6 +415,8 @@ fi
 export ALL_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
 export HTTPS_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
 export HTTP_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+export SSH_CONNECTION="127.0.0.1 1234 127.0.0.1 22"
+export SSH_CLIENT="127.0.0.1 1234 22"
 
 exec "$APP_PATH" --proxy-server="socks5://127.0.0.1:${ACTIVE_PORT}" "$@"
 `, appPath)
@@ -406,6 +434,8 @@ exec "$APP_PATH" --proxy-server="socks5://127.0.0.1:${ACTIVE_PORT}" "$@"
 set "ALL_PROXY=%s"
 set "HTTPS_PROXY=%s"
 set "HTTP_PROXY=%s"
+set "SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22"
+set "SSH_CLIENT=127.0.0.1 1234 22"
 start "" "%s" --proxy-server=%s
 `, proxyURL, proxyURL, proxyURL, appPath, chromiumProxy)
 

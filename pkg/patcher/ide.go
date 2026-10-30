@@ -110,20 +110,35 @@ func FindIdeMainJs() string {
 	return ""
 }
 
-// ClearIdeCache removes VS Code compile cache so patched JS reloads cleanly
+// ClearIdeCache removes VS Code compile cache so patched JS reloads cleanly across Linux, macOS, and Windows
 func ClearIdeCache() {
 	home, _ := os.UserHomeDir()
 	cacheDirs := []string{
+		// Linux
 		filepath.Join(home, ".config", "Antigravity IDE", "CachedData"),
 		filepath.Join(home, ".config", "Antigravity IDE", "Code Cache"),
 		filepath.Join(home, ".config", "Antigravity", "CachedData"),
 		filepath.Join(home, ".config", "Antigravity", "Code Cache"),
+		// Windows
 		filepath.Join(os.Getenv("APPDATA"), "Antigravity IDE", "CachedData"),
 		filepath.Join(os.Getenv("APPDATA"), "Antigravity IDE", "Code Cache"),
+		filepath.Join(os.Getenv("APPDATA"), "Antigravity", "CachedData"),
+		filepath.Join(os.Getenv("APPDATA"), "Antigravity", "Code Cache"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Antigravity IDE", "CachedData"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Antigravity IDE", "Code Cache"),
+		// macOS
+		filepath.Join(home, "Library", "Application Support", "Antigravity IDE", "CachedData"),
+		filepath.Join(home, "Library", "Application Support", "Antigravity IDE", "Code Cache"),
+		filepath.Join(home, "Library", "Application Support", "Antigravity", "CachedData"),
+		filepath.Join(home, "Library", "Application Support", "Antigravity", "Code Cache"),
+		filepath.Join(home, "Library", "Caches", "com.google.antigravity"),
+		filepath.Join(home, "Library", "Caches", "com.google.antigravity.helper"),
 	}
 
 	for _, d := range cacheDirs {
-		_ = os.RemoveAll(d)
+		if d != "" {
+			_ = os.RemoveAll(d)
+		}
 	}
 }
 

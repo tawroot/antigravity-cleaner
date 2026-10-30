@@ -39,3 +39,27 @@ func TestBuildProxyEnv(t *testing.T) {
 		t.Errorf("BuildProxyEnv did not produce ALL_PROXY")
 	}
 }
+
+func BenchmarkCleanHostPort(b *testing.B) {
+	input := "socks5h://127.0.0.1:10808"
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		res := CleanHostPort(input)
+		if res == "" {
+			b.Fatal("empty host port")
+		}
+	}
+}
+
+func BenchmarkBuildProxyEnv(b *testing.B) {
+	input := "socks5h://127.0.0.1:10808"
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		env := BuildProxyEnv(input)
+		if len(env) == 0 {
+			b.Fatal("empty proxy env")
+		}
+	}
+}

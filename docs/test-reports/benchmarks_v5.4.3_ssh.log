@@ -1,0 +1,56 @@
+?   	github.com/tawroot/antigravity-cleaner/cmd/antigravity	[no test files]
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/account	0.007s
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/cleaner
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkSurgicalTargetsIntegrity-12    	 3445228	       334.6 ns/op	      72 B/op	       5 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/cleaner	1.510s
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/doctor	0.006s
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/gui	0.025s
+2026/10/30 23:25:08 [FLAGS] Applied privacy flag: --disable_telemetry=true (Halts telemetry, Git logging and error traces)
+2026/10/30 23:25:08 [FLAGS] Applied enterprise flag: --is_google_internal=true (Unlocks internal payload metadata and experiments)
+2026/10/30 23:25:08 [FLAGS] Applied release channel: --jetbox_release_channel=insiders
+2026/10/30 23:25:08 [FLAGS] Applied stubby auth mode: --stubby_auth_mode=business_licensed_enterprise
+2026/10/30 23:25:08 [FLAGS] Applied local Chrome flag: --use_local_chrome=true
+2026/10/30 23:25:08 [FLAGS] Applied browser eval flag: --browser_eval_env=true
+2026/10/30 23:25:08 [FLAGS] Applied visual browser flag: --local_chrome_headless=false
+2026/10/30 23:25:08 [FLAGS] Applied sidecar policy flag: --allow_all_sidecars=true (Unlocks all local companion processes and MCPs)
+2026/10/30 23:25:08 [FLAGS] Applied region gate bypass flag: --disable_unleash=true (Halts remote Unleash geographic gating)
+2026/10/30 23:25:08 [FLAGS] Applied experiment shield flag: --use_snapshot_mendelfp=true (Forces embedded snapshot, halts server polling)
+2026/10/30 23:25:08 [FLAGS] Applied sidecar config bypass: --bypass_sidecar_user_config=true (Forces all sidecars enabled)
+2026/10/30 23:25:08 [FLAGS] Applied disk shield flag: --disable_log_to_disk=true (Prevents massive local log dumps and write EIO)
+2026/10/30 23:25:08 [FLAGS] Applied stderr shield: --suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/patcher
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkBuildServerFlags-12        	 3652926	       314.9 ns/op	     688 B/op	       7 allocs/op
+BenchmarkMergeLaunchArguments-12    	  820960	      1373 ns/op	    1920 B/op	      27 allocs/op
+BenchmarkParsePattern-12            	 3633531	       338.3 ns/op	     330 B/op	      15 allocs/op
+BenchmarkPatternSearch-12           	     214	   5133739 ns/op	2042.52 MB/s	       0 B/op	       0 allocs/op
+BenchmarkPatternFindAll-12          	     298	   3949376 ns/op	1327.52 MB/s	     248 B/op	       5 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/patcher	7.795s
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/proxy
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkCleanHostPort-12    	100000000	        10.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBuildProxyEnv-12    	  116817	      9852 ns/op	    9549 B/op	     116 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/proxy	2.272s
+goos: linux
+goarch: amd64
+pkg: github.com/tawroot/antigravity-cleaner/pkg/quota
+cpu: AMD Ryzen 5 7535HS with Radeon Graphics        
+BenchmarkRenderQuota-12    	  341490	      3470 ns/op	    3655 B/op	      48 allocs/op
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/quota	2.201s
+?   	github.com/tawroot/antigravity-cleaner/pkg/ui	[no test files]
+PASS
+ok  	github.com/tawroot/antigravity-cleaner/pkg/updater	0.003s

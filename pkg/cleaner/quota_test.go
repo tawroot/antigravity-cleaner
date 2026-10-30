@@ -41,3 +41,28 @@ func TestSurgicalResetDryRun(t *testing.T) {
 		t.Logf("  - candidate: %s", r)
 	}
 }
+
+func BenchmarkSurgicalTargetsIntegrity(b *testing.B) {
+	forbidden := []string{"globalstorage", "workspacestorage", "history", "conversations"}
+	targets := []string{
+		"Cookies",
+		"Cookies-journal",
+		"DIPS",
+		"TransportSecurity",
+		"blob_storage",
+		"Session Storage",
+	}
+
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		for _, target := range targets {
+			lower := strings.ToLower(target)
+			for _, f := range forbidden {
+				if strings.Contains(lower, f) {
+					b.Fatalf("Target %s violates chat preservation rule", target)
+				}
+			}
+		}
+	}
+}

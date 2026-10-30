@@ -24,6 +24,11 @@ var (
 	asarWriteFnPatched = []byte("    writeFn({ message }) {\n" +
 		"      try { (consoleMethods[message.level] || consoleMethods.info)(...message.data); } catch (_) {}\n" +
 		"                      " + "},")
+
+	// asarUpdaterTarget: electron-updater initialization in dist/updater.js (127 bytes)
+	asarUpdaterTarget = []byte("function initAutoUpdater(isHeadless, settingsService) {\n    // In dev mode (npm start), electron-updater skips checks because the app")
+	// asarUpdaterPatched: Anti-Update shield neutralizing silent background updates with exact same length (127 bytes)
+	asarUpdaterPatched = []byte("function initAutoUpdater(isHeadless, settingsService) {\n    return; // In dev mode (npm start), electron-updater skips checks because")
 )
 
 // FindAntigravityAsar searches for app.asar in standard Antigravity installation paths
@@ -100,11 +105,75 @@ func PatchAsarZeroLog(asarPath string) (string, error) {
 		copy(patched[idxWrite:idxWrite+len(asarWriteFnPatched)], asarWriteFnPatched)
 	}
 
+	// 3. Patch initAutoUpdater if present (Anti-Update Shield)
+	idxUpdater := bytes.Index(patched, asarUpdaterTarget)
+	if idxUpdater != -1 && len(asarUpdaterTarget) == len(asarUpdaterPatched) {
+		copy(patched[idxUpdater:idxUpdater+len(asarUpdaterPatched)], asarUpdaterPatched)
+	}
+
 	if err := AtomicWrite(asarPath, patched); err != nil {
 		return "", fmt.Errorf("failed to write patched app.asar: %w", err)
 	}
 
+	// Also neutralize app-update.yml alongside app.asar if present
+	neutralizeAppUpdateYml(asarPath)
+
 	ClearIdeCache()
 
-	return fmt.Sprintf("Successfully applied Zero-Log Shield to %s (silenced broken-pipe write EIO)", filepath.Base(asarPath)), nil
+	return fmt.Sprintf("Successfully applied Zero-Log Shield & Anti-Update Shield to %s", filepath.Base(asarPath)), nil
+}
+
+// NeutralizeAppUpdateYml neutralizes app-update.yml to prevent Google background updates
+func neutralizeAppUpdateYml(asarPath string) {
+	ymlPath := filepath.Join(filepath.Dir(asarPath), "app-update.yml")
+	if fi, err := os.Stat(ymlPath); err == nil && !fi.IsDir() {
+		data, err := os.ReadFile(ymlPath)
+		if err == nil && !bytes.Contains(data, []byte("127.0.0.1:0")) {
+			_, _ = BackupFile(ymlPath)
+			neutralized := "provider: generic\nurl: http://127.0.0.1:0/\nupdaterCacheDirName: antigravity-updater\n"
+			_ = AtomicWrite(ymlPath, []byte(neutralized))
+		}
+	}
+}
+
+// PatchAsarAntiUpdate explicitly freezes background updates by patching app.asar and app-update.yml
+func PatchAsarAntiUpdate(asarPath string) (string, error) {
+	if asarPath == "" {
+		asarPath = FindAntigravityAsar()
+		if asarPath == "" {
+			return "", fmt.Errorf("Antigravity app.asar not found")
+		}
+	}
+
+	data, err := os.ReadFile(asarPath)
+	if err != nil {
+		return "", fmt.Errorf("failed to read %s: %w", asarPath, err)
+	}
+
+	idxUpdater := bytes.Index(data, asarUpdaterTarget)
+	if idxUpdater == -1 {
+		if bytes.Contains(data, asarUpdaterPatched) {
+			neutralizeAppUpdateYml(asarPath)
+			return fmt.Sprintf("Already patched: %s (Anti-Update Shield active)", filepath.Base(asarPath)), nil
+		}
+		neutralizeAppUpdateYml(asarPath)
+		return fmt.Sprintf("Note: initAutoUpdater target signature not found in %s, neutralized app-update.yml", filepath.Base(asarPath)), nil
+	}
+
+	if _, err := BackupFile(asarPath); err != nil {
+		return "", fmt.Errorf("backup failed: %w", err)
+	}
+
+	patched := make([]byte, len(data))
+	copy(patched, data)
+	copy(patched[idxUpdater:idxUpdater+len(asarUpdaterPatched)], asarUpdaterPatched)
+
+	if err := AtomicWrite(asarPath, patched); err != nil {
+		return "", fmt.Errorf("failed to write patched app.asar: %w", err)
+	}
+
+	neutralizeAppUpdateYml(asarPath)
+	ClearIdeCache()
+
+	return fmt.Sprintf("Successfully applied Anti-Update Shield to %s (background updates permanently frozen)", filepath.Base(asarPath)), nil
 }

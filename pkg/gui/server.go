@@ -14,11 +14,18 @@ import (
 	"strings"
 	"time"
 
+	"github.com/tawroot/antigravity-cleaner/pkg/account"
 	"github.com/tawroot/antigravity-cleaner/pkg/cleaner"
 	"github.com/tawroot/antigravity-cleaner/pkg/doctor"
 	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
 	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
 )
+
+func init() {
+	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {
+		_ = account.SyncTokenBridge(logger)
+	})
+}
 
 //go:embed assets/*
 var assetsFS embed.FS
