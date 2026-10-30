@@ -15,7 +15,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ آنتی‌گراویتی کلینر، فیکسر و پچر پرو (v5.4.0)</h1>
+<h1 align="center">⚡ آنتی‌گراویتی کلینر، فیکسر و پچر پرو (v5.4.3)</h1>
 
 <p align="center">
   <strong>موتور خودترمیم و ضدتحریم هوش مصنوعی، رفع ارور ۴۰۳ و سهمیه ۴۲۹، تله‌متری صفر و تزریق پروکسی بدون سربار TUN</strong>
@@ -23,7 +23,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.4.0-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -68,9 +68,9 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ---
 
-## 💻 رابط‌های بصری: محیط گرافیکی رترو Win95 و داشبورد ترمینال
+## 💻 رابط‌های بصری: محیط گرافیکی دسکتاپ و داشبورد ترمینال
 
-### 💾 پنجره نوستالژیک و پرتابل ویندوز ۹۵ (Retro KeyGen GUI)
+### 💾 پنجره گرافیکی پرتابل (Desktop GUI)
 اجرای مستقل با دابل‌کلیک یا دستور `ag-cleaner gui` با فرایند سه‌مرحله‌ای شفاف (`۱. پچ خودکار ➔ ۲. اجرای ادیتور ➔ ۳. ساخت میانبر`) همراه با کلید قطع دائمی تله‌متری:
 
 <div align="center">
@@ -181,7 +181,7 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 | دستور (Command) | دسته‌بندی | شرح عملکرد و کاربرد |
 | :--- | :---: | :--- |
 | `ag-cleaner` | **تعاملی** | اجرای داشبورد تعاملی خط فرمان (TUI) با کلیدهای جهت‌نما. |
-| `ag-cleaner gui` | **رابط کاربری** | اجرای پنجره گرافیکی پرتابل و نوستالژیک رترو ویندوز ۹۵. |
+| `ag-cleaner gui` | **رابط کاربری** | اجرای پنجره گرافیکی پرتابل و مستقل دسکتاپ (GUI). |
 | `ag-cleaner doctor` | **عیب‌یابی** | تست کامل سلامت سیستم، نشت DNS و اسکن خودکار پورت‌های فعال پروکسی. |
 | `ag-cleaner doctor --verbose` | **عیب‌یابی عمیق** | تست تفصیلی با نمایش لاگ‌های زنده شبکه و مسیر سوکت‌ها. |
 | `ag-cleaner patch all` | **پچ و آزادسازی** | پچ کد ماشین هسته (`hasValidAuth = 1`)، خط فرمان CLI، فرانت‌اند و سپر ASAR. |

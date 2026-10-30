@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner, Fixer & Patcher Pro (v5.4.0)</h1>
+<h1 align="center">⚡ Antigravity Cleaner, Fixer & Patcher Pro (v5.4.3)</h1>
 
 <p align="center">
   <strong>Autonomous Sanction Bypass, Zero-Telemetry Engine & Direct No-TUN Proxy Injector for Google Antigravity</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.4.0-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)

@@ -5,6 +5,70 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.3] - 2026-10-31
+
+### 🚀 The Freedom & Enterprise Release: Multi-Account Manager, Live Quota Monitor, Universal SSH Spoofing, Token Bridge & 1-Click Surgical Auto-Fix
+
+This landmark release introduces complete process-level remote environment spoofing, seamless multi-account profile management, real-time quota telemetry, bi-directional token bridging, zero-downtime atomic patching, and surgical 429 quota cache wiping integrated directly into the 1-Click Auto-Fix workflow.
+
+#### 👤 Multi-Account Profile Switcher (`pkg/account`)
+- **Seamless Account Switching:** Safely save, list, switch, and delete multiple Google accounts across Antigravity IDE (`state.vscdb`) and Standalone Hub (`~/.config/Antigravity`).
+- **OS Keyring Security:** Connects natively to the operating system's Secret Service / Keyring (`zalando/go-keyring`) to securely persist `refresh_token` and `id_token` credentials without plain-text storage or accidental session collisions.
+- **Ergonomic Quick Navigation:** Numbered interactive profile selector (`[a] Multi-Account Manager`) with instant soft-reloading.
+
+#### 📊 Real-Time Live Quota Monitor (`pkg/quota`)
+- **Accurate Quota Telemetry:** Direct Connect RPC query to the running `language_server` process with automated CSRF token and port extraction.
+- **Visual Tier & Credit Breakdown:** Matches official UI formatting with precise tracking of Gemini 2.5 Pro (5-hour and weekly buckets), Claude 3.5 Sonnet / GPT-4o allowances, and image generation credits with live reset countdown timers.
+- **Offline Fallback:** Automated fallback to CloudCode API endpoints when the IDE is closed.
+
+#### ⚡ 1-Click Smart Auto-Fix Integration (Step 4 Surgical Reset)
+- **Direct Quota & Cookie Reset in Auto-Fix:** Option 1 (`runQuickAutoFix`) now automatically executes surgical cleanup of corrupted HTTP 429 quota buckets, stale DIPS states, TransportSecurity cookies, and orphaned WebSockets alongside binary bytecode patching.
+- **Strict Data Preservation:** 100% of user chats, conversations, workspaces, custom prompt configurations, and keybindings remain completely untouched.
+
+#### 🛰️ Universal SSH Environment Spoofing & Fraud Detection Bypass
+- **Kernel & Process Sensor Reconstruction:** Exploits the core binary's internal remote detection routines at `0x6935840` (`isSSH()`) and `0x6920b72`, injecting `SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22` and `SSH_CLIENT=127.0.0.1 1234 22`.
+- **File-Based Token Storage Activation:** Forces the runtime behavior `Using file-based token storage because SSH session detected` (`~/.gemini/jetski-standalone-oauth-token`), completely eliminating GNOME Keyring, D-Bus Secret Service deadlocks, and `Failed to fetch` account setup crashes.
+- **Universal Surface Coverage:** SSH spoofing environment is automatically applied across the CLI launcher (`pkg/proxy/launcher.go`), smart desktop launchers (`antigravity-smart-launcher.sh`), and the binary wrapper (`pkg/patcher/wrapper.go`).
+
+#### 🔑 Bi-Directional OAuth Token Bridge (`pkg/account/token_bridge.go`)
+- **Keyring-to-File Synchronization:** Automatically extracts active OAuth tokens from the OS Secret Service / Keyring and exports them to Antigravity's standalone token file with strict `0600` permissions.
+- **Zero-Logout Live Restarts:** Functions as an automated Post-Install Hook during binary wrapping and proxy launching, ensuring existing user logins never drop when applying patches or upgrading.
+
+#### 🛡️ Non-Destructive Live Core Restart (Zero Session Disruption)
+- **Harnessing `monitorLsCrashInternal`:** Utilizes the editor's built-in supervisor recovery loop in `app.asar` to perform graceful single-PID restarts of `language_server` within 2 seconds.
+- **No More Application Restarts:** Eliminates crude `pkill antigravity` actions; active editor windows, open file tabs, and running subagent conversations remain fully active and connected during patching.
+
+#### ⚙️ 114 Internal Core Flags Reverse-Engineered & Enterprise Shield
+- **Complete Flag Discovery (`docs/INTERNAL_FLAGS_AND_REVERSE_ENGINEERING.md`):** Extracted and documented all 114 internal flags from registration function `0x7608aa0`.
+- **Golden Anti-Sanction & Stability Flags (`DefaultEnterpriseFlagsOptions`):**
+  - `--disable_unleash=true`: Shuts down Google Unleash remote geographic gating and dynamic region killswitches.
+  - `--use_snapshot_mendelfp=true`: Enforces the embedded feature snapshot, halting dynamic server experiment downgrades.
+  - `--disable_log_to_disk=true`: Stops massive multi-gigabyte log accumulation, eliminating `write EIO` pipe crashes.
+  - `--suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true`: Completely silences noisy C++ internal logger output from stderr.
+  - `--is_google_internal=true`, `--jetbox_release_channel=insiders`, `--stubby_auth_mode=business_licensed_enterprise`: Activates internal employee metadata and unlocks all experimental features.
+  - `--allow_all_sidecars=true`, `--bypass_sidecar_user_config=true`: Forces all sidecar processes, companion tools, and MCP servers to stay active.
+
+#### 🍏 macOS Apple Silicon AMFI Resigning & Quarantine Stripping
+- **Mach-O Binary Auto-Detection (`pkg/patcher/atomic.go`):** Automatically recognizes Mach-O headers on macOS and applies `xattr -dr com.apple.quarantine`.
+- **Ad-hoc Codesigning:** Executes `codesign --force --sign -` immediately after bytecode patching, permanently fixing AMFI code-signature violations (SIGTERM/SIGKILL crashes) on M1/M2/M3/M4 chips (Closes #37).
+
+#### 🔍 Offline Application Discovery (`pkg/patcher/discovery.go`)
+- **Proactive Path Scanning:** Dynamically discovers Antigravity installations even when closed by scanning system `PATH`, `~/Downloads`, `~/Desktop`, and `.desktop` entry specs.
+
+#### 🎨 Cyberpunk Terminal User Interface (TUI)
+- **Live Status Header:** Real-time visual status chips for Core, Wrapper, CLI, and ASAR patch state.
+- **Clean Structure:** Ergonomic 1-key quick actions with an isolated `[m] Advanced Tools` sub-menu.
+
+### 🐛 Resolved Issues & Bug Fixes
+- **macOS Apple Silicon Startup Crash / AMFI Signature Invalidation (Closes #37):** Automatically strips quarantine extended attributes (`com.apple.quarantine`) and applies ad-hoc codesigning (`codesign --force --sign -`) to patched Mach-O binaries, resolving `Language server exited unexpectedly (code=null, signal=SIGTERM / SIGKILL)`.
+- **Google Cloud Fraud Detection & Account Setup Failures (Closes #32, #34):** Injected universal SSH remote spoofing (`SSH_CONNECTION`, `SSH_CLIENT`), forcing file-based token storage and resolving `Failed to fetch` and GNOME Keyring / D-Bus secret service deadlocks.
+- **Accidental Session Drop / Logout During Core Restart (Fixes #35):** Implemented bi-directional OAuth token bridging between system Keyring and Standalone storage (`jetski-standalone-oauth-token`) to ensure 100% session preservation.
+- **IDE Window & Subagent Disconnects on Patching (Fixes #28):** Replaced destructive `pkill antigravity` with non-destructive single-PID soft restart leveraging Electron supervisor loop (`monitorLsCrashInternal`).
+- **HTTP 429 Quota Exhaustion & Poisoned Cookies (Fixes #29, #33):** Integrated surgical 16-target quota and network persistent state reset directly into the 1-Click Auto-Fix flow.
+- **Offline Target Discovery When Closed (Fixes #31):** Added proactive scanning across user Downloads, Desktop, and system `.desktop` files for systems where Antigravity is not running in background.
+
+---
+
 ## [5.3.2] - 2026-10-19
 
 ### 🌐 Universal Multi-Architecture Discovery & Official Google RPM/DEB Hierarchy Support

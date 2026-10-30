@@ -37,3 +37,8 @@ website-legacy-backup/
 landing-v2/
 design-system-spec/
 
+
+HANDOFF.md
+HANDOFF.fa.md
+FINANCIAL_REPORT.md
+*.secret.*

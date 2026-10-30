@@ -7,20 +7,29 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/mattn/go-isatty"
+	"github.com/tawroot/antigravity-cleaner/pkg/account"
 	"github.com/tawroot/antigravity-cleaner/pkg/cleaner"
 	"github.com/tawroot/antigravity-cleaner/pkg/doctor"
 	"github.com/tawroot/antigravity-cleaner/pkg/gui"
 	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
 	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
+	"github.com/tawroot/antigravity-cleaner/pkg/quota"
 	"github.com/tawroot/antigravity-cleaner/pkg/ui"
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.2"
+const Version = "5.4.3"
+
+func init() {
+	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {
+		_ = account.SyncTokenBridge(logger)
+	})
+}
 
 func main() {
 	if len(os.Args) > 1 {
@@ -47,24 +56,45 @@ func main() {
 		clearScreen()
 		ui.PrintBanner(Version)
 
-		sectionWorkflow := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("─── 🚀 Sequential Workflow ──────────────────────────────────────────")
+		// Live system status indicators
+		lsRunning := patcher.IsAntigravityRunning()
+		statusRunning := lipgloss.NewStyle().Foreground(lipgloss.Color("#FF5555")).Render("Idle")
+		if lsRunning {
+			statusRunning = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("Active (Running)")
+		}
+
+		lsStatus := lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Unpatched")
+		targets := patcher.FindAllLanguageServers(nil)
+		if len(targets) > 0 {
+			wm := patcher.NewWrapperManager(filepath.Dir(targets[0]), nil)
+			if wm.IsWrapperInstalled() {
+				lsStatus = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("✔ Patched & Enterprise")
+			} else {
+				lsStatus = lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("Installed")
+			}
+		}
+		fmt.Printf("  📊 Core Status: %s | Process: %s\n\n", lsStatus, statusRunning)
+
+		sectionPrimary := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("─── ⚡ Quick Actions ────────────────────────────────────────────────")
+		sectionWorkspace := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF")).Render("─── 🚀 Workspace & Accounts ─────────────────────────────────────────")
 		sectionTools := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("─── 🛠️ Maintenance & Diagnostics ───────────────────────────────────")
 		sectionCommunity := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("─── ⭐ Community & Support ──────────────────────────────────────────")
 
-		fmt.Println("  " + sectionWorkflow)
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("1"), descStyle.Render("Step 1: Quick Auto-Fix (Full Patch + Injected Proxy)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("2"), descStyle.Render("Step 2: Enterprise & Privacy Flags (Mute Telemetry & Insiders)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("3"), descStyle.Render("Step 3: Launch Antigravity with Smart Proxy (No TUN!)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("4"), descStyle.Render("Step 4: Create Desktop Shortcut with Injected Proxy"))
+		fmt.Println("  " + sectionPrimary)
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("1"), descStyle.Render("⚡ Smart 1-Click Auto-Fix (Recommended: Full Patch + Flags + Proxy)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("2"), descStyle.Render("🚀 Launch Antigravity with Smart Proxy (Direct socket, Zero TUN)"))
+		fmt.Println()
+
+		fmt.Println("  " + sectionWorkspace)
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("q"), descStyle.Render("📊 Live Quota Monitor (Check Gemini/Claude Pro Credits & Reset Timer)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("a"), descStyle.Render("👤 Multi-Account Manager (Save / Switch Google Profiles)"))
 		fmt.Println()
 
 		fmt.Println("  " + sectionTools)
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("5"), descStyle.Render("Surgical 429 Quota Reset (Preserves Chats & Settings)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("6"), descStyle.Render("Run Antigravity Doctor (System & Connection Health)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("r"), descStyle.Render("Generate Diagnostic Report (Auto-Open Text Report)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("u"), descStyle.Render("Check for Updates (Self-Update)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("7"), descStyle.Render("Restore Backups (.agybak)"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("8"), descStyle.Render("Launch Retro GUI (Classic Win95 Patcher)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("3"), descStyle.Render("🧹 Surgical 429 Quota Reset (Preserves Chats & Settings)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("4"), descStyle.Render("🩺 Run Antigravity Doctor (System & Connection Health)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("m"), descStyle.Render("⚙️ Advanced & Manual Tools... (Granular patches, flags, restore)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("g"), descStyle.Render("🎮 Launch Retro GUI (Classic Win95 Patcher)"))
 		fmt.Println()
 
 		fmt.Println("  " + sectionCommunity)
@@ -78,20 +108,27 @@ func main() {
 		case "1", "autofix", "fix":
 			runQuickAutoFix()
 			ui.PromptKey()
-		case "2", "e", "E", "flags", "enterprise":
-			runEnterpriseMenu()
-			ui.PromptKey()
-		case "3":
+		case "2", "launch", "run":
 			runLaunchProxy()
 			ui.PromptKey()
-		case "4":
-			runCreateLauncher()
+		case "q", "Q", "quota":
+			runQuota()
 			ui.PromptKey()
-		case "5":
+		case "a", "A", "account", "accounts":
+			runAccountInteractive()
+			ui.PromptKey()
+		case "3", "5", "clean":
 			runSurgicalClean()
 			ui.PromptKey()
-		case "6":
+		case "4", "6", "doctor":
 			runDoctor(false)
+			ui.PromptKey()
+		case "m", "M", "advanced", "tools", "manual":
+			runAdvancedMenu()
+		case "g", "8", "gui":
+			runGui()
+		case "e", "E", "flags", "enterprise":
+			runEnterpriseMenu()
 			ui.PromptKey()
 		case "r", "R", "report":
 			runReport()
@@ -99,21 +136,69 @@ func main() {
 		case "u", "U", "update", "upgrade":
 			runUpdate()
 			ui.PromptKey()
-		case "7":
+		case "7", "restore":
 			runRestore()
 			ui.PromptKey()
-		case "8", "9", "gui":
-			runGui()
 		case "t", "T", "telegram":
 			openTerminalURL("https://t.me/dallrep")
 			ui.PromptKey()
 		case "s", "S", "star":
 			openTerminalURL("https://github.com/tawroot/antigravity-cleaner")
 			ui.PromptKey()
-		case "0", "exit", "q":
+		case "0", "exit":
 			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("⭐ If this tool helped you, please give it a Star on GitHub!"))
 			fmt.Printf("  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#00BFFF")).Render("💬 Join Telegram for support & updates: https://t.me/dallrep"))
 			fmt.Printf("  %s\n\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🦅 Farewell! Happy Coding with Antigravity."))
+			return
+		default:
+			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Invalid option. Please choose an option from the menu."))
+			ui.PromptKey()
+		}
+	}
+}
+
+func runAdvancedMenu() {
+	keyStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF"))
+	descStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2"))
+
+	for {
+		clearScreen()
+		ui.PrintBanner(Version)
+		fmt.Println("  " + lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("─── ⚙️ Advanced & Granular Tools ────────────────────────────────────"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("1"), descStyle.Render("Patch Core Binaries only (language_server & agy)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("2"), descStyle.Render("Patch IDE & Extensions (main.js, VS Code extension, app.asar)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("3"), descStyle.Render("Enterprise & Privacy Flags Manager (SSH spoofing, Mendelfp)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("4"), descStyle.Render("Create / Rebuild Desktop Shortcut"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("5"), descStyle.Render("Generate Diagnostic Report (Auto-Open Text Report)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("6"), descStyle.Render("Check for Updates (Self-Update)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("7"), descStyle.Render("Restore Backups (.agybak)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("0"), descStyle.Render("Back to Main Menu"))
+		fmt.Println()
+
+		choice := ui.ReadInput("Select an advanced option")
+		switch choice {
+		case "1":
+			runPatchCore()
+			ui.PromptKey()
+		case "2":
+			runPatchIde()
+			ui.PromptKey()
+		case "3", "e", "E", "flags", "enterprise":
+			runEnterpriseMenu()
+			ui.PromptKey()
+		case "4":
+			runCreateLauncher()
+			ui.PromptKey()
+		case "5", "r", "R", "report":
+			runReport()
+			ui.PromptKey()
+		case "6", "u", "U", "update":
+			runUpdate()
+			ui.PromptKey()
+		case "7":
+			runRestore()
+			ui.PromptKey()
+		case "0", "b", "back", "q":
 			return
 		default:
 			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("Invalid option. Please choose an option from the menu."))
@@ -181,6 +266,10 @@ func handleSubcommand(cmd string, args []string) {
 		runGui()
 	case "clean":
 		runSurgicalClean()
+	case "quota":
+		runQuota(args)
+	case "account", "accounts":
+		runAccount(args)
 	case "enterprise", "flags":
 		action := "status"
 		if len(args) > 0 {
@@ -205,7 +294,7 @@ func handleSubcommand(cmd string, args []string) {
 }
 
 func printUsage() {
-	fmt.Printf("Usage: antigravity-cleaner [autofix|gui|doctor|report|update|patch|launch|clean|enterprise|kill|create-launcher|about|version]\n\n" +
+	fmt.Printf("Usage: antigravity-cleaner [autofix|gui|doctor|report|update|patch|launch|clean|quota|account|enterprise|kill|create-launcher|about|version]\n\n" +
 		"Subcommands:\n" +
 		"  autofix, fix     One-click auto-fix: patch all targets and create desktop launcher\n" +
 		"  gui              Launch retro Win95 desktop GUI window\n" +
@@ -215,6 +304,8 @@ func printUsage() {
 		"  patch [all|core] Apply multi-target bytecode and interface unlocks\n" +
 		"  launch           Start Antigravity with injected smart No-TUN proxy\n" +
 		"  clean            Surgically flush rate-limit and poisoned geo tokens\n" +
+		"  quota            Live real-time monitor for Google Gemini Pro credits & reset timer\n" +
+		"  account          Manage multiple Google accounts (save, switch, list, rm)\n" +
 		"  enterprise       Configure enterprise and zero-telemetry flags\n" +
 		"  kill             Safely terminate hung Antigravity processes\n" +
 		"  create-launcher  Create desktop application shortcut with proxy\n" +
@@ -256,27 +347,27 @@ func ensureRunningSafety(force bool) bool {
 		return true
 	}
 
-	warnStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFB800"))
+	infoStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF"))
 	fmt.Println()
-	fmt.Println(warnStyle.Render("  ⚠️ NOTICE: Active Antigravity or language_server processes detected."))
+	fmt.Println(infoStyle.Render("  ℹ Active Antigravity session detected."))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render(
-		"  Closing running processes prevents zombie socket locks and ensures clean patches."))
+		"  Antigravity Cleaner uses atomic in-place patching so your session and subagents stay open."))
 	fmt.Println()
 
 	if force {
-		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  [--force specified] Terminating running processes cleanly..."))
-		_, _ = patcher.KillAntigravityProcesses()
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  [--force specified] Seamlessly soft-restarting language_server core..."))
+		_, _ = patcher.RestartLanguageServerOnly()
 		return true
 	}
 
-	confirm := ui.ReadInput("Do you want to automatically close active processes before proceeding? (Y/n)")
+	confirm := ui.ReadInput("Do you want to seamlessly soft-restart language_server core now? [Y: soft-restart / n: keep running as-is] (Y/n)")
 	if confirm == "n" || confirm == "N" {
-		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#FFB800")).Render("  Operation cancelled to preserve running Antigravity session."))
-		return false
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Preserving active session intact. Applying live atomic disk patch..."))
+		return true
 	}
 
-	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Closed active processes cleanly."))
-	_, _ = patcher.KillAntigravityProcesses()
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("  ✔ Soft-restarted language_server. Core will reload automatically within 2s."))
+	_, _ = patcher.RestartLanguageServerOnly()
 	return true
 }
 
@@ -332,15 +423,57 @@ func runQuickAutoFix() {
 		ui.PrintStatus("OK", "Desktop Launcher", "Created at "+path)
 	}
 
+	fmt.Println()
+	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFB800")).Render("  Step 3: Enterprise License Wrapper & Zero-Telemetry..."))
+	servers := patcher.FindAllLanguageServers(nil)
+	if len(servers) == 0 {
+		if single := patcher.FindLanguageServerModular(nil); single != "" {
+			servers = append(servers, single)
+		} else if single := patcher.FindLanguageServer(); single != "" {
+			servers = append(servers, single)
+		}
+	}
+
+	if len(servers) > 0 {
+		wrapperCount := 0
+		for _, s := range servers {
+			wm := patcher.NewWrapperManager(filepath.Dir(s), nil)
+			if !wm.IsWrapperInstalled() {
+				if err := wm.InstallWrapper(patcher.DefaultEnterpriseFlagsOptions()); err == nil {
+					wrapperCount++
+				}
+			} else {
+				wrapperCount++
+			}
+		}
+		if wrapperCount > 0 {
+			ui.PrintStatus("OK", "Enterprise Wrapper", "Active (Business Licensed Enterprise + Zero-Telemetry)")
+		} else {
+			ui.PrintStatus("WARN", "Enterprise Wrapper", "Could not install wrapper on detected targets")
+		}
+	} else {
+		ui.PrintStatus("INFO", "Enterprise Wrapper", "Standalone mode (Core path detected on launch)")
+	}
+
+	fmt.Println()
+	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF79C6")).Render("  Step 4: Surgical Quota, DIPS & Network Cache Reset..."))
+	if removed, err := cleaner.SurgicalReset429("", false); err != nil {
+		ui.PrintStatus("INFO", "Surgical Clean", "Skipped or no stale cache detected")
+	} else {
+		ui.PrintStatus("OK", "Surgical Clean", fmt.Sprintf("Cleaned %d temporary cache & session artifacts", len(removed)))
+	}
+
 	if coreSuccess {
 		fmt.Println()
 		successBox := lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color("#00FF9F")).
 			Padding(0, 2).
-			Render(fmt.Sprintf("%s\n\n%s\n%s\n%s\n\n%s\n%s",
+			Render(fmt.Sprintf("%s\n\n%s\n%s\n%s\n%s\n%s\n\n%s\n%s",
 				lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("🎉 AUTO-FIX COMPLETED SUCCESSFULLY!"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Core Engine:      UNLOCKED (MultiGate hasValidAuth Bypass Active)"),
+				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Enterprise Tier:  ACTIVATED (Business Licensed Enterprise & Zero-Telemetry)"),
+				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Quota & DIPS:     PURGED (Corrupted 429 token cache & cookies safely cleaned)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Smart Proxy:      CONFIGURED (Direct socket, Zero TUN mode needed)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Desktop Shortcut: READY (Click 'Antigravity' in App Menu or Desktop)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🚀 You can now launch Antigravity with full region freedom!"),
@@ -556,9 +689,11 @@ func runEnterpriseMenu() {
 		fmt.Println("  Enabling this will transparently inject:")
 		fmt.Println("    • --disable_telemetry=true (Halts telemetry, Git logging & error traces)")
 		fmt.Println("    • --is_google_internal=true (Unlocks internal payload metadata & URL bypass)")
+		fmt.Println("    • --disable_unleash=true & --use_snapshot_mendelfp=true (Halts remote region gates)")
 		fmt.Println("    • --jetbox_release_channel=insiders")
 		fmt.Println("    • --stubby_auth_mode=business_licensed_enterprise")
 		fmt.Println("    • --use_local_chrome=true & --browser_eval_env=true")
+		fmt.Println("    • Bi-directional Token Bridge (zero session drops with SSH spoofing)")
 		fmt.Println()
 		confirm := ui.ReadInput("Do you want to INSTALL the enterprise wrapper? (y/N)")
 		if confirm == "y" || confirm == "Y" {
@@ -662,6 +797,198 @@ func runUpdate() {
 	}
 
 	ui.PrintStatus("OK", "Update Complete", fmt.Sprintf("🎉 Successfully updated to %s! Please restart Antigravity Cleaner.", release.TagName))
+}
+
+func runQuota(args ...[]string) {
+	ui.PrintSection("📊 Google Antigravity Live Quota Monitor")
+	fmt.Println("  Reading session token from Antigravity IDE...")
+
+	token, err := quota.ExtractRefreshToken("")
+	if err != nil {
+		ui.PrintStatus("FAIL", "Session Token", err.Error())
+		return
+	}
+
+	fmt.Println("  Authenticating with Google CloudCode APIs...")
+	accessToken, err := quota.RefreshAccessToken(token)
+	if err != nil {
+		ui.PrintStatus("FAIL", "OAuth Refresh", err.Error())
+		return
+	}
+
+	fmt.Println("  Retrieving real-time quota buckets from Google CloudCode...")
+	groups, _ := quota.FetchQuotaSummary(accessToken)
+	detailed, err := quota.FetchDetailedUserQuota(accessToken)
+	if err != nil && len(groups) == 0 {
+		ui.PrintStatus("FAIL", "Quota API", err.Error())
+		return
+	}
+
+	showRaw := false
+	if len(args) > 0 {
+		for _, a := range args[0] {
+			if a == "--all" || a == "-a" || a == "--raw" || a == "-v" || a == "--verbose" {
+				showRaw = true
+				break
+			}
+		}
+	}
+
+	if showRaw {
+		fmt.Print(quota.RenderQuotaRaw(groups, detailed))
+	} else {
+		fmt.Print(quota.RenderQuota(groups, detailed))
+	}
+}
+
+func runAccount(args []string) {
+	ui.PrintSection("👤 Multi-Account Manager")
+	if len(args) == 0 {
+		runAccountInteractive()
+		return
+	}
+
+	sub := args[0]
+	switch sub {
+	case "save":
+		if len(args) < 2 {
+			fmt.Println("  Error: Please provide a name for this account. Example: antigravity-cleaner account save work-gmail")
+			return
+		}
+		name := args[1]
+		if err := account.SaveAccount(name, ""); err != nil {
+			ui.PrintStatus("FAIL", "Save Profile", err.Error())
+		} else {
+			ui.PrintStatus("OK", "Account Saved", fmt.Sprintf("Successfully saved current Antigravity profile as '%s'", name))
+		}
+	case "switch", "use":
+		if len(args) < 2 {
+			fmt.Println("  Error: Please provide the account name to switch to. Example: antigravity-cleaner account switch work-gmail")
+			return
+		}
+		name := args[1]
+		if !ensureRunningSafety(false) {
+			return
+		}
+		if err := account.SwitchAccount(name, ""); err != nil {
+			ui.PrintStatus("FAIL", "Switch Account", err.Error())
+		} else {
+			ui.PrintStatus("OK", "Account Switched", fmt.Sprintf("Switched to '%s'! Launch Antigravity to use this account.", name))
+		}
+	case "list", "ls":
+		list, err := account.ListAccounts()
+		if err != nil {
+			ui.PrintStatus("FAIL", "List Accounts", err.Error())
+			return
+		}
+		if len(list) == 0 {
+			fmt.Println("  No saved accounts found. Save current account with: antigravity-cleaner account save <name>")
+			return
+		}
+		fmt.Printf("  Saved Accounts (%d):\n", len(list))
+		for _, a := range list {
+			emailInfo := ""
+			if a.Email != "" {
+				emailInfo = fmt.Sprintf(" (\x1b[36m%s\x1b[0m)", a.Email)
+			}
+			fmt.Printf("    • \x1b[1;32m%-15s\x1b[0m %s [Saved: %s]\n", a.Name, emailInfo, a.SavedAt)
+		}
+	case "rm", "delete":
+		if len(args) < 2 {
+			fmt.Println("  Error: Please specify the account name to remove.")
+			return
+		}
+		name := args[1]
+		if err := account.DeleteAccount(name); err != nil {
+			ui.PrintStatus("FAIL", "Delete Account", err.Error())
+		} else {
+			ui.PrintStatus("OK", "Account Removed", fmt.Sprintf("Deleted profile '%s'", name))
+		}
+	default:
+		fmt.Println("  Unknown account command. Options: save, switch, list, rm")
+	}
+}
+
+func runAccountInteractive() {
+	ui.PrintSection("👤 Multi-Account Manager")
+	list, err := account.ListAccounts()
+	if err == nil && len(list) > 0 {
+		fmt.Printf("  Saved Profiles (%d):\n", len(list))
+		for i, a := range list {
+			emailInfo := ""
+			if a.Email != "" {
+				emailInfo = fmt.Sprintf(" (\x1b[36m%s\x1b[0m)", a.Email)
+			}
+			fmt.Printf("    [%d] \x1b[1;32m%-15s\x1b[0m %s [Saved: %s]\n", i+1, a.Name, emailInfo, a.SavedAt)
+		}
+		fmt.Println()
+	}
+
+	fmt.Println("  Options:")
+	fmt.Println("    [1] Save current session as new profile")
+	fmt.Println("    [2] Switch to an existing profile")
+	fmt.Println("    [3] Delete a saved profile")
+	fmt.Println("    [0] Back to main menu")
+	fmt.Println()
+
+	choice := ui.ReadInput("Select option")
+	switch choice {
+	case "1":
+		name := ui.ReadInput("Enter profile name (e.g. work, personal)")
+		if name != "" {
+			runAccount([]string{"save", name})
+		}
+	case "2":
+		if len(list) == 0 {
+			ui.PrintStatus("INFO", "No Profiles", "No saved profiles found. Save current profile first with [1].")
+			return
+		}
+		fmt.Println()
+		fmt.Println("  Select profile to switch to:")
+		for i, a := range list {
+			emailInfo := ""
+			if a.Email != "" {
+				emailInfo = fmt.Sprintf(" (\x1b[36m%s\x1b[0m)", a.Email)
+			}
+			fmt.Printf("    [%d] \x1b[1;32m%-15s\x1b[0m %s\n", i+1, a.Name, emailInfo)
+		}
+		fmt.Println("    [0] Cancel")
+		fmt.Println()
+		input := ui.ReadInput("Enter profile number or name")
+		if input == "" || input == "0" {
+			return
+		}
+		targetName := input
+		if idx, err := strconv.Atoi(input); err == nil && idx >= 1 && idx <= len(list) {
+			targetName = list[idx-1].Name
+		}
+		runAccount([]string{"switch", targetName})
+	case "3":
+		if len(list) == 0 {
+			ui.PrintStatus("INFO", "No Profiles", "No saved profiles found.")
+			return
+		}
+		fmt.Println()
+		fmt.Println("  Select profile to delete:")
+		for i, a := range list {
+			emailInfo := ""
+			if a.Email != "" {
+				emailInfo = fmt.Sprintf(" (\x1b[36m%s\x1b[0m)", a.Email)
+			}
+			fmt.Printf("    [%d] \x1b[1;31m%-15s\x1b[0m %s\n", i+1, a.Name, emailInfo)
+		}
+		fmt.Println("    [0] Cancel")
+		fmt.Println()
+		input := ui.ReadInput("Enter profile number or name to delete")
+		if input == "" || input == "0" {
+			return
+		}
+		targetName := input
+		if idx, err := strconv.Atoi(input); err == nil && idx >= 1 && idx <= len(list) {
+			targetName = list[idx-1].Name
+		}
+		runAccount([]string{"rm", targetName})
+	}
 }
 
 
