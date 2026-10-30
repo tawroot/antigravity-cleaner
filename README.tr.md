@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.3)</h1>
 
 <p align="center">
   <strong>Google Antigravity İçin Otonom Yaptırım Aşma, Sıfır Telemetri Motoru ve Doğrudan No-TUN Proxy Enjektörü</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -59,7 +59,7 @@
 - [🏛️ Sistem Mimarisi ve Trafik Akışı](#️-sistem-mimarisi-ve-trafik-akışı)
 - [🛡️ Sıfır Telemetri Motoru ve Gizlilik Güvencesi](#️-sıfır-telemetri-motoru-ve-gizlilik-güvencesi)
 - [📊 Canlı Sistem Performans Testleri ve Denetim Günlükleri](#-canlı-sistem-performans-testleri-ve-denetim-günlükleri)
-- [🥊 Kapsamlı Karşılaştırma Tablosu (v5.3.1)](#-kapsamlı-karşılaştırma-tablosu-v531)
+- [🥊 Kapsamlı Karşılaştırma Tablosu (v5.4.3)](#-kapsamlı-karşılaştırma-tablosu-v531)
 - [🚀 Hızlı CLI Kurulumu (Tek Satır)](#-hızlı-cli-kurulumu-tek-satır)
 - [💻 Görsel Arayüzler: Retro KeyGen GUI ve Terminal Paneli](#-görsel-arayüzler-retro-keygen-gui-ve-terminal-paneli)
 - [🛠️ CLI Alt Komutları ve Tanılama](#️-cli-alt-komutları)
@@ -432,9 +432,9 @@ Varsayılan olarak Google Antigravity, arka planda düzenli aralıklarla Google 
 
 ---
 
-## 🥊 Kapsamlı Karşılaştırma Tablosu (v5.3.1)
+## 🥊 Kapsamlı Karşılaştırma Tablosu (v5.4.3)
 
-| Özellik | Tek Amaçlı Yamalayıcılar (`open-antigravity-patcher`, `QNIX`) | Süreç ve DLL Enjektörleri (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| Özellik | Tek Amaçlı Yamalayıcılar (`open-antigravity-patcher`, `QNIX`) | Süreç ve DLL Enjektörleri (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.3)** |
 | :--- | :---: | :---: | :---: |
 | **Programlama Dili ve Mimari** | Python 3 (çalışma ortamı ve `pip` gerektirir) | Yalnızca Windows C++ / DLL enjeksiyonu | **Yerel Saf Go (Sıfır bağımlılık, Tek Yürütülebilir Dosya)** |
 | **Kullanıcı Arayüzü** | Basit konsol metin çıktısı | Basit siyah konsol | **Klasik Win95 Retro GUI + Modern Lipgloss TUI Paneli** |
@@ -466,11 +466,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Görsel Arayüzler: Retro KeyGen GUI ve Terminal Paneli
 
-### 💾 Retro KeyGen Masaüstü GUI (v5.3.1)
+### 💾 Retro KeyGen Masaüstü GUI (v5.4.3)
 Bağımsız olarak veya `ag-cleaner gui` komutuyla açarak 3 adımlı iş akışını (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`), gerçek zamanlı Sıfır Telemetri anahtarını ve canlı süreç izlemeyi kullanın:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---

@@ -68,11 +68,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Визуальные интерфейсы: ретро-GUI KeyGen и терминальный дашборд
 
-### 💾 Ретро-GUI в стиле Windows 95 (v5.4.0)
+### 💾 Ретро-GUI в стиле Windows 95 (v5.4.3)
 Автономный запуск двойным кликом или командой `ag-cleaner gui`: пошаговый мастер (`① Авто-фикс ➔ ② Запуск IDE ➔ ③ Создание ярлыка`), тумблер нулевой телеметрии и мониторинг процессов:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.0" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---
@@ -242,7 +242,7 @@ Antigravity Cleaner полностью управляется из команд�
 <summary><strong>⚡ Бенчмарки производительности системы</strong></summary>
 <br>
 
-| Метрика | Antigravity Cleaner Pro (v5.4.0) | Обычные скрипты / Python |
+| Метрика | Antigravity Cleaner Pro (v5.4.3) | Обычные скрипты / Python |
 | :--- | :--- | :--- |
 | **Язык и движок** | Чистый Go 1.22+ (нативный бинарник) | Python 3 / Bash / Node.js |
 | **Скорость сканирования MultiGate** | **1.94 ГБ/с (100% в оперативной памяти)** | 40–80 МБ/с (grep/sed на диске) |
@@ -308,7 +308,7 @@ Antigravity Cleaner содержит встроенный **Agent Skill** ([`ski
 
 ## 🗺️ План развития (Roadmap)
 
-Ознакомьтесь с планами на v5.4.0 и v6.0.0 в файле [**ROADMAP.md**](ROADMAP.md).
+Ознакомьтесь с планами на v5.4.3 и v6.0.0 в файле [**ROADMAP.md**](ROADMAP.md).
 
 ---
 

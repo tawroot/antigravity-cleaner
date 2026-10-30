@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.3)</h1>
 
 <p align="center">
   <strong>面向 Google Antigravity 的全自动制裁绕过、零遥测引擎与免 TUN 模式直连代理注入器</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -59,7 +59,7 @@
 - [🏛️ 系统架构设计与流量流向](#️-系统架构设计与流量流向)
 - [🛡️ 零遥测引擎与隐私保护承诺](#️-零遥测引擎与隐私保护承诺)
 - [📊 实机基准测试性能与审计日志](#-实机基准测试性能与审计日志)
-- [🥊 全方位方案对比矩阵 (v5.3.1)](#-全方位方案对比矩阵-v531)
+- [🥊 全方位方案对比矩阵 (v5.4.3)](#-全方位方案对比矩阵-v531)
 - [🚀 命令行一键极速安装](#-命令行一键极速安装)
 - [💻 可视化界面：复古 KeyGen GUI 与终端仪表盘](#-可视化界面复古-keygen-gui-与终端仪表盘)
 - [🛠️ CLI 子命令与诊断指令](#️-cli-子命令)
@@ -432,9 +432,9 @@ graph LR
 
 ---
 
-## 🥊 全方位方案对比矩阵 (v5.3.1)
+## 🥊 全方位方案对比矩阵 (v5.4.3)
 
-| 特性维度 | 单一功能补丁脚本 (`open-antigravity-patcher`, `QNIX`) | 进程与 DLL 注入器 (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| 特性维度 | 单一功能补丁脚本 (`open-antigravity-patcher`, `QNIX`) | 进程与 DLL 注入器 (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.3)** |
 | :--- | :---: | :---: | :---: |
 | **实现语言与底层架构** | Python 3（依赖环境与 `pip` 库） | 仅限 Windows 的 C++ / DLL 注入 | **原生纯 Go 编写（零外部依赖、单文件运行）** |
 | **用户界面体验** | 简陋终端文本输出 | 简陋黑框控制台 | **Win95 复古 KeyGen 桌面 GUI + 2026 现代 Lipgloss TUI 仪表盘** |
@@ -466,11 +466,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 可视化界面：复古 KeyGen GUI 与终端仪表盘
 
-### 💾 复古 KeyGen 风格桌面 GUI (v5.3.1)
+### 💾 复古 KeyGen 风格桌面 GUI (v5.4.3)
 独立运行或输入 `ag-cleaner gui` 唤出经典 3 步工作流（`① 自动修复 ➔ ② 启动 IDE ➔ ③ 生成快捷方式`），具备实时零遥测开关与动态进程状态监控：
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---

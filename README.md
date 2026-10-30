@@ -68,11 +68,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Visual Interfaces: Retro KeyGen GUI & Terminal Dashboard
 
-### 💾 Retro KeyGen Desktop GUI (v5.4.0)
+### 💾 Retro KeyGen Desktop GUI (v5.4.3)
 Launch standalone or with `ag-cleaner gui` for a 3-step workflow (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`), real-time Zero-Telemetry toggle, and live process monitoring:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.0" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---
@@ -253,7 +253,7 @@ Clicking **`[Auto-Fix]`** or running `ag-cleaner patch all`:
 <summary><strong>⚡ Click to view Live System Benchmarks & Performance Audit</strong></summary>
 <br>
 
-| Metric | Antigravity Cleaner Pro (v5.4.0) | Standard Shell Script / Legacy Tool |
+| Metric | Antigravity Cleaner Pro (v5.4.3) | Standard Shell Script / Legacy Tool |
 | :--- | :--- | :--- |
 | **Language & Engine** | Pure Go 1.22+ Native Binary | Python 3 / Bash / Node.js wrapper |
 | **MultiGate Scan Speed** | **1.94 GB/s (100% In-Memory RAM)** | 40–80 MB/s (Disk-bound grep/sed) |

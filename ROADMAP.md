@@ -38,7 +38,7 @@
 
 ---
 
-## 🟡 Horizon Milestone: v5.4.0 (Intelligent Error Normalizer & UX Dignity)
+## 🟢 Completed Milestone: v5.4.3 (Freedom & Enterprise Edition, Multi-Account & Quota Telemetry)
 
 ### 1. 🛡️ Dynamic Egress IP Detection & Transparent Error Translation
 Instead of presenting opaque, cryptic Google backend codes that frighten users (like `FAILED_PRECONDITION #3501` or `Sherlog TraceID`), v5.4.0 will actively inspect the environment and render **dynamic, humanized, actionable English diagnostic notifications**:

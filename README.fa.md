@@ -74,7 +74,7 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 اجرای مستقل با دابل‌کلیک یا دستور `ag-cleaner gui` با فرایند سه‌مرحله‌ای شفاف (`۱. پچ خودکار ➔ ۲. اجرای ادیتور ➔ ۳. ساخت میانبر`) همراه با کلید قطع دائمی تله‌متری:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.0" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---
@@ -324,7 +324,7 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 🗺️ نقشه راه آینده (Roadmap)
 
-اهداف فازهای v5.4.0 و نسخه آینده v6.0.0 در سند رسمی [**ROADMAP.fa.md**](ROADMAP.fa.md) قابل مشاهده است.
+اهداف فازهای v5.4.3 و نسخه آینده v6.0.0 در سند رسمی [**ROADMAP.fa.md**](ROADMAP.fa.md) قابل مشاهده است.
 
 ---
 

@@ -1,4 +1,4 @@
-# 🏛️ Technical Architecture (v5.3.1)
+# 🏛️ Technical Architecture (v5.4.3)
 
 ## Overview
 **Antigravity Cleaner Pro** is an enterprise-grade, high-performance systems utility engineered in **pure Go (1.22+)**. It is compiled into a single, zero-dependency native binary for Linux (amd64, arm64), macOS (Intel, Apple Silicon M1–M4), and Windows. It provides automated self-healing, regional sanction bypass, quota reset, and smart proxy injection for **Google Antigravity IDE**, the `agy` CLI, and the Google Antigravity VS Code extension.

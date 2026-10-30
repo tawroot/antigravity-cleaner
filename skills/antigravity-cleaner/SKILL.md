@@ -3,7 +3,7 @@ name: antigravity-cleaner
 description: Autonomous self-healing, sanction bypass, and diagnostics skill for Google Antigravity IDE and CLI. Use when experiencing region restrictions, HTTP 429 quota exhaustion, license #3501 errors, or when the user asks to unlock, patch, or verify their Antigravity environment.
 ---
 
-# Antigravity Cleaner Pro — Autonomous AI Agent Skill (v5.3.0)
+# Antigravity Cleaner Pro — Autonomous AI Agent Skill (v5.4.3)
 
 This skill provides an autonomous, standardized operating protocol for AI coding assistants (Google Antigravity, Claude Code, Cursor, Codex) to audit, self-heal, patch, and unblock the developer's Google Antigravity environment without breaking active chat sessions.
 
@@ -33,7 +33,7 @@ make build || go build -o bin/antigravity ./cmd/antigravity
 ```
 
 **Inform the user immediately:**
-> *"Antigravity Cleaner Toolkit v5.3.0 is initialized. I can apply all patches autonomously right here, or you can launch the classic retro desktop window using `antigravity gui` if you prefer an interactive interface."*
+> *"Antigravity Cleaner Toolkit v5.4.3 is initialized. I can apply all patches autonomously right here, or you can launch the modern Cyberpunk TUI or classic retro desktop window using `antigravity-cleaner` if you prefer an interactive interface."*
 
 ---
 

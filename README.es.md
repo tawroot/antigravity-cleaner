@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.3)</h1>
 
 <p align="center">
   <strong>Elusión autónoma de sanciones, motor de cero telemetría e inyector directo de proxy sin modo TUN para Google Antigravity</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -59,7 +59,7 @@
 - [🏛️ Arquitectura del sistema y flujo de tráfico](#️-arquitectura-del-sistema-y-flujo-de-tráfico)
 - [🛡️ Motor de cero telemetría y garantía de privacidad](#️-motor-de-cero-telemetría-y-garantía-de-privacidad)
 - [📊 Pruebas de rendimiento en vivo y registros de auditoría](#-pruebas-de-rendimiento-en-vivo-y-registros-de-auditoría)
-- [🥊 Matriz comparativa exhaustiva (v5.3.1)](#-matriz-comparativa-exhaustiva-v531)
+- [🥊 Matriz comparativa exhaustiva (v5.4.3)](#-matriz-comparativa-exhaustiva-v531)
 - [🚀 Instalación rápida por CLI (una sola línea)](#-instalación-rápida-por-cli-una-sola-línea)
 - [💻 Interfaces visuales: GUI Retro KeyGen y panel de terminal](#-interfaces-visuales-gui-retro-keygen-y-panel-de-terminal)
 - [🛠️ Subcomandos de CLI y diagnóstico](#️-subcomandos-de-cli)
@@ -398,9 +398,9 @@ Mediante nuestro **motor de cero telemetría con 8 flags empresariales**:
 
 ---
 
-## 🥊 Matriz comparativa exhaustiva (v5.3.1)
+## 🥊 Matriz comparativa exhaustiva (v5.4.3)
 
-| Característica | Parcheadores básicos unipropropósito (`open-antigravity-patcher`, `QNIX`) | Inyectores de procesos y DLL (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| Característica | Parcheadores básicos unipropropósito (`open-antigravity-patcher`, `QNIX`) | Inyectores de procesos y DLL (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.3)** |
 | :--- | :---: | :---: | :---: |
 | **Lenguaje y arquitectura** | Python 3 (requiere dependencias y `pip`) | Exclusivo de Windows C++ / inyección DLL | **Go puro nativo (cero dependencias, ejecutable único)** |
 | **Interfaz de usuario** | Salida simple de texto en consola | Consola básica | **GUI clásica Retro Win95 + Panel TUI moderno con Lipgloss** |
@@ -432,11 +432,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Interfaces visuales: GUI Retro KeyGen y panel de terminal
 
-### 💾 Interfaz de escritorio Retro KeyGen GUI (v5.3.1)
+### 💾 Interfaz de escritorio Retro KeyGen GUI (v5.4.3)
 Ejecútala de forma independiente o con `ag-cleaner gui` para un flujo de trabajo asistido en 3 pasos (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`), con conmutador de cero telemetría en tiempo real y supervisión de procesos en directo:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---

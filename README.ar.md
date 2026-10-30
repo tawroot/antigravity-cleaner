@@ -15,7 +15,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.3)</h1>
 
 <p align="center">
   <strong>محرك الإعفاء التلقائي من العقوبات، وتصفير التتبع (Zero-Telemetry)، وحاقن البروكسي المباشر بدون TUN لبيئة Google Antigravity</strong>
@@ -23,7 +23,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -61,7 +61,7 @@
 - [🏛️ معمارية النظام ومسار الترافيك](#️-معمارية-النظام-ومسار-الترافيك)
 - [🛡️ محرك انعدام التتبع (Zero-Telemetry) وضمان الخصوصية](#️-محرك-انعدام-التتبع-zero-telemetry-وضمان-الخصوصية)
 - [📊 اختبارات الأداء القياسية الحية وسجلات التدقيق](#-اختبارات-الأداء-القياسية-الحية-وسجلات-التدقيق)
-- [🥊 جدول المقارنة الشامل (v5.3.1)](#-جدول-المقارنة-الشامل-v531)
+- [🥊 جدول المقارنة الشامل (v5.4.3)](#-جدول-المقارنة-الشامل-v531)
 - [🚀 التثبيت السريع عبر سطر الأوامر (أمر واحد)](#-التثبيت-السريع-عبر-سطر-الأوامر-أمر-واحد)
 - [💻 الواجهات المرئية: واجهة KeyGen الكلاسيكية ولوحة التحكم الطرفية](#-الواجهات-المرئية-واجهة-keygen-الكلاسيكية-ولوحة-التحكم-الطرفية)
 - [🛠️ أوامر الطرفية (CLI) والتشخيصات](#️-أوامر-الطرفية-cli)
@@ -434,9 +434,9 @@ graph LR
 
 ---
 
-## 🥊 جدول المقارنة الشامل (v5.3.1)
+## 🥊 جدول المقارنة الشامل (v5.4.3)
 
-| الميزة | أدوات الترقيع أحادية الغرض (`open-antigravity-patcher`, `QNIX`) | حاقنات العمليات و DLL (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| الميزة | أدوات الترقيع أحادية الغرض (`open-antigravity-patcher`, `QNIX`) | حاقنات العمليات و DLL (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.3)** |
 | :--- | :---: | :---: | :---: |
 | **لغة البرمجة والمعمارية** | Python 3 (تتطلب بيئة تشغيل، `pip`) | خاصة بويندوز C++ / حقن DLL | **لغة Go النقية الأصلية (بدون أي متطلبات، ملف تنفيذي واحد)** |
 | **واجهة المستخدم** | سطر أوامر بسيط نصوص عادية | كونسول بسيط | **واجهة رسومية كلاسيكية Win95 Retro GUI + لوحة TUI عصرية بـ Lipgloss** |
@@ -468,11 +468,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 الواجهات المرئية: واجهة KeyGen الكلاسيكية ولوحة التحكم الطرفية
 
-### 💾 واجهة Retro KeyGen الرسومية لسطح المكتب (v5.3.1)
+### 💾 واجهة Retro KeyGen الرسومية لسطح المكتب (v5.4.3)
 شغّلها كملف تنفيذي مستقل أو عبر الأمر `ag-cleaner gui` للاستفادة من سير العمل المبسط بثلاث خطوات (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`)، مع مفتاح تبديل انعدام التتبع الفوري ومراقبة حية للعمليات:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---

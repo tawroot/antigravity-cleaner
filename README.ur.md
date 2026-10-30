@@ -15,7 +15,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner Pro (v5.3.1)</h1>
+<h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.3)</h1>
 
 <p align="center">
   <strong>خودکار پابندی بائی پاس، زیرو ٹیلی میٹری انجن اور گوگل اینٹی گریویٹی کے لیے براہ راست نو-ٹَن (No-TUN) پراکسی انجیکٹر</strong>
@@ -23,7 +23,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.3.1-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -61,7 +61,7 @@
 - [🏛️ سسٹم کا معمارانہ خاکہ اور ٹریفک کا بہاؤ](#️-سسٹم-کا-معمارانہ-خاکہ-اور-ٹریفک-کا-بہاؤ)
 - [🛡️ زیرو ٹیلی میٹری انجن اور پرائیویسی کی ضمانت](#️-زیرو-ٹیلی-میٹری-انجن-اور-پرائیویسی-کی-ضمانت)
 - [📊 لائیو سسٹم بینچ مارکس اور آڈٹ لاگز](#-لائیو-سسٹم-بینچ-مارکس-اور-آڈٹ-لاگز)
-- [🥊 جامع تقابلی جائزہ (ورژن 5.3.1)](#-جامع-تقابلی-جائزہ-ورژن-531)
+- [🥊 جامع تقابلی جائزہ (ورژن 5.4.3)](#-جامع-تقابلی-جائزہ-ورژن-531)
 - [🚀 فوری CLI انسٹالیشن (سنگل کمانڈ)](#-فوری-cli-انسٹالیشن-سنگل-کمانڈ)
 - [💻 بصری انٹرفیس: ریٹرو KeyGen GUI اور ٹرمینل ڈیش بورڈ](#-بصری-انٹرفیس-ریٹرو-keygen-gui-اور-ٹرمینل-ڈیش-بورڈ)
 - [🛠️ CLI ذیلی کمانڈز اور تشخیص](#️-cli-ذیلی-کمانڈز)
@@ -434,9 +434,9 @@ graph LR
 
 ---
 
-## 🥊 جامع تقابلی جائزہ (ورژن 5.3.1)
+## 🥊 جامع تقابلی جائزہ (ورژن 5.4.3)
 
-| فیچر | روایتی سنگل پرپز پیچرز (`open-antigravity-patcher`, `QNIX`) | پروسیس اور DLL انجیکٹرز (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.3.1)** |
+| فیچر | روایتی سنگل پرپز پیچرز (`open-antigravity-patcher`, `QNIX`) | پروسیس اور DLL انجیکٹرز (`antigravity-proxy`) | **⚡ Antigravity Cleaner Pro (v5.4.3)** |
 | :--- | :---: | :---: | :---: |
 | **پروگرامنگ زبان اور معماری** | پائتھون 3 (اضافی رن ٹائم اور `pip` درکار) | صرف ونڈوز C++ / DLL انجیکشن | **خالص Go (بغیر کسی بیرونی ضرورت کے، سنگل فائل بائنری)** |
 | **صارف کا انٹرفیس (UI)** | بنیادی ٹیکسٹ آؤٹ پٹ | سادہ کنسول | **کلاسیک Win95 ریٹرو GUI + جدید 2026 Lipgloss TUI ڈیش بورڈ** |
@@ -468,11 +468,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 بصری انٹرفیس: ریٹرو KeyGen GUI اور ٹرمینل ڈیش بورڈ
 
-### 💾 ریٹرو KeyGen ڈیسک ٹاپ GUI (v5.3.1)
+### 💾 ریٹرو KeyGen ڈیسک ٹاپ GUI (v5.4.3)
 اسے آزادانہ طور پر یا `ag-cleaner gui` کے ذریعے چلائیں تاکہ 3 مراحل والا آسان طریقہ کار (`① Auto-Fix ➔ ② Launch IDE ➔ ③ Shortcut`)، ریئل ٹائم زیرو ٹیلی میٹری سوئچ اور لائیو پروسیس مانیٹرنگ حاصل ہو سکے:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.3.1" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
 </div>
 
 ---
