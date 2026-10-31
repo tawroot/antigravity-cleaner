@@ -384,7 +384,9 @@ func findPIDListeningPorts(pid int) []int {
 				parts := strings.Split(localAddr, ":")
 				if len(parts) == 2 {
 					if portNum, err := strconv.ParseInt(parts[1], 16, 64); err == nil {
-						ports = append(ports, int(portNum))
+						if portNum > 0 && portNum <= 65535 {
+							ports = append(ports, int(portNum))
+						}
 					}
 				}
 			}
