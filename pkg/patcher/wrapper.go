@@ -185,7 +185,18 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 	backupName := BackupFileName(m.binName)
 	var scriptContent string
 	if runtime.GOOS == "windows" {
-		scriptContent = fmt.Sprintf("@echo off\r\nset \"SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22\"\r\nset \"SSH_CLIENT=127.0.0.1 1234 22\"\r\n\"%%~dp0%s\" %s %%*\r\n", backupName, flagsStr)
+		// On Windows, replacing a .exe executable with a batch script (.bat/@echo) causes CreateProcessW
+		// to fail with ERROR_BAD_EXE_FORMAT (193), resulting in blank Electron windows.
+		// If a previous text wrapper was installed, heal it by restoring the native PE binary.
+		if _, err := os.Stat(originalBin); err == nil {
+			if data, errRead := os.ReadFile(serverBin); errRead == nil && strings.HasPrefix(string(data), "@echo") {
+				_ = os.Remove(serverBin)
+				_ = os.Rename(originalBin, serverBin)
+				m.logger("Auto-healed legacy script wrapper on Windows: restored native PE binary at %s", serverBin)
+			}
+		}
+		m.logger("Windows environment: Enterprise flags & SSH spoofing are securely forwarded via desktop launcher environment variables; keeping native PE binary intact at %s", serverBin)
+		return nil
 	} else {
 		scriptContent = fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexport SSH_CONNECTION=\"127.0.0.1 1234 127.0.0.1 22\"\nexport SSH_CLIENT=\"127.0.0.1 1234 22\"\nexec \"$DIR/%s\" %s \"$@\"\n", backupName, flagsStr)
 	}

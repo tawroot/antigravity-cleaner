@@ -111,12 +111,24 @@ func RunDiagnostics(verbose bool) []DiagnosticItem {
 			TargetPaths:  paths,
 		})
 	} else {
-		items = append(items, DiagnosticItem{
-			Name:         "Core Engine",
-			Status:       "WARN",
-			HumanSummary: "Not Found (language_server binary missing)",
-			DebugDetails: "Check resources/bin or resources/app/bin",
-		})
+		mainJsCheck := patcher.FindIdeMainJs()
+		asarPathCheck := patcher.FindAntigravityAsar()
+		if mainJsCheck != "" || asarPathCheck != "" {
+			items = append(items, DiagnosticItem{
+				Name:         "Core Engine",
+				Status:       "OK",
+				HumanSummary: "Integrated / Bundled (Antigravity IDE)",
+				DebugDetails: "Embedded AI engine managed via IDE internal bundle",
+				TargetPaths:  []string{"Core logic managed via Antigravity IDE bundle"},
+			})
+		} else {
+			items = append(items, DiagnosticItem{
+				Name:         "Core Engine",
+				Status:       "WARN",
+				HumanSummary: "Not Found (language_server binary missing)",
+				DebugDetails: "Check resources/bin or resources/app/bin",
+			})
+		}
 	}
 
 	// 3. IDE Frontend

@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strings"
 )
 
@@ -24,23 +25,58 @@ func FindVsCodeExtension() string {
 		filepath.Join(home, ".vscode-insiders", "extensions"),
 		filepath.Join(home, ".vscode-oss", "extensions"),
 		filepath.Join(home, ".vscode-server", "extensions"),
+		filepath.Join(home, ".antigravity-ide", "extensions"),
+		filepath.Join(home, ".antigravity", "extensions"),
+	}
+
+	if runtime.GOOS == "windows" {
+		localApp := os.Getenv("LOCALAPPDATA")
+		candidateDirs = append(candidateDirs,
+			filepath.Join(localApp, "Programs", "Antigravity IDE", "resources", "app", "extensions"),
+			filepath.Join(localApp, "Programs", "Antigravity", "resources", "app", "extensions"),
+			filepath.Join(localApp, "Programs", "antigravity", "resources", "app", "extensions"),
+		)
+	} else if runtime.GOOS == "linux" {
+		candidateDirs = append(candidateDirs,
+			"/usr/share/antigravity/resources/app/extensions",
+			"/usr/share/antigravity-ide/resources/app/extensions",
+			"/opt/antigravity/resources/app/extensions",
+			"/opt/Antigravity IDE/resources/app/extensions",
+		)
 	}
 
 	var latestExtJs string
 	var latestModTime int64
 
 	for _, dir := range candidateDirs {
+		// 1. Direct subfolder check for 'agy' extension in bundled builds
+		directAgy := filepath.Join(dir, "agy")
+		if fi, err := os.Stat(directAgy); err == nil && fi.IsDir() {
+			for _, sub := range []string{filepath.Join("dist", "extension.js"), "extension.js"} {
+				target := filepath.Join(directAgy, sub)
+				if fiTarget, errTarget := os.Stat(target); errTarget == nil && !fiTarget.IsDir() {
+					if fiTarget.ModTime().Unix() > latestModTime {
+						latestModTime = fiTarget.ModTime().Unix()
+						latestExtJs = target
+					}
+				}
+			}
+		}
+
+		// 2. Scan directory entries for google.google-antigravity-* or agy-*
 		entries, err := os.ReadDir(dir)
 		if err != nil {
 			continue
 		}
 		for _, e := range entries {
-			if e.IsDir() && strings.HasPrefix(e.Name(), "google.google-antigravity-") {
-				extJs := filepath.Join(dir, e.Name(), "extension.js")
-				if fi, err := os.Stat(extJs); err == nil {
-					if fi.ModTime().Unix() > latestModTime {
-						latestModTime = fi.ModTime().Unix()
-						latestExtJs = extJs
+			if e.IsDir() && (strings.HasPrefix(e.Name(), "google.google-antigravity-") || strings.EqualFold(e.Name(), "agy") || strings.HasPrefix(e.Name(), "agy-")) {
+				for _, sub := range []string{"extension.js", filepath.Join("dist", "extension.js")} {
+					extJs := filepath.Join(dir, e.Name(), sub)
+					if fi, err := os.Stat(extJs); err == nil && !fi.IsDir() {
+						if fi.ModTime().Unix() > latestModTime {
+							latestModTime = fi.ModTime().Unix()
+							latestExtJs = extJs
+						}
 					}
 				}
 			}

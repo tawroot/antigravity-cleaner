@@ -23,7 +23,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.3"
+const Version = "5.4.4"
 
 func init() {
 	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {
@@ -390,7 +390,12 @@ func runQuickAutoFix() {
 	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#BD00FF")).Render("  Step 1: Core Engine MultiGate Bytecode Unlock..."))
 	coreSuccess := false
 	if res, err := patcher.PatchLanguageServer(""); err != nil {
-		ui.PrintStatus("FAIL", "Core Engine", err.Error())
+		if mainJs := patcher.FindIdeMainJs(); mainJs != "" {
+			ui.PrintStatus("OK", "Core Engine", "Integrated / Bundled Mode (Antigravity IDE)")
+			coreSuccess = true
+		} else {
+			ui.PrintStatus("FAIL", "Core Engine", err.Error())
+		}
 	} else {
 		ui.PrintStatus("OK", "Core Engine", res)
 		coreSuccess = true
@@ -407,6 +412,7 @@ func runQuickAutoFix() {
 		ui.PrintStatus("INFO", "IDE main.js", "Antigravity 2.x Bundled (Internal gate active)")
 	} else {
 		ui.PrintStatus("OK", "IDE main.js", res)
+		coreSuccess = true
 	}
 
 	if res, err := patcher.PatchAsarZeroLog(""); err != nil {

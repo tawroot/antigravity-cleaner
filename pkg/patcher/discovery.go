@@ -401,11 +401,17 @@ func probeRootsForAllLanguageServers(roots []string) []string {
 
 	subpaths := []string{
 		filepath.Join("resources", "bin"),
+		filepath.Join("resources", "app", "bin"),
 		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "app", "extensions", "agy", "bin"),
 		filepath.Join("Contents", "Resources", "bin"),
+		filepath.Join("Contents", "Resources", "app", "bin"),
 		filepath.Join("Contents", "Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("Contents", "Resources", "app", "extensions", "agy", "bin"),
 		filepath.Join("Resources", "bin"),
+		filepath.Join("Resources", "app", "bin"),
 		filepath.Join("Resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("Resources", "app", "extensions", "agy", "bin"),
 	}
 
 	extDirs := []string{
@@ -499,6 +505,8 @@ func GetStandardLanguageServerCandidates() []string {
 
 	linuxSubdirs := []string{
 		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "app", "extensions", "agy", "bin"),
+		filepath.Join("resources", "app", "bin"),
 		filepath.Join("resources", "bin"),
 	}
 
@@ -534,6 +542,8 @@ func GetStandardLanguageServerCandidates() []string {
 
 	winSubdirs := []string{
 		filepath.Join("resources", "app", "extensions", "antigravity", "bin"),
+		filepath.Join("resources", "app", "extensions", "agy", "bin"),
+		filepath.Join("resources", "app", "bin"),
 		filepath.Join("resources", "bin"),
 	}
 
