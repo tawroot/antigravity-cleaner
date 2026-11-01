@@ -182,7 +182,9 @@ func (s *Server) handlePatch(w http.ResponseWriter, r *http.Request) {
 		msg = "All 4 targets patched & Zero-Telemetry enabled!"
 		_, _ = patcher.PatchAgy("")
 		_, _ = patcher.PatchIdeMainJs("")
-		_, _ = patcher.PatchVsCodeExtension("")
+		if _, err := patcher.PatchVsCodeExtension(""); err != nil {
+			msg += " — Warning: VS Code extension " + err.Error()
+		}
 		_, _ = patcher.PatchAsarZeroLog("")
 		_, _ = proxy.GenerateNoTunDesktopLauncher("")
 

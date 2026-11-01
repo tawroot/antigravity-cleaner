@@ -104,19 +104,26 @@ func PatchVsCodeExtension(extPath string) (string, error) {
 		return fmt.Sprintf("Already patched: %s", filepath.Base(filepath.Dir(extPath))), nil
 	}
 
+	// Apply Part 1: Channel lock
+	patched := channelChangedRe.ReplaceAllString(content, channelPatched)
+	channelApplied := patched != content || strings.Contains(content, channelPatched)
+
+	// Apply Part 2: Re-download guard injection
+	guardApplied := strings.Contains(patched, "Skipping version check and re-download")
+	if downloadGuardTarget.MatchString(patched) {
+		patched = downloadGuardTarget.ReplaceAllString(patched, "$1\n"+downloadGuardCode)
+		guardApplied = true
+	}
+
+	if !channelApplied && !guardApplied {
+		return "", fmt.Errorf("patch signatures not found in %s (unsupported or already modified build) — extension was NOT patched", filepath.Base(filepath.Dir(extPath)))
+	}
+
 	if _, err := BackupFile(extPath); err != nil {
 		return "", fmt.Errorf("backup failed: %w", err)
 	}
 
-	// Apply Part 1: Channel lock
-	content = channelChangedRe.ReplaceAllString(content, channelPatched)
-
-	// Apply Part 2: Re-download guard injection
-	if downloadGuardTarget.MatchString(content) {
-		content = downloadGuardTarget.ReplaceAllString(content, "$1\n"+downloadGuardCode)
-	}
-
-	if err := AtomicWrite(extPath, []byte(content)); err != nil {
+	if err := AtomicWrite(extPath, []byte(patched)); err != nil {
 		return "", fmt.Errorf("failed to write patched extension.js: %w", err)
 	}
 
