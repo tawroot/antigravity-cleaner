@@ -225,11 +225,14 @@ func scanWindowsProcess(targetName string) string {
 // isBackupOrTempFile returns true if fileName ends with backup or temporary suffixes
 func isBackupOrTempFile(fileName string) bool {
 	low := strings.ToLower(fileName)
-	suffixes := []string{".agybak", ".bin", ".bak", ".tmp", ".old", ".orig"}
+	suffixes := []string{".agybak", ".bin", ".bak", ".tmp", ".old", ".orig", ".bin.exe"}
 	for _, s := range suffixes {
 		if strings.HasSuffix(low, s) {
 			return true
 		}
+	}
+	if strings.Contains(low, ".bin.") {
+		return true
 	}
 	return false
 }

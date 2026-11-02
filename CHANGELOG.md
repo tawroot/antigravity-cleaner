@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.5] - 2026-11-02
+
+### 🚑 Stability & Self-Healing Hotfix: Windows Binary Restoration, macOS CodeSign & Flag Modernization
+
+This update resolves critical regressions reported across Windows and macOS on Antigravity 2.28.2+ environments:
+
+#### 🪟 Windows Self-Healing Core Engine & Rename Prevention (#40, #43, #36)
+- **Eliminate Wrapper Rename Loop:** Prevents `language_server.exe` from being renamed to `.bin.exe` on Windows (`pkg/patcher/wrapper.go`). Windows natively executes with enterprise environment injection via desktop launcher.
+- **Automated Binary Self-Healing (`HealWindowsBinaries`):** Proactively detects missing or broken `language_server.exe`, safely restores native PE binaries from previous `.bin.exe` / `.bin.bin.exe` artifacts, and sweeps away orphaned backup remnants.
+- **Architecture Discovery Filter (`isBackupOrTempFile`):** Excludes `.bin.exe` and intermediate `.bin.*` files from being misidentified as primary engine binaries in `pkg/patcher/discovery.go`.
+
+#### 🍎 macOS Apple Silicon & Gatekeeper Resilience (#37, #42)
+- **C++ Logger Flag Deprecation Bypass (#42):** Disabled the unsupported `--suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true` flag in default enterprise options, completely eliminating `Language server exited unexpectedly (code=2)` startup aborts on Antigravity 2.28.2+.
+- **Automatic Ad-Hoc Re-Signing & Bundle Integrity (#37):** Automatically strips Apple quarantine attributes (`xattr -dr com.apple.quarantine`) and recursively re-signs the entire `.app` bundle (`codesign --force --deep --sign -`) whenever binary bytecodes, ASAR archives, or JavaScript bundles are modified on macOS.
+
+#### 🧩 VS Code Extension Strict Matching (#39, #41)
+- **Fail-Fast Signature Audit:** Audits AST signatures for extension patch points, preventing silent false-positive reports when upstream Google builds evolve.
+
+---
+
 ## [5.4.3] - 2026-10-31
 
 ### 🚀 The Freedom & Enterprise Release: Multi-Account Manager, Live Quota Monitor, Universal SSH Spoofing, Token Bridge & 1-Click Surgical Auto-Fix

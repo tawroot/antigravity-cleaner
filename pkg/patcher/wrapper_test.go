@@ -185,3 +185,86 @@ func TestWrapperManagerMacArmBinary(t *testing.T) {
 		t.Errorf("restored content mismatch: got %q, want %q", string(restored), originalContent)
 	}
 }
+
+func TestHealWindowsBinariesMissingServerBin(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Simulate Bug #40: language_server.exe is missing, but language_server.bin.exe exists
+	fakePE := make([]byte, 150*1024)
+	copy(fakePE, []byte("MZ-FAKE-PE-BINARY"))
+	binBackup := filepath.Join(tempDir, "language_server.bin.exe")
+	if err := os.WriteFile(binBackup, fakePE, 0755); err != nil {
+		t.Fatalf("failed to write fake backup: %v", err)
+	}
+
+	HealWindowsBinaries(tempDir, nil)
+
+	serverBin := filepath.Join(tempDir, "language_server.exe")
+	info, err := os.Stat(serverBin)
+	if err != nil {
+		t.Fatalf("expected language_server.exe to be restored, got error: %v", err)
+	}
+	if info.Size() != int64(len(fakePE)) {
+		t.Errorf("expected restored size %d, got %d", len(fakePE), info.Size())
+	}
+
+	// Stale .bin.exe should be cleaned up
+	if _, err := os.Stat(binBackup); !os.IsNotExist(err) {
+		t.Errorf("expected language_server.bin.exe to be cleaned up")
+	}
+}
+
+func TestHealWindowsBinariesRecursiveBinLoop(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Simulate Bug #36 / repeated runs: language_server.bin.bin.bin.exe exists
+	fakePE := make([]byte, 200*1024)
+	copy(fakePE, []byte("MZ-NESTED-BIN-LOOP"))
+	nestedBin := filepath.Join(tempDir, "language_server.bin.bin.bin.exe")
+	if err := os.WriteFile(nestedBin, fakePE, 0755); err != nil {
+		t.Fatalf("failed to write nested bin: %v", err)
+	}
+
+	HealWindowsBinaries(tempDir, nil)
+
+	serverBin := filepath.Join(tempDir, "language_server.exe")
+	info, err := os.Stat(serverBin)
+	if err != nil {
+		t.Fatalf("expected language_server.exe to be restored from nested bin, got error: %v", err)
+	}
+	if info.Size() != int64(len(fakePE)) {
+		t.Errorf("expected restored size %d, got %d", len(fakePE), info.Size())
+	}
+
+	if _, err := os.Stat(nestedBin); !os.IsNotExist(err) {
+		t.Errorf("expected nested bin to be cleaned up")
+	}
+}
+
+func TestHealWindowsBinariesLegacyScriptWrapper(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Simulate legacy batch script wrapper in language_server.exe and real PE in .bin.exe
+	batchContent := []byte("@echo off\r\nstart language_server.bin.exe %*")
+	serverBin := filepath.Join(tempDir, "language_server.exe")
+	if err := os.WriteFile(serverBin, batchContent, 0755); err != nil {
+		t.Fatalf("failed to write batch script: %v", err)
+	}
+
+	fakePE := make([]byte, 180*1024)
+	copy(fakePE, []byte("MZ-REAL-PE"))
+	binBackup := filepath.Join(tempDir, "language_server.bin.exe")
+	if err := os.WriteFile(binBackup, fakePE, 0755); err != nil {
+		t.Fatalf("failed to write fake backup: %v", err)
+	}
+
+	HealWindowsBinaries(tempDir, nil)
+
+	info, err := os.Stat(serverBin)
+	if err != nil {
+		t.Fatalf("expected serverBin to exist, got: %v", err)
+	}
+	if info.Size() != int64(len(fakePE)) {
+		t.Errorf("expected PE binary restored, got size %d", info.Size())
+	}
+}

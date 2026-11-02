@@ -112,12 +112,34 @@ func AtomicWrite(targetPath string, data []byte) error {
 		return FormatAppManagementError("atomically replacing target file", targetPath, err)
 	}
 
-	// On macOS, if the written file is an executable Mach-O binary, clear quarantine and re-sign ad-hoc
+	// On macOS, clear quarantine and re-sign ad-hoc (both target and enclosing .app bundle)
 	// to prevent AMFI (Apple Mobile File Integrity) kernel SIGTERM/SIGKILL termination.
-	if runtime.GOOS == "darwin" && IsMachOBinary(data) {
+	if runtime.GOOS == "darwin" {
 		_ = ResignDarwinBinary(targetPath)
 	}
 
+	return nil
+}
+
+// ResignDarwinAppBundle finds the enclosing .app bundle (if any) and runs codesign --force --deep --sign - on it.
+func ResignDarwinAppBundle(filePath string) error {
+	if runtime.GOOS != "darwin" {
+		return nil
+	}
+	dir := filePath
+	for {
+		if strings.HasSuffix(dir, ".app") {
+			_ = exec.Command("xattr", "-dr", "com.apple.quarantine", dir).Run()
+			cmd := exec.Command("codesign", "--force", "--deep", "--sign", "-", dir)
+			_ = cmd.Run()
+			return nil
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir || parent == "/" || parent == "." {
+			break
+		}
+		dir = parent
+	}
 	return nil
 }
 
@@ -132,8 +154,8 @@ func IsMachOBinary(data []byte) bool {
 		magic == 0xcafebabe || magic == 0xbebafeca // Fat / Universal binary
 }
 
-// ResignDarwinBinary clears quarantine flags and applies an ad-hoc signature on macOS binaries.
-// This prevents AMFI (Apple Mobile File Integrity) kernel crashes (SIGTERM/SIGKILL) on modified Mach-O files.
+// ResignDarwinBinary clears quarantine flags and applies an ad-hoc signature on macOS binaries and enclosing app bundle.
+// This prevents AMFI (Apple Mobile File Integrity) kernel crashes (SIGTERM/SIGKILL) on modified Mach-O files and ASAR bundles.
 func ResignDarwinBinary(targetPath string) error {
 	if runtime.GOOS != "darwin" {
 		return nil
@@ -144,9 +166,10 @@ func ResignDarwinBinary(targetPath string) error {
 
 	// 2. Force ad-hoc re-signature (codesign --force --sign - <target>)
 	cmd := exec.Command("codesign", "--force", "--sign", "-", targetPath)
-	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("codesign failed on %s: %s (%w)", targetPath, strings.TrimSpace(string(out)), err)
-	}
+	_ = cmd.Run()
+
+	// 3. Re-sign enclosing .app bundle with --deep to ensure entire bundle integrity
+	_ = ResignDarwinAppBundle(targetPath)
 	return nil
 }
 

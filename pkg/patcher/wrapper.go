@@ -56,11 +56,16 @@ func NewWrapperManager(pathOrDir string, logger LogFunc) *WrapperManager {
 		}
 	}
 
-	// Normalize if binName was passed as a .bin backup
-	if strings.HasSuffix(binName, ".bin.exe") {
-		binName = strings.TrimSuffix(binName, ".bin.exe") + ".exe"
-	} else if strings.HasSuffix(binName, ".bin") {
-		binName = strings.TrimSuffix(binName, ".bin")
+	// Normalize if binName was passed with backup suffixes or polluted with repeated .bin
+	for strings.Contains(binName, ".bin") {
+		binName = strings.ReplaceAll(binName, ".bin", "")
+	}
+	if runtime.GOOS == "windows" {
+		if !strings.HasSuffix(strings.ToLower(binName), ".exe") {
+			binName += ".exe"
+		}
+		// On Windows, proactively heal any damaged/missing core binaries in binDir
+		HealWindowsBinaries(binDir, logger)
 	}
 
 	// If binName was not explicitly identified from a file path:
@@ -139,6 +144,10 @@ func (m *WrapperManager) OriginalBin() string {
 
 // IsWrapperInstalled checks whether a wrapper script is active and original binary backed up
 func (m *WrapperManager) IsWrapperInstalled() bool {
+	if runtime.GOOS == "windows" {
+		return false
+	}
+
 	origInfo, err := os.Stat(m.OriginalBin())
 	if err != nil || origInfo.IsDir() {
 		return false
@@ -156,6 +165,16 @@ func (m *WrapperManager) IsWrapperInstalled() bool {
 func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 	serverBin := m.ServerBin()
 	originalBin := m.OriginalBin()
+
+	if runtime.GOOS == "windows" {
+		// On Windows, replacing language_server.exe with a shell/batch script causes CreateProcessW
+		// to fail with ERROR_BAD_EXE_FORMAT (193), resulting in blank Electron windows or missing binary popups.
+		// Enterprise flags & SSH spoofing are securely forwarded via desktop launcher environment variables.
+		// NEVER rename language_server.exe away on Windows!
+		HealWindowsBinaries(m.binDir, m.logger)
+		m.logger("Windows environment: Enterprise flags & SSH spoofing are securely forwarded via desktop launcher; keeping native PE binary intact at %s", serverBin)
+		return nil
+	}
 
 	// 1. If original backup doesn't exist, backup the real binary
 	if _, err := os.Stat(originalBin); os.IsNotExist(err) {
@@ -183,23 +202,7 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 
 	// 3. Create wrapper script with remote environment spoofing (switches language_server to file-token mode & reduces cloud fraud friction)
 	backupName := BackupFileName(m.binName)
-	var scriptContent string
-	if runtime.GOOS == "windows" {
-		// On Windows, replacing a .exe executable with a batch script (.bat/@echo) causes CreateProcessW
-		// to fail with ERROR_BAD_EXE_FORMAT (193), resulting in blank Electron windows.
-		// If a previous text wrapper was installed, heal it by restoring the native PE binary.
-		if _, err := os.Stat(originalBin); err == nil {
-			if data, errRead := os.ReadFile(serverBin); errRead == nil && strings.HasPrefix(string(data), "@echo") {
-				_ = os.Remove(serverBin)
-				_ = os.Rename(originalBin, serverBin)
-				m.logger("Auto-healed legacy script wrapper on Windows: restored native PE binary at %s", serverBin)
-			}
-		}
-		m.logger("Windows environment: Enterprise flags & SSH spoofing are securely forwarded via desktop launcher environment variables; keeping native PE binary intact at %s", serverBin)
-		return nil
-	} else {
-		scriptContent = fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexport SSH_CONNECTION=\"127.0.0.1 1234 127.0.0.1 22\"\nexport SSH_CLIENT=\"127.0.0.1 1234 22\"\nexec \"$DIR/%s\" %s \"$@\"\n", backupName, flagsStr)
-	}
+	scriptContent := fmt.Sprintf("#!/usr/bin/env bash\nDIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\nexport SSH_CONNECTION=\"127.0.0.1 1234 127.0.0.1 22\"\nexport SSH_CLIENT=\"127.0.0.1 1234 22\"\nexec \"$DIR/%s\" %s \"$@\"\n", backupName, flagsStr)
 
 	if err := os.WriteFile(serverBin, []byte(scriptContent), 0755); err != nil {
 		return FormatAppManagementError("writing wrapper script", serverBin, err)
@@ -211,6 +214,12 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 
 // RemoveWrapper restores the original binary and removes the wrapper
 func (m *WrapperManager) RemoveWrapper() error {
+	if runtime.GOOS == "windows" {
+		HealWindowsBinaries(m.binDir, m.logger)
+		m.logger("Windows environment: verified pristine native PE binary at %s", m.ServerBin())
+		return nil
+	}
+
 	serverBin := m.ServerBin()
 	originalBin := m.OriginalBin()
 
@@ -228,4 +237,86 @@ func (m *WrapperManager) RemoveWrapper() error {
 
 	m.logger("Successfully removed wrapper and restored original binary at %s", serverBin)
 	return nil
+}
+
+// HealWindowsBinaries detects and repairs any broken, missing, or renamed language_server.exe on Windows.
+// Resolves Bug #40, Bug #43, and Bug #36 caused by legacy .bin.exe renaming loops.
+func HealWindowsBinaries(binDir string, logger LogFunc) {
+	if binDir == "" {
+		return
+	}
+	if logger == nil {
+		logger = defaultFlagsLogger
+	}
+
+	serverBin := filepath.Join(binDir, "language_server.exe")
+
+	// 1. If language_server.exe exists but is a script/batch file (<4KB and text), remove it
+	if data, err := os.ReadFile(serverBin); err == nil && len(data) < 4096 {
+		content := strings.ToLower(string(data))
+		if strings.HasPrefix(content, "@echo") || strings.HasPrefix(content, "#!") {
+			_ = os.Remove(serverBin)
+			logger("Removed invalid script wrapper at %s", serverBin)
+		}
+	}
+
+	// 2. Scan binDir for candidate language_server binaries (including .bin.exe, .bin.bin.exe, etc.)
+	entries, err := os.ReadDir(binDir)
+	if err != nil {
+		return
+	}
+
+	var bestCandidate string
+	var bestSize int64
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+		name := entry.Name()
+		low := strings.ToLower(name)
+		if strings.HasPrefix(low, "language_server") && strings.HasSuffix(low, ".exe") {
+			fullPath := filepath.Join(binDir, name)
+			fi, errStat := entry.Info()
+			if errStat != nil {
+				continue
+			}
+
+			// Real executable binary candidate
+			if fi.Size() > bestSize {
+				bestSize = fi.Size()
+				bestCandidate = fullPath
+			}
+		}
+	}
+
+	// 3. If serverBin is missing or abnormally small (<100KB) and we found a valid PE binary candidate, restore it
+	fiServer, errServer := os.Stat(serverBin)
+	serverNeedsRestore := errServer != nil || fiServer.Size() < 100*1024
+
+	if serverNeedsRestore && bestCandidate != "" && bestCandidate != serverBin {
+		logger("Auto-healing Windows binary: restoring %s -> %s (size: %d bytes)", filepath.Base(bestCandidate), serverBin, bestSize)
+		if errRename := os.Rename(bestCandidate, serverBin); errRename != nil {
+			if data, errRead := os.ReadFile(bestCandidate); errRead == nil {
+				_ = os.WriteFile(serverBin, data, 0755)
+			}
+		}
+	}
+
+	// 4. Clean up any leftover duplicate .bin*.exe files to prevent recursive rename pollution
+	if fi, err := os.Stat(serverBin); err == nil && fi.Size() > 100*1024 {
+		for _, entry := range entries {
+			if entry.IsDir() {
+				continue
+			}
+			name := entry.Name()
+			low := strings.ToLower(name)
+			if strings.HasPrefix(low, "language_server") && strings.Contains(low, ".bin") && strings.HasSuffix(low, ".exe") {
+				target := filepath.Join(binDir, name)
+				if target != serverBin {
+					_ = os.Remove(target)
+				}
+			}
+		}
+	}
 }

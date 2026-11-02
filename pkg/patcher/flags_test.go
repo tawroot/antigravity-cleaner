@@ -1,6 +1,7 @@
 package patcher
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -12,8 +13,8 @@ func TestBuildServerFlags(t *testing.T) {
 	}
 
 	flags := BuildServerFlags(opts, logger)
-	if len(flags) != 13 {
-		t.Fatalf("expected 13 flags, got %d: %v", len(flags), flags)
+	if len(flags) != 12 {
+		t.Fatalf("expected 12 flags, got %d: %v", len(flags), flags)
 	}
 
 	var hasTelemetry, hasInternal, hasChannel, hasStubby, hasChrome, hasBrowserEval, hasVisualHeadless, hasSidecars bool
@@ -85,11 +86,35 @@ func TestBuildServerFlags(t *testing.T) {
 	if !hasLogDisk {
 		t.Errorf("missing --disable_log_to_disk=true flag")
 	}
+	if hasCppLogger {
+		t.Errorf("expected --suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr flag to be disabled by default (Issue #42)")
+	}
+	if len(logs) != 12 {
+		t.Errorf("expected 12 log entries, got %d", len(logs))
+	}
+}
+
+func TestBuildServerFlagsWithCppLoggerExplicit(t *testing.T) {
+	opts := DefaultEnterpriseFlagsOptions()
+	opts.SuppressCppLoggerCheck = true
+
+	var logs []string
+	logger := func(format string, a ...interface{}) {
+		logs = append(logs, fmt.Sprintf(format, a...))
+	}
+
+	flags := BuildServerFlags(opts, logger)
+	hasCppLogger := false
+	for _, f := range flags {
+		if f == "--suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true" {
+			hasCppLogger = true
+		}
+	}
 	if !hasCppLogger {
-		t.Errorf("missing --suppress_cpp_logger_module_check_and_dont_log_cpp_to_stderr=true flag")
+		t.Errorf("expected cpp logger flag when SuppressCppLoggerCheck is true")
 	}
 	if len(logs) != 13 {
-		t.Errorf("expected 13 log entries, got %d", len(logs))
+		t.Errorf("expected 13 logs, got %d", len(logs))
 	}
 }
 

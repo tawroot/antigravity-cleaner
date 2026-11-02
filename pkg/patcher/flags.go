@@ -55,7 +55,7 @@ func DefaultEnterpriseFlagsOptions() EnterpriseFlagsOptions {
 		UseSnapshotMendelfp:     true,
 		BypassSidecarUserConfig: true,
 		DisableLogToDisk:        true,
-		SuppressCppLoggerCheck:  true,
+		SuppressCppLoggerCheck:  false, // Issue #42: Removed in Antigravity 2.28.2+, causes fatal exit status 2 if passed
 	}
 }
 
