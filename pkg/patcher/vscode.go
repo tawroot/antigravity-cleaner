@@ -10,10 +10,11 @@ import (
 )
 
 var (
-	channelChangedRe = regexp.MustCompile(`const\s+isChannelChanged\s*=\s*manifestFetched\s*&&\s*lastInstalledUrl\s*!==\s*releaseBaseUrl;`)
-	channelPatched   = `const isChannelChanged = false;`
+	channelChangedRe         = regexp.MustCompile(`const\s+isChannelChanged\s*=\s*manifestFetched\s*&&\s*lastInstalledUrl\s*!==\s*releaseBaseUrl;`)
+	channelChangedMinifiedRe = regexp.MustCompile(`let\s+([a-zA-Z0-9_$]+)\s*=\s*[^;]+;\s*([a-zA-Z0-9_$]+\s*&&\s*[a-zA-Z0-9_$]+\.appendLine\(\s*[` + "`" + `'"]\[INSTALL\]\s*Release channel change detected)`)
+	channelPatched           = `const isChannelChanged = false; /*patched:channel_lock*/`
 
-	downloadGuardTarget = regexp.MustCompile(`(outputChannel\.appendLine\(\s*['"]\[INSTALL\]\s*Checking Antigravity releases\.\.\.['"]\s*\);)`)
+	downloadGuardTarget = regexp.MustCompile(`([a-zA-Z0-9_$]+\.appendLine\(\s*['"]\[INSTALL\]\s*Checking Antigravity releases\.\.\.['"]\s*\);)`)
 	downloadGuardCode   = `{const __primary=options.targetPathOverride||getInstalledTargetPath(); const __candidates=[__primary, (0,path_1.join)((0,path_1.dirname)(__primary),'antigravity'+((0,path_1.extname)(__primary)||''))]; for(const __p of __candidates){if(__p&&await pathExists(__p)){ outputChannel.appendLine('[INSTALL] Existing binary found at '+__p+'. Skipping version check and re-download.');return __p;}}}`
 )
 
@@ -100,17 +101,29 @@ func PatchVsCodeExtension(extPath string) (string, error) {
 	}
 
 	content := string(data)
-	if strings.Contains(content, channelPatched) && strings.Contains(content, "Skipping version check and re-download") {
+	alreadyPatched := (strings.Contains(content, channelPatched) && strings.Contains(content, "Skipping version check and re-download")) ||
+		strings.Contains(content, "/*patched:channel_lock*/")
+	if alreadyPatched {
 		return fmt.Sprintf("Already patched: %s", filepath.Base(filepath.Dir(extPath))), nil
 	}
 
-	// Apply Part 1: Channel lock
-	patched := channelChangedRe.ReplaceAllString(content, channelPatched)
-	channelApplied := patched != content || strings.Contains(content, channelPatched)
+	// Apply Part 1: Channel lock (Classic unminified and v1.10.0+ minified)
+	patched := content
+	channelApplied := false
 
-	// Apply Part 2: Re-download guard injection
+	if channelChangedRe.MatchString(patched) {
+		patched = channelChangedRe.ReplaceAllString(patched, channelPatched)
+		channelApplied = true
+	} else if channelChangedMinifiedRe.MatchString(patched) {
+		patched = channelChangedMinifiedRe.ReplaceAllString(patched, "let $1 = false; /*patched:channel_lock*/ $2")
+		channelApplied = true
+	} else if strings.Contains(content, channelPatched) || strings.Contains(content, "/*patched:channel_lock*/") {
+		channelApplied = true
+	}
+
+	// Apply Part 2: Re-download guard injection (if unminified AST present)
 	guardApplied := strings.Contains(patched, "Skipping version check and re-download")
-	if downloadGuardTarget.MatchString(patched) {
+	if !guardApplied && downloadGuardTarget.MatchString(patched) && strings.Contains(patched, "options.targetPathOverride") {
 		patched = downloadGuardTarget.ReplaceAllString(patched, "$1\n"+downloadGuardCode)
 		guardApplied = true
 	}
