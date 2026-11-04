@@ -90,31 +90,67 @@ var (
 	}()
 )
 
-// FindAgy searches for agy binary in PATH and standard directories
+// FindAgy dynamically searches for the agy binary in PATH, user environments, and dynamic runtime locations
 func FindAgy() string {
-	if p, err := exec.LookPath("agy"); err == nil {
-		return p
-	}
-	if p, err := exec.LookPath("agy.exe"); err == nil {
-		return p
+	names := []string{"agy", "agy.exe", "antigravity", "antigravity.exe"}
+	for _, n := range names {
+		if p, err := exec.LookPath(n); err == nil && p != "" {
+			return p
+		}
 	}
 
 	home, _ := os.UserHomeDir()
-	candidates := []string{
-		filepath.Join(home, ".local", "bin", "agy"),
-		filepath.Join(home, ".gemini", "bin", "antigravity"),
-		filepath.Join(home, ".gemini", "bin", "agy"),
-		"/usr/local/bin/agy",
-		"/usr/bin/agy",
-		filepath.Join(home, "bin", "agy"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "agy", "bin", "agy.exe"),
-		filepath.Join(os.Getenv("USERPROFILE"), "scoop", "apps", "agy", "current", "agy.exe"),
+	seen := make(map[string]bool)
+	var candidates []string
+
+	add := func(p string) {
+		if p == "" {
+			return
+		}
+		clean := filepath.Clean(p)
+		if !seen[clean] {
+			seen[clean] = true
+			if fi, err := os.Stat(clean); err == nil && !fi.IsDir() {
+				candidates = append(candidates, clean)
+			}
+		}
 	}
 
-	for _, c := range candidates {
-		if fi, err := os.Stat(c); err == nil && !fi.IsDir() {
-			return c
+	// 1. Dynamic check across all PATH directories
+	for _, dir := range filepath.SplitList(os.Getenv("PATH")) {
+		for _, name := range []string{"agy", "agy.exe"} {
+			add(filepath.Join(dir, name))
 		}
+	}
+
+	// 2. User environment & standard toolchains
+	if home != "" {
+		for _, sub := range []string{
+			filepath.Join(".local", "bin"),
+			filepath.Join(".gemini", "bin"),
+			filepath.Join("bin"),
+			filepath.Join(".antigravity", "bin"),
+		} {
+			for _, name := range []string{"agy", "agy.exe"} {
+				add(filepath.Join(home, sub, name))
+			}
+		}
+	}
+
+	// 3. Windows environment locations
+	if localAppData := os.Getenv("LOCALAPPDATA"); localAppData != "" {
+		add(filepath.Join(localAppData, "agy", "bin", "agy.exe"))
+		add(filepath.Join(localAppData, "Programs", "agy", "agy.exe"))
+	}
+	if userProfile := os.Getenv("USERPROFILE"); userProfile != "" {
+		add(filepath.Join(userProfile, "scoop", "apps", "agy", "current", "agy.exe"))
+	}
+	if progFiles := os.Getenv("ProgramFiles"); progFiles != "" {
+		add(filepath.Join(progFiles, "agy", "agy.exe"))
+	}
+
+	if len(candidates) > 0 {
+		return candidates[0]
 	}
 	return ""
 }

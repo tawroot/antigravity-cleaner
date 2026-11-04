@@ -268,3 +268,69 @@ func TestHealWindowsBinariesLegacyScriptWrapper(t *testing.T) {
 		t.Errorf("expected PE binary restored, got size %d", info.Size())
 	}
 }
+
+func TestHealDarwinBinariesLegacyScriptWrapper(t *testing.T) {
+	tempDir := t.TempDir()
+
+	// Simulate Bug #37: bash script wrapper in language_server and real Mach-O in language_server.bin
+	scriptContent := []byte("#!/usr/bin/env bash\nexec \"$DIR/language_server.bin\" \"$@\"\n")
+	serverBin := filepath.Join(tempDir, "language_server")
+	if err := os.WriteFile(serverBin, scriptContent, 0755); err != nil {
+		t.Fatalf("failed to write script wrapper: %v", err)
+	}
+
+	fakeMachO := make([]byte, 180*1024)
+	// Mach-O 64-bit LE magic: 0xcffaedfe
+	fakeMachO[0] = 0xcf
+	fakeMachO[1] = 0xfa
+	fakeMachO[2] = 0xed
+	fakeMachO[3] = 0xfe
+	binBackup := filepath.Join(tempDir, "language_server.bin")
+	if err := os.WriteFile(binBackup, fakeMachO, 0755); err != nil {
+		t.Fatalf("failed to write fake Mach-O backup: %v", err)
+	}
+
+	HealDarwinBinaries(tempDir, nil)
+
+	info, err := os.Stat(serverBin)
+	if err != nil {
+		t.Fatalf("expected serverBin to exist after healing, got: %v", err)
+	}
+	if info.Size() != int64(len(fakeMachO)) {
+		t.Errorf("expected Mach-O binary restored, got size %d, want %d", info.Size(), len(fakeMachO))
+	}
+
+	// Backup .bin should be cleaned up
+	if _, err := os.Stat(binBackup); !os.IsNotExist(err) {
+		t.Errorf("expected language_server.bin to be cleaned up after restore")
+	}
+}
+
+func TestHealDarwinBinariesMissingServerBin(t *testing.T) {
+	tempDir := t.TempDir()
+
+	fakeMachO := make([]byte, 150*1024)
+	fakeMachO[0] = 0xcf
+	fakeMachO[1] = 0xfa
+	fakeMachO[2] = 0xed
+	fakeMachO[3] = 0xfe
+	binBackup := filepath.Join(tempDir, "language_server.bin")
+	if err := os.WriteFile(binBackup, fakeMachO, 0755); err != nil {
+		t.Fatalf("failed to write fake backup: %v", err)
+	}
+
+	HealDarwinBinaries(tempDir, nil)
+
+	serverBin := filepath.Join(tempDir, "language_server")
+	info, err := os.Stat(serverBin)
+	if err != nil {
+		t.Fatalf("expected language_server to be restored, got error: %v", err)
+	}
+	if info.Size() != int64(len(fakeMachO)) {
+		t.Errorf("expected restored size %d, got %d", len(fakeMachO), info.Size())
+	}
+
+	if _, err := os.Stat(binBackup); !os.IsNotExist(err) {
+		t.Errorf("expected language_server.bin to be cleaned up")
+	}
+}

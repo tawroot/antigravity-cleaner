@@ -66,6 +66,9 @@ func NewWrapperManager(pathOrDir string, logger LogFunc) *WrapperManager {
 		}
 		// On Windows, proactively heal any damaged/missing core binaries in binDir
 		HealWindowsBinaries(binDir, logger)
+	} else if runtime.GOOS == "darwin" {
+		// On macOS, proactively heal any damaged/missing core binaries or invalid script wrappers in binDir
+		HealDarwinBinaries(binDir, logger)
 	}
 
 	// If binName was not explicitly identified from a file path:
@@ -176,6 +179,16 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 		return nil
 	}
 
+	if runtime.GOOS == "darwin" {
+		// On macOS, replacing language_server with a shell script causes Apple Mobile File Integrity (AMFI)
+		// and Gatekeeper to abort the process on launch with signal=SIGTERM (Bug #37).
+		// Enterprise flags & SSH spoofing are securely forwarded via Desktop launcher (Antigravity-Proxy.command);
+		// NEVER rename language_server away on macOS! Keep the native Mach-O binary intact and ad-hoc codesigned.
+		HealDarwinBinaries(m.binDir, m.logger)
+		m.logger("macOS environment: Verified pristine native Mach-O binary at %s; keeping native binary intact with ad-hoc signature to prevent AMFI SIGTERM", serverBin)
+		return nil
+	}
+
 	// 1. If original backup doesn't exist, backup the real binary
 	if _, err := os.Stat(originalBin); os.IsNotExist(err) {
 		if _, err := os.Stat(serverBin); err != nil {
@@ -217,6 +230,11 @@ func (m *WrapperManager) RemoveWrapper() error {
 	if runtime.GOOS == "windows" {
 		HealWindowsBinaries(m.binDir, m.logger)
 		m.logger("Windows environment: verified pristine native PE binary at %s", m.ServerBin())
+		return nil
+	}
+	if runtime.GOOS == "darwin" {
+		HealDarwinBinaries(m.binDir, m.logger)
+		m.logger("macOS environment: verified pristine native Mach-O binary at %s", m.ServerBin())
 		return nil
 	}
 
@@ -318,5 +336,110 @@ func HealWindowsBinaries(binDir string, logger LogFunc) {
 				}
 			}
 		}
+	}
+}
+
+// HealDarwinBinaries detects and repairs any broken, missing, or script-wrapped language_server binaries on macOS.
+// Resolves Bug #37 where legacy shell script wrappers cause Apple AMFI kernel SIGTERM aborts and "signature not found" failures.
+func HealDarwinBinaries(binDir string, logger LogFunc) {
+	if binDir == "" {
+		return
+	}
+	if logger == nil {
+		logger = defaultFlagsLogger
+	}
+
+	serverBin := filepath.Join(binDir, "language_server")
+
+	// 1. If language_server exists but is a script (<4KB and text starting with #!), remove it
+	if data, err := os.ReadFile(serverBin); err == nil && len(data) < 4096 {
+		content := strings.TrimSpace(string(data))
+		if strings.HasPrefix(content, "#!") {
+			_ = os.Remove(serverBin)
+			logger("Removed invalid script wrapper at %s", serverBin)
+		}
+	}
+
+	// 2. Scan binDir for candidate Mach-O binaries (including language_server.bin, architecture binaries, etc.)
+	entries, err := os.ReadDir(binDir)
+	if err != nil {
+		return
+	}
+
+	var bestCandidate string
+	var bestSize int64
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+		name := entry.Name()
+		low := strings.ToLower(name)
+		if strings.HasPrefix(low, "language_server") {
+			fullPath := filepath.Join(binDir, name)
+			fi, errStat := entry.Info()
+			if errStat != nil {
+				continue
+			}
+
+			// Exclude tiny text scripts
+			if fi.Size() < 4096 {
+				continue
+			}
+
+			// Real executable binary candidate
+			if fi.Size() > bestSize {
+				bestSize = fi.Size()
+				bestCandidate = fullPath
+			}
+		}
+	}
+
+	// 3. If serverBin is missing or abnormally small (<100KB) and we found a valid binary candidate, restore it
+	fiServer, errServer := os.Stat(serverBin)
+	serverNeedsRestore := errServer != nil || fiServer.Size() < 100*1024
+
+	if serverNeedsRestore && bestCandidate != "" && bestCandidate != serverBin {
+		logger("Auto-healing macOS binary: restoring %s -> %s (size: %d bytes)", filepath.Base(bestCandidate), serverBin, bestSize)
+		if errRename := os.Rename(bestCandidate, serverBin); errRename != nil {
+			if data, errRead := os.ReadFile(bestCandidate); errRead == nil {
+				_ = os.WriteFile(serverBin, data, 0755)
+			}
+		}
+	}
+
+	// 4. Clean up any leftover duplicate .bin files (e.g. language_server.bin, language_server.bin.bin)
+	if fi, err := os.Stat(serverBin); err == nil && fi.Size() > 100*1024 {
+		for _, entry := range entries {
+			if entry.IsDir() {
+				continue
+			}
+			name := entry.Name()
+			low := strings.ToLower(name)
+			if strings.HasPrefix(low, "language_server") && strings.Contains(low, ".bin") {
+				target := filepath.Join(binDir, name)
+				if target != serverBin {
+					_ = os.Remove(target)
+				}
+			}
+		}
+
+		// 5. Ensure valid ad-hoc code signature and quarantine removal on macOS
+		if runtime.GOOS == "darwin" {
+			_ = ResignDarwinBinary(serverBin)
+		}
+	}
+}
+
+// HealPlatformBinaries detects and repairs damaged, missing, or script-wrapped language_server binaries
+// across Windows and macOS before any patching or inspection operations.
+func HealPlatformBinaries(binDir string, logger LogFunc) {
+	if binDir == "" {
+		return
+	}
+	if runtime.GOOS == "windows" {
+		HealWindowsBinaries(binDir, logger)
+	} else if runtime.GOOS == "darwin" {
+		HealDarwinBinaries(binDir, logger)
 	}
 }

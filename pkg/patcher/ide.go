@@ -6,10 +6,11 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"strings"
 )
 
 var (
-	ideTargetRe = regexp.MustCompile(`(resetIsTierGCPTos\(\),)this\.[A-Za-z_$0-9]+\.isGoogleInternal`)
+	ideTargetRe = regexp.MustCompile(`(resetIsTierGCPTos\(\),)(?:this\.)?[A-Za-z_$0-9.]*isGoogleInternal`)
 	idePatchedStr = "resetIsTierGCPTos(),true"
 )
 
@@ -47,10 +48,13 @@ func FindAllIdeMainJs() []string {
 	jsSubpaths := []string{
 		filepath.Join("resources", "app", "out", "main.js"),
 		filepath.Join("resources", "app", "main.js"),
+		filepath.Join("resources", "app", "dist", "main.js"),
 		filepath.Join("Contents", "Resources", "app", "out", "main.js"),
 		filepath.Join("Contents", "Resources", "app", "main.js"),
+		filepath.Join("Contents", "Resources", "app", "dist", "main.js"),
 		filepath.Join("Resources", "app", "out", "main.js"),
 		filepath.Join("Resources", "app", "main.js"),
+		filepath.Join("Resources", "app", "dist", "main.js"),
 	}
 
 	for _, appPath := range appPaths {
@@ -86,6 +90,8 @@ func FindAllIdeMainJs() []string {
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "antigravity", "resources", "app", "main.js"),
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "app", "out", "main.js"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "app", "main.js"),
+		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE", "resources", "app", "dist", "main.js"),
 		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity", "resources", "app", "out", "main.js"),
 		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity", "resources", "app", "out", "main.js"),
 		"/Applications/Antigravity.app/Contents/Resources/app/out/main.js",
@@ -110,29 +116,74 @@ func FindIdeMainJs() string {
 	return ""
 }
 
-// ClearIdeCache removes VS Code compile cache so patched JS reloads cleanly across Linux, macOS, and Windows
+// ClearIdeCache removes VS Code compile cache, V8 bytecode caches, and partition caches
+// so patched JS reloads cleanly across Linux, macOS, and Windows.
 func ClearIdeCache() {
 	home, _ := os.UserHomeDir()
-	cacheDirs := []string{
-		// Linux
-		filepath.Join(home, ".config", "Antigravity IDE", "CachedData"),
-		filepath.Join(home, ".config", "Antigravity IDE", "Code Cache"),
-		filepath.Join(home, ".config", "Antigravity", "CachedData"),
-		filepath.Join(home, ".config", "Antigravity", "Code Cache"),
-		// Windows
-		filepath.Join(os.Getenv("APPDATA"), "Antigravity IDE", "CachedData"),
-		filepath.Join(os.Getenv("APPDATA"), "Antigravity IDE", "Code Cache"),
-		filepath.Join(os.Getenv("APPDATA"), "Antigravity", "CachedData"),
-		filepath.Join(os.Getenv("APPDATA"), "Antigravity", "Code Cache"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Antigravity IDE", "CachedData"),
-		filepath.Join(os.Getenv("LOCALAPPDATA"), "Antigravity IDE", "Code Cache"),
-		// macOS
-		filepath.Join(home, "Library", "Application Support", "Antigravity IDE", "CachedData"),
-		filepath.Join(home, "Library", "Application Support", "Antigravity IDE", "Code Cache"),
-		filepath.Join(home, "Library", "Application Support", "Antigravity", "CachedData"),
-		filepath.Join(home, "Library", "Application Support", "Antigravity", "Code Cache"),
-		filepath.Join(home, "Library", "Caches", "com.google.antigravity"),
-		filepath.Join(home, "Library", "Caches", "com.google.antigravity.helper"),
+	var cacheDirs []string
+	seen := make(map[string]bool)
+
+	add := func(p string) {
+		if p == "" {
+			return
+		}
+		clean := filepath.Clean(p)
+		if !seen[clean] {
+			seen[clean] = true
+			cacheDirs = append(cacheDirs, clean)
+		}
+	}
+
+	// 1. Candidate parent config & cache roots across all OSes
+	var parentDirs []string
+	if xdg := os.Getenv("XDG_CONFIG_HOME"); xdg != "" {
+		parentDirs = append(parentDirs, xdg)
+	}
+	if home != "" {
+		parentDirs = append(parentDirs,
+			filepath.Join(home, ".config"),
+			filepath.Join(home, "Library", "Application Support"),
+			filepath.Join(home, "Library", "Caches"),
+		)
+	}
+	if appData := os.Getenv("APPDATA"); appData != "" {
+		parentDirs = append(parentDirs, appData)
+	}
+	if localAppData := os.Getenv("LOCALAPPDATA"); localAppData != "" {
+		parentDirs = append(parentDirs, localAppData)
+	}
+
+	// Subfolders holding V8 and Electron caches
+	cacheSubdirs := []string{
+		"CachedData",
+		"Code Cache",
+		filepath.Join("Code Cache", "js"),
+		filepath.Join("Code Cache", "wasm"),
+		filepath.Join("Partitions"),
+	}
+
+	for _, parent := range parentDirs {
+		entries, err := os.ReadDir(parent)
+		if err != nil {
+			continue
+		}
+		for _, entry := range entries {
+			if entry.IsDir() {
+				nameLower := strings.ToLower(entry.Name())
+				if strings.Contains(nameLower, "antigravity") {
+					targetRoot := filepath.Join(parent, entry.Name())
+					for _, sub := range cacheSubdirs {
+						add(filepath.Join(targetRoot, sub))
+					}
+				}
+			}
+		}
+	}
+
+	// Standard macOS cache bundles
+	if home != "" {
+		add(filepath.Join(home, "Library", "Caches", "com.google.antigravity"))
+		add(filepath.Join(home, "Library", "Caches", "com.google.antigravity.helper"))
 	}
 
 	for _, d := range cacheDirs {

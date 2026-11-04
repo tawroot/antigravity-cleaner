@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 )
 
 // BinaryGate defines byte patterns for checking and patching binaries
@@ -52,9 +53,20 @@ func FindLanguageServer() string {
 
 // PatchSingleLanguageServer patches a specific language_server binary to unlock auth and region checks
 func PatchSingleLanguageServer(binPath string) (string, error) {
+	HealPlatformBinaries(filepath.Dir(binPath), nil)
+
 	data, err := os.ReadFile(binPath)
 	if err != nil {
 		return "", fmt.Errorf("failed to read binary %s: %w", binPath, err)
+	}
+
+	// If binPath is a legacy script wrapper, heal the directory and reload the real binary
+	if len(data) < 4096 && (strings.HasPrefix(string(data), "#!") || strings.HasPrefix(string(data), "@echo")) {
+		HealPlatformBinaries(filepath.Dir(binPath), nil)
+		data, err = os.ReadFile(binPath)
+		if err != nil {
+			return "", fmt.Errorf("failed to read binary %s after healing: %w", binPath, err)
+		}
 	}
 
 	gates := []BinaryGate{managerGateX64, managerGateARM64}
@@ -151,6 +163,8 @@ func CheckLanguageServerStatus(binPath string) string {
 			return "Not Installed"
 		}
 	}
+
+	HealPlatformBinaries(filepath.Dir(binPath), nil)
 
 	data, err := os.ReadFile(binPath)
 	if err != nil {

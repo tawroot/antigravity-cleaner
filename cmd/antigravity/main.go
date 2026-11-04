@@ -23,7 +23,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.5"
+const Version = "5.4.6"
 
 func init() {
 	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {
@@ -72,6 +72,8 @@ func main() {
 			} else {
 				lsStatus = lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("Installed")
 			}
+		} else if ideTargets := patcher.FindAllIdeMainJs(); len(ideTargets) > 0 {
+			lsStatus = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF9F")).Render("✔ Bundled (Antigravity IDE)")
 		}
 		fmt.Printf("  📊 Core Status: %s | Process: %s\n\n", lsStatus, statusRunning)
 
@@ -495,7 +497,11 @@ func runPatchCore() {
 	}
 	ui.PrintSection("Patch Core Binaries")
 	if res, err := patcher.PatchLanguageServer(""); err != nil {
-		ui.PrintStatus("FAIL", "Language Server", err.Error())
+		if ideTargets := patcher.FindAllIdeMainJs(); len(ideTargets) > 0 {
+			ui.PrintStatus("INFO", "Language Server", "Antigravity IDE detected (Bundled Mode). Core is managed via Option [2] (Patch IDE).")
+		} else {
+			ui.PrintStatus("FAIL", "Language Server", err.Error())
+		}
 	} else {
 		ui.PrintStatus("OK", "Language Server", res)
 	}

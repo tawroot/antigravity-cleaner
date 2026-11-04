@@ -273,6 +273,8 @@ func scoreBinaryForArchitecture(fileName string) int {
 // DetectLanguageServerInDir dynamically scans binDir for any language_server binary matching host architecture.
 // Completely eliminates hardcoded binary name dependencies across all platforms.
 func DetectLanguageServerInDir(binDir string) string {
+	HealPlatformBinaries(binDir, nil)
+
 	entries, err := os.ReadDir(binDir)
 	if err != nil {
 		return ""
