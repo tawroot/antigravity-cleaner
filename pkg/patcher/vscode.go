@@ -18,7 +18,7 @@ var (
 	downloadGuardCode   = `{const __primary=options.targetPathOverride||getInstalledTargetPath(); const __candidates=[__primary, (0,path_1.join)((0,path_1.dirname)(__primary),'antigravity'+((0,path_1.extname)(__primary)||''))]; for(const __p of __candidates){if(__p&&await pathExists(__p)){ outputChannel.appendLine('[INSTALL] Existing binary found at '+__p+'. Skipping version check and re-download.');return __p;}}}`
 )
 
-// FindVsCodeExtension finds the extension.js of google.google-antigravity
+// FindVsCodeExtension finds the extension.js of google.google-antigravity or related forks (Cursor, Windsurf, VSCodium)
 func FindVsCodeExtension() string {
 	home, _ := os.UserHomeDir()
 	candidateDirs := []string{
@@ -26,6 +26,11 @@ func FindVsCodeExtension() string {
 		filepath.Join(home, ".vscode-insiders", "extensions"),
 		filepath.Join(home, ".vscode-oss", "extensions"),
 		filepath.Join(home, ".vscode-server", "extensions"),
+		filepath.Join(home, ".cursor", "extensions"),
+		filepath.Join(home, ".cursor-server", "extensions"),
+		filepath.Join(home, ".windsurf", "extensions"),
+		filepath.Join(home, ".windsurf-server", "extensions"),
+		filepath.Join(home, ".vscodium", "extensions"),
 		filepath.Join(home, ".antigravity-ide", "extensions"),
 		filepath.Join(home, ".antigravity", "extensions"),
 	}
@@ -36,6 +41,8 @@ func FindVsCodeExtension() string {
 			filepath.Join(localApp, "Programs", "Antigravity IDE", "resources", "app", "extensions"),
 			filepath.Join(localApp, "Programs", "Antigravity", "resources", "app", "extensions"),
 			filepath.Join(localApp, "Programs", "antigravity", "resources", "app", "extensions"),
+			filepath.Join(localApp, "Programs", "cursor", "resources", "app", "extensions"),
+			filepath.Join(localApp, "Programs", "Cursor", "resources", "app", "extensions"),
 		)
 	} else if runtime.GOOS == "linux" {
 		candidateDirs = append(candidateDirs,
@@ -43,6 +50,7 @@ func FindVsCodeExtension() string {
 			"/usr/share/antigravity-ide/resources/app/extensions",
 			"/opt/antigravity/resources/app/extensions",
 			"/opt/Antigravity IDE/resources/app/extensions",
+			"/opt/Cursor/resources/app/extensions",
 		)
 	}
 
@@ -70,7 +78,7 @@ func FindVsCodeExtension() string {
 			continue
 		}
 		for _, e := range entries {
-			if e.IsDir() && (strings.HasPrefix(e.Name(), "google.google-antigravity-") || strings.EqualFold(e.Name(), "agy") || strings.HasPrefix(e.Name(), "agy-")) {
+			if e.IsDir() && (strings.HasPrefix(e.Name(), "google.google-antigravity-") || strings.HasPrefix(e.Name(), "google.antigravity-") || strings.HasPrefix(e.Name(), "antigravity-") || strings.EqualFold(e.Name(), "agy") || strings.HasPrefix(e.Name(), "agy-")) {
 				for _, sub := range []string{"extension.js", filepath.Join("dist", "extension.js")} {
 					extJs := filepath.Join(dir, e.Name(), sub)
 					if fi, err := os.Stat(extJs); err == nil && !fi.IsDir() {
