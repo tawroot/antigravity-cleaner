@@ -31,4 +31,19 @@ func TestFindAllAntigravityExecutables(t *testing.T) {
 	for _, target := range targets {
 		t.Logf(" - Target: %s, ExePath: %s, IsIDE: %v", target.Name, target.ExePath, target.IsIDE)
 	}
+
+	// Test FindTargetExecutable and FindAntigravityExecutable
+	defaultExe := FindAntigravityExecutable()
+	ideExe := FindTargetExecutable("ide")
+	appExe := FindTargetExecutable("app")
+
+	t.Logf("Default Exe: %s", defaultExe)
+	t.Logf("IDE Exe: %s", ideExe)
+	t.Logf("App Exe: %s", appExe)
+
+	if len(targets) > 0 {
+		if defaultExe == "" {
+			t.Fatalf("expected non-empty default executable when targets exist")
+		}
+	}
 }

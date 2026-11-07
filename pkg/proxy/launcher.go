@@ -97,22 +97,46 @@ func FindAllAntigravityExecutables() []AppTarget {
 		add("Antigravity IDE", path, true)
 	}
 
-	return targets
+	// Sort targets so Antigravity IDE appears first, followed by standalone Antigravity
+	var ideTargets []AppTarget
+	var standardTargets []AppTarget
+	for _, t := range targets {
+		if t.IsIDE {
+			ideTargets = append(ideTargets, t)
+		} else {
+			standardTargets = append(standardTargets, t)
+		}
+	}
+	return append(ideTargets, standardTargets...)
 }
 
-// FindAntigravityExecutable finds the main Antigravity GUI application
-func FindAntigravityExecutable() string {
+// FindTargetExecutable finds an Antigravity executable matching preference ("ide", "app"/"standalone", or empty for default)
+func FindTargetExecutable(preference string) string {
 	targets := FindAllAntigravityExecutables()
 	if len(targets) == 0 {
 		return ""
 	}
-	// Prefer standard Antigravity if available, otherwise IDE
-	for _, t := range targets {
-		if !t.IsIDE {
-			return t.ExePath
+	prefLower := strings.ToLower(strings.TrimSpace(preference))
+	if prefLower == "ide" {
+		for _, t := range targets {
+			if t.IsIDE {
+				return t.ExePath
+			}
+		}
+	} else if prefLower == "app" || prefLower == "standalone" {
+		for _, t := range targets {
+			if !t.IsIDE {
+				return t.ExePath
+			}
 		}
 	}
+	// Default: Return the first target (IDE takes precedence if installed, else standalone)
 	return targets[0].ExePath
+}
+
+// FindAntigravityExecutable finds the primary Antigravity GUI application
+func FindAntigravityExecutable() string {
+	return FindTargetExecutable("")
 }
 
 // BuildProxyEnv constructs clean proxy environment variables for child processes
