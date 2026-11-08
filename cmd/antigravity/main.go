@@ -23,7 +23,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.6"
+const Version = "5.4.7"
 
 func init() {
 	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {

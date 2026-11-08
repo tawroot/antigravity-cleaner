@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.7] - 2026-11-08
+
+### ⚡ Extension 1.10.0 Support, Multi-Editor Discovery, Account Manager & Dynamic Launcher
+
+#### 🧩 VS Code Extension 1.10.0 Minification Fix (#46)
+- **Atomic Regex Matching:** Replaced regex backreferences with atomic pattern to reliably match minified variants of the extension in version 1.10.0.
+- **SOCKS5 Isolation:** Resolved `UND_ERR_INVALID_ARG` in Node.js (undici) by isolating SOCKS5/SOCKS5h loopback from `HTTPS_PROXY` environment variables.
+
+#### 👤 Multi-Account Manager & Token Bridge Hardening
+- **Token Protection:** Prevented `SyncTokenBridge` from stomping the active `jetski-standalone-oauth-token` when running under SSH connection spoofing.
+- **Bi-Directional Sync:** Synchronized active tokens between file storage and OS Keyring in `SaveAccount` and `SwitchAccount`.
+
+#### 🔍 Editor & IDE Discovery Expansion (#45)
+- **Multi-Editor Extension Support:** Added discovery and patching support for **Cursor** (`~/.cursor/extensions`), **Windsurf** (`~/.windsurf/extensions`), and **VSCodium** across Linux, macOS, and Windows.
+- **Alternative Extension Prefixes:** Added support for alternative extension ID prefixes (`google.antigravity-` and `antigravity-`).
+
+#### 🚀 Dynamic Target Selection & Auto-Fix
+- **Auto-Fix Extension Coverage:** Included `PatchVsCodeExtension` in `runQuickAutoFix` (Option 1) so 1-click auto-fix covers all IDE extensions without requiring manual individual patch commands.
+- **Dynamic Launcher Selection:** Prompt dynamically when multiple Antigravity targets are installed, with CLI target flags (`launch ide` / `launch app`).
+
+---
+
+## [5.4.6] - 2026-11-04
+
+### 🛡️ AMFI SIGTERM Resolution, Chromium & SQLite Session Purge & V8 Bytecode Optimization
+
+- **macOS AMFI SIGTERM Resolution (#37):** Added `HealDarwinBinaries` to auto-purge legacy shell script wrappers, restore native Mach-O `language_server` with ad-hoc codesign, and keep native binary intact to prevent AMFI SIGTERM aborts.
+- **Chromium & Session Purge (#44):** Deep wipe modern Chromium `Network/` subdirectories (`Cookies`, `Trust Tokens`, `TransportSecurity`, `Persistent State`), `WebStorage/`, and safely reset `antigravityUnifiedStateSync.oauthToken` in `state.vscdb`.
+- **V8 Cache & Bundled IDE:** Deep clean V8 Code Cache (`js`/`wasm`, Partitions) and support `dist/main.js` to prevent stale bytecode execution in Antigravity IDE.
+- **CLI (agy):** Fully dynamic zero-hardcode binary detection for `agy 1.4.12` with bytecode multi-gate bypass.
+
+---
+
 ## [5.4.5] - 2026-11-02
 
 ### 🚑 Stability & Self-Healing Hotfix: Windows Binary Restoration, macOS CodeSign & Flag Modernization
