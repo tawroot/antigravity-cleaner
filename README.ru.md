@@ -13,7 +13,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ Antigravity Cleaner, Fixer & Patcher Pro (v5.4.3)</h1>
+<h1 align="center">⚡ Antigravity Cleaner, Fixer & Patcher Pro (v5.4.7)</h1>
 
 <p align="center">
   <strong>Автономный обход санкций, исправление ошибок 403 и 429, движок нулевой телеметрии и прямой No-TUN прокси-инжектор для Google Antigravity</strong>
@@ -21,7 +21,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.7-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -68,11 +68,11 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 💻 Визуальные интерфейсы: ретро-GUI KeyGen и терминальный дашборд
 
-### 💾 Ретро-GUI в стиле Windows 95 (v5.4.3)
+### 💾 Ретро-GUI в стиле Windows 95 (v5.4.7)
 Автономный запуск двойным кликом или командой `ag-cleaner gui`: пошаговый мастер (`① Авто-фикс ➔ ② Запуск IDE ➔ ③ Создание ярлыка`), тумблер нулевой телеметрии и мониторинг процессов:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.7" width="460">
 </div>
 
 ---
@@ -242,7 +242,7 @@ Antigravity Cleaner полностью управляется из команд�
 <summary><strong>⚡ Бенчмарки производительности системы</strong></summary>
 <br>
 
-| Метрика | Antigravity Cleaner Pro (v5.4.3) | Обычные скрипты / Python |
+| Метрика | Antigravity Cleaner Pro (v5.4.7) | Обычные скрипты / Python |
 | :--- | :--- | :--- |
 | **Язык и движок** | Чистый Go 1.22+ (нативный бинарник) | Python 3 / Bash / Node.js |
 | **Скорость сканирования MultiGate** | **1.94 ГБ/с (100% в оперативной памяти)** | 40–80 МБ/с (grep/sed на диске) |
@@ -308,7 +308,7 @@ Antigravity Cleaner содержит встроенный **Agent Skill** ([`ski
 
 ## 🗺️ План развития (Roadmap)
 
-Ознакомьтесь с планами на v5.4.3 и v6.0.0 в файле [**ROADMAP.md**](ROADMAP.md).
+Ознакомьтесь с планами на v5.4.7 и v6.0.0 в файле [**ROADMAP.md**](ROADMAP.md).
 
 ---
 

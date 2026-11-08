@@ -15,7 +15,7 @@
   <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
 </p>
 
-<h1 align="center">⚡ آنتی‌گراویتی کلینر، فیکسر و پچر پرو (v5.4.3)</h1>
+<h1 align="center">⚡ آنتی‌گراویتی کلینر، فیکسر و پچر پرو (v5.4.7)</h1>
 
 <p align="center">
   <strong>موتور خودترمیم و ضدتحریم هوش مصنوعی، رفع ارور ۴۰۳ و سهمیه ۴۲۹، تله‌متری صفر و تزریق پروکسی بدون سربار TUN</strong>
@@ -23,7 +23,7 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.4.3-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.7-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
@@ -74,7 +74,7 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 اجرای مستقل با دابل‌کلیک یا دستور `ag-cleaner gui` با فرایند سه‌مرحله‌ای شفاف (`۱. پچ خودکار ➔ ۲. اجرای ادیتور ➔ ۳. ساخت میانبر`) همراه با کلید قطع دائمی تله‌متری:
 
 <div align="center">
-  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.3" width="460">
+  <img src="docs/images/gui.png" alt="Antigravity Cleaner Retro KeyGen Desktop GUI v5.4.7" width="460">
 </div>
 
 ---
@@ -324,7 +324,7 @@ irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.p
 
 ## 🗺️ نقشه راه آینده (Roadmap)
 
-اهداف فازهای v5.4.3 و نسخه آینده v6.0.0 در سند رسمی [**ROADMAP.fa.md**](ROADMAP.fa.md) قابل مشاهده است.
+اهداف فازهای v5.4.7 و نسخه آینده v6.0.0 در سند رسمی [**ROADMAP.fa.md**](ROADMAP.fa.md) قابل مشاهده است.
 
 ---
 
