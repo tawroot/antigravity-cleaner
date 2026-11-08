@@ -97,22 +97,46 @@ func FindAllAntigravityExecutables() []AppTarget {
 		add("Antigravity IDE", path, true)
 	}
 
-	return targets
+	// Sort targets so Antigravity IDE appears first, followed by standalone Antigravity
+	var ideTargets []AppTarget
+	var standardTargets []AppTarget
+	for _, t := range targets {
+		if t.IsIDE {
+			ideTargets = append(ideTargets, t)
+		} else {
+			standardTargets = append(standardTargets, t)
+		}
+	}
+	return append(ideTargets, standardTargets...)
 }
 
-// FindAntigravityExecutable finds the main Antigravity GUI application
-func FindAntigravityExecutable() string {
+// FindTargetExecutable finds an Antigravity executable matching preference ("ide", "app"/"standalone", or empty for default)
+func FindTargetExecutable(preference string) string {
 	targets := FindAllAntigravityExecutables()
 	if len(targets) == 0 {
 		return ""
 	}
-	// Prefer standard Antigravity if available, otherwise IDE
-	for _, t := range targets {
-		if !t.IsIDE {
-			return t.ExePath
+	prefLower := strings.ToLower(strings.TrimSpace(preference))
+	if prefLower == "ide" {
+		for _, t := range targets {
+			if t.IsIDE {
+				return t.ExePath
+			}
+		}
+	} else if prefLower == "app" || prefLower == "standalone" {
+		for _, t := range targets {
+			if !t.IsIDE {
+				return t.ExePath
+			}
 		}
 	}
+	// Default: Return the first target (IDE takes precedence if installed, else standalone)
 	return targets[0].ExePath
+}
+
+// FindAntigravityExecutable finds the primary Antigravity GUI application
+func FindAntigravityExecutable() string {
+	return FindTargetExecutable("")
 }
 
 // BuildProxyEnv constructs clean proxy environment variables for child processes
@@ -122,14 +146,15 @@ func BuildProxyEnv(proxyURL string) []string {
 	var httpProxy string
 	var socksProxy string
 
-	if strings.HasPrefix(proxyURL, "socks") {
+	isSocks := strings.HasPrefix(proxyURL, "socks")
+	if isSocks {
 		socksProxy = proxyURL
 		// If socks5h, ensure Go and curl understand remote DNS
 		if !strings.HasPrefix(proxyURL, "socks5h://") && strings.HasPrefix(proxyURL, "socks5://") {
 			socksProxy = strings.Replace(proxyURL, "socks5://", "socks5h://", 1)
 		}
-		// Also provide standard HTTP proxy fallback if possible
-		httpProxy = socksProxy
+		// Notice: Node.js (undici) throws UND_ERR_INVALID_ARG if HTTPS_PROXY contains socks5:// or socks5h://.
+		// Therefore, httpProxy remains empty when using SOCKS; Chromium uses --proxy-server directly.
 	} else {
 		httpProxy = proxyURL
 		socksProxy = proxyURL
@@ -138,13 +163,16 @@ func BuildProxyEnv(proxyURL string) []string {
 	overrides := map[string]string{
 		"ALL_PROXY":      socksProxy,
 		"all_proxy":      socksProxy,
-		"HTTPS_PROXY":    httpProxy,
-		"https_proxy":    httpProxy,
-		"HTTP_PROXY":     httpProxy,
-		"http_proxy":     httpProxy,
-		"GRPC_PROXY":     httpProxy,
 		"SSH_CONNECTION": "127.0.0.1 1234 127.0.0.1 22", // Remote environment spoofing: switches language_server to file-token mode
 		"SSH_CLIENT":     "127.0.0.1 1234 22",
+	}
+
+	if httpProxy != "" {
+		overrides["HTTPS_PROXY"] = httpProxy
+		overrides["https_proxy"] = httpProxy
+		overrides["HTTP_PROXY"] = httpProxy
+		overrides["http_proxy"] = httpProxy
+		overrides["GRPC_PROXY"] = httpProxy
 	}
 
 	// Filter existing proxy envs and sensitive leak variables
@@ -156,13 +184,24 @@ func BuildProxyEnv(proxyURL string) []string {
 		"GOOGLE_APPLICATION_CREDENTIALS": true,
 	}
 
+	// Proxy keys to remove if we are overriding or if using socks (to prevent inherited socks5h from breaking Node.js)
+	stripProxyKeys := map[string]bool{
+		"ALL_PROXY":   true,
+		"all_proxy":   true,
+		"HTTPS_PROXY": true,
+		"https_proxy": true,
+		"HTTP_PROXY":  true,
+		"http_proxy":  true,
+		"GRPC_PROXY":  true,
+	}
+
 	var cleanEnv []string
 	for _, e := range env {
 		parts := strings.SplitN(e, "=", 2)
 		if len(parts) > 0 {
 			key := parts[0]
 			keyUpper := strings.ToUpper(key)
-			if _, isProxy := overrides[keyUpper]; isProxy {
+			if stripProxyKeys[key] || stripProxyKeys[keyUpper] {
 				continue
 			}
 			if leakKeys[key] || leakKeys[keyUpper] {
@@ -309,9 +348,14 @@ if [ "$ACTIVE_PORT" = "10809" ] || [ "$ACTIVE_PORT" = "2081" ]; then
     PROXY_TYPE="http"
 fi
 
-export ALL_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
-export HTTPS_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
-export HTTP_PROXY="${PROXY_TYPE}h://127.0.0.1:${ACTIVE_PORT}"
+if [ "$PROXY_TYPE" = "http" ]; then
+    export ALL_PROXY="http://127.0.0.1:${ACTIVE_PORT}"
+    export HTTPS_PROXY="http://127.0.0.1:${ACTIVE_PORT}"
+    export HTTP_PROXY="http://127.0.0.1:${ACTIVE_PORT}"
+else
+    export ALL_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+    unset HTTPS_PROXY HTTP_PROXY https_proxy http_proxy
+fi
 
 # 4. Remote environment spoofing: switches language_server to file-token mode & reduces cloud fraud friction
 export SSH_CONNECTION="127.0.0.1 1234 127.0.0.1 22"
@@ -412,13 +456,24 @@ if [ -z "$ACTIVE_PORT" ]; then
     ACTIVE_PORT="10808"
 fi
 
-export ALL_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
-export HTTPS_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
-export HTTP_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+PROXY_TYPE="socks5"
+if [ "$ACTIVE_PORT" = "7890" ] || [ "$ACTIVE_PORT" = "10809" ] || [ "$ACTIVE_PORT" = "2081" ]; then
+    PROXY_TYPE="http"
+fi
+
+if [ "$PROXY_TYPE" = "http" ]; then
+    export ALL_PROXY="http://127.0.0.1:${ACTIVE_PORT}"
+    export HTTPS_PROXY="http://127.0.0.1:${ACTIVE_PORT}"
+    export HTTP_PROXY="http://127.0.0.1:${ACTIVE_PORT}"
+else
+    export ALL_PROXY="socks5h://127.0.0.1:${ACTIVE_PORT}"
+    unset HTTPS_PROXY HTTP_PROXY https_proxy http_proxy
+fi
+
 export SSH_CONNECTION="127.0.0.1 1234 127.0.0.1 22"
 export SSH_CLIENT="127.0.0.1 1234 22"
 
-exec "$APP_PATH" --proxy-server="socks5://127.0.0.1:${ACTIVE_PORT}" "$@"
+exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
 `, appPath)
 
 		if err := os.WriteFile(cmdPath, []byte(content), 0755); err != nil {
@@ -430,14 +485,28 @@ exec "$APP_PATH" --proxy-server="socks5://127.0.0.1:${ACTIVE_PORT}" "$@"
 	if runtime.GOOS == "windows" {
 		chromiumProxy := CleanChromiumProxyURL(proxyURL)
 		batPath := filepath.Join(home, "Desktop", "Antigravity-NoTUN.bat")
-		content := fmt.Sprintf(`@echo off
-set "ALL_PROXY=%s"
+
+		var proxyEnvLines string
+		if strings.HasPrefix(proxyURL, "socks") {
+			socksProxy := proxyURL
+			if !strings.HasPrefix(socksProxy, "socks5h://") && strings.HasPrefix(socksProxy, "socks5://") {
+				socksProxy = strings.Replace(socksProxy, "socks5://", "socks5h://", 1)
+			}
+			proxyEnvLines = fmt.Sprintf(`set "ALL_PROXY=%s"
+set "HTTPS_PROXY="
+set "HTTP_PROXY="`, socksProxy)
+		} else {
+			proxyEnvLines = fmt.Sprintf(`set "ALL_PROXY=%s"
 set "HTTPS_PROXY=%s"
-set "HTTP_PROXY=%s"
+set "HTTP_PROXY=%s"`, proxyURL, proxyURL, proxyURL)
+		}
+
+		content := fmt.Sprintf(`@echo off
+%s
 set "SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22"
 set "SSH_CLIENT=127.0.0.1 1234 22"
 start "" "%s" --proxy-server=%s
-`, proxyURL, proxyURL, proxyURL, appPath, chromiumProxy)
+`, proxyEnvLines, appPath, chromiumProxy)
 
 		if err := os.WriteFile(batPath, []byte(content), 0755); err != nil {
 			return "", err

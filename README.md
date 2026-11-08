@@ -16,7 +16,7 @@
 <h1 align="center">⚡ Antigravity Cleaner, Fixer & Patcher Pro (v5.4.3)</h1>
 
 <p align="center">
-  <strong>Autonomous Sanction Bypass, Zero-Telemetry Engine & Direct No-TUN Proxy Injector for Google Antigravity</strong>
+  <strong>The Best 1-Click Autonomous Region Fixer, Sanction Bypass & Direct No-TUN Proxy Injector for Google Antigravity (Ubuntu/Linux, Windows, macOS)</strong>
 </p>
 
 <div align="center">
@@ -150,7 +150,7 @@ Run `ag-cleaner` in your terminal for an interactive Lipgloss dashboard, and sel
   <img src="docs/images/error-notice.png" alt="Google Region Restriction Notice" width="680">
 </p>
 
-**Antigravity Cleaner, Fixer & Patcher Pro** is a specialized, open-source systems utility engineered in **pure Go** that neutralizes region blocking, account eligibility barriers, telemetry phone-home beacons, and HTTP 429 quota locks across:
+**Antigravity Fixer, Cleaner & Patcher** is the best open-source autonomous utility designed to remove region restrictions, bypass Google sanctions, and resolve **"Your current account is not eligible" (Error 403)**, **Region Locks**, and **HTTP 429 Quota locks** across Ubuntu/Linux, Windows, and macOS:
 - **Google Antigravity 2.x**
 - **Antigravity IDE**
 - **Antigravity CLI (`agy`)**

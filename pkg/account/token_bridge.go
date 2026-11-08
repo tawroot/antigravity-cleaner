@@ -82,13 +82,19 @@ func SyncTokenBridge(logger func(format string, args ...interface{})) error {
 		return nil
 	}
 
-	// If both have valid tokens but are different, update file to match active keyring
+	// If both have valid tokens but are different:
+	// Prioritize file storage because in SSH spoofing mode (which Antigravity runs with),
+	// Google's language_server reads and updates jetski-standalone-oauth-token directly,
+	// while OS Keyring remains untouched. Overwriting file with Keyring clobbers fresh logins!
 	if krHasValidToken && fileHasValidToken {
 		krHash := sha256.Sum256([]byte(krVal))
 		fileHash := sha256.Sum256(fileBytes)
 		if krHash != fileHash {
-			_ = os.WriteFile(tokenFilePath, []byte(krVal), 0600)
-			logger("Updated file token storage with latest active OS Keyring credentials")
+			if err := keyring.Set("gemini", "antigravity", string(fileBytes)); err != nil {
+				logger("Warning: failed to sync file token to OS Keyring: %v", err)
+			} else {
+				logger("Synced active file token storage to OS Keyring")
+			}
 		}
 	}
 

@@ -182,14 +182,22 @@ func SaveAccount(name string, dbPath string) error {
 				}
 			}
 
-			// Capture OS Keyring token payload (gemini / antigravity)
+			// Capture OS Keyring token payload (gemini / antigravity) or fallback to file token
 			var keyringSecret string
 			if krVal, err := keyring.Get("gemini", "antigravity"); err == nil && krVal != "" {
 				keyringSecret = krVal
-				if email == "" || email == "Google User (Antigravity Hub)" {
-					if match := emailRe.FindString(krVal); match != "" {
-						email = match
+			}
+			tokenFilePath := StandaloneTokenFilePath()
+			if tokenFilePath != "" {
+				if fileData, err := os.ReadFile(tokenFilePath); err == nil && len(fileData) > 0 {
+					if keyringSecret == "" {
+						keyringSecret = string(fileData)
 					}
+				}
+			}
+			if keyringSecret != "" && (email == "" || email == "Google User (Antigravity Hub)") {
+				if match := emailRe.FindString(keyringSecret); match != "" {
+					email = match
 				}
 			}
 
@@ -198,6 +206,12 @@ func SaveAccount(name string, dbPath string) error {
 			}
 
 			_ = os.MkdirAll(accountProfileDir, 0700)
+
+			if tokenFilePath != "" {
+				if fileData, err := os.ReadFile(tokenFilePath); err == nil && len(fileData) > 0 {
+					_ = os.WriteFile(filepath.Join(accountProfileDir, "jetski-standalone-oauth-token"), fileData, 0600)
+				}
+			}
 
 			// Backup Hub files
 			for _, f := range hubFiles {
@@ -322,10 +336,24 @@ func SwitchAccount(name string, dbPath string) error {
 		}
 
 		// 0. Restore OS Keyring credentials if present (gemini / antigravity)
-		if account.KeyringSecret != "" {
-			_ = keyring.Set("gemini", "antigravity", account.KeyringSecret)
-		} else if krBytes, err := os.ReadFile(filepath.Join(accountProfileDir, "keyring_secret.json")); err == nil {
-			_ = keyring.Set("gemini", "antigravity", string(krBytes))
+		secret := account.KeyringSecret
+		if secret == "" {
+			if krBytes, err := os.ReadFile(filepath.Join(accountProfileDir, "keyring_secret.json")); err == nil {
+				secret = string(krBytes)
+			} else if tokBytes, err := os.ReadFile(filepath.Join(accountProfileDir, "jetski-standalone-oauth-token")); err == nil {
+				secret = string(tokBytes)
+			}
+		}
+
+		if secret != "" {
+			_ = keyring.Set("gemini", "antigravity", secret)
+		}
+
+		// 0b. Restore ~/.gemini/jetski-standalone-oauth-token for file-token mode (SSH spoofing)
+		tokenFilePath := StandaloneTokenFilePath()
+		if tokenFilePath != "" && secret != "" {
+			_ = os.MkdirAll(filepath.Dir(tokenFilePath), 0700)
+			_ = os.WriteFile(tokenFilePath, []byte(secret), 0600)
 		}
 
 		// 1. Restore Hub files

@@ -23,7 +23,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.6"
+const Version = "5.4.7"
 
 func init() {
 	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {
@@ -263,7 +263,18 @@ func handleSubcommand(cmd string, args []string) {
 		fs := flag.NewFlagSet("launch", flag.ExitOnError)
 		fs.StringVar(&proxyURL, "proxy", "", "Custom proxy URL (e.g. socks5h://127.0.0.1:10808)")
 		_ = fs.Parse(args)
-		_ = proxy.LaunchAntigravityWithProxy("", proxyURL, fs.Args())
+
+		var preference string
+		remaining := fs.Args()
+		if len(remaining) > 0 {
+			switch strings.ToLower(remaining[0]) {
+			case "ide", "app", "standalone":
+				preference = remaining[0]
+				remaining = remaining[1:]
+			}
+		}
+		appPath := proxy.FindTargetExecutable(preference)
+		_ = proxy.LaunchAntigravityWithProxy(appPath, proxyURL, remaining)
 	case "gui":
 		runGui()
 	case "clean":
@@ -417,6 +428,12 @@ func runQuickAutoFix() {
 		coreSuccess = true
 	}
 
+	if res, err := patcher.PatchVsCodeExtension(""); err != nil {
+		ui.PrintStatus("INFO", "VS Code / IDE Extension", "No external extensions folder found (optional)")
+	} else {
+		ui.PrintStatus("OK", "VS Code / IDE Extension", res)
+	}
+
 	if res, err := patcher.PatchAsarZeroLog(""); err != nil {
 		ui.PrintStatus("INFO", "Zero-Log ASAR", "Antigravity Standalone (app.asar optional)")
 	} else {
@@ -546,9 +563,31 @@ func runLaunchProxy() {
 	}
 
 	ui.PrintStatus("OK", "Proxy Detected", fmt.Sprintf("%s (%s)", best.URL, best.Provider))
+
+	targets := proxy.FindAllAntigravityExecutables()
+	selectedExe := ""
+	if len(targets) > 1 {
+		fmt.Println()
+		fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00F0FF")).Render("  ℹ Multiple Antigravity installations detected:"))
+		for i, t := range targets {
+			fmt.Printf("  [%d] %s (%s)\n", i+1, lipgloss.NewStyle().Bold(true).Render(t.Name), t.ExePath)
+		}
+		fmt.Println()
+		choice := ui.ReadInput(fmt.Sprintf("Select target to launch [1-%d] (default: 1)", len(targets)))
+		idx := 0
+		if choice != "" {
+			if n, err := strconv.Atoi(strings.TrimSpace(choice)); err == nil && n >= 1 && n <= len(targets) {
+				idx = n - 1
+			}
+		}
+		selectedExe = targets[idx].ExePath
+	} else if len(targets) == 1 {
+		selectedExe = targets[0].ExePath
+	}
+
 	fmt.Printf("  %s\n", lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("Starting Antigravity with injected environment..."))
 
-	if err := proxy.LaunchAntigravityWithProxy("", best.URL, nil); err != nil {
+	if err := proxy.LaunchAntigravityWithProxy(selectedExe, best.URL, nil); err != nil {
 		ui.PrintStatus("FAIL", "Launch Error", err.Error())
 	} else {
 		ui.PrintStatus("OK", "Process Spawned", "Antigravity launched successfully without TUN mode!")

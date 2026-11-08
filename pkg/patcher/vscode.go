@@ -10,14 +10,15 @@ import (
 )
 
 var (
-	channelChangedRe = regexp.MustCompile(`const\s+isChannelChanged\s*=\s*manifestFetched\s*&&\s*lastInstalledUrl\s*!==\s*releaseBaseUrl;`)
-	channelPatched   = `const isChannelChanged = false;`
+	channelChangedRe         = regexp.MustCompile(`const\s+isChannelChanged\s*=\s*manifestFetched\s*&&\s*lastInstalledUrl\s*!==\s*releaseBaseUrl;`)
+	channelChangedMinifiedRe = regexp.MustCompile(`let\s+([a-zA-Z0-9_$]+)\s*=\s*[^;]+;\s*([a-zA-Z0-9_$]+\s*&&\s*[a-zA-Z0-9_$]+\.appendLine\(\s*[` + "`" + `'"]\[INSTALL\]\s*Release channel change detected)`)
+	channelPatched           = `const isChannelChanged = false; /*patched:channel_lock*/`
 
-	downloadGuardTarget = regexp.MustCompile(`(outputChannel\.appendLine\(\s*['"]\[INSTALL\]\s*Checking Antigravity releases\.\.\.['"]\s*\);)`)
+	downloadGuardTarget = regexp.MustCompile(`([a-zA-Z0-9_$]+\.appendLine\(\s*['"]\[INSTALL\]\s*Checking Antigravity releases\.\.\.['"]\s*\);)`)
 	downloadGuardCode   = `{const __primary=options.targetPathOverride||getInstalledTargetPath(); const __candidates=[__primary, (0,path_1.join)((0,path_1.dirname)(__primary),'antigravity'+((0,path_1.extname)(__primary)||''))]; for(const __p of __candidates){if(__p&&await pathExists(__p)){ outputChannel.appendLine('[INSTALL] Existing binary found at '+__p+'. Skipping version check and re-download.');return __p;}}}`
 )
 
-// FindVsCodeExtension finds the extension.js of google.google-antigravity
+// FindVsCodeExtension finds the extension.js of google.google-antigravity or related forks (Cursor, Windsurf, VSCodium)
 func FindVsCodeExtension() string {
 	home, _ := os.UserHomeDir()
 	candidateDirs := []string{
@@ -25,6 +26,11 @@ func FindVsCodeExtension() string {
 		filepath.Join(home, ".vscode-insiders", "extensions"),
 		filepath.Join(home, ".vscode-oss", "extensions"),
 		filepath.Join(home, ".vscode-server", "extensions"),
+		filepath.Join(home, ".cursor", "extensions"),
+		filepath.Join(home, ".cursor-server", "extensions"),
+		filepath.Join(home, ".windsurf", "extensions"),
+		filepath.Join(home, ".windsurf-server", "extensions"),
+		filepath.Join(home, ".vscodium", "extensions"),
 		filepath.Join(home, ".antigravity-ide", "extensions"),
 		filepath.Join(home, ".antigravity", "extensions"),
 	}
@@ -35,6 +41,8 @@ func FindVsCodeExtension() string {
 			filepath.Join(localApp, "Programs", "Antigravity IDE", "resources", "app", "extensions"),
 			filepath.Join(localApp, "Programs", "Antigravity", "resources", "app", "extensions"),
 			filepath.Join(localApp, "Programs", "antigravity", "resources", "app", "extensions"),
+			filepath.Join(localApp, "Programs", "cursor", "resources", "app", "extensions"),
+			filepath.Join(localApp, "Programs", "Cursor", "resources", "app", "extensions"),
 		)
 	} else if runtime.GOOS == "linux" {
 		candidateDirs = append(candidateDirs,
@@ -42,6 +50,7 @@ func FindVsCodeExtension() string {
 			"/usr/share/antigravity-ide/resources/app/extensions",
 			"/opt/antigravity/resources/app/extensions",
 			"/opt/Antigravity IDE/resources/app/extensions",
+			"/opt/Cursor/resources/app/extensions",
 		)
 	}
 
@@ -69,7 +78,7 @@ func FindVsCodeExtension() string {
 			continue
 		}
 		for _, e := range entries {
-			if e.IsDir() && (strings.HasPrefix(e.Name(), "google.google-antigravity-") || strings.EqualFold(e.Name(), "agy") || strings.HasPrefix(e.Name(), "agy-")) {
+			if e.IsDir() && (strings.HasPrefix(e.Name(), "google.google-antigravity-") || strings.HasPrefix(e.Name(), "google.antigravity-") || strings.HasPrefix(e.Name(), "antigravity-") || strings.EqualFold(e.Name(), "agy") || strings.HasPrefix(e.Name(), "agy-")) {
 				for _, sub := range []string{"extension.js", filepath.Join("dist", "extension.js")} {
 					extJs := filepath.Join(dir, e.Name(), sub)
 					if fi, err := os.Stat(extJs); err == nil && !fi.IsDir() {
@@ -100,17 +109,29 @@ func PatchVsCodeExtension(extPath string) (string, error) {
 	}
 
 	content := string(data)
-	if strings.Contains(content, channelPatched) && strings.Contains(content, "Skipping version check and re-download") {
+	alreadyPatched := (strings.Contains(content, channelPatched) && strings.Contains(content, "Skipping version check and re-download")) ||
+		strings.Contains(content, "/*patched:channel_lock*/")
+	if alreadyPatched {
 		return fmt.Sprintf("Already patched: %s", filepath.Base(filepath.Dir(extPath))), nil
 	}
 
-	// Apply Part 1: Channel lock
-	patched := channelChangedRe.ReplaceAllString(content, channelPatched)
-	channelApplied := patched != content || strings.Contains(content, channelPatched)
+	// Apply Part 1: Channel lock (Classic unminified and v1.10.0+ minified)
+	patched := content
+	channelApplied := false
 
-	// Apply Part 2: Re-download guard injection
+	if channelChangedRe.MatchString(patched) {
+		patched = channelChangedRe.ReplaceAllString(patched, channelPatched)
+		channelApplied = true
+	} else if channelChangedMinifiedRe.MatchString(patched) {
+		patched = channelChangedMinifiedRe.ReplaceAllString(patched, "let $1 = false; /*patched:channel_lock*/ $2")
+		channelApplied = true
+	} else if strings.Contains(content, channelPatched) || strings.Contains(content, "/*patched:channel_lock*/") {
+		channelApplied = true
+	}
+
+	// Apply Part 2: Re-download guard injection (if unminified AST present)
 	guardApplied := strings.Contains(patched, "Skipping version check and re-download")
-	if downloadGuardTarget.MatchString(patched) {
+	if !guardApplied && downloadGuardTarget.MatchString(patched) && strings.Contains(patched, "options.targetPathOverride") {
 		patched = downloadGuardTarget.ReplaceAllString(patched, "$1\n"+downloadGuardCode)
 		guardApplied = true
 	}
