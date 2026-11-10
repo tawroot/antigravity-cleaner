@@ -204,8 +204,8 @@ func (m *WrapperManager) InstallWrapper(opts EnterpriseFlagsOptions) error {
 		_ = ResignDarwinBinary(originalBin)
 	}
 
-	// 2. Build flags
-	flags := BuildServerFlags(opts, m.logger)
+	// 2. Build flags dynamically tailored to target binary (prevents Issue #48 status 2 flag crashes)
+	flags := BuildServerFlagsForBinary(originalBin, opts, m.logger)
 	flagsStr := strings.Join(flags, " ")
 
 	// Execute post-install hooks (e.g. bi-directional token bridge synchronization)
