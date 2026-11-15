@@ -535,6 +535,8 @@ func GetStandardLanguageServerCandidates() []string {
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE"),
 		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
 		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
+		filepath.Join(home, "scoop", "apps", "antigravity-ide", "current"),
+		filepath.Join(home, "scoop", "apps", "antigravity", "current"),
 		filepath.Join(home, "antigravity"),
 	}
 
@@ -698,6 +700,8 @@ func FindAllLanguageServers(logger LogFunc) []string {
 			filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE"),
 			filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
 			filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
+			filepath.Join(home, "scoop", "apps", "antigravity-ide", "current"),
+			filepath.Join(home, "scoop", "apps", "antigravity", "current"),
 		)
 		// Scan all registered and active WSL distributions for Linux language_server ELF binaries
 		for _, wslServer := range FindAllWslLanguageServers(logger) {
