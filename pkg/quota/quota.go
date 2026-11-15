@@ -185,6 +185,40 @@ func ExtractRefreshToken(dbPath string) (string, error) {
 				return match, nil
 			}
 		}
+
+		// Mode 1b: Check Standalone file token (jetski-standalone-oauth-token) in ~/.gemini or AppData
+		home, _ := os.UserHomeDir()
+		var tokenFiles []string
+		if home != "" {
+			tokenFiles = append(tokenFiles, filepath.Join(home, ".gemini", "jetski-standalone-oauth-token"))
+		}
+		if appData := os.Getenv("APPDATA"); appData != "" {
+			tokenFiles = append(tokenFiles,
+				filepath.Join(appData, "Antigravity", "jetski-standalone-oauth-token"),
+				filepath.Join(appData, "Antigravity", "User", "jetski-standalone-oauth-token"),
+			)
+		}
+		for _, tf := range tokenFiles {
+			if data, err := os.ReadFile(tf); err == nil && len(data) > 0 {
+				var payload struct {
+					Token struct {
+						RefreshToken string `json:"refresh_token"`
+					} `json:"token"`
+					RefreshToken string `json:"refresh_token"`
+				}
+				if err := json.Unmarshal(data, &payload); err == nil {
+					if payload.Token.RefreshToken != "" {
+						return payload.Token.RefreshToken, nil
+					}
+					if payload.RefreshToken != "" {
+						return payload.RefreshToken, nil
+					}
+				}
+				if match := tokenRe.FindString(string(data)); match != "" {
+					return match, nil
+				}
+			}
+		}
 	}
 
 	// Mode 2: Check IDE (VS Code state.vscdb)
