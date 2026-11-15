@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"net/url"
 	"os"
@@ -20,7 +21,6 @@ import (
 	"time"
 
 	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
-	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
 	"github.com/zalando/go-keyring"
 	_ "modernc.org/sqlite"
 )
@@ -45,18 +45,29 @@ func xorDecode(b []byte) string {
 
 // getQuotaHttpClient returns an HTTP client routed through the best detected proxy (if available)
 func getQuotaHttpClient() *http.Client {
-	bestProxy, _ := proxy.GetBestProxy()
 	var transport *http.Transport
-	if bestProxy != nil {
-		if proxyURL, err := url.Parse(bestProxy.URL); err == nil {
-			transport = &http.Transport{
-				Proxy: http.ProxyURL(proxyURL),
-				TLSClientConfig: &tls.Config{
-					InsecureSkipVerify: false,
-				},
+
+	// Probe common loopback proxy ports without importing proxy package (prevents import cycle)
+	for _, port := range []int{10808, 2080, 7890, 1080, 10809, 2081} {
+		conn, err := net.DialTimeout("tcp", fmt.Sprintf("127.0.0.1:%d", port), 50*time.Millisecond)
+		if err == nil {
+			_ = conn.Close()
+			proxyType := "socks5"
+			if port == 7890 || port == 10809 || port == 2081 {
+				proxyType = "http"
+			}
+			if proxyURL, err := url.Parse(fmt.Sprintf("%s://127.0.0.1:%d", proxyType, port)); err == nil {
+				transport = &http.Transport{
+					Proxy: http.ProxyURL(proxyURL),
+					TLSClientConfig: &tls.Config{
+						InsecureSkipVerify: false,
+					},
+				}
+				break
 			}
 		}
 	}
+
 	if transport == nil {
 		transport = &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
