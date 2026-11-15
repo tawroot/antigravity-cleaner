@@ -206,7 +206,7 @@ func scanWindowsProcess(targetName string) string {
 	cleanName := strings.TrimSuffix(targetName, ".exe")
 	filter := fmt.Sprintf("*%s*", cleanName)
 	cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
-		fmt.Sprintf("(Get-Process | Where-Object { $_.Name -like '%s' -or $_.ProcessName -like '%s' } | Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue)", filter, filter))
+		fmt.Sprintf("(Get-Process -Name '%s' -ErrorAction SilentlyContinue).Path", filter))
 	out, err := cmd.Output()
 	if err == nil {
 		lines := strings.Split(strings.TrimSpace(string(out)), "\n")

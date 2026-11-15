@@ -59,6 +59,13 @@ func FindAllAntigravityExecutables() []AppTarget {
 		// Antigravity IDE (VS Code based)
 		add("Antigravity IDE", filepath.Join(localAppData, "Programs", "Antigravity IDE", "Antigravity IDE.exe"), true)
 		add("Antigravity IDE", filepath.Join(progFiles, "Antigravity IDE", "Antigravity IDE.exe"), true)
+
+		// Scoop installations
+		userProfile := os.Getenv("USERPROFILE")
+		if userProfile != "" {
+			add("Antigravity", filepath.Join(userProfile, "scoop", "apps", "antigravity", "current", "Antigravity.exe"), false)
+			add("Antigravity IDE", filepath.Join(userProfile, "scoop", "apps", "antigravity-ide", "current", "Antigravity IDE.exe"), true)
+		}
 	}
 
 	// 2. Linux checks
