@@ -163,6 +163,8 @@ func BuildProxyEnv(proxyURL string) []string {
 	overrides := map[string]string{
 		"ALL_PROXY":      socksProxy,
 		"all_proxy":      socksProxy,
+		"NO_PROXY":       "localhost,127.0.0.1",
+		"no_proxy":       "localhost,127.0.0.1",
 		"SSH_CONNECTION": "127.0.0.1 1234 127.0.0.1 22", // Remote environment spoofing: switches language_server to file-token mode
 		"SSH_CLIENT":     "127.0.0.1 1234 22",
 	}
@@ -173,6 +175,13 @@ func BuildProxyEnv(proxyURL string) []string {
 		overrides["HTTP_PROXY"] = httpProxy
 		overrides["http_proxy"] = httpProxy
 		overrides["GRPC_PROXY"] = httpProxy
+	} else if isSocks {
+		cleanAddr := CleanHostPort(proxyURL)
+		httpLoopback := fmt.Sprintf("http://%s", cleanAddr)
+		overrides["HTTPS_PROXY"] = httpLoopback
+		overrides["https_proxy"] = httpLoopback
+		overrides["HTTP_PROXY"] = httpLoopback
+		overrides["http_proxy"] = httpLoopback
 	}
 
 	// Filter existing proxy envs and sensitive leak variables
@@ -244,9 +253,10 @@ func LaunchAntigravityWithProxy(appPath string, proxyURL string, extraArgs []str
 
 	chromiumProxy := CleanChromiumProxyURL(proxyURL)
 
-	// Build arguments: pass --proxy-server to Chromium/Electron without quotes
+	// Build arguments: pass --proxy-server and loopback filter to Chromium/Electron without quotes
 	args := []string{
 		fmt.Sprintf("--proxy-server=%s", chromiumProxy),
+		"--proxy-bypass-list=<-loopback>",
 	}
 	args = append(args, extraArgs...)
 
@@ -483,36 +493,94 @@ exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
 	}
 
 	if runtime.GOOS == "windows" {
-		chromiumProxy := CleanChromiumProxyURL(proxyURL)
-		batPath := filepath.Join(home, "Desktop", "Antigravity-NoTUN.bat")
+		cleanerAppDir := filepath.Join(home, "AppData", "Roaming", "antigravity-cleaner")
+		_ = os.MkdirAll(cleanerAppDir, 0755)
 
-		var proxyEnvLines string
-		if strings.HasPrefix(proxyURL, "socks") {
-			socksProxy := proxyURL
-			if !strings.HasPrefix(socksProxy, "socks5h://") && strings.HasPrefix(socksProxy, "socks5://") {
-				socksProxy = strings.Replace(socksProxy, "socks5://", "socks5h://", 1)
-			}
-			proxyEnvLines = fmt.Sprintf(`set "ALL_PROXY=%s"
-set "HTTPS_PROXY="
-set "HTTP_PROXY="`, socksProxy)
-		} else {
-			proxyEnvLines = fmt.Sprintf(`set "ALL_PROXY=%s"
-set "HTTPS_PROXY=%s"
-set "HTTP_PROXY=%s"`, proxyURL, proxyURL, proxyURL)
-		}
+		ps1Path := filepath.Join(cleanerAppDir, "launcher.ps1")
+		vbsPath := filepath.Join(cleanerAppDir, "run.vbs")
+		batPath := filepath.Join(cleanerAppDir, "launcher.bat")
 
-		content := fmt.Sprintf(`@echo off
-%s
+		// 1. Dynamic silent PowerShell launcher with auto-port detection and full env injection
+		launcherPs1Content := fmt.Sprintf(`$ErrorActionPreference = 'SilentlyContinue'
+
+$candidates = @(
+    @{ Port = 10808; Scheme = "socks5" },
+    @{ Port = 2080;  Scheme = "socks5" },
+    @{ Port = 7890;  Scheme = "socks5" },
+    @{ Port = 1080;  Scheme = "socks5" },
+    @{ Port = 10809; Scheme = "http" },
+    @{ Port = 2081;  Scheme = "http" }
+)
+
+$activePort = 10808
+$activeScheme = "socks5"
+
+foreach ($c in $candidates) {
+    $t = New-Object System.Net.Sockets.TcpClient
+    try {
+        $iar = $t.BeginConnect("127.0.0.1", $c.Port, $null, $null)
+        if ($iar.AsyncWaitHandle.WaitOne(60, $false) -and $t.Connected) {
+            $activePort = $c.Port
+            $activeScheme = $c.Scheme
+            $t.Close()
+            break
+        }
+    } catch {} finally {
+        $t.Close()
+    }
+}
+
+$env:ALL_PROXY   = "$($activeScheme)://127.0.0.1:$activePort"
+$env:all_proxy   = "$($activeScheme)://127.0.0.1:$activePort"
+$env:HTTP_PROXY  = "http://127.0.0.1:$activePort"
+$env:http_proxy  = "http://127.0.0.1:$activePort"
+$env:HTTPS_PROXY = "http://127.0.0.1:$activePort"
+$env:https_proxy = "http://127.0.0.1:$activePort"
+$env:NO_PROXY    = "localhost,127.0.0.1"
+$env:no_proxy    = "localhost,127.0.0.1"
+$env:SSH_CONNECTION = "127.0.0.1 1234 127.0.0.1 22"
+$env:SSH_CLIENT     = "127.0.0.1 1234 22"
+
+$appPath = "%s"
+if (-not (Test-Path $appPath)) {
+    $appPath = "$env:LOCALAPPDATA\Programs\antigravity\Antigravity.exe"
+}
+
+$arg1 = "--proxy-server=$($activeScheme)://127.0.0.1:$activePort"
+$arg2 = '--proxy-bypass-list=<-loopback>'
+
+Start-Process -FilePath $appPath -ArgumentList @($arg1, $arg2) -WorkingDirectory (Split-Path $appPath)
+`, appPath)
+		_ = os.WriteFile(ps1Path, []byte(launcherPs1Content), 0755)
+
+		// 2. Silent VBS runner (Zero console window flash)
+		vbsContent := fmt.Sprintf(`Set shell = CreateObject("WScript.Shell")
+ps1Path = "%s"
+cmd = "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File """ & ps1Path & """"
+shell.Run cmd, 0, False
+`, ps1Path)
+		_ = os.WriteFile(vbsPath, []byte(vbsContent), 0755)
+
+		// 3. Resilient Standalone Batch Launcher on Desktop
+		batContent := fmt.Sprintf(`@echo off
+title Antigravity - No TUN Proxy
+
+set "ALL_PROXY=socks5://127.0.0.1:10808"
+set "all_proxy=socks5://127.0.0.1:10808"
+set "HTTP_PROXY=http://127.0.0.1:10808"
+set "http_proxy=http://127.0.0.1:10808"
+set "HTTPS_PROXY=http://127.0.0.1:10808"
+set "https_proxy=http://127.0.0.1:10808"
+set "NO_PROXY=localhost,127.0.0.1"
+set "no_proxy=localhost,127.0.0.1"
 set "SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22"
 set "SSH_CLIENT=127.0.0.1 1234 22"
-start "" "%s" --proxy-server=%s
-`, proxyEnvLines, appPath, chromiumProxy)
 
-		if err := os.WriteFile(batPath, []byte(content), 0755); err != nil {
-			return "", err
-		}
+start "" "%s" --proxy-server="socks5://127.0.0.1:10808" --proxy-bypass-list="<-loopback>"
+`, appPath)
+		_ = os.WriteFile(batPath, []byte(batContent), 0755)
 
-		// Generate native Windows shortcuts (.lnk) for all installed targets
+		// 4. Generate native Windows shortcuts (.lnk) for all installed targets
 		targets := FindAllAntigravityExecutables()
 		if len(targets) == 0 {
 			targets = []AppTarget{{Name: "Antigravity", ExePath: appPath}}
@@ -523,20 +591,36 @@ start "" "%s" --proxy-server=%s
 			lnkScript := fmt.Sprintf(`
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("%s")
-$Shortcut.TargetPath = "%s"
-$Shortcut.Arguments = "--proxy-server=%s"
+$Shortcut.TargetPath = "wscript.exe"
+$Shortcut.Arguments = """%s"""
 $Shortcut.WorkingDirectory = "%s"
 $Shortcut.IconLocation = "%s,0"
 $Shortcut.Description = "Google %s with Smart Proxy"
 $Shortcut.Save()
-`, lnkPath, t.ExePath, chromiumProxy, filepath.Dir(t.ExePath), t.ExePath, t.Name)
+`, lnkPath, vbsPath, filepath.Dir(t.ExePath), t.ExePath, t.Name)
 			_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", lnkScript).Run()
+
+			// Also patch Start Menu shortcut if exists
+			startMenuLnk := filepath.Join(home, "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", fmt.Sprintf("%s.lnk", t.Name))
+			if _, err := os.Stat(startMenuLnk); err == nil {
+				startMenuScript := fmt.Sprintf(`
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("%s")
+$Shortcut.TargetPath = "wscript.exe"
+$Shortcut.Arguments = """%s"""
+$Shortcut.WorkingDirectory = "%s"
+$Shortcut.IconLocation = "%s,0"
+$Shortcut.Description = "Google %s with Smart Proxy"
+$Shortcut.Save()
+`, startMenuLnk, vbsPath, filepath.Dir(t.ExePath), t.ExePath, t.Name)
+				_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", startMenuScript).Run()
+			}
 		}
 
 		if len(targets) > 1 {
-			return fmt.Sprintf("Desktop shortcuts created for Antigravity & Antigravity IDE (%s)", batPath), nil
+			return "Official Desktop & Start Menu shortcuts updated for Antigravity & Antigravity IDE", nil
 		}
-		return batPath, nil
+		return "Official Desktop & Start Menu shortcuts successfully patched with Smart No-TUN Proxy", nil
 	}
 
 	return "", fmt.Errorf("desktop launcher generation not supported on %s", runtime.GOOS)

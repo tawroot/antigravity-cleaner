@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.8] - 2026-11-15
+
+### 🪟 Windows Silent Shortcut Overhaul, Dynamic Loopback Port Scanner & Chromium Loopback Unblock
+
+#### 🚀 Native Windows Silent Shortcut Pipeline
+- **Eliminate Cluttering Desktop Batch Files:** Instead of creating standalone `.bat` files on the user's desktop, the launcher now in-place patches the official `Antigravity.lnk` shortcut on both **Desktop** and **Start Menu** with the official application icon (`Antigravity.exe,0`).
+- **Zero-Flash Execution:** Leverages a lightweight Windows Script Host runner (`run.vbs` with `windowStyle = 0`) to execute the launcher engine silently without flashing a command prompt window.
+
+#### ⚡ Dynamic Loopback Port Detection
+- **Multi-Client Probing:** Probes active loopback proxy ports dynamically across v2rayN / Xray (`10808`, `10809`), Hiddify / NekoBox (`2080`, `2081`), Clash / Mihomo (`7890`), and standard SOCKS5 (`1080`) with short non-blocking timeouts (~50ms) instead of hardcoded values.
+
+#### 🔓 Chromium Loopback & OAuth Gatekeeper Unblock
+- **Loopback Proxy Bypass List:** Injects `--proxy-bypass-list="<-loopback>"` to prevent Chromium's default loopback bypass from dropping local OAuth callbacks and loopback proxy communication.
+- **Environment Variable Parity:** Injects both uppercase and lowercase proxy variables (`ALL_PROXY`, `all_proxy`, `HTTP_PROXY`, `http_proxy`, `HTTPS_PROXY`, `https_proxy`) and `NO_PROXY=localhost,127.0.0.1` so that child processes (Node.js utility workers, gRPC clients, Language Server) properly inherit proxy routes on Windows.
+
+---
+
 ## [5.4.7] - 2026-11-08
 
 ### ⚡ Extension 1.10.0 Support, Multi-Editor Discovery, Account Manager & Dynamic Launcher
