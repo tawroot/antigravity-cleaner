@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = "SilentlyContinue"
+$ErrorActionPreference = "SilentlyContinue"
 $GithubBaseUrl = "https://github.com/dalroot/antigravity-cleaner/releases/latest/download"
 $ExeName = "antigravity-cleaner-windows-amd64.exe"
 

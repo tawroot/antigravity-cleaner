@@ -182,13 +182,6 @@ func BuildProxyEnv(proxyURL string) []string {
 		overrides["HTTP_PROXY"] = httpProxy
 		overrides["http_proxy"] = httpProxy
 		overrides["GRPC_PROXY"] = httpProxy
-	} else if isSocks {
-		cleanAddr := CleanHostPort(proxyURL)
-		httpLoopback := fmt.Sprintf("http://%s", cleanAddr)
-		overrides["HTTPS_PROXY"] = httpLoopback
-		overrides["https_proxy"] = httpLoopback
-		overrides["HTTP_PROXY"] = httpLoopback
-		overrides["http_proxy"] = httpLoopback
 	}
 
 	// Filter existing proxy envs and sensitive leak variables
@@ -508,12 +501,13 @@ exec "$APP_PATH" --proxy-server="${PROXY_TYPE}://127.0.0.1:${ACTIVE_PORT}" "$@"
 		batPath := filepath.Join(cleanerAppDir, "launcher.bat")
 
 		// 1. Dynamic silent PowerShell launcher with auto-port detection and full env injection
-		launcherPs1Content := fmt.Sprintf(`$ErrorActionPreference = 'SilentlyContinue'
+		launcherPs1Content := fmt.Sprintf(`param([string]$TargetAppPath = "%s")
+$ErrorActionPreference = 'SilentlyContinue'
 
 $candidates = @(
     @{ Port = 10808; Scheme = "socks5" },
     @{ Port = 2080;  Scheme = "socks5" },
-    @{ Port = 7890;  Scheme = "socks5" },
+    @{ Port = 7890;  Scheme = "http" },
     @{ Port = 1080;  Scheme = "socks5" },
     @{ Port = 10809; Scheme = "http" },
     @{ Port = 2081;  Scheme = "http" }
@@ -539,16 +533,26 @@ foreach ($c in $candidates) {
 
 $env:ALL_PROXY   = "$($activeScheme)://127.0.0.1:$activePort"
 $env:all_proxy   = "$($activeScheme)://127.0.0.1:$activePort"
-$env:HTTP_PROXY  = "http://127.0.0.1:$activePort"
-$env:http_proxy  = "http://127.0.0.1:$activePort"
-$env:HTTPS_PROXY = "http://127.0.0.1:$activePort"
-$env:https_proxy = "http://127.0.0.1:$activePort"
+if ($activeScheme -eq "http") {
+    $env:HTTP_PROXY  = "http://127.0.0.1:$activePort"
+    $env:http_proxy  = "http://127.0.0.1:$activePort"
+    $env:HTTPS_PROXY = "http://127.0.0.1:$activePort"
+    $env:https_proxy = "http://127.0.0.1:$activePort"
+} else {
+    $env:HTTP_PROXY  = ""
+    $env:http_proxy  = ""
+    $env:HTTPS_PROXY = ""
+    $env:https_proxy = ""
+}
 $env:NO_PROXY    = "localhost,127.0.0.1"
 $env:no_proxy    = "localhost,127.0.0.1"
 $env:SSH_CONNECTION = "127.0.0.1 1234 127.0.0.1 22"
 $env:SSH_CLIENT     = "127.0.0.1 1234 22"
 
-$appPath = "%s"
+$appPath = $TargetAppPath
+if (-not $appPath -or -not (Test-Path $appPath)) {
+    $appPath = "%s"
+}
 if (-not (Test-Path $appPath)) {
     $appPath = "$env:LOCALAPPDATA\Programs\antigravity\Antigravity.exe"
 }
@@ -557,13 +561,17 @@ $arg1 = "--proxy-server=$($activeScheme)://127.0.0.1:$activePort"
 $arg2 = '--proxy-bypass-list=<-loopback>'
 
 Start-Process -FilePath $appPath -ArgumentList @($arg1, $arg2) -WorkingDirectory (Split-Path $appPath)
-`, appPath)
+`, appPath, appPath)
 		_ = os.WriteFile(ps1Path, []byte(launcherPs1Content), 0755)
 
 		// 2. Silent VBS runner (Zero console window flash)
 		vbsContent := fmt.Sprintf(`Set shell = CreateObject("WScript.Shell")
 ps1Path = "%s"
-cmd = "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File """ & ps1Path & """"
+targetApp = ""
+If WScript.Arguments.Count > 0 Then
+    targetApp = WScript.Arguments(0)
+End If
+cmd = "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File """ & ps1Path & """ -TargetAppPath """ & targetApp & """"
 shell.Run cmd, 0, False
 `, ps1Path)
 		_ = os.WriteFile(vbsPath, []byte(vbsContent), 0755)
@@ -574,10 +582,10 @@ title Antigravity - No TUN Proxy
 
 set "ALL_PROXY=socks5://127.0.0.1:10808"
 set "all_proxy=socks5://127.0.0.1:10808"
-set "HTTP_PROXY=http://127.0.0.1:10808"
-set "http_proxy=http://127.0.0.1:10808"
-set "HTTPS_PROXY=http://127.0.0.1:10808"
-set "https_proxy=http://127.0.0.1:10808"
+set "HTTP_PROXY="
+set "http_proxy="
+set "HTTPS_PROXY="
+set "https_proxy="
 set "NO_PROXY=localhost,127.0.0.1"
 set "no_proxy=localhost,127.0.0.1"
 set "SSH_CONNECTION=127.0.0.1 1234 127.0.0.1 22"
@@ -599,12 +607,12 @@ start "" "%s" --proxy-server="socks5://127.0.0.1:10808" --proxy-bypass-list="<-l
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("%s")
 $Shortcut.TargetPath = "wscript.exe"
-$Shortcut.Arguments = """%s"""
+$Shortcut.Arguments = """%s"" ""%s"""
 $Shortcut.WorkingDirectory = "%s"
 $Shortcut.IconLocation = "%s,0"
 $Shortcut.Description = "Google %s with Smart Proxy"
 $Shortcut.Save()
-`, lnkPath, vbsPath, filepath.Dir(t.ExePath), t.ExePath, t.Name)
+`, lnkPath, vbsPath, t.ExePath, filepath.Dir(t.ExePath), t.ExePath, t.Name)
 			_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", lnkScript).Run()
 
 			// Also patch Start Menu shortcut if exists
@@ -614,12 +622,12 @@ $Shortcut.Save()
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("%s")
 $Shortcut.TargetPath = "wscript.exe"
-$Shortcut.Arguments = """%s"""
+$Shortcut.Arguments = """%s"" ""%s"""
 $Shortcut.WorkingDirectory = "%s"
 $Shortcut.IconLocation = "%s,0"
 $Shortcut.Description = "Google %s with Smart Proxy"
 $Shortcut.Save()
-`, startMenuLnk, vbsPath, filepath.Dir(t.ExePath), t.ExePath, t.Name)
+`, startMenuLnk, vbsPath, t.ExePath, filepath.Dir(t.ExePath), t.ExePath, t.Name)
 				_ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", startMenuScript).Run()
 			}
 		}

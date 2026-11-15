@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Mirrored Networking Auto-Configuration:** Deploys `networkingMode=mirrored`, `dnsTunneling=true`, and `autoProxy=true` in `%USERPROFILE%\.wslconfig` cleanly while preserving all existing user settings.
 - **Dynamic Shell Bridge Injection:** Injects dynamic proxy environment variables idempotently into `.bashrc` and `.zshrc` across all WSL distribution users.
 
+#### 🛡️ Dynamic Binary Flag Probing & Exit Status 2 Crash Prevention (#48)
+- **Runtime Flag Probing:** Dynamically probes binary `--help` output before injecting `-stubby_auth_mode` or `-use_snapshot_mendelfp` flags into enterprise and wrapper profiles.
+- **Fail-Safe Startup:** Prevents `language_server` crashes with `exit status 2: flags provided but not defined` on newer and older Google Antigravity core engine builds.
+
 ---
 
 ## [5.4.7] - 2026-11-08
