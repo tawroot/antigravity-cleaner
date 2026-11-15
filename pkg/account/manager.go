@@ -96,6 +96,7 @@ var hubDirs = []string{
 	"Local Storage",
 	"Session Storage",
 	"Partitions",
+	"Network",
 }
 
 var hubCacheExcludes = []string{
@@ -349,11 +350,16 @@ func SwitchAccount(name string, dbPath string) error {
 			_ = keyring.Set("gemini", "antigravity", secret)
 		}
 
-		// 0b. Restore ~/.gemini/jetski-standalone-oauth-token for file-token mode (SSH spoofing)
+		// 0b. Restore ~/.gemini/jetski-standalone-oauth-token and Hub dir for file-token mode (SSH spoofing)
 		tokenFilePath := StandaloneTokenFilePath()
 		if tokenFilePath != "" && secret != "" {
 			_ = os.MkdirAll(filepath.Dir(tokenFilePath), 0700)
 			_ = os.WriteFile(tokenFilePath, []byte(secret), 0600)
+		}
+		if hubDir != "" && secret != "" {
+			_ = os.WriteFile(filepath.Join(hubDir, "jetski-standalone-oauth-token"), []byte(secret), 0600)
+			_ = os.MkdirAll(filepath.Join(hubDir, "User"), 0700)
+			_ = os.WriteFile(filepath.Join(hubDir, "User", "jetski-standalone-oauth-token"), []byte(secret), 0600)
 		}
 
 		// 1. Restore Hub files

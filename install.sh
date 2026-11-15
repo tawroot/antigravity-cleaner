@@ -3,8 +3,8 @@ set -e
 
 APP_NAME="antigravity-cleaner"
 INSTALL_DIR="${HOME}/.local/bin"
-REPO="tawroot/antigravity-cleaner"
-VERSION="v5.4.7"
+REPO="dalroot/antigravity-cleaner"
+VERSION="v5.4.8"
 
 echo "===================================================="
 echo "  ⚡ Antigravity Cleaner — Universal AI Freedom Toolkit (${VERSION})"
@@ -78,5 +78,5 @@ fi
 
 echo ""
 echo -e "\033[1;33m⭐ If Antigravity Cleaner helped you, please give it a star on GitHub:\033[0m"
-echo -e "\033[1;36m   https://github.com/tawroot/antigravity-cleaner\033[0m"
+echo -e "\033[1;36m   https://github.com/dalroot/antigravity-cleaner\033[0m"
 echo ""

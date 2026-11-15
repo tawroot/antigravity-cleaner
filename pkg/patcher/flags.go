@@ -1,8 +1,16 @@
 package patcher
 
 import (
+	"bufio"
+	"bytes"
+	"context"
+	"fmt"
 	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
 	"strings"
+	"time"
 )
 
 // defaultFlagsLogger provides structured logging with [FLAGS] tag
@@ -134,6 +142,105 @@ func BuildServerFlags(opts EnterpriseFlagsOptions, logger LogFunc) []string {
 	}
 
 	return flags
+}
+
+// DetectSupportedFlags inspects a language_server binary to determine which CLI flags it natively supports.
+// It executes '<binPath> --help' with a short timeout and parses the usage declaration.
+// This prevents fatal Go runtime exits (status 2: 'flags provided but not defined') across different core builds (Issue #48).
+func DetectSupportedFlags(binPath string) (map[string]bool, error) {
+	if binPath == "" {
+		return nil, fmt.Errorf("empty binary path")
+	}
+	if fi, err := os.Stat(binPath); err != nil || fi.IsDir() {
+		return nil, fmt.Errorf("invalid binary path %q: %w", binPath, err)
+	}
+
+	supported := make(map[string]bool)
+
+	// 1. Proactive execution probe with --help
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+
+	cmd := exec.CommandContext(ctx, binPath, "--help")
+	output, _ := cmd.CombinedOutput()
+	if len(output) > 0 {
+		scanner := bufio.NewScanner(bytes.NewReader(output))
+		for scanner.Scan() {
+			line := strings.TrimSpace(scanner.Text())
+			if strings.HasPrefix(line, "-") {
+				parts := strings.SplitN(line, ":", 2)
+				flagPart := strings.TrimLeft(parts[0], "-")
+				flagName := strings.TrimSpace(strings.SplitN(flagPart, "=", 2)[0])
+				if flagName != "" {
+					supported[flagName] = true
+				}
+			}
+		}
+	}
+
+	if len(supported) > 0 {
+		return supported, nil
+	}
+
+	// 2. Fallback: Scan binary content for known flag string markers if --help yielded nothing
+	data, err := os.ReadFile(binPath)
+	if err != nil {
+		return nil, err
+	}
+
+	candidateMarkers := []string{
+		"disable_telemetry",
+		"is_google_internal",
+		"jetbox_release_channel",
+		"stubby_auth_mode",
+		"use_stubby_auth",
+		"use_local_chrome",
+		"browser_eval_env",
+		"local_chrome_headless",
+	}
+
+	for _, m := range candidateMarkers {
+		if bytes.Contains(data, []byte(m)) {
+			supported[m] = true
+		}
+	}
+
+	return supported, nil
+}
+
+// FilterSupportedFlags validates candidate flags against the binary's actual registered flags.
+// If supported flags cannot be probed (e.g. non-binary or mock test file), candidates are retained.
+func FilterSupportedFlags(binPath string, candidateFlags []string, logger LogFunc) []string {
+	if binPath == "" || len(candidateFlags) == 0 {
+		return candidateFlags
+	}
+
+	supported, err := DetectSupportedFlags(binPath)
+	if err != nil || len(supported) == 0 {
+		return candidateFlags
+	}
+
+	binBase := filepath.Base(binPath)
+	var filtered []string
+	for _, flag := range candidateFlags {
+		flagName := strings.TrimLeft(flag, "-")
+		flagName = strings.TrimSpace(strings.SplitN(flagName, "=", 2)[0])
+		if supported[flagName] {
+			filtered = append(filtered, flag)
+		} else {
+			if logger != nil {
+				logger("Probed %s: filtered unsupported runtime flag %s (preventing status 2 crash, closes #48)", binBase, flag)
+			}
+		}
+	}
+
+	return filtered
+}
+
+// BuildServerFlagsForBinary generates safe, verified CLI arguments specifically tailored for the target binary.
+func BuildServerFlagsForBinary(binPath string, opts EnterpriseFlagsOptions, logger LogFunc) []string {
+	candidateFlags := BuildServerFlags(opts, logger)
+	return FilterSupportedFlags(binPath, candidateFlags, logger)
 }
 
 

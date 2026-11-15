@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.8] - 2026-11-15
+
+### 🪟 Windows Silent Shortcut Overhaul, Dynamic Loopback Port Scanner & Chromium Loopback Unblock
+
+#### 🚀 Native Windows Silent Shortcut Pipeline
+- **Eliminate Cluttering Desktop Batch Files:** Instead of creating standalone `.bat` files on the user's desktop, the launcher now in-place patches the official `Antigravity.lnk` shortcut on both **Desktop** and **Start Menu** with the official application icon (`Antigravity.exe,0`).
+- **Zero-Flash Execution:** Leverages a lightweight Windows Script Host runner (`run.vbs` with `windowStyle = 0`) to execute the launcher engine silently without flashing a command prompt window.
+
+#### ⚡ Dynamic Loopback Port Detection
+- **Multi-Client Probing:** Probes active loopback proxy ports dynamically across v2rayN / Xray (`10808`, `10809`), Hiddify / NekoBox (`2080`, `2081`), Clash / Mihomo (`7890`), and standard SOCKS5 (`1080`) with short non-blocking timeouts (~50ms) instead of hardcoded values.
+
+#### 🔓 Chromium Loopback & OAuth Gatekeeper Unblock
+- **Loopback Proxy Bypass List:** Injects `--proxy-bypass-list="<-loopback>"` to prevent Chromium's default loopback bypass from dropping local OAuth callbacks and loopback proxy communication.
+- **Environment Variable Parity:** Injects both uppercase and lowercase proxy variables (`ALL_PROXY`, `all_proxy`, `HTTP_PROXY`, `http_proxy`, `HTTPS_PROXY`, `https_proxy`) and `NO_PROXY=localhost,127.0.0.1` so that child processes (Node.js utility workers, gRPC clients, Language Server) properly inherit proxy routes on Windows.
+
+#### 🐧 Dynamic WSL (Windows Subsystem for Linux) Self-Healing & Mirrored Networking
+- **Zero-Hardcoding Distro Discovery:** Dynamically discovers all installed WSL distributions via `\\wsl.localhost\`, `\\wsl$\`, and the Windows Registry (`HKCU\...\Lxss`), without hardcoding distribution names.
+- **Linux ELF Bytecode Patching:** Recursively discovers and patches Linux ELF `language_server` binaries across all user homes inside all WSL distros with the IDA bytecode unlock (`hasValidAuth = 1`).
+- **Mirrored Networking Auto-Configuration:** Deploys `networkingMode=mirrored`, `dnsTunneling=true`, and `autoProxy=true` in `%USERPROFILE%\.wslconfig` cleanly while preserving all existing user settings.
+- **Dynamic Shell Bridge Injection:** Injects dynamic proxy environment variables idempotently into `.bashrc` and `.zshrc` across all WSL distribution users.
+
+#### 🛡️ Dynamic Binary Flag Probing & Exit Status 2 Crash Prevention (#48)
+- **Runtime Flag Probing:** Dynamically probes binary `--help` output before injecting `-stubby_auth_mode` or `-use_snapshot_mendelfp` flags into enterprise and wrapper profiles.
+- **Fail-Safe Startup:** Prevents `language_server` crashes with `exit status 2: flags provided but not defined` on newer and older Google Antigravity core engine builds.
+
+---
+
 ## [5.4.7] - 2026-11-08
 
 ### ⚡ Extension 1.10.0 Support, Multi-Editor Discovery, Account Manager & Dynamic Launcher

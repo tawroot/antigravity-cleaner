@@ -206,7 +206,7 @@ func scanWindowsProcess(targetName string) string {
 	cleanName := strings.TrimSuffix(targetName, ".exe")
 	filter := fmt.Sprintf("*%s*", cleanName)
 	cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
-		fmt.Sprintf("(Get-Process | Where-Object { $_.Name -like '%s' -or $_.ProcessName -like '%s' } | Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue)", filter, filter))
+		fmt.Sprintf("(Get-Process -Name '%s' -ErrorAction SilentlyContinue).Path", filter))
 	out, err := cmd.Output()
 	if err == nil {
 		lines := strings.Split(strings.TrimSpace(string(out)), "\n")
@@ -535,6 +535,8 @@ func GetStandardLanguageServerCandidates() []string {
 		filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE"),
 		filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
 		filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
+		filepath.Join(home, "scoop", "apps", "antigravity-ide", "current"),
+		filepath.Join(home, "scoop", "apps", "antigravity", "current"),
 		filepath.Join(home, "antigravity"),
 	}
 
@@ -698,7 +700,13 @@ func FindAllLanguageServers(logger LogFunc) []string {
 			filepath.Join(os.Getenv("LOCALAPPDATA"), "Programs", "Antigravity IDE"),
 			filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
 			filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
+			filepath.Join(home, "scoop", "apps", "antigravity-ide", "current"),
+			filepath.Join(home, "scoop", "apps", "antigravity", "current"),
 		)
+		// Scan all registered and active WSL distributions for Linux language_server ELF binaries
+		for _, wslServer := range FindAllWslLanguageServers(logger) {
+			add(wslServer)
+		}
 	} else if runtime.GOOS == "linux" {
 		candidateRoots = append(candidateRoots,
 			filepath.Join(home, "Applications", "Antigravity"),
@@ -777,6 +785,18 @@ func FindLanguageServerModular(logger LogFunc) string {
 // FindRunningLanguageServerPID returns the PID of an active language_server, or 0 if none is active
 func FindRunningLanguageServerPID() int {
 	selfPid := os.Getpid()
+
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
+			"(Get-Process -Name '*language_server*' -ErrorAction SilentlyContinue | Select-Object -First 1).Id")
+		if out, err := cmd.Output(); err == nil {
+			var pid int
+			if _, err := fmt.Sscanf(strings.TrimSpace(string(out)), "%d", &pid); err == nil && pid > 0 {
+				return pid
+			}
+		}
+		return 0
+	}
 
 	if runtime.GOOS == "linux" {
 		entries, err := os.ReadDir("/proc")

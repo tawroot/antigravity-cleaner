@@ -2,6 +2,9 @@ package patcher
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -167,6 +170,104 @@ func BenchmarkMergeLaunchArguments(b *testing.B) {
 		merged := MergeLaunchArguments(existing, opts, noopLogger)
 		if len(merged) == 0 {
 			b.Fatal("empty merged flags")
+		}
+	}
+}
+
+func TestDetectAndFilterSupportedFlags(t *testing.T) {
+	tempDir := t.TempDir()
+	mockBin := filepath.Join(tempDir, "mock_language_server")
+
+	// Create a mock executable that returns standard Go flag usage on --help
+	mockUsage := `#!/bin/sh
+if [ "$1" = "--help" ]; then
+  echo "Usage of mock_language_server:"
+  echo "  -disable_telemetry=false: If true, disable telemetry logging"
+  echo "  -is_google_internal=false: Whether running in internal environment"
+  echo "  -jetbox_release_channel=\"stable\": Release channel"
+  echo "  -use_local_chrome=false: Whether to use local chrome"
+  exit 0
+fi
+exit 0
+`
+	if err := os.WriteFile(mockBin, []byte(mockUsage), 0755); err != nil {
+		t.Fatalf("failed to write mock binary: %v", err)
+	}
+
+	supported, err := DetectSupportedFlags(mockBin)
+	if err != nil {
+		t.Fatalf("DetectSupportedFlags failed: %v", err)
+	}
+
+	if !supported["disable_telemetry"] {
+		t.Errorf("expected disable_telemetry to be detected")
+	}
+	if !supported["is_google_internal"] {
+		t.Errorf("expected is_google_internal to be detected")
+	}
+	if supported["stubby_auth_mode"] {
+		t.Errorf("did not expect stubby_auth_mode in mock usage")
+	}
+	if supported["use_snapshot_mendelfp"] {
+		t.Errorf("did not expect use_snapshot_mendelfp in mock usage")
+	}
+
+	// Test FilterSupportedFlags
+	candidates := []string{
+		"--disable_telemetry=true",
+		"--is_google_internal=true",
+		"--stubby_auth_mode=business_licensed_enterprise",
+		"--use_snapshot_mendelfp=true",
+	}
+
+	var logs []string
+	filtered := FilterSupportedFlags(mockBin, candidates, func(format string, args ...interface{}) {
+		logs = append(logs, fmt.Sprintf(format, args...))
+	})
+
+	if len(filtered) != 2 {
+		t.Fatalf("expected 2 filtered flags, got %d: %v", len(filtered), filtered)
+	}
+	if filtered[0] != "--disable_telemetry=true" || filtered[1] != "--is_google_internal=true" {
+		t.Errorf("unexpected filtered flags: %v", filtered)
+	}
+
+	if len(logs) != 2 {
+		t.Errorf("expected 2 log messages for filtered flags, got %d: %v", len(logs), logs)
+	}
+}
+
+func TestBuildServerFlagsForBinaryRealHostTargets(t *testing.T) {
+	opts := DefaultEnterpriseFlagsOptions()
+	targets := []string{
+		"/opt/antigravity/resources/bin/language_server",
+		"/home/hokar/Applications/Antigravity/resources/bin/language_server",
+	}
+
+	for _, target := range targets {
+		if _, err := os.Stat(target); err != nil {
+			continue
+		}
+
+		var filteredLogs []string
+		safeFlags := BuildServerFlagsForBinary(target, opts, func(format string, args ...interface{}) {
+			filteredLogs = append(filteredLogs, fmt.Sprintf(format, args...))
+		})
+
+		if len(safeFlags) == 0 {
+			t.Errorf("expected non-empty safe flags for %s", target)
+		}
+
+		// Ensure that unsupported flags are NEVER present for the older binary (/opt/antigravity)
+		if strings.Contains(target, "/opt/antigravity") {
+			for _, f := range safeFlags {
+				if strings.Contains(f, "stubby_auth_mode") {
+					t.Errorf("target %s should not have stubby_auth_mode flag: %s", target, f)
+				}
+				if strings.Contains(f, "use_snapshot_mendelfp") {
+					t.Errorf("target %s should not have use_snapshot_mendelfp flag: %s", target, f)
+				}
+			}
 		}
 	}
 }

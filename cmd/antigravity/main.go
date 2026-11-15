@@ -23,7 +23,7 @@ import (
 	"github.com/tawroot/antigravity-cleaner/pkg/updater"
 )
 
-const Version = "5.4.7"
+const Version = "5.4.8"
 
 func init() {
 	patcher.RegisterPostInstallHook(func(logger patcher.LogFunc) {
@@ -478,6 +478,13 @@ func runQuickAutoFix() {
 		}
 	} else {
 		ui.PrintStatus("INFO", "Enterprise Wrapper", "Standalone mode (Core path detected on launch)")
+	}
+
+	// Dynamic WSL environment healing & mirrored networking on Windows
+	if runtime.GOOS == "windows" {
+		if wslReport, err := patcher.PatchAllWsl(nil); err == nil && len(wslReport.DistrosFound) > 0 {
+			ui.PrintStatus("OK", "WSL Environment", fmt.Sprintf("%d distros patched (Mirrored Networking active)", len(wslReport.DistrosFound)))
+		}
 	}
 
 	fmt.Println()
