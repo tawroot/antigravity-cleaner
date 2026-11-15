@@ -480,6 +480,13 @@ func runQuickAutoFix() {
 		ui.PrintStatus("INFO", "Enterprise Wrapper", "Standalone mode (Core path detected on launch)")
 	}
 
+	// Dynamic WSL environment healing & mirrored networking on Windows
+	if runtime.GOOS == "windows" {
+		if wslReport, err := patcher.PatchAllWsl(nil); err == nil && len(wslReport.DistrosFound) > 0 {
+			ui.PrintStatus("OK", "WSL Environment", fmt.Sprintf("%d distros patched (Mirrored Networking active)", len(wslReport.DistrosFound)))
+		}
+	}
+
 	fmt.Println()
 	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF79C6")).Render("  Step 4: Surgical Quota, DIPS & Network Cache Reset..."))
 	if removed, err := cleaner.SurgicalReset429("", false); err != nil {

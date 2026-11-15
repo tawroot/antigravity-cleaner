@@ -699,6 +699,10 @@ func FindAllLanguageServers(logger LogFunc) []string {
 			filepath.Join(os.Getenv("PROGRAMFILES"), "Antigravity"),
 			filepath.Join(os.Getenv("ProgramFiles(x86)"), "Antigravity"),
 		)
+		// Scan all registered and active WSL distributions for Linux language_server ELF binaries
+		for _, wslServer := range FindAllWslLanguageServers(logger) {
+			add(wslServer)
+		}
 	} else if runtime.GOOS == "linux" {
 		candidateRoots = append(candidateRoots,
 			filepath.Join(home, "Applications", "Antigravity"),
