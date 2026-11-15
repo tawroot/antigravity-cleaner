@@ -1,5 +1,5 @@
-$ErrorActionPreference = "SilentlyContinue"
-$GithubBaseUrl = "https://github.com/tawroot/antigravity-cleaner/releases/latest/download"
+﻿$ErrorActionPreference = "SilentlyContinue"
+$GithubBaseUrl = "https://github.com/dalroot/antigravity-cleaner/releases/latest/download"
 $ExeName = "antigravity-cleaner-windows-amd64.exe"
 
 $HomePath = if ($IsWindows -or $env:OS -like "*Windows*") { $env:USERPROFILE } else { $env:HOME }
@@ -28,7 +28,7 @@ try {
 catch {
     Write-Host "Falling back to legacy PowerShell engine..." -ForegroundColor Gray
     $LegacyScript = Join-Path $InstallDir "Antigravity.ps1"
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/legacy/Antigravity.ps1" -OutFile $LegacyScript -UseBasicParsing
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/legacy/Antigravity.ps1" -OutFile $LegacyScript -UseBasicParsing
     Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$LegacyScript`""
     exit 0
 }
@@ -53,10 +53,12 @@ if ($UserPath -notlike "*$InstallDir*") {
     [Environment]::SetEnvironmentVariable("PATH", "$UserPath;$InstallDir", "User")
     Write-Host "Added $InstallDir to user PATH." -ForegroundColor Cyan
 }
+# Immediately update current session PATH
+$env:PATH = "$env:PATH;$InstallDir"
 
 Write-Host ""
 Write-Host "Installation Complete! Launching Antigravity Cleaner..." -ForegroundColor Green
 Write-Host "⭐ If this tool helped you, please star our repository on GitHub:" -ForegroundColor Yellow
-Write-Host "   https://github.com/tawroot/antigravity-cleaner" -ForegroundColor Cyan
+Write-Host "   https://github.com/dalroot/antigravity-cleaner" -ForegroundColor Cyan
 Write-Host ""
 Start-Process $TargetFile
