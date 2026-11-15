@@ -2,6 +2,7 @@ package quota
 
 import (
 	"bytes"
+	"crypto/tls"
 	"database/sql"
 	"encoding/base64"
 	"encoding/json"
@@ -10,6 +11,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"runtime"
@@ -18,6 +20,7 @@ import (
 	"time"
 
 	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
+	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
 	"github.com/zalando/go-keyring"
 	_ "modernc.org/sqlite"
 )
@@ -38,6 +41,32 @@ func xorDecode(b []byte) string {
 		res[i] = v ^ 0x5a
 	}
 	return string(res)
+}
+
+// getQuotaHttpClient returns an HTTP client routed through the best detected proxy (if available)
+func getQuotaHttpClient() *http.Client {
+	bestProxy, _ := proxy.GetBestProxy()
+	var transport *http.Transport
+	if bestProxy != nil {
+		if proxyURL, err := url.Parse(bestProxy.URL); err == nil {
+			transport = &http.Transport{
+				Proxy: http.ProxyURL(proxyURL),
+				TLSClientConfig: &tls.Config{
+					InsecureSkipVerify: false,
+				},
+			}
+		}
+	}
+	if transport == nil {
+		transport = &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+		}
+	}
+
+	return &http.Client{
+		Transport: transport,
+		Timeout:   15 * time.Second,
+	}
 }
 
 // QuotaBucket represents a time-window usage quota
@@ -289,7 +318,7 @@ func RefreshAccessToken(refreshToken string) (string, error) {
 	form.Set("grant_type", "refresh_token")
 	form.Set("refresh_token", refreshToken)
 
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := getQuotaHttpClient()
 	resp, err := client.PostForm("https://oauth2.googleapis.com/token", form)
 	if err != nil {
 		return "", fmt.Errorf("failed to contact oauth2.googleapis.com: %w", err)
@@ -331,21 +360,35 @@ func DiscoverLanguageServerRPC() ([]QuotaGroup, error) {
 		return nil, fmt.Errorf("language_server process not running")
 	}
 
-	cmdlineBytes, err := os.ReadFile(fmt.Sprintf("/proc/%d/cmdline", pid))
-	if err != nil {
-		return nil, fmt.Errorf("failed to read /proc/%d/cmdline: %w", pid, err)
+	var cmdlineStr string
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
+			fmt.Sprintf("(Get-CimInstance Win32_Process -Filter 'ProcessId = %d').CommandLine", pid))
+		if out, err := cmd.Output(); err == nil {
+			cmdlineStr = string(out)
+		}
+	} else {
+		if data, err := os.ReadFile(fmt.Sprintf("/proc/%d/cmdline", pid)); err == nil {
+			cmdlineStr = string(data)
+		}
 	}
 
-	args := strings.Split(string(cmdlineBytes), "\x00")
+	if cmdlineStr == "" {
+		return nil, fmt.Errorf("failed to read command line for language_server PID %d", pid)
+	}
+
 	var csrfToken string
-	for i, arg := range args {
-		if (arg == "--csrf_token" || arg == "-csrf_token") && i+1 < len(args) {
-			csrfToken = args[i+1]
+	for _, arg := range strings.Fields(cmdlineStr) {
+		argClean := strings.Trim(arg, "\"'")
+		if strings.HasPrefix(argClean, "--csrf_token=") {
+			csrfToken = strings.TrimPrefix(argClean, "--csrf_token=")
 			break
 		}
-		if strings.HasPrefix(arg, "--csrf_token=") {
-			csrfToken = strings.TrimPrefix(arg, "--csrf_token=")
-			break
+	}
+	if csrfToken == "" {
+		re := regexp.MustCompile(`--csrf_token\s+([a-zA-Z0-9_-]+)`)
+		if m := re.FindStringSubmatch(cmdlineStr); len(m) > 1 {
+			csrfToken = m[1]
 		}
 	}
 
@@ -403,6 +446,25 @@ func DiscoverLanguageServerRPC() ([]QuotaGroup, error) {
 }
 
 func findPIDListeningPorts(pid int) []int {
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
+			fmt.Sprintf("(Get-NetTCPConnection -OwningProcess %d -State Listen -ErrorAction SilentlyContinue).LocalPort", pid))
+		out, err := cmd.Output()
+		if err == nil {
+			var ports []int
+			for _, line := range strings.Split(strings.TrimSpace(string(out)), "\n") {
+				line = strings.TrimSpace(line)
+				if p, err := strconv.Atoi(line); err == nil && p > 0 && p <= 65535 {
+					ports = append(ports, p)
+				}
+			}
+			if len(ports) > 0 {
+				return ports
+			}
+		}
+		return nil
+	}
+
 	data, err := os.ReadFile(fmt.Sprintf("/proc/%d/net/tcp", pid))
 	if err != nil {
 		return nil
@@ -431,7 +493,7 @@ func findPIDListeningPorts(pid int) []int {
 
 // FetchQuotaSummaryFromCloud retrieves the quota summary from CloudCode API
 func FetchQuotaSummaryFromCloud(accessToken string) ([]QuotaGroup, error) {
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := getQuotaHttpClient()
 
 	req, err := http.NewRequest("POST", UsageURL, bytes.NewBuffer([]byte("{}")))
 	if err != nil {
@@ -480,7 +542,7 @@ func FetchQuotaSummaryFromCloud(accessToken string) ([]QuotaGroup, error) {
 
 // FetchDetailedUserQuota retrieves individual model-by-model quotas from retrieveUserQuota API
 func FetchDetailedUserQuota(accessToken string) ([]DetailedQuotaBucket, error) {
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := getQuotaHttpClient()
 
 	req, err := http.NewRequest("POST", DetailedQuotaURL, bytes.NewBuffer([]byte("{}")))
 	if err != nil {

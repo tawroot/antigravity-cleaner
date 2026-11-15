@@ -786,6 +786,18 @@ func FindLanguageServerModular(logger LogFunc) string {
 func FindRunningLanguageServerPID() int {
 	selfPid := os.Getpid()
 
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command",
+			"(Get-Process -Name '*language_server*' -ErrorAction SilentlyContinue | Select-Object -First 1).Id")
+		if out, err := cmd.Output(); err == nil {
+			var pid int
+			if _, err := fmt.Sscanf(strings.TrimSpace(string(out)), "%d", &pid); err == nil && pid > 0 {
+				return pid
+			}
+		}
+		return 0
+	}
+
 	if runtime.GOOS == "linux" {
 		entries, err := os.ReadDir("/proc")
 		if err == nil {
