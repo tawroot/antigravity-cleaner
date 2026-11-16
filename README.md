@@ -328,6 +328,22 @@ Check out our official [**ROADMAP.md**](ROADMAP.md) (or [🇮🇷 Persian Roadma
 
 ---
 
+## ☕ Support & Donations
+
+Antigravity Cleaner is **100% free, offline, and open-source** under Apache-2.0. If this tool helped unblock your AI workflows, voluntary contributions directly fund cross-platform testing VMs and reverse-engineering relays:
+
+| Network | Asset | Verified Address |
+| :--- | :--- | :--- |
+| **Tron (TRC-20)** | USDT | `TH17LH5wQ4fxw6bHyX2mSST6seWGF9Jtsj` |
+| **BNB Smart Chain (BEP-20)** | USDT / BNB | `0xC5AD1517C51709A3279af3Bf16277864757Db687` |
+| **TON Network** | TON / USDT | `UQDyEKG41kbhmNePc5LKho245CeU1BB1yOIYgmCILdX3xW69` |
+| **Bitcoin** | BTC (Native SegWit) | `bc1q4nqeypx6hmspkyltj5znpc2kuemakcyv0n9mk6` |
+| **Solana** | SOL | `69Ah7scsBwKfauSeFc6Q6yPtSrRy2YQWfNbKZsAtHmEP` |
+
+👉 *For detailed multi-language notes, see [**DONATE.md**](DONATE.md).*
+
+---
+
 ## 📈 Star History
 
 If this tool unblocked your workflow, a ⭐ star helps other developers discover it.

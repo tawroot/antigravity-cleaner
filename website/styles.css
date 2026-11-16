@@ -1988,6 +1988,132 @@ tbody tr:hover {
   }
 }
 
+/* Support & Donations */
+.VPDonate {
+  padding: 64px 24px;
+  background-color: var(--vp-c-bg-soft);
+}
+
+.donate-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.donate-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 36px;
+}
+
+.donate-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.donate-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--vp-c-text-1);
+  margin-bottom: 12px;
+}
+
+.donate-desc {
+  font-size: 0.95rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+}
+
+.donate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.donate-item {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.donate-item:hover {
+  border-color: var(--vp-c-brand);
+  transform: translateY(-2px);
+}
+
+.donate-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crypto-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.crypto-network {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--vp-c-text-2);
+}
+
+.crypto-addr-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.crypto-addr-box code {
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: var(--vp-c-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.copy-wallet-btn {
+  background: var(--vp-c-brand);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.copy-wallet-btn:hover {
+  opacity: 0.88;
+}
+
 @media (max-width: 640px) {
   .VPNavBarMenu, .VPNavBarSearch {
     display: none;
@@ -1997,5 +2123,8 @@ tbody tr:hover {
   }
   .VPHero .name {
     font-size: 2.25rem;
+  }
+  .donate-card {
+    padding: 24px 16px;
   }
 }

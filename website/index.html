@@ -103,6 +103,7 @@
             <a href="faq.html" class="VPLink nav-link" data-i18n="nav.faq">FAQ</a>
             <a href="blog.html" class="VPLink nav-link" data-i18n="nav.blog">Blog</a>
             <a href="#doc-benchmarks" class="VPLink nav-link" id="navBenchBtn" data-i18n="nav.benchmarks">Benchmarks</a>
+            <a href="#donate" class="VPLink nav-link" id="navDonateBtn">☕ Donate</a>
           </nav>
         </div>
 
@@ -499,6 +500,79 @@
       </div>
     </section>
 
+    <!-- Support & Donations Section -->
+    <section class="VPDonate" id="donate">
+      <div class="container">
+        <div class="donate-card">
+          <div class="donate-header">
+            <span class="donate-badge">☕ Support Open-Source</span>
+            <h2 class="donate-title">Support Antigravity Cleaner</h2>
+            <p class="donate-desc">
+              Antigravity Cleaner is and will forever remain <strong>100% free, offline, and open-source</strong>.
+              If this tool helped unblock your AI workflows, voluntary contributions directly fund multi-platform testing infrastructure and ongoing reverse-engineering patches.
+            </p>
+          </div>
+
+          <div class="donate-grid">
+            <div class="donate-item">
+              <div class="donate-item-top">
+                <span class="crypto-name">USDT (TRC-20)</span>
+                <span class="crypto-network">Tron</span>
+              </div>
+              <div class="crypto-addr-box">
+                <code id="addr-usdt-trc20">TH17LH5wQ4fxw6bHyX2mSST6seWGF9Jtsj</code>
+                <button class="copy-wallet-btn" type="button" onclick="navigator.clipboard.writeText('TH17LH5wQ4fxw6bHyX2mSST6seWGF9Jtsj'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)">Copy</button>
+              </div>
+            </div>
+
+            <div class="donate-item">
+              <div class="donate-item-top">
+                <span class="crypto-name">USDT (BEP-20) / BNB</span>
+                <span class="crypto-network">BNB Chain</span>
+              </div>
+              <div class="crypto-addr-box">
+                <code id="addr-usdt-bep20">0xC5AD1517C51709A3279af3Bf16277864757Db687</code>
+                <button class="copy-wallet-btn" type="button" onclick="navigator.clipboard.writeText('0xC5AD1517C51709A3279af3Bf16277864757Db687'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)">Copy</button>
+              </div>
+            </div>
+
+            <div class="donate-item">
+              <div class="donate-item-top">
+                <span class="crypto-name">TON</span>
+                <span class="crypto-network">The Open Network</span>
+              </div>
+              <div class="crypto-addr-box">
+                <code id="addr-ton">UQDyEKG41kbhmNePc5LKho245CeU1BB1yOIYgmCILdX3xW69</code>
+                <button class="copy-wallet-btn" type="button" onclick="navigator.clipboard.writeText('UQDyEKG41kbhmNePc5LKho245CeU1BB1yOIYgmCILdX3xW69'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)">Copy</button>
+              </div>
+            </div>
+
+            <div class="donate-item">
+              <div class="donate-item-top">
+                <span class="crypto-name">Bitcoin (BTC)</span>
+                <span class="crypto-network">Native SegWit</span>
+              </div>
+              <div class="crypto-addr-box">
+                <code id="addr-btc">bc1q4nqeypx6hmspkyltj5znpc2kuemakcyv0n9mk6</code>
+                <button class="copy-wallet-btn" type="button" onclick="navigator.clipboard.writeText('bc1q4nqeypx6hmspkyltj5znpc2kuemakcyv0n9mk6'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)">Copy</button>
+              </div>
+            </div>
+
+            <div class="donate-item">
+              <div class="donate-item-top">
+                <span class="crypto-name">Solana (SOL)</span>
+                <span class="crypto-network">Solana</span>
+              </div>
+              <div class="crypto-addr-box">
+                <code id="addr-sol">69Ah7scsBwKfauSeFc6Q6yPtSrRy2YQWfNbKZsAtHmEP</code>
+                <button class="copy-wallet-btn" type="button" onclick="navigator.clipboard.writeText('69Ah7scsBwKfauSeFc6Q6yPtSrRy2YQWfNbKZsAtHmEP'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Home Footer (Clean & Modern Marzban / VitePress Style) -->
     <footer class="VPHomeFooter">
       <div class="container">
@@ -538,12 +612,13 @@
 
             <nav class="footer-nav-links" aria-label="Footer Navigation">
               <a href="#docs" class="f-link" data-i18n="footer.docs">Documentation</a>
+              <a href="#donate" class="f-link">☕ Donate</a>
               <a href="troubleshooting.html" class="f-link" data-i18n="footer.clinic">Error Clinic</a>
               <a href="faq.html" class="f-link" data-i18n="footer.faq">FAQ</a>
               <a href="blog.html" class="f-link" data-i18n="footer.blog">Blog</a>
-              <a href="https://github.com/tawroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.github">GitHub</a>
+              <a href="https://github.com/dalroot/antigravity-cleaner" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.github">GitHub</a>
               <a href="https://t.me/dallrep" target="_blank" rel="noopener noreferrer" class="f-link telegram-link" data-i18n="footer.telegram">📢 Telegram: @dallrep</a>
-              <a href="https://github.com/tawroot/antigravity-cleaner/issues" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.reportBug">Report Bug</a>
+              <a href="https://github.com/dalroot/antigravity-cleaner/issues" target="_blank" rel="noopener noreferrer" class="f-link" data-i18n="footer.reportBug">Report Bug</a>
             </nav>
           </div>
 
