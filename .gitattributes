@@ -1,0 +1,2 @@
+# Treat website assets and documentation as documentation so they don't skew code statistics
+website/** linguist-documentation
