@@ -242,7 +242,7 @@ func RunDiagnostics(verbose bool) []DiagnosticItem {
 	bestProxy, _ := proxy.GetBestProxy()
 	var transport *http.Transport
 	if bestProxy != nil {
-		proxyURL, _ := url.Parse(bestProxy.URL)
+		proxyURL, _ := url.Parse(bestProxy.NetHttpURL())
 		transport = &http.Transport{
 			Proxy: http.ProxyURL(proxyURL),
 			TLSClientConfig: &tls.Config{

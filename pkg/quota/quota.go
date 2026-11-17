@@ -43,31 +43,85 @@ func xorDecode(b []byte) string {
 	return string(res)
 }
 
+// sanitizeHttpProxyURL converts socks5h:// to socks5:// for Go net/http compatibility
+func sanitizeHttpProxyURL(raw string) string {
+	raw = strings.TrimSpace(raw)
+	if strings.HasPrefix(raw, "socks5h://") {
+		return "socks5://" + strings.TrimPrefix(raw, "socks5h://")
+	}
+	return raw
+}
+
 // getQuotaHttpClient returns an HTTP client routed through the best detected proxy (if available)
 func getQuotaHttpClient() *http.Client {
 	var transport *http.Transport
 
-	// Probe common loopback proxy ports without importing proxy package (prevents import cycle)
-	for _, port := range []int{10808, 2080, 7890, 1080, 10809, 2081} {
-		conn, err := net.DialTimeout("tcp", fmt.Sprintf("127.0.0.1:%d", port), 50*time.Millisecond)
-		if err == nil {
-			_ = conn.Close()
-			proxyType := "socks5"
-			if port == 7890 || port == 10809 || port == 2081 {
-				proxyType = "http"
+	// 1. Probe common loopback proxy ports in parallel (300ms timeout)
+	type candidate struct {
+		port      int
+		proxyType string
+	}
+	candidates := []candidate{
+		{10808, "socks5"},
+		{2080, "socks5"},
+		{7890, "http"},
+		{1080, "socks5"},
+		{10809, "http"},
+		{2081, "http"},
+	}
+
+	ch := make(chan string, len(candidates))
+	for _, c := range candidates {
+		go func(p int, pt string) {
+			conn, err := net.DialTimeout("tcp", fmt.Sprintf("127.0.0.1:%d", p), 300*time.Millisecond)
+			if err == nil {
+				_ = conn.Close()
+				ch <- fmt.Sprintf("%s://127.0.0.1:%d", pt, p)
+			} else {
+				ch <- ""
 			}
-			if proxyURL, err := url.Parse(fmt.Sprintf("%s://127.0.0.1:%d", proxyType, port)); err == nil {
-				transport = &http.Transport{
-					Proxy: http.ProxyURL(proxyURL),
-					TLSClientConfig: &tls.Config{
-						InsecureSkipVerify: false,
-					},
-				}
-				break
+		}(c.port, c.proxyType)
+	}
+
+	var foundProxy string
+	for i := 0; i < len(candidates); i++ {
+		res := <-ch
+		if res != "" && foundProxy == "" {
+			foundProxy = res
+		}
+	}
+
+	if foundProxy != "" {
+		if proxyURL, err := url.Parse(foundProxy); err == nil {
+			transport = &http.Transport{
+				Proxy: http.ProxyURL(proxyURL),
+				TLSClientConfig: &tls.Config{
+					InsecureSkipVerify: false,
+				},
 			}
 		}
 	}
 
+	// 2. Check environment variables, sanitizing socks5h -> socks5 for Go net/http compatibility
+	if transport == nil {
+		for _, envVar := range []string{"ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy"} {
+			val := os.Getenv(envVar)
+			if val != "" {
+				val = sanitizeHttpProxyURL(val)
+				if proxyURL, err := url.Parse(val); err == nil {
+					transport = &http.Transport{
+						Proxy: http.ProxyURL(proxyURL),
+						TLSClientConfig: &tls.Config{
+							InsecureSkipVerify: false,
+						},
+					}
+					break
+				}
+			}
+		}
+	}
+
+	// 3. Fallback to default
 	if transport == nil {
 		transport = &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
@@ -76,7 +130,7 @@ func getQuotaHttpClient() *http.Client {
 
 	return &http.Client{
 		Transport: transport,
-		Timeout:   15 * time.Second,
+		Timeout:   20 * time.Second,
 	}
 }
 

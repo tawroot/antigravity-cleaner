@@ -16,6 +16,20 @@ type ProxyEndpoint struct {
 	Provider string // "v2rayN / Xray", "NekoBox / Hiddify", "Clash / Mihomo"
 }
 
+// NetHttpURL returns the proxy URL formatted for Go net/http.Transport (socks5h is converted to socks5)
+func (p *ProxyEndpoint) NetHttpURL() string {
+	return SafeNetHttpProxyURL(p.URL)
+}
+
+// SafeNetHttpProxyURL sanitizes proxy URLs for Go net/http (converts socks5h:// to socks5://)
+func SafeNetHttpProxyURL(raw string) string {
+	raw = strings.TrimSpace(raw)
+	if strings.HasPrefix(raw, "socks5h://") {
+		return "socks5://" + strings.TrimPrefix(raw, "socks5h://")
+	}
+	return raw
+}
+
 // Known default proxy ports and software
 var defaultCandidates = []struct {
 	Port     int

@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/logo.png" alt="Antigravity Cleaner Logo" width="115">
+  <img src="docs/images/ac-logo.svg" alt="Antigravity Cleaner Logo" width="220">
 </p>
 
 <h1 align="center">⚡ Antigravity Cleaner Pro (v5.4.8)</h1>

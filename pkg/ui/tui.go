@@ -68,15 +68,9 @@ var (
 
 // PrintBanner prints the Antigravity Cleaner Banner
 func PrintBanner(version string) {
-	bannerText := `
-   ___          __  _                         _ __         
-  /   |  ____  / /_(_)___ __________ __   __(_) /___  __  
- / /| | / __ \/ __/ / __ '/ ___/ __ '/ | / / / __/ / / /  
-/ ___ |/ / / / /_/ / /_/ / /  / /_/ /| |/ / / /_/ /_/ /   
-/_/  |_/_/ /_/\__/_/\__, /_/   \__,_/ |___/_/\__/\__, /    
-                  /____/                       /____/     `
-
-	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(ColorPrimary).Render(bannerText))
+	fmt.Println()
+	fmt.Print(RenderACLogo("  "))
+	fmt.Println()
 	fmt.Printf("  %s %s%s v%s%s\n",
 		"⚡",
 		lipgloss.NewStyle().Bold(true).Foreground(ColorSecondary).Render("Antigravity Cleaner"),
