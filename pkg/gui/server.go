@@ -14,11 +14,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/account"
-	"github.com/tawroot/antigravity-cleaner/pkg/cleaner"
-	"github.com/tawroot/antigravity-cleaner/pkg/doctor"
-	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
-	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
+	"github.com/dalroot/antigravity-cleaner/pkg/account"
+	"github.com/dalroot/antigravity-cleaner/pkg/cleaner"
+	"github.com/dalroot/antigravity-cleaner/pkg/doctor"
+	"github.com/dalroot/antigravity-cleaner/pkg/patcher"
+	"github.com/dalroot/antigravity-cleaner/pkg/proxy"
 )
 
 func init() {

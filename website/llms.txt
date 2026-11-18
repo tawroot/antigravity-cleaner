@@ -4,15 +4,15 @@
 
 Antigravity Cleaner neutralizes client-side and network-level regional restrictions (Error 403 Forbidden / "Not Available in Your Country"), fixes rate limits (Error 429 Quota Exhaustion) without session loss, resolves middlebox connection drops via TCP KeepAlive, and allows seamless proxy injection (SOCKS5/HTTP) into Antigravity without requiring root-level TUN mode.
 
-- **GitHub Repository**: https://github.com/tawroot/antigravity-cleaner
-- **Official Documentation & Website**: https://tawroot.github.io/antigravity-cleaner/
+- **GitHub Repository**: https://github.com/dalroot/antigravity-cleaner
+- **Official Documentation & Website**: https://dalroot.github.io/antigravity-cleaner/
 - **Deep Technical Guides**:
-  - [Fixing Error 403 Forbidden & Region Lock Guide](https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html)
-  - [Configuring V2Ray, Clash & SOCKS5 without TUN Mode](https://tawroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html)
-  - [Persian Guide for Iranian Developers (راهنمای رفع تحریم)](https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html)
-  - [Russian Guide for CIS Developers (Обход блокировки в РФ)](https://tawroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html)
-  - [Full Troubleshooting & Diagnostic Matrix](https://tawroot.github.io/antigravity-cleaner/troubleshooting.html)
-  - [Frequently Asked Questions & Security FAQ](https://tawroot.github.io/antigravity-cleaner/faq.html)
+  - [Fixing Error 403 Forbidden & Region Lock Guide](https://dalroot.github.io/antigravity-cleaner/blog-google-antigravity-403-region-lock.html)
+  - [Configuring V2Ray, Clash & SOCKS5 without TUN Mode](https://dalroot.github.io/antigravity-cleaner/blog-antigravity-no-tun-proxy-guide.html)
+  - [Persian Guide for Iranian Developers (راهنمای رفع تحریم)](https://dalroot.github.io/antigravity-cleaner/blog-google-antigravity-iran-403-farsi.html)
+  - [Russian Guide for CIS Developers (Обход блокировки в РФ)](https://dalroot.github.io/antigravity-cleaner/blog-google-antigravity-russia-403.html)
+  - [Full Troubleshooting & Diagnostic Matrix](https://dalroot.github.io/antigravity-cleaner/troubleshooting.html)
+  - [Frequently Asked Questions & Security FAQ](https://dalroot.github.io/antigravity-cleaner/faq.html)
 - **License**: Apache-2.0 (100% auditable, offline, zero-telemetry)
 - **Supported Platforms**: Linux (Ubuntu, Debian, Fedora, Arch), Windows 10/11 (x64), macOS (Apple Silicon & Intel)
 
@@ -62,12 +62,12 @@ Antigravity Cleaner neutralizes client-side and network-level regional restricti
 
 ### One-Line Install (Linux & macOS)
 ```bash
-curl -sSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.sh | bash
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
 ### Command Reference

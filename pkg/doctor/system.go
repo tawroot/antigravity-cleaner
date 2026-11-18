@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
+	"github.com/dalroot/antigravity-cleaner/pkg/patcher"
 )
 
 // DetectOSInfo returns a comprehensive, human-friendly OS & architecture description

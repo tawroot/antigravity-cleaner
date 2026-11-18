@@ -14,11 +14,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
+	"github.com/dalroot/antigravity-cleaner/pkg/proxy"
 )
 
 const (
-	RepoOwner = "tawroot"
+	RepoOwner = "dalroot"
 	RepoName  = "antigravity-cleaner"
 )
 

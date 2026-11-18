@@ -4,7 +4,7 @@ This file contains recommended GitHub topics to maximize repository discoverabil
 
 ## How to Add Topics
 
-1. Go to: https://github.com/tawroot/antigravity-cleaner
+1. Go to: https://github.com/dalroot/antigravity-cleaner
 2. Click on the ⚙️ gear icon next to "About"
 3. In the "Topics" field, add the topics below (comma-separated)
 4. Click "Save changes"

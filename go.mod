@@ -1,4 +1,4 @@
-module github.com/tawroot/antigravity-cleaner
+module github.com/dalroot/antigravity-cleaner
 
 go 1.26.0
 

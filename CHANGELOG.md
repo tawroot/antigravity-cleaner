@@ -239,7 +239,7 @@ This milestone transforms **Antigravity Cleaner** into a blazing-fast, compiled 
 - **IDA-Style Byte Pattern Scanner:** In-memory bytecode scanning (<0.22s on 170MB binaries) with wildcards for MultiGate binary patching on x86-64 and ARM64.
 - **Concurrent Diagnostic Doctor (`ag-cleaner doctor`):** Parallelized latency and DNS leak tests completing in under 3 seconds.
 - **POSIX Atomic Inode Replacement:** Modifies binaries safely on disk without `ETXTBSY` or corruption if the application is running.
-- **Maintained & Architected by:** **[@dalroot](https://github.com/dalroot)** on [tawroot/antigravity-cleaner](https://github.com/tawroot/antigravity-cleaner).
+- **Maintained & Architected by:** **[@dalroot](https://github.com/dalroot)** on [tawroot/antigravity-cleaner](https://github.com/dalroot/antigravity-cleaner).
 
 ---
 
@@ -558,8 +558,8 @@ This is a **major milestone** release with a complete UI/UX redesign, new featur
 ### 📞 Support & Community
 
 - 📢 **Telegram Channel:** [t.me/panbehnet](https://t.me/panbehnet)
-- 🐛 **Report Issues:** [GitHub Issues](https://github.com/tawroot/antigravity-cleaner/issues)
-- 🌐 **Website:** [tawroot.github.io/antigravity-cleaner](https://tawroot.github.io/antigravity-cleaner/)
+- 🐛 **Report Issues:** [GitHub Issues](https://github.com/dalroot/antigravity-cleaner/issues)
+- 🌐 **Website:** [dalroot.github.io/antigravity-cleaner](https://dalroot.github.io/antigravity-cleaner/)
 - 💬 **Contact:** [@RAHBARUSD](https://t.me/RAHBARUSD)
 
 ---

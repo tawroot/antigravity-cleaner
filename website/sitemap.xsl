@@ -156,7 +156,7 @@
             </tbody>
           </table>
           <div class="footer">
-            Antigravity Cleaner Project • <a href="https://github.com/tawroot/antigravity-cleaner">GitHub Repository</a> • Apache-2.0
+            Antigravity Cleaner Project • <a href="https://github.com/dalroot/antigravity-cleaner">GitHub Repository</a> • Apache-2.0
           </div>
         </div>
       </body>

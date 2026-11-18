@@ -43,10 +43,10 @@ We welcome responsible security research and disclosure. If you identify a secur
 
 1. **Do NOT open a public GitHub issue.** Public issues should be reserved for functional bugs and feature requests.
 2. **Submit via GitHub Private Vulnerability Reporting:**
-   - Navigate to the repository's [Security Tab](https://github.com/tawroot/antigravity-cleaner/security).
+   - Navigate to the repository's [Security Tab](https://github.com/dalroot/antigravity-cleaner/security).
    - Click **"Report a vulnerability"** to open an encrypted private draft advisory.
 3. **Alternative Direct Disclosure:**
-   - Contact the lead maintainer directly via GitHub ([@tawroot](https://github.com/tawroot)).
+   - Contact the lead maintainer directly via GitHub ([@dalroot](https://github.com/dalroot)).
    - Include a detailed technical proof of concept (PoC), steps to reproduce, and impact assessment.
 
 ### Response Timelines
@@ -61,7 +61,7 @@ We welcome responsible security research and disclosure. If you identify a secur
 All binaries released under GitHub Releases are built from the public repository using automated GitHub Actions CI/CD workflows with verifiable SHA256 checksums. Users are encouraged to inspect and compile from source using Go 1.22+:
 
 ```bash
-git clone https://github.com/tawroot/antigravity-cleaner.git
+git clone https://github.com/dalroot/antigravity-cleaner.git
 cd antigravity-cleaner
 go build -o ag-cleaner ./cmd/antigravity
 ```

@@ -23,8 +23,8 @@
 
 <div align="center">
 
-  [![Release](https://img.shields.io/badge/Release-v5.4.8-0078D6?style=for-the-badge)](https://github.com/tawroot/antigravity-cleaner/releases)
-  [![Downloads](https://img.shields.io/github/downloads/tawroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/tawroot/antigravity-cleaner/releases)
+  [![Release](https://img.shields.io/badge/Release-v5.4.8-0078D6?style=for-the-badge)](https://github.com/dalroot/antigravity-cleaner/releases)
+  [![Downloads](https://img.shields.io/github/downloads/dalroot/antigravity-cleaner/total?style=for-the-badge&logo=github&color=0078D6&label=Downloads)](https://github.com/dalroot/antigravity-cleaner/releases)
   [![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org)
   [![Security Audit](https://img.shields.io/badge/Security_Audit-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/security.yml)
   [![Telegram Community](https://img.shields.io/badge/Telegram-@dallrep-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/dallrep)
@@ -39,11 +39,11 @@
 
 <div align="center">
 
-[![GitHub Stars](https://img.shields.io/github/stars/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/dalroot/antigravity-cleaner?style=social)](https://github.com/dalroot/antigravity-cleaner/stargazers)
 &nbsp;
 [![Telegram Support](https://img.shields.io/badge/Community-t.me%2Fdallrep-blue?style=social&logo=telegram)](https://t.me/dallrep)
 &nbsp;
-[![GitHub Forks](https://img.shields.io/github/forks/tawroot/antigravity-cleaner?style=social)](https://github.com/tawroot/antigravity-cleaner/network/members)
+[![GitHub Forks](https://img.shields.io/github/forks/dalroot/antigravity-cleaner?style=social)](https://github.com/dalroot/antigravity-cleaner/network/members)
 
 </div>
 
@@ -93,7 +93,7 @@
         <span style="font-size: 40px;">🪟</span><br>
         <strong>Windows 10 & 11</strong><br>
         <small style="opacity: 0.75;">إصدارات 64-بت</small><br><br>
-        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe">
+        <a href="https://github.com/dalroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-windows-amd64.exe">
           <img src="https://img.shields.io/badge/Download-.exe_(x64)-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows">
         </a><br><br>
         <small style="opacity: 0.85;">⚡ انقر نقراً مزدوجاً على .exe لتشغيل الواجهة الرسومية</small>
@@ -102,10 +102,10 @@
         <span style="font-size: 40px;">🍎</span><br>
         <strong>Apple macOS</strong><br>
         <small style="opacity: 0.75;">معالجات Apple Silicon و Intel</small><br><br>
-        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64">
+        <a href="https://github.com/dalroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-arm64">
           <img src="https://img.shields.io/badge/Download-Apple_Silicon-white?style=for-the-badge&logo=apple&logoColor=black" alt="Download macOS ARM64">
         </a><br><br>
-        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64">
+        <a href="https://github.com/dalroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-darwin-amd64">
           <img src="https://img.shields.io/badge/Download-Intel_(x64)-gray?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS x64">
         </a>
       </td>
@@ -113,10 +113,10 @@
         <span style="font-size: 40px;">🐧</span><br>
         <strong>توزيعات Linux</strong><br>
         <small style="opacity: 0.75;">Ubuntu, Debian, Fedora, Arch</small><br><br>
-        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64">
+        <a href="https://github.com/dalroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-amd64">
           <img src="https://img.shields.io/badge/Download-Linux_(x64)-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux x64">
         </a><br><br>
-        <a href="https://github.com/tawroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64">
+        <a href="https://github.com/dalroot/antigravity-cleaner/releases/latest/download/antigravity-cleaner-linux-arm64">
           <img src="https://img.shields.io/badge/Download-Linux_(ARM64)-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux ARM64">
         </a>
       </td>
@@ -456,12 +456,12 @@ graph LR
 
 ### 🐧 أنظمة لينكس و 🍎 ماك (معالجات Apple Silicon M1–M4 وإنتل)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.sh | bash
 ```
 
 ### 🪟 أنظمة ويندوز (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/tawroot/antigravity-cleaner/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
 ---
@@ -552,8 +552,8 @@ ag-cleaner about
 ## 🚦 المسار القياسي للإبلاغ عن الأخطاء والمشاكل
 
 لضمان الفرز والمعالجة السريعة:
-1. **نماذج الإبلاغ التفاعلية في GitHub:** إذا واجهت حالة استثنائية، يرجى فتح بلاغ باستخدام [نموذج الإبلاغ عن الأخطاء](https://github.com/tawroot/antigravity-cleaner/issues/new?template=bug_report.yml).
-2. **الأسئلة المجتمعية وإعدادات البروكسي:** للأسئلة العامة ومشاركة إعدادات الشبكات الخاصة، يرجى استخدام [نقاشات GitHub (Discussions)](https://github.com/tawroot/antigravity-cleaner/discussions).
+1. **نماذج الإبلاغ التفاعلية في GitHub:** إذا واجهت حالة استثنائية، يرجى فتح بلاغ باستخدام [نموذج الإبلاغ عن الأخطاء](https://github.com/dalroot/antigravity-cleaner/issues/new?template=bug_report.yml).
+2. **الأسئلة المجتمعية وإعدادات البروكسي:** للأسئلة العامة ومشاركة إعدادات الشبكات الخاصة، يرجى استخدام [نقاشات GitHub (Discussions)](https://github.com/dalroot/antigravity-cleaner/discussions).
 3. **الثغرات الأمنية:** اتبع إرشادات وثيقة [SECURITY.md](.github/SECURITY.md) وأرسل تقريراً سرياً عبر ميزة النصائح الأمنية في GitHub (Security Advisories).
 
 ---
@@ -578,11 +578,11 @@ ag-cleaner about
 
 إذا ساعدتك هذه الأداة في حل مشاكل الحظر، فإن منحها نجمة ⭐ يساعد مطورين آخرين في العثور عليها.
 
-<a href="https://star-history.com/#tawroot/antigravity-cleaner&Date">
+<a href="https://star-history.com/#dalroot/antigravity-cleaner&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=tawroot/antigravity-cleaner&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=tawroot/antigravity-cleaner&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=tawroot/antigravity-cleaner&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=dalroot/antigravity-cleaner&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=dalroot/antigravity-cleaner&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=dalroot/antigravity-cleaner&type=Date" />
  </picture>
 </a>
 
@@ -591,6 +591,6 @@ ag-cleaner about
 ## 💬 المجتمع والنقاشات (Discussions)
 
 لديك أسئلة، أو اقتراحات لميزات جديدة، أو ترغب في مشاركة إعداداتك؟  
-[**افتح موضوعاً للنقاش في Discussions ←**](https://github.com/tawroot/antigravity-cleaner/discussions)
+[**افتح موضوعاً للنقاش في Discussions ←**](https://github.com/dalroot/antigravity-cleaner/discussions)
 
 </div>

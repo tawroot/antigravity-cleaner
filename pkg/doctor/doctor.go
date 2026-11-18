@@ -14,8 +14,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
-	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
+	"github.com/dalroot/antigravity-cleaner/pkg/patcher"
+	"github.com/dalroot/antigravity-cleaner/pkg/proxy"
 )
 
 // DiagnosticItem represents a friendly diagnostic check

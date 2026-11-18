@@ -12,15 +12,15 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/mattn/go-isatty"
-	"github.com/tawroot/antigravity-cleaner/pkg/account"
-	"github.com/tawroot/antigravity-cleaner/pkg/cleaner"
-	"github.com/tawroot/antigravity-cleaner/pkg/doctor"
-	"github.com/tawroot/antigravity-cleaner/pkg/gui"
-	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
-	"github.com/tawroot/antigravity-cleaner/pkg/proxy"
-	"github.com/tawroot/antigravity-cleaner/pkg/quota"
-	"github.com/tawroot/antigravity-cleaner/pkg/ui"
-	"github.com/tawroot/antigravity-cleaner/pkg/updater"
+	"github.com/dalroot/antigravity-cleaner/pkg/account"
+	"github.com/dalroot/antigravity-cleaner/pkg/cleaner"
+	"github.com/dalroot/antigravity-cleaner/pkg/doctor"
+	"github.com/dalroot/antigravity-cleaner/pkg/gui"
+	"github.com/dalroot/antigravity-cleaner/pkg/patcher"
+	"github.com/dalroot/antigravity-cleaner/pkg/proxy"
+	"github.com/dalroot/antigravity-cleaner/pkg/quota"
+	"github.com/dalroot/antigravity-cleaner/pkg/ui"
+	"github.com/dalroot/antigravity-cleaner/pkg/updater"
 )
 
 const Version = "5.4.8"
@@ -101,7 +101,7 @@ func main() {
 
 		fmt.Println("  " + sectionCommunity)
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("t"), descStyle.Render("Join Telegram Community (@dallrep) for help & updates"))
-		fmt.Printf("  [%s] %s\n", keyStyle.Render("s"), descStyle.Render("Star on GitHub (github.com/tawroot/antigravity-cleaner)"))
+		fmt.Printf("  [%s] %s\n", keyStyle.Render("s"), descStyle.Render("Star on GitHub (github.com/dalroot/antigravity-cleaner)"))
 		fmt.Printf("  [%s] %s\n", keyStyle.Render("0"), descStyle.Render("Exit"))
 		fmt.Println()
 
@@ -145,7 +145,7 @@ func main() {
 			openTerminalURL("https://t.me/dallrep")
 			ui.PromptKey()
 		case "s", "S", "star":
-			openTerminalURL("https://github.com/tawroot/antigravity-cleaner")
+			openTerminalURL("https://github.com/dalroot/antigravity-cleaner")
 			ui.PromptKey()
 		case "0", "exit":
 			fmt.Printf("\n  %s\n", lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).Render("⭐ If this tool helped you, please give it a Star on GitHub!"))
@@ -335,7 +335,7 @@ func printAbout() {
 	fmt.Println(lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FF9F")).Render("  ► Project Credits & Attribution:"))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("  - Lead Architect & Maintainer: @dalroot"))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("  - Co-Pilot & Pair Programming: Antigravity AI (Google DeepMind)"))
-	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#8BE9FD")).Render("  - Repository: https://github.com/tawroot/antigravity-cleaner"))
+	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#8BE9FD")).Render("  - Repository: https://github.com/dalroot/antigravity-cleaner"))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  - Dedicated to developers navigating digital sanctions worldwide."))
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4")).Render("  - License: Apache License 2.0"))
 	fmt.Println()
@@ -509,7 +509,7 @@ func runQuickAutoFix() {
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Smart Proxy:      CONFIGURED (Direct socket, Zero TUN mode needed)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2")).Render("✔ Desktop Shortcut: READY (Click 'Antigravity' in App Menu or Desktop)"),
 				lipgloss.NewStyle().Foreground(lipgloss.Color("#00F0FF")).Render("🚀 You can now launch Antigravity with full region freedom!"),
-				lipgloss.NewStyle().Foreground(lipgloss.Color("#FFD700")).Render("⭐ If this helped you, star us: https://github.com/tawroot/antigravity-cleaner"),
+				lipgloss.NewStyle().Foreground(lipgloss.Color("#FFD700")).Render("⭐ If this helped you, star us: https://github.com/dalroot/antigravity-cleaner"),
 			))
 		fmt.Println(successBox)
 	}

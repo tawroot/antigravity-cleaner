@@ -77,7 +77,7 @@
 
 ## 🤝 مشارکت و نظرسنجی کامیونیتی
 تمامی اولویت‌های این نقشه راه بر اساس بازخورد مستقیم شما توسعه‌دهندگان شکل می‌گیرد.  
-* برای ارائه ایده یا ثبت رای: [تالار گفت‌وگوی گیت‌هاب (Discussions)](https://github.com/tawroot/antigravity-cleaner/discussions)  
+* برای ارائه ایده یا ثبت رای: [تالار گفت‌وگوی گیت‌هاب (Discussions)](https://github.com/dalroot/antigravity-cleaner/discussions)  
 * ارتباط مستقیم در تلگرام: [@dallrep](https://t.me/dallrep)
 
 </div>

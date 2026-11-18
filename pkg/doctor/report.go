@@ -107,7 +107,7 @@ func SaveAndOpenReport(report string) (string, error) {
 		"  📋 INSTRUCTIONS (راهنمای ارسال گزارش):\n" +
 		"  1. Select and copy all text below (Ctrl+A then Ctrl+C / Cmd+A then Cmd+C).\n" +
 		"  2. Paste it into the GitHub Discussions Clinic:\n" +
-		"     👉 https://github.com/tawroot/antigravity-cleaner/discussions/34\n" +
+		"     👉 https://github.com/dalroot/antigravity-cleaner/discussions/34\n" +
 		"     Or Telegram Community:\n" +
 		"     👉 https://t.me/dallrep\n" +
 		"================================================================================\n\n"

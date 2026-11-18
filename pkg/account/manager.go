@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/quota"
+	"github.com/dalroot/antigravity-cleaner/pkg/quota"
 	"github.com/zalando/go-keyring"
 	_ "modernc.org/sqlite"
 )

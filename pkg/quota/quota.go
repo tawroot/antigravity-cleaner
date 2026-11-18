@@ -20,7 +20,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/patcher"
+	"github.com/dalroot/antigravity-cleaner/pkg/patcher"
 	"github.com/zalando/go-keyring"
 	_ "modernc.org/sqlite"
 )

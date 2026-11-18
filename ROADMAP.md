@@ -77,5 +77,5 @@ Instead of presenting opaque, cryptic Google backend codes that frighten users (
 
 ## 🤝 Community Feedback & Governance
 Every feature on this roadmap is shaped by real developers facing network edge restrictions.  
-- Join our [GitHub Discussions](https://github.com/tawroot/antigravity-cleaner/discussions) to suggest ideas or vote on priorities.  
+- Join our [GitHub Discussions](https://github.com/dalroot/antigravity-cleaner/discussions) to suggest ideas or vote on priorities.  
 - Connect directly with maintainers on Telegram: [@dallrep](https://t.me/dallrep).

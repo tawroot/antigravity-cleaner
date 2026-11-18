@@ -8,7 +8,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tawroot/antigravity-cleaner/pkg/account"
+	"github.com/dalroot/antigravity-cleaner/pkg/account"
 )
 
 // AppTarget describes an installed Antigravity application target (Standard 2.0 or IDE)

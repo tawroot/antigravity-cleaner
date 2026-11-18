@@ -6,9 +6,9 @@
 
 **Antigravity Cleaner** is an open-source, 100% offline self-healing toolkit, regional sanction bypasser, and process-level proxy launcher for Google Antigravity (Google DeepMind's agentic AI IDE).
 
-- **Repository**: [https://github.com/tawroot/antigravity-cleaner](https://github.com/tawroot/antigravity-cleaner)
-- **Documentation**: [https://tawroot.github.io/antigravity-cleaner/](https://tawroot.github.io/antigravity-cleaner/)
-- **Diagnostics Clinic**: [https://tawroot.github.io/antigravity-cleaner/troubleshooting.html](https://tawroot.github.io/antigravity-cleaner/troubleshooting.html)
+- **Repository**: [https://github.com/dalroot/antigravity-cleaner](https://github.com/dalroot/antigravity-cleaner)
+- **Documentation**: [https://dalroot.github.io/antigravity-cleaner/](https://dalroot.github.io/antigravity-cleaner/)
+- **Diagnostics Clinic**: [https://dalroot.github.io/antigravity-cleaner/troubleshooting.html](https://dalroot.github.io/antigravity-cleaner/troubleshooting.html)
 - **License**: Apache-2.0 (Auditable, offline, zero-telemetry, zero-phoning-home)
 - **Primary Languages**: Go (native CLI & GUI engine), Web (VitePress/Marzban modern design system)
 
