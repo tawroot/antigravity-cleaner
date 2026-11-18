@@ -462,6 +462,13 @@ curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/in
 irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
+> [!NOTE]
+> **Depo Taşıma Bildirimi:** Projenin resmi deposu `tawroot/antigravity-cleaner` adresinden `dalroot/antigravity-cleaner` adresine taşınmıştır. Mevcut yönlendirmeler otomatik olarak çalışmaktadır. Depoyu daha önce klonladıysanız, yerel bağlantınızı şu komutla güncelleyebilirsiniz:
+> ```bash
+> git remote set-url origin https://github.com/dalroot/antigravity-cleaner.git
+> ```
+
+
 ---
 
 ## 💻 Görsel Arayüzler: Retro KeyGen GUI ve Terminal Paneli

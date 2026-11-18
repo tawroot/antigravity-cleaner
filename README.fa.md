@@ -66,6 +66,13 @@ curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/in
 irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
+> [!NOTE]
+> **اطلاعیه انتقال نشانی مخزن:** مخزن رسمی پروژه از `tawroot/antigravity-cleaner` به `dalroot/antigravity-cleaner` منتقل شده است. تمام ریدایرکت‌های گیت‌هاب به صورت خودکار فعال هستند. اگر قبلاً مخزن را کلون کرده‌اید، می‌توانید آدرس ریموت خود را با دستور زیر به‌روزرسانی کنید:
+> ```bash
+> git remote set-url origin https://github.com/dalroot/antigravity-cleaner.git
+> ```
+
+
 ---
 
 ## 💻 رابط‌های بصری: محیط گرافیکی دسکتاپ و داشبورد ترمینال

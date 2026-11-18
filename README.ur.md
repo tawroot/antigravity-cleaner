@@ -464,6 +464,13 @@ curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/in
 irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
+> [!NOTE]
+> **ریپازیٹری منتقلی کا نوٹس:** پروجیکٹ کا آفیشل ذخیرہ `tawroot/antigravity-cleaner` سے `dalroot/antigravity-cleaner` پر منتقل کر دیا گیا ہے۔ تمام خودکار ری ڈائریکٹس فعال ہیں۔ اگر آپ نے پہلے ریپازیٹری کلون کی تھی، تو اپنے ریموٹ کو درج ذیل کمانڈ سے اپ ڈیٹ کریں:
+> ```bash
+> git remote set-url origin https://github.com/dalroot/antigravity-cleaner.git
+> ```
+
+
 ---
 
 ## 💻 بصری انٹرفیس: ریٹرو KeyGen GUI اور ٹرمینل ڈیش بورڈ

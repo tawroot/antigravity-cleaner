@@ -462,6 +462,13 @@ curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/in
 irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
+> [!NOTE]
+> **仓库迁移通知：** 项目官方仓库已由 `tawroot/antigravity-cleaner` 迁移至 `dalroot/antigravity-cleaner`。现有克隆和链接将自动重定向。如您此前已克隆仓库，可通过以下命令更新远程地址：
+> ```bash
+> git remote set-url origin https://github.com/dalroot/antigravity-cleaner.git
+> ```
+
+
 ---
 
 ## 💻 可视化界面：复古 KeyGen GUI 与终端仪表盘

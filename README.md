@@ -64,6 +64,13 @@ curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/in
 irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
+> [!NOTE]
+> **Repository Migration Notice:** The project repository has relocated from `tawroot/antigravity-cleaner` to `dalroot/antigravity-cleaner`. Existing clones, issues, and releases redirect automatically. If you previously cloned the repository, update your local remote:
+> ```bash
+> git remote set-url origin https://github.com/dalroot/antigravity-cleaner.git
+> ```
+
+
 ---
 
 ## 💻 Visual Interfaces: Retro KeyGen GUI & Terminal Dashboard

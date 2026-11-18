@@ -64,6 +64,13 @@ curl -fsSL https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/in
 irm https://raw.githubusercontent.com/dalroot/antigravity-cleaner/main/install.ps1 | iex
 ```
 
+> [!NOTE]
+> **Уведомление о перемещении репозитория:** Официальный репозиторий проекта перемещен с `tawroot/antigravity-cleaner` на `dalroot/antigravity-cleaner`. Все перенаправления GitHub работают автоматически. Если вы клонировали репозиторий ранее, обновите адрес удаленного репозитория:
+> ```bash
+> git remote set-url origin https://github.com/dalroot/antigravity-cleaner.git
+> ```
+
+
 ---
 
 ## 💻 Визуальные интерфейсы: ретро-GUI KeyGen и терминальный дашборд
